@@ -37,19 +37,17 @@ anchor_bottom = 1.0
 margin_top = 200.0
 
 [node name="Control" type="Control" parent="Background/Center"]
-margin_left = 490.0
-margin_top = 260.0
-margin_right = 790.0
-margin_bottom = 260.0
-rect_min_size = Vector2( 300, 0 )
+margin_left = 539.0
+margin_top = 130.0
+margin_right = 741.0
+margin_bottom = 390.0
+rect_min_size = Vector2( 202, 260 )
 
 [node name="Bag" parent="Background/Center/Control" instance=ExtResource( 1 )]
-unique_name_in_owner = true
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = -194.024
-margin_right = 300.0
-margin_bottom = 194.024
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 0.0
+margin_bottom = 0.0
 
 [node name="TitleAnimations" type="AnimationPlayer" parent="."]
 autoplay = "intro"
