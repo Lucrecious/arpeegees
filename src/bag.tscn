@@ -75,8 +75,8 @@ mouse_filter = 2
 [node name="BagTop" type="TextureRect" parent="Holder"]
 anchor_right = 0.99
 anchor_bottom = 0.077
-margin_right = 398.0
-margin_bottom = 39.0
+margin_right = 1.01999
+margin_bottom = -1.04
 mouse_filter = 2
 texture = ExtResource( 2 )
 expand = true
