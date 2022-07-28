@@ -9,18 +9,30 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Control",
-"class": "CardBag",
+"base": "Resource",
+"class": "ArpeegeePin",
 "language": "GDScript",
-"path": "res://src/bag.gd"
+"path": "res://src/resources/arpeegee_pin.gd"
+}, {
+"base": "Node2D",
+"class": "ArpeegeePinNode",
+"language": "GDScript",
+"path": "res://src/resources/arpeegee_pins/arpeegee_pin.gd"
+}, {
+"base": "Control",
+"class": "PinBag",
+"language": "GDScript",
+"path": "res://src/game/bag.gd"
 }, {
 "base": "Control",
 "class": "TitleScreen",
 "language": "GDScript",
-"path": "res://src/title.gd"
+"path": "res://src/game/title.gd"
 } ]
 _global_script_class_icons={
-"CardBag": "",
+"ArpeegeePin": "",
+"ArpeegeePinNode": "",
+"PinBag": "",
 "TitleScreen": ""
 }
 
@@ -29,6 +41,10 @@ _global_script_class_icons={
 config/name="arpeegees"
 run/main_scene="res://src/main.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+ArpeegeePins="*res://src/resources/arpeegee_pins/arpeegee_pins.gd"
 
 [display]
 
