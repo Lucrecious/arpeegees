@@ -12,25 +12,28 @@ func _ready() -> void:
 	_npc_pins = _get_of_type(_pins, ArpeegeePin.Type.NPC)
 
 # always picks at least 1 player and 1 npc
-func pick_random(amount: int) -> Array:
+func pick_random(amount: int) -> Dictionary:
 	if amount < 2:
 		assert(false, 'minimum two must be picked')
-		return []
+		return {}
 	
 	if amount > _pins.size():
 		assert(false, 'not enough pins')
-		return []
+		return {}
 	
 	if _player_pins.empty():
 		assert(false, 'not enough player pins')
-		return []
+		return {}
 	
 	if _npc_pins.empty():
 		assert(false, 'not enough npc pins')
-		return []
+		return {}
 	
 	var player := _player_pins[randi() % _player_pins.size()] as ArpeegeePin
 	var npc := _npc_pins[randi() % _npc_pins.size()] as ArpeegeePin
+	
+	# we're going to pick first (n - 2) so shuffling them...
+	_pins.shuffle()
 	
 	# put picked player and npc pins at the back
 	var player_index := _pins.find(player)
@@ -42,14 +45,22 @@ func pick_random(amount: int) -> Array:
 	_pins[-1] = player
 	_pins[-2] = npc
 	
-	var pins := [player, npc]
+	var results := {
+		players = [player],
+		npcs = [npc],
+		other = []
+	}
 	
 	for i in amount - 2:
-		# choose from anything except last two (since they hold player and npc)
-		var random_index := randi() % (_pins.size() - 2)
-		pins.push_back(_pins[random_index])
+		var pin := _pins[i] as ArpeegeePin
+		if pin.type == ArpeegeePin.Type.Player:
+			results.players.push_back(pin)
+		elif pin.type == ArpeegeePin.Type.NPC:
+			results.npcs.push_back(pin)
+		else:
+			results.other.push_back(pin)
 	
-	return pins
+	return results
 
 func _get_of_type(pins: Array, type: int) -> Array:
 	var of_type := []

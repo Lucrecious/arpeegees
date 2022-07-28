@@ -19,6 +19,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/resources/arpeegee_pins/arpeegee_pin.gd"
 }, {
+"base": "Node2D",
+"class": "BattleLayout",
+"language": "GDScript",
+"path": "res://src/game/battle/layout.gd"
+}, {
+"base": "Control",
+"class": "BattleScreen",
+"language": "GDScript",
+"path": "res://src/game/battle.gd"
+}, {
 "base": "Control",
 "class": "PinBag",
 "language": "GDScript",
@@ -32,6 +42,8 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "ArpeegeePin": "",
 "ArpeegeePinNode": "",
+"BattleLayout": "",
+"BattleScreen": "",
 "PinBag": "",
 "TitleScreen": ""
 }
@@ -52,6 +64,7 @@ window/size/width=1280
 window/size/height=720
 window/dpi/allow_hidpi=true
 window/stretch/mode="2d"
+window/stretch/aspect="keep_width"
 
 [gui]
 

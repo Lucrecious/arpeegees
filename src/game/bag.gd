@@ -14,8 +14,8 @@ var _opened := false
 onready var _noise := OpenSimplexNoise.new()
 onready var _animation := $'%Animation' as AnimationPlayer
 onready var _holder := $Holder as Control
-onready var _star_particles := $StarParticles as CPUParticles2D
-onready var _star_particles_position := _star_particles.position
+onready var _star_particles := $'%StarParticles' as CPUParticles2D
+onready var _star_particles_hint := $'%StarParticlesHint' as Node2D
 
 func _ready() -> void:
 	connect('mouse_entered', self, '_on_mouse_entered')
@@ -36,11 +36,11 @@ func shoot_particles() -> void:
 	var relative_destination := Vector2.UP.rotated(rotation_radians) * 1000.0
 	
 	var initial_displacement := Vector2(rand_range(-1.0, 1.0) * ((rect_size.x / 2.0) - 30.0), 0)
-	
 	_star_particles.emitting = true
-	_star_particles.position = _star_particles_position + initial_displacement
+	_star_particles.global_position = _star_particles_hint.global_position + initial_displacement
+	_star_particles.global_position.y += 50.0
 	
-	_shoot_tween.tween_property(_star_particles, 'position', _star_particles.position + relative_destination, .5)
+	_shoot_tween.tween_property(_star_particles, 'global_position', _star_particles.global_position + relative_destination, .5)
 	_shoot_tween.tween_callback(_star_particles, 'set', ['emitting', false])
 
 func open() -> void:

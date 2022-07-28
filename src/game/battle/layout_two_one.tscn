@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/game/battle/layout.gd" type="Script" id=1]
+
+[node name="BattleLayout" type="Node2D"]
+position = Vector2( 640, 0 )
+script = ExtResource( 1 )
+
+[node name="Positions_Left" type="Node2D" parent="."]
+position = Vector2( -640, 0 )
+
+[node name="Hint1" type="Position2D" parent="Positions_Left"]
+position = Vector2( 311, 425 )
+__meta__ = {
+"_gizmo_extents_": 100.0
+}
+
+[node name="Hint2" type="Position2D" parent="Positions_Left"]
+position = Vector2( 467, 564 )
+__meta__ = {
+"_gizmo_extents_": 100.0
+}
+
+[node name="Positions_Right" type="Node2D" parent="."]
+position = Vector2( -640, 0 )
+
+[node name="Hint1" type="Position2D" parent="Positions_Right"]
+position = Vector2( 950, 462 )
+__meta__ = {
+"_gizmo_extents_": 100.0
+}

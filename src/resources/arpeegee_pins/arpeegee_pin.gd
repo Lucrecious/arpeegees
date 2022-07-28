@@ -15,3 +15,11 @@ func _arpeegee_pin_set(value: ArpeegeePin) -> void:
 		return
 	
 	arpeegee_pin = value
+
+onready var _particles := $'%StarParticles' as CPUParticles2D
+
+func emit_stars() -> void:
+	_particles.emitting = true
+
+func stop_star_emission() -> void:
+	_particles.emitting = false
