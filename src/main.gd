@@ -16,4 +16,3 @@ func _on_battle_screen_requested(pin_amount: int) -> void:
 	var battle_screen := BattleScreen.instance() as BattleScreen
 	battle_screen.pin_count = pin_amount
 	add_child(battle_screen)
-	

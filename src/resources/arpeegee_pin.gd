@@ -13,6 +13,6 @@ enum Rarity {
 	UltraRare,
 }
 
-export(String) var nice_name := 'Arpeegee'
 export(Type) var type := Type.NPC
 export(Rarity) var rarity := Rarity.Common
+export(String, FILE) var scene_path := ''

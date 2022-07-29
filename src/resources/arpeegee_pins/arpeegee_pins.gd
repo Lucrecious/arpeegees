@@ -34,16 +34,10 @@ func pick_random(amount: int) -> Dictionary:
 	
 	# we're going to pick first (n - 2) so shuffling them...
 	_pins.shuffle()
-	
-	# put picked player and npc pins at the back
-	var player_index := _pins.find(player)
-	var npc_index := _pins.find(npc)
-	var tmp_pin1 = _pins[-1]
-	var tmp_pin2 = _pins[-2]
-	_pins[player_index] = tmp_pin1
-	_pins[npc_index] = tmp_pin2
-	_pins[-1] = player
-	_pins[-2] = npc
+	_pins.erase(player)
+	_pins.erase(npc)
+	_pins.push_back(player)
+	_pins.push_back(npc)
 	
 	var results := {
 		players = [player],

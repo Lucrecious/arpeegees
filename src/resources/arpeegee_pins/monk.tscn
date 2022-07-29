@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/sprites/monk/monk_idle.png" type="Texture" id=1]
+[ext_resource path="res://src/game/battle/star_particles.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/resources/arpeegee_pins/arpeegee_pin.gd" type="Script" id=3]
+
+[node name="Monk" type="Node2D"]
+script = ExtResource( 3 )
+nice_name = "Monk"
+
+[node name="Particles" parent="." instance=ExtResource( 2 )]
+unique_name_in_owner = true
+position = Vector2( -1, -162 )
+
+[node name="Sprites" type="Node2D" parent="."]
+
+[node name="Idle" type="Sprite" parent="Sprites"]
+position = Vector2( 7, -100 )
+scale = Vector2( 0.15, 0.15 )
+texture = ExtResource( 1 )

@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource( 1 )
-nice_name = "Harpy"
 type = 1
-rarity = 1
+rarity = 0
+scene_path = "res://src/resources/arpeegee_pins/harpy.tscn"

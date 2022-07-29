@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource( 1 )
-nice_name = "Monk"
 type = 0
 rarity = 0
+scene_path = "res://src/resources/arpeegee_pins/monk.tscn"

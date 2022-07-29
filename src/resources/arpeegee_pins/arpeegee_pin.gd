@@ -1,25 +1,17 @@
 class_name ArpeegeePinNode
 extends Node2D
 
-export(Resource) var _arpeegee_pin setget __arpeegee_pin_set
-func __arpeegee_pin_set(value: Resource) -> void:
-	if _arpeegee_pin == value:
-		return
-	
-	_arpeegee_pin = value
-	_arpeegee_pin_set(value)
+export(String) var nice_name := 'Arpeegee'
 
-var arpeegee_pin: ArpeegeePin setget _arpeegee_pin_set
-func _arpeegee_pin_set(value: ArpeegeePin) -> void:
-	if arpeegee_pin == value:
-		return
-	
-	arpeegee_pin = value
-
-onready var _particles := $'%StarParticles' as CPUParticles2D
+onready var _particles := get_node_or_null('Particles') as CPUParticles2D
 
 func emit_stars() -> void:
+	if not _particles:
+		return
+	
 	_particles.emitting = true
 
 func stop_star_emission() -> void:
+	if not _particles:
+		return
 	_particles.emitting = false
