@@ -1,11 +1,11 @@
 class_name BattleLayout
 extends Node2D
 
-const LeftPositionsName := 'Positions_Left'
-const RightPositionsName = 'Positions_Right'
+const LEFT_POSITIONS_NAME := 'Positions_Left'
+const RIGHT_POSITIONS_NAME = 'Positions_Right'
 
-onready var _left_side_positions := get_node_or_null(LeftPositionsName) as Node2D
-onready var _right_side_positions := get_node_or_null(RightPositionsName) as Node2D
+onready var _left_side_positions := get_node_or_null(LEFT_POSITIONS_NAME) as Node2D
+onready var _right_side_positions := get_node_or_null(RIGHT_POSITIONS_NAME) as Node2D
 
 func _ready() -> void:
 	assert(_left_side_positions)
@@ -34,6 +34,6 @@ func mirror() -> void:
 	_right_side_positions = tmp_side_position
 	
 	_left_side_positions.name += str(_left_side_positions.get_instance_id())
-	_right_side_positions.name = RightPositionsName
-	_left_side_positions.name =  LeftPositionsName
+	_right_side_positions.name = RIGHT_POSITIONS_NAME
+	_left_side_positions.name =  LEFT_POSITIONS_NAME
 	

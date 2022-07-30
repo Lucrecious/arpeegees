@@ -3,7 +3,12 @@ extends Node2D
 
 export(String) var nice_name := 'Arpeegee'
 
+var resource: ArpeegeePin = null
+
 onready var _particles := get_node_or_null('Particles') as CPUParticles2D
+
+func _ready() -> void:
+	assert(resource)
 
 func emit_stars() -> void:
 	if not _particles:

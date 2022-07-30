@@ -25,5 +25,5 @@ void vertex() {
 
 [resource]
 shader = SubResource( 1 )
-shader_param/noise_scale_pixels = 8.0
-shader_param/time_scale = 0.4
+shader_param/noise_scale_pixels = 2.0
+shader_param/time_scale = 0.1

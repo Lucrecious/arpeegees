@@ -1,0 +1,45 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/game/battle/action_button.gd" type="Script" id=1]
+
+[node name="ActionButton" type="Button"]
+margin_right = 361.0
+margin_bottom = 109.0
+rect_min_size = Vector2( 0, 110 )
+script = ExtResource( 1 )
+label_text = "Action Name"
+icon_name = "sword_attack"
+
+[node name="Margin" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+custom_constants/margin_right = 20
+custom_constants/margin_top = 20
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 20
+
+[node name="HBox" type="HBoxContainer" parent="Margin"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 341.0
+margin_bottom = 90.0
+mouse_filter = 2
+custom_constants/separation = 15
+
+[node name="Icon" type="TextureRect" parent="Margin/HBox"]
+unique_name_in_owner = true
+margin_right = 47.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 47, 57 )
+mouse_filter = 2
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="Margin/HBox"]
+unique_name_in_owner = true
+margin_left = 62.0
+margin_top = 28.0
+margin_right = 321.0
+margin_bottom = 42.0
+size_flags_horizontal = 3
