@@ -2,12 +2,13 @@ class_name PinAction
 extends Resource
 
 enum TargetType {
+	Self,
 	Single,
 }
 
 enum ActionType {
 	Physical,
-	Magic,
+	Buff,
 }
 
 export(String) var nice_name := 'Action'

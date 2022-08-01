@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/ui/health_bar_overlay.png" type="Texture" id=1]
+[ext_resource path="res://src/resources/arpeegee_pins/components/health_bar.gd" type="Script" id=2]
+[ext_resource path="res://assets/ui/progress_bar_background.png" type="Texture" id=3]
+[ext_resource path="res://assets/ui/health_empty_bar.png" type="Texture" id=4]
+
+[node name="HealthBar" type="Sprite"]
+texture = ExtResource( 3 )
+centered = false
+script = ExtResource( 2 )
+
+[node name="ProgressBarEmpty" type="Sprite" parent="."]
+texture = ExtResource( 4 )
+centered = false
+
+[node name="ProgressBar" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+centered = false

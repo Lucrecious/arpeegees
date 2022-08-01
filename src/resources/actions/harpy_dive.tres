@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource( 1 )
-nice_name = "Mandolin Bash"
+nice_name = "Dive"
 description = ""
 target_type = 1
 action_type = 0

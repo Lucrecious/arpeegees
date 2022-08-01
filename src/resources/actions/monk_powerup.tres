@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource( 1 )
-nice_name = "Mandolin Bash"
+nice_name = "Power Up"
 description = ""
-target_type = 1
+target_type = 0
 action_type = 0

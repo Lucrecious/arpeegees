@@ -4,8 +4,8 @@
 
 [node name="ActionButton" type="Button"]
 margin_right = 361.0
-margin_bottom = 109.0
-rect_min_size = Vector2( 0, 110 )
+margin_bottom = 80.0
+rect_min_size = Vector2( 0, 70 )
 script = ExtResource( 1 )
 label_text = "Action Name"
 icon_name = "sword_attack"
@@ -14,21 +14,22 @@ icon_name = "sword_attack"
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-custom_constants/margin_right = 20
-custom_constants/margin_top = 20
-custom_constants/margin_left = 20
-custom_constants/margin_bottom = 20
+custom_constants/margin_right = 15
+custom_constants/margin_top = 5
+custom_constants/margin_left = 15
+custom_constants/margin_bottom = 5
 
 [node name="HBox" type="HBoxContainer" parent="Margin"]
-margin_left = 20.0
-margin_top = 20.0
-margin_right = 341.0
-margin_bottom = 90.0
+margin_left = 15.0
+margin_top = 5.0
+margin_right = 346.0
+margin_bottom = 75.0
 mouse_filter = 2
 custom_constants/separation = 15
 
 [node name="Icon" type="TextureRect" parent="Margin/HBox"]
 unique_name_in_owner = true
+self_modulate = Color( 0, 0, 0, 1 )
 margin_right = 47.0
 margin_bottom = 70.0
 rect_min_size = Vector2( 47, 57 )
@@ -38,8 +39,9 @@ stretch_mode = 6
 
 [node name="Label" type="Label" parent="Margin/HBox"]
 unique_name_in_owner = true
+self_modulate = Color( 0, 0, 0, 1 )
 margin_left = 62.0
 margin_top = 28.0
-margin_right = 321.0
+margin_right = 331.0
 margin_bottom = 42.0
 size_flags_horizontal = 3

@@ -10,6 +10,7 @@ var _layout: BattleLayout = null
 onready var _battle_viewport := $ViewportContainer/Viewport as Viewport
 onready var _battle_layer := $ViewportContainer/Viewport/YSort as YSort
 onready var _turn_manager := $TurnManager as TurnManager
+onready var _narrator := $'%Narrator' as NarratorUI
 
 func _ready() -> void:
 	_configure_viewport(_battle_viewport)
@@ -52,9 +53,14 @@ func _drop_character_pins(pins: Dictionary) -> void:
 	var npc_nodes := _drop_pins(npcs, left_positions, max_wait_sec, bounce_sec)
 	var nodes := player_nodes + npc_nodes
 	
-	var tween_to_turning := get_tree().create_tween()
-	tween_to_turning.tween_interval(max_wait_sec + bounce_sec + .7)
-	tween_to_turning.tween_callback(_turn_manager, 'initialize_turns', [nodes])
+	var tween_to_intro_narration := get_tree().create_tween()
+	tween_to_intro_narration.tween_interval(max_wait_sec + bounce_sec)
+	tween_to_intro_narration.tween_callback(_narrator, 'speak_tr', ['NARRATOR_BATTLE_INTRODUCTION_GENERIC'])
+	_narrator.connect('speaking_ended', self, '_on_finish_intro_narration', [nodes], CONNECT_ONESHOT)
+
+func _on_finish_intro_narration(nodes: Array) -> void:
+	_turn_manager.initialize_turns(nodes)
+	_narrator.watch(nodes)
 
 func _drop_pins(pins: Array, positions: PoolVector2Array, wait_sec: float, bounce_sec: float) -> Array:
 	var nodes := []

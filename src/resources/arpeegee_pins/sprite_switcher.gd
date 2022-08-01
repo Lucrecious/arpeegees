@@ -13,8 +13,12 @@ func _ready() -> void:
 	
 	assert(IDLE_SPRITE_NAME in _name_to_sprite)
 
-func change(name: String) -> void:
+func sprite(name: String) -> Node2D:
 	var sprite := _name_to_sprite.get(name, _name_to_sprite[IDLE_SPRITE_NAME]) as Node2D
+	return sprite
+
+func change(name: String) -> void:
+	var sprite := sprite(name)
 	for n in _name_to_sprite.values():
 		n.visible = false
 	sprite.visible = true

@@ -16,3 +16,16 @@ static func get_closest_adjecent_position(actioner: Node2D, target: Node2D) -> V
 	position += Vector2.UP * (actioner_rect.size.y / 2.0)
 	
 	return position - actioner_rect.get_center()
+
+static func get_top_right_corner_screen(pin: Node2D) -> Vector2:
+	var bounding_box := NodE.get_child(pin, REferenceRect) as REferenceRect
+	var global_rect := bounding_box.global_rect()
+	var position := global_rect.position + Vector2.RIGHT * global_rect.size
+	return position
+
+static func add_damage(tween: SceneTreeTween, target: ArpeegeePinNode, amount: int) -> void:
+	var damage_receiver := NodE.get_child(target, DamageReceiver) as DamageReceiver
+	if not damage_receiver:
+		return
+	
+	tween.tween_callback(damage_receiver, 'damage', [amount])

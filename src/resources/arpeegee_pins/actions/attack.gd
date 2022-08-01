@@ -12,6 +12,7 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	tween.tween_property(actioner, 'global_position', actioner.global_position + relative, .3)
 	tween.tween_interval(.3)
 	tween.tween_callback(sprite_switcher, 'change', ['attack'])
+	ActionUtils.add_damage(tween, target, 5)
 	tween.tween_interval(.4)
 	tween.tween_callback(sprite_switcher, 'change', ['idle'])
 	tween.tween_property(actioner, 'global_position', actioner.global_position, .3)

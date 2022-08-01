@@ -10,7 +10,7 @@ func clear() -> void:
 		remove_child(child)
 		child.queue_free()
 
-func add_pin_action(action: PinAction) -> void:
+func add_pin_action(action: PinAction) -> Button:
 	var action_button := ActionButton.instance() as PinActionButton
 	action_button.label_text = action.nice_name
 	
@@ -21,3 +21,4 @@ func add_pin_action(action: PinAction) -> void:
 			pass
 	
 	_vbox.add_child(action_button)
+	return action_button

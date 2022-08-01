@@ -105,6 +105,11 @@ _global_script_classes=[ {
 "path": "res://lut/input/binded_actions.gd"
 }, {
 "base": "Node2D",
+"class": "DamageReceiver",
+"language": "GDScript",
+"path": "res://src/resources/arpeegee_pins/components/damage_receiver.gd"
+}, {
+"base": "Node2D",
 "class": "Death",
 "language": "GDScript",
 "path": "res://lut/components/death.gd"
@@ -198,6 +203,11 @@ _global_script_classes=[ {
 "class": "Move4Directions",
 "language": "GDScript",
 "path": "res://lut/components/move4.gd"
+}, {
+"base": "MarginContainer",
+"class": "NarratorUI",
+"language": "GDScript",
+"path": "res://src/game/battle/narrator.gd"
 }, {
 "base": "Reference",
 "class": "NodE",
@@ -309,6 +319,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://lut/components/root_sprite.gd"
 }, {
+"base": "Node",
+"class": "STring",
+"language": "GDScript",
+"path": "res://lut/extension/string_extension.gd"
+}, {
 "base": "Reference",
 "class": "SignalDetector",
 "language": "GDScript",
@@ -328,6 +343,11 @@ _global_script_classes=[ {
 "class": "SpriteSwitcher",
 "language": "GDScript",
 "path": "res://src/resources/arpeegee_pins/sprite_switcher.gd"
+}, {
+"base": "Node2D",
+"class": "Squisher",
+"language": "GDScript",
+"path": "res://src/resources/arpeegee_pins/components/squisher.gd"
 }, {
 "base": "MeshInstance2D",
 "class": "SubdividedQuadMeshInstance",
@@ -424,6 +444,7 @@ _global_script_class_icons={
 "ConstantVelocity": "",
 "Controller": "",
 "Controller_BindedActions": "",
+"DamageReceiver": "",
 "Death": "",
 "DeathTimer": "",
 "DebugMultiplayerAPI": "",
@@ -443,6 +464,7 @@ _global_script_class_icons={
 "MathE": "",
 "Move4": "",
 "Move4Directions": "",
+"NarratorUI": "",
 "NodE": "",
 "ObjEct": "",
 "PinAction": "",
@@ -465,10 +487,12 @@ _global_script_class_icons={
 "ResolutionSprite": "",
 "RingBuffer": "",
 "RootSprite": "",
+"STring": "",
 "SignalDetector": "",
 "SignalExpression": "",
 "SpriteFlattener": "",
 "SpriteSwitcher": "",
+"Squisher": "",
 "SubdividedQuadMeshInstance": "",
 "TileActionMode": "",
 "TileMapCursor": "",
@@ -509,6 +533,10 @@ window/stretch/aspect="keep_width"
 
 common/drop_mouse_on_gui_input_disabled=true
 common/snap_controls_to_pixels=false
+
+[locale]
+
+translations=PoolStringArray( "res://dialogue_localized.en.translation" )
 
 [physics]
 
