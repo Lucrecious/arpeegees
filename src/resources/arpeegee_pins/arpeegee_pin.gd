@@ -11,6 +11,9 @@ func _ready() -> void:
 	if not resource:
 		print_debug('warning: resource missing')
 
+func _hello_world() -> void:
+	print('hello world')
+
 func emit_stars() -> void:
 	if not _particles:
 		return

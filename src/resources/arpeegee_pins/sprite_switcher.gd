@@ -17,6 +17,10 @@ func sprite(name: String) -> Node2D:
 	var sprite := _name_to_sprite.get(name, _name_to_sprite[IDLE_SPRITE_NAME]) as Node2D
 	return sprite
 
+func has_sprite(name: String) -> bool:
+	var sprite := _name_to_sprite.get(name, null) as Node2D
+	return sprite != null
+
 func change(name: String) -> void:
 	var sprite := sprite(name)
 	for n in _name_to_sprite.values():

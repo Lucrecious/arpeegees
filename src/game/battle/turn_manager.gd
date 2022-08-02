@@ -18,6 +18,10 @@ func initialize_turns(pins: Array) -> void:
 
 func _do_turn(turn: int, object: Object, callback: String) -> void:
 	var pin := _ordered_pins[turn % _ordered_pins.size()] as ArpeegeePinNode
+	var health := NodE.get_child(pin, Health) as Health
+	if health and health.current <= 0:
+		_next_turn()
+		return
 	
 	var actions_node := NodE.get_child(pin, PinActions) as PinActions
 	var action_nodes := actions_node.get_pin_action_nodes()
