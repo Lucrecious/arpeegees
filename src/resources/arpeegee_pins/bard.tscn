@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://assets/sprites/bard/bard_idle.png" type="Texture" id=1]
 [ext_resource path="res://src/game/battle/star_particles.tscn" type="PackedScene" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://assets/sprites/bard/bard_hit_nomandolin.png" type="Texture" id=14]
 [ext_resource path="res://src/resources/arpeegee_pins/components/health_bar.tscn" type="PackedScene" id=15]
 [ext_resource path="res://lut/components/root_sprite.gd" type="Script" id=16]
+[ext_resource path="res://src/resources/arpeegee_pins/components/status_effects_list.gd" type="Script" id=17]
 
 [sub_resource type="ArrayMesh" id=1]
 surfaces/0 = {
@@ -80,6 +81,9 @@ script = ExtResource( 9 )
 
 [node name="MandolinBash" type="Node2D" parent="Actions"]
 script = ExtResource( 11 )
+
+[node name="StatusEffects" type="Node2D" parent="."]
+script = ExtResource( 17 )
 
 [node name="BoundingBox" type="Node2D" parent="."]
 position = Vector2( 0, -80 )

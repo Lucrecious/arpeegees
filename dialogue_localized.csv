@@ -1,5 +1,8 @@
 keys,en,es
 NARRATOR_BATTLE_INTRODUCTION_GENERIC,Looks like we got rumble!,
+NARRATOR_BATTLE_FINISHED_HEROES_WIN_GENERIC,The heroes defeated the monsters! And all was good.,
+NARRATOR_BATTLE_FINISHED_MONSTERS_WIN_GENERIC,"Oh no! The ""scary"" monsters won! What will happen now?",
+NARRATOR_BATTLE_FINISHED_TIED_GENERIC,The heroes managed to ward off the monsters... but not without heavy sacrifices.,
 ,,
 MANDOLIN_BASH_ACTION_NAME,Mandolin Bash,
 NARRATOR_MANDOLIN_BASH_USE_1,Bard uses their mandolin like a hammer. Hope it doesn't break...,

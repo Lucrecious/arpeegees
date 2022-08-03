@@ -59,15 +59,27 @@ func _drop_character_pins(pins: Dictionary) -> void:
 	_narrator.connect('speaking_ended', self, '_on_finish_intro_narration', [nodes], CONNECT_ONESHOT)
 
 func _on_finish_intro_narration(nodes: Array) -> void:
+	_turn_manager.connect('battle_ended', self, '_on_battle_ended')
 	_turn_manager.initialize_turns(nodes)
 	_narrator.watch(nodes)
+
+func _on_battle_ended(end_condition: int) -> void:
+	if end_condition == TurnManager.EndCondition.NPCsDead:
+		_narrator.speak_tr('NARRATOR_BATTLE_FINISHED_HEROES_WIN_GENERIC')
+	elif end_condition == TurnManager.EndCondition.PlayersDead:
+		_narrator.speak_tr('NARRATOR_BATTLE_FINISHED_MONSTERS_WIN_GENERIC')
+	elif end_condition == TurnManager.EndCondition.EveryoneDead:
+		_narrator.speak_tr('NARRATOR_BATTLE_FINISHED_TIED_GENERIC')
+	else:
+		assert(false)
 
 func _drop_pins(pins: Array, positions: PoolVector2Array, wait_sec: float, bounce_sec: float) -> Array:
 	var nodes := []
 	for i in positions.size():
 		var pin := pins[i] as ArpeegeePin
 		
-		var pin_node := load(pin.scene_path).instance() as ArpeegeePinNode
+		var pin_node_scene := load(pin.scene_path)
+		var pin_node := pin_node_scene.instance() as ArpeegeePinNode
 		pin_node.resource = pin
 		
 		nodes.push_back(pin_node)

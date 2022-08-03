@@ -29,3 +29,10 @@ static func add_damage(tween: SceneTreeTween, target: ArpeegeePinNode, amount: i
 		return
 	
 	tween.tween_callback(damage_receiver, 'damage', [amount])
+
+static func add_status_effect(tween: SceneTreeTween, target: ArpeegeePinNode, effect: String) -> void:
+	var status_effects := NodE.get_child(target, StatusEffectsList) as StatusEffectsList
+	if not status_effects:
+		return
+	
+	tween.tween_callback(status_effects, 'add', [effect])

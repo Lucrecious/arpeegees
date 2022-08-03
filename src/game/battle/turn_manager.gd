@@ -1,6 +1,15 @@
 class_name TurnManager
 extends Control
 
+signal battle_ended(end_condition)
+
+enum EndCondition {
+	None,
+	PlayersDead,
+	NPCsDead,
+	EveryoneDead,
+}
+
 const ActionMenuScene := preload('res://src/game/battle/action_menu.tscn')
 
 var _ordered_pins := []
@@ -70,7 +79,51 @@ func _on_action_pressed(menu: PinActionMenu, pin: ArpeegeePinNode, action_node: 
 		action_node.run_action_with_target()
 
 func _on_turn_finished() -> void:
+	var end_condition := _is_game_finished()
+	if end_condition != EndCondition.None:
+		emit_signal('battle_ended', end_condition)
+		return
+	
 	_next_turn()
+
+func _is_game_finished() -> int:
+	var players := _get_type(ArpeegeePin.Type.Player)
+	var npcs := _get_type(ArpeegeePin.Type.NPC)
+	
+	var all_players_dead := _is_all_dead(players)
+	var all_npcs_dead := _is_all_dead(npcs)
+	
+	if all_players_dead and all_npcs_dead:
+		return EndCondition.EveryoneDead
+	
+	if all_npcs_dead:
+		return EndCondition.NPCsDead
+	
+	if all_players_dead:
+		return EndCondition.PlayersDead
+	
+	return EndCondition.None
+
+func _is_all_dead(pins: Array) -> bool:
+	for p in pins:
+		var health := NodE.get_child(p, Health) as Health
+		if not health:
+			continue
+		
+		if health.current > 0:
+			return false
+	
+	return true
+
+func _get_type(type: int) -> Array:
+	var pins_of_type := []
+	for p in _ordered_pins:
+		var arpeegee := p.resource as ArpeegeePin
+		if arpeegee.type != type:
+			continue
+		pins_of_type.push_back(p)
+	
+	return pins_of_type
 
 func _next_turn() -> void:
 	_current_turn += 1

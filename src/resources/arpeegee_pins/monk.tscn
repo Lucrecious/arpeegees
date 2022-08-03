@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://assets/sprites/monk/monk_idle.png" type="Texture" id=1]
 [ext_resource path="res://src/game/battle/star_particles.tscn" type="PackedScene" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://lut/components/health.gd" type="Script" id=13]
 [ext_resource path="res://src/resources/arpeegee_pins/components/damage_receiver.gd" type="Script" id=14]
 [ext_resource path="res://src/resources/arpeegee_pins/components/health_bar.tscn" type="PackedScene" id=15]
+[ext_resource path="res://src/resources/arpeegee_pins/components/status_effects_list.gd" type="Script" id=16]
 
 [sub_resource type="ArrayMesh" id=1]
 surfaces/0 = {
@@ -85,6 +86,10 @@ script = ExtResource( 11 )
 
 [node name="PowerUp" type="Node2D" parent="Actions"]
 script = ExtResource( 12 )
+
+[node name="StatusEffects" type="Node2D" parent="."]
+position = Vector2( 0, -13 )
+script = ExtResource( 16 )
 
 [node name="HealthBar" parent="." instance=ExtResource( 15 )]
 position = Vector2( -49, -207 )
