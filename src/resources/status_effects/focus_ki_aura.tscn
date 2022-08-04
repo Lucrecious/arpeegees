@@ -30,10 +30,27 @@ initial_velocity_random = 0.52
 scale_amount = 0.1
 scale_amount_random = 0.1
 
-[node name="ConstantPower" type="CPUParticles2D" parent="."]
+[node name="ConstantPowerBack" type="CPUParticles2D" parent="."]
 z_index = -1
 emitting = false
-amount = 40
+amount = 20
+local_coords = false
+texture = ExtResource( 2 )
+emission_shape = 2
+emission_rect_extents = Vector2( 70, 1 )
+direction = Vector2( 0, -1 )
+spread = 25.54
+gravity = Vector2( 0, -100 )
+initial_velocity = 162.17
+initial_velocity_random = 0.52
+scale_amount = 0.1
+scale_amount_random = 0.1
+color_initial_ramp = SubResource( 1 )
+
+[node name="ConstantPowerFront" type="CPUParticles2D" parent="."]
+z_index = 1
+emitting = false
+amount = 20
 local_coords = false
 texture = ExtResource( 2 )
 emission_shape = 2

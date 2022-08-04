@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://assets/sprites/harpy/harpy_idle.png" type="Texture" id=1]
 [ext_resource path="res://src/game/battle/star_particles.tscn" type="PackedScene" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://lut/components/health.gd" type="Script" id=14]
 [ext_resource path="res://src/resources/arpeegee_pins/components/damage_receiver.gd" type="Script" id=15]
 [ext_resource path="res://src/resources/arpeegee_pins/components/health_bar.tscn" type="PackedScene" id=16]
+[ext_resource path="res://src/resources/arpeegee_pins/components/stats.gd" type="Script" id=17]
 
 [sub_resource type="ArrayMesh" id=1]
 surfaces/0 = {
@@ -37,6 +38,14 @@ nice_name = "Harpy"
 [node name="Health" type="Node" parent="."]
 script = ExtResource( 14 )
 current = 30
+
+[node name="PinStats" type="Node" parent="."]
+script = ExtResource( 17 )
+attack = 2
+magic_attack = 5
+defence = 3
+magic_defence = 4
+evasion = 5
 
 [node name="Particles" parent="." instance=ExtResource( 2 )]
 unique_name_in_owner = true

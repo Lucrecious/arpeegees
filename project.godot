@@ -29,6 +29,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://lut/extension/audio_stream_player_2d_extension.gd"
 }, {
+"base": "Reference",
+"class": "BackgroundResourceLoader",
+"language": "GDScript",
+"path": "res://lut/background_loader.gd"
+}, {
 "base": "Node2D",
 "class": "BattleLayout",
 "language": "GDScript",
@@ -244,6 +249,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/game/bag.gd"
 }, {
+"base": "Node",
+"class": "PinStats",
+"language": "GDScript",
+"path": "res://src/resources/arpeegee_pins/components/stats.gd"
+}, {
 "base": "Node2D",
 "class": "PlatformerJump",
 "language": "GDScript",
@@ -439,6 +449,7 @@ _global_script_class_icons={
 "ArpeegeePin": "",
 "ArpeegeePinNode": "",
 "AudioStrEamPlayer2D": "",
+"BackgroundResourceLoader": "",
 "BattleLayout": "",
 "BattleScreen": "",
 "ButtonInput": "",
@@ -482,6 +493,7 @@ _global_script_class_icons={
 "PinActionMenu": "",
 "PinActions": "",
 "PinBag": "",
+"PinStats": "",
 "PlatformerJump": "",
 "PlatformerRun": "",
 "PlatformerTurner": "",
@@ -533,6 +545,7 @@ config/icon="res://icon.png"
 ArpeegeePins="*res://src/resources/arpeegee_pins/arpeegee_pins.gd"
 Icons="*res://src/resources/icons.gd"
 StatusEffects="*res://src/resources/status_effects.gd"
+TweenExtension="*res://lut/extension/tween_extension.gd"
 
 [display]
 

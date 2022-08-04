@@ -25,7 +25,6 @@ func _get_positions(positions: Node2D) -> PoolVector2Array:
 	
 	return left_positions
 
-
 func mirror() -> void:
 	scale.x *= -1.0
 	
