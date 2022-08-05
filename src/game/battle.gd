@@ -17,7 +17,7 @@ var _layout: BattleLayout = null
 
 onready var _battle_viewport := $ViewportContainer/Viewport as Viewport
 onready var _battle_layer := $'%BattleLayer' as YSort
-onready var _turn_manager := $TurnManager as TurnManager
+onready var _turn_manager := $'%TurnManager' as TurnManager
 onready var _narrator := $'%Narrator' as NarratorUI
 
 func _ready() -> void:

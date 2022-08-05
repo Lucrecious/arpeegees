@@ -38,11 +38,11 @@ func get_pin_action_nodes() -> Array:
 func run_action_with_target(action_name: String, target: Node2D) -> void:
 	var node := NodE.get_child_by_name(self, action_name)
 	if not node:
-		print_debug('%s failed to %s' % [_parent.name, action_name])
+		print_debug('%s failed to %s, signals will not be called!' % [_parent.name, action_name])
 		return
 	
 	if not node.has_method('run'):
-		print_debug('%s does not have a run method' % [node.get_path()])
+		print_debug('%s does not have a run method, signals will not be called!' % [node.get_path()])
 		return
 	
 	if target == null:

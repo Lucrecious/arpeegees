@@ -439,7 +439,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://lut/turn_based_nodes/player.gd"
 }, {
-"base": "Control",
+"base": "Node",
 "class": "TurnManager",
 "language": "GDScript",
 "path": "res://src/game/battle/turn_manager.gd"

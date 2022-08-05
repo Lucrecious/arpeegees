@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/game/battle.gd" type="Script" id=1]
 [ext_resource path="res://src/game/battle/turn_manager.gd" type="Script" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://src/game/battle/stats_canvas.gd" type="Script" id=5]
 [ext_resource path="res://src/ui/target_selector.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/ui/theme.tres" type="Theme" id=7]
+[ext_resource path="res://src/game/battle/battle_overlay.gd" type="Script" id=8]
+[ext_resource path="res://src/game/battle/ai.gd" type="Script" id=9]
 
 [node name="Battle" type="Control"]
 anchor_top = 1.0
@@ -34,15 +36,23 @@ render_target_update_mode = 3
 [node name="BattleLayer" type="YSort" parent="ViewportContainer/Viewport"]
 unique_name_in_owner = true
 
-[node name="TurnManager" type="Control" parent="."]
+[node name="BattleOverlay" type="Control" parent="."]
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -720.0
 mouse_filter = 2
+script = ExtResource( 8 )
+
+[node name="AI" type="Node" parent="BattleOverlay"]
+script = ExtResource( 9 )
+
+[node name="TurnManager" type="Node" parent="BattleOverlay"]
+unique_name_in_owner = true
 script = ExtResource( 2 )
 
 [node name="StatsCanvas" type="Control" parent="."]
+visible = false
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
