@@ -9,12 +9,6 @@ func _gui_input(event: InputEvent) -> void:
 	if not event is InputEventMouseMotion:
 		return
 	
-	#if not visible:
-	#	return
-	
-	#if not get_rect().has_point(get_local_mouse_position()):
-	#	return
-	
 	var pin := _get_hovering_pin()
 	if pin == _current_pin:
 		return
