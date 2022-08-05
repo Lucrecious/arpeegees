@@ -51,6 +51,7 @@ script = ExtResource( 2 )
 
 [node name="StatsPanel" parent="BattleOverlay" instance=ExtResource( 4 )]
 visible = false
+mouse_filter = 0
 
 [node name="Narrator" parent="." instance=ExtResource( 3 )]
 unique_name_in_owner = true

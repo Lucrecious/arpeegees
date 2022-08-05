@@ -38,7 +38,9 @@ func start(caster: ArpeegeePinNode, available_targets: Array) -> void:
 	
 	visible = true
 	
-	_update_head()
+	get_viewport().warp_mouse(get_viewport_rect().get_center())
+	
+	place_head(get_viewport_rect().get_center())
 
 func place_head(position: Vector2) -> void:
 	_line.set_point_position(1, position)
@@ -56,7 +58,7 @@ func _gui_input(event: InputEvent) -> void:
 		return
 	
 	if event is InputEventMouseMotion:
-		_update_head()
+		place_head(get_local_mouse_position())
 		return
 	
 	var mouse_button := event as InputEventMouseButton
@@ -66,9 +68,6 @@ func _gui_input(event: InputEvent) -> void:
 			if bounding_box.global_rect().has_point(get_local_mouse_position()):
 				_finish_finding_target(pin)
 				return
-
-func _update_head() -> void:
-	place_head(get_local_mouse_position())
 
 func _finish_finding_target(pin: ArpeegeePinNode) -> void:
 	visible = false

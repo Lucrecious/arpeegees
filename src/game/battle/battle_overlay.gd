@@ -13,9 +13,13 @@ func _ready() -> void:
 	_action_menu = ActionMenuScene.instance() as PinActionMenu
 	
 	add_child(_action_menu)
+	move_child(_action_menu, 0)
+	
 	_action_menu.visible = false
 	
 	_turn_manager.connect('player_turn_started', self, '_on_player_turn_started')
+	
+	connect('mouse_exited', self, '_on_mouse_exited')
 
 func _on_player_turn_started() -> void:
 	var pin := _turn_manager.get_turn_pin()
@@ -70,6 +74,12 @@ func _on_action_pressed(menu: PinActionMenu, pin: ArpeegeePinNode, action_node: 
 
 var _current_pin: ArpeegeePinNode
 func _gui_input(event: InputEvent) -> void:
+	if _turn_manager.is_running_action():
+		return
+	
+	if _current_pin:
+		return
+	
 	if not event is InputEventMouseMotion:
 		return
 	
@@ -83,9 +93,26 @@ func _gui_input(event: InputEvent) -> void:
 		_stats_panel.visible = true
 		_stats_panel.set_as_toplevel(true)
 		_show_stats(_current_pin)
-	else:
-		_stats_panel.visible = false
-		_stats_panel.set_as_toplevel(false)
+
+func _on_mouse_exited() -> void:
+	_current_pin = null
+	_stats_panel.visible = false
+	_stats_panel.set_as_toplevel(false)
+
+func _input(event):
+	if not _current_pin:
+		return
+	
+	if not event is InputEventMouseMotion:
+		return
+	
+	var pin := _get_hovering_pin()
+	if pin:
+		return
+	
+	_current_pin = null
+	_stats_panel.visible = false
+	_stats_panel.set_as_toplevel(false)
 
 func _show_stats(pin: ArpeegeePinNode) -> void:
 	_stats_panel.apply_pin(pin)

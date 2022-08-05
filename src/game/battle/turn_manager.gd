@@ -67,6 +67,9 @@ func run_action_with_target(pin: ArpeegeePinNode, action_name: String, target: A
 func run_action(pin: ArpeegeePinNode, action_name: String) -> void:
 	run_action_with_target(pin, action_name, null)
 
+func is_running_action() -> bool:
+	return _is_running_action
+
 func _get_type(type: int) -> Array:
 	var pins_of_type := []
 	for p in _ordered_pins:
