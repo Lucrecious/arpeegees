@@ -4,6 +4,17 @@ extends Node2D
 func _ready() -> void:
 	_start_emissions()
 
+func get_modifiers() -> Array:
+	var nodes := []
+	
+	for child in get_children():
+		if not child is StatModifier:
+			continue
+		
+		nodes.push_back(child)
+	
+	return nodes
+
 func _start_emissions() -> void:
 	for child in get_children():
 		if not child is CPUParticles2D:

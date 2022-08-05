@@ -38,7 +38,7 @@ func _do_turn(turn: int, object: Object, callback: String) -> void:
 	var action_menu := ActionMenuScene.instance() as PinActionMenu
 	add_child(action_menu)
 	var menu_corner := ActionUtils.get_top_right_corner_screen(pin)
-	action_menu.rect_global_position = menu_corner
+	action_menu.rect_position = menu_corner
 	
 	for node in action_nodes:
 		var action := node.pin_action() as PinAction

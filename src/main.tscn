@@ -7,13 +7,17 @@
 [ext_resource path="res://assets/battle/ground.svg" type="Texture" id=5]
 
 [node name="Main" type="Control"]
+anchor_left = -0.001
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 1.28
 script = ExtResource( 2 )
 
 [node name="Background" type="Control" parent="."]
+anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_top = -720.0
 
 [node name="SkyTop" type="ColorRect" parent="Background"]
 anchor_top = 1.0

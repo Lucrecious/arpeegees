@@ -1,11 +1,15 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/game/battle/action_button.gd" type="Script" id=1]
+[ext_resource path="res://assets/ui/theme.tres" type="Theme" id=2]
+[ext_resource path="res://src/ui/wobble_label.gd" type="Script" id=3]
+[ext_resource path="res://assets/ui/ScribblesVariant-Regular.ttf" type="DynamicFontData" id=4]
 
 [node name="ActionButton" type="Button"]
 margin_right = 361.0
 margin_bottom = 80.0
 rect_min_size = Vector2( 0, 70 )
+theme = ExtResource( 2 )
 script = ExtResource( 1 )
 label_text = "Action Name"
 icon_name = "sword_attack"
@@ -41,7 +45,9 @@ stretch_mode = 6
 unique_name_in_owner = true
 self_modulate = Color( 0, 0, 0, 1 )
 margin_left = 62.0
-margin_top = 28.0
+margin_top = 16.0
 margin_right = 331.0
-margin_bottom = 42.0
+margin_bottom = 53.0
 size_flags_horizontal = 3
+script = ExtResource( 3 )
+_alternative_font_data = ExtResource( 4 )

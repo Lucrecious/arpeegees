@@ -254,6 +254,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/resources/arpeegee_pins/components/stats.gd"
 }, {
+"base": "Control",
+"class": "PinStatsCanvas",
+"language": "GDScript",
+"path": "res://src/game/battle/stats_canvas.gd"
+}, {
 "base": "Node2D",
 "class": "PlatformerJump",
 "language": "GDScript",
@@ -359,6 +364,21 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/resources/arpeegee_pins/components/squisher.gd"
 }, {
+"base": "Reference",
+"class": "StatComputer",
+"language": "GDScript",
+"path": "res://src/resources/arpeegee_pins/components/stat_computer.gd"
+}, {
+"base": "Node",
+"class": "StatModifier",
+"language": "GDScript",
+"path": "res://src/resources/stat_modifier.gd"
+}, {
+"base": "Panel",
+"class": "StatPopup",
+"language": "GDScript",
+"path": "res://src/ui/stat_popup.gd"
+}, {
 "base": "Node2D",
 "class": "StatusEffect",
 "language": "GDScript",
@@ -443,6 +463,11 @@ _global_script_classes=[ {
 "class": "Velocity3",
 "language": "GDScript",
 "path": "res://lut/components_3d/velocity3.gd"
+}, {
+"base": "Label",
+"class": "WobbleLabel",
+"language": "GDScript",
+"path": "res://src/ui/wobble_label.gd"
 } ]
 _global_script_class_icons={
 "ActionUtils": "",
@@ -494,6 +519,7 @@ _global_script_class_icons={
 "PinActions": "",
 "PinBag": "",
 "PinStats": "",
+"PinStatsCanvas": "",
 "PlatformerJump": "",
 "PlatformerRun": "",
 "PlatformerTurner": "",
@@ -515,6 +541,9 @@ _global_script_class_icons={
 "SpriteFlattener": "",
 "SpriteSwitcher": "",
 "Squisher": "",
+"StatComputer": "",
+"StatModifier": "",
+"StatPopup": "",
 "StatusEffect": "",
 "StatusEffectsList": "",
 "SubdividedQuadMeshInstance": "",
@@ -531,7 +560,8 @@ _global_script_class_icons={
 "UI_KeybindProperty": "",
 "UI_SliderProperty": "",
 "Velocity": "",
-"Velocity3": ""
+"Velocity3": "",
+"WobbleLabel": ""
 }
 
 [application]
@@ -553,7 +583,7 @@ window/size/width=1280
 window/size/height=720
 window/dpi/allow_hidpi=true
 window/stretch/mode="2d"
-window/stretch/aspect="keep_width"
+window/stretch/aspect="keep"
 
 [gui]
 

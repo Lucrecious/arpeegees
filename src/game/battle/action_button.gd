@@ -21,7 +21,7 @@ func _icon_name_set(value: String) -> void:
 	emit_signal('icon_name_changed')
 
 onready var _icon := $'%Icon' as TextureRect
-onready var _label := $'%Label' as Label
+onready var _label := $'%Label' as WobbleLabel
 
 func _ready() -> void:
 	connect('label_text_changed', self, '_on_label_text_changed')
@@ -29,6 +29,20 @@ func _ready() -> void:
 	
 	connect('icon_name_changed', self, '_on_icon_name_changed')
 	_on_icon_name_changed()
+	
+	connect('mouse_entered', self, '_on_hover_enter')
+	connect('mouse_exited', self, '_on_hover_exited')
+	
+	if get_rect().has_point(get_local_mouse_position()):
+		_label.enable_wobble()
+	else:
+		_label.disable_wobble()
+
+func _on_hover_enter() -> void:
+	_label.enable_wobble()
+
+func _on_hover_exited() -> void:
+	_label.disable_wobble()
 
 func _on_label_text_changed() -> void:
 	_update_label_text()
