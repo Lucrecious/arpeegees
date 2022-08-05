@@ -1,32 +1,38 @@
 class_name PinStatsCanvas
 extends Control
 
-export(float) var delay_popup_sec := 1.0
-
 onready var _stats_panel := $StatsPanel as StatPopup
 onready var _battle_layer := $'%BattleLayer' as Node2D
-onready var _timer := NodE.add_child(self,
-		TimEr.one_shot(delay_popup_sec, self, '_on_timeout', true)) as Timer
 
+var _current_pin: ArpeegeePinNode
 func _gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion:
-		if _stats_panel.visible:
-			_stats_panel.visible = false
-			_stats_panel.set_as_toplevel(false)
-		
-		_timer.stop()
-		_timer.start()
-
-func _on_timeout() -> void:
-	_show_stats_if_possible()
-
-func _show_stats_if_possible() -> void:
-	var hovering_pin := _get_hovering_pin()
-	if not hovering_pin:
+	if not event is InputEventMouseMotion:
 		return
 	
-	_stats_panel.apply_pin(hovering_pin)
-	var position := ActionUtils.get_top_right_corner_screen(hovering_pin)
+	#if not visible:
+	#	return
+	
+	#if not get_rect().has_point(get_local_mouse_position()):
+	#	return
+	
+	var pin := _get_hovering_pin()
+	if pin == _current_pin:
+		return
+	
+	_current_pin = pin
+	
+	if _current_pin:
+		_stats_panel.visible = true
+		_stats_panel.set_as_toplevel(true)
+		_show_stats(_current_pin)
+	else:
+		_stats_panel.visible = false
+		_stats_panel.set_as_toplevel(false)
+		
+
+func _show_stats(pin: ArpeegeePinNode) -> void:
+	_stats_panel.apply_pin(pin)
+	var position := ActionUtils.get_top_right_corner_screen(pin)
 	_stats_panel.rect_position = position
 	_stats_panel.visible = true
 	_stats_panel.set_as_toplevel(true)

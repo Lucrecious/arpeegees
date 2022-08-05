@@ -8,12 +8,14 @@ margin_left = 313.0
 margin_top = 307.0
 margin_right = 633.0
 margin_bottom = 479.0
+mouse_filter = 2
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 custom_constants/margin_right = 10
 custom_constants/margin_top = 5
 custom_constants/margin_left = 10
@@ -24,10 +26,12 @@ margin_left = 10.0
 margin_top = 5.0
 margin_right = 310.0
 margin_bottom = 167.0
+mouse_filter = 2
 
 [node name="NameHealth" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 margin_right = 300.0
 margin_bottom = 37.0
+mouse_filter = 2
 
 [node name="Name" type="Label" parent="MarginContainer/VBoxContainer/NameHealth"]
 unique_name_in_owner = true
@@ -40,6 +44,7 @@ text = "%s"
 margin_left = 41.0
 margin_right = 166.0
 margin_bottom = 37.0
+mouse_filter = 2
 size_flags_horizontal = 3
 
 [node name="Health" type="Label" parent="MarginContainer/VBoxContainer/NameHealth"]
@@ -55,6 +60,7 @@ align = 2
 margin_top = 41.0
 margin_right = 300.0
 margin_bottom = 78.0
+mouse_filter = 2
 
 [node name="Attack" type="Label" parent="MarginContainer/VBoxContainer/Attacks"]
 unique_name_in_owner = true
@@ -67,6 +73,7 @@ text = "ATK: %d"
 margin_left = 104.0
 margin_right = 175.0
 margin_bottom = 37.0
+mouse_filter = 2
 size_flags_horizontal = 3
 
 [node name="MagicAttack" type="Label" parent="MarginContainer/VBoxContainer/Attacks"]
@@ -82,6 +89,7 @@ align = 2
 margin_top = 82.0
 margin_right = 300.0
 margin_bottom = 119.0
+mouse_filter = 2
 
 [node name="Defence" type="Label" parent="MarginContainer/VBoxContainer/Defences"]
 unique_name_in_owner = true
@@ -94,6 +102,7 @@ text = "DEF: %d"
 margin_left = 102.0
 margin_right = 177.0
 margin_bottom = 37.0
+mouse_filter = 2
 size_flags_horizontal = 3
 
 [node name="MagicDefence" type="Label" parent="MarginContainer/VBoxContainer/Defences"]
@@ -109,6 +118,7 @@ align = 2
 margin_top = 123.0
 margin_right = 300.0
 margin_bottom = 160.0
+mouse_filter = 2
 
 [node name="Evasion" type="Label" parent="MarginContainer/VBoxContainer/EvasionCritical"]
 unique_name_in_owner = true
@@ -121,6 +131,7 @@ text = "Evasion: %d"
 margin_left = 144.0
 margin_right = 194.0
 margin_bottom = 37.0
+mouse_filter = 2
 size_flags_horizontal = 3
 
 [node name="Critical" type="Label" parent="MarginContainer/VBoxContainer/EvasionCritical"]
