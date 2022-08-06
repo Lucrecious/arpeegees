@@ -1,0 +1,47 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform sampler2D noise_texture: hint_normal;
+uniform float noise_scale = 1.0;
+uniform float skip_amount = 100.0;
+uniform float update_sec = .2;
+
+//vec3 random3(vec3 c) {
+//	float j = 4096.0*sin(dot(c,vec3(17.0, 59.4, 15.0)));
+//	vec3 r;
+//	r.z = fract(512.0*j);
+//	j *= .125;
+//	r.x = fract(512.0*j);
+//	j *= .125;
+//	r.y = fract(512.0*j);
+//	return r-0.5;
+//}
+
+float roundTo(float value, float by) {
+	return round(value / by) * by;
+}
+
+void vertex() {
+	float time = roundTo(TIME, update_sec);
+	vec4 value = texture(noise_texture, UV + vec2(time * skip_amount, 0));
+	VERTEX.xy += value.xy * noise_scale;
+}"
+
+[sub_resource type="OpenSimplexNoise" id=2]
+
+[sub_resource type="NoiseTexture" id=3]
+width = 1024
+height = 1024
+seamless = true
+as_normalmap = true
+bump_strength = 100.0
+noise = SubResource( 2 )
+
+[resource]
+shader = SubResource( 1 )
+shader_param/noise_scale = 15.0
+shader_param/skip_amount = 100.0
+shader_param/update_sec = 0.2
+shader_param/noise_texture = SubResource( 3 )

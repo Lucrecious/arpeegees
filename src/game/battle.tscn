@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://src/game/battle.gd" type="Script" id=1]
 [ext_resource path="res://src/game/battle/turn_manager.gd" type="Script" id=2]
@@ -9,6 +9,33 @@
 [ext_resource path="res://src/game/battle/battle_overlay.gd" type="Script" id=8]
 [ext_resource path="res://src/game/battle/ai.gd" type="Script" id=9]
 
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+ 
+uniform sampler2D uv_offset_texture: hint_black;
+uniform float offset_amount = 300.0;
+uniform float update_sec = .4;
+
+
+void fragment() {
+    vec2 offset = texture(uv_offset_texture, UV + floor(TIME / update_sec) * update_sec).xy * 2.0 - 1.0;
+    offset *= 1.0 / offset_amount;
+    
+    COLOR = vec4(texture(TEXTURE, UV + offset).rgb, texture(TEXTURE, UV).a);
+}"
+
+[sub_resource type="OpenSimplexNoise" id=3]
+
+[sub_resource type="NoiseTexture" id=4]
+seamless = true
+noise = SubResource( 3 )
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/offset_amount = 500.0
+shader_param/update_sec = 0.4
+shader_param/uv_offset_texture = SubResource( 4 )
+
 [node name="Battle" type="Control"]
 anchor_top = 1.0
 anchor_right = 1.0
@@ -18,6 +45,7 @@ theme = ExtResource( 7 )
 script = ExtResource( 1 )
 
 [node name="ViewportContainer" type="ViewportContainer" parent="."]
+material = SubResource( 2 )
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
