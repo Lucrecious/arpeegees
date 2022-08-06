@@ -54,9 +54,9 @@ func get_turn_pin() -> ArpeegeePinNode:
 
 func run_action_with_target(pin: ArpeegeePinNode, action_name: String, target: ArpeegeePinNode) -> void:
 	var actions_node := NodE.get_child(pin, PinActions) as PinActions
-	actions_node.connect('action_started', self, 'emit_signal', ['action_started'],
+	actions_node.connect('action_started', self, '_on_action_started', [],
 			CONNECT_ONESHOT | CONNECT_DEFERRED | CONNECT_REFERENCE_COUNTED)
-	actions_node.connect('action_ended', self, 'emit_signal', ['action_ended'],
+	actions_node.connect('action_ended', self, '_on_action_ended', [],
 			CONNECT_ONESHOT | CONNECT_DEFERRED | CONNECT_REFERENCE_COUNTED)
 	
 	if target:
@@ -69,6 +69,14 @@ func run_action(pin: ArpeegeePinNode, action_name: String) -> void:
 
 func is_running_action() -> bool:
 	return _is_running_action
+
+func _on_action_started() -> void:
+	_is_running_action = true
+	emit_signal('action_started')
+
+func _on_action_ended() -> void:
+	_is_running_action = false
+	emit_signal('action_ended')
 
 func _get_type(type: int) -> Array:
 	var pins_of_type := []
