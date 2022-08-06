@@ -3,12 +3,6 @@ extends Control
 
 signal pins_dropped()
 
-enum Advantage {
-	HealthUp,
-	AttackUp,
-	EvasionUp,
-}
-
 const LayoutTwoOne := preload('res://src/game/battle/layout_two_one.tscn')
 
 export(int) var pin_count := 3
@@ -90,14 +84,13 @@ func _do_intro_narration() -> void:
 
 func _balance_battle() -> void:
 	_turn_manager.connect('battle_ended', self, '_on_battle_ended')
+	
 	var nodes := NodE.get_children(_battle_layer, ArpeegeePinNode)
-	
-	var disadvantaged_nodes := _get_disadvantaged_nodes(nodes)
-	
-	if not disadvantaged_nodes.empty():
-		_add_random_advantage(disadvantaged_nodes)
+	_turn_manager.initialize_turns(nodes)
+	_turn_manager.balance_battle()
 	
 	_start_battle(nodes)
+
 
 func _on_battle_ended(end_condition: int) -> void:
 	if end_condition == TurnManager.EndCondition.NPCsDead:
@@ -109,77 +102,9 @@ func _on_battle_ended(end_condition: int) -> void:
 	else:
 		assert(false)
 
-func _get_disadvantaged_nodes(nodes: Array) -> Array:
-	var players := _get_nodes_of_type(nodes, ArpeegeePin.Type.Player)
-	var npcs := _get_nodes_of_type(nodes, ArpeegeePin.Type.NPC)
-	
-	if players.size() > npcs.size():
-		return npcs
-	
-	if npcs.size() > players.size():
-		return players
-	
-	return []
-
-func _get_nodes_of_type(nodes: Array, type: int) -> Array:
-	var of_type := []
-	
-	for n in nodes:
-		var resource := n.resource as ArpeegeePin
-		if resource.type != type:
-			continue
-		
-		of_type.push_back(n)
-	
-	return of_type
-
-func _add_random_advantage(nodes: Array) -> void:
-	var advantage := _get_random_advantage()
-	
-	match advantage:
-		Advantage.AttackUp:
-			_increase_attack(nodes)
-		Advantage.EvasionUp:
-			_increase_evasion(nodes)
-		Advantage.HealthUp:
-			_increase_health(nodes)
-
-func _get_random_advantage() -> int:
-	var values := Advantage.values()
-	var advantage := values[randi() % values.size()] as int
-	return advantage
-
-func _increase_attack(nodes: Array) -> void:
-	for n in nodes:
-		var stats := NodE.get_child(n, PinStats) as PinStats
-		if not stats:
-			assert(false)
-			continue
-		
-		stats.attack += (stats.attack / 2)
-
-func _increase_evasion(nodes: Array) -> void:
-	for n in nodes:
-		var stats := NodE.get_child(n, PinStats) as PinStats
-		if not stats:
-			assert(false)
-			continue
-		
-		stats.evasion += (stats.evasion / 2)
-
-func _increase_health(nodes: Array) -> void:
-	for n in nodes:
-		var health := NodE.get_child(n, Health) as Health
-		if not health:
-			assert(false)
-			continue
-		
-		health.max_points = health.max_points * 2
-		health.current = health.max_points
-
 func _start_battle(nodes: Array) -> void:
-	_turn_manager.initialize_turns(nodes)
 	_narrator.watch(nodes)
+	_turn_manager.start()
 
 func _load_and_drop_pins(pins: Array, positions: PoolVector2Array, wait_sec: float, bounce_sec: float) -> void:
 	var background_resource_loader := BackgroundResourceLoader.new()

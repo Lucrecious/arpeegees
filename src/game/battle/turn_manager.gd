@@ -8,6 +8,12 @@ signal action_ended()
 signal battle_ended(end_condition)
 signal initialized()
 
+enum Advantage {
+	HealthUp,
+	AttackUp,
+	EvasionUp,
+}
+
 enum EndCondition {
 	None,
 	PlayersDead,
@@ -35,7 +41,8 @@ func initialize_turns(pins: Array) -> void:
 		return
 	
 	emit_signal('initialized')
-	
+
+func start() -> void:
 	_do_turn(_current_turn)
 
 func get_npcs() -> Array:
@@ -72,6 +79,93 @@ func run_action(pin: ArpeegeePinNode, action_name: String) -> void:
 
 func is_running_action() -> bool:
 	return _is_running_action
+
+func balance_battle() -> void:
+	var disadvantaged_nodes := _get_disadvantaged_nodes(_ordered_pins)
+	
+	if not disadvantaged_nodes.empty():
+		_add_random_advantage(disadvantaged_nodes)
+
+func _get_disadvantaged_nodes(nodes: Array) -> Array:
+	var players := _get_nodes_of_type(nodes, ArpeegeePin.Type.Player)
+	var npcs := _get_nodes_of_type(nodes, ArpeegeePin.Type.NPC)
+	
+	if players.size() > npcs.size():
+		return npcs
+	
+	if npcs.size() > players.size():
+		return players
+	
+	return []
+
+func _get_nodes_of_type(nodes: Array, type: int) -> Array:
+	var of_type := []
+	
+	for n in nodes:
+		var resource := n.resource as ArpeegeePin
+		if resource.type != type:
+			continue
+		
+		of_type.push_back(n)
+	
+	return of_type
+
+func _add_random_advantage(nodes: Array) -> void:
+	var advantage := _get_random_advantage()
+	
+	match advantage:
+		Advantage.AttackUp:
+			_increase_attack(nodes)
+		Advantage.EvasionUp:
+			_increase_evasion(nodes)
+		Advantage.HealthUp:
+			_increase_health(nodes)
+
+func _get_random_advantage() -> int:
+	var values := Advantage.values()
+	var advantage := values[randi() % values.size()] as int
+	return advantage
+
+func _increase_attack(nodes: Array) -> void:
+	for n in nodes:
+		var status_effects := NodE.get_child(n, StatusEffectsList) as StatusEffectsList
+		var effect := StatusEffect.new()
+		var attack := StatModifier.new()
+		attack.type = StatModifier.Type.Attack
+		attack.multiplier = 1.5
+		
+		var magic_attack := StatModifier.new()
+		magic_attack.type = StatModifier.Type.MagicAttack
+		attack.multiplier = 1.5
+		
+		effect.add_child(attack)
+		effect.add_child(magic_attack)
+		status_effects.add_instance(effect)
+
+func _increase_evasion(nodes: Array) -> void:
+	for n in nodes:
+		var status_effects := NodE.get_child(n, StatusEffectsList) as StatusEffectsList
+		var effect := StatusEffect.new()
+		var modifier := StatModifier.new()
+		modifier.type = StatModifier.Type.Evasion
+		modifier.multiplier = 1.5
+		
+		effect.add_child(modifier)
+		status_effects.add_instance(effect)
+
+func _increase_health(nodes: Array) -> void:
+	for n in nodes:
+		var status_effects := NodE.get_child(n, StatusEffectsList) as StatusEffectsList
+		var effect := StatusEffect.new()
+		var modifier := StatModifier.new()
+		modifier.type = StatModifier.Type.MaxHealth
+		modifier.multiplier = 2.0
+		
+		var health := NodE.get_child(n, Health) as Health
+		health.current = modifier.apply(health.current)
+		
+		effect.add_child(modifier)
+		status_effects.add_instance(effect)
 
 func _on_action_started() -> void:
 	_is_running_action = true

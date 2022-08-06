@@ -32,8 +32,27 @@ static func get_modified_stats(pin: ArpeegeePinNode) -> Dictionary:
 		StatModifier.Type.Critical : stats.critical,
 	}
 	
+	var unmodified_stats := modified_stats.duplicate()
+	
+	var relative_stats := {
+		StatModifier.Type.MaxHealth : 0,
+		StatModifier.Type.Attack : 0,
+		StatModifier.Type.MagicAttack : 0,
+		StatModifier.Type.Defence : 0,
+		StatModifier.Type.MagicDefence : 0,
+		StatModifier.Type.Evasion : 0,
+		StatModifier.Type.Critical : 0,
+	}
+	
 	for m in modifiers:
 		var value := modified_stats.get(m.type, 0) as int
-		modified_stats[m.type] = m.apply(value)
+		value = m.apply(value)
+		modified_stats[m.type] = value
+		relative_stats[m.type] = value - unmodified_stats[m.type]
 	
-	return modified_stats
+	var stats_dict := {
+		modified = modified_stats,
+		relative = relative_stats,
+	}
+	
+	return stats_dict
