@@ -6,6 +6,7 @@ signal npc_turn_started()
 signal action_started()
 signal action_ended()
 signal battle_ended(end_condition)
+signal initialized()
 
 enum EndCondition {
 	None,
@@ -32,6 +33,8 @@ func initialize_turns(pins: Array) -> void:
 	if _ordered_pins.empty():
 		assert(false)
 		return
+	
+	emit_signal('initialized')
 	
 	_do_turn(_current_turn)
 

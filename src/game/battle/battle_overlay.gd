@@ -12,6 +12,10 @@ onready var _turn_manager := $TurnManager as TurnManager
 func _ready() -> void:
 	_action_menu = ActionMenuScene.instance() as PinActionMenu
 	
+	var original_mouse_filter := mouse_filter
+	mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_turn_manager.connect('initialized', self, 'set', ['mouse_filter', original_mouse_filter])
+	
 	add_child(_action_menu)
 	move_child(_action_menu, 0)
 	
