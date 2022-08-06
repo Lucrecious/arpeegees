@@ -9,6 +9,8 @@ onready var _line := $Line as Line2D
 onready var _head := $Head as Polygon2D
 
 var _available_targets := []
+var _select_indicators := []
+var _bounding_boxes := []
 
 func _ready() -> void:
 	visible = false
@@ -28,6 +30,12 @@ func start(caster: ArpeegeePinNode, available_targets: Array) -> void:
 	
 	_is_finding_target = true
 	_available_targets = available_targets.duplicate()
+	for t in _available_targets:
+		var select_indicator := NodE.get_child(t, SelectIndicater) as SelectIndicater
+		var bounding_box := NodE.get_child(t, REferenceRect) as REferenceRect
+		
+		_select_indicators.push_back(select_indicator)
+		_bounding_boxes.push_back(bounding_box)
 	
 	var bounding_box := NodE.get_child(caster, REferenceRect) as REferenceRect
 	if not bounding_box:
@@ -58,13 +66,23 @@ func _gui_input(event: InputEvent) -> void:
 		return
 	
 	if event is InputEventMouseMotion:
+		for s in _select_indicators:
+			s.highlight(false)
+		
+		for i in _bounding_boxes.size():
+			var bounding_box := _bounding_boxes[i] as REferenceRect
+			if bounding_box.global_rect().has_point(get_local_mouse_position()):
+				var select_indicator := _select_indicators[i] as SelectIndicater
+				select_indicator.highlight(true)
+		
 		place_head(get_local_mouse_position())
 		return
 	
 	var mouse_button := event as InputEventMouseButton
 	if mouse_button and mouse_button.pressed and mouse_button.button_index == BUTTON_LEFT:
-		for pin in _available_targets:
-			var bounding_box := NodE.get_child(pin, REferenceRect) as REferenceRect
+		for i in _available_targets.size():
+			var pin := _available_targets[i] as ArpeegeePinNode
+			var bounding_box := _bounding_boxes[i] as REferenceRect
 			if bounding_box.global_rect().has_point(get_local_mouse_position()):
 				_finish_finding_target(pin)
 				return
@@ -72,5 +90,11 @@ func _gui_input(event: InputEvent) -> void:
 func _finish_finding_target(pin: ArpeegeePinNode) -> void:
 	visible = false
 	_is_finding_target = false
+	
+	for s in _select_indicators:
+		s.highlight(false)
+	
 	_available_targets.clear()
+	_select_indicators.clear()
+	_bounding_boxes.clear()
 	emit_signal('target_found', pin)

@@ -1,10 +1,12 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://assets/sprites/harpy/harpy_idle.png" type="Texture" id=1]
 [ext_resource path="res://src/game/battle/star_particles.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/resources/arpeegee_pins/arpeegee_pin.gd" type="Script" id=3]
 [ext_resource path="res://assets/sprites/harpy/harpy_dive_head.png" type="Texture" id=4]
 [ext_resource path="res://assets/sprites/harpy/harpy_hit.png" type="Texture" id=5]
+[ext_resource path="res://assets/shaders/pin_sprite_shader.gdshader" type="Shader" id=6]
+[ext_resource path="res://src/resources/arpeegee_pins/components/selected_indicator.gd" type="Script" id=7]
 [ext_resource path="res://lut/nodes/reference_rect.gd" type="Script" id=8]
 [ext_resource path="res://src/resources/arpeegee_pins/sprite_switcher.gd" type="Script" id=9]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/actions.gd" type="Script" id=10]
@@ -17,9 +19,17 @@
 [ext_resource path="res://src/resources/arpeegee_pins/components/stats.gd" type="Script" id=17]
 [ext_resource path="res://src/resources/arpeegee_pins/components/status_effects_list.gd" type="Script" id=18]
 
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 6 )
+shader_param/line_color = Color( 1, 1, 1, 1 )
+shader_param/line_thickness = 0.0
+
 [node name="Harpy" type="Node2D"]
 script = ExtResource( 3 )
 nice_name = "Harpy"
+
+[node name="SelectIndicater" type="Node" parent="."]
+script = ExtResource( 7 )
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource( 14 )
@@ -38,9 +48,11 @@ unique_name_in_owner = true
 position = Vector2( -1, -162 )
 
 [node name="Sprites" type="Node2D" parent="."]
+material = SubResource( 1 )
 script = ExtResource( 12 )
 
 [node name="Idle" type="Sprite" parent="Sprites"]
+use_parent_material = true
 position = Vector2( -150, -177 )
 scale = Vector2( 0.12, 0.12 )
 texture = ExtResource( 1 )
@@ -48,12 +60,14 @@ centered = false
 
 [node name="DiveHead" type="Sprite" parent="Sprites"]
 visible = false
+use_parent_material = true
 position = Vector2( -10, -109 )
 scale = Vector2( 0.12, 0.12 )
 texture = ExtResource( 4 )
 
 [node name="HitAndDeath" type="Sprite" parent="Sprites"]
 visible = false
+use_parent_material = true
 position = Vector2( -7, -84 )
 scale = Vector2( 0.12, 0.12 )
 texture = ExtResource( 5 )

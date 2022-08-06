@@ -339,6 +339,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://lut/extension/string_extension.gd"
 }, {
+"base": "Node",
+"class": "SelectIndicater",
+"language": "GDScript",
+"path": "res://src/resources/arpeegee_pins/components/selected_indicator.gd"
+}, {
 "base": "Reference",
 "class": "SignalDetector",
 "language": "GDScript",
@@ -541,6 +546,7 @@ _global_script_class_icons={
 "RingBuffer": "",
 "RootSprite": "",
 "STring": "",
+"SelectIndicater": "",
 "SignalDetector": "",
 "SignalExpression": "",
 "SpriteFlattener": "",

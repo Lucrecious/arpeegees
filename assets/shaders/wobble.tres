@@ -16,9 +16,12 @@ void fragment() {
 }"
 
 [sub_resource type="OpenSimplexNoise" id=3]
+period = 32.0
 
 [sub_resource type="NoiseTexture" id=4]
 seamless = true
+as_normalmap = true
+bump_strength = 20.0
 noise = SubResource( 3 )
 
 [resource]
