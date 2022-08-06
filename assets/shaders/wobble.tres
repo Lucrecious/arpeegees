@@ -1,0 +1,28 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+ 
+uniform sampler2D uv_offset_texture: hint_black;
+uniform float offset_amount = 300.0;
+uniform float update_sec = .4;
+
+
+void fragment() {
+    vec2 offset = texture(uv_offset_texture, UV + floor(TIME / update_sec) * update_sec).xy * 2.0 - 1.0;
+    offset *= 1.0 / offset_amount;
+    
+    COLOR = vec4(texture(TEXTURE, UV + offset).rgb, texture(TEXTURE, UV).a);
+}"
+
+[sub_resource type="OpenSimplexNoise" id=3]
+
+[sub_resource type="NoiseTexture" id=4]
+seamless = true
+noise = SubResource( 3 )
+
+[resource]
+shader = SubResource( 1 )
+shader_param/offset_amount = 500.0
+shader_param/update_sec = 0.4
+shader_param/uv_offset_texture = SubResource( 4 )
