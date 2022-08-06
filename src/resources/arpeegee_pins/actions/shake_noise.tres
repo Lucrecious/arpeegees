@@ -1,0 +1,5 @@
+[gd_resource type="OpenSimplexNoise" format=2]
+
+[resource]
+octaves = 4
+period = 32.0

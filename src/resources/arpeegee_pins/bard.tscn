@@ -23,6 +23,8 @@
 shader = ExtResource( 7 )
 shader_param/line_color = Color( 1, 1, 1, 1 )
 shader_param/line_thickness = 0.0
+shader_param/fill_color = Color( 1, 1, 1, 1 )
+shader_param/color_mix = 0.0
 
 [node name="Bard" type="Node2D"]
 script = ExtResource( 3 )
@@ -68,7 +70,7 @@ texture = ExtResource( 14 )
 [node name="Attack" type="Sprite" parent="Sprites"]
 visible = false
 use_parent_material = true
-position = Vector2( -43, -88 )
+position = Vector2( -25, -88 )
 scale = Vector2( 0.08, 0.08 )
 texture = ExtResource( 5 )
 

@@ -36,3 +36,63 @@ static func add_status_effect(tween: SceneTreeTween, target: ArpeegeePinNode, ef
 		return
 	
 	tween.tween_callback(status_effects, 'add', [effect])
+
+static func add_jump(
+		tween: SceneTreeTween, pin: ArpeegeePinNode,
+		height: float, peak_sec: float, land_offset := 0.0) -> void:
+	tween.tween_property(pin, 'position:y', pin.position.y - height, peak_sec)\
+			.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	tween.tween_property(pin, 'position:y', pin.position.y - land_offset, peak_sec)\
+			.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUAD)
+
+static func add_walk(tween: SceneTreeTween, pin: ArpeegeePinNode, start_position: Vector2,
+		target_position: Vector2, step_height: float, steps: int) -> Vector2:
+	var relative := target_position - start_position
+	
+	var step_vector := relative / steps
+	
+	var step_sec := .1
+	
+	var pin_position := pin.position
+	
+	for i in steps:
+		var end_location := start_position + (step_vector * (i + 1)) as Vector2
+		var mid_location := start_position + (((step_vector * (float(i) + .5))) + (Vector2.UP *  step_height)) as Vector2
+		
+		tween.tween_property(pin, 'position', mid_location, step_sec / 2.0)
+		tween.tween_property(pin, 'position', end_location, step_sec / 2.0)
+	
+	return target_position
+
+static func add_wind_up(tween: SceneTreeTween, pin: ArpeegeePinNode,
+		position: Vector2, side: int) -> Vector2:
+	side = sign(side)
+	
+	var target_position := position + Vector2.RIGHT * 50.0
+	tween.tween_property(pin, 'position', target_position, .5)\
+			.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
+	tween.tween_interval(.5)
+	
+	return target_position
+
+static func add_stab(tween: SceneTreeTween, pin: ArpeegeePinNode, target_position: Vector2) -> Vector2:
+	tween.tween_property(pin, 'global_position', target_position, .2)\
+			.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_EXPO)
+	
+	return target_position
+
+static func add_shake(tween: SceneTreeTween, pin: ArpeegeePinNode, position: Vector2,
+		axis: Vector2, magnitude: float, sec: float) -> void:
+	
+	tween.tween_method(_1, '_shake', 0.0, 1.0, sec, [pin, position, axis.normalized(), magnitude])
+	tween.tween_property(pin, 'global_position', position, .05)
+
+class _1:
+	# todo: make this work wtith noise
+	const noise := preload('res://src/resources/arpeegee_pins/actions/shake_noise.tres')
+	static func _shake(_1: float, pin: ArpeegeePinNode, position: Vector2,
+			axis: Vector2, magnitude: float) -> void:
+		
+		var s := sign(rand_range(-1.0, 1.0))
+		pin.global_position = position + s * rand_range(0.7, 1.0) * axis * magnitude
+		

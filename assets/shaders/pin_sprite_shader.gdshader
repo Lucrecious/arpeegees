@@ -3,6 +3,9 @@ shader_type canvas_item;
 uniform vec4 line_color : hint_color = vec4(1.0);
 uniform float line_thickness : hint_range(0.0, 10.0) = 0.0;
 
+uniform vec4 fill_color: hint_color = vec4(1.0);
+uniform float color_mix: hint_range(0.0, 1.0, 0.01) = 0.0;
+
 vec4 outline(vec4 color, vec2 pixel_size, sampler2D sample, vec2 uv) {
 	vec2 size = pixel_size * line_thickness;
 
@@ -25,5 +28,5 @@ void fragment() {
 		color = outline(color, TEXTURE_PIXEL_SIZE, TEXTURE, UV);
 	}
 	
-	COLOR = color;
+	COLOR = vec4(((color * (1.0 - color_mix)) + (fill_color * color_mix)).rgb, color.a);
 }
