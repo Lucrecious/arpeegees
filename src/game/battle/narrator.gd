@@ -37,7 +37,7 @@ func watch(nodes: Array) -> void:
 		var pin_actions := NodE.get_child(n, PinActions) as PinActions
 		pin_actions.connect('action_started_with_name', self, '_on_pin_action_started', [pin_actions])
 
-func _on_pin_action_started(action_name: String, actions: PinActions) -> void:
+func _on_pin_action_started(action_name: String, _actions: PinActions) -> void:
 	var text_key := ''
 	if action_name == 'MandolinBash':
 		text_key = 'NARRATOR_MANDOLIN_BASH_USE_1'

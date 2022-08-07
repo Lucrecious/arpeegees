@@ -59,7 +59,7 @@ func pick_random(amount: int) -> Dictionary:
 func _get_of_type(pins: Array, type: int) -> Array:
 	var of_type := []
 	
-	for pin in _pins:
+	for pin in pins:
 		if (pin as ArpeegeePin).type != type:
 			continue
 		of_type.push_back(pin)

@@ -14,6 +14,7 @@ static func get_closest_adjecent_position(actioner: Node2D, target: Node2D) -> V
 	position += away_direction * Vector2.RIGHT * (target_rect.size.x / 2.0)
 	position += away_direction * Vector2.RIGHT * (actioner_rect.size.x / 2.0)
 	position += Vector2.UP * (actioner_rect.size.y / 2.0)
+	position += Vector2.DOWN * .01
 	
 	return position - actioner_rect.get_center()
 
@@ -53,8 +54,6 @@ static func add_walk(tween: SceneTreeTween, pin: ArpeegeePinNode, start_position
 	
 	var step_sec := .1
 	
-	var pin_position := pin.position
-	
 	for i in steps:
 		var end_location := start_position + (step_vector * (i + 1)) as Vector2
 		var mid_location := start_position + (((step_vector * (float(i) + .5))) + (Vector2.UP *  step_height)) as Vector2
@@ -66,7 +65,7 @@ static func add_walk(tween: SceneTreeTween, pin: ArpeegeePinNode, start_position
 
 static func add_wind_up(tween: SceneTreeTween, pin: ArpeegeePinNode,
 		position: Vector2, side: int) -> Vector2:
-	side = sign(side)
+	side = int(sign(side))
 	
 	var target_position := position + Vector2.RIGHT * 50.0
 	tween.tween_property(pin, 'position', target_position, .5)\

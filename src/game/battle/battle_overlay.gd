@@ -69,13 +69,6 @@ func _on_action_ended() -> void:
 func _on_target_found(target: ArpeegeePinNode, caster: ArpeegeePinNode, action_name: String) -> void:
 	_turn_manager.run_action_with_target(caster, action_name, target)
 
-func _on_action_pressed(menu: PinActionMenu, pin: ArpeegeePinNode, action_node: Node,
-	object: Object, callback: String) -> void:
-	menu.queue_free()
-	
-	if pin.resource.type == ArpeegeePin.Type.Player:
-		action_node.run_action_with_target()
-
 var _current_pin: ArpeegeePinNode
 func _gui_input(event: InputEvent) -> void:
 	if _turn_manager.is_running_action():

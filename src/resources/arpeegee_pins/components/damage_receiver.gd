@@ -40,7 +40,7 @@ func _hurt() -> void:
 			.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
 	tween.tween_method(self, '_set_fill_color', 1.0, 0.0, flash_sec / 2.0)\
 			.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_EXPO)
-	tween.parallel().tween_interval(.5)
+	tween.parallel().tween_interval(.8)
 	
 	if _health.current <= 0:
 		if _sprite_switcher.has_sprite('dead'):

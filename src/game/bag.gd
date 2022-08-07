@@ -55,7 +55,7 @@ func open() -> void:
 	
 	_animation.connect('animation_finished', self, '_on_animation_finished', [], CONNECT_ONESHOT)
 
-func _on_animation_finished(_animation: String) -> void:
+func _on_animation_finished(_1: String) -> void:
 	emit_signal('open_animation_finished')
 
 func _on_mouse_entered() -> void:

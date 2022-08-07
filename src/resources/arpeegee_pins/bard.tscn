@@ -90,6 +90,9 @@ script = ExtResource( 9 )
 [node name="MandolinBash" type="Node2D" parent="Actions"]
 script = ExtResource( 11 )
 
+[node name="ImpactHint" type="Position2D" parent="Actions/MandolinBash"]
+position = Vector2( -84, -96 )
+
 [node name="StatusEffects" type="Node2D" parent="."]
 script = ExtResource( 17 )
 
