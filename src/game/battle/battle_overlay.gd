@@ -12,9 +12,8 @@ onready var _turn_manager := $TurnManager as TurnManager
 func _ready() -> void:
 	_action_menu = ActionMenuScene.instance() as PinActionMenu
 	
-	var original_mouse_filter := mouse_filter
+	_turn_manager.connect('initialized', self, '_on_turn_manager_initialized', [mouse_filter])
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_turn_manager.connect('initialized', self, 'set', ['mouse_filter', original_mouse_filter])
 	
 	add_child(_action_menu)
 	move_child(_action_menu, 0)
@@ -24,6 +23,14 @@ func _ready() -> void:
 	_turn_manager.connect('player_turn_started', self, '_on_player_turn_started')
 	
 	connect('mouse_exited', self, '_on_mouse_exited')
+
+func _on_turn_manager_initialized(original_mouse_filter: int) -> void:
+	mouse_filter = original_mouse_filter
+	
+	for pin in _turn_manager.get_pins():
+		var health := NodE.get_child(pin, Health) as Health
+		health.connect('increased', self, '_on_pin_health_changed', [pin, false])
+		health.connect('damaged', self, '_on_pin_health_changed', [pin, true])
 
 func _on_player_turn_started() -> void:
 	var pin := _turn_manager.get_turn_pin()
@@ -130,3 +137,10 @@ func _get_hovering_pin() -> ArpeegeePinNode:
 		return p
 	
 	return null
+
+func _on_pin_health_changed(amount: int, pin: ArpeegeePinNode, damaged: bool) -> void:
+	_spawn_health_changed_floaty_number(pin, amount, damaged)
+
+func _spawn_health_changed_floaty_number(pin: ArpeegeePinNode, amount: int, damaged: bool) -> void:	
+	amount = amount if not damaged else -amount
+	VFX.floating_number(pin, amount, self)

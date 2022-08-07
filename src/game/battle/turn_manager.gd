@@ -51,6 +51,9 @@ func get_npcs() -> Array:
 func get_players() -> Array:
 	return _players.duplicate()
 
+func get_pins() -> Array:
+	return _ordered_pins.duplicate()
+
 func next_turn() -> void:
 	if _is_running_action:
 		assert(false)

@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/ui/floating_number_font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://src/vfx/floating_number.gd" type="Script" id=2]
+
+[node name="FloatingNumber" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+use_top_left = true
+
+[node name="Label" type="Label" parent="CenterContainer"]
+margin_left = -43.0
+margin_top = -28.0
+margin_right = 42.0
+margin_bottom = 27.0
+custom_fonts/font = ExtResource( 1 )
+text = "100"
+align = 1
+valign = 1

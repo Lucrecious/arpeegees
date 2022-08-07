@@ -29,9 +29,9 @@ func damage(amount: int) -> void:
 		return
 	
 	_health.damage(amount)
-	_hurt()
+	_hurt(amount)
 
-func _hurt() -> void:
+func _hurt(amount: int) -> void:
 	_sprite_switcher.change(sprite_name)
 	var tween := create_tween()
 	
