@@ -43,7 +43,7 @@ func shoot_particles() -> void:
 	_shoot_tween.tween_property(_star_particles, 'global_position', _star_particles.global_position + relative_destination, .5)
 	_shoot_tween.tween_callback(_star_particles, 'set', ['emitting', false])
 
-func open() -> void:
+func _open() -> void:
 	if _opened:
 		return
 	
@@ -87,7 +87,7 @@ func _gui_input(event: InputEvent) -> void:
 		return
 	
 	if mouse_button.button_index == BUTTON_LEFT and mouse_button.is_pressed():
-		open()
+		_open()
 		return
 
 var _sec_passed := 0.0

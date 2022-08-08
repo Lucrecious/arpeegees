@@ -3,6 +3,7 @@ extends Control
 const BattleScreen := preload('res://src/game/battle.tscn')
 
 onready var _title_screen := $Title as TitleScreen
+onready var _battle_screen := $Battle as BattleScreen
 
 func _enter_tree():
 	randomize()
@@ -13,6 +14,4 @@ func _ready() -> void:
 func _on_battle_screen_requested(pin_amount: int) -> void:
 	remove_child(_title_screen)
 	
-	var battle_screen := BattleScreen.instance() as BattleScreen
-	battle_screen.pin_count = pin_amount
-	add_child(battle_screen)
+	_battle_screen.start(pin_amount)

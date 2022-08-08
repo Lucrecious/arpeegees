@@ -5,7 +5,8 @@ signal pins_dropped()
 
 const LayoutTwoOne := preload('res://src/game/battle/layout_two_one.tscn')
 
-export(int) var pin_count := 3
+export(bool) var auto_start := false
+export(int, 3, 3) var auto_start_pin_count := 3
 
 var _layout: BattleLayout = null
 
@@ -13,10 +14,23 @@ onready var _battle_viewport := $ViewportContainer/Viewport as Viewport
 onready var _battle_layer := $'%BattleLayer' as YSort
 onready var _turn_manager := $'%TurnManager' as TurnManager
 onready var _narrator := $'%Narrator' as NarratorUI
+onready var _original_narrator_position := _narrator.rect_position
 
 func _ready() -> void:
-	_configure_viewport(_battle_viewport)
+	_narrator.rect_position += Vector2.DOWN * (_narrator.rect_size.y + 100.0)
 	
+	if auto_start:
+		start(auto_start_pin_count)
+
+var _started := false
+func start(pin_count: int) -> void:
+	if _started:
+		assert(false)
+		return
+	
+	_started = true
+	
+	_configure_viewport(_battle_viewport)
 	var pins := ArpeegeePins.pick_random(pin_count)
 	if _is_two_one_layout(pins.npcs.size(), pins.players.size()):
 		_layout = _create_battle_layout(LayoutTwoOne, pins)
@@ -78,6 +92,10 @@ func _wait_for_drop_to_finish(wait_sec: float) -> void:
 
 func _do_intro_narration() -> void:
 	var speaking_tween := create_tween()
+	
+	speaking_tween.tween_property(_narrator, 'rect_position:y', _original_narrator_position.y, 3.5)\
+			.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+	speaking_tween.tween_interval(0.5)
 	speaking_tween.tween_callback(_narrator, 'speak_tr', ['NARRATOR_BATTLE_INTRODUCTION_GENERIC'])
 	TweenExtension.pause_until_signal(speaking_tween.parallel(), _narrator, 'speaking_ended')
 	speaking_tween.tween_callback(self, '_balance_battle')

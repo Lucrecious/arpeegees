@@ -53,15 +53,15 @@ func _on_pin_action_started(action_name: String, _actions: PinActions) -> void:
 
 var _current_tween: SceneTreeTween = null
 func speak_tr(translation_key: String) -> void:
+	var dialogue := tr(translation_key)
+	_speak(dialogue)
+
+func _speak(text: String) -> void:
 	if _current_tween:
 		_current_tween.kill()
 		_current_tween = null
 		_finished_speaking()
 	
-	var dialogue := tr(translation_key)
-	_speak(dialogue)
-
-func _speak(text: String) -> void:
 	var sentences := STring.split_sentences(text)
 
 	_current_tween = get_tree().create_tween()
@@ -72,7 +72,7 @@ func _speak(text: String) -> void:
 		_current_tween.tween_callback(_label, 'set', ['text', s])
 		_current_tween.tween_callback(_label, 'set', ['visible_characters', 0.0])
 		_current_tween.tween_property(_label, 'visible_characters', s.length(), s.length() / LETTERS_PER_SEC)
-		_current_tween.tween_interval(1.0)
+		_current_tween.tween_interval(2.0)
 		_current_tween.tween_callback(_label, 'set', ['visible_characters', 0.0])
 
 	_current_tween.tween_callback(self, '_finished_speaking')
