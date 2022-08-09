@@ -1,4 +1,7 @@
+class_name NPCAI
 extends Node
+
+signal turn_finished()
 
 onready var _turn_manager := NodE.get_sibling(self, TurnManager) as TurnManager
 
@@ -28,6 +31,3 @@ func _on_npc_turn_started() -> void:
 	else:
 		assert(false)
 		return
-	
-	TweenExtension.pause_until_signal(tween.parallel(), _turn_manager, 'action_ended')
-	tween.tween_callback(_turn_manager, 'next_turn')

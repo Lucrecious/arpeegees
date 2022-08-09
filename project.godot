@@ -214,6 +214,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://lut/components/move4.gd"
 }, {
+"base": "Node",
+"class": "NPCAI",
+"language": "GDScript",
+"path": "res://src/game/battle/ai.gd"
+}, {
 "base": "MarginContainer",
 "class": "NarratorUI",
 "language": "GDScript",
@@ -526,6 +531,7 @@ _global_script_class_icons={
 "MathE": "",
 "Move4": "",
 "Move4Directions": "",
+"NPCAI": "",
 "NarratorUI": "",
 "NodE": "",
 "ObjEct": "",

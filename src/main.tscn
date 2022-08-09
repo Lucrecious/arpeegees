@@ -12,5 +12,6 @@ margin_left = 1.28
 script = ExtResource( 2 )
 
 [node name="Battle" parent="." instance=ExtResource( 3 )]
+auto_start = false
 
 [node name="Title" parent="." instance=ExtResource( 1 )]

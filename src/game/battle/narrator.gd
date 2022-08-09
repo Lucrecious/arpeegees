@@ -2,6 +2,7 @@ class_name NarratorUI
 extends MarginContainer
 
 signal speaking_started()
+signal text_started()
 signal speaking_ended()
 
 const NARRATOR_MOUTH_OPEN_TEXTURE := preload('res://assets/ui/narrator/narrator_speaking.png')
@@ -13,11 +14,17 @@ var _is_speaking := false
 
 onready var _label := $'%Label' as Label
 onready var _narrator_head := $'%NarratorHead' as TextureRect
+onready var _textbox := $'%Textbox' as Control
 
 func _ready() -> void:
 	_narrator_head.texture = NARRATOR_MOUTH_CLOSED_TEXTURE
 	
-	connect('speaking_started', self, '_start_tween_talking_loop')
+	_textbox_dissolve_level(0.0)
+	
+	connect('text_started', self, '_start_tween_talking_loop')
+
+func is_speaking() -> bool:
+	return _is_speaking
 
 func _start_tween_talking_loop() -> void:
 	if not _is_speaking:
@@ -68,13 +75,21 @@ func _speak(text: String) -> void:
 	_label.visible_characters = 0
 	_label.text = ''
 	
+	_current_tween.tween_method(self, '_textbox_dissolve_level', 0.0, 1.0, 1.5)\
+			.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+	
+	_current_tween.tween_callback(self, 'emit_signal', ['text_started'])
+	
 	for s in sentences:
 		_current_tween.tween_callback(_label, 'set', ['text', s])
 		_current_tween.tween_callback(_label, 'set', ['visible_characters', 0.0])
 		_current_tween.tween_property(_label, 'visible_characters', s.length(), s.length() / LETTERS_PER_SEC)
 		_current_tween.tween_interval(2.0)
 		_current_tween.tween_callback(_label, 'set', ['visible_characters', 0.0])
-
+	
+	_current_tween.tween_method(self, '_textbox_dissolve_level', 1.0, 0.0, 1.0)\
+		.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
+	
 	_current_tween.tween_callback(self, '_finished_speaking')
 	_current_tween.parallel().tween_callback(self, 'set', ['_current_tween', null])
 	
@@ -84,3 +99,6 @@ func _speak(text: String) -> void:
 func _finished_speaking() -> void:
 	_is_speaking = false
 	emit_signal('speaking_ended')
+
+func _textbox_dissolve_level(ratio: float) -> void:
+	_textbox.material.set_shader_param('dissolve_value', ratio)

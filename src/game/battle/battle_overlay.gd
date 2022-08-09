@@ -8,6 +8,7 @@ onready var _target_selector := $'%TargetSelector' as TargetSelector
 onready var _battle_layer := $'%BattleLayer' as Node2D
 onready var _stats_panel := $StatsPanel as StatPopup
 onready var _turn_manager := $TurnManager as TurnManager
+onready var _narrator := NodE.get_sibling(self, NarratorUI) as NarratorUI
 
 func _ready() -> void:
 	_action_menu = ActionMenuScene.instance() as PinActionMenu
@@ -23,6 +24,8 @@ func _ready() -> void:
 	_turn_manager.connect('player_turn_started', self, '_on_player_turn_started')
 	
 	connect('mouse_exited', self, '_on_mouse_exited')
+	
+	_turn_manager.connect('action_ended', self, '_on_action_ended')
 
 func _on_turn_manager_initialized(original_mouse_filter: int) -> void:
 	mouse_filter = original_mouse_filter
@@ -45,7 +48,6 @@ func _show_action_menu(pin: ArpeegeePinNode) -> void:
 	_action_menu.rect_position = menu_corner
 	
 	_turn_manager.connect('action_started', self, '_on_action_started', [_action_menu], CONNECT_ONESHOT)
-	_turn_manager.connect('action_ended', self, '_on_action_ended', [], CONNECT_ONESHOT)
 	
 	for node in action_nodes:
 		var action := node.pin_action() as PinAction
@@ -71,7 +73,12 @@ func _on_action_started(menu: PinActionMenu) -> void:
 	menu.visible = false
 
 func _on_action_ended() -> void:
-	_turn_manager.call_deferred('next_turn')
+	var tween := create_tween()
+	
+	if _narrator.is_speaking():
+		TweenExtension.pause_until_signal(tween, _narrator, 'speaking_ended')
+	
+	tween.tween_callback(_turn_manager, 'next_turn')
 
 func _on_target_found(target: ArpeegeePinNode, caster: ArpeegeePinNode, action_name: String) -> void:
 	_turn_manager.run_action_with_target(caster, action_name, target)
