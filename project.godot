@@ -369,10 +369,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://lut/nodes/sprite_flattener.gd"
 }, {
-"base": "Node2D",
+"base": "Reference",
 "class": "SpriteSwitcher",
 "language": "GDScript",
-"path": "res://src/resources/arpeegee_pins/sprite_switcher.gd"
+"path": "res://src/resources/arpeegee_pins/components/sprite_switcher.gd"
 }, {
 "base": "Node2D",
 "class": "Squisher",
@@ -403,11 +403,6 @@ _global_script_classes=[ {
 "class": "StatusEffectsList",
 "language": "GDScript",
 "path": "res://src/resources/arpeegee_pins/components/status_effects_list.gd"
-}, {
-"base": "MeshInstance2D",
-"class": "SubdividedQuadMeshInstance",
-"language": "GDScript",
-"path": "res://src/resources/arpeegee_pins/subdivided_mesh.gd"
 }, {
 "base": "Control",
 "class": "TargetSelector",
@@ -569,7 +564,6 @@ _global_script_class_icons={
 "StatPopup": "",
 "StatusEffect": "",
 "StatusEffectsList": "",
-"SubdividedQuadMeshInstance": "",
 "TargetSelector": "",
 "TileActionMode": "",
 "TileMapCursor": "",

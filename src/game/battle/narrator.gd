@@ -43,12 +43,16 @@ func watch(nodes: Array) -> void:
 	for n in _pin_nodes:
 		var pin_actions := NodE.get_child(n, PinActions) as PinActions
 		pin_actions.connect('action_started_with_action_node', self, '_on_pin_action_started', [pin_actions])
+		for p in pin_actions.get_pin_action_nodes():
+			if p.has_signal('text_triggered'):
+				p.connect('text_triggered', self, '_on_action_node_text_triggered')
+
+func _on_action_node_text_triggered(translation_key: String) -> void:
+	speak_tr(translation_key)
 
 func _on_pin_action_started(action_node: Node2D, _actions: PinActions) -> void:
 	var text_key := ''
-	if action_node.name == 'MandolinBash':
-		text_key = 'NARRATOR_MANDOLIN_BASH_USE_1'
-	elif action_node.name == 'Dive':
+	if action_node.name == 'Dive':
 		text_key = 'NARRATOR_DIVE_BOMB_HEAD_USE'
 	elif action_node.name == 'PowerUp':
 		text_key = 'NARRATOR_FOCUS_KI_USE_1'

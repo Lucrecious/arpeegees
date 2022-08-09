@@ -1,5 +1,7 @@
 extends Node2D
 
+signal text_triggered(translation)
+
 export(String) var impact_hint_name := 'ImpactHint'
 
 onready var _impact_hint_node := NodE.get_child_by_name(self, impact_hint_name) as Node2D
@@ -26,6 +28,9 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	tween.tween_interval(.3)
 	position = ActionUtils.add_wind_up(tween, actioner, position, side)
 	position = ActionUtils.add_stab(tween, actioner, target_position)
+	
+	if _times_used < 4:
+		ActionUtils.add_text_trigger(tween, self, 'NARRATOR_MANDOLIN_BASH_USE_%d' % [_times_used])
 	
 	var sprite_switcher := NodE.get_child(actioner, SpriteSwitcher) as SpriteSwitcher
 	tween.tween_callback(sprite_switcher, 'change', ['attack'])

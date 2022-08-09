@@ -86,6 +86,13 @@ static func add_shake(tween: SceneTreeTween, pin: ArpeegeePinNode, position: Vec
 	tween.tween_method(_1, '_shake', 0.0, 1.0, sec, [pin, position, axis.normalized(), magnitude])
 	tween.tween_property(pin, 'global_position', position, .05)
 
+static func add_text_trigger(tween: SceneTreeTween, object: Object, translation: String) -> void:
+	if not object.has_signal('text_triggered'):
+		assert(false)
+		return
+	
+	tween.tween_callback(object, 'emit_signal', ['text_triggered', translation])
+
 class _1:
 	# todo: make this work wtith noise
 	const noise := preload('res://src/resources/arpeegee_pins/actions/shake_noise.tres')
