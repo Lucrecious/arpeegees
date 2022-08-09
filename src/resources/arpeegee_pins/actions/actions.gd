@@ -2,7 +2,7 @@ class_name PinActions
 extends Node2D
 
 signal action_started()
-signal action_started_with_name()
+signal action_started_with_action_node()
 signal action_ended()
 
 onready var _parent := get_parent() as Node2D
@@ -51,7 +51,7 @@ func run_action_with_target(action_name: String, target: Node2D) -> void:
 		node.run(_parent, target, self, '_on_action_node_finished')
 	
 	emit_signal('action_started')
-	emit_signal('action_started_with_name', action_name)
+	emit_signal('action_started_with_action_node', node)
 
 func run_action(action_name: String) -> void:
 	run_action_with_target(action_name, null)

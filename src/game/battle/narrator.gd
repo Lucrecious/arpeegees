@@ -42,15 +42,15 @@ func watch(nodes: Array) -> void:
 	
 	for n in _pin_nodes:
 		var pin_actions := NodE.get_child(n, PinActions) as PinActions
-		pin_actions.connect('action_started_with_name', self, '_on_pin_action_started', [pin_actions])
+		pin_actions.connect('action_started_with_action_node', self, '_on_pin_action_started', [pin_actions])
 
-func _on_pin_action_started(action_name: String, _actions: PinActions) -> void:
+func _on_pin_action_started(action_node: Node2D, _actions: PinActions) -> void:
 	var text_key := ''
-	if action_name == 'MandolinBash':
+	if action_node.name == 'MandolinBash':
 		text_key = 'NARRATOR_MANDOLIN_BASH_USE_1'
-	elif action_name == 'Dive':
+	elif action_node.name == 'Dive':
 		text_key = 'NARRATOR_DIVE_BOMB_HEAD_USE'
-	elif action_name == 'PowerUp':
+	elif action_node.name == 'PowerUp':
 		text_key = 'NARRATOR_FOCUS_KI_USE_1'
 	
 	if text_key.empty():
@@ -70,14 +70,16 @@ func _speak(text: String) -> void:
 		_finished_speaking()
 	
 	var sentences := STring.split_sentences(text)
-
+	
+	var parallel_tween := create_tween()
+	parallel_tween.tween_method(self, '_textbox_dissolve_level', 0.0, 1.0, 1.0)\
+			.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+	
 	_current_tween = get_tree().create_tween()
 	_label.visible_characters = 0
 	_label.text = ''
 	
-	_current_tween.tween_method(self, '_textbox_dissolve_level', 0.0, 1.0, 1.5)\
-			.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
-	
+	_current_tween.tween_interval(.3)
 	_current_tween.tween_callback(self, 'emit_signal', ['text_started'])
 	
 	for s in sentences:
@@ -85,10 +87,13 @@ func _speak(text: String) -> void:
 		_current_tween.tween_callback(_label, 'set', ['visible_characters', 0.0])
 		_current_tween.tween_property(_label, 'visible_characters', s.length(), s.length() / LETTERS_PER_SEC)
 		_current_tween.tween_interval(2.0)
-		_current_tween.tween_callback(_label, 'set', ['visible_characters', 0.0])
 	
-	_current_tween.tween_method(self, '_textbox_dissolve_level', 1.0, 0.0, 1.0)\
-		.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
+	_current_tween.tween_method(self, '_textbox_dissolve_level', 1.0, 0.5, 0.25)\
+		.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_LINEAR)
+	
+	_current_tween.tween_callback(_label, 'set', ['visible_characters', 0.0])
+	_current_tween.tween_method(self, '_textbox_dissolve_level', 0.5, 0.0, .25)\
+		.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_LINEAR)
 	
 	_current_tween.tween_callback(self, '_finished_speaking')
 	_current_tween.parallel().tween_callback(self, 'set', ['_current_tween', null])

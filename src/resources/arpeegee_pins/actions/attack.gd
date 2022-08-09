@@ -4,10 +4,17 @@ export(String) var impact_hint_name := 'ImpactHint'
 
 onready var _impact_hint_node := NodE.get_child_by_name(self, impact_hint_name) as Node2D
 
+var _times_used := 0
+
 func pin_action() -> PinAction:
 	return load('res://src/resources/actions/bard_mandolin_swing.tres') as PinAction
 
+func times_used() -> int:
+	return _times_used
+
 func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> void:
+	_times_used += 1
+	
 	var position := actioner.global_position
 	var relative := ActionUtils.get_closest_adjecent_position(actioner, target)
 	var target_position := position + relative

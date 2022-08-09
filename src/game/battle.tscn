@@ -87,6 +87,7 @@ expand = true
 stretch_mode = 5
 
 [node name="MockUp" type="Node2D" parent="Background"]
+visible = false
 
 [node name="Harpy" type="Sprite" parent="Background/MockUp"]
 position = Vector2( 493.085, 436 )
