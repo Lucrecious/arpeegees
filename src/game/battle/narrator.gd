@@ -37,15 +37,27 @@ func _start_tween_talking_loop() -> void:
 	tween.tween_interval(rand_range(.05, .2))
 	tween.tween_callback(self, '_start_tween_talking_loop')
 
-func watch(nodes: Array) -> void:
-	_pin_nodes = nodes.duplicate()
+func watch(node: ArpeegeePinNode) -> void:
+	assert(not node in _pin_nodes)
+	_pin_nodes.push_back(node)
 	
-	for n in _pin_nodes:
-		var pin_actions := NodE.get_child(n, PinActions) as PinActions
-		pin_actions.connect('action_started_with_action_node', self, '_on_pin_action_started', [pin_actions])
-		for p in pin_actions.get_pin_action_nodes():
-			if p.has_signal('text_triggered'):
-				p.connect('text_triggered', self, '_on_action_node_text_triggered')
+	var pin_actions := NodE.get_child(node, PinActions) as PinActions
+	pin_actions.connect('action_started_with_action_node', self, '_on_pin_action_started', [pin_actions])
+	for p in pin_actions.get_pin_action_nodes():
+		if p.has_signal('text_triggered'):
+			p.connect('text_triggered', self, '_on_action_node_text_triggered')
+
+func unwatch(node: ArpeegeePinNode) -> void:
+	assert(node in _pin_nodes)
+	
+	_pin_nodes.erase(node)
+	
+	var pin_actions := NodE.get_child(node, PinActions) as PinActions
+	pin_actions.disconnect('action_started_with_action_node', self, '_on_pin_action_started')
+	
+	for p in pin_actions.get_pin_action_nodes():
+		if p.has_signal('text_triggered'):
+			p.disconnect('text_triggered', self, '_on_action_node_text_triggered')
 
 func _on_action_node_text_triggered(translation_key: String) -> void:
 	speak_tr(translation_key)

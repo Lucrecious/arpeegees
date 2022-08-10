@@ -13,7 +13,7 @@ onready var _narrator := NodE.get_sibling(self, NarratorUI) as NarratorUI
 func _ready() -> void:
 	_action_menu = ActionMenuScene.instance() as PinActionMenu
 	
-	_turn_manager.connect('initialized', self, '_on_turn_manager_initialized', [mouse_filter])
+	_turn_manager.connect('initialized', self, 'set', ['mouse_filter', mouse_filter])
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	
 	add_child(_action_menu)
@@ -26,11 +26,19 @@ func _ready() -> void:
 	connect('mouse_exited', self, '_on_mouse_exited')
 	
 	_turn_manager.connect('action_ended', self, '_on_action_ended')
-
-func _on_turn_manager_initialized(original_mouse_filter: int) -> void:
-	mouse_filter = original_mouse_filter
 	
-	for pin in _turn_manager.get_pins():
+	_turn_manager.connect('pins_changed', self, '_on_pins_changed')
+	_on_pins_changed()
+
+var _pins_cache := []
+func _on_pins_changed() -> void:
+	for pin in _pins_cache:
+		var health := NodE.get_child(pin, Health) as Health
+		health.disconnect('increased', self, '_on_pin_health_changed')
+		health.disconnect('damaged', self, '_on_pin_health_changed')
+	
+	_pins_cache = _turn_manager.get_pins()
+	for pin in _pins_cache:
 		var health := NodE.get_child(pin, Health) as Health
 		health.connect('increased', self, '_on_pin_health_changed', [pin, false])
 		health.connect('damaged', self, '_on_pin_health_changed', [pin, true])

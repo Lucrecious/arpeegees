@@ -435,6 +435,11 @@ _global_script_classes=[ {
 "path": "res://lut/extension/scene_tree_extension.gd"
 }, {
 "base": "Node",
+"class": "Transformer",
+"language": "GDScript",
+"path": "res://src/resources/arpeegee_pins/components/transformer.gd"
+}, {
+"base": "Node",
 "class": "TurnBased_Command",
 "language": "GDScript",
 "path": "res://lut/turn_based_nodes/command.gd"
@@ -570,6 +575,7 @@ _global_script_class_icons={
 "TimEr": "",
 "TitleScreen": "",
 "TrEe": "",
+"Transformer": "",
 "TurnBased_Command": "",
 "TurnBased_Manager": "",
 "TurnBased_Player": "",

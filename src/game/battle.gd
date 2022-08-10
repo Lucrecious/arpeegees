@@ -121,7 +121,8 @@ func _on_battle_ended(end_condition: int) -> void:
 		assert(false)
 
 func _start_battle(nodes: Array) -> void:
-	_narrator.watch(nodes)
+	for n in nodes:
+		_narrator.watch(n)
 	_turn_manager.start()
 
 func _load_and_drop_pins(pins: Array, positions: PoolVector2Array, wait_sec: float, bounce_sec: float) -> void:
@@ -148,7 +149,6 @@ func _drop_pins(positions: PoolVector2Array, pins: Array, loader: BackgroundReso
 		
 		var pin_node_scene := pin_resources[i] as PackedScene
 		var pin_node := pin_node_scene.instance() as ArpeegeePinNode
-		pin_node.resource = pin
 		
 		_battle_layer.add_child(pin_node)
 		var position := positions[i]

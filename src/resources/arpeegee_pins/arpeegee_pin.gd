@@ -3,7 +3,9 @@ extends Node2D
 
 export(String) var nice_name := 'Arpeegee'
 
-var resource: ArpeegeePin = null
+export(Resource) var _resource_set: Resource = null
+
+onready var resource := _resource_set as ArpeegeePin
 
 onready var _particles := get_node_or_null('Particles') as CPUParticles2D
 

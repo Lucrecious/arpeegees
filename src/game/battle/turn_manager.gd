@@ -1,6 +1,7 @@
 class_name TurnManager
 extends Node
 
+signal pins_changed()
 signal player_turn_started()
 signal npc_turn_started()
 signal action_started()
@@ -29,6 +30,8 @@ var _is_running_action := false
 
 var _current_turn := 0
 
+var _transform_queue := []
+
 func initialize_turns(pins: Array) -> void:
 	_ordered_pins = pins.duplicate()
 	_players = _get_type(ArpeegeePin.Type.Player)
@@ -40,6 +43,14 @@ func initialize_turns(pins: Array) -> void:
 		assert(false)
 		return
 	
+	for p in _ordered_pins:
+		var transformer := NodE.get_child(p, Transformer, false) as Transformer
+		if not transformer:
+			continue
+		
+		transformer.connect('transform_requested', self, '_on_pin_transform_requested', [p, transformer], CONNECT_ONESHOT)
+	
+	emit_signal('pins_changed')
 	emit_signal('initialized')
 
 func start() -> void:
@@ -175,8 +186,42 @@ func _on_action_started() -> void:
 	emit_signal('action_started')
 
 func _on_action_ended() -> void:
+	_do_queued_transforms()
+	
 	_is_running_action = false
 	emit_signal('action_ended')
+
+func _do_queued_transforms() -> void:
+	var changed := false
+	while not _transform_queue.empty():
+		var stuff := _transform_queue.pop_front() as Dictionary
+		var pin := stuff.pin as ArpeegeePinNode
+		
+		var old_pin_index := _ordered_pins.find(pin)
+		
+		if old_pin_index < 0:
+			continue
+		
+		changed = true
+		
+		var transformer := stuff.transformer as Transformer
+		
+		var new_pin := transformer.transform_scene.instance() as ArpeegeePinNode
+		
+		pin.get_parent().add_child(new_pin)
+		new_pin.position = pin.position
+		
+		_ordered_pins[old_pin_index] = new_pin
+		_npcs = _get_type(ArpeegeePin.Type.NPC)
+		_players = _get_type(ArpeegeePin.Type.Player)
+		
+		pin.get_parent().remove_child(pin)
+		pin.queue_free()
+	
+	if not changed:
+		return
+	
+	emit_signal('pins_changed')
 
 func _get_type(type: int) -> Array:
 	var pins_of_type := []
@@ -239,3 +284,6 @@ func _by_playable_by_topdown(node1: ArpeegeePinNode, node2: ArpeegeePinNode) -> 
 		return node1.global_position.y < node2.global_position.y
 	
 	return resource1.type == ArpeegeePin.Type.Player
+
+func _on_pin_transform_requested(pin: ArpeegeePinNode, transformer: Transformer) -> void:
+	_transform_queue.push_back({ pin = pin, transformer = transformer })

@@ -3,6 +3,7 @@ extends Node2D
 signal text_triggered(translation)
 
 export(String) var impact_hint_name := 'ImpactHint'
+export(String) var attack_sprite_name := 'attack'
 
 onready var _impact_hint_node := NodE.get_child_by_name(self, impact_hint_name) as Node2D
 
@@ -29,11 +30,17 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	position = ActionUtils.add_wind_up(tween, actioner, position, side)
 	position = ActionUtils.add_stab(tween, actioner, target_position)
 	
-	if _times_used < 4:
-		ActionUtils.add_text_trigger(tween, self, 'NARRATOR_MANDOLIN_BASH_USE_%d' % [_times_used])
-	
+	if pin_action().resource_path.get_file() == 'bard_mandolin_swing.tres':
+		if _times_used < 4:
+			ActionUtils.add_text_trigger(tween, self, 'NARRATOR_MANDOLIN_BASH_USE_%d' % [_times_used])
+			if _times_used == 3:
+				var transformer := NodE.get_child(actioner, Transformer) as Transformer
+				assert(transformer)
+				tween.tween_callback(transformer, 'request_transform')
+		
 	var sprite_switcher := NodE.get_child(actioner, SpriteSwitcher) as SpriteSwitcher
-	tween.tween_callback(sprite_switcher, 'change', ['attack'])
+	if not attack_sprite_name.empty():
+		tween.tween_callback(sprite_switcher, 'change', [attack_sprite_name])
 	
 	if _impact_hint_node:
 		tween.tween_callback(VFX, 'physical_impact', [actioner, _impact_hint_node])
@@ -44,4 +51,5 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	tween.tween_callback(sprite_switcher, 'change', ['idle'])
 	ActionUtils.add_walk(tween, actioner,
 			actioner.global_position + relative, actioner.global_position, 15.0, 7)
+	
 	tween.tween_callback(object, callback)
