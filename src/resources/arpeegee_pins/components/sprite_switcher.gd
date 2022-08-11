@@ -14,6 +14,7 @@ func _ready() -> void:
 	assert(IDLE_SPRITE_NAME in _name_to_sprite)
 
 func sprite(name: String) -> Node2D:
+	name = name.to_lower()
 	var sprite := _name_to_sprite.get(name, _name_to_sprite[IDLE_SPRITE_NAME]) as Node2D
 	return sprite
 
