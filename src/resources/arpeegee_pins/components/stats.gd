@@ -10,3 +10,4 @@ export(int, 0, 10) var magic_defence := 1
 export(int, 0, 10) var evasion := 1
 export(int, 0, 10) var critical := 1
 
+

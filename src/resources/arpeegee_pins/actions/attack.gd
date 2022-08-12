@@ -45,7 +45,12 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	if _impact_hint_node:
 		tween.tween_callback(VFX, 'physical_impact', [actioner, _impact_hint_node])
 	
-	ActionUtils.add_damage(tween, target, 10)
+	var modified_stats := NodE.get_child(actioner, ModifiedPinStats) as ModifiedPinStats
+	if modified_stats:
+		ActionUtils.add_damage(tween, target, modified_stats.attack)
+	else:
+		assert(false)
+	
 	ActionUtils.add_shake(tween, actioner, position, Vector2(1, 0), 5.0, .35)
 	tween.tween_interval(.4)
 	tween.tween_callback(sprite_switcher, 'change', ['idle'])

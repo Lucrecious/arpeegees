@@ -31,6 +31,13 @@ static func add_damage(tween: SceneTreeTween, target: ArpeegeePinNode, amount: i
 	
 	tween.tween_callback(damage_receiver, 'damage', [amount])
 
+# do at least 1 damage if factor is not 0
+static func damage_with_factor(amount: int, factor: float) -> int:
+	if is_equal_approx(factor, 0.0):
+		return 0
+	
+	return int(max(floor(float(amount) * factor), 1))
+
 static func add_status_effect(tween: SceneTreeTween, target: ArpeegeePinNode, effect: String) -> void:
 	var status_effects := NodE.get_child(target, StatusEffectsList) as StatusEffectsList
 	if not status_effects:

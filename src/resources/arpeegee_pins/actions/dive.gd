@@ -25,7 +25,13 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	tween.tween_callback(divehead_sprite, 'set', ['rotation_degrees', 0.0])
 	tween.tween_interval(.7)
 	tween.tween_property(actioner, 'global_position', actioner.global_position + relative, .2)
-	ActionUtils.add_damage(tween, target, 5)
+	
+	var modified_stats := NodE.get_child(actioner, ModifiedPinStats) as ModifiedPinStats
+	if modified_stats:
+		ActionUtils.add_damage(tween, target, modified_stats.attack)
+	else:
+		assert(false)
+	
 	tween.tween_interval(.5)
 	tween.tween_callback(sprite_switcher, 'change', ['idle'])
 	tween.tween_property(actioner, 'global_position', actioner.global_position, .3)

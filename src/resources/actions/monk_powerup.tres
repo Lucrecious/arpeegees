@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource( 1 )
-nice_name = "Power Up"
+nice_name = "FOCUS_KI_ACTION_NAME"
 description = ""
 target_type = 0
 action_type = 0
