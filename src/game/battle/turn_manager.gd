@@ -50,9 +50,6 @@ func initialize_turns(pins: Array) -> void:
 		
 		transformer.connect('transform_requested', self, '_on_pin_transform_requested', [p, transformer], CONNECT_ONESHOT)
 	
-	connect('player_turn_started', self, '_on_pin_turn_started')
-	connect('npc_turn_started', self, '_on_pin_turn_started')
-	
 	emit_signal('pins_changed')
 	emit_signal('initialized')
 
@@ -247,12 +244,18 @@ func _do_turn(turn: int) -> void:
 	if health and health.current <= 0:
 		next_turn()
 		return
-		
+	
+	var wait_sec := _run_start_turn_effects(pin)
+	var tween := create_tween()
+	
+	if wait_sec > 0:
+		tween.tween_interval(wait_sec + 2.5)
+	
 	var is_player := bool(pin.resource.type == ArpeegeePin.Type.Player)
 	if is_player:
-		emit_signal('player_turn_started')
+		tween.tween_callback(self, 'emit_signal', ['player_turn_started'])
 	else:
-		emit_signal('npc_turn_started')
+		tween.tween_callback(self, 'emit_signal', ['npc_turn_started'])
 
 func _is_game_finished() -> int:
 	var all_players_dead := _is_all_dead(_players)
@@ -291,15 +294,28 @@ func _by_playable_by_topdown(node1: ArpeegeePinNode, node2: ArpeegeePinNode) -> 
 func _on_pin_transform_requested(pin: ArpeegeePinNode, transformer: Transformer) -> void:
 	_transform_queue.push_back({ pin = pin, transformer = transformer })
 
-func _on_pin_turn_started() -> void:
-	var pin := get_turn_pin()
-	_run_start_turn_effects(pin)
-
-func _run_start_turn_effects(pin: ArpeegeePinNode) -> void:
+# returns wait sec
+func _run_start_turn_effects(pin: ArpeegeePinNode) -> float:
 	var status_effects := NodE.get_child(pin, StatusEffectsList) as StatusEffectsList
 	var effects := NodE.get_children(status_effects, StatusEffect)
+	
+	var effect_chain: SceneTreeTween
+	
+	var wait_sec := 0.0
 	
 	for effect in effects:
 		var start_turn_effects := effect.get_start_turn_effects() as Array
 		for e in start_turn_effects:
-			e.run_start_turn_effect()
+			var estimated_sec := .5
+			if e.has_method('estimated_sec'):
+				estimated_sec = e.estimated_sec()
+			
+			wait_sec += estimated_sec
+			
+			if not effect_chain:
+				effect_chain = create_tween()
+			
+			effect_chain.tween_callback(e, 'run_start_turn_effect')
+			effect_chain.tween_interval(estimated_sec)
+	
+	return wait_sec

@@ -18,6 +18,11 @@ static func get_closest_adjecent_position(actioner: Node2D, target: Node2D) -> V
 	
 	return position - actioner_rect.get_center()
 
+static func get_head_position(target: Node2D) -> Vector2:
+	var bounding_box := NodE.get_child(target, REferenceRect) as REferenceRect
+	var rect := bounding_box.global_rect()
+	return rect.get_center() + Vector2.UP * (rect.size.y / 4.0)
+
 static func get_top_right_corner_screen(pin: Node2D) -> Vector2:
 	var bounding_box := NodE.get_child(pin, REferenceRect) as REferenceRect
 	var global_rect := bounding_box.global_rect()
@@ -30,6 +35,29 @@ static func add_damage(tween: SceneTreeTween, target: ArpeegeePinNode, amount: i
 		return
 	
 	tween.tween_callback(damage_receiver, 'damage', [amount])
+
+static func add_hurt(tween: SceneTreeTween, target: ArpeegeePinNode) -> void:
+	var damage_receiver := NodE.get_child(target, DamageReceiver) as DamageReceiver
+	if not damage_receiver:
+		return
+	
+	tween.tween_callback(damage_receiver, 'hurt')
+
+static func add_projectile_shot(tween: SceneTreeTween,
+		start_position: Vector2, target: ArpeegeePinNode,
+		travel_sec: float, projectile_scene: PackedScene) -> Vector2:
+	
+	var projectile := projectile_scene.instance() as Node2D
+	
+	var end_position := get_head_position(target)
+	
+	tween.tween_callback(target.get_viewport(), 'add_child', [projectile])
+	tween.tween_callback(projectile, 'set', ['position', start_position])
+	tween.tween_property(projectile, 'position', end_position, travel_sec)\
+			.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_EXPO)
+	tween.tween_callback(projectile, 'queue_free')
+	
+	return end_position
 
 # do at least 1 damage if factor is not 0
 static func damage_with_factor(amount: int, factor: float) -> int:

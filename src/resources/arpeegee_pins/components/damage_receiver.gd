@@ -29,28 +29,32 @@ func damage(amount: int) -> void:
 		return
 	
 	_health.damage(amount)
-	_hurt(amount)
+	hurt()
 
-func _hurt(amount: int) -> void:
+var _current_hurt_tween: SceneTreeTween
+func hurt() -> void:
 	_sprite_switcher.change(sprite_name)
-	var tween := create_tween()
+	if _current_hurt_tween and _current_hurt_tween.is_running():
+		_current_hurt_tween.kill()
+	
+	_current_hurt_tween = create_tween()
 	
 	var flash_sec := 0.15
-	tween.tween_method(self, '_set_fill_color', 0.0, 1.0, flash_sec / 2.0)\
+	_current_hurt_tween.tween_method(self, '_set_fill_color', 0.0, 1.0, flash_sec / 2.0)\
 			.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
-	tween.tween_method(self, '_set_fill_color', 1.0, 0.0, flash_sec / 2.0)\
+	_current_hurt_tween.tween_method(self, '_set_fill_color', 1.0, 0.0, flash_sec / 2.0)\
 			.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_EXPO)
-	tween.parallel().tween_interval(.8)
+	_current_hurt_tween.parallel().tween_interval(.8)
 	
 	if _health.current <= 0:
 		if _sprite_switcher.has_sprite('dead'):
-			tween.tween_callback(_sprite_switcher, 'change', ['dead'])
+			_current_hurt_tween.tween_callback(_sprite_switcher, 'change', ['dead'])
 		else:
-			tween.tween_property(get_parent(), 'modulate:a', 0.0, 1.0)\
+			_current_hurt_tween.tween_property(get_parent(), 'modulate:a', 0.0, 1.0)\
 					.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_EXPO)
 		return
 	
-	tween.tween_callback(_sprite_switcher, 'change', ['idle'])
+	_current_hurt_tween.tween_callback(_sprite_switcher, 'change', ['idle'])
 
 func _set_fill_color(ratio: float) -> void:
 	_root_sprite_shader.set_shader_param('color_mix', ratio)

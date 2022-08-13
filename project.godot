@@ -134,6 +134,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://lut/input/directional_button_input.gd"
 }, {
+"base": "Node",
+"class": "DiscordStartTurnEffect",
+"language": "GDScript",
+"path": "res://src/resources/status_effects/discord_effect.gd"
+}, {
 "base": "Node2D",
 "class": "Dodge",
 "language": "GDScript",
@@ -384,11 +389,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/resources/arpeegee_pins/components/squisher.gd"
 }, {
-"base": "Node",
-"class": "StartTurnDamageStatusEffect",
-"language": "GDScript",
-"path": "res://src/resources/status_effects/turn_damage.gd"
-}, {
 "base": "Reference",
 "class": "StatComputer",
 "language": "GDScript",
@@ -485,6 +485,11 @@ _global_script_classes=[ {
 "path": "res://lut/ui/slider_property.gd"
 }, {
 "base": "Node2D",
+"class": "VFXNotesPair",
+"language": "GDScript",
+"path": "res://src/vfx/notes.gd"
+}, {
+"base": "Node2D",
 "class": "Velocity",
 "language": "GDScript",
 "path": "res://lut/components/velocity.gd"
@@ -525,6 +530,7 @@ _global_script_class_icons={
 "DeathTimer": "",
 "DebugMultiplayerAPI": "",
 "DirectionalButtonInput": "",
+"DiscordStartTurnEffect": "",
 "Dodge": "",
 "FloatingNumber": "",
 "FuncREf": "",
@@ -575,7 +581,6 @@ _global_script_class_icons={
 "SpriteFlattener": "",
 "SpriteSwitcher": "",
 "Squisher": "",
-"StartTurnDamageStatusEffect": "",
 "StatComputer": "",
 "StatModifier": "",
 "StatPopup": "",
@@ -595,6 +600,7 @@ _global_script_class_icons={
 "Turner4Directions": "",
 "UI_KeybindProperty": "",
 "UI_SliderProperty": "",
+"VFXNotesPair": "",
 "Velocity": "",
 "Velocity3": "",
 "WobbleLabel": ""

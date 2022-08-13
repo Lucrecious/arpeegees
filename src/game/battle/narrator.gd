@@ -8,6 +8,10 @@ signal speaking_ended()
 const NARRATOR_MOUTH_OPEN_TEXTURE := preload('res://assets/ui/narrator/narrator_speaking.png')
 const NARRATOR_MOUTH_CLOSED_TEXTURE := preload('res://assets/ui/narrator/narrator_silent.png')
 const LETTERS_PER_SEC := 30.0
+const DISSOLVE_IN_SEC := 1.0
+const WAIT_BEFORE_FIRST_SENTENCE_SEC := 0.3
+const WAIT_BETWEEN_SENTENCES_SEC := 2.0
+const DISSOLVE_OUT_SEC := 0.5
 
 var _pin_nodes := []
 var _is_speaking := false
@@ -46,6 +50,10 @@ func watch(node: ArpeegeePinNode) -> void:
 	for p in pin_actions.get_pin_action_nodes():
 		if p.has_signal('text_triggered'):
 			p.connect('text_triggered', self, '_on_action_node_text_triggered')
+	
+	var status_effects := NodE.get_child(node, StatusEffectsList) as StatusEffectsList
+	status_effects.connect('effect_added', self, '_on_effect_added')
+	status_effects.connect('effect_removed', self, '_on_effect_removed')
 
 func unwatch(node: ArpeegeePinNode) -> void:
 	assert(node in _pin_nodes)
@@ -58,6 +66,10 @@ func unwatch(node: ArpeegeePinNode) -> void:
 	for p in pin_actions.get_pin_action_nodes():
 		if p.has_signal('text_triggered'):
 			p.disconnect('text_triggered', self, '_on_action_node_text_triggered')
+	
+	var status_effects := NodE.get_child(node, StatusEffectsList) as StatusEffectsList
+	status_effects.disconnect('effect_added', self, '_on_effect_added')
+	status_effects.disconnect('effect_removed', self, '_on_effect_removed')
 
 func _on_action_node_text_triggered(translation_key: String) -> void:
 	speak_tr(translation_key)
@@ -79,6 +91,17 @@ func speak_tr(translation_key: String) -> void:
 	var dialogue := tr(translation_key)
 	_speak(dialogue)
 
+static func speak_estimate_sec(text: String) -> float:
+	var sentences := STring.split_sentences(text)
+	var between_sentences := WAIT_BETWEEN_SENTENCES_SEC * sentences.size()
+	
+	var letters_sec := 0.0
+	for s in sentences:
+		letters_sec += s.length() / LETTERS_PER_SEC
+	
+	return DISSOLVE_IN_SEC + (WAIT_BEFORE_FIRST_SENTENCE_SEC * between_sentences)\
+			+ letters_sec + DISSOLVE_OUT_SEC
+
 func _speak(text: String) -> void:
 	if _current_tween:
 		_current_tween.kill()
@@ -88,7 +111,7 @@ func _speak(text: String) -> void:
 	var sentences := STring.split_sentences(text)
 	
 	var parallel_tween := create_tween()
-	parallel_tween.tween_method(self, '_textbox_dissolve_level', 0.0, 1.0, 1.0)\
+	parallel_tween.tween_method(self, '_textbox_dissolve_level', 0.0, 1.0, DISSOLVE_IN_SEC)\
 			.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 	
 	_current_tween = get_tree().create_tween()
@@ -102,13 +125,13 @@ func _speak(text: String) -> void:
 		_current_tween.tween_callback(_label, 'set', ['text', s])
 		_current_tween.tween_callback(_label, 'set', ['visible_characters', 0.0])
 		_current_tween.tween_property(_label, 'visible_characters', s.length(), s.length() / LETTERS_PER_SEC)
-		_current_tween.tween_interval(2.0)
+		_current_tween.tween_interval(WAIT_BETWEEN_SENTENCES_SEC)
 	
-	_current_tween.tween_method(self, '_textbox_dissolve_level', 1.0, 0.5, 0.25)\
+	_current_tween.tween_method(self, '_textbox_dissolve_level', 1.0, 0.5, DISSOLVE_OUT_SEC / 2.0)\
 		.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_LINEAR)
 	
 	_current_tween.tween_callback(_label, 'set', ['visible_characters', 0.0])
-	_current_tween.tween_method(self, '_textbox_dissolve_level', 0.5, 0.0, .25)\
+	_current_tween.tween_method(self, '_textbox_dissolve_level', 0.5, 0.0, DISSOLVE_OUT_SEC / 2.0)\
 		.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_LINEAR)
 	
 	_current_tween.tween_callback(self, '_finished_speaking')
@@ -123,3 +146,20 @@ func _finished_speaking() -> void:
 
 func _textbox_dissolve_level(ratio: float) -> void:
 	_textbox.material.set_shader_param('dissolve_value', ratio)
+
+func _on_effect_added(effect: StatusEffect) -> void:
+	for child in effect.get_children():
+		if not child.has_signal('text_triggered'):
+			continue
+		
+		child.connect('text_triggered', self, '_on_status_effect_text_triggered')
+
+func _on_effect_removed(effect: StatusEffect) -> void:
+	for child in effect.get_children():
+		if not child.has_signal('text_triggered'):
+			continue
+		
+		child.disconnect('text_triggered', self, '_on_status_text_triggered')
+
+func _on_status_effect_text_triggered(translation_key: String) -> void:
+	speak_tr(translation_key)
