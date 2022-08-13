@@ -22,6 +22,8 @@ shader_param/line_color = Color( 1, 1, 1, 1 )
 shader_param/line_thickness = 0.0
 shader_param/fill_color = Color( 1, 1, 1, 1 )
 shader_param/color_mix = 0.0
+shader_param/top_skew = 0.0
+shader_param/squash = 1.0
 
 [node name="Bard" instance=ExtResource( 1 )]
 nice_name = "Bard"

@@ -159,7 +159,8 @@ func _on_effect_removed(effect: StatusEffect) -> void:
 		if not child.has_signal('text_triggered'):
 			continue
 		
-		child.disconnect('text_triggered', self, '_on_status_text_triggered')
+		if child.is_connected('text_triggered', self, '_on_status_text_triggered'):
+			child.disconnect('text_triggered', self, '_on_status_text_triggered')
 
 func _on_status_effect_text_triggered(translation_key: String) -> void:
 	speak_tr(translation_key)

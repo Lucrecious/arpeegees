@@ -128,6 +128,11 @@ static func add_text_trigger(tween: SceneTreeTween, object: Object, translation:
 	
 	tween.tween_callback(object, 'emit_signal', ['text_triggered', translation])
 
+static func add_shader_param_interpolation(tween: SceneTreeTween,
+		material: ShaderMaterial, param: String,
+		begin: float, end: float, duration: float) -> MethodTweener:
+	return tween.tween_method(_1, '_set_shader_param', begin, end, duration, [material, param])
+
 class _1:
 	# todo: make this work wtith noise
 	const noise := preload('res://src/resources/arpeegee_pins/actions/shake_noise.tres')
@@ -136,4 +141,6 @@ class _1:
 		
 		var s := sign(rand_range(-1.0, 1.0))
 		pin.global_position = position + s * rand_range(0.7, 1.0) * axis * magnitude
-		
+	
+	static func _set_shader_param(value: float, shader: ShaderMaterial, param: String) -> void:
+		shader.set_shader_param(param, value)
