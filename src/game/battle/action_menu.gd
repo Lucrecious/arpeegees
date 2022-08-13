@@ -17,6 +17,8 @@ func add_pin_action(action: PinAction) -> Button:
 	match action.action_type:
 		PinAction.ActionType.Physical:
 			action_button.icon_name = 'sword_attack'
+		PinAction.ActionType.Projectile:
+			action_button.icon_name = 'bow_and_arrow'
 		_:
 			pass
 	

@@ -10,6 +10,7 @@ enum ActionType {
 	Physical,
 	Buff,
 	Spell,
+	Projectile,
 }
 
 export(String) var nice_name := 'Action'
