@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://src/game/battle.gd" type="Script" id=1]
 [ext_resource path="res://src/game/battle/turn_manager.gd" type="Script" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://assets/battle/grass.svg" type="Texture" id=13]
 [ext_resource path="res://assets/sprites/monk/monk_idle.png" type="Texture" id=14]
 [ext_resource path="res://assets/sprites/harpy/harpy_idle.png" type="Texture" id=15]
+[ext_resource path="res://src/game/situational_dialog.gd" type="Script" id=16]
 
 [node name="Battle" type="Control"]
 anchor_top = 1.0
@@ -136,6 +137,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -720.0
 script = ExtResource( 8 )
+
+[node name="SituationalDialog" type="Node" parent="BattleOverlay"]
+script = ExtResource( 16 )
+_turn_manager_path = NodePath("../TurnManager")
 
 [node name="AI" type="Node" parent="BattleOverlay"]
 script = ExtResource( 9 )

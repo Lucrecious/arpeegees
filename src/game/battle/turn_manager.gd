@@ -70,26 +70,46 @@ func next_turn() -> void:
 		assert(false)
 		return
 	
+	var pin := get_turn_pin()
+	if not _is_all_dead([pin]):
+		_run_end_turn_effects(pin)
+	
 	_current_turn += 1
 	_do_turn(_current_turn)
+
+func get_alive_next_pin() -> ArpeegeePinNode:
+	var turn := _current_turn + 1
+	var pin := _ordered_pins[turn % _ordered_pins.size()] as ArpeegeePinNode
+	while _is_all_dead([pin]):
+		turn += 1
+		pin = _ordered_pins[turn % _ordered_pins.size()]
+	return pin
 
 func get_turn_pin() -> ArpeegeePinNode:
 	return _ordered_pins[_current_turn % _ordered_pins.size()] as ArpeegeePinNode
 
+func run_action_with_targets(pin: ArpeegeePinNode, action_node: String, targets: Array) -> void:
+	_run_action_with_targets(pin, action_node, targets, true)
+
 func run_action_with_target(pin: ArpeegeePinNode, action_name: String, target: ArpeegeePinNode) -> void:
+	_run_action_with_targets(pin, action_name, [target], false)
+
+func run_action(pin: ArpeegeePinNode, action_name: String) -> void:
+	_run_action_with_targets(pin, action_name, [], false)
+
+func _run_action_with_targets(pin: ArpeegeePinNode, action_name: String, targets: Array, multiple: bool) -> void:
 	var actions_node := NodE.get_child(pin, PinActions) as PinActions
 	actions_node.connect('action_started', self, '_on_action_started', [],
 			CONNECT_ONESHOT | CONNECT_DEFERRED | CONNECT_REFERENCE_COUNTED)
 	actions_node.connect('action_ended', self, '_on_action_ended', [],
 			CONNECT_ONESHOT | CONNECT_DEFERRED | CONNECT_REFERENCE_COUNTED)
 	
-	if target:
-		actions_node.run_action_with_target(action_name, target)
-	else:
+	if targets.empty():
 		actions_node.run_action(action_name)
-
-func run_action(pin: ArpeegeePinNode, action_name: String) -> void:
-	run_action_with_target(pin, action_name, null)
+	elif targets.size() == 1 and not multiple:
+		actions_node.run_action_with_targets(action_name, targets, false)
+	else:
+		actions_node.run_action_with_targets(action_name, targets, true)
 
 func is_running_action() -> bool:
 	return _is_running_action
@@ -294,10 +314,19 @@ func _by_playable_by_topdown(node1: ArpeegeePinNode, node2: ArpeegeePinNode) -> 
 func _on_pin_transform_requested(pin: ArpeegeePinNode, transformer: Transformer) -> void:
 	_transform_queue.push_back({ pin = pin, transformer = transformer })
 
+func _run_end_turn_effects(pin: ArpeegeePinNode) -> void:
+	var status_effects := NodE.get_child(pin, StatusEffectsList) as StatusEffectsList
+	var effects := status_effects.get_all()
+	
+	for effect in effects:
+		var end_turn_effects := effect.get_end_turn_effects() as Array
+		for e in end_turn_effects:
+			e.run_end_turn_effect()
+
 # returns wait sec
 func _run_start_turn_effects(pin: ArpeegeePinNode) -> float:
 	var status_effects := NodE.get_child(pin, StatusEffectsList) as StatusEffectsList
-	var effects := NodE.get_children(status_effects, StatusEffect)
+	var effects := status_effects.get_all()
 	
 	var effect_chain: SceneTreeTween
 	

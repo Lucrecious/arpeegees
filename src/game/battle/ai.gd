@@ -13,6 +13,9 @@ func _on_npc_turn_started() -> void:
 	
 	var actions_node := NodE.get_child(pin, PinActions) as PinActions
 	var action_nodes := actions_node.get_pin_action_nodes()
+	if action_nodes.empty():
+		_turn_manager.next_turn()
+		return
 	
 	var tween := create_tween()
 	tween.tween_interval(1.0)
@@ -28,6 +31,9 @@ func _on_npc_turn_started() -> void:
 	
 	elif action.target_type == PinAction.TargetType.Self:
 		tween.tween_callback(_turn_manager, 'run_action', [pin, node.name])
+	elif action.target_type == PinAction.TargetType.AllEnemies:
+		var players := _turn_manager.get_players()
+		tween.tween_callback(_turn_manager, 'run_action_with_targets', [pin, node.name, players])
 	else:
 		assert(false)
 		return

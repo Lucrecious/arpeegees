@@ -4,6 +4,7 @@ extends Resource
 enum TargetType {
 	Self,
 	Single,
+	AllEnemies,
 }
 
 enum ActionType {

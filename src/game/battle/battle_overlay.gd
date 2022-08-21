@@ -9,6 +9,8 @@ onready var _battle_layer := $'%BattleLayer' as Node2D
 onready var _stats_panel := $StatsPanel as StatPopup
 onready var _turn_manager := $TurnManager as TurnManager
 onready var _narrator := NodE.get_sibling(self, NarratorUI) as NarratorUI
+onready var _situational_dialog := $SituationalDialog as SituationalDialog
+onready var _ai := $AI as NPCAI
 
 func _ready() -> void:
 	_action_menu = ActionMenuScene.instance() as PinActionMenu
@@ -21,9 +23,9 @@ func _ready() -> void:
 	
 	_action_menu.visible = false
 	
-	_turn_manager.connect('player_turn_started', self, '_on_player_turn_started')
-	
 	connect('mouse_exited', self, '_on_mouse_exited')
+	
+	_turn_manager.connect('player_turn_started', self, '_on_player_turn_started')
 	
 	_turn_manager.connect('action_ended', self, '_on_action_ended')
 	
@@ -47,6 +49,32 @@ func _on_player_turn_started() -> void:
 	var pin := _turn_manager.get_turn_pin()
 	_show_action_menu(pin)
 
+var _previous_pin_turn: ArpeegeePinNode
+func _on_turn_started_preview(object: Object, callback: String) -> void:
+	var current := _turn_manager.get_alive_next_pin()
+	if _previous_pin_turn and not _turn_manager._is_all_dead([current]):
+		if _previous_pin_turn.resource.type == ArpeegeePin.Type.Player\
+				and current.resource.type == ArpeegeePin.Type.NPC:
+			_do_npc_turn_section_start()
+	
+	_previous_pin_turn = current
+	var tween := create_tween()
+	if _narrator.is_speaking():
+		tween.tween_interval(0.1)
+		TweenExtension.pause_until_signal(tween, _narrator, 'speaking_ended')
+		
+	if current.resource.type == ArpeegeePin.Type.Player:
+		tween.tween_callback(object, callback)
+	elif current.resource.type == ArpeegeePin.Type.NPC:
+		tween.tween_callback(_ai, 'do_npc_turn')
+
+func _do_npc_turn_section_start() -> void:
+	var keys := _situational_dialog.npc_overall_turn_started_dialog()
+	if keys.size() == 1:
+		_narrator.speak_tr(keys[0])
+	else:
+		assert(false, 'multiple keys is not implemented yet')
+
 func _show_action_menu(pin: ArpeegeePinNode) -> void:
 	var actions_node := NodE.get_child(pin, PinActions) as PinActions
 	var action_nodes := actions_node.get_pin_action_nodes()
@@ -65,6 +93,8 @@ func _show_action_menu(pin: ArpeegeePinNode) -> void:
 			button.connect('pressed', self, '_on_single_target_action_pressed', [pin, node.name])
 		elif action.target_type == PinAction.TargetType.Self:
 			button.connect('pressed', _turn_manager, 'run_action', [pin, node.name])
+		elif action.target_type == PinAction.TargetType.AllEnemies:
+			button.connect('pressed', _turn_manager, 'run_action_with_targets', [pin, node.name, _turn_manager.get_npcs()])
 		else:
 			assert(false)
 
@@ -87,6 +117,9 @@ func _on_action_ended() -> void:
 		TweenExtension.pause_until_signal(tween, _narrator, 'speaking_ended')
 	
 	tween.tween_callback(_turn_manager, 'next_turn')
+
+func _next_turn() -> void:
+	_on_turn_started_preview(_turn_manager, 'next_turn')
 
 func _on_target_found(target: ArpeegeePinNode, caster: ArpeegeePinNode, action_name: String) -> void:
 	_turn_manager.run_action_with_target(caster, action_name, target)

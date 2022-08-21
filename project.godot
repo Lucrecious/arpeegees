@@ -170,6 +170,11 @@ _global_script_classes=[ {
 "path": "res://lut/components/health.gd"
 }, {
 "base": "Node",
+"class": "HeckinGoodSongDancingEffect",
+"language": "GDScript",
+"path": "res://src/resources/status_effects/heckin_good_song_dancing.gd"
+}, {
+"base": "Node",
 "class": "IButtonInput",
 "language": "GDScript",
 "path": "res://lut/input/button_input_interface.gd"
@@ -374,6 +379,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://lut/signal_expression.gd"
 }, {
+"base": "Node",
+"class": "SituationalDialog",
+"language": "GDScript",
+"path": "res://src/game/situational_dialog.gd"
+}, {
 "base": "Node2D",
 "class": "SpriteFlattener",
 "language": "GDScript",
@@ -537,6 +547,7 @@ _global_script_class_icons={
 "GEometry": "",
 "Gravity": "",
 "Health": "",
+"HeckinGoodSongDancingEffect": "",
 "IButtonInput": "",
 "IDirectionalInput": "",
 "Input_ActionBinding": "",
@@ -578,6 +589,7 @@ _global_script_class_icons={
 "SelectIndicater": "",
 "SignalDetector": "",
 "SignalExpression": "",
+"SituationalDialog": "",
 "SpriteFlattener": "",
 "SpriteSwitcher": "",
 "Squisher": "",
