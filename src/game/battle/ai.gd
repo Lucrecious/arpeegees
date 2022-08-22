@@ -14,7 +14,7 @@ func _on_npc_turn_started() -> void:
 	var actions_node := NodE.get_child(pin, PinActions) as PinActions
 	var action_nodes := actions_node.get_pin_action_nodes()
 	if action_nodes.empty():
-		_turn_manager.next_turn()
+		_turn_manager.finish_turn()
 		return
 	
 	var tween := create_tween()

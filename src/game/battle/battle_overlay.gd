@@ -27,7 +27,7 @@ func _ready() -> void:
 	
 	_turn_manager.connect('player_turn_started', self, '_on_player_turn_started')
 	
-	_turn_manager.connect('action_ended', self, '_on_action_ended')
+	_turn_manager.connect('turn_finished', self, '_on_turn_finished')
 	
 	_turn_manager.connect('pins_changed', self, '_on_pins_changed')
 	_on_pins_changed()
@@ -50,8 +50,8 @@ func _on_player_turn_started() -> void:
 	_show_action_menu(pin)
 
 var _previous_pin_turn: ArpeegeePinNode
-func _on_turn_started_preview(object: Object, callback: String) -> void:
-	var current := _turn_manager.get_alive_next_pin()
+func _on_turn_started_preview() -> SceneTreeTween:
+	var current := _turn_manager.get_turn_pin()
 	if _previous_pin_turn and not _turn_manager._is_all_dead([current]):
 		if _previous_pin_turn.resource.type == ArpeegeePin.Type.Player\
 				and current.resource.type == ArpeegeePin.Type.NPC:
@@ -62,11 +62,9 @@ func _on_turn_started_preview(object: Object, callback: String) -> void:
 	if _narrator.is_speaking():
 		tween.tween_interval(0.1)
 		TweenExtension.pause_until_signal(tween, _narrator, 'speaking_ended')
-		
-	if current.resource.type == ArpeegeePin.Type.Player:
-		tween.tween_callback(object, callback)
-	elif current.resource.type == ArpeegeePin.Type.NPC:
-		tween.tween_callback(_ai, 'do_npc_turn')
+	
+	tween.tween_interval(0.01)
+	return tween
 
 func _do_npc_turn_section_start() -> void:
 	var keys := _situational_dialog.npc_overall_turn_started_dialog()
@@ -83,11 +81,10 @@ func _show_action_menu(pin: ArpeegeePinNode) -> void:
 	_action_menu.visible = true
 	_action_menu.rect_position = menu_corner
 	
-	_turn_manager.connect('action_started', self, '_on_action_started', [_action_menu], CONNECT_ONESHOT)
-	
 	for node in action_nodes:
 		var action := node.pin_action() as PinAction
 		var button := _action_menu.add_pin_action(action)
+		button.connect('pressed', self, '_on_action_started', [_action_menu], CONNECT_ONESHOT)
 		
 		if action.target_type == PinAction.TargetType.Single:
 			button.connect('pressed', self, '_on_single_target_action_pressed', [pin, node.name])
@@ -110,16 +107,18 @@ func _on_action_started(menu: PinActionMenu) -> void:
 	menu.clear()
 	menu.visible = false
 
-func _on_action_ended() -> void:
+func _on_turn_finished() -> void:
 	var tween := create_tween()
 	
 	if _narrator.is_speaking():
 		TweenExtension.pause_until_signal(tween, _narrator, 'speaking_ended')
 	
-	tween.tween_callback(_turn_manager, 'next_turn')
+	tween.tween_callback(self, '_next_turn')
 
 func _next_turn() -> void:
-	_on_turn_started_preview(_turn_manager, 'next_turn')
+	var tween := _on_turn_started_preview()
+	tween.tween_callback(_turn_manager, 'step_turn')
+	
 
 func _on_target_found(target: ArpeegeePinNode, caster: ArpeegeePinNode, action_name: String) -> void:
 	_turn_manager.run_action_with_target(caster, action_name, target)

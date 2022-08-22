@@ -123,7 +123,7 @@ func _on_battle_ended(end_condition: int) -> void:
 func _start_battle(nodes: Array) -> void:
 	for n in nodes:
 		_narrator.watch(n)
-	_turn_manager.start()
+	_turn_manager.step_turn()
 
 func _load_and_drop_pins(pins: Array, positions: PoolVector2Array, wait_sec: float, bounce_sec: float) -> void:
 	var background_resource_loader := BackgroundResourceLoader.new()

@@ -4,8 +4,7 @@ extends Node
 signal pins_changed()
 signal player_turn_started()
 signal npc_turn_started()
-signal action_started()
-signal action_ended()
+signal turn_finished()
 signal battle_ended(end_condition)
 signal initialized()
 
@@ -27,6 +26,7 @@ var _players := []
 var _npcs := []
 
 var _is_running_action := false
+var _turn_started := false
 
 var _current_turn := 0
 
@@ -53,7 +53,7 @@ func initialize_turns(pins: Array) -> void:
 	emit_signal('pins_changed')
 	emit_signal('initialized')
 
-func start() -> void:
+func step_turn() -> void:
 	_do_turn(_current_turn)
 
 func get_npcs() -> Array:
@@ -65,7 +65,7 @@ func get_players() -> Array:
 func get_pins() -> Array:
 	return _ordered_pins.duplicate()
 
-func next_turn() -> void:
+func finish_turn() -> void:
 	if _is_running_action:
 		assert(false)
 		return
@@ -74,16 +74,20 @@ func next_turn() -> void:
 	if not _is_all_dead([pin]):
 		_run_end_turn_effects(pin)
 	
-	_current_turn += 1
-	_do_turn(_current_turn)
-
-func get_alive_next_pin() -> ArpeegeePinNode:
-	var turn := _current_turn + 1
-	var pin := _ordered_pins[turn % _ordered_pins.size()] as ArpeegeePinNode
-	while _is_all_dead([pin]):
-		turn += 1
-		pin = _ordered_pins[turn % _ordered_pins.size()]
-	return pin
+	var end_condition := _is_game_finished()
+	if end_condition != EndCondition.None:
+		emit_signal('turn_finished', end_condition)
+		emit_signal('battle_ended')
+		return
+	
+	emit_signal('turn_finished')
+	
+	while true:
+		_current_turn += 1
+		pin = get_turn_pin()
+		if not _is_all_dead([pin]):
+			break
+	_turn_started = false
 
 func get_turn_pin() -> ArpeegeePinNode:
 	return _ordered_pins[_current_turn % _ordered_pins.size()] as ArpeegeePinNode
@@ -203,13 +207,12 @@ func _increase_health(nodes: Array) -> void:
 
 func _on_action_started() -> void:
 	_is_running_action = true
-	emit_signal('action_started')
 
 func _on_action_ended() -> void:
 	_do_queued_transforms()
 	
 	_is_running_action = false
-	emit_signal('action_ended')
+	finish_turn()
 
 func _do_queued_transforms() -> void:
 	var changed := false
@@ -254,16 +257,10 @@ func _get_type(type: int) -> Array:
 	return pins_of_type
 
 func _do_turn(turn: int) -> void:
-	var end_condition := _is_game_finished()
-	if end_condition != EndCondition.None:
-		emit_signal('battle_ended', end_condition)
+	if _turn_started:
 		return
 	
-	var pin := _ordered_pins[turn % _ordered_pins.size()] as ArpeegeePinNode
-	var health := NodE.get_child(pin, Health) as Health
-	if health and health.current <= 0:
-		next_turn()
-		return
+	var pin := get_turn_pin()
 	
 	var wait_sec := _run_start_turn_effects(pin)
 	var tween := create_tween()
@@ -271,6 +268,7 @@ func _do_turn(turn: int) -> void:
 	if wait_sec > 0:
 		tween.tween_interval(wait_sec + 2.5)
 	
+	_turn_started = true
 	var is_player := bool(pin.resource.type == ArpeegeePin.Type.Player)
 	if is_player:
 		tween.tween_callback(self, 'emit_signal', ['player_turn_started'])
