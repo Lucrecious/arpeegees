@@ -68,6 +68,9 @@ func _on_turn_started_preview() -> SceneTreeTween:
 
 func _do_npc_turn_section_start() -> void:
 	var keys := _situational_dialog.npc_overall_turn_started_dialog()
+	if keys.empty():
+		return
+	
 	if keys.size() == 1:
 		_narrator.speak_tr(keys[0])
 	else:

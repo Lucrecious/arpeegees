@@ -26,12 +26,13 @@ func add_as_effects(effects: Array) -> void:
 	
 	add_instance(status_effect)
 
-func get_effect(effect) -> Node:
-	for child in get_children():
-		if not child is effect:
+func has_effect_in_status(effect_type) -> Node:
+	var error := false
+	for status_effect in get_children():
+		var effect := NodE.get_child(status_effect, effect_type, error)
+		if not effect:
 			continue
-		
-		return child
+		return status_effect
 	return null
 
 func _on_effect_tree_exited(effect: StatusEffect) -> void:

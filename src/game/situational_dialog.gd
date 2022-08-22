@@ -7,7 +7,10 @@ onready var _turn_manager := NodE.get_node(self, _turn_manager_path, TurnManager
 
 func npc_overall_turn_started_dialog() -> PoolStringArray:
 	var keys := PoolStringArray()
-	keys.push_back(_dancing_status_effect())
+	var translation_key := _dancing_status_effect()
+	if not translation_key.empty():
+		keys.push_back(translation_key)
+	
 	return keys
 
 var _turns_dancing := 0
@@ -26,7 +29,7 @@ func _any_npc_heckin_good_song_dancing() -> bool:
 	var npcs := _turn_manager.get_npcs()
 	for n in npcs:
 		var status_effects := NodE.get_child(n, StatusEffectsList) as StatusEffectsList
-		var is_dancing := status_effects.get_effect(HeckinGoodSongDancingEffect) != null
+		var is_dancing := status_effects.has_effect_in_status(HeckinGoodSongDancingEffect)
 		if not is_dancing:
 			continue
 		return true
