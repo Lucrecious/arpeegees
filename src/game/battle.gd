@@ -96,7 +96,8 @@ func _do_intro_narration() -> void:
 	speaking_tween.tween_property(_narrator, 'rect_position:y', _original_narrator_position.y, 1.5)\
 			.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BOUNCE)
 	speaking_tween.tween_interval(0.5)
-	speaking_tween.tween_callback(_narrator, 'speak_tr', ['NARRATOR_BATTLE_INTRODUCTION_GENERIC'])
+	speaking_tween.tween_callback(_narrator, '_speak', ['This is a longer sentence to test the wrapping situation with the tweens.'])
+	#speaking_tween.tween_callback(_narrator, 'speak_tr', ['NARRATOR_BATTLE_INTRODUCTION_GENERIC'])
 	TweenExtension.pause_until_signal(speaking_tween.parallel(), _narrator, 'speaking_ended')
 	speaking_tween.tween_callback(self, '_balance_battle')
 

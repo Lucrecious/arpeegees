@@ -5,9 +5,11 @@ signal speaking_started()
 signal text_started()
 signal speaking_ended()
 
+const MAX_LINES_VISIBLE := 3
+
 const NARRATOR_MOUTH_OPEN_TEXTURE := preload('res://assets/ui/narrator/narrator_speaking.png')
 const NARRATOR_MOUTH_CLOSED_TEXTURE := preload('res://assets/ui/narrator/narrator_silent.png')
-const LETTERS_PER_SEC := 30.0
+const LETTERS_PER_SEC := 25.0
 const DISSOLVE_IN_SEC := 1.0
 const WAIT_BEFORE_FIRST_SENTENCE_SEC := 0.3
 const WAIT_BETWEEN_SENTENCES_SEC := 2.0
@@ -19,8 +21,11 @@ var _is_speaking := false
 onready var _label := $'%Label' as Label
 onready var _narrator_head := $'%NarratorHead' as TextureRect
 onready var _textbox := $'%Textbox' as Control
+onready var _default_font := theme.default_font
 
 func _ready() -> void:
+	assert(_default_font)
+	
 	_narrator_head.texture = NARRATOR_MOUTH_CLOSED_TEXTURE
 	
 	_textbox_dissolve_level(0.0)
@@ -92,7 +97,7 @@ func speak_tr(translation_key: String) -> void:
 	_speak(dialogue)
 
 static func speak_estimate_sec(text: String) -> float:
-	var sentences := STring.split_sentences(text)
+	var sentences := STring.split_phrases(text)
 	var between_sentences := WAIT_BETWEEN_SENTENCES_SEC * sentences.size()
 	
 	var letters_sec := 0.0
@@ -108,7 +113,7 @@ func _speak(text: String) -> void:
 		_current_tween = null
 		_finished_speaking()
 	
-	var sentences := STring.split_sentences(text)
+	var sentences := _prepare_text(text)
 	
 	var parallel_tween := create_tween()
 	parallel_tween.tween_method(self, '_textbox_dissolve_level', 0.0, 1.0, DISSOLVE_IN_SEC)\
@@ -122,15 +127,34 @@ func _speak(text: String) -> void:
 	_current_tween.tween_callback(self, 'emit_signal', ['text_started'])
 	
 	for s in sentences:
-		_current_tween.tween_callback(_label, 'set', ['text', s])
-		_current_tween.tween_callback(_label, 'set', ['visible_characters', 0.0])
-		_current_tween.tween_property(_label, 'visible_characters', s.length(), s.length() / LETTERS_PER_SEC)
+		var length := 0
+		var total_thing := s.join('\n') as String
+		_current_tween.tween_callback(_label, 'set', ['text', total_thing])
+		_current_tween.tween_callback(_label, 'set', ['visible_characters', 0])
+		
+		var line_spaces := PoolIntArray([])
+		for i in s.size():
+			var line := s[i] as String
+			var new_line_length := int(line.length() + 1) # + 1 for the new line
+			line_spaces.push_back(line.count(' '))
+			
+			if i >= MAX_LINES_VISIBLE:
+				var remove_line_length := int(s[i - MAX_LINES_VISIBLE].length() + 1) # + 1 for new line
+				_current_tween.tween_callback(self, '_wrap_lines', [new_line_length, remove_line_length, length])
+				length -= remove_line_length
+			
+			length += new_line_length
+			
+			_current_tween.tween_callback(self, '_debug_print', [length])
+			_current_tween.tween_method(self, '_set_visible_characters',
+					length - new_line_length, length, new_line_length / LETTERS_PER_SEC)
+			
 		_current_tween.tween_interval(WAIT_BETWEEN_SENTENCES_SEC)
 	
 	_current_tween.tween_method(self, '_textbox_dissolve_level', 1.0, 0.5, DISSOLVE_OUT_SEC / 2.0)\
 		.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_LINEAR)
 	
-	_current_tween.tween_callback(_label, 'set', ['visible_characters', 0.0])
+	_current_tween.tween_callback(_label, 'set', ['visible_characters', 0])
 	_current_tween.tween_method(self, '_textbox_dissolve_level', 0.5, 0.0, DISSOLVE_OUT_SEC / 2.0)\
 		.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_LINEAR)
 	
@@ -139,6 +163,39 @@ func _speak(text: String) -> void:
 	
 	_is_speaking = true
 	emit_signal('speaking_started')
+
+func _set_visible_characters(value: int) -> void:
+	if value > 0:
+		var space_count := _label.text.count(' ', 0, value)
+		var newline_count := _label.text.count('\n', 0, value)
+		value -= (space_count + newline_count)
+	
+	_label.visible_characters = value
+
+func _debug_print(length: int) -> void:
+	pass
+	#print('debug print...')
+	#print()
+	#printt(_label.visible_characters, length, _label.text.length())
+	#print(_label.text.left(_label.visible_characters))
+
+func _wrap_lines(new_line_length: int, remove_line_length: int, current_sentence_length: int) -> void:
+	_label.text = _label.text.right(remove_line_length)
+	var characters_shown := current_sentence_length - remove_line_length
+	if characters_shown > 0:
+		var space_count := _label.text.count(' ', 0, characters_shown)
+		var newline_count := _label.text.count('\n', 0, characters_shown)
+		characters_shown -= (newline_count + space_count)
+	
+	_label.visible_characters = characters_shown
+
+func _prepare_text(text: String) -> Array:
+	var phrases := Array(STring.split_phrases(text))
+	for i in phrases.size():
+		var phrase := phrases[i] as String
+		phrases[i] = STring.autowrap(phrase, _label.rect_size.x, _default_font)
+	
+	return phrases
 
 func _finished_speaking() -> void:
 	_is_speaking = false
