@@ -22,7 +22,7 @@ func run(actioner: Node2D, object: Object, callback: String) -> void:
 	var skew_stepper := JuiceSteppers.SkewBackAndForth.new(animation, root_sprite.material)
 	skew_stepper.offset = 0.1
 	skew_stepper.offset_to_home_sec = 0.5
-	skew_stepper.between_offsets_sec = 0.5
+	skew_stepper.between_offsets_sec = 1.0
 	skew_stepper.squish_bottom = 0.9
 	
 	for i in 4:
