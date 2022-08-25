@@ -3,7 +3,10 @@ extends Node
 
 signal turn_finished()
 
+export(NodePath) var _narrator_ui_path := NodePath()
+
 onready var _turn_manager := NodE.get_sibling(self, TurnManager) as TurnManager
+onready var _narrator_ui := NodE.get_node(self, _narrator_ui_path, NarratorUI) as NarratorUI
 
 func _ready() -> void:
 	_turn_manager.connect('npc_turn_started', self, '_on_npc_turn_started')
@@ -18,6 +21,9 @@ func _on_npc_turn_started() -> void:
 		return
 	
 	var tween := create_tween()
+	if _narrator_ui.is_speaking():
+		TweenExtension.pause_until_signal(tween, _narrator_ui, 'speaking_ended')
+	
 	tween.tween_interval(1.0)
 
 	var node := action_nodes[randi() % action_nodes.size()] as Node

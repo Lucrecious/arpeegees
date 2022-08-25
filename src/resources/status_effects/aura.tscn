@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/sprites/effects/note2_vfx.png" type="Texture" id=1]
+[ext_resource path="res://src/vfx/aura_particles.gd" type="Script" id=2]
+
+[sub_resource type="Curve" id=3]
+min_value = -360.0
+max_value = 360.0
+_data = [ Vector2( 0, -148.97 ), 0.0, 0.0, 0, 0, Vector2( 0.338346, -3.68112 ), 0.0, 0.0, 0, 0, Vector2( 0.68797, -97.7351 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 0.464572 ), 0.0, 0.0, 0, 0, Vector2( 0.413534, 0.550158 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0.0642202, 0.665138, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[node name="Aura" type="CPUParticles2D"]
+amount = 10
+lifetime = 2.0
+local_coords = false
+texture = ExtResource( 1 )
+emission_shape = 2
+emission_rect_extents = Vector2( 100, 80 )
+direction = Vector2( 0, -1 )
+spread = 10.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 100.0
+angular_velocity = 10.0
+angular_velocity_random = 1.0
+angular_velocity_curve = SubResource( 3 )
+scale_amount_curve = SubResource( 2 )
+color_ramp = SubResource( 1 )
+script = ExtResource( 2 )

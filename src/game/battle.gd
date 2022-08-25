@@ -96,8 +96,7 @@ func _do_intro_narration() -> void:
 	speaking_tween.tween_property(_narrator, 'rect_position:y', _original_narrator_position.y, 1.5)\
 			.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BOUNCE)
 	speaking_tween.tween_interval(0.5)
-	speaking_tween.tween_callback(_narrator, '_speak', ['This is a longer sentence to test the wrapping situation with the tweens.'])
-	#speaking_tween.tween_callback(_narrator, 'speak_tr', ['NARRATOR_BATTLE_INTRODUCTION_GENERIC'])
+	speaking_tween.tween_callback(_narrator, 'speak_tr', ['NARRATOR_BATTLE_INTRODUCTION_GENERIC', false])
 	TweenExtension.pause_until_signal(speaking_tween.parallel(), _narrator, 'speaking_ended')
 	speaking_tween.tween_callback(self, '_balance_battle')
 
@@ -113,11 +112,11 @@ func _balance_battle() -> void:
 
 func _on_battle_ended(end_condition: int) -> void:
 	if end_condition == TurnManager.EndCondition.NPCsDead:
-		_narrator.speak_tr('NARRATOR_BATTLE_FINISHED_HEROES_WIN_GENERIC')
+		_narrator.speak_tr('NARRATOR_BATTLE_FINISHED_HEROES_WIN_GENERIC', true)
 	elif end_condition == TurnManager.EndCondition.PlayersDead:
-		_narrator.speak_tr('NARRATOR_BATTLE_FINISHED_MONSTERS_WIN_GENERIC')
+		_narrator.speak_tr('NARRATOR_BATTLE_FINISHED_MONSTERS_WIN_GENERIC', true)
 	elif end_condition == TurnManager.EndCondition.EveryoneDead:
-		_narrator.speak_tr('NARRATOR_BATTLE_FINISHED_TIED_GENERIC')
+		_narrator.speak_tr('NARRATOR_BATTLE_FINISHED_TIED_GENERIC', true)
 	else:
 		assert(false)
 
@@ -139,8 +138,7 @@ func _load_and_drop_pins(pins: Array, positions: PoolVector2Array, wait_sec: flo
 		scene_paths.push_back(pin.scene_path)
 	
 	background_resource_loader.load(scene_paths)
-	
-	
+
 func _drop_pins(positions: PoolVector2Array, pins: Array, loader: BackgroundResourceLoader,
 		wait_sec: float, bounce_sec: float) -> void:
 	

@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/sprites/effects/note1_vfx.png" type="Texture" id=1]
+[ext_resource path="res://src/vfx/explosion.gd" type="Script" id=2]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0.0150376, 0.973807 ), 0.0, 0.0, 0, 0, Vector2( 0.526316, 0.865699 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.352185 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0, 0.582569, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[node name="ExplosionParticles" type="CPUParticles2D"]
+emitting = false
+amount = 15
+lifetime = 1.5
+one_shot = true
+explosiveness = 1.0
+texture = ExtResource( 1 )
+emission_shape = 1
+emission_sphere_radius = 25.0
+direction = Vector2( 0, -1 )
+spread = 50.0
+gravity = Vector2( 0, 500 )
+initial_velocity = 500.0
+scale_amount_curve = SubResource( 1 )
+color_ramp = SubResource( 2 )
+script = ExtResource( 2 )

@@ -34,6 +34,10 @@ func _ready() -> void:
 
 var _pins_cache := []
 func _on_pins_changed() -> void:
+	_previous_pin_turn = null
+	if _turn_manager.get_pin_count() > 0:
+		_previous_pin_turn = _turn_manager.get_turn_pin()
+	
 	for pin in _pins_cache:
 		var health := NodE.get_child(pin, Health) as Health
 		health.disconnect('increased', self, '_on_pin_health_changed')
@@ -72,7 +76,8 @@ func _do_npc_turn_section_start() -> void:
 		return
 	
 	if keys.size() == 1:
-		_narrator.speak_tr(keys[0])
+		var chain := false
+		_narrator.speak_tr(keys[0], chain)
 	else:
 		assert(false, 'multiple keys is not implemented yet')
 

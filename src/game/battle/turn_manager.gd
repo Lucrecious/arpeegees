@@ -32,6 +32,8 @@ var _current_turn := 0
 
 var _transform_queue := []
 
+onready var _start_turn_effect_runner := $StartTurnEffectRunner as StartTurnEffectRunner
+
 func initialize_turns(pins: Array) -> void:
 	_ordered_pins = pins.duplicate()
 	_players = _get_type(ArpeegeePin.Type.Player)
@@ -64,6 +66,9 @@ func get_players() -> Array:
 
 func get_pins() -> Array:
 	return _ordered_pins.duplicate()
+
+func get_pin_count() -> int:
+	return _ordered_pins.size()
 
 func finish_turn() -> void:
 	if _is_running_action:
@@ -262,11 +267,10 @@ func _do_turn(turn: int) -> void:
 	
 	var pin := get_turn_pin()
 	
-	var wait_sec := _run_start_turn_effects(pin)
+	var are_effects_running := _start_turn_effect_runner.run(pin)
 	var tween := create_tween()
-	
-	if wait_sec > 0:
-		tween.tween_interval(wait_sec + 2.5)
+	if are_effects_running:
+		TweenExtension.pause_until_signal(tween, _start_turn_effect_runner, 'finished')
 	
 	_turn_started = true
 	var is_player := bool(pin.resource.type == ArpeegeePin.Type.Player)
@@ -320,29 +324,3 @@ func _run_end_turn_effects(pin: ArpeegeePinNode) -> void:
 		var end_turn_effects := effect.get_end_turn_effects() as Array
 		for e in end_turn_effects:
 			e.run_end_turn_effect()
-
-# returns wait sec
-func _run_start_turn_effects(pin: ArpeegeePinNode) -> float:
-	var status_effects := NodE.get_child(pin, StatusEffectsList) as StatusEffectsList
-	var effects := status_effects.get_all()
-	
-	var effect_chain: SceneTreeTween
-	
-	var wait_sec := 0.0
-	
-	for effect in effects:
-		var start_turn_effects := effect.get_start_turn_effects() as Array
-		for e in start_turn_effects:
-			var estimated_sec := .5
-			if e.has_method('estimated_sec'):
-				estimated_sec = e.estimated_sec()
-			
-			wait_sec += estimated_sec
-			
-			if not effect_chain:
-				effect_chain = create_tween()
-			
-			effect_chain.tween_callback(e, 'run_start_turn_effect')
-			effect_chain.tween_interval(estimated_sec)
-	
-	return wait_sec

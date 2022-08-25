@@ -29,6 +29,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://lut/extension/audio_stream_player_2d_extension.gd"
 }, {
+"base": "CPUParticles2D",
+"class": "AuraParticles",
+"language": "GDScript",
+"path": "res://src/vfx/aura_particles.gd"
+}, {
 "base": "Reference",
 "class": "BackgroundResourceLoader",
 "language": "GDScript",
@@ -144,6 +149,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://lut/components/dodge.gd"
 }, {
+"base": "CPUParticles2D",
+"class": "ExplosionParticles",
+"language": "GDScript",
+"path": "res://src/vfx/explosion.gd"
+}, {
 "base": "Node2D",
 "class": "FloatingNumber",
 "language": "GDScript",
@@ -193,6 +203,11 @@ _global_script_classes=[ {
 "class": "Input_ActionBinding_Directional",
 "language": "GDScript",
 "path": "res://lut/input/bindings/directional.gd"
+}, {
+"base": "Reference",
+"class": "JuiceSteppers",
+"language": "GDScript",
+"path": "res://src/resources/arpeegee_pins/actions/juice_steppers.gd"
 }, {
 "base": "Node",
 "class": "Level2",
@@ -399,6 +414,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/resources/arpeegee_pins/components/squisher.gd"
 }, {
+"base": "Node",
+"class": "StartTurnEffectRunner",
+"language": "GDScript",
+"path": "res://src/game/battle/start_turn_effect_runner.gd"
+}, {
 "base": "Reference",
 "class": "StatComputer",
 "language": "GDScript",
@@ -484,6 +504,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://lut/components/turner4.gd"
 }, {
+"base": "Reference",
+"class": "TweenJuice",
+"language": "GDScript",
+"path": "res://src/resources/arpeegee_pins/actions/tween_juice.gd"
+}, {
 "base": "Control",
 "class": "UI_KeybindProperty",
 "language": "GDScript",
@@ -519,6 +544,7 @@ _global_script_class_icons={
 "ArpeegeePin": "",
 "ArpeegeePinNode": "",
 "AudioStrEamPlayer2D": "",
+"AuraParticles": "",
 "BackgroundResourceLoader": "",
 "BattleLayout": "",
 "BattleScreen": "",
@@ -542,6 +568,7 @@ _global_script_class_icons={
 "DirectionalButtonInput": "",
 "DiscordStartTurnEffect": "",
 "Dodge": "",
+"ExplosionParticles": "",
 "FloatingNumber": "",
 "FuncREf": "",
 "GEometry": "",
@@ -552,6 +579,7 @@ _global_script_class_icons={
 "IDirectionalInput": "",
 "Input_ActionBinding": "",
 "Input_ActionBinding_Directional": "",
+"JuiceSteppers": "",
 "Level2": "",
 "LevelEditor2": "",
 "LevelEditor2Commands": "",
@@ -593,6 +621,7 @@ _global_script_class_icons={
 "SpriteFlattener": "",
 "SpriteSwitcher": "",
 "Squisher": "",
+"StartTurnEffectRunner": "",
 "StatComputer": "",
 "StatModifier": "",
 "StatPopup": "",
@@ -610,6 +639,7 @@ _global_script_class_icons={
 "TurnBased_Player": "",
 "TurnManager": "",
 "Turner4Directions": "",
+"TweenJuice": "",
 "UI_KeybindProperty": "",
 "UI_SliderProperty": "",
 "VFXNotesPair": "",
@@ -631,6 +661,7 @@ Icons="*res://src/resources/icons.gd"
 StatusEffects="*res://src/resources/status_effects.gd"
 TweenExtension="*res://lut/extension/tween_extension.gd"
 VFX="*res://src/vfx/vfx.gd"
+Aura="*res://src/vfx/aura.gd"
 
 [debug]
 

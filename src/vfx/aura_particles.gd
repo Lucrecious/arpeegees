@@ -1,0 +1,3 @@
+class_name AuraParticles
+extends CPUParticles2D
+

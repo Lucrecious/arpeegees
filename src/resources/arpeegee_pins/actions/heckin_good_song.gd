@@ -9,11 +9,46 @@ func pin_action() -> PinAction:
 	return preload('res://src/resources/actions/heckin_good_song.tres')
 
 func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> void:
+	var root_sprite := Components.root_sprite(actioner)
+	var sprite_switcher := NodE.get_child(actioner, SpriteSwitcher) as SpriteSwitcher
+	var explosion_parent := NodE.get_child_by_group(actioner, 'aura_hint_position') as Node2D
+	if not explosion_parent:
+		explosion_parent = actioner
+	
+	var animation := create_tween()
+	
+	animation.tween_interval(0.5)
+	var skew_stepper := JuiceSteppers.SkewBackAndForth.new(animation, root_sprite.material)
+	skew_stepper.offset = 0.3
+	skew_stepper.between_offsets_sec = 0.6
+	skew_stepper.offset_to_home_sec = 0.5
+	
+	animation.tween_callback(sprite_switcher, 'change', ['heckingoodsong'])
+	
+	for i in 2:
+		skew_stepper.step()
+		_add_explosion(animation, explosion_parent)
+		animation.tween_interval(0.5)
+	
 	for t in targets:
 		var status_effects := NodE.get_child(t, StatusEffectsList) as StatusEffectsList
 		var heckin_good_song_effect := HeckinGoodSongDancingEffect.new()
-		status_effects.add_as_effects([heckin_good_song_effect])
+		var auras := Aura.create_note_auras()
+		animation.tween_callback(status_effects, 'add_as_children', [[heckin_good_song_effect] + auras])
 	
-	var animation := create_tween()
 	ActionUtils.add_text_trigger(animation, self, 'NARRATOR_HECKIN_GOOD_SONG_USE_1')
+	
+	for i in 2:
+		skew_stepper.step()
+		_add_explosion(animation, explosion_parent)
+		animation.tween_interval(0.5)
+	
+	skew_stepper.finish()
+	animation.tween_interval(0.5)
+	animation.tween_callback(sprite_switcher, 'change', ['idle'])
+	
 	animation.tween_callback(object, callback)
+
+func _add_explosion(animation: SceneTreeTween, explosion_parent: Node2D) -> void:
+	var explosion := VFX.note_explosion(false)
+	animation.tween_callback(explosion_parent, 'add_child', [explosion])

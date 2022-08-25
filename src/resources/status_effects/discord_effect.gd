@@ -3,6 +3,7 @@ extends Node
 
 const RUNS_ALIVE := 1
 
+signal start_turn_effect_finished()
 signal text_triggered(translation_key)
 
 onready var runs_alive := RUNS_ALIVE
@@ -34,9 +35,6 @@ func _ready() -> void:
 	
 		direction = direction.rotated(TAU / 3.0)
 
-func estimated_sec() -> float:
-	return NarratorUI.speak_estimate_sec(tr('NARRATOR_DISCORD_RECOIL_EFFECT'))
-
 func run_start_turn_effect() -> void:
 	var animation := create_tween()
 	
@@ -59,9 +57,9 @@ func run_start_turn_effect() -> void:
 	
 	runs_alive -= 1
 	
+	animation.tween_callback(self, 'emit_signal', ['start_turn_effect_finished'])
+	
 	if runs_alive > 0:
 		return
-	
-	animation.tween_callback(self, 'queue_free')
-	
-	return
+		
+	animation.tween_callback(get_parent(), 'queue_free')

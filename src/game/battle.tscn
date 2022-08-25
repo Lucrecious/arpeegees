@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://src/game/battle.gd" type="Script" id=1]
 [ext_resource path="res://src/game/battle/turn_manager.gd" type="Script" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://assets/sprites/monk/monk_idle.png" type="Texture" id=14]
 [ext_resource path="res://assets/sprites/harpy/harpy_idle.png" type="Texture" id=15]
 [ext_resource path="res://src/game/situational_dialog.gd" type="Script" id=16]
+[ext_resource path="res://src/game/battle/start_turn_effect_runner.gd" type="Script" id=17]
 
 [node name="Battle" type="Control"]
 anchor_top = 1.0
@@ -144,10 +145,14 @@ _turn_manager_path = NodePath("../TurnManager")
 
 [node name="AI" type="Node" parent="BattleOverlay"]
 script = ExtResource( 9 )
+_narrator_ui_path = NodePath("../../Narrator")
 
 [node name="TurnManager" type="Node" parent="BattleOverlay"]
 unique_name_in_owner = true
 script = ExtResource( 2 )
+
+[node name="StartTurnEffectRunner" type="Node" parent="BattleOverlay/TurnManager"]
+script = ExtResource( 17 )
 
 [node name="StatsPanel" parent="BattleOverlay" instance=ExtResource( 4 )]
 visible = false

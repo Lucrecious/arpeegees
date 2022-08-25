@@ -1,7 +1,22 @@
 extends Node
 
+const ExplosionTemplateScene := preload('res://src/vfx/explosion.tscn')
 const ImpactWhiteScene := preload('res://src/vfx/impact_white.tscn')
 const FloatingNumberScene := preload('res://src/vfx/floating_number.tscn')
+
+func note_explosion(front: bool) -> CPUParticles2D:
+	var explosion := ExplosionTemplateScene.instance() as ExplosionParticles
+	if randi() % 2 == 0:
+		explosion.texture = load('res://assets/sprites/effects/note1_vfx.png')
+	else:
+		explosion.texture = load('res://assets/sprites/effects/note2_vfx.png')
+	
+	explosion.scale_amount = 1.0
+	if front:
+		explosion.z_index = Aura.Z_INDEX_FRONT
+	
+	return explosion
+	
 
 func physical_impact(node: Node2D, position_node: Node2D) -> void:
 	physical_impactv(node, position_node.global_position)

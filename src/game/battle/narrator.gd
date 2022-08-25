@@ -17,6 +17,7 @@ const DISSOLVE_OUT_SEC := 0.5
 
 var _pin_nodes := []
 var _is_speaking := false
+var _queued_text := []
 
 onready var _label := $'%Label' as Label
 onready var _narrator_head := $'%NarratorHead' as TextureRect
@@ -77,7 +78,8 @@ func unwatch(node: ArpeegeePinNode) -> void:
 	status_effects.disconnect('effect_removed', self, '_on_effect_removed')
 
 func _on_action_node_text_triggered(translation_key: String) -> void:
-	speak_tr(translation_key)
+	var chain := true
+	speak_tr(translation_key, chain)
 
 func _on_pin_action_started(action_node: Node2D, _actions: PinActions) -> void:
 	var text_key := ''
@@ -89,12 +91,13 @@ func _on_pin_action_started(action_node: Node2D, _actions: PinActions) -> void:
 	if text_key.empty():
 		return
 	
-	speak_tr(text_key)
+	var chain := false
+	speak_tr(text_key, chain)
 
 var _current_tween: SceneTreeTween = null
-func speak_tr(translation_key: String) -> void:
+func speak_tr(translation_key: String, chain: bool) -> void:
 	var dialogue := tr(translation_key)
-	_speak(dialogue)
+	_speak(dialogue, chain)
 
 static func speak_estimate_sec(text: String) -> float:
 	var sentences := STring.split_phrases(text)
@@ -107,12 +110,19 @@ static func speak_estimate_sec(text: String) -> float:
 	return DISSOLVE_IN_SEC + (WAIT_BEFORE_FIRST_SENTENCE_SEC * between_sentences)\
 			+ letters_sec + DISSOLVE_OUT_SEC
 
-func _speak(text: String) -> void:
+func _speak(text: String, chain: bool) -> void:
 	if _current_tween:
+		if chain:
+			_queued_text.push_back(text)
+			return
+		
 		_current_tween.kill()
 		_current_tween = null
 		_finished_speaking()
 	
+	_run_speaking_tween(text, true)
+
+func _run_speaking_tween(text: String, start_signal: bool) -> void:
 	var sentences := _prepare_text(text)
 	
 	var parallel_tween := create_tween()
@@ -123,7 +133,7 @@ func _speak(text: String) -> void:
 	_label.visible_characters = 0
 	_label.text = ''
 	
-	_current_tween.tween_interval(.3)
+	_current_tween.tween_interval(0.3)
 	_current_tween.tween_callback(self, 'emit_signal', ['text_started'])
 	
 	for s in sentences:
@@ -145,7 +155,6 @@ func _speak(text: String) -> void:
 			
 			length += new_line_length
 			
-			_current_tween.tween_callback(self, '_debug_print', [length])
 			_current_tween.tween_method(self, '_set_visible_characters',
 					length - new_line_length, length, new_line_length / LETTERS_PER_SEC)
 			
@@ -159,9 +168,11 @@ func _speak(text: String) -> void:
 		.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_LINEAR)
 	
 	_current_tween.tween_callback(self, '_finished_speaking')
-	_current_tween.parallel().tween_callback(self, 'set', ['_current_tween', null])
 	
 	_is_speaking = true
+	if not start_signal:
+		return
+	
 	emit_signal('speaking_started')
 
 func _set_visible_characters(value: int) -> void:
@@ -171,13 +182,6 @@ func _set_visible_characters(value: int) -> void:
 		value -= (space_count + newline_count)
 	
 	_label.visible_characters = value
-
-func _debug_print(length: int) -> void:
-	pass
-	#print('debug print...')
-	#print()
-	#printt(_label.visible_characters, length, _label.text.length())
-	#print(_label.text.left(_label.visible_characters))
 
 func _wrap_lines(new_line_length: int, remove_line_length: int, current_sentence_length: int) -> void:
 	_label.text = _label.text.right(remove_line_length)
@@ -198,8 +202,13 @@ func _prepare_text(text: String) -> Array:
 	return phrases
 
 func _finished_speaking() -> void:
-	_is_speaking = false
-	emit_signal('speaking_ended')
+	_current_tween = null
+	if _queued_text.empty():
+		_is_speaking = false
+		emit_signal('speaking_ended')
+		return
+	
+	_run_speaking_tween(_queued_text.pop_front(), false)
 
 func _textbox_dissolve_level(ratio: float) -> void:
 	_textbox.material.set_shader_param('dissolve_value', ratio)
@@ -220,4 +229,5 @@ func _on_effect_removed(effect: StatusEffect) -> void:
 			child.disconnect('text_triggered', self, '_on_status_text_triggered')
 
 func _on_status_effect_text_triggered(translation_key: String) -> void:
-	speak_tr(translation_key)
+	var chain := true
+	speak_tr(translation_key, chain)
