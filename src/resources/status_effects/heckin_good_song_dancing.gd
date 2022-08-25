@@ -8,9 +8,15 @@ signal text_triggered(translation_key)
 
 var skip_turn_percent := .5
 
+var _is_powered_up := false
+
 onready var runs_alive := RUNS_ALIVE
 onready var _pin := NodE.get_ancestor(self, ArpeegeePinNode) as ArpeegeePinNode
 onready var _actions := NodE.get_child(_pin, PinActions) as PinActions
+
+func power_up() -> void:
+	_is_powered_up = true
+	skip_turn_percent = 0.8
 
 func run_start_turn_effect() -> void:
 	var tween := create_tween()

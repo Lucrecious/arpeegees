@@ -1,5 +1,5 @@
 keys,en,es
-NARRATOR_BATTLE_INTRODUCTION_GENERIC,Looks like we got rumble!,
+NARRATOR_BATTLE_INTRODUCTION_GENERIC,Looks like we got a rumble!,
 NARRATOR_BATTLE_FINISHED_HEROES_WIN_GENERIC,The heroes defeated the monsters! And all was good.,
 NARRATOR_BATTLE_FINISHED_MONSTERS_WIN_GENERIC,"Oh no! The ""scary"" monsters won! What will happen now?",
 NARRATOR_BATTLE_FINISHED_TIED_GENERIC,The heroes managed to ward off the monsters... but not without heavy sacrifices.,
@@ -21,6 +21,9 @@ NARRATOR_HECKIN_GOOD_SONG_MONSTERS_DANCING,The monsters have that Heckin' Good S
 NARRATOR_HECKIN_GOOD_SONG_MONSTER_DISTRACTED,Looks like the monster forgot to attack! It was grooving to Bard's song!,
 ,,
 NARRATOR_DISCORD_CANCELS_HECKIN_GOOD_SONG,Bard plays a really really painful chord... The monsters stop dancing along to that Heckin' Good Song. You ruined it.,
+,,
+FOUR_CHORD_STRUM_ACTION_NAME,4 Chord Strum,
+NARRATOR_FOUR_CHORD_STRUM_USE_1,"Bard plays a steady, catchy song, making all of their music SLAP way harder!",
 ,,
 FOCUS_KI_ACTION_NAME,Focus Ki,
 NARRATOR_FOCUS_KI_USE_1,Monk focuses their ki! Their fists burn with unlocked power!!,

@@ -1,9 +1,12 @@
+class_name HeckinGoodSongPinAction
 extends Node2D
 
 signal text_triggered(translation_key)
 
 export(String) var spawn_position_hint_node := 'SpawnPositionHint'
 export(PackedScene) var projectile_scene: PackedScene = null
+
+var buffed_from_four_chord_strum := false
 
 func pin_action() -> PinAction:
 	return preload('res://src/resources/actions/heckin_good_song.tres')
@@ -33,10 +36,14 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 	for t in targets:
 		var status_effects := NodE.get_child(t, StatusEffectsList) as StatusEffectsList
 		var heckin_good_song_effect := HeckinGoodSongDancingEffect.new()
+		heckin_good_song_effect.power_up()
 		var auras := Aura.create_note_auras()
 		animation.tween_callback(status_effects, 'add_as_children', [[heckin_good_song_effect] + auras])
 	
-	ActionUtils.add_text_trigger(animation, self, 'NARRATOR_HECKIN_GOOD_SONG_USE_1')
+	if buffed_from_four_chord_strum:
+		ActionUtils.add_text_trigger(animation, self, 'NARRATOR_HECKIN_GOOD_SONG_POWERED_UP_USE_1')
+	else:
+		ActionUtils.add_text_trigger(animation, self, 'NARRATOR_HECKIN_GOOD_SONG_USE_1')
 	
 	for i in 2:
 		skew_stepper.step()

@@ -184,6 +184,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/resources/status_effects/heckin_good_song_dancing.gd"
 }, {
+"base": "Node2D",
+"class": "HeckinGoodSongPinAction",
+"language": "GDScript",
+"path": "res://src/resources/arpeegee_pins/actions/heckin_good_song.gd"
+}, {
 "base": "Node",
 "class": "IButtonInput",
 "language": "GDScript",
@@ -575,6 +580,7 @@ _global_script_class_icons={
 "Gravity": "",
 "Health": "",
 "HeckinGoodSongDancingEffect": "",
+"HeckinGoodSongPinAction": "",
 "IButtonInput": "",
 "IDirectionalInput": "",
 "Input_ActionBinding": "",

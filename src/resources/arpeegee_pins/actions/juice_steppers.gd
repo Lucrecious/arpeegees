@@ -8,8 +8,6 @@ class SkewBackAndForth extends Reference:
 	var squish_bottom := 0.8
 	var squish_end:= 1.0
 	
-	var squish_factor := 0.1
-	
 	var _started := false
 	var _finished := false
 	var _current_sign := 1
