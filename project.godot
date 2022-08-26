@@ -364,6 +364,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://lut/rng.gd"
 }, {
+"base": "Reference",
+"class": "RaNdom",
+"language": "GDScript",
+"path": "res://lut/extension/random_extension.gd"
+}, {
 "base": "Node2D",
 "class": "ResolutionSprite",
 "language": "GDScript",
@@ -616,6 +621,7 @@ _global_script_class_icons={
 "REferenceRect": "",
 "REsource": "",
 "RNG": "",
+"RaNdom": "",
 "ResolutionSprite": "",
 "RingBuffer": "",
 "RootSprite": "",

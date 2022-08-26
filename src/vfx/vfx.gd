@@ -12,11 +12,27 @@ func note_explosion(front: bool) -> CPUParticles2D:
 		explosion.texture = load('res://assets/sprites/effects/note2_vfx.png')
 	
 	explosion.scale_amount = 1.0
+	explosion.spread = 50.0
 	if front:
 		explosion.z_index = Aura.Z_INDEX_FRONT
 	
 	return explosion
+
+func power_up_initial_explosion() -> Array:
+	var front := ExplosionTemplateScene.instance() as ExplosionParticles
+	front.texture = load('res://assets/sprites/effects/hero_smoke%d.png' % [RaNdom.randi_range(1, 7)])
+	front.scale_amount = 0.4
+	front.amount = 5
+	front.spread = 35
+	front.z_index = Aura.Z_INDEX_FRONT
 	
+	var back := ExplosionTemplateScene.instance() as ExplosionParticles
+	back.texture = load('res://assets/sprites/effects/hero_smoke%d.png' % [RaNdom.randi_range(1, 7)])
+	back.scale_amount = 0.4
+	front.amount = 5
+	back.spread = 35.0
+	
+	return [front, back]
 
 func physical_impact(node: Node2D, position_node: Node2D) -> void:
 	physical_impactv(node, position_node.global_position)
