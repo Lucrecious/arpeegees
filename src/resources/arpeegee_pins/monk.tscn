@@ -16,15 +16,17 @@ shader_param/line_color = Color( 1, 1, 1, 1 )
 shader_param/line_thickness = 0.0
 shader_param/fill_color = Color( 1, 1, 1, 1 )
 shader_param/color_mix = 0.0
+shader_param/top_skew = 0.0
+shader_param/squash = 1.0
 
 [node name="Monk" instance=ExtResource( 1 )]
 nice_name = "Monk"
 _resource_set = ExtResource( 9 )
 
-[node name="Health" parent="." index="5"]
+[node name="Health" parent="." index="6"]
 current = 25
 
-[node name="PinStats" parent="." index="6"]
+[node name="PinStats" parent="." index="7"]
 attack = 5
 magic_attack = 0
 defence = 2
@@ -45,24 +47,27 @@ centered = false
 [node name="Hurt" type="Sprite" parent="Sprites" index="1"]
 visible = false
 use_parent_material = true
-position = Vector2( 9, -90 )
+position = Vector2( -58, -190 )
 rotation = 0.717431
 scale = Vector2( 0.27, 0.068 )
 texture = ExtResource( 4 )
+centered = false
 
 [node name="PowerUp" type="Sprite" parent="Sprites" index="2"]
 visible = false
 use_parent_material = true
-position = Vector2( 2, -91 )
+position = Vector2( -64, -189 )
 scale = Vector2( 0.13, 0.14 )
 texture = ExtResource( 3 )
+centered = false
 
 [node name="Dead" type="Sprite" parent="Sprites" index="3"]
 visible = false
 use_parent_material = true
-position = Vector2( -49, -80 )
+position = Vector2( -134, -193 )
 scale = Vector2( 0.08, 0.08 )
 texture = ExtResource( 2 )
+centered = false
 
 [node name="Actions" type="Node2D" parent="." index="10"]
 script = ExtResource( 6 )

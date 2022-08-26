@@ -22,8 +22,9 @@ class SkewBackAndForth extends Reference:
 			return
 		
 		if not _started:
+			if not is_equal_approx(offset_to_home_sec, 0.0):
+				_start()
 			_started = true
-			_start()
 			return
 		
 		TweenJuice.skew(_animation, _material,
