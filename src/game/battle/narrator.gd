@@ -10,7 +10,7 @@ const MAX_LINES_VISIBLE := 3
 const NARRATOR_MOUTH_OPEN_TEXTURE := preload('res://assets/ui/narrator/narrator_speaking.png')
 const NARRATOR_MOUTH_CLOSED_TEXTURE := preload('res://assets/ui/narrator/narrator_silent.png')
 const LETTERS_PER_SEC := 25.0
-const DISSOLVE_IN_SEC := 1.0
+const DISSOLVE_IN_SEC := 0.5
 const WAIT_BEFORE_FIRST_SENTENCE_SEC := 0.3
 const WAIT_BETWEEN_SENTENCES_SEC := 2.0
 const DISSOLVE_OUT_SEC := 0.5
@@ -125,15 +125,13 @@ func _speak(text: String, chain: bool) -> void:
 func _run_speaking_tween(text: String, start_signal: bool) -> void:
 	var sentences := _prepare_text(text)
 	
-	var parallel_tween := create_tween()
-	parallel_tween.tween_method(self, '_textbox_dissolve_level', 0.0, 1.0, DISSOLVE_IN_SEC)\
+	_current_tween = create_tween()
+	_current_tween.tween_method(self, '_textbox_dissolve_level', 0.0, 1.0, DISSOLVE_IN_SEC)\
 			.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 	
-	_current_tween = get_tree().create_tween()
 	_label.visible_characters = 0
 	_label.text = ''
 	
-	_current_tween.tween_interval(0.3)
 	_current_tween.tween_callback(self, 'emit_signal', ['text_started'])
 	
 	for s in sentences:
@@ -175,6 +173,14 @@ func _run_speaking_tween(text: String, start_signal: bool) -> void:
 	
 	emit_signal('speaking_started')
 
+func skip() -> void:
+	if not _current_tween:
+		return
+	
+	_current_tween.stop()
+	_finished_speaking()
+
+
 func _set_visible_characters(value: int) -> void:
 	if value > 0:
 		var space_count := _label.text.count(' ', 0, value)
@@ -202,7 +208,12 @@ func _prepare_text(text: String) -> Array:
 	return phrases
 
 func _finished_speaking() -> void:
-	_current_tween = null
+	_textbox_dissolve_level(0.0)
+	_label.text = ""
+	if _current_tween:
+		_current_tween.kill()
+		_current_tween = null
+	
 	if _queued_text.empty():
 		_is_speaking = false
 		emit_signal('speaking_ended')

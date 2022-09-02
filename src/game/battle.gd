@@ -170,3 +170,10 @@ func _drop_pins(positions: PoolVector2Array, pins: Array, loader: BackgroundReso
 	
 	emit_signal('pins_dropped')
 
+func _input(input: InputEvent) -> void:
+	var mouse_button := input as InputEventMouseButton
+	if not mouse_button:
+		return
+	
+	if mouse_button.pressed and mouse_button.button_index == BUTTON_LEFT:
+		_narrator.skip()
