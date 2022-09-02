@@ -29,7 +29,7 @@ margin_top = -720.0
 theme = ExtResource( 7 )
 script = ExtResource( 1 )
 auto_start = true
-auto_start_player_pins = [ ExtResource( 18 ), ExtResource( 20 ) ]
+auto_start_player_pins = [ ExtResource( 20 ), ExtResource( 18 ) ]
 auto_start_npc_pins = [ ExtResource( 19 ) ]
 
 [node name="Background" type="Control" parent="."]

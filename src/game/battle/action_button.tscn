@@ -49,5 +49,7 @@ margin_top = 16.0
 margin_right = 331.0
 margin_bottom = 53.0
 size_flags_horizontal = 3
+custom_constants/line_spacing = -5
+autowrap = true
 script = ExtResource( 3 )
 _alternative_font_data = ExtResource( 4 )

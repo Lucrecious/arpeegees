@@ -16,7 +16,8 @@ func disable_wobble() -> void:
 	_wobble_timer.stop()
 
 func _ready() -> void:
-	_theme_font = get_font('font')
+	_theme_font = get_font('font').duplicate() as DynamicFont
+	_theme_font.size *= 0.8
 	_alternative_font = _theme_font.duplicate() as DynamicFont
 	_alternative_font.font_data = _alternative_font_data
 	add_font_override('font', _theme_font)
@@ -34,5 +35,4 @@ func _on_timeout() -> void:
 		add_font_override('font', _theme_font)
 	
 	_is_on_theme_font = not _is_on_theme_font
-	
 	
