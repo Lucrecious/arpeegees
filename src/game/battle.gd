@@ -6,7 +6,8 @@ signal pins_dropped()
 const LayoutTwoOne := preload('res://src/game/battle/layout_two_one.tscn')
 
 export(bool) var auto_start := false
-export(int, 3, 3) var auto_start_pin_count := 3
+export(Array, Resource) var auto_start_player_pins := []
+export(Array, Resource) var auto_start_npc_pins := []
 
 var _layout: BattleLayout = null
 
@@ -20,10 +21,15 @@ func _ready() -> void:
 	_narrator.rect_position += Vector2.DOWN * (_narrator.rect_size.y + 100.0)
 	
 	if auto_start:
-		start(auto_start_pin_count)
+		var pins := {
+			players = auto_start_player_pins,
+			npcs = auto_start_npc_pins,
+			other = [],
+		}
+		start(pins)
 
 var _started := false
-func start(pin_count: int) -> void:
+func start(pins: Dictionary) -> void:
 	if _started:
 		assert(false)
 		return
@@ -31,7 +37,6 @@ func start(pin_count: int) -> void:
 	_started = true
 	
 	_configure_viewport(_battle_viewport)
-	var pins := ArpeegeePins.pick_random(pin_count)
 	if _is_two_one_layout(pins.npcs.size(), pins.players.size()):
 		_layout = _create_battle_layout(LayoutTwoOne, pins)
 		_drop_character_pins(pins)

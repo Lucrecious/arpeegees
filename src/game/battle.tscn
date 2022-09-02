@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://src/game/battle.gd" type="Script" id=1]
 [ext_resource path="res://src/game/battle/turn_manager.gd" type="Script" id=2]
@@ -17,6 +17,9 @@
 [ext_resource path="res://assets/sprites/harpy/harpy_idle.png" type="Texture" id=15]
 [ext_resource path="res://src/game/situational_dialog.gd" type="Script" id=16]
 [ext_resource path="res://src/game/battle/start_turn_effect_runner.gd" type="Script" id=17]
+[ext_resource path="res://src/resources/arpeegee_pins/bard.tres" type="Resource" id=18]
+[ext_resource path="res://src/resources/arpeegee_pins/harpy.tres" type="Resource" id=19]
+[ext_resource path="res://src/resources/arpeegee_pins/monk.tres" type="Resource" id=20]
 
 [node name="Battle" type="Control"]
 anchor_top = 1.0
@@ -26,6 +29,8 @@ margin_top = -720.0
 theme = ExtResource( 7 )
 script = ExtResource( 1 )
 auto_start = true
+auto_start_player_pins = [ ExtResource( 18 ), ExtResource( 20 ) ]
+auto_start_npc_pins = [ ExtResource( 19 ) ]
 
 [node name="Background" type="Control" parent="."]
 anchor_top = 1.0

@@ -7,7 +7,7 @@ var _player_pins := []
 var _npc_pins := []
 
 func _ready() -> void:
-	_pins = _get_and_load_pins('res://src/resources/arpeegee_pins/')
+	_pins = _get_and_load_pickable_pins('res://src/resources/arpeegee_pins/')
 	_player_pins = _get_of_type(_pins, ArpeegeePin.Type.Player)
 	_npc_pins = _get_of_type(_pins, ArpeegeePin.Type.NPC)
 
@@ -66,7 +66,7 @@ func _get_of_type(pins: Array, type: int) -> Array:
 	
 	return of_type
 
-func _get_and_load_pins(directory_path: String) -> Array:
+func _get_and_load_pickable_pins(directory_path: String) -> Array:
 	var pins := []
 	
 	var directory := Directory.new()
@@ -92,7 +92,8 @@ func _get_and_load_pins(directory_path: String) -> Array:
 			file_name = directory.get_next()
 			continue
 		
-		pins.push_back(arpeegee_pin)
+		if arpeegee_pin.pickable:
+			pins.push_back(arpeegee_pin)
 		
 		file_name = directory.get_next()
 	 

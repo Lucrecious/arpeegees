@@ -14,4 +14,6 @@ func _ready() -> void:
 func _on_battle_screen_requested(pin_amount: int) -> void:
 	remove_child(_title_screen)
 	
-	_battle_screen.start(pin_amount)
+	var pins := ArpeegeePins.pick_random(3)
+	
+	_battle_screen.start(pins)

@@ -16,3 +16,4 @@ enum Rarity {
 export(Type) var type := Type.NPC
 export(Rarity) var rarity := Rarity.Common
 export(String, FILE) var scene_path := ''
+export(bool) var pickable := true

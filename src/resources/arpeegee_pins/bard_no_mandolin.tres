@@ -7,3 +7,4 @@ script = ExtResource( 1 )
 type = 0
 rarity = 1
 scene_path = "res://src/resources/arpeegee_pins/bard_no_mandolin.tscn"
+pickable = false
