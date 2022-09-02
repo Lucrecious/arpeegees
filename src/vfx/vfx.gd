@@ -34,6 +34,10 @@ func power_up_initial_explosion() -> Array:
 	
 	return [front, back]
 
+func shield_vfx() -> Node2D:
+	var shield_vfx := preload('res://src/vfx/shield_vfx.tscn').instance() as Node2D
+	return shield_vfx
+
 func physical_impact(node: Node2D, position_node: Node2D) -> void:
 	physical_impactv(node, position_node.global_position)
 

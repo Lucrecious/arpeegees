@@ -4,13 +4,16 @@ signal text_triggered(translation)
 
 export(String) var impact_hint_name := 'ImpactHint'
 export(String) var attack_sprite_name := 'attack'
+export(Resource) var pin_action: Resource = null
+export(bool) var walk := true
 
 onready var _impact_hint_node := NodE.get_child_by_name(self, impact_hint_name) as Node2D
 
 var _times_used := 0
 
 func pin_action() -> PinAction:
-	return load('res://src/resources/actions/bard_mandolin_swing.tres') as PinAction
+	assert(pin_action is PinAction)
+	return pin_action as PinAction
 
 func times_used() -> int:
 	return _times_used
@@ -25,18 +28,27 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	var side := int(sign(relative.x))
 	
 	var tween := get_tree().create_tween()
-	position = ActionUtils.add_walk(tween, actioner, position, position + relative, 15.0, 7)
+	if walk:
+		position = ActionUtils.add_walk(tween, actioner, position, position + relative, 15.0, 7)
+	else:
+		position += relative
+		tween.tween_property(actioner, 'global_position', position, 0.3)\
+				.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
+	
 	tween.tween_interval(.3)
 	position = ActionUtils.add_wind_up(tween, actioner, position, side)
 	position = ActionUtils.add_stab(tween, actioner, target_position)
 	
-	if pin_action().resource_path.get_file() == 'bard_mandolin_swing.tres':
-		if _times_used < 4:
-			ActionUtils.add_text_trigger(tween, self, 'NARRATOR_MANDOLIN_BASH_USE_%d' % [_times_used])
-			if _times_used == 3:
-				var transformer := NodE.get_child(actioner, Transformer) as Transformer
-				assert(transformer)
-				tween.tween_callback(transformer, 'request_transform')
+	match pin_action().resource_path.get_file():
+		'bard_mandolin_swing.tres':
+			if _times_used < 4:
+				ActionUtils.add_text_trigger(tween, self, 'NARRATOR_MANDOLIN_BASH_USE_%d' % [_times_used])
+				if _times_used == 3:
+					var transformer := NodE.get_child(actioner, Transformer) as Transformer
+					assert(transformer)
+					tween.tween_callback(transformer, 'request_transform')
+		'panchi_monk.tres':
+			ActionUtils.add_text_trigger(tween, self, 'NARRATOR_PANCHI_USE_1')
 		
 	var sprite_switcher := NodE.get_child(actioner, SpriteSwitcher) as SpriteSwitcher
 	if not attack_sprite_name.empty():

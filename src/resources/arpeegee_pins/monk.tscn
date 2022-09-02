@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/sprites/monk/monk_dead.png" type="Texture" id=2]
@@ -9,8 +9,11 @@
 [ext_resource path="res://lut/components/root_sprite.gd" type="Script" id=7]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/powerup.gd" type="Script" id=8]
 [ext_resource path="res://src/resources/arpeegee_pins/monk.tres" type="Resource" id=9]
-[ext_resource path="res://assets/sprites/effects/glow_circle.png" type="Texture" id=10]
-[ext_resource path="res://src/resources/arpeegee_pins/components/shrinkgrow.gd" type="Script" id=11]
+[ext_resource path="res://src/resources/arpeegee_pins/actions/chikara_panchi_monk.gd" type="Script" id=10]
+[ext_resource path="res://src/resources/actions/panchi_monk.tres" type="Resource" id=12]
+[ext_resource path="res://src/resources/arpeegee_pins/actions/attack.gd" type="Script" id=13]
+[ext_resource path="res://src/resources/arpeegee_pins/actions/armadillo_stance_monk.gd" type="Script" id=14]
+[ext_resource path="res://assets/sprites/monk/monk_handsup.PNG" type="Texture" id=15]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 5 )
@@ -20,35 +23,6 @@ shader_param/fill_color = Color( 1, 1, 1, 1 )
 shader_param/color_mix = 0.0
 shader_param/top_skew = 0.0
 shader_param/squash = 1.0
-
-[sub_resource type="GDScript" id=2]
-script/source = "extends Sprite
-
-
-onready var _status_effects := NodE.get_sibling(get_parent(), StatusEffectsList) as StatusEffectsList
-onready var _fist_back := $FistBack as Node2D
-onready var _fist_front := $FistFront as Node2D
-
-func _ready() -> void:
-	_status_effects.connect('effect_added_or_removed', self, '_on_effect_added_or_removed')
-
-func _on_effect_added_or_removed() -> void:
-	if not is_inside_tree():
-		return
-	
-	if not _is_focusing_ki():
-		return
-	
-	_fist_front.start()
-	_fist_back.start()
-
-func _is_focusing_ki() -> bool:
-	for effect in _status_effects.get_all():
-		if not effect.is_in_group('__focus_ki_status_effect'):
-			continue
-		return true
-	return false
-"
 
 [node name="Monk" instance=ExtResource( 1 )]
 nice_name = "Monk"
@@ -74,23 +48,16 @@ position = Vector2( -59, -182 )
 scale = Vector2( 0.135, 0.135 )
 texture = ExtResource( 4 )
 centered = false
-script = SubResource( 2 )
 
-[node name="FistBack" type="Sprite" parent="Sprites/Idle" index="0"]
-self_modulate = Color( 1, 1, 1, 0.462745 )
-position = Vector2( 503.704, 666.667 )
-scale = Vector2( 2.8371, 2.8371 )
-texture = ExtResource( 10 )
-script = ExtResource( 11 )
+[node name="ArmadilloStance" type="Sprite" parent="Sprites" index="1"]
+visible = false
+use_parent_material = true
+position = Vector2( -109, -235 )
+scale = Vector2( 0.105, 0.105 )
+texture = ExtResource( 15 )
+centered = false
 
-[node name="FistFront" type="Sprite" parent="Sprites/Idle" index="1"]
-self_modulate = Color( 1, 1, 1, 0.462745 )
-position = Vector2( 118.518, 644.444 )
-scale = Vector2( 2.8371, 2.8371 )
-texture = ExtResource( 10 )
-script = ExtResource( 11 )
-
-[node name="Hurt" type="Sprite" parent="Sprites" index="1"]
+[node name="Hurt" type="Sprite" parent="Sprites" index="2"]
 visible = false
 use_parent_material = true
 position = Vector2( -58, -190 )
@@ -99,7 +66,7 @@ scale = Vector2( 0.27, 0.068 )
 texture = ExtResource( 4 )
 centered = false
 
-[node name="PowerUp" type="Sprite" parent="Sprites" index="2"]
+[node name="PowerUp" type="Sprite" parent="Sprites" index="3"]
 visible = false
 use_parent_material = true
 position = Vector2( -64, -189 )
@@ -107,7 +74,7 @@ scale = Vector2( 0.13, 0.14 )
 texture = ExtResource( 3 )
 centered = false
 
-[node name="Dead" type="Sprite" parent="Sprites" index="3"]
+[node name="Dead" type="Sprite" parent="Sprites" index="4"]
 visible = false
 use_parent_material = true
 position = Vector2( -134, -193 )
@@ -118,5 +85,23 @@ centered = false
 [node name="Actions" type="Node2D" parent="." index="10"]
 script = ExtResource( 6 )
 
-[node name="PowerUp" type="Node2D" parent="Actions" index="0"]
+[node name="Panchi" type="Node2D" parent="Actions" index="0"]
+script = ExtResource( 13 )
+attack_sprite_name = "idle"
+pin_action = ExtResource( 12 )
+walk = false
+
+[node name="ImpactHint" type="Position2D" parent="Actions/Panchi" index="0"]
+position = Vector2( -45, -97 )
+
+[node name="ChikaraPanchi" type="Node2D" parent="Actions" index="1"]
+script = ExtResource( 10 )
+
+[node name="Position2D" type="Position2D" parent="Actions/ChikaraPanchi" index="0"]
+position = Vector2( -47, -91 )
+
+[node name="FocusKi" type="Node2D" parent="Actions" index="2"]
 script = ExtResource( 8 )
+
+[node name="ArmadilloStance" type="Node2D" parent="Actions" index="3"]
+script = ExtResource( 14 )

@@ -81,8 +81,8 @@ func finish_turn() -> void:
 	
 	var end_condition := _is_game_finished()
 	if end_condition != EndCondition.None:
-		emit_signal('turn_finished', end_condition)
-		emit_signal('battle_ended')
+		emit_signal('turn_finished')
+		emit_signal('battle_ended', end_condition)
 		return
 	
 	emit_signal('turn_finished')

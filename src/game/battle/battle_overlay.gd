@@ -51,7 +51,11 @@ func _on_pins_changed() -> void:
 
 func _on_player_turn_started() -> void:
 	var pin := _turn_manager.get_turn_pin()
-	_show_action_menu(pin)
+	var pin_actions := NodE.get_child(pin, PinActions) as PinActions
+	if not pin_actions.get_pin_action_nodes().empty():
+		_show_action_menu(pin, pin_actions)
+	else:
+		_turn_manager.finish_turn()
 
 var _previous_pin_turn: ArpeegeePinNode
 func _on_turn_started_preview() -> SceneTreeTween:
@@ -81,9 +85,8 @@ func _do_npc_turn_section_start() -> void:
 	else:
 		assert(false, 'multiple keys is not implemented yet')
 
-func _show_action_menu(pin: ArpeegeePinNode) -> void:
-	var actions_node := NodE.get_child(pin, PinActions) as PinActions
-	var action_nodes := actions_node.get_pin_action_nodes()
+func _show_action_menu(pin: ArpeegeePinNode, pin_actions: PinActions) -> void:
+	var action_nodes := pin_actions.get_pin_action_nodes()
 	
 	var menu_corner := ActionUtils.get_top_right_corner_screen(pin)
 	_action_menu.visible = true

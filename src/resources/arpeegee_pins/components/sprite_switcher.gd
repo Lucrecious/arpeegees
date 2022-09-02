@@ -18,6 +18,28 @@ func sprite(name: String) -> Node2D:
 	var sprite := _name_to_sprite.get(name, _name_to_sprite[IDLE_SPRITE_NAME]) as Node2D
 	return sprite
 
+func swap_map(one: String, other: String) -> void:
+	var node := _name_to_sprite.get(one, null) as Node2D
+	if not node:
+		assert(false)
+		return
+	
+	var other_node := _name_to_sprite.get(other, null) as Node2D
+	if not other_node:
+		assert(false)
+		return
+	
+	_name_to_sprite[one] = other_node
+	_name_to_sprite[other] = node
+	
+	if other_node.visible:
+		node.visible = true
+		other_node.visible = false
+	elif node.visible:
+		node.visible = false
+		other_node.visible = true
+	
+
 func has_sprite(name: String) -> bool:
 	var sprite := _name_to_sprite.get(name, null) as Node2D
 	return sprite != null
