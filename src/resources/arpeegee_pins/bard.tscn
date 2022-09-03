@@ -19,8 +19,9 @@
 [ext_resource path="res://assets/sprites/bard/bard_sing.png" type="Texture" id=17]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/four_chord_strum.gd" type="Script" id=18]
 [ext_resource path="res://src/resources/actions/bard_mandolin_swing.tres" type="Resource" id=19]
-[ext_resource path="res://assets/sounds/mandolin_chord.wav" type="AudioStream" id=20]
-[ext_resource path="res://assets/sounds/mandolin_chord2.mp3" type="AudioStream" id=21]
+[ext_resource path="res://assets/sounds/actions/BARD BONK.wav" type="AudioStream" id=20]
+[ext_resource path="res://assets/sounds/actions/BARD HECKIN GOOD SONG.wav" type="AudioStream" id=21]
+[ext_resource path="res://assets/sounds/actions/BARD DISCORD 1.wav" type="AudioStream" id=22]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 7 )
@@ -30,10 +31,6 @@ shader_param/fill_color = Color( 1, 1, 1, 1 )
 shader_param/color_mix = 0.0
 shader_param/top_skew = 0.0
 shader_param/squash = 1.0
-
-[sub_resource type="AudioStreamRandomPitch" id=2]
-audio_stream = ExtResource( 21 )
-random_pitch = 1.2
 
 [node name="Bard" instance=ExtResource( 1 )]
 nice_name = "Bard"
@@ -107,7 +104,7 @@ pin_action = ExtResource( 19 )
 [node name="ImpactHint" type="Position2D" parent="Actions/MandolinBash" index="0"]
 position = Vector2( -84, -96 )
 
-[node name="MandolinChordHit" type="AudioStreamPlayer" parent="Actions/MandolinBash" index="1"]
+[node name="HitSFX" type="AudioStreamPlayer" parent="Actions/MandolinBash" index="1"]
 stream = ExtResource( 20 )
 volume_db = -5.0
 
@@ -118,12 +115,14 @@ projectile_scene = ExtResource( 13 )
 [node name="SpawnPositionHint" type="Position2D" parent="Actions/Discord" index="0"]
 position = Vector2( -6, -101 )
 
+[node name="Discord" type="AudioStreamPlayer" parent="Actions/Discord" index="1"]
+stream = ExtResource( 22 )
+
 [node name="HeckinGoodSong" type="Node2D" parent="Actions" index="2"]
 script = ExtResource( 15 )
 
 [node name="MandolinNiceChord" type="AudioStreamPlayer" parent="Actions/HeckinGoodSong" index="0"]
-stream = SubResource( 2 )
-volume_db = -5.0
+stream = ExtResource( 21 )
 
 [node name="FourChordStrum" type="Node2D" parent="Actions" index="3"]
 script = ExtResource( 18 )

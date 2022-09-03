@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/sprites/monk/monk_dead.png" type="Texture" id=2]
@@ -10,10 +10,15 @@
 [ext_resource path="res://src/resources/arpeegee_pins/actions/powerup.gd" type="Script" id=8]
 [ext_resource path="res://src/resources/arpeegee_pins/monk.tres" type="Resource" id=9]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/chikara_panchi_monk.gd" type="Script" id=10]
+[ext_resource path="res://assets/sounds/actions/panchi_impact_monk.mp3" type="AudioStream" id=11]
 [ext_resource path="res://src/resources/actions/panchi_monk.tres" type="Resource" id=12]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/attack.gd" type="Script" id=13]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/armadillo_stance_monk.gd" type="Script" id=14]
 [ext_resource path="res://assets/sprites/monk/monk_handsup.PNG" type="Texture" id=15]
+[ext_resource path="res://assets/sounds/actions/panch_dash_monk.mp3" type="AudioStream" id=16]
+[ext_resource path="res://assets/sounds/actions/MONK CHARGE 1.wav" type="AudioStream" id=17]
+[ext_resource path="res://assets/sounds/actions/MONK CHARGE 2.wav" type="AudioStream" id=18]
+[ext_resource path="res://src/resources/sounds.gd" type="Script" id=19]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 5 )
@@ -94,6 +99,12 @@ walk = false
 [node name="ImpactHint" type="Position2D" parent="Actions/Panchi" index="0"]
 position = Vector2( -45, -97 )
 
+[node name="HitSFX" type="AudioStreamPlayer" parent="Actions/Panchi" index="1"]
+stream = ExtResource( 11 )
+
+[node name="DashSFX" type="AudioStreamPlayer" parent="Actions/Panchi" index="2"]
+stream = ExtResource( 16 )
+
 [node name="ChikaraPanchi" type="Node2D" parent="Actions" index="1"]
 script = ExtResource( 10 )
 
@@ -105,3 +116,18 @@ script = ExtResource( 8 )
 
 [node name="ArmadilloStance" type="Node2D" parent="Actions" index="3"]
 script = ExtResource( 14 )
+
+[node name="Sounds" type="Node" parent="." index="13"]
+script = ExtResource( 19 )
+
+[node name="ChargeUp" type="AudioStreamPlayer" parent="Sounds" index="0"]
+stream = ExtResource( 17 )
+
+[node name="ArmorUp" type="AudioStreamPlayer" parent="Sounds" index="1"]
+stream = ExtResource( 18 )
+
+[node name="Impact" type="AudioStreamPlayer" parent="Sounds" index="2"]
+stream = ExtResource( 11 )
+
+[node name="Dash" type="AudioStreamPlayer" parent="Sounds" index="3"]
+stream = ExtResource( 16 )

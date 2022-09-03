@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/dive_impact_harpy.mp3-c14eca4305186557f4caa59b447b0633.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/actions/dive_impact_harpy.mp3"
+dest_files=[ "res://.import/dive_impact_harpy.mp3-c14eca4305186557f4caa59b447b0633.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -29,10 +29,10 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 	skew_stepper.offset_to_home_sec = 0.5
 	
 	animation.tween_callback(sprite_switcher, 'change', ['heckingoodsong'])
+	animation.tween_callback(_mandolin_nice_chord, 'play')
 	
 	for i in 2:
 		skew_stepper.step()
-		animation.tween_callback(_mandolin_nice_chord, 'play')
 		_add_explosion(animation, explosion_parent)
 		animation.tween_interval(0.5)
 	
@@ -50,7 +50,6 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 	
 	for i in 2:
 		skew_stepper.step()
-		animation.tween_callback(_mandolin_nice_chord, 'play')
 		_add_explosion(animation, explosion_parent)
 		animation.tween_interval(0.5)
 	

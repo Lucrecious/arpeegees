@@ -33,11 +33,6 @@ func damage(amount: int) -> void:
 
 var _current_hurt_tween: SceneTreeTween
 func hurt() -> void:
-	var sounds := create_tween()
-	sounds.tween_callback(Sounds, 'play', ['Woosh'])
-	sounds.tween_interval(0.08)
-	sounds.tween_callback(Sounds, 'play', ['PhysicalHit'])
-	
 	_sprite_switcher.change(sprite_name)
 	if _current_hurt_tween and _current_hurt_tween.is_running():
 		_current_hurt_tween.kill()

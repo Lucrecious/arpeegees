@@ -5,6 +5,8 @@ signal text_triggered(translation_key)
 export(String) var spawn_position_hint_node := 'SpawnPositionHint'
 export(PackedScene) var projectile_scene: PackedScene = null
 
+onready var _discord_sound := $Discord as AudioStreamPlayer
+
 func pin_action() -> PinAction:
 	return preload('res://src/resources/actions/discord_bard.tres')
 
@@ -29,6 +31,8 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	skew_stepper.offset = 0.3
 	skew_stepper.offset_to_home_sec = 0.25
 	skew_stepper.between_offsets_sec = 0.5
+	
+	animation.tween_callback(_discord_sound, 'play')
 	
 	for i in 3:
 		skew_stepper.step()

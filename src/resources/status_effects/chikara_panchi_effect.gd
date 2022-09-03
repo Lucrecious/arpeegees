@@ -16,6 +16,8 @@ var _pin_actions: PinActions
 func run_start_turn_effect() -> void:
 	assert(actioner and sprite_switcher and target and hint_position)
 	
+	var sounds := NodE.get_child_by_name(actioner, 'Sounds')
+	
 	_pin_actions = NodE.get_child(actioner, PinActions) as PinActions
 	_pin_actions.set_moveless(true)
 	
@@ -28,6 +30,8 @@ func run_start_turn_effect() -> void:
 	var side := int(sign(relative.x))
 	
 	var tween := get_tree().create_tween()
+	tween.tween_callback(sounds, 'play', ['Dash'])
+	
 	position += relative
 	tween.tween_property(actioner, 'global_position', position, 0.3)\
 			.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
@@ -35,6 +39,7 @@ func run_start_turn_effect() -> void:
 	tween.tween_interval(.3)
 	position = ActionUtils.add_wind_up(tween, actioner, position, side)
 	position = ActionUtils.add_stab(tween, actioner, target_position)
+	tween.tween_callback(sounds, 'play', ['Impact'])
 
 	ActionUtils.add_text_trigger(tween, self, 'NARRATOR_CHIKARA_PANCHI_USE_ATTACK')
 	

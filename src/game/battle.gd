@@ -131,8 +131,11 @@ func _start_battle(nodes: Array) -> void:
 
 func _load_and_drop_pins(pins: Array, positions: PoolVector2Array, wait_sec: float, bounce_sec: float) -> void:
 	var background_resource_loader := BackgroundResourceLoader.new()
+	get_tree().root.call_deferred('add_child', background_resource_loader)
+	
 	var tween := create_tween()
 	TweenExtension.pause_until_signal(tween, background_resource_loader, 'finished')
+	tween.tween_callback(background_resource_loader, 'queue_free')
 	tween.tween_callback(self, '_drop_pins', [positions, pins, background_resource_loader, wait_sec, bounce_sec])
 	
 	var scene_paths := PoolStringArray([])

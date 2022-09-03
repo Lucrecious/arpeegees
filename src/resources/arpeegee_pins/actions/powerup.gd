@@ -6,6 +6,7 @@ func pin_action() -> PinAction:
 func run(actioner: Node2D, object: Object, callback: String) -> void:
 	var sprite_switcher := NodE.get_child(actioner, SpriteSwitcher) as SpriteSwitcher
 	var status_effects_list := NodE.get_child(actioner, StatusEffectsList) as StatusEffectsList
+	var sounds := NodE.get_child_by_name(actioner, 'Sounds')
 	
 	var status_effect := StatusEffect.new()
 	status_effect.add_to_group('__focus_ki_status_effect')
@@ -20,6 +21,9 @@ func run(actioner: Node2D, object: Object, callback: String) -> void:
 	
 	var tween := get_tree().create_tween()
 	tween.tween_callback(sprite_switcher, 'change', ['powerup'])
+	
+	tween.tween_callback(sounds, 'play', ['ChargeUp'])
+	
 	tween.tween_callback(status_effects_list, 'add_instance', [status_effect])
 	tween.tween_interval(1.3)
 	tween.tween_callback(sprite_switcher, 'change', ['idle'])

@@ -8,11 +8,13 @@ func pin_action() -> PinAction:
 func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> void:
 	var status_effects_list := NodE.get_child(actioner, StatusEffectsList) as StatusEffectsList
 	var sprite_switcher := NodE.get_child(actioner, SpriteSwitcher) as SpriteSwitcher
+	var sounds := NodE.get_child_by_name(actioner, 'Sounds')
 	
 	var animation := create_tween()
 	animation.tween_interval(1.0)
 	
 	animation.tween_callback(sprite_switcher, 'swap_map', ['idle', 'powerup'])
+	animation.tween_callback(sounds, 'play', ['ChargeUp'])
 	
 	ActionUtils.add_text_trigger(animation, self, 'NARRATOR_CHIKARA_PANCHI_USE_START')
 	

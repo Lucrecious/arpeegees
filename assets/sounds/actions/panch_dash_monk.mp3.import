@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/panch_dash_monk.mp3-ab63651ade3280649fcb530d58ad96f5.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/actions/panch_dash_monk.mp3"
+dest_files=[ "res://.import/panch_dash_monk.mp3-ab63651ade3280649fcb530d58ad96f5.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

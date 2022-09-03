@@ -34,7 +34,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/vfx/aura_particles.gd"
 }, {
-"base": "Reference",
+"base": "Node",
 "class": "BackgroundResourceLoader",
 "language": "GDScript",
 "path": "res://lut/background_loader.gd"
@@ -692,10 +692,10 @@ gdscript/warnings/integer_division=false
 window/size/width=1280
 window/size/height=720
 window/size/test_width=1920
-window/size/test_height=1080
 window/dpi/allow_hidpi=true
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
+window/size/test_height=1080
 
 [gui]
 

@@ -9,12 +9,14 @@ func run(actioner: Node2D, object: Object, callback: String) -> void:
 	var status_effects_list := NodE.get_child(actioner, StatusEffectsList) as StatusEffectsList
 	var sprite_switcher := NodE.get_child(actioner, SpriteSwitcher) as SpriteSwitcher
 	var bounds := NodE.get_child(actioner, REferenceRect) as REferenceRect
+	var sounds := NodE.get_child_by_name(actioner, 'Sounds')
 	
 	var animation := create_tween()
 	
 	animation.tween_interval(1.0)
 	
 	animation.tween_callback(self, '_replace_idle_with_armadillo_stance', [sprite_switcher])
+	animation.tween_callback(sounds, 'play', ['ArmorUp'])
 	
 	var shield_vfx := VFX.shield_vfx()
 	animation.tween_callback(get_parent(), 'add_child', [shield_vfx])
