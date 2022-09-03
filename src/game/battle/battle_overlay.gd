@@ -136,6 +136,7 @@ func _on_target_found(target: ArpeegeePinNode, caster: ArpeegeePinNode, action_n
 
 var _current_pin: ArpeegeePinNode
 func _gui_input(event: InputEvent) -> void:
+	return
 	if _turn_manager.is_running_action():
 		return
 	
@@ -157,11 +158,13 @@ func _gui_input(event: InputEvent) -> void:
 		_show_stats(_current_pin)
 
 func _on_mouse_exited() -> void:
+	return
 	_current_pin = null
 	_stats_panel.visible = false
 	_stats_panel.set_as_toplevel(false)
 
 func _input(event):
+	return
 	if not _current_pin:
 		return
 	
@@ -177,6 +180,7 @@ func _input(event):
 	_stats_panel.set_as_toplevel(false)
 
 func _show_stats(pin: ArpeegeePinNode) -> void:
+	return
 	_stats_panel.apply_pin(pin)
 	var position := ActionUtils.get_top_right_corner_screen(pin)
 	_stats_panel.rect_position = position

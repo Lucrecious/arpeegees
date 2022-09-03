@@ -114,7 +114,6 @@ func _balance_battle() -> void:
 	
 	_start_battle(nodes)
 
-
 func _on_battle_ended(end_condition: int) -> void:
 	if end_condition == TurnManager.EndCondition.NPCsDead:
 		_narrator.speak_tr('NARRATOR_BATTLE_FINISHED_HEROES_WIN_GENERIC', true)

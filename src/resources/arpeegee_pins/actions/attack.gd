@@ -24,14 +24,16 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	var position := actioner.global_position
 	var relative := ActionUtils.get_closest_adjecent_position(actioner, target)
 	var target_position := position + relative
+
 	
 	var side := int(sign(relative.x))
 	
 	var tween := get_tree().create_tween()
 	if walk:
-		position = ActionUtils.add_walk(tween, actioner, position, position + relative, 15.0, 7)
+		position = ActionUtils.add_walk(tween, actioner, position, position + relative, 15.0, 5)
 	else:
 		position += relative
+		tween.tween_callback(Sounds, 'play', ['Woosh3'])
 		tween.tween_property(actioner, 'global_position', position, 0.3)\
 				.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
 	
@@ -39,8 +41,10 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	position = ActionUtils.add_wind_up(tween, actioner, position, side)
 	position = ActionUtils.add_stab(tween, actioner, target_position)
 	
+	var is_mandolin := false
 	match pin_action().resource_path.get_file():
 		'bard_mandolin_swing.tres':
+			is_mandolin = true
 			if _times_used < 4:
 				ActionUtils.add_text_trigger(tween, self, 'NARRATOR_MANDOLIN_BASH_USE_%d' % [_times_used])
 				if _times_used == 3:
@@ -56,6 +60,9 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	
 	if _impact_hint_node:
 		tween.tween_callback(VFX, 'physical_impact', [actioner, _impact_hint_node])
+		if is_mandolin:
+			var chord_hit := NodE.get_child_by_name(actioner, 'MandolinChordHit') as AudioStreamPlayer
+			#tween.tween_callback(chord_hit, 'play')
 	
 	var modified_stats := NodE.get_child(actioner, ModifiedPinStats) as ModifiedPinStats
 	if modified_stats:
@@ -67,6 +74,6 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	tween.tween_interval(.4)
 	tween.tween_callback(sprite_switcher, 'change', ['idle'])
 	ActionUtils.add_walk(tween, actioner,
-			actioner.global_position + relative, actioner.global_position, 15.0, 7)
+			actioner.global_position + relative, actioner.global_position, 15.0, 5)
 	
 	tween.tween_callback(object, callback)

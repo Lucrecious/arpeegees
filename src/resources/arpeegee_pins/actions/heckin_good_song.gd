@@ -6,6 +6,8 @@ signal text_triggered(translation_key)
 export(String) var spawn_position_hint_node := 'SpawnPositionHint'
 export(PackedScene) var projectile_scene: PackedScene = null
 
+onready var _mandolin_nice_chord := $MandolinNiceChord as AudioStreamPlayer
+
 var buffed_from_four_chord_strum := false
 
 func pin_action() -> PinAction:
@@ -30,6 +32,7 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 	
 	for i in 2:
 		skew_stepper.step()
+		animation.tween_callback(_mandolin_nice_chord, 'play')
 		_add_explosion(animation, explosion_parent)
 		animation.tween_interval(0.5)
 	
@@ -47,6 +50,7 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 	
 	for i in 2:
 		skew_stepper.step()
+		animation.tween_callback(_mandolin_nice_chord, 'play')
 		_add_explosion(animation, explosion_parent)
 		animation.tween_interval(0.5)
 	

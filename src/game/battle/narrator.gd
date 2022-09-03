@@ -18,6 +18,7 @@ const DISSOLVE_OUT_SEC := 0.5
 var _pin_nodes := []
 var _is_speaking := false
 var _queued_text := []
+var _is_typing := false
 
 onready var _label := $'%Label' as Label
 onready var _narrator_head := $'%NarratorHead' as TextureRect
@@ -31,21 +32,8 @@ func _ready() -> void:
 	
 	_textbox_dissolve_level(0.0)
 	
-	connect('text_started', self, '_start_tween_talking_loop')
-
 func is_speaking() -> bool:
 	return _is_speaking
-
-func _start_tween_talking_loop() -> void:
-	if not _is_speaking:
-		return
-	
-	var tween := get_tree().create_tween()
-	tween.tween_callback(_narrator_head, 'set', ['texture', NARRATOR_MOUTH_OPEN_TEXTURE])
-	tween.tween_interval(rand_range(.05, .2))
-	tween.tween_callback(_narrator_head, 'set', ['texture', NARRATOR_MOUTH_CLOSED_TEXTURE])
-	tween.tween_interval(rand_range(.05, .2))
-	tween.tween_callback(self, '_start_tween_talking_loop')
 
 func watch(node: ArpeegeePinNode) -> void:
 	assert(not node in _pin_nodes)
@@ -135,6 +123,8 @@ func _run_speaking_tween(text: String, start_signal: bool) -> void:
 	_current_tween.tween_callback(self, 'emit_signal', ['text_started'])
 	
 	for s in sentences:
+		_current_tween.tween_callback(self, '_set_is_typing', [true])
+		
 		var length := 0
 		var total_thing := s.join('\n') as String
 		_current_tween.tween_callback(_label, 'set', ['text', total_thing])
@@ -156,6 +146,7 @@ func _run_speaking_tween(text: String, start_signal: bool) -> void:
 			_current_tween.tween_method(self, '_set_visible_characters',
 					length - new_line_length, length, new_line_length / LETTERS_PER_SEC)
 			
+		_current_tween.tween_callback(self, '_set_is_typing', [false])
 		_current_tween.tween_interval(WAIT_BETWEEN_SENTENCES_SEC)
 	
 	_current_tween.tween_method(self, '_textbox_dissolve_level', 1.0, 0.5, DISSOLVE_OUT_SEC / 2.0)\
@@ -208,6 +199,7 @@ func _prepare_text(text: String) -> Array:
 	return phrases
 
 func _finished_speaking() -> void:
+	_is_typing = false
 	_textbox_dissolve_level(0.0)
 	_label.text = ""
 	if _current_tween:
@@ -242,3 +234,23 @@ func _on_effect_removed(effect: StatusEffect) -> void:
 func _on_status_effect_text_triggered(translation_key: String) -> void:
 	var chain := true
 	speak_tr(translation_key, chain)
+
+func _set_is_typing(value: bool) -> void:
+	if _is_typing == value:
+		return
+	
+	_is_typing = value
+	if not _is_typing:
+		_narrator_head.texture = NARRATOR_MOUTH_CLOSED_TEXTURE
+
+func _process(delta: float) -> void:
+	if not _is_typing:
+		return
+	
+	if Engine.get_idle_frames() % 5 == 0:
+		Sounds.play('SpeakingBlip')
+		if _narrator_head.texture == NARRATOR_MOUTH_OPEN_TEXTURE:
+			_narrator_head.texture = NARRATOR_MOUTH_CLOSED_TEXTURE
+		else:
+			_narrator_head.texture = NARRATOR_MOUTH_OPEN_TEXTURE
+	

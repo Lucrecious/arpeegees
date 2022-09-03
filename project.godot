@@ -680,6 +680,7 @@ StatusEffects="*res://src/resources/status_effects.gd"
 TweenExtension="*res://lut/extension/tween_extension.gd"
 VFX="*res://src/vfx/vfx.gd"
 Aura="*res://src/vfx/aura.gd"
+Sounds="*res://src/resources/sounds.tscn"
 
 [debug]
 
@@ -700,6 +701,13 @@ window/stretch/aspect="keep"
 
 common/drop_mouse_on_gui_input_disabled=true
 common/snap_controls_to_pixels=false
+
+[importer_defaults]
+
+mp3={
+"loop": false,
+"loop_offset": 0
+}
 
 [locale]
 
