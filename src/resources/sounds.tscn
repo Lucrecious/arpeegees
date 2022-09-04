@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/resources/sounds.gd" type="Script" id=1]
-[ext_resource path="res://assets/sounds/speaking_blip.wav" type="AudioStream" id=2]
+[ext_resource path="res://assets/sounds/actions/GUMDROP VOICE.wav" type="AudioStream" id=2]
 [ext_resource path="res://assets/sounds/hit_woody.wav" type="AudioStream" id=3]
 [ext_resource path="res://assets/sounds/woosh.wav" type="AudioStream" id=4]
 [ext_resource path="res://assets/sounds/footstep.wav" type="AudioStream" id=5]

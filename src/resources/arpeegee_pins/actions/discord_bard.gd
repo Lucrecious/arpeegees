@@ -38,7 +38,7 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 		skew_stepper.step()
 		add_projectile_and_vfx(animation, actioner, target, spawn_position_hint)
 	
-	ActionUtils.add_damage(animation, target, attack_damage)
+	ActionUtils.add_damage(animation, target, attack_damage, PinAction.AttackType.Normal)
 	animation.tween_callback(target_status_effects, 'add_instance', [status_effect])
 	
 	skew_stepper.finish()

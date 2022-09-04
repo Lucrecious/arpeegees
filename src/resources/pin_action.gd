@@ -14,6 +14,11 @@ enum ActionType {
 	Projectile,
 }
 
+enum AttackType {
+	Normal,
+	Magic
+}
+
 export(String) var nice_name := 'Action'
 export(String, MULTILINE) var description := ''
 export(TargetType) var target_type := TargetType.Single

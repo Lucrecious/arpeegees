@@ -50,7 +50,7 @@ func run_start_turn_effect() -> void:
 	
 	var modified_stats := NodE.get_child(actioner, ModifiedPinStats) as ModifiedPinStats
 	if modified_stats:
-		ActionUtils.add_damage(tween, target, modified_stats.attack * 2.5)
+		ActionUtils.add_damage(tween, target, modified_stats.attack * 2.5, PinAction.AttackType.Normal)
 	else:
 		assert(false)
 	

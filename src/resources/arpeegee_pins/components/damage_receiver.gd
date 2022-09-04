@@ -4,6 +4,7 @@ extends Node2D
 export(String) var sprite_name := ''
 
 onready var _health := NodE.get_sibling(self, Health) as Health
+onready var _modified_stats := NodE.get_sibling(self, ModifiedPinStats) as ModifiedPinStats
 onready var _sprite_switcher := NodE.get_sibling(self, SpriteSwitcher) as SpriteSwitcher
 onready var _root_sprite := Components.root_sprite(get_parent())
 onready var _root_sprite_shader := _root_sprite.material as ShaderMaterial
@@ -24,11 +25,20 @@ func disable() -> void:
 	
 	_enabled = false
 
-func damage(amount: int) -> void:
+func damage(amount: int, type: int) -> void:
 	if not _enabled:
 		return
 	
-	_health.damage(amount)
+	var actual_damage := 0
+	if type == PinAction.AttackType.Normal:
+		actual_damage = round(amount * (amount / float(amount + _modified_stats.defence)))
+	elif type == PinAction.AttackType.Magic:
+		actual_damage = round(amount * (amount / float(amount + _modified_stats.magic_defence)))
+	else:
+		assert(false)
+	
+	actual_damage = max(actual_damage, 1)
+	_health.damage(actual_damage)
 	hurt()
 
 var _current_hurt_tween: SceneTreeTween

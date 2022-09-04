@@ -53,7 +53,8 @@ func run_start_turn_effect() -> void:
 		animation.tween_callback(VFX, 'physical_impactv', [_pin, head_position])
 		animation.tween_interval(0.3)
 	
-	ActionUtils.add_damage(animation, _pin, ActionUtils.damage_with_factor(_modified_stats.attack, 0.5))
+	ActionUtils.add_damage(animation, _pin,
+			ActionUtils.damage_with_factor(_modified_stats.attack, 0.5), PinAction.AttackType.Magic)
 	
 	runs_alive -= 1
 	

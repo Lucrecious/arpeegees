@@ -29,12 +29,12 @@ static func get_top_right_corner_screen(pin: Node2D) -> Vector2:
 	var position := global_rect.position + Vector2.RIGHT * global_rect.size
 	return position
 
-static func add_damage(tween: SceneTreeTween, target: ArpeegeePinNode, amount: int) -> void:
+static func add_damage(tween: SceneTreeTween, target: ArpeegeePinNode, amount: int, type: int) -> void:
 	var damage_receiver := NodE.get_child(target, DamageReceiver) as DamageReceiver
 	if not damage_receiver:
 		return
 	
-	tween.tween_callback(damage_receiver, 'damage', [amount])
+	tween.tween_callback(damage_receiver, 'damage', [amount, type])
 
 static func add_hurt(tween: SceneTreeTween, target: ArpeegeePinNode) -> void:
 	var damage_receiver := NodE.get_child(target, DamageReceiver) as DamageReceiver
