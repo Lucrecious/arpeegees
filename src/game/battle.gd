@@ -117,12 +117,19 @@ func _balance_battle() -> void:
 func _on_battle_ended(end_condition: int) -> void:
 	if end_condition == TurnManager.EndCondition.NPCsDead:
 		_narrator.speak_tr('NARRATOR_BATTLE_FINISHED_HEROES_WIN_GENERIC', true)
+		_change_to_win_sprites(_turn_manager.get_players())
 	elif end_condition == TurnManager.EndCondition.PlayersDead:
 		_narrator.speak_tr('NARRATOR_BATTLE_FINISHED_MONSTERS_WIN_GENERIC', true)
+		_change_to_win_sprites(_turn_manager.get_npcs())
 	elif end_condition == TurnManager.EndCondition.EveryoneDead:
 		_narrator.speak_tr('NARRATOR_BATTLE_FINISHED_TIED_GENERIC', true)
 	else:
 		assert(false)
+
+func _change_to_win_sprites(pins: Array) -> void:
+	for p in pins:
+		var sprite_switcher := NodE.get_child(p, SpriteSwitcher) as SpriteSwitcher
+		sprite_switcher.change('win')
 
 func _start_battle(nodes: Array) -> void:
 	for n in nodes:

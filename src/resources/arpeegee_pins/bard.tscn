@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/sprites/bard/bard_idle.png" type="Texture" id=2]
@@ -27,6 +27,7 @@
 [ext_resource path="res://assets/sounds/discord_hit2_bard.mp3" type="AudioStream" id=25]
 [ext_resource path="res://assets/sounds/chord_strum_bard.mp3" type="AudioStream" id=26]
 [ext_resource path="res://assets/sounds/heckin_good_song_bard.mp3" type="AudioStream" id=27]
+[ext_resource path="res://assets/sprites/bard/bard_win.png" type="Texture" id=28]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 7 )
@@ -98,6 +99,13 @@ use_parent_material = true
 position = Vector2( -37, -79 )
 scale = Vector2( 0.08, 0.08 )
 texture = ExtResource( 4 )
+
+[node name="Win" type="Sprite" parent="Sprites" index="6"]
+visible = false
+use_parent_material = true
+position = Vector2( -17, -86 )
+scale = Vector2( 0.075, 0.075 )
+texture = ExtResource( 28 )
 
 [node name="Actions" type="Node2D" parent="." index="11"]
 script = ExtResource( 9 )
