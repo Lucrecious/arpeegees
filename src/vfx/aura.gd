@@ -18,6 +18,22 @@ func create_power_up_auras() -> Array:
 	
 	return [front, back]
 
+func create_enraged_auras() -> Array:
+	var front := AuraTemplateScene.instance() as AuraParticles
+	front.texture = load('res://assets/sprites/effects/monster_enraged.png')
+	front.scale_amount = 2.0
+	front.z_index = Z_INDEX_FRONT
+	front.amount = 3
+	front.position.y -= 50.0
+	
+	var back := AuraTemplateScene.instance() as AuraParticles
+	back.texture = load('res://assets/sprites/effects/monster_enraged.png')
+	back.scale_amount = 2.0
+	back.amount = 3
+	back.position.y -= 50.0
+	
+	return [back, front]
+
 func create_note_auras() -> Array:
 	var front := AuraTemplateScene.instance() as AuraParticles
 	front.texture = load('res://assets/sprites/effects/note2_vfx.png')

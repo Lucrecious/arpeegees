@@ -112,9 +112,23 @@ func _balance_battle() -> void:
 	
 	var nodes := NodE.get_children(_battle_layer, ArpeegeePinNode)
 	_turn_manager.initialize_turns(nodes)
-	_turn_manager.balance_battle()
+	var type_disadvanged := _turn_manager.balance_battle()
 	
-	_start_battle(nodes)
+	var disadvantage_dialog := ''
+	
+	match type_disadvanged:
+		ArpeegeePin.Type.Player:
+			disadvantage_dialog = 'NARRATOR_HERO_FILLED_WITH_GUTS'
+		ArpeegeePin.Type.NPC:
+			disadvantage_dialog = 'NARRATOR_MONSTER_FILL_WITH_EVIL'
+	
+	if disadvantage_dialog.empty():
+		_start_battle(nodes)
+	else:
+		var tween := create_tween()
+		TweenExtension.pause_until_signal(tween, _narrator, 'speaking_ended')
+		tween.tween_callback(self, '_start_battle', [nodes])
+		_narrator.speak_tr(disadvantage_dialog, true)
 
 func _on_battle_ended(end_condition: int) -> void:
 	if end_condition == TurnManager.EndCondition.NPCsDead:

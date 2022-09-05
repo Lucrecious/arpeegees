@@ -8,12 +8,6 @@ signal turn_finished()
 signal battle_ended(end_condition)
 signal initialized()
 
-enum Advantage {
-	HealthUp,
-	AttackUp,
-	EvasionUp,
-}
-
 enum EndCondition {
 	None,
 	PlayersDead,
@@ -123,11 +117,15 @@ func _run_action_with_targets(pin: ArpeegeePinNode, action_name: String, targets
 func is_running_action() -> bool:
 	return _is_running_action
 
-func balance_battle() -> void:
+func balance_battle() -> int:
 	var disadvantaged_nodes := _get_disadvantaged_nodes(_ordered_pins)
 	
-	if not disadvantaged_nodes.empty():
-		_add_random_advantage(disadvantaged_nodes)
+	if disadvantaged_nodes.empty():
+		return -1
+	
+	var type := disadvantaged_nodes[0].resource.type as int
+	_add_attack_boost(disadvantaged_nodes, type)
+	return type
 
 func _get_disadvantaged_nodes(nodes: Array) -> Array:
 	var players := _get_nodes_of_type(nodes, ArpeegeePin.Type.Player)
@@ -153,23 +151,10 @@ func _get_nodes_of_type(nodes: Array, type: int) -> Array:
 	
 	return of_type
 
-func _add_random_advantage(nodes: Array) -> void:
-	var advantage := _get_random_advantage()
-	
-	match advantage:
-		Advantage.AttackUp:
-			_increase_attack(nodes)
-		Advantage.EvasionUp:
-			_increase_evasion(nodes)
-		Advantage.HealthUp:
-			_increase_health(nodes)
+func _add_attack_boost(nodes: Array, type: int) -> void:
+	_increase_attack(nodes, type)
 
-func _get_random_advantage() -> int:
-	var values := Advantage.values()
-	var advantage := values[randi() % values.size()] as int
-	return advantage
-
-func _increase_attack(nodes: Array) -> void:
+func _increase_attack(nodes: Array, type: int) -> void:
 	for n in nodes:
 		var status_effects := NodE.get_child(n, StatusEffectsList) as StatusEffectsList
 		var effect := StatusEffect.new()
@@ -183,17 +168,29 @@ func _increase_attack(nodes: Array) -> void:
 		
 		effect.add_child(attack)
 		effect.add_child(magic_attack)
+		
+		match type:
+			ArpeegeePin.Type.NPC:
+				NodE.add_children(status_effects, Aura.create_enraged_auras())
+			ArpeegeePin.Type.Player:
+				assert(false, 'not implemented')
+		
 		status_effects.add_instance(effect)
 
 func _increase_evasion(nodes: Array) -> void:
 	for n in nodes:
 		var status_effects := NodE.get_child(n, StatusEffectsList) as StatusEffectsList
+		
 		var effect := StatusEffect.new()
+		effect.stack_count = 1
+		effect.tag = StatusEffectTag.Enraged
+		
 		var modifier := StatModifier.new()
 		modifier.type = StatModifier.Type.Evasion
 		modifier.multiplier = 1.5
 		
 		effect.add_child(modifier)
+		
 		status_effects.add_instance(effect)
 
 func _increase_health(nodes: Array) -> void:

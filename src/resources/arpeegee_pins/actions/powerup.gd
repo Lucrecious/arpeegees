@@ -28,10 +28,9 @@ func _create_focus_ki_status_effect() -> StatusEffect:
 	var stat_modifier := StatModifier.new()
 	stat_modifier.type = StatModifier.Type.Attack
 	stat_modifier.multiplier = 1.5
-	var status_effect_children := [stat_modifier]
-	status_effect_children += Aura.create_power_up_auras()
-	status_effect_children += VFX.power_up_initial_explosion()
-	for c in status_effect_children:
-		status_effect.add_child(c)
+	
+	status_effect.add_child(stat_modifier)
+	NodE.add_children(status_effect, Aura.create_power_up_auras())
+	NodE.add_children(status_effect, VFX.power_up_initial_explosion())
 	
 	return status_effect
