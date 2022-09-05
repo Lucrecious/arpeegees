@@ -3,6 +3,9 @@ extends Node
 
 signal changed()
 
+const CRITICAL_MAX := 10
+const EVASION_MAX := 10
+
 var max_health := 0
 var attack := 0
 var magic_attack := 0
@@ -12,6 +15,9 @@ var evasion := 0
 var critical := 0
 
 onready var _status_effects := NodE.get_sibling(self, StatusEffectsList) as StatusEffectsList
+
+static func attack_with_critical(amount: int) -> int:
+	return int(round(amount * 2.0))
 
 func _ready() -> void:
 	_status_effects.connect('effect_added_or_removed', self, '_on_effect_added_or_removed')

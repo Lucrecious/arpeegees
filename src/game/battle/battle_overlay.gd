@@ -42,12 +42,20 @@ func _on_pins_changed() -> void:
 		var health := NodE.get_child(pin, Health) as Health
 		health.disconnect('increased', self, '_on_pin_health_changed')
 		health.disconnect('damaged', self, '_on_pin_health_changed')
+		
+		var damage_receiver := NodE.get_child(pin, DamageReceiver) as DamageReceiver
+		damage_receiver.disconnect('critical_hit', self, '_on_pin_critical_hit_or_evaded')
+		damage_receiver.disconnect('evaded', self, '_on_pin_critical_hit_or_evaded')
 	
 	_pins_cache = _turn_manager.get_pins()
 	for pin in _pins_cache:
 		var health := NodE.get_child(pin, Health) as Health
 		health.connect('increased', self, '_on_pin_health_changed', [pin, false])
 		health.connect('damaged', self, '_on_pin_health_changed', [pin, true])
+		
+		var damage_receiver := NodE.get_child(pin, DamageReceiver) as DamageReceiver
+		damage_receiver.connect('critical_hit', self, '_on_pin_critical_hit_or_evaded', [pin, true])
+		damage_receiver.connect('evaded', self, '_on_pin_critical_hit_or_evaded', [pin, false])
 
 func _on_player_turn_started() -> void:
 	var pin := _turn_manager.get_turn_pin()
@@ -202,6 +210,12 @@ func _get_hovering_pin() -> ArpeegeePinNode:
 
 func _on_pin_health_changed(amount: int, pin: ArpeegeePinNode, damaged: bool) -> void:
 	_spawn_health_changed_floaty_number(pin, amount, damaged)
+
+func _on_pin_critical_hit_or_evaded(pin: ArpeegeePinNode, is_critical: bool) -> void:
+	if is_critical:
+		VFX.floating_text(pin, 'CRITICAL!!', self)
+	else:
+		VFX.floating_text(pin, 'MISS', self)
 
 func _spawn_health_changed_floaty_number(pin: ArpeegeePinNode, amount: int, damaged: bool) -> void:	
 	amount = amount if not damaged else -amount

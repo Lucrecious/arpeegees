@@ -160,9 +160,9 @@ _global_script_classes=[ {
 "path": "res://src/vfx/explosion.gd"
 }, {
 "base": "Node2D",
-"class": "FloatingNumber",
+"class": "FloatingText",
 "language": "GDScript",
-"path": "res://src/vfx/floating_number.gd"
+"path": "res://src/vfx/floating_text.gd"
 }, {
 "base": "Reference",
 "class": "FuncREf",
@@ -454,6 +454,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/resources/status_effect.gd"
 }, {
+"base": "Reference",
+"class": "StatusEffectTag",
+"language": "GDScript",
+"path": "res://src/resources/status_effects/status_effect_tags.gd"
+}, {
 "base": "Node2D",
 "class": "StatusEffectsList",
 "language": "GDScript",
@@ -585,7 +590,7 @@ _global_script_class_icons={
 "DiscordStartTurnEffect": "",
 "Dodge": "",
 "ExplosionParticles": "",
-"FloatingNumber": "",
+"FloatingText": "",
 "FuncREf": "",
 "GEometry": "",
 "Gravity": "",
@@ -644,6 +649,7 @@ _global_script_class_icons={
 "StatModifier": "",
 "StatPopup": "",
 "StatusEffect": "",
+"StatusEffectTag": "",
 "StatusEffectsList": "",
 "TargetSelector": "",
 "TileActionMode": "",
@@ -681,6 +687,7 @@ TweenExtension="*res://lut/extension/tween_extension.gd"
 VFX="*res://src/vfx/vfx.gd"
 Aura="*res://src/vfx/aura.gd"
 Sounds="*res://src/resources/sounds.tscn"
+FairRandom="*res://src/game/fair_random.gd"
 
 [debug]
 

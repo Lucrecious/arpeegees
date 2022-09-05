@@ -1,16 +1,21 @@
-class_name FloatingNumber
+class_name FloatingText
 extends Node2D
 
+export(String) var text := ''
 export(int) var value := 0
 
 func _ready() -> void:
 	var label := $CenterContainer/Label as Label
-	if value > 0:
-		label.modulate = Color.lightgreen
-		label.text = '+%d' % value
+	if text.empty():
+		if value > 0:
+			label.modulate = Color.lightgreen
+			label.text = '+%d' % value
+		else:
+			label.modulate = Color.lightcoral
+			label.text = '%d' % value
 	else:
-		label.modulate = Color.lightcoral
-		label.text = '%d' % value
+		label.modulate = Color.lightblue
+		label.text = text
 
 func float_up(float_up_pixels := 100.0) -> void:
 	scale = Vector2.ONE * 2.0

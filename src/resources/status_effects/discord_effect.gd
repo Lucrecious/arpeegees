@@ -6,13 +6,16 @@ const RUNS_ALIVE := 1
 signal start_turn_effect_finished()
 signal text_triggered(translation_key)
 
+var bard_pin: ArpeegeePinNode
+var _notes_pairs := []
+
 onready var runs_alive := RUNS_ALIVE
 onready var _pin := NodE.get_ancestor(self, ArpeegeePinNode) as ArpeegeePinNode
 onready var _modified_stats := NodE.get_child(_pin, ModifiedPinStats) as ModifiedPinStats
 
-var _notes_pairs := []
-
 func _ready() -> void:
+	assert(bard_pin)
+	
 	var head_position := ActionUtils.get_head_position(_pin)
 	
 	for i in 3:
@@ -53,8 +56,8 @@ func run_start_turn_effect() -> void:
 		animation.tween_callback(VFX, 'physical_impactv', [_pin, head_position])
 		animation.tween_interval(0.3)
 	
-	ActionUtils.add_damage(animation, _pin,
-			ActionUtils.damage_with_factor(_modified_stats.attack, 0.5), PinAction.AttackType.Magic)
+	ActionUtils.add_magic_attack(animation, bard_pin, _pin,
+			ActionUtils.damage_with_factor(_modified_stats.attack, 0.5))
 	
 	runs_alive -= 1
 	

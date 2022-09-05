@@ -2,7 +2,7 @@ extends Node
 
 const ExplosionTemplateScene := preload('res://src/vfx/explosion.tscn')
 const ImpactWhiteScene := preload('res://src/vfx/impact_white.tscn')
-const FloatingNumberScene := preload('res://src/vfx/floating_number.tscn')
+const FloatingTextScene := preload('res://src/vfx/floating_text.tscn')
 
 func note_explosion(front: bool) -> CPUParticles2D:
 	var explosion := ExplosionTemplateScene.instance() as ExplosionParticles
@@ -54,17 +54,27 @@ func floating_number(pin: ArpeegeePinNode, value: int, parent: Node) -> void:
 	assert(pin)
 	assert(parent)
 	
-	var bounding_box := NodE.get_child(pin, REferenceRect) as REferenceRect
-	assert(bounding_box)
-	
-	var floating_number := FloatingNumberScene.instance() as FloatingNumber
+	var floating_number := FloatingTextScene.instance() as FloatingText
 	floating_number.value = value
 	
-	parent.add_child(floating_number)
+	_add_floating_text_character(pin, parent, floating_number, 2.0)
+
+func floating_text(pin: ArpeegeePinNode, text: String, parent: Node) -> void:
+	assert(pin)
+	assert(parent)
+	
+	var floating_text := FloatingTextScene.instance() as FloatingText
+	floating_text.text = text
+	
+	_add_floating_text_character(pin, parent, floating_text, 3.0)
+
+func _add_floating_text_character(pin: ArpeegeePinNode, parent: Node, floating_label: FloatingText, factor: float) -> void:
+	var bounding_box := NodE.get_child(pin,  REferenceRect) as REferenceRect
+	assert(bounding_box)
+	parent.add_child(floating_label)
 	
 	var rect := bounding_box.global_rect()
-	
-	var number_start_position := rect.get_center() + Vector2.UP * rect.size.y / 4.0
-	floating_number.global_position = number_start_position
-	var distance_to_top := -(rect.position.y - number_start_position.y)
-	floating_number.float_up(distance_to_top * 2.0)
+	var label_start_position := rect.get_center() + Vector2.UP * rect.size.y / 4.0
+	floating_label.global_position = label_start_position
+	var distance_to_top := -(rect.position.y - label_start_position.y)
+	floating_label.float_up(distance_to_top * factor)

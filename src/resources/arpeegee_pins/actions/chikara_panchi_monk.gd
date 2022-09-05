@@ -13,18 +13,30 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	var animation := create_tween()
 	animation.tween_interval(1.0)
 	
+	var status_effect := _create_chikara_panchi_status_effect(sprite_switcher, actioner, target)
+	animation.tween_callback(status_effects_list, 'add_instance', [status_effect])
+	
 	animation.tween_callback(sprite_switcher, 'swap_map', ['idle', 'powerup'])
 	animation.tween_callback(sounds, 'play', ['ChargeUp'])
 	
 	ActionUtils.add_text_trigger(animation, self, 'NARRATOR_CHIKARA_PANCHI_USE_START')
+	
+	animation.tween_interval(0.5)
+	
+	animation.tween_callback(object, callback)
+
+func _create_chikara_panchi_status_effect(sprite_switcher: SpriteSwitcher,
+		actioner: ArpeegeePinNode, target: ArpeegeePinNode) -> StatusEffect:
+	var status_effect := StatusEffect.new()
+	status_effect.stack_count = 1
+	status_effect.tag = StatusEffectTag.ChikaraPanchi
 	
 	var chikara_panchi_effect := ChikaraPanchiEffect.new()
 	chikara_panchi_effect.sprite_switcher = sprite_switcher
 	chikara_panchi_effect.actioner = actioner
 	chikara_panchi_effect.target = target
 	chikara_panchi_effect.hint_position = get_child(0)
-	animation.tween_callback(status_effects_list, 'add_as_children', [[chikara_panchi_effect]])
 	
-	animation.tween_interval(0.5)
+	status_effect.add_child(chikara_panchi_effect)
 	
-	animation.tween_callback(object, callback)
+	return status_effect

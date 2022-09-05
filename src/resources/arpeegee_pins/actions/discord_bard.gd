@@ -18,9 +18,7 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	var spawn_position_hint := get_node(spawn_position_hint_node).global_position as Vector2
 	var root_sprite := NodE.get_child(actioner, RootSprite) as RootSprite
 	
-	var status_effect := StatusEffect.new()
-	var discord_effect := DiscordStartTurnEffect.new()
-	status_effect.add_child(discord_effect)
+	var status_effect := _create_discord_status_effect(actioner)
 	
 	var animation := create_tween()
 	
@@ -38,7 +36,7 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 		skew_stepper.step()
 		add_projectile_and_vfx(animation, actioner, target, spawn_position_hint)
 	
-	ActionUtils.add_damage(animation, target, attack_damage, PinAction.AttackType.Normal)
+	ActionUtils.add_attack(animation, actioner, target, attack_damage)
 	animation.tween_callback(target_status_effects, 'add_instance', [status_effect])
 	
 	skew_stepper.finish()
@@ -59,3 +57,14 @@ func add_projectile_and_vfx(animation: SceneTreeTween, actioner: Node2D, target:
 	ActionUtils.add_hurt(animation, target)
 	
 	return hit_position
+
+func _create_discord_status_effect(actioner: ArpeegeePinNode) -> StatusEffect:
+	var status_effect := StatusEffect.new()
+	status_effect.tag = StatusEffectTag.Discord
+	status_effect.stack_count = 1
+	
+	var discord_effect := DiscordStartTurnEffect.new()
+	discord_effect.bard_pin = actioner
+	status_effect.add_child(discord_effect)
+	
+	return status_effect

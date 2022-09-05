@@ -29,12 +29,26 @@ static func get_top_right_corner_screen(pin: Node2D) -> Vector2:
 	var position := global_rect.position + Vector2.RIGHT * global_rect.size
 	return position
 
-static func add_damage(tween: SceneTreeTween, target: ArpeegeePinNode, amount: int, type: int) -> void:
-	var damage_receiver := NodE.get_child(target, DamageReceiver) as DamageReceiver
-	if not damage_receiver:
-		return
+static func add_attack(tween:SceneTreeTween, actioner: ArpeegeePinNode, target: ArpeegeePinNode,
+		amount: int) -> void:
+	_add_attack(tween, actioner, target, amount, PinAction.AttackType.Normal)
+
+static func add_magic_attack(tween: SceneTreeTween, actioner:ArpeegeePinNode, target: ArpeegeePinNode,
+		amount: int) -> void:
+	_add_attack(tween, actioner, target, amount, PinAction.AttackType.Magic)
+
+static func _add_attack(tween: SceneTreeTween, actioner: ArpeegeePinNode, target: ArpeegeePinNode,
+		amount: int, type: int) -> void:
 	
-	tween.tween_callback(damage_receiver, 'damage', [amount, type])
+	var target_evasion := (NodE.get_child(target, ModifiedPinStats) as ModifiedPinStats).evasion
+	var damage_receiver := NodE.get_child(target, DamageReceiver) as DamageReceiver
+	var is_miss := FairRandom.is_evading(target_evasion)
+	if is_miss:
+		tween.tween_callback(damage_receiver, 'evade')
+	else:
+		var modified_stats := NodE.get_child(actioner, ModifiedPinStats) as ModifiedPinStats
+		var is_critical := FairRandom.is_critical(modified_stats.critical)
+		tween.tween_callback(damage_receiver, 'damage', [amount, type, is_critical])
 
 static func add_hurt(tween: SceneTreeTween, target: ArpeegeePinNode) -> void:
 	var damage_receiver := NodE.get_child(target, DamageReceiver) as DamageReceiver
@@ -65,13 +79,6 @@ static func damage_with_factor(amount: int, factor: float) -> int:
 		return 0
 	
 	return int(max(floor(float(amount) * factor), 1))
-
-static func add_status_effect(tween: SceneTreeTween, target: ArpeegeePinNode, effect: String) -> void:
-	var status_effects := NodE.get_child(target, StatusEffectsList) as StatusEffectsList
-	if not status_effects:
-		return
-	
-	tween.tween_callback(status_effects, 'add', [effect])
 
 static func add_jump(
 		tween: SceneTreeTween, pin: ArpeegeePinNode,

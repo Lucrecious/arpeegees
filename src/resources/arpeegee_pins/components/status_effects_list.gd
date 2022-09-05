@@ -9,14 +9,23 @@ export(NodePath) var _aura_hint_position_path := NodePath()
 
 onready var _aura_hint_position := get_node_or_null(_aura_hint_position_path) as Node2D
 
-func add(effect_name: String) -> void:
-	var effect := StatusEffects.instance(effect_name)
-	add_instance(effect)
+func count_tags(tag: int) -> int:
+	var count := 0
+	for c in get_children():
+		if not c is StatusEffect:
+			continue
+		count += int(tag == c.tag)
+	return count
 
 func get_all() -> Array:
 	return NodE.get_children(self, StatusEffect)
 
 func add_instance(instance: StatusEffect) -> void:
+	var tag_count := count_tags(instance.tag)
+	if tag_count >= instance.stack_count:
+		instance.queue_free()
+		return
+	
 	add_child(instance)
 	if _aura_hint_position:
 		for c in instance.get_children():
@@ -27,13 +36,6 @@ func add_instance(instance: StatusEffect) -> void:
 	
 	emit_signal('effect_added', instance)
 	emit_signal('effect_added_or_removed')
-
-func add_as_children(children: Array) -> void:
-	var status_effect := StatusEffect.new()
-	for e in children:
-		status_effect.add_child(e)
-	
-	add_instance(status_effect)
 
 func has_effect_in_status(effect_type) -> Node:
 	var error := false

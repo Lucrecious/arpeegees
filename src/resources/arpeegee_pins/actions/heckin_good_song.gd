@@ -38,10 +38,8 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 	
 	for t in targets:
 		var status_effects := NodE.get_child(t, StatusEffectsList) as StatusEffectsList
-		var heckin_good_song_effect := HeckinGoodSongDancingEffect.new()
-		heckin_good_song_effect.power_up()
-		var auras := Aura.create_note_auras()
-		animation.tween_callback(status_effects, 'add_as_children', [[heckin_good_song_effect] + auras])
+		var status_effect := _create_heckin_good_song_status_effect()
+		animation.tween_callback(status_effects, 'add_instance', [status_effect])
 	
 	if buffed_from_four_chord_strum:
 		ActionUtils.add_text_trigger(animation, self, 'NARRATOR_HECKIN_GOOD_SONG_POWERED_UP_USE_1')
@@ -62,3 +60,16 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 func _add_explosion(animation: SceneTreeTween, explosion_parent: Node2D) -> void:
 	var explosion := VFX.note_explosion(false)
 	animation.tween_callback(explosion_parent, 'add_child', [explosion])
+
+func _create_heckin_good_song_status_effect() -> StatusEffect:
+	var status_effect := StatusEffect.new()
+	status_effect.stack_count = 1
+	status_effect.tag = StatusEffectTag.HeckinGoodSong
+	
+	var heckin_good_song_effect := HeckinGoodSongDancingEffect.new()
+	heckin_good_song_effect.power_up()
+	var auras := Aura.create_note_auras()
+	NodE.add_children(status_effect, auras)
+	status_effect.add_child(heckin_good_song_effect)
+	
+	return status_effect

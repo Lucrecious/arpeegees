@@ -23,6 +23,23 @@ func run(actioner: Node2D, object: Object, callback: String) -> void:
 	animation.tween_callback(shield_vfx, 'set',
 			['global_position', bounds.global_rect().get_center()])
 	
+	var status_effect := _create_armadillo_stance_status_effect()
+	
+	animation.tween_callback(status_effects_list, 'add_instance', [status_effect])
+	
+	ActionUtils.add_text_trigger(animation, self, 'NARRATOR_ARMADILLO_STANCE_USE')
+	
+	animation.tween_interval(0.5)
+	animation.tween_callback(object, callback)
+
+func _replace_idle_with_armadillo_stance(sprite_switcher: SpriteSwitcher) -> void:
+	sprite_switcher.swap_map('idle', 'armadillostance')
+
+func _create_armadillo_stance_status_effect() -> StatusEffect:
+	var status_effect := StatusEffect.new()
+	status_effect.stack_count = 1
+	status_effect.tag = StatusEffectTag.ArmadilloStance
+	
 	var defensive_stat := StatModifier.new()
 	defensive_stat.type = StatModifier.Type.Defence
 	defensive_stat.multiplier = 2.0
@@ -35,13 +52,6 @@ func run(actioner: Node2D, object: Object, callback: String) -> void:
 	attack_stat.type = StatModifier.Type.Attack
 	attack_stat.multiplier = 0.5
 	
-	animation.tween_callback(status_effects_list, 'add_as_children',
-			[[defensive_stat, magic_defensive_stat, attack_stat]])
+	NodE.add_children(status_effect, [defensive_stat, magic_defensive_stat, attack_stat])
 	
-	ActionUtils.add_text_trigger(animation, self, 'NARRATOR_ARMADILLO_STANCE_USE')
-	
-	animation.tween_interval(0.5)
-	animation.tween_callback(object, callback)
-
-func _replace_idle_with_armadillo_stance(sprite_switcher: SpriteSwitcher) -> void:
-	sprite_switcher.swap_map('idle', 'armadillostance')
+	return status_effect

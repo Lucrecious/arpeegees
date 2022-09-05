@@ -1,6 +1,10 @@
 class_name StatusEffect
 extends Node2D
 
+var stack_count := 1
+
+var tag := -1
+
 func _ready() -> void:
 	_start_emissions()
 

@@ -1,6 +1,9 @@
 class_name DamageReceiver
 extends Node2D
 
+signal critical_hit
+signal evaded
+
 export(String) var sprite_name := ''
 
 onready var _health := NodE.get_sibling(self, Health) as Health
@@ -25,7 +28,7 @@ func disable() -> void:
 	
 	_enabled = false
 
-func damage(amount: int, type: int) -> void:
+func damage(amount: int, type: int, is_critical: bool) -> void:
 	if not _enabled:
 		return
 	
@@ -40,6 +43,11 @@ func damage(amount: int, type: int) -> void:
 	actual_damage = max(actual_damage, 1)
 	_health.damage(actual_damage)
 	hurt()
+	if is_critical:
+		emit_signal('critical_hit')
+
+func evade() -> void:
+	emit_signal('evaded')
 
 var _current_hurt_tween: SceneTreeTween
 func hurt() -> void:
