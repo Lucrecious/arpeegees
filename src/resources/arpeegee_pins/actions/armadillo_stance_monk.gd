@@ -2,14 +2,23 @@ extends Node2D
 
 signal text_triggered(translation_key)
 
+var _blocked := false
+
 func pin_action() -> PinAction:
 	return load('res://src/resources/actions/armadillo_stance_monk.tres') as PinAction
 
+func is_blocked() -> bool:
+	return _blocked
+
 func run(actioner: Node2D, object: Object, callback: String) -> void:
+	assert(not _blocked)
+	
 	var status_effects_list := NodE.get_child(actioner, StatusEffectsList) as StatusEffectsList
 	var sprite_switcher := NodE.get_child(actioner, SpriteSwitcher) as SpriteSwitcher
 	var bounds := NodE.get_child(actioner, REferenceRect) as REferenceRect
 	var sounds := NodE.get_child_by_name(actioner, 'Sounds')
+	
+	_blocked = true
 	
 	var animation := create_tween()
 	

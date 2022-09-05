@@ -43,6 +43,9 @@ func get_pin_action_nodes() -> Array:
 		if not child.has_method('pin_action'):
 			continue
 		
+		if child.has_method('is_blocked') and child.is_blocked():
+			continue
+		
 		pin_action_nodes.push_back(child)
 	
 	return pin_action_nodes
