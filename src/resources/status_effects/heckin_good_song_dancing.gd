@@ -66,6 +66,19 @@ func run_start_turn_effect() -> void:
 	
 	_actions.set_moveless(true)
 	emit_signal('text_triggered', 'NARRATOR_HECKIN_GOOD_SONG_MONSTER_DISTRACTED')
+	
+	runs_alive -= 1
 
 func run_end_turn_effect() -> void:
 	_actions.set_moveless(false)
+
+	if runs_alive > 0:
+		return
+	
+	StatusEffect.queue_free_leave_particles_until_dead(get_parent())
+	_reset_sprite()
+
+func _reset_sprite() -> void:
+	var shader := _root_sprite.material as ShaderMaterial
+	shader.set_shader_param('top_skew', 0.0)
+	shader.set_shader_param('squash', 1.0)
