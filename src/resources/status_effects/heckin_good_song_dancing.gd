@@ -61,13 +61,14 @@ func run_start_turn_effect() -> void:
 	tween.tween_interval(0.2)
 	tween.tween_callback(self, 'emit_signal', ['start_turn_effect_finished'])
 	
+	runs_alive -= 1
+	
 	if randf() > skip_turn_percent:
 		return
 	
 	_actions.set_moveless(true)
 	emit_signal('text_triggered', 'NARRATOR_HECKIN_GOOD_SONG_MONSTER_DISTRACTED')
 	
-	runs_alive -= 1
 
 func run_end_turn_effect() -> void:
 	_actions.set_moveless(false)

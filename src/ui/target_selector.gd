@@ -46,9 +46,7 @@ func start(caster: ArpeegeePinNode, available_targets: Array) -> void:
 	
 	visible = true
 	
-	get_viewport().warp_mouse(get_viewport_rect().get_center())
-	
-	place_head(get_viewport_rect().get_center())
+	place_head(get_global_mouse_position())
 
 func place_head(position: Vector2) -> void:
 	_line.set_point_position(1, position)
