@@ -9,7 +9,7 @@
 [ext_resource path="res://src/resources/arpeegee_pins/actions/actions.gd" type="Script" id=7]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/attack.gd" type="Script" id=8]
 [ext_resource path="res://src/resources/arpeegee_pins/bard_no_mandolin.tres" type="Resource" id=9]
-[ext_resource path="res://src/resources/actions/bard_mandolin_swing.tres" type="Resource" id=10]
+[ext_resource path="res://src/resources/actions/generic_attack.tres" type="Resource" id=10]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 3 )

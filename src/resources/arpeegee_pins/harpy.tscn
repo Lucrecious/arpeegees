@@ -38,7 +38,7 @@ sprite_name = "hitanddeath"
 current = 20
 
 [node name="PinStats" parent="." index="7"]
-attack = 100
+attack = 2
 magic_attack = 5
 defence = 3
 magic_defence = 4
