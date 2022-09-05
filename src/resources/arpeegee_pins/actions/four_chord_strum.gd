@@ -19,6 +19,9 @@ func run(actioner: Node2D, object: Object, callback: String) -> void:
 	heckin_good_song.buffed_from_four_chord_strum = true
 	
 	var animation := create_tween()
+	
+	animation.tween_callback(Music, 'pause_fade_out')
+	
 	animation.tween_interval(0.5)
 	
 	animation.tween_callback(sprite_switcher, 'change', ['heckingoodsong'])
@@ -39,6 +42,8 @@ func run(actioner: Node2D, object: Object, callback: String) -> void:
 	skew_stepper.finish()
 	
 	ActionUtils.add_text_trigger(animation, self, 'NARRATOR_FOUR_CHORD_STRUM_USE_1')
+	
+	animation.tween_callback(Music, 'unpause_fade_in')
 	
 	animation.tween_callback(sprite_switcher, 'change', ['idle'])
 	

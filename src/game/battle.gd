@@ -91,6 +91,8 @@ func _on_pins_dropped(wait_sec: float) -> void:
 	_wait_for_drop_to_finish(wait_sec)
 
 func _wait_for_drop_to_finish(wait_sec: float) -> void:
+	Music.play_theme()
+	
 	var tween_to_intro_narration := get_tree().create_tween()
 	tween_to_intro_narration.tween_interval(wait_sec)
 	tween_to_intro_narration.tween_callback(self, '_do_intro_narration')

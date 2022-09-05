@@ -22,6 +22,8 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 	
 	var animation := create_tween()
 	
+	animation.tween_callback(Music, 'pause_fade_out')
+	
 	animation.tween_interval(0.5)
 	var skew_stepper := JuiceSteppers.SkewBackAndForth.new(animation, root_sprite.material)
 	skew_stepper.offset = 0.3
@@ -53,6 +55,9 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 	
 	skew_stepper.finish()
 	animation.tween_interval(0.5)
+	
+	animation.tween_callback(Music, 'unpause_fade_in')
+	
 	animation.tween_callback(sprite_switcher, 'change', ['idle'])
 	
 	animation.tween_callback(object, callback)

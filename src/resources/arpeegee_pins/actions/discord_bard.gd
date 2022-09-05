@@ -21,6 +21,8 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	
 	var animation := create_tween()
 	
+	animation.tween_callback(Music, 'pause_fade_out')
+	
 	animation.tween_interval(0.5)
 	animation.tween_callback(sprite_switcher, 'change', ['discord'])
 	
@@ -42,9 +44,12 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	skew_stepper.finish()
 	
 	ActionUtils.add_text_trigger(animation, self, 'NARRATOR_DISCORD_USE_1')
-	animation.tween_interval(1.0)
+	
+	animation.tween_callback(Music, 'unpause_fade_in')
+	
+	animation.tween_interval(.5)
 	animation.tween_callback(sprite_switcher, 'change', ['idle'])
-	animation.tween_interval(1.0)
+	animation.tween_interval(.5)
 	
 	animation.tween_callback(object, callback)
 
