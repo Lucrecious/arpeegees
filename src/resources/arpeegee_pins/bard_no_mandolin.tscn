@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/sprites/bard/bard_idle_no_mandolin.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://src/resources/arpeegee_pins/actions/actions.gd" type="Script" id=7]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/attack.gd" type="Script" id=8]
 [ext_resource path="res://src/resources/arpeegee_pins/bard_no_mandolin.tres" type="Resource" id=9]
+[ext_resource path="res://src/resources/actions/bard_mandolin_swing.tres" type="Resource" id=10]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 3 )
@@ -16,15 +17,17 @@ shader_param/line_color = Color( 1, 1, 1, 1 )
 shader_param/line_thickness = 0.0
 shader_param/fill_color = Color( 1, 1, 1, 1 )
 shader_param/color_mix = 0.0
+shader_param/top_skew = 0.0
+shader_param/squash = 1.0
 
 [node name="BardNoMandolin" instance=ExtResource( 1 )]
 nice_name = "Bard (Mandolin-less)"
 _resource_set = ExtResource( 9 )
 
-[node name="Health" parent="." index="5"]
+[node name="Health" parent="." index="6"]
 current = 15
 
-[node name="PinStats" parent="." index="6"]
+[node name="PinStats" parent="." index="7"]
 attack = 2
 magic_attack = 0
 defence = 2
@@ -62,6 +65,7 @@ script = ExtResource( 7 )
 [node name="Punch" type="Node2D" parent="PinActions" index="0"]
 script = ExtResource( 8 )
 attack_sprite_name = ""
+pin_action = ExtResource( 10 )
 
 [node name="ImpactHint" type="Position2D" parent="PinActions/Punch" index="0"]
 position = Vector2( -44, -55 )
