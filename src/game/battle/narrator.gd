@@ -248,7 +248,7 @@ func _process(delta: float) -> void:
 		return
 	
 	if Engine.get_idle_frames() % 5 == 0:
-		Sounds.play('SpeakingBlip')
+		Sounds.play('SpeakingBlip1')
 		if _narrator_head.texture == NARRATOR_MOUTH_OPEN_TEXTURE:
 			_narrator_head.texture = NARRATOR_MOUTH_CLOSED_TEXTURE
 		else:

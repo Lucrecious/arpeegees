@@ -8,6 +8,7 @@ signal text_triggered(translation_key)
 
 var bard_pin: ArpeegeePinNode
 var _notes_pairs := []
+var _bard_sounds: SoundsComponent
 
 onready var runs_alive := RUNS_ALIVE
 onready var _pin := NodE.get_ancestor(self, ArpeegeePinNode) as ArpeegeePinNode
@@ -15,6 +16,7 @@ onready var _modified_stats := NodE.get_child(_pin, ModifiedPinStats) as Modifie
 
 func _ready() -> void:
 	assert(bard_pin)
+	_bard_sounds = NodE.get_child(bard_pin, SoundsComponent) as SoundsComponent
 	
 	var head_position := ActionUtils.get_head_position(_pin)
 	
@@ -47,9 +49,13 @@ func run_start_turn_effect() -> void:
 	
 	ActionUtils.add_text_trigger(animation, self, 'NARRATOR_DISCORD_RECOIL_EFFECT')
 	
-	for notes in _notes_pairs:
+	assert(_notes_pairs.size() == 3, 'I only have sounds for 3')
+	for i in _notes_pairs.size():
+		var notes = _notes_pairs[i]
 		animation.tween_property(notes, 'global_position', head_position, 0.25)\
 				.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_EXPO)
+		
+		animation.tween_callback(_bard_sounds, 'play', ['DiscordFollowUpHit%d' % (i + 1)])
 		
 		animation.tween_callback(notes, 'queue_free')
 		ActionUtils.add_hurt(animation, _pin)

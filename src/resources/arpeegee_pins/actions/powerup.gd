@@ -13,7 +13,7 @@ func run(actioner: Node2D, object: Object, callback: String) -> void:
 	var tween := get_tree().create_tween()
 	tween.tween_callback(sprite_switcher, 'change', ['powerup'])
 	
-	tween.tween_callback(sounds, 'play', ['ChargeUp'])
+	tween.tween_callback(sounds, 'play', ['FocusKiCharge'])
 	
 	tween.tween_callback(status_effects_list, 'add_instance', [status_effect])
 	tween.tween_interval(1.3)

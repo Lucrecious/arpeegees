@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/chikara_panchi_charge_monk.mp3-0fde11f88927a544cd8fcdf0dc1a0ef3.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/chikara_panchi_charge_monk.mp3"
+dest_files=[ "res://.import/chikara_panchi_charge_monk.mp3-0fde11f88927a544cd8fcdf0dc1a0ef3.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

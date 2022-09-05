@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://src/resources/arpeegee_pins/components/sprite_switcher.gd" type="Script" id=1]
 [ext_resource path="res://src/game/battle/star_particles.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://src/resources/arpeegee_pins/components/health_bar.tscn" type="PackedScene" id=9]
 [ext_resource path="res://lut/nodes/reference_rect.gd" type="Script" id=10]
 [ext_resource path="res://src/resources/arpeegee_pins/components/modified_stats.gd" type="Script" id=11]
+[ext_resource path="res://src/resources/sounds.gd" type="Script" id=12]
 
 [node name="Pin" type="Node2D"]
 script = ExtResource( 8 )
@@ -53,3 +54,6 @@ _extents = Vector2( 50, 80 )
 [node name="HealthBar" parent="." instance=ExtResource( 9 )]
 position = Vector2( -50, -215 )
 scale = Vector2( 0.2, 0.2 )
+
+[node name="Sounds" type="Node" parent="."]
+script = ExtResource( 12 )

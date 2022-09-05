@@ -102,7 +102,7 @@ static func add_walk(tween: SceneTreeTween, pin: ArpeegeePinNode, start_position
 		
 		tween.tween_property(pin, 'position', mid_location, step_sec / 2.0)
 		tween.tween_property(pin, 'position', end_location, step_sec / 2.0)
-		tween.tween_callback(Sounds, 'play_new', ['Footstep'])
+		tween.tween_callback(Sounds, 'play_new_random', ['FootstepGrass', 3])
 	
 	return target_position
 

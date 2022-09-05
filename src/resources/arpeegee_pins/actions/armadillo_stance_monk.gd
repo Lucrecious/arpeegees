@@ -16,7 +16,7 @@ func run(actioner: Node2D, object: Object, callback: String) -> void:
 	animation.tween_interval(1.0)
 	
 	animation.tween_callback(self, '_replace_idle_with_armadillo_stance', [sprite_switcher])
-	animation.tween_callback(sounds, 'play', ['ArmorUp'])
+	animation.tween_callback(sounds, 'play', ['ArmadilloStance'])
 	
 	var shield_vfx := VFX.shield_vfx()
 	animation.tween_callback(get_parent(), 'add_child', [shield_vfx])

@@ -30,16 +30,19 @@ func run_start_turn_effect() -> void:
 	var side := int(sign(relative.x))
 	
 	var tween := get_tree().create_tween()
-	tween.tween_callback(sounds, 'play', ['Dash'])
+	tween.tween_callback(Sounds, 'play', ['Dash1'])
 	
 	position += relative
 	tween.tween_property(actioner, 'global_position', position, 0.3)\
 			.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
 	
 	tween.tween_interval(.3)
+	
+	tween.tween_callback(sounds, 'play', ['ChikaraPanchiWindUp'])
 	position = ActionUtils.add_wind_up(tween, actioner, position, side)
+	
 	position = ActionUtils.add_stab(tween, actioner, target_position)
-	tween.tween_callback(sounds, 'play', ['Impact'])
+	tween.tween_callback(sounds, 'play', ['ChikaraPanchiHit'])
 
 	ActionUtils.add_text_trigger(tween, self, 'NARRATOR_CHIKARA_PANCHI_USE_ATTACK')
 	

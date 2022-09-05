@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/narrator_blip.mp3-a3ea1dd047e2ddd76d185d4e372d2457.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/narrator_blip.mp3"
+dest_files=[ "res://.import/narrator_blip.mp3-a3ea1dd047e2ddd76d185d4e372d2457.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

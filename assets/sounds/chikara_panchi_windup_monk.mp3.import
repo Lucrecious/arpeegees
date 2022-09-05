@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/chikara_panchi_windup_monk.mp3-97702e57c04629fc0125550751dca975.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/chikara_panchi_windup_monk.mp3"
+dest_files=[ "res://.import/chikara_panchi_windup_monk.mp3-97702e57c04629fc0125550751dca975.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/heckin_good_song_bard.mp3-c9c9b9ed63c6cc373b24ace91a30fb49.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/heckin_good_song_bard.mp3"
+dest_files=[ "res://.import/heckin_good_song_bard.mp3-c9c9b9ed63c6cc373b24ace91a30fb49.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

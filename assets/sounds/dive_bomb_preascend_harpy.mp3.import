@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/dive_bomb_preascend_harpy.mp3-f2c6bd4a3aebc8d4f12f5b8d9830c8bf.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/dive_bomb_preascend_harpy.mp3"
+dest_files=[ "res://.import/dive_bomb_preascend_harpy.mp3-f2c6bd4a3aebc8d4f12f5b8d9830c8bf.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

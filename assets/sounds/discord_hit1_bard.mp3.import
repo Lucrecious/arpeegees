@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/discord_hit1_bard.mp3-89c31d9a74a8433a4eaa37a7dd77e03e.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/discord_hit1_bard.mp3"
+dest_files=[ "res://.import/discord_hit1_bard.mp3-89c31d9a74a8433a4eaa37a7dd77e03e.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

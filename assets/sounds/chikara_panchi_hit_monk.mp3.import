@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/chikara_panchi_hit_monk.mp3-037a1c5bed85eb015adc0cb2b55493fa.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/chikara_panchi_hit_monk.mp3"
+dest_files=[ "res://.import/chikara_panchi_hit_monk.mp3-037a1c5bed85eb015adc0cb2b55493fa.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

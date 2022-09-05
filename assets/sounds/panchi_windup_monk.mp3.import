@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/panchi_windup_monk.mp3-d271ee68ae60d5762bc38ed882a32870.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/panchi_windup_monk.mp3"
+dest_files=[ "res://.import/panchi_windup_monk.mp3-d271ee68ae60d5762bc38ed882a32870.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

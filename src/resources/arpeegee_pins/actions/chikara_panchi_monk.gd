@@ -17,7 +17,7 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	animation.tween_callback(status_effects_list, 'add_instance', [status_effect])
 	
 	animation.tween_callback(sprite_switcher, 'swap_map', ['idle', 'powerup'])
-	animation.tween_callback(sounds, 'play', ['ChargeUp'])
+	animation.tween_callback(sounds, 'play', ['ChikaraPanchiCharge'])
 	
 	ActionUtils.add_text_trigger(animation, self, 'NARRATOR_CHIKARA_PANCHI_USE_START')
 	

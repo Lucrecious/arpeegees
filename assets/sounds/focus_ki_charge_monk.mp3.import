@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/focus_ki_charge_monk.mp3-46434952b6ebe03a112c89d38e0b0210.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/focus_ki_charge_monk.mp3"
+dest_files=[ "res://.import/focus_ki_charge_monk.mp3-46434952b6ebe03a112c89d38e0b0210.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

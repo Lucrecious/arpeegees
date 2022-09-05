@@ -9,6 +9,8 @@ func run(actioner: Node2D, object: Object, callback: String) -> void:
 	var actions := NodE.get_child(actioner, PinActions) as PinActions
 	var heckin_good_song := NodE.get_child(actions, HeckinGoodSongPinAction) as HeckinGoodSongPinAction
 	var root_sprite := Components.root_sprite(actioner)
+	var sounds := NodE.get_child(actioner, SoundsComponent) as SoundsComponent
+	var sprite_switcher := NodE.get_child(actioner, SpriteSwitcher) as SpriteSwitcher
 
 	var explosion_parent := NodE.get_child_by_group(actioner, 'aura_hint_position') as Node2D
 	if not explosion_parent:
@@ -18,6 +20,10 @@ func run(actioner: Node2D, object: Object, callback: String) -> void:
 	
 	var animation := create_tween()
 	animation.tween_interval(0.5)
+	
+	animation.tween_callback(sprite_switcher, 'change', ['heckingoodsong'])
+	
+	animation.tween_callback(sounds, 'play', ['ChordStrum'])
 	
 	var skew_stepper := JuiceSteppers.SkewBackAndForth.new(animation, root_sprite.material)
 	skew_stepper.offset = 0.1
@@ -33,6 +39,8 @@ func run(actioner: Node2D, object: Object, callback: String) -> void:
 	skew_stepper.finish()
 	
 	ActionUtils.add_text_trigger(animation, self, 'NARRATOR_FOUR_CHORD_STRUM_USE_1')
+	
+	animation.tween_callback(sprite_switcher, 'change', ['idle'])
 	
 	animation.tween_interval(0.5)
 	animation.tween_callback(object, callback)

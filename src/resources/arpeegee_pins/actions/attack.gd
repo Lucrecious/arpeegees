@@ -7,9 +7,10 @@ export(String) var attack_sprite_name := 'attack'
 export(Resource) var pin_action: Resource = null
 export(bool) var walk := true
 
+export(String) var hit_sfx_name := ''
+export(String) var windup_sfx_name := ''
+
 onready var _impact_hint_node := NodE.get_child_by_name(self, impact_hint_name) as Node2D
-onready var _hit_sfx := get_node_or_null('HitSFX') as AudioStreamPlayer
-onready var _dash_sfx := get_node_or_null('DashSFX') as AudioStreamPlayer
 
 var _times_used := 0
 
@@ -21,12 +22,13 @@ func times_used() -> int:
 	return _times_used
 
 func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> void:
+	var sounds := NodE.get_child(actioner, SoundsComponent) as SoundsComponent
+	
 	_times_used += 1
 	
 	var position := actioner.global_position
 	var relative := ActionUtils.get_closest_adjecent_position(actioner, target)
 	var target_position := position + relative
-
 	
 	var side := int(sign(relative.x))
 	
@@ -34,20 +36,25 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	if walk:
 		position = ActionUtils.add_walk(tween, actioner, position, position + relative, 15.0, 5)
 	else:
-		if _dash_sfx:
-			tween.tween_callback(_dash_sfx, 'play')
+		tween.tween_callback(Sounds, 'play', ['Dash1'])
 		position += relative
 		tween.tween_property(actioner, 'global_position', position, 0.3)\
 				.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
 	
 	tween.tween_interval(.3)
+	
+	if not windup_sfx_name.empty():
+		tween.tween_callback(sounds, 'play', [windup_sfx_name])
+	else:
+		tween.tween_callback(Sounds, 'play', ['GenericWindUp1'])
 	position = ActionUtils.add_wind_up(tween, actioner, position, side)
+	
 	position = ActionUtils.add_stab(tween, actioner, target_position)
 	
-	if _hit_sfx:
-		tween.tween_callback(_hit_sfx, 'play')
+	if not hit_sfx_name.empty():
+		tween.tween_callback(sounds, 'play', [hit_sfx_name])
 	else:
-		tween.tween_callback(Sounds, 'play', ['PhysicalHit'])
+		tween.tween_callback(Sounds, 'play', ['GenericHit1'])
 	
 	var is_mandolin := false
 	match pin_action().resource_path.get_file():
@@ -68,9 +75,6 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	
 	if _impact_hint_node:
 		tween.tween_callback(VFX, 'physical_impact', [actioner, _impact_hint_node])
-		if is_mandolin:
-			var chord_hit := NodE.get_child_by_name(actioner, 'MandolinChordHit') as AudioStreamPlayer
-			#tween.tween_callback(chord_hit, 'play')
 	
 	var modified_stats := NodE.get_child(actioner, ModifiedPinStats) as ModifiedPinStats
 	if modified_stats:

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/armadillo_stance_monk.mp3-36a38600695434343a8593f59de3cce5.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/armadillo_stance_monk.mp3"
+dest_files=[ "res://.import/armadillo_stance_monk.mp3-36a38600695434343a8593f59de3cce5.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

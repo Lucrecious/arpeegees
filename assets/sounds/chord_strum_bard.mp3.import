@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/chord_strum_bard.mp3-0452320c9acdf4a2aa002d178b29b842.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/chord_strum_bard.mp3"
+dest_files=[ "res://.import/chord_strum_bard.mp3-0452320c9acdf4a2aa002d178b29b842.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

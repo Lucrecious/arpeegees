@@ -1,33 +1,34 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/resources/sounds.gd" type="Script" id=1]
-[ext_resource path="res://assets/sounds/actions/GUMDROP VOICE.wav" type="AudioStream" id=2]
-[ext_resource path="res://assets/sounds/hit_woody.wav" type="AudioStream" id=3]
-[ext_resource path="res://assets/sounds/woosh.wav" type="AudioStream" id=4]
-[ext_resource path="res://assets/sounds/footstep.wav" type="AudioStream" id=5]
-[ext_resource path="res://assets/sounds/woosh2.mp3" type="AudioStream" id=6]
-[ext_resource path="res://assets/sounds/woosh3.mp3" type="AudioStream" id=7]
-
-[sub_resource type="AudioStreamRandomPitch" id=1]
-audio_stream = ExtResource( 5 )
+[ext_resource path="res://assets/sounds/step_grass3.mp3" type="AudioStream" id=2]
+[ext_resource path="res://assets/sounds/narrator_blip.mp3" type="AudioStream" id=3]
+[ext_resource path="res://assets/sounds/step_grass1.mp3" type="AudioStream" id=4]
+[ext_resource path="res://assets/sounds/step_grass2.mp3" type="AudioStream" id=5]
+[ext_resource path="res://assets/sounds/dash1.mp3" type="AudioStream" id=6]
+[ext_resource path="res://assets/sounds/panchi_hit_monk.mp3" type="AudioStream" id=7]
+[ext_resource path="res://assets/sounds/panchi_windup_monk.mp3" type="AudioStream" id=8]
 
 [node name="Sounds" type="Node"]
 script = ExtResource( 1 )
 
-[node name="SpeakingBlip" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 2 )
-
-[node name="PhysicalHit" type="AudioStreamPlayer" parent="."]
+[node name="SpeakingBlip1" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
 
-[node name="Woosh" type="AudioStreamPlayer" parent="."]
+[node name="FootstepGrass1" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
 
-[node name="Woosh2" type="AudioStreamPlayer" parent="."]
+[node name="FootstepGrass2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+
+[node name="FootstepGrass3" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+
+[node name="Dash1" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
 
-[node name="Woosh3" type="AudioStreamPlayer" parent="."]
+[node name="GenericHit1" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
 
-[node name="Footstep" type="AudioStreamPlayer" parent="."]
-stream = SubResource( 1 )
+[node name="GenericWindUp1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )

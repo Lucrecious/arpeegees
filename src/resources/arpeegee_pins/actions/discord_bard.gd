@@ -5,8 +5,6 @@ signal text_triggered(translation_key)
 export(String) var spawn_position_hint_node := 'SpawnPositionHint'
 export(PackedScene) var projectile_scene: PackedScene = null
 
-onready var _discord_sound := $Discord as AudioStreamPlayer
-
 func pin_action() -> PinAction:
 	return preload('res://src/resources/actions/discord_bard.tres')
 
@@ -17,6 +15,7 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	var attack_damage := ActionUtils.damage_with_factor(modified_stats.attack, 0.5)
 	var spawn_position_hint := get_node(spawn_position_hint_node).global_position as Vector2
 	var root_sprite := NodE.get_child(actioner, RootSprite) as RootSprite
+	var sounds := NodE.get_child(actioner, SoundsComponent) as SoundsComponent
 	
 	var status_effect := _create_discord_status_effect(actioner)
 	
@@ -30,11 +29,12 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	skew_stepper.offset_to_home_sec = 0.25
 	skew_stepper.between_offsets_sec = 0.5
 	
-	animation.tween_callback(_discord_sound, 'play')
+	animation.tween_callback(sounds, 'play_random', ['DiscordSong', 2])
 	
 	for i in 3:
 		skew_stepper.step()
 		add_projectile_and_vfx(animation, actioner, target, spawn_position_hint)
+		animation.tween_callback(sounds, 'play', ['DiscordHit%d' % (i + 1)])
 	
 	ActionUtils.add_attack(animation, actioner, target, attack_damage)
 	animation.tween_callback(target_status_effects, 'add_instance', [status_effect])

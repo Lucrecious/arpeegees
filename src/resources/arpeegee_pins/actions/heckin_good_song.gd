@@ -6,8 +6,6 @@ signal text_triggered(translation_key)
 export(String) var spawn_position_hint_node := 'SpawnPositionHint'
 export(PackedScene) var projectile_scene: PackedScene = null
 
-onready var _mandolin_nice_chord := $MandolinNiceChord as AudioStreamPlayer
-
 var buffed_from_four_chord_strum := false
 
 func pin_action() -> PinAction:
@@ -17,6 +15,8 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 	var root_sprite := Components.root_sprite(actioner)
 	var sprite_switcher := NodE.get_child(actioner, SpriteSwitcher) as SpriteSwitcher
 	var explosion_parent := NodE.get_child_by_group(actioner, 'aura_hint_position') as Node2D
+	var sounds := NodE.get_child(actioner, SoundsComponent) as SoundsComponent
+	
 	if not explosion_parent:
 		explosion_parent = actioner
 	
@@ -29,7 +29,7 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 	skew_stepper.offset_to_home_sec = 0.5
 	
 	animation.tween_callback(sprite_switcher, 'change', ['heckingoodsong'])
-	animation.tween_callback(_mandolin_nice_chord, 'play')
+	animation.tween_callback(sounds, 'play', ['HeckinGoodSong'])
 	
 	for i in 2:
 		skew_stepper.step()
