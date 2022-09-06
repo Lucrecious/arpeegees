@@ -15,12 +15,6 @@ __meta__ = {
 "_gizmo_extents_": 100.0
 }
 
-[node name="Hint2" type="Position2D" parent="Positions_Left"]
-position = Vector2( 522, 566 )
-__meta__ = {
-"_gizmo_extents_": 100.0
-}
-
 [node name="Positions_Right" type="Node2D" parent="."]
 position = Vector2( -640, 0 )
 

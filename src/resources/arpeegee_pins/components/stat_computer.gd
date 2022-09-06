@@ -44,11 +44,13 @@ static func get_modified_stats(pin: ArpeegeePinNode) -> Dictionary:
 		StatModifier.Type.Critical : 0,
 	}
 	
+	# does not compound, only uses base to calculate increase
 	for m in modifiers:
-		var value := modified_stats.get(m.type, 0) as int
-		value = m.apply(value)
-		modified_stats[m.type] = value
-		relative_stats[m.type] = value - unmodified_stats[m.type]
+		var base_value := unmodified_stats.get(m.type, 0) as int
+		var new_value := m.apply(base_value) as int
+		var delta := new_value - base_value
+		modified_stats[m.type] = modified_stats[m.type] + delta
+		relative_stats[m.type] = modified_stats[m.type] - unmodified_stats[m.type]
 	
 	var stats_dict := {
 		modified = modified_stats,

@@ -42,17 +42,30 @@ func pick_random(amount: int) -> Dictionary:
 	var results := {
 		players = [player],
 		npcs = [npc],
-		other = []
+		item_powerup = null,
 	}
 	
-	for i in amount - 2:
+	# 20% chance to get an item
+	var is_get_item := randf() < 1.0
+	print_debug('set to 100% item get for testing')
+	
+	if is_get_item:
+		var item := load('res://src/resources/items/item.tscn').instance() as PinItemPowerUp
+		var random_index := randi() % PinItemPowerUp.Type.size()
+		var random_type := PinItemPowerUp.Type.values()[random_index] as int
+		item.as_type(random_type)
+		results.item_powerup = item
+	
+	# only one item, and the rest are dudes
+	amount -= (2 + int(is_get_item))
+	for i in amount:
 		var pin := _pins[i] as ArpeegeePin
 		if pin.type == ArpeegeePin.Type.Player:
 			results.players.push_back(pin)
 		elif pin.type == ArpeegeePin.Type.NPC:
 			results.npcs.push_back(pin)
 		else:
-			results.other.push_back(pin)
+			assert(false)
 	
 	return results
 

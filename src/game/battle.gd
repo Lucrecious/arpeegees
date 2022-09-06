@@ -4,6 +4,7 @@ extends Control
 signal pins_dropped()
 
 const LayoutTwoOne := preload('res://src/game/battle/layout_two_one.tscn')
+const LayoutOneOne := preload('res://src/game/battle/layout_one_one.tscn')
 
 export(bool) var auto_start := false
 export(Array, Resource) var auto_start_player_pins := []
@@ -24,7 +25,7 @@ func _ready() -> void:
 		var pins := {
 			players = auto_start_player_pins,
 			npcs = auto_start_npc_pins,
-			other = [],
+			item_powerup = null,
 		}
 		start(pins)
 
@@ -37,11 +38,17 @@ func start(pins: Dictionary) -> void:
 	_started = true
 	
 	_configure_viewport(_battle_viewport)
+	var layout_scene: PackedScene
 	if _is_two_one_layout(pins.npcs.size(), pins.players.size()):
-		_layout = _create_battle_layout(LayoutTwoOne, pins)
-		_drop_character_pins(pins)
+		layout_scene = LayoutTwoOne
+	elif _is_one_one_layout(pins.npcs.size(), pins.players.size()):
+		layout_scene = LayoutOneOne
 	else:
 		assert(false, 'scenario not defined yet')
+		return
+	
+	_layout = _create_battle_layout(layout_scene, pins)
+	_drop_character_pins(pins)
 
 func _configure_viewport(viewport: Viewport) -> void:
 	var max_superscaling := 2560
@@ -58,8 +65,16 @@ func _configure_viewport(viewport: Viewport) -> void:
 func _is_two_one_layout(amount1: int, amount2: int) -> bool:
 	return (amount1 == 1 and amount2 == 2) or (amount1 == 2 and amount2 == 1)
 
+func _is_one_one_layout(amount1: int, amount2: int) -> bool:
+	return amount1 == 1 and amount2 == 1
+
 func _create_battle_layout(layout_scene: PackedScene, pins: Dictionary) -> BattleLayout:
-	var mirrored := (pins.npcs.size() == 1) as bool
+	var mirrored := false
+	if pins.npcs.size() < pins.players.size():
+		mirrored = true
+	elif pins.npcs.size() == pins.players.size():
+		mirrored = ((randi() % 2) == 0)
+	
 	var layout := layout_scene.instance() as BattleLayout
 	assert(layout, 'must be battle layout')
 	_battle_layer.add_child(layout)
@@ -84,8 +99,12 @@ func _drop_character_pins(pins: Dictionary) -> void:
 	var max_wait_sec := .5
 	var bounce_sec := 1.5
 	
+	var item_powerup := pins.item_powerup as PinItemPowerUp
+	var item_position := _layout.get_item_position()
+	
 	connect('pins_dropped', self, '_on_pins_dropped', [max_wait_sec + bounce_sec])
-	_load_and_drop_pins(players + npcs, right_positions + left_positions, max_wait_sec, bounce_sec)
+	_load_and_drop_pins(players + npcs, right_positions + left_positions, item_powerup, item_position,
+			max_wait_sec, bounce_sec)
 
 func _on_pins_dropped(wait_sec: float) -> void:
 	_wait_for_drop_to_finish(wait_sec)
@@ -112,6 +131,11 @@ func _balance_battle() -> void:
 	
 	var nodes := NodE.get_children(_battle_layer, ArpeegeePinNode)
 	_turn_manager.initialize_turns(nodes)
+	
+	var item := NodE.get_child(_battle_layer, PinItemPowerUp, false) as PinItemPowerUp
+	if item:
+		_turn_manager.use_item(item)
+	
 	var type_disadvanged := _turn_manager.balance_battle()
 	
 	var disadvantage_dialog := ''
@@ -152,14 +176,16 @@ func _start_battle(nodes: Array) -> void:
 		_narrator.watch(n)
 	_turn_manager.step_turn()
 
-func _load_and_drop_pins(pins: Array, positions: PoolVector2Array, wait_sec: float, bounce_sec: float) -> void:
+func _load_and_drop_pins(pins: Array, positions: PoolVector2Array, item: Node2D, item_position,
+		wait_sec: float, bounce_sec: float) -> void:
 	var background_resource_loader := BackgroundResourceLoader.new()
 	get_tree().root.call_deferred('add_child', background_resource_loader)
 	
 	var tween := create_tween()
 	TweenExtension.pause_until_signal(tween, background_resource_loader, 'finished')
 	tween.tween_callback(background_resource_loader, 'queue_free')
-	tween.tween_callback(self, '_drop_pins', [positions, pins, background_resource_loader, wait_sec, bounce_sec])
+	tween.tween_callback(self, '_drop_pins', [positions, pins, item, item_position,
+			background_resource_loader, wait_sec, bounce_sec])
 	
 	var scene_paths := PoolStringArray([])
 	
@@ -169,8 +195,8 @@ func _load_and_drop_pins(pins: Array, positions: PoolVector2Array, wait_sec: flo
 	
 	background_resource_loader.load(scene_paths)
 
-func _drop_pins(positions: PoolVector2Array, pins: Array, loader: BackgroundResourceLoader,
-		wait_sec: float, bounce_sec: float) -> void:
+func _drop_pins(positions: PoolVector2Array, pins: Array, item: PinItemPowerUp, item_position: Vector2,
+		loader: BackgroundResourceLoader, wait_sec: float, bounce_sec: float) -> void:
 	
 	var pin_resources := loader.result as Array
 	for i in positions.size():
@@ -192,6 +218,18 @@ func _drop_pins(positions: PoolVector2Array, pins: Array, loader: BackgroundReso
 			.set_ease(Tween.EASE_OUT)\
 			.set_trans(Tween.TRANS_BOUNCE)
 		drop_tween.tween_callback(pin_node, 'stop_star_emission')
+	
+	if item:
+		_battle_layer.add_child(item)
+		var position := item_position
+		
+		item.global_position = position + Vector2.UP * 1000.0
+		
+		var drop_tween := get_tree().create_tween()
+		drop_tween.tween_interval(rand_range(0.0, wait_sec))
+		drop_tween.tween_property(item, 'global_position:y', position.y, bounce_sec)\
+			.set_ease(Tween.EASE_OUT)\
+			.set_trans(Tween.TRANS_BOUNCE)
 	
 	emit_signal('pins_dropped')
 
