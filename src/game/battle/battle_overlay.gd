@@ -46,6 +46,9 @@ func _on_pins_changed() -> void:
 		var damage_receiver := NodE.get_child(pin, DamageReceiver) as DamageReceiver
 		damage_receiver.disconnect('critical_hit', self, '_on_pin_critical_hit_or_evaded')
 		damage_receiver.disconnect('evaded', self, '_on_pin_critical_hit_or_evaded')
+		
+		var modified_stats := NodE.get_child(pin, ModifiedPinStats) as ModifiedPinStats
+		modified_stats.disconnect('changed_relatives', self, '_on_pin_changed_relatives')
 	
 	_pins_cache = _turn_manager.get_pins()
 	for pin in _pins_cache:
@@ -56,6 +59,9 @@ func _on_pins_changed() -> void:
 		var damage_receiver := NodE.get_child(pin, DamageReceiver) as DamageReceiver
 		damage_receiver.connect('critical_hit', self, '_on_pin_critical_hit_or_evaded', [pin, true])
 		damage_receiver.connect('evaded', self, '_on_pin_critical_hit_or_evaded', [pin, false])
+		
+		var modified_stats := NodE.get_child(pin, ModifiedPinStats) as ModifiedPinStats
+		modified_stats.connect('changed_relatives', self, '_on_pin_changed_relatives', [pin])
 
 func _on_player_turn_started() -> void:
 	var pin := _turn_manager.get_turn_pin()
@@ -216,6 +222,30 @@ func _on_pin_critical_hit_or_evaded(pin: ArpeegeePinNode, is_critical: bool) -> 
 		VFX.floating_text(pin, 'CRITICAL!!', self)
 	else:
 		VFX.floating_text(pin, 'MISS', self)
+
+func _on_pin_changed_relatives(relatives: Dictionary, pin: ArpeegeePinNode) -> void:
+	var texts := []
+	
+	for type in relatives:
+		if type == StatModifier.Type.MaxHealth:
+			continue
+		
+		var relative := relatives[type] as int
+		if relative == 0:
+			continue
+		
+		var type_as_string := StatModifier.type_to_string(type)
+		var sign_ := '+' if relative > 0 else '-'
+		var text := '%s %s %d' % [type_as_string, sign_, abs(relative)]
+		texts.push_back(text)
+	
+	if texts.empty():
+		return
+	
+	var animation := create_tween()
+	for t in texts:
+		animation.tween_callback(VFX, 'floating_text', [pin, t, self])
+		animation.tween_interval(1.5)
 
 func _spawn_health_changed_floaty_number(pin: ArpeegeePinNode, amount: int, damaged: bool) -> void:	
 	amount = amount if not damaged else -amount

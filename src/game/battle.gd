@@ -9,6 +9,8 @@ const LayoutOneOne := preload('res://src/game/battle/layout_one_one.tscn')
 export(bool) var auto_start := false
 export(Array, Resource) var auto_start_player_pins := []
 export(Array, Resource) var auto_start_npc_pins := []
+export(bool) var auto_start_item := false
+export(PinItemPowerUp.Type) var auto_start_item_type := PinItemPowerUp.Type.HP
 
 var _layout: BattleLayout = null
 
@@ -22,10 +24,15 @@ func _ready() -> void:
 	_narrator.rect_position += Vector2.DOWN * (_narrator.rect_size.y + 100.0)
 	
 	if auto_start:
+		var item_powerup: PinItemPowerUp
+		if auto_start_item:
+			item_powerup = load('res://src/resources/items/item.tscn').instance()
+			item_powerup.as_type(auto_start_item_type)
+		
 		var pins := {
 			players = auto_start_player_pins,
 			npcs = auto_start_npc_pins,
-			item_powerup = null,
+			item_powerup = item_powerup,
 		}
 		start(pins)
 

@@ -4,6 +4,14 @@ const ExplosionTemplateScene := preload('res://src/vfx/explosion.tscn')
 const ImpactWhiteScene := preload('res://src/vfx/impact_white.tscn')
 const FloatingTextScene := preload('res://src/vfx/floating_text.tscn')
 
+func sparkle_explosions() -> Array:
+	var explosion := ExplosionTemplateScene.instance() as ExplosionParticles
+	explosion.spread = 180.0
+	explosion.scale_amount = 0.1
+	explosion.texture = load('res://assets/sprites/effects/sparkle5.png')
+	
+	return [explosion]
+
 func note_explosion(front: bool) -> CPUParticles2D:
 	var explosion := ExplosionTemplateScene.instance() as ExplosionParticles
 	if randi() % 2 == 0:
