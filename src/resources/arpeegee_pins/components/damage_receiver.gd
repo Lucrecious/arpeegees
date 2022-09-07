@@ -28,6 +28,11 @@ func disable() -> void:
 	
 	_enabled = false
 
+func real_damage(amount: int) -> void:
+	_health.damage(amount)
+	if amount > 0:
+		hurt()
+
 func damage(amount: int, type: int, is_critical: bool) -> void:
 	if not _enabled:
 		return

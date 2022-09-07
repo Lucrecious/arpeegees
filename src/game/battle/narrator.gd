@@ -71,10 +71,6 @@ func _on_action_node_text_triggered(translation_key: String) -> void:
 
 func _on_pin_action_started(action_node: Node2D, _actions: PinActions) -> void:
 	var text_key := ''
-	if action_node.name == 'Dive':
-		text_key = 'NARRATOR_DIVE_BOMB_HEAD_USE'
-	elif action_node.name == 'PowerUp':
-		text_key = 'NARRATOR_FOCUS_KI_USE_1'
 	
 	if text_key.empty():
 		return

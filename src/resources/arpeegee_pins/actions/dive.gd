@@ -1,5 +1,7 @@
 extends Node2D
 
+signal text_triggered(translation_key)
+
 func pin_action() -> PinAction:
 	return load('res://src/resources/actions/harpy_dive.tres') as PinAction
 
@@ -35,13 +37,20 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	
 	tween.tween_callback(sounds, 'play', ['DiveBombHit'])
 	
+	ActionUtils.add_text_trigger(tween, self, 'NARRATOR_DIVE_BOMB_USE')
+	
 	var modified_stats := NodE.get_child(actioner, ModifiedPinStats) as ModifiedPinStats
 	if modified_stats:
-		ActionUtils.add_attack(tween, actioner, target, modified_stats.attack)
+		ActionUtils.add_attack(tween, actioner, target, modified_stats.attack * 2.0)
 	else:
 		assert(false)
 	
 	tween.tween_interval(.5)
 	tween.tween_callback(sprite_switcher, 'change', ['idle'])
 	tween.tween_property(actioner, 'global_position', actioner.global_position, .3)
+	
+	ActionUtils.add_text_trigger(tween, self, 'NARRATOR_DIVE_BOMB_RECOIL')
+	
+	ActionUtils.add_real_damage(tween, actioner, 2)
+	
 	tween.tween_callback(object, callback)

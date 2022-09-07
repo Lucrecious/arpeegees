@@ -420,6 +420,11 @@ _global_script_classes=[ {
 "path": "res://src/game/situational_dialog.gd"
 }, {
 "base": "Node",
+"class": "SkipTurnStartTurnEffect",
+"language": "GDScript",
+"path": "res://src/resources/status_effects/skip_turn_effect.gd"
+}, {
+"base": "Node",
 "class": "SoundsComponent",
 "language": "GDScript",
 "path": "res://src/resources/sounds.gd"
@@ -652,6 +657,7 @@ _global_script_class_icons={
 "SignalDetector": "",
 "SignalExpression": "",
 "SituationalDialog": "",
+"SkipTurnStartTurnEffect": "",
 "SoundsComponent": "",
 "SpriteFlattener": "",
 "SpriteSwitcher": "",
