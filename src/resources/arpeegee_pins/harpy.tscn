@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/sprites/harpy/harpy_idle.png" type="Texture" id=2]
@@ -16,6 +16,9 @@
 [ext_resource path="res://assets/sprites/harpy/harpy_win.PNG" type="Texture" id=14]
 [ext_resource path="res://assets/sprites/harpy/harpy_dive_claws.png" type="Texture" id=15]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/swoop_harpy.gd" type="Script" id=16]
+[ext_resource path="res://assets/sprites/harpy/harpy_wingattack.png" type="Texture" id=17]
+[ext_resource path="res://src/resources/arpeegee_pins/actions/attack.gd" type="Script" id=18]
+[ext_resource path="res://src/resources/actions/wing_attack_harpy.tres" type="Resource" id=19]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 6 )
@@ -85,7 +88,15 @@ scale = Vector2( 0.12, 0.12 )
 texture = ExtResource( 15 )
 centered = false
 
-[node name="HitAndDeath" type="Sprite" parent="Sprites" index="4"]
+[node name="WingAttack" type="Sprite" parent="Sprites" index="4"]
+visible = false
+use_parent_material = true
+position = Vector2( -229, -274 )
+scale = Vector2( 0.12, 0.12 )
+texture = ExtResource( 17 )
+centered = false
+
+[node name="HitAndDeath" type="Sprite" parent="Sprites" index="5"]
 visible = false
 use_parent_material = true
 position = Vector2( -224, -275 )
@@ -93,7 +104,7 @@ scale = Vector2( 0.12, 0.12 )
 texture = ExtResource( 5 )
 centered = false
 
-[node name="Win" type="Sprite" parent="Sprites" index="5"]
+[node name="Win" type="Sprite" parent="Sprites" index="6"]
 visible = false
 use_parent_material = true
 position = Vector2( -152, -264 )
@@ -109,6 +120,14 @@ script = ExtResource( 11 )
 
 [node name="Swoop" type="Node2D" parent="Actions" index="1"]
 script = ExtResource( 16 )
+
+[node name="WingAttack" type="Node2D" parent="Actions" index="2"]
+script = ExtResource( 18 )
+attack_sprite_name = "wingattack"
+pin_action = ExtResource( 19 )
+
+[node name="ImpactHint" type="Position2D" parent="Actions/WingAttack" index="0"]
+position = Vector2( 78, -53 )
 
 [node name="DiveBombSquish" type="AudioStreamPlayer" parent="Sounds" index="0"]
 stream = ExtResource( 8 )

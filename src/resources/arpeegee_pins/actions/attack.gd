@@ -30,7 +30,7 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	var relative := ActionUtils.get_closest_adjecent_position(actioner, target)
 	var target_position := position + relative
 	
-	var side := int(sign(relative.x))
+	var side := -int(sign(relative.x))
 	
 	var tween := get_tree().create_tween()
 	if walk:

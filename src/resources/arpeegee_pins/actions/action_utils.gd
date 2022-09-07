@@ -125,7 +125,7 @@ static func add_wind_up(tween: SceneTreeTween, pin: ArpeegeePinNode,
 		position: Vector2, side: int) -> Vector2:
 	side = int(sign(side))
 	
-	var target_position := position + Vector2.RIGHT * 50.0
+	var target_position := position + Vector2.RIGHT * 50.0 * side
 	tween.tween_property(pin, 'position', target_position, .35)\
 			.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
 	tween.tween_interval(.3)
