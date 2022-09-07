@@ -32,16 +32,12 @@ func apply_power(pins: Array) -> void:
 	match type:
 		Type.Attack:
 			_apply_attack(pins)
-			print('applied attack')
 		Type.Flee:
 			_apply_flee(pins)
-			print('applied evasion')
 		Type.HP:
 			_apply_hp(pins)
-			print('applied health')
 		Type.MP:
 			_apply_mp(pins)
-			print('applied magic attack')
 
 func _trail_and_explosion(from_local: Vector2, to_global: Vector2) -> void:
 	var trail := CPUParticles2D.new()
