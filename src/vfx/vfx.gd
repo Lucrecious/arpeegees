@@ -4,6 +4,14 @@ const ExplosionTemplateScene := preload('res://src/vfx/explosion.tscn')
 const ImpactWhiteScene := preload('res://src/vfx/impact_white.tscn')
 const FloatingTextScene := preload('res://src/vfx/floating_text.tscn')
 
+func heart_explosion() -> Array:
+	var explosion := ExplosionTemplateScene.instance() as ExplosionParticles
+	explosion.texture = load('res://assets/sprites/effects/heart1.png')
+	explosion.scale_amount = 1.0
+	explosion.spread = 45.0
+	
+	return [explosion]
+
 func sparkle_explosions() -> Array:
 	var explosion := ExplosionTemplateScene.instance() as ExplosionParticles
 	explosion.spread = 180.0

@@ -68,6 +68,8 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 					tween.tween_callback(transformer, 'request_transform')
 		'panchi_monk.tres':
 			ActionUtils.add_text_trigger(tween, self, 'NARRATOR_PANCHI_USE_1')
+		'wing_attack_harpy.tres':
+			ActionUtils.add_text_trigger(tween, self, 'NARRATOR_WING_ATTACK_USE')
 		
 	var sprite_switcher := NodE.get_child(actioner, SpriteSwitcher) as SpriteSwitcher
 	if not attack_sprite_name.empty():
