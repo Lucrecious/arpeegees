@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://assets/sprites/effects/heart1.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/effects/glow_circle.png" type="Texture" id=1]
 [ext_resource path="res://src/vfx/explosion.gd" type="Script" id=2]
 
 [sub_resource type="Curve" id=1]

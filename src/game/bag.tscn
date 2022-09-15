@@ -23,7 +23,7 @@ shader_param/amount = 0.0
 shader_param/line_color = Color( 1, 1, 0, 1 )
 shader_param/line_thickness = 0.0
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=5]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("Holder/BagTop:rect_position")
@@ -40,7 +40,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=3]
 resource_name = "open"
-length = 1.9
+length = 3.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Holder/BagBottom:visible")
 tracks/0/interp = 1
@@ -65,43 +65,43 @@ tracks/1/keys = {
 "update": 0,
 "values": [ 0.0, 0.9, 1.0, 0.0 ]
 }
-tracks/2/type = "method"
-tracks/2/path = NodePath("Holder/BagPieces")
+tracks/2/type = "value"
+tracks/2/path = NodePath("Holder/BagPieces:material:shader_param/line_thickness")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 1.1 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "explode"
-} ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("Holder/BagPieces:material:shader_param/line_thickness")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
 "times": PoolRealArray( 0, 1.1, 1.11 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ 0.0, 4.7, 0.0 ]
 }
-tracks/4/type = "value"
-tracks/4/path = NodePath("Holder/BagTop:rect_position")
+tracks/3/type = "value"
+tracks/3/path = NodePath("Holder/BagTop:rect_position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.1, 1.9 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( -456, -3089 ) ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath(".")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 1.1, 1.9 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( -456, -3089 ) ]
+"times": PoolRealArray( 1.1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "shoot_all_particles"
+} ]
 }
 tracks/5/type = "method"
 tracks/5/path = NodePath(".")
@@ -114,7 +114,7 @@ tracks/5/keys = {
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
-"method": "shoot_all_particles"
+"method": "explode_bag"
 } ]
 }
 
@@ -143,6 +143,7 @@ expand = true
 stretch_mode = 5
 
 [node name="BagPieces" type="Control" parent="Holder"]
+unique_name_in_owner = true
 material = SubResource( 4 )
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -267,5 +268,5 @@ position = Vector2( 103, 20 )
 
 [node name="Animation" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
-anims/RESET = SubResource( 2 )
+anims/RESET = SubResource( 5 )
 anims/open = SubResource( 3 )

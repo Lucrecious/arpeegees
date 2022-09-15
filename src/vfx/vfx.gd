@@ -20,6 +20,40 @@ func sparkle_explosions() -> Array:
 	
 	return [explosion]
 
+func random_sparkle_explosions() -> Array:
+	var sparkle1 := ExplosionTemplateScene.instance() as ExplosionParticles
+	sparkle1.spread = 180.0
+	sparkle1.scale_amount = 0.1
+	sparkle1.amount = 5
+	sparkle1.initial_velocity_random = 0.5
+	sparkle1.texture = load(_random_sparkle_path())
+	sparkle1.z_index = Aura.Z_INDEX_FRONT
+	
+	var sparkle2 := ExplosionTemplateScene.instance() as ExplosionParticles
+	sparkle2.spread = 180.0
+	sparkle2.scale_amount = 0.1
+	sparkle2.amount = 5
+	sparkle2.initial_velocity_random = 0.5
+	sparkle2.texture = load(_random_sparkle_path())
+	sparkle2.z_index = Aura.Z_INDEX_FRONT
+	
+	var glows := ExplosionTemplateScene.instance() as ExplosionParticles
+	glows.spread = 180.0
+	glows.scale_amount = 1.0
+	glows.amount = 15
+	glows.initial_velocity_random = 1.0
+	glows.texture = load('res://assets/sprites/effects/glow_circle.png')
+	glows.z_index = Aura.Z_INDEX_FRONT
+	glows.hue_variation_random = 1.0
+	glows.hue_variation = 0.5
+	
+	return [sparkle1, sparkle2, glows]
+
+func _random_sparkle_path() -> String:
+	var path := 'res://assets/sprites/effects/sparkle%d.png' % [randi() % 5 + 1]
+	
+	return path
+
 func note_explosion(front: bool) -> CPUParticles2D:
 	var explosion := ExplosionTemplateScene.instance() as ExplosionParticles
 	if randi() % 2 == 0:

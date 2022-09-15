@@ -1,6 +1,7 @@
 class_name PinBag
 extends Control
 
+signal bag_exploded()
 signal open_animation_finished()
 
 const SHAKE_DEGREES := 10.0
@@ -16,6 +17,7 @@ onready var _animation := $'%Animation' as AnimationPlayer
 onready var _holder := $Holder as Control
 onready var _particles_spawn_hint := $'%StarParticlesHint' as Position2D
 onready var _star_particles := $'%StarParticles' as CPUParticles2D
+onready var _bag_pieces := $'%BagPieces' as Control
 
 func _ready() -> void:
 	connect('mouse_entered', self, '_on_mouse_entered')
@@ -23,11 +25,15 @@ func _ready() -> void:
 	
 	_noise.period = .2
 
-func shoot_all_particles() -> void:
-	for i in 3:
-		_shoot_particles()
+func explode_bag() -> void:
+	_bag_pieces.explode()
+	emit_signal('bag_exploded')
 
-func _shoot_particles() -> void:
+func shoot_all_particles() -> void:
+	for i in [-1, 0, 1]:
+		_shoot_particles(i)
+
+func _shoot_particles(index: int) -> void:
 	var shoot_tween := create_tween()
 	
 	var angle_amount := rand_range(-1.0, 1.0)
@@ -36,9 +42,10 @@ func _shoot_particles() -> void:
 	
 	var particles := _star_particles.duplicate()
 	_star_particles.get_parent().add_child(particles)
-	particles.global_position = _particles_spawn_hint.global_position
+	particles.global_position = _particles_spawn_hint.global_position + index * Vector2.RIGHT * 100.0
 	particles.emitting = true
 	
+	shoot_tween.tween_interval(1.0)
 	shoot_tween.tween_property(particles, 'global_position', particles.global_position + relative_destination, .5)
 	shoot_tween.tween_callback(particles, 'set', ['emitting', false])
 
