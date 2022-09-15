@@ -14,8 +14,8 @@ var _opened := false
 onready var _noise := OpenSimplexNoise.new()
 onready var _animation := $'%Animation' as AnimationPlayer
 onready var _holder := $Holder as Control
+onready var _particles_spawn_hint := $'%StarParticlesHint' as Position2D
 onready var _star_particles := $'%StarParticles' as CPUParticles2D
-onready var _star_particles_hint := $'%StarParticlesHint' as Node2D
 
 func _ready() -> void:
 	connect('mouse_entered', self, '_on_mouse_entered')
@@ -23,25 +23,24 @@ func _ready() -> void:
 	
 	_noise.period = .2
 
-var _shoot_tween: SceneTreeTween
-func shoot_particles() -> void:
-	if _shoot_tween:
-		_shoot_tween.kill()
-		_shoot_tween = null
-	
-	_shoot_tween = get_tree().create_tween()
+func shoot_all_particles() -> void:
+	for i in 3:
+		_shoot_particles()
+
+func _shoot_particles() -> void:
+	var shoot_tween := create_tween()
 	
 	var angle_amount := rand_range(-1.0, 1.0)
 	var rotation_radians := angle_amount * deg2rad(PARTICLE_SPREAD_DEGREES)
 	var relative_destination := Vector2.UP.rotated(rotation_radians) * 1000.0
 	
-	var initial_displacement := Vector2(rand_range(-1.0, 1.0) * ((rect_size.x / 2.0) - 30.0), 0)
-	_star_particles.emitting = true
-	_star_particles.global_position = _star_particles_hint.global_position + initial_displacement
-	_star_particles.global_position.y += 50.0
+	var particles := _star_particles.duplicate()
+	_star_particles.get_parent().add_child(particles)
+	particles.global_position = _particles_spawn_hint.global_position
+	particles.emitting = true
 	
-	_shoot_tween.tween_property(_star_particles, 'global_position', _star_particles.global_position + relative_destination, .5)
-	_shoot_tween.tween_callback(_star_particles, 'set', ['emitting', false])
+	shoot_tween.tween_property(particles, 'global_position', particles.global_position + relative_destination, .5)
+	shoot_tween.tween_callback(particles, 'set', ['emitting', false])
 
 func _open() -> void:
 	if _opened:

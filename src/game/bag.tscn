@@ -1,29 +1,27 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://src/game/bag.gd" type="Script" id=1]
 [ext_resource path="res://assets/title/bag.png" type="Texture" id=2]
 [ext_resource path="res://assets/title/bag-tip.png" type="Texture" id=3]
 [ext_resource path="res://src/game/battle/star_particles.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/game/battle/bag_bulge.gdshader" type="Shader" id=5]
+[ext_resource path="res://assets/title/bag_piece8.png" type="Texture" id=6]
+[ext_resource path="res://assets/title/bag_piece6.png" type="Texture" id=7]
+[ext_resource path="res://assets/title/bag_piece3.png" type="Texture" id=8]
+[ext_resource path="res://assets/title/bag_piece1.png" type="Texture" id=9]
+[ext_resource path="res://assets/title/bag_piece10.png" type="Texture" id=10]
+[ext_resource path="res://assets/title/bag_piece9.png" type="Texture" id=11]
+[ext_resource path="res://assets/title/bag_piece4.png" type="Texture" id=12]
+[ext_resource path="res://assets/title/bag_piece5.png" type="Texture" id=13]
+[ext_resource path="res://assets/title/bag_piece7.png" type="Texture" id=14]
+[ext_resource path="res://src/game/bag_pieces.gd" type="Script" id=15]
+[ext_resource path="res://assets/title/bag_piece2.png" type="Texture" id=16]
 
-[sub_resource type="Shader" id=4]
-code = "shader_type canvas_item;
-
-uniform float amount = 0.0;
-
-vec2 distort(vec2 r, float alpha)
-{
-    return r * -alpha * (0.5 - dot(r, r));
-}
-
-void fragment()
-{
-	vec2 uv = UV + distort(UV - vec2(0.5), amount);
-	COLOR = texture(TEXTURE, uv);
-}"
-
-[sub_resource type="ShaderMaterial" id=5]
-shader = SubResource( 4 )
+[sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 5 )
 shader_param/amount = 0.0
+shader_param/line_color = Color( 1, 1, 0, 1 )
+shader_param/line_thickness = 0.0
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -39,137 +37,85 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Vector2( 0, 0 ) ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath("Holder/BagTop:rect_rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Holder/BagBottom:rect_position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 0, 17 ) ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("Holder/BagBottom:rect_rotation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("Holder/BagBottom:rect_scale")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 1, 1 ) ]
-}
 
 [sub_resource type="Animation" id=3]
 resource_name = "open"
-length = 3.0
+length = 1.9
 tracks/0/type = "value"
-tracks/0/path = NodePath("Holder/BagTop:rect_position")
+tracks/0/path = NodePath("Holder/BagBottom:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0.2, 0.7 ),
+"times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( -1153, -1015 ) ]
+"update": 1,
+"values": [ true, false ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Holder/BagTop:rect_rotation")
+tracks/1/path = NodePath("Holder/BagPieces:material:shader_param/amount")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.2, 0.7 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 1, 1.1, 1.11 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ 0.0, -89.9999 ]
+"values": [ 0.0, 0.9, 1.0, 0.0 ]
 }
 tracks/2/type = "method"
-tracks/2/path = NodePath(".")
+tracks/2/path = NodePath("Holder/BagPieces")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.9, 1.5, 2.1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 1.1 ),
+"transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
-"method": "shoot_particles"
-}, {
-"args": [  ],
-"method": "shoot_particles"
-}, {
-"args": [  ],
-"method": "shoot_particles"
+"method": "explode"
 } ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("Holder/BagBottom:rect_position")
+tracks/3/path = NodePath("Holder/BagPieces:material:shader_param/line_thickness")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 1, 1.2, 1.6, 1.8, 2.2, 2.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 1.1, 1.11 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 17 ), Vector2( 0, 50 ), Vector2( 0, 50 ), Vector2( 0, 86 ), Vector2( 0, 86 ), Vector2( 0, 771 ) ]
+"values": [ 0.0, 4.7, 0.0 ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("Holder/BagBottom:rect_rotation")
+tracks/4/path = NodePath("Holder/BagTop:rect_position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 1, 1.2, 1.6, 1.8, 2.2, 2.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 1.1, 1.9 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ]
+"values": [ Vector2( 0, 0 ), Vector2( -456, -3089 ) ]
 }
-tracks/5/type = "value"
-tracks/5/path = NodePath("Holder/BagBottom:rect_scale")
-tracks/5/interp = 2
+tracks/5/type = "method"
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ), Vector2( 1, 1 ) ]
+"times": PoolRealArray( 1.1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "shoot_all_particles"
+} ]
 }
 
 [node name="Bag" type="Control"]
@@ -196,8 +142,116 @@ texture = ExtResource( 3 )
 expand = true
 stretch_mode = 5
 
+[node name="BagPieces" type="Control" parent="Holder"]
+material = SubResource( 4 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 17.0
+margin_bottom = 17.0
+mouse_filter = 2
+script = ExtResource( 15 )
+
+[node name="Piece1" type="TextureRect" parent="Holder/BagPieces"]
+use_parent_material = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 106, 136 )
+mouse_filter = 2
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 5
+
+[node name="Piece2" type="TextureRect" parent="Holder/BagPieces"]
+use_parent_material = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 106, 136 )
+mouse_filter = 2
+texture = ExtResource( 16 )
+expand = true
+stretch_mode = 5
+
+[node name="Piece3" type="TextureRect" parent="Holder/BagPieces"]
+use_parent_material = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 106, 136 )
+mouse_filter = 2
+texture = ExtResource( 8 )
+expand = true
+stretch_mode = 5
+
+[node name="Piece4" type="TextureRect" parent="Holder/BagPieces"]
+use_parent_material = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 106, 136 )
+mouse_filter = 2
+texture = ExtResource( 12 )
+expand = true
+stretch_mode = 5
+
+[node name="Piece5" type="TextureRect" parent="Holder/BagPieces"]
+use_parent_material = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 106, 136 )
+mouse_filter = 2
+texture = ExtResource( 13 )
+expand = true
+stretch_mode = 5
+
+[node name="Piece6" type="TextureRect" parent="Holder/BagPieces"]
+use_parent_material = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 106, 136 )
+mouse_filter = 2
+texture = ExtResource( 7 )
+expand = true
+stretch_mode = 5
+
+[node name="Piece7" type="TextureRect" parent="Holder/BagPieces"]
+use_parent_material = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 106, 136 )
+mouse_filter = 2
+texture = ExtResource( 14 )
+expand = true
+stretch_mode = 5
+
+[node name="Piece8" type="TextureRect" parent="Holder/BagPieces"]
+use_parent_material = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 106, 136 )
+mouse_filter = 2
+texture = ExtResource( 6 )
+expand = true
+stretch_mode = 5
+
+[node name="Piece9" type="TextureRect" parent="Holder/BagPieces"]
+use_parent_material = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 106, 136 )
+mouse_filter = 2
+texture = ExtResource( 11 )
+expand = true
+stretch_mode = 5
+
+[node name="Piece10" type="TextureRect" parent="Holder/BagPieces"]
+use_parent_material = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 106, 136 )
+mouse_filter = 2
+texture = ExtResource( 10 )
+expand = true
+stretch_mode = 5
+
 [node name="BagBottom" type="TextureRect" parent="Holder"]
-material = SubResource( 5 )
 margin_top = 17.0
 margin_right = 214.0
 margin_bottom = 302.0
