@@ -4,7 +4,6 @@ const ActionMenuScene := preload('res://src/game/battle/action_menu.tscn')
 
 var _action_menu: PinActionMenu
 
-onready var _target_selector := $'%TargetSelector' as TargetSelector
 onready var _battle_layer := $'%BattleLayer' as Node2D
 onready var _stats_panel := $StatsPanel as StatPopup
 onready var _turn_manager := $TurnManager as TurnManager
@@ -102,35 +101,37 @@ func _do_npc_turn_section_start() -> void:
 func _show_action_menu(pin: ArpeegeePinNode, pin_actions: PinActions) -> void:
 	var action_nodes := pin_actions.get_pin_action_nodes()
 	
-	var menu_corner := ActionUtils.get_top_right_corner_screen(pin)
-	_action_menu.visible = true
-	_action_menu.rect_position = menu_corner
+	_action_menu.initialize(pin)
+	
+	_action_menu.connect('action_picked', self, '_on_action_picked', [pin, _action_menu], CONNECT_ONESHOT)
 	
 	for node in action_nodes:
 		var action := node.pin_action() as PinAction
-		var button := _action_menu.add_pin_action(action)
-		button.connect('pressed', self, '_on_action_started', [_action_menu], CONNECT_ONESHOT)
 		
 		if action.target_type == PinAction.TargetType.Single:
-			button.connect('pressed', self, '_on_single_target_action_pressed', [pin, node.name])
+			_action_menu.add_pin_action(node, _turn_manager.get_npcs())
 		elif action.target_type == PinAction.TargetType.Self:
-			button.connect('pressed', _turn_manager, 'run_action', [pin, node.name])
+			_action_menu	.add_pin_action(node, [])
 		elif action.target_type == PinAction.TargetType.AllEnemies:
-			button.connect('pressed', _turn_manager, 'run_action_with_targets', [pin, node.name, _turn_manager.get_npcs()])
+			_action_menu.add_pin_action(node, [])
 		else:
 			assert(false)
 
-func _on_single_target_action_pressed(pin: ArpeegeePinNode, action_name: String) -> void:
-	_pick_target(pin, action_name)
-
-func _pick_target(pin: ArpeegeePinNode, action_name: String) -> void:
-	_target_selector.connect('target_found', self, '_on_target_found',
-			[pin, action_name], CONNECT_ONESHOT)
-	_target_selector.start(pin, _turn_manager.get_npcs())
-
-func _on_action_started(menu: PinActionMenu) -> void:
+func _on_action_picked(action_node: Node, targets: Array, pin: ArpeegeePinNode, menu: PinActionMenu) -> void:
 	menu.clear()
-	menu.visible = false
+	
+	var action := action_node.pin_action() as PinAction
+	if action.target_type == PinAction.TargetType.Single:
+		assert(targets.size() == 1)
+		_turn_manager.run_action_with_target(pin, action_node.name, targets[0])
+	elif action.target_type == PinAction.TargetType.Self:
+		assert(targets.size() == 0)
+		_turn_manager.run_action(pin, action_node.name)
+	elif action.target_type == PinAction.TargetType.AllEnemies:
+		assert(targets.size() == 0)
+		_turn_manager.run_action_with_targets(pin, action_node.name, _turn_manager.get_npcs())
+	else:
+		assert(false)
 
 func _on_turn_finished() -> void:
 	var tween := create_tween()
@@ -143,10 +144,6 @@ func _on_turn_finished() -> void:
 func _next_turn() -> void:
 	var tween := _on_turn_started_preview()
 	tween.tween_callback(_turn_manager, 'step_turn')
-	
-
-func _on_target_found(target: ArpeegeePinNode, caster: ArpeegeePinNode, action_name: String) -> void:
-	_turn_manager.run_action_with_target(caster, action_name, target)
 
 var _current_pin: ArpeegeePinNode
 func _gui_input(event: InputEvent) -> void:
