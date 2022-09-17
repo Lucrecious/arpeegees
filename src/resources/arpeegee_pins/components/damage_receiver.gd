@@ -39,9 +39,9 @@ func damage(amount: int, type: int, is_critical: bool) -> void:
 	
 	var actual_damage := 0
 	if type == PinAction.AttackType.Normal:
-		actual_damage = round(amount * (amount / float(amount + _modified_stats.defence)))
+		actual_damage = ceil(amount * (amount / float(amount + _modified_stats.defence)))
 	elif type == PinAction.AttackType.Magic:
-		actual_damage = round(amount * (amount / float(amount + _modified_stats.magic_defence)))
+		actual_damage = ceil(amount * (amount / float(amount + _modified_stats.magic_defence)))
 	else:
 		assert(false)
 	
