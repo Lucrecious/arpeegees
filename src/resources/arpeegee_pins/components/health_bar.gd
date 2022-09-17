@@ -2,7 +2,10 @@ extends Sprite
 
 var _max_health := 0
 
-onready var _progress_bar := $ProgressBar as Sprite
+onready var _progress_bar := $BarLine as Line2D
+onready var _bar_point_start := _progress_bar.points[0].x
+onready var _bar_point_end := _progress_bar.points[1].x
+
 onready var _health := NodE.get_sibling(self, Health) as Health
 onready var _modified_pin_stats := NodE.get_sibling(self, ModifiedPinStats) as ModifiedPinStats
 onready var _actions := NodE.get_sibling(self, PinActions) as PinActions
@@ -23,4 +26,7 @@ func _on_action_ended() -> void:
 	visible = true
 
 func _on_stats_changed() -> void:
-	_progress_bar.scale.x = float(_health.current) / _modified_pin_stats.max_health
+	var health_ratio := float(_health.current) / _modified_pin_stats.max_health
+	var new_point := lerp(_bar_point_start, _bar_point_end, health_ratio) as float
+	var y := _progress_bar.points[1].y
+	_progress_bar.set_point_position(1, Vector2(new_point, y))

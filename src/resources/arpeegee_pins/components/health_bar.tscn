@@ -1,20 +1,16 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://assets/ui/health_bar_overlay.png" type="Texture" id=1]
 [ext_resource path="res://src/resources/arpeegee_pins/components/health_bar.gd" type="Script" id=2]
-[ext_resource path="res://assets/ui/progress_bar_background.png" type="Texture" id=3]
-[ext_resource path="res://assets/ui/health_empty_bar.png" type="Texture" id=4]
+[ext_resource path="res://assets/ui/health_bar.png" type="Texture" id=3]
 
 [node name="HealthBar" type="Sprite"]
+scale = Vector2( 2, 2 )
 texture = ExtResource( 3 )
 centered = false
 script = ExtResource( 2 )
 
-[node name="ProgressBarEmpty" type="Sprite" parent="."]
-texture = ExtResource( 4 )
-centered = false
-
-[node name="ProgressBar" type="Sprite" parent="."]
-z_index = 1
-texture = ExtResource( 1 )
-centered = false
+[node name="BarLine" type="Line2D" parent="."]
+position = Vector2( 0.5, -5 )
+points = PoolVector2Array( 15, 129, 181, 129 )
+width = 40.0
+default_color = Color( 0.0431373, 0.760784, 0, 1 )
