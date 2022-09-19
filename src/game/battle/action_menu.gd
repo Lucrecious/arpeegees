@@ -1,5 +1,5 @@
 class_name PinActionMenu
-extends Control
+extends MarginContainer
 
 signal action_picked(action_node, targets)
 

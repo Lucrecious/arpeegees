@@ -21,7 +21,7 @@ onready var _narrator := $'%Narrator' as NarratorUI
 onready var _original_narrator_position := _narrator.rect_position
 
 func _ready() -> void:
-	_narrator.rect_position += Vector2.DOWN * (_narrator.rect_size.y + 100.0)
+	_narrator.rect_position += Vector2.DOWN * (_narrator.rect_size.y - 500.0)
 	
 	if auto_start:
 		var item_powerup: PinItemPowerUp
@@ -127,7 +127,7 @@ func _do_intro_narration() -> void:
 	var speaking_tween := create_tween()
 	
 	speaking_tween.tween_property(_narrator, 'rect_position:y', _original_narrator_position.y, 1.5)\
-			.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BOUNCE)
+			.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 	speaking_tween.tween_interval(0.5)
 	speaking_tween.tween_callback(_narrator, 'speak_tr', ['NARRATOR_BATTLE_INTRODUCTION_GENERIC', false])
 	TweenExtension.pause_until_signal(speaking_tween.parallel(), _narrator, 'speaking_ended')

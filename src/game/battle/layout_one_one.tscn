@@ -10,7 +10,7 @@ script = ExtResource( 1 )
 position = Vector2( -640, 0 )
 
 [node name="Hint1" type="Position2D" parent="Positions_Left"]
-position = Vector2( 385, 441 )
+position = Vector2( 574, 441 )
 __meta__ = {
 "_gizmo_extents_": 100.0
 }
@@ -19,7 +19,7 @@ __meta__ = {
 position = Vector2( -640, 0 )
 
 [node name="Hint1" type="Position2D" parent="Positions_Right"]
-position = Vector2( 857, 486 )
+position = Vector2( 1046, 486 )
 __meta__ = {
 "_gizmo_extents_": 100.0
 }
@@ -27,7 +27,7 @@ __meta__ = {
 [node name="Position_Item" type="Node2D" parent="."]
 
 [node name="Hint" type="Position2D" parent="Position_Item"]
-position = Vector2( 0, 273 )
+position = Vector2( 189, 273 )
 __meta__ = {
 "_gizmo_extents_": 100.0
 }

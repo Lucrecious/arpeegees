@@ -1,24 +1,16 @@
 extends Control
 
-const ActionMenuScene := preload('res://src/game/battle/action_menu.tscn')
-
-var _action_menu: PinActionMenu
-
 onready var _battle_layer := $'%BattleLayer' as Node2D
 onready var _stats_panel := $StatsPanel as StatPopup
 onready var _turn_manager := $TurnManager as TurnManager
 onready var _narrator := NodE.get_sibling(self, NarratorUI) as NarratorUI
 onready var _situational_dialog := $SituationalDialog as SituationalDialog
 onready var _ai := $AI as NPCAI
+onready var _action_menu := $'%ActionMenu' as PinActionMenu
 
 func _ready() -> void:
-	_action_menu = ActionMenuScene.instance() as PinActionMenu
-	
 	_turn_manager.connect('initialized', self, 'set', ['mouse_filter', mouse_filter])
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
-	
-	add_child(_action_menu)
-	move_child(_action_menu, 0)
 	
 	_action_menu.visible = false
 	
