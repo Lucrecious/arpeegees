@@ -46,8 +46,7 @@ func pick_random(amount: int) -> Dictionary:
 	}
 	
 	# 20% chance to get an item
-	var is_get_item := randf() < 1.0
-	print_debug('set to 100% item get for testing')
+	var is_get_item := randf() < 0.2
 	
 	if is_get_item:
 		var item := load('res://src/resources/items/item.tscn').instance() as PinItemPowerUp
