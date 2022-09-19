@@ -83,6 +83,7 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 
 func _create_tired_status_effect(pin: ArpeegeePinNode) -> StatusEffect:
 	var status_effect := StatusEffect.new()
+	status_effect.tag = StatusEffectTag.TiredAfterSwoop
 	
 	var skip_turn_effect := SkipTurnStartTurnEffect.new()
 	skip_turn_effect.text_key = 'NARRATOR_SWOOP_TOO_TIRED'

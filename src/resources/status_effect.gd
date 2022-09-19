@@ -27,6 +27,7 @@ static func queue_free_leave_particles_until_dead(status_effect: StatusEffect) -
 
 
 func _ready() -> void:
+	assert(tag != -1, 'must be set')
 	_start_emissions()
 
 func get_modifiers() -> Array:

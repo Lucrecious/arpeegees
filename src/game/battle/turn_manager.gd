@@ -155,12 +155,11 @@ func _get_nodes_of_type(nodes: Array, type: int) -> Array:
 	return of_type
 
 func _add_attack_boost(nodes: Array, type: int) -> void:
-	_increase_attack(nodes, type)
-
-func _increase_attack(nodes: Array, type: int) -> void:
 	for n in nodes:
 		var status_effects := NodE.get_child(n, StatusEffectsList) as StatusEffectsList
 		var effect := StatusEffect.new()
+		effect.tag = StatusEffectTag.Enraged
+		
 		var attack := StatModifier.new()
 		attack.type = StatModifier.Type.Attack
 		attack.multiplier = 1.5
@@ -180,35 +179,35 @@ func _increase_attack(nodes: Array, type: int) -> void:
 		
 		status_effects.add_instance(effect)
 
-func _increase_evasion(nodes: Array) -> void:
-	for n in nodes:
-		var status_effects := NodE.get_child(n, StatusEffectsList) as StatusEffectsList
-		
-		var effect := StatusEffect.new()
-		effect.stack_count = 1
-		effect.tag = StatusEffectTag.Enraged
-		
-		var modifier := StatModifier.new()
-		modifier.type = StatModifier.Type.Evasion
-		modifier.multiplier = 1.5
-		
-		effect.add_child(modifier)
-		
-		status_effects.add_instance(effect)
-
-func _increase_health(nodes: Array) -> void:
-	for n in nodes:
-		var status_effects := NodE.get_child(n, StatusEffectsList) as StatusEffectsList
-		var effect := StatusEffect.new()
-		var modifier := StatModifier.new()
-		modifier.type = StatModifier.Type.MaxHealth
-		modifier.multiplier = 2.0
-		
-		var health := NodE.get_child(n, Health) as Health
-		health.current = modifier.apply(health.current)
-		
-		effect.add_child(modifier)
-		status_effects.add_instance(effect)
+#func _increase_evasion(nodes: Array) -> void:
+#	for n in nodes:
+#		var status_effects := NodE.get_child(n, StatusEffectsList) as StatusEffectsList
+#
+#		var effect := StatusEffect.new()
+#		effect.stack_count = 1
+#		effect.tag = StatusEffectTag.Enraged
+#
+#		var modifier := StatModifier.new()
+#		modifier.type = StatModifier.Type.Evasion
+#		modifier.multiplier = 1.5
+#
+#		effect.add_child(modifier)
+#
+#		status_effects.add_instance(effect)
+#
+#func _increase_health(nodes: Array) -> void:
+#	for n in nodes:
+#		var status_effects := NodE.get_child(n, StatusEffectsList) as StatusEffectsList
+#		var effect := StatusEffect.new()
+#		var modifier := StatModifier.new()
+#		modifier.type = StatModifier.Type.MaxHealth
+#		modifier.multiplier = 2.0
+#
+#		var health := NodE.get_child(n, Health) as Health
+#		health.current = modifier.apply(health.current)
+#
+#		effect.add_child(modifier)
+#		status_effects.add_instance(effect)
 
 func _on_action_started() -> void:
 	_is_running_action = true
