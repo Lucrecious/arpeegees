@@ -4,6 +4,7 @@ extends Control
 signal pins_dropped()
 
 const LayoutTwoOne := preload('res://src/game/battle/layout_two_one.tscn')
+const LayoutOneTwo := preload('res://src/game/battle/layout_one_TWO.tscn')
 const LayoutOneOne := preload('res://src/game/battle/layout_one_one.tscn')
 
 export(bool) var auto_start := false
@@ -14,8 +15,8 @@ export(PinItemPowerUp.Type) var auto_start_item_type := PinItemPowerUp.Type.HP
 
 var _layout: BattleLayout = null
 
-onready var _battle_viewport := $ViewportContainer/Viewport as Viewport
-onready var _battle_layer := $'%BattleLayer' as YSort
+#onready var _battle_viewport := $'%BattleViewport' as Viewport
+onready var _battle_layer := $'%BattleLayer' as Control
 onready var _turn_manager := $'%TurnManager' as TurnManager
 onready var _narrator := $'%Narrator' as NarratorUI
 onready var _original_narrator_position := _narrator.rect_position
@@ -44,10 +45,13 @@ func start(pins: Dictionary) -> void:
 	
 	_started = true
 	
-	_configure_viewport(_battle_viewport)
+#	_configure_viewport(_battle_viewport)
+#	get_viewport().connect('size_changed', self, '_configure_viewport', [_battle_viewport])
 	var layout_scene: PackedScene
 	if _is_two_one_layout(pins.npcs.size(), pins.players.size()):
 		layout_scene = LayoutTwoOne
+	elif _is_one_two_layout(pins.npcs.size(), pins.players.size()):
+		layout_scene = LayoutOneTwo
 	elif _is_one_one_layout(pins.npcs.size(), pins.players.size()):
 		layout_scene = LayoutOneOne
 	else:
@@ -69,30 +73,31 @@ func _configure_viewport(viewport: Viewport) -> void:
 	viewport.get_texture().flags = Texture.FLAG_FILTER
 	viewport.canvas_transform = viewport.canvas_transform.scaled(Vector2.ONE * scale)
 
-func _is_two_one_layout(amount1: int, amount2: int) -> bool:
-	return (amount1 == 1 and amount2 == 2) or (amount1 == 2 and amount2 == 1)
+#func _process(delta):
+#	if Engine.get_idle_frames() % 5 != 0:
+#		return
+#
+#	printt(_battle_viewport.size, _battle_viewport.canvas_transform.get_scale())
 
-func _is_one_one_layout(amount1: int, amount2: int) -> bool:
-	return amount1 == 1 and amount2 == 1
+func _is_two_one_layout(left_size: int, right_size: int) -> bool:
+	return left_size == 2 and right_size == 1
+
+func _is_one_two_layout(left_size: int, right_size: int) -> bool:
+	return left_size == 1 and right_size == 2
+
+func _is_one_one_layout(left_size: int, right_size: int) -> bool:
+	return left_size == 1 and right_size == 1
 
 func _create_battle_layout(layout_scene: PackedScene, pins: Dictionary) -> BattleLayout:
-	var mirrored := false
-	if pins.npcs.size() < pins.players.size():
-		mirrored = true
-	elif pins.npcs.size() == pins.players.size():
-		mirrored = ((randi() % 2) == 0)
-	
 	var layout := layout_scene.instance() as BattleLayout
 	assert(layout, 'must be battle layout')
 	_battle_layer.add_child(layout)
-	if mirrored:
-		layout.mirror()
-	
 	return layout
 
 func _drop_character_pins(pins: Dictionary) -> void:
 	var left_positions := _layout.get_left_positions()
 	var right_positions := _layout.get_right_positions()
+	
 	var npcs := pins.npcs as Array
 	var players := pins.players as Array
 	if left_positions.size() != npcs.size():
@@ -136,7 +141,7 @@ func _do_intro_narration() -> void:
 func _balance_battle() -> void:
 	_turn_manager.connect('battle_ended', self, '_on_battle_ended')
 	
-	var nodes := NodE.get_children(_battle_layer, ArpeegeePinNode)
+	var nodes := NodE.get_children_recursive(_battle_layer, ArpeegeePinNode)
 	_turn_manager.initialize_turns(nodes)
 	
 	var item := NodE.get_child(_battle_layer, PinItemPowerUp, false) as PinItemPowerUp
@@ -183,7 +188,7 @@ func _start_battle(nodes: Array) -> void:
 		_narrator.watch(n)
 	_turn_manager.step_turn()
 
-func _load_and_drop_pins(pins: Array, positions: PoolVector2Array, item: Node2D, item_position,
+func _load_and_drop_pins(pins: Array, positions: Array, item: Node2D, item_position,
 		wait_sec: float, bounce_sec: float) -> void:
 	var background_resource_loader := BackgroundResourceLoader.new()
 	get_tree().root.call_deferred('add_child', background_resource_loader)
@@ -202,7 +207,7 @@ func _load_and_drop_pins(pins: Array, positions: PoolVector2Array, item: Node2D,
 	
 	background_resource_loader.load(scene_paths)
 
-func _drop_pins(positions: PoolVector2Array, pins: Array, item: PinItemPowerUp, item_position: Vector2,
+func _drop_pins(positions: Array, pins: Array, item: PinItemPowerUp, item_position: Control,
 		loader: BackgroundResourceLoader, wait_sec: float, bounce_sec: float) -> void:
 	
 	var pin_resources := loader.result as Array
@@ -212,8 +217,9 @@ func _drop_pins(positions: PoolVector2Array, pins: Array, item: PinItemPowerUp, 
 		var pin_node_scene := pin_resources[i] as PackedScene
 		var pin_node := pin_node_scene.instance() as ArpeegeePinNode
 		
-		_battle_layer.add_child(pin_node)
-		var position := positions[i]
+		var control := positions[i] as Control
+		control.add_child(pin_node)
+		var position := control.get_global_rect().get_center()
 		
 		pin_node.global_position = position + Vector2.UP * 1000.0
 		
@@ -228,7 +234,7 @@ func _drop_pins(positions: PoolVector2Array, pins: Array, item: PinItemPowerUp, 
 	
 	if item:
 		_battle_layer.add_child(item)
-		var position := item_position
+		var position := item_position.get_global_rect().get_center()
 		
 		item.global_position = position + Vector2.UP * 1000.0
 		

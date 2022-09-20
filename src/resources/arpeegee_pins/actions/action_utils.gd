@@ -98,9 +98,9 @@ static func damage_with_factor(amount: int, factor: float) -> int:
 static func add_jump(
 		tween: SceneTreeTween, pin: ArpeegeePinNode,
 		height: float, peak_sec: float, land_offset := 0.0) -> void:
-	tween.tween_property(pin, 'position:y', pin.position.y - height, peak_sec)\
+	tween.tween_property(pin, 'global_position:y', pin.position.y - height, peak_sec)\
 			.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
-	tween.tween_property(pin, 'position:y', pin.position.y - land_offset, peak_sec)\
+	tween.tween_property(pin, 'global_position:y', pin.position.y - land_offset, peak_sec)\
 			.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUAD)
 
 static func add_walk(tween: SceneTreeTween, pin: ArpeegeePinNode, start_position: Vector2,
@@ -115,8 +115,8 @@ static func add_walk(tween: SceneTreeTween, pin: ArpeegeePinNode, start_position
 		var end_location := start_position + (step_vector * (i + 1)) as Vector2
 		var mid_location := start_position + (((step_vector * (float(i) + .5))) + (Vector2.UP *  step_height)) as Vector2
 		
-		tween.tween_property(pin, 'position', mid_location, step_sec / 2.0)
-		tween.tween_property(pin, 'position', end_location, step_sec / 2.0)
+		tween.tween_property(pin, 'global_position', mid_location, step_sec / 2.0)
+		tween.tween_property(pin, 'global_position', end_location, step_sec / 2.0)
 		tween.tween_callback(Sounds, 'play_new_random', ['FootstepGrass', 3])
 	
 	return target_position
@@ -126,7 +126,7 @@ static func add_wind_up(tween: SceneTreeTween, pin: ArpeegeePinNode,
 	side = int(sign(side))
 	
 	var target_position := position + Vector2.RIGHT * 50.0 * side
-	tween.tween_property(pin, 'position', target_position, .35)\
+	tween.tween_property(pin, 'global_position', target_position, .35)\
 			.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
 	tween.tween_interval(.3)
 	

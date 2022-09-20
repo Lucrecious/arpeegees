@@ -33,6 +33,7 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	var side := -int(sign(relative.x))
 	
 	var tween := get_tree().create_tween()
+	
 	if walk:
 		position = ActionUtils.add_walk(tween, actioner, position, position + relative, 15.0, 5)
 	else:
@@ -42,20 +43,20 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 				.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
 	
 	tween.tween_interval(.3)
-	
+
 	if not windup_sfx_name.empty():
 		tween.tween_callback(sounds, 'play', [windup_sfx_name])
 	else:
 		tween.tween_callback(Sounds, 'play', ['GenericWindUp1'])
 	position = ActionUtils.add_wind_up(tween, actioner, position, side)
-	
+
 	position = ActionUtils.add_stab(tween, actioner, target_position)
-	
+
 	if not hit_sfx_name.empty():
 		tween.tween_callback(sounds, 'play', [hit_sfx_name])
 	else:
 		tween.tween_callback(Sounds, 'play', ['GenericHit1'])
-	
+
 	var is_mandolin := false
 	match pin_action().resource_path.get_file():
 		'bard_mandolin_swing.tres':
@@ -70,23 +71,24 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 			ActionUtils.add_text_trigger(tween, self, 'NARRATOR_PANCHI_USE_1')
 		'wing_attack_harpy.tres':
 			ActionUtils.add_text_trigger(tween, self, 'NARRATOR_WING_ATTACK_USE')
-		
+
 	var sprite_switcher := NodE.get_child(actioner, SpriteSwitcher) as SpriteSwitcher
 	if not attack_sprite_name.empty():
 		tween.tween_callback(sprite_switcher, 'change', [attack_sprite_name])
-	
+
 	if _impact_hint_node:
 		tween.tween_callback(VFX, 'physical_impact', [actioner, _impact_hint_node])
-	
+
 	var modified_stats := NodE.get_child(actioner, ModifiedPinStats) as ModifiedPinStats
 	if modified_stats:
 		ActionUtils.add_attack(tween, actioner, target, modified_stats.attack)
 	else:
 		assert(false)
-	
+
 	ActionUtils.add_shake(tween, actioner, position, Vector2(1, 0), 5.0, .35)
 	tween.tween_interval(.4)
 	tween.tween_callback(sprite_switcher, 'change', ['idle'])
+
 	ActionUtils.add_walk(tween, actioner,
 			actioner.global_position + relative, actioner.global_position, 15.0, 5)
 	
