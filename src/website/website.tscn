@@ -1,5 +1,8 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
 
-[node name="Website" type="Control"]
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[node name="Website" type="PanelContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+custom_styles/panel = SubResource( 1 )

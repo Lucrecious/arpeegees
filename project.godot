@@ -434,6 +434,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/resources/sounds.gd"
 }, {
+"base": "MarginContainer",
+"class": "SpanLimiter",
+"language": "GDScript",
+"path": "res://lut/ui/span_limiter.gd"
+}, {
 "base": "Node2D",
 "class": "SpriteFlattener",
 "language": "GDScript",
@@ -548,6 +553,11 @@ _global_script_classes=[ {
 "class": "TweenJuice",
 "language": "GDScript",
 "path": "res://src/resources/arpeegee_pins/actions/tween_juice.gd"
+}, {
+"base": "Node2D",
+"class": "UICamera",
+"language": "GDScript",
+"path": "res://src/ui/ui_camera.gd"
 }, {
 "base": "Control",
 "class": "UI_KeybindProperty",
@@ -665,6 +675,7 @@ _global_script_class_icons={
 "SituationalDialog": "",
 "SkipTurnStartTurnEffect": "",
 "SoundsComponent": "",
+"SpanLimiter": "",
 "SpriteFlattener": "",
 "SpriteSwitcher": "",
 "Squisher": "",
@@ -688,6 +699,7 @@ _global_script_class_icons={
 "TurnManager": "",
 "Turner4Directions": "",
 "TweenJuice": "",
+"UICamera": "",
 "UI_KeybindProperty": "",
 "UI_SliderProperty": "",
 "VFXNotesPair": "",
@@ -724,6 +736,8 @@ gdscript/warnings/integer_division=false
 
 window/size/width=1280
 window/size/height=720
+window/size/test_width=1920
+window/size/test_height=1080
 window/dpi/allow_hidpi=true
 window/stretch/aspect="keep_width"
 

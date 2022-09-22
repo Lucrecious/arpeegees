@@ -4,7 +4,7 @@ extends Control
 signal pins_dropped()
 
 const LayoutTwoOne := preload('res://src/game/battle/layout_two_one.tscn')
-const LayoutOneTwo := preload('res://src/game/battle/layout_one_TWO.tscn')
+const LayoutOneTwo := preload('res://src/game/battle/layout_one_two.tscn')
 const LayoutOneOne := preload('res://src/game/battle/layout_one_one.tscn')
 
 export(bool) var auto_start := false
@@ -19,10 +19,10 @@ var _layout: BattleLayout = null
 onready var _battle_layer := $'%BattleLayer' as Control
 onready var _turn_manager := $'%TurnManager' as TurnManager
 onready var _narrator := $'%Narrator' as NarratorUI
-onready var _original_narrator_position := _narrator.rect_position
+onready var _original_narrator_position := _narrator.rect_global_position
 
 func _ready() -> void:
-	_narrator.rect_position += Vector2.LEFT * (_narrator.rect_size.x + 500.0)
+	_narrator.rect_global_position += Vector2.LEFT * (_narrator.rect_size.x + 500.0)
 	
 	if auto_start:
 		var item_powerup: PinItemPowerUp
@@ -131,7 +131,7 @@ func _wait_for_drop_to_finish(wait_sec: float) -> void:
 func _do_intro_narration() -> void:
 	var speaking_tween := create_tween()
 	
-	speaking_tween.tween_property(_narrator, 'rect_position', _original_narrator_position, 1.5)\
+	speaking_tween.tween_property(_narrator, 'rect_global_position', _original_narrator_position, 1.5)\
 			.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 	speaking_tween.tween_interval(0.5)
 	speaking_tween.tween_callback(_narrator, 'speak_tr', ['NARRATOR_BATTLE_INTRODUCTION_GENERIC', false])
