@@ -21,6 +21,8 @@ onready var _turn_manager := $'%TurnManager' as TurnManager
 onready var _narrator := $'%Narrator' as NarratorUI
 onready var _original_narrator_position := _narrator.rect_position
 
+onready var bottom_bar := $'%BlackGradient' as Control
+
 func _ready() -> void:
 	_narrator.rect_position += Vector2.LEFT * (_narrator.rect_size.x + 500.0)
 	
@@ -36,6 +38,12 @@ func _ready() -> void:
 			item_powerup = item_powerup,
 		}
 		start(pins)
+
+func get_narrator() -> NarratorUI:
+	return _narrator
+
+func get_original_narrator_position() -> Vector2:
+	return _original_narrator_position
 
 var _started := false
 func start(pins: Dictionary) -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://src/game/title.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/main.gd" type="Script" id=2]
@@ -9,6 +9,18 @@
 [ext_resource path="res://assets/ui/website_font_bold.ttf" type="DynamicFontData" id=7]
 [ext_resource path="res://assets/ui/website/logo.png" type="Texture" id=8]
 [ext_resource path="res://assets/ui/website/wood.png" type="Texture" id=9]
+[ext_resource path="res://assets/ui/website/introduction-graphic.png" type="Texture" id=10]
+[ext_resource path="res://assets/ui/website/text-box-style-1-corner-front.svg" type="Texture" id=11]
+[ext_resource path="res://assets/ui/website/text-box-style-1-corner-back.svg" type="Texture" id=12]
+[ext_resource path="res://assets/ui/website/Group 29.png" type="Texture" id=13]
+[ext_resource path="res://assets/ui/website/svgexport-1.svg" type="Texture" id=14]
+[ext_resource path="res://assets/ui/website/Group 8-1.svg" type="Texture" id=15]
+[ext_resource path="res://assets/ui/website/Artboard.svg" type="Texture" id=16]
+[ext_resource path="res://assets/ui/website_font_regular.ttf" type="DynamicFontData" id=17]
+[ext_resource path="res://assets/ui/website/Path-1.svg" type="Texture" id=18]
+[ext_resource path="res://assets/ui/website/Group 10.png" type="Texture" id=19]
+[ext_resource path="res://assets/ui/website/packet-image.png" type="Texture" id=20]
+[ext_resource path="res://assets/ui/website/Group 26.svg" type="Texture" id=21]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -33,11 +45,64 @@ border_color = Color( 0, 0, 0, 1 )
 size = 22
 font_data = ExtResource( 7 )
 
+[sub_resource type="StyleBoxFlat" id=4]
+content_margin_left = 11.0
+content_margin_right = 11.0
+content_margin_top = 11.0
+content_margin_bottom = 11.0
+bg_color = Color( 0.0823529, 0.0117647, 0.168627, 1 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+content_margin_left = 13.0
+content_margin_right = 13.0
+content_margin_top = 16.0
+content_margin_bottom = 13.0
+bg_color = Color( 0.72549, 0.705882, 0.74902, 1 )
+border_width_left = 7
+border_width_top = 7
+border_width_right = 7
+border_width_bottom = 7
+border_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 60
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 32
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=12]
+size = 42
+font_data = ExtResource( 7 )
+
+[sub_resource type="StyleBoxFlat" id=9]
+draw_center = false
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 0.0941176, 0, 0.176471, 1 )
+
+[sub_resource type="DynamicFont" id=10]
+size = 42
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=11]
+size = 32
+font_data = ExtResource( 17 )
+
 [node name="Main" type="Control"]
-anchor_left = -0.001
 anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 1.28
+margin_bottom = 720.0
 script = ExtResource( 2 )
 
 [node name="Background" type="ColorRect" parent="."]
@@ -55,7 +120,7 @@ anchor_bottom = 1.0
 margin_left = -640.0
 margin_top = -1183.0
 margin_right = 640.0
-margin_bottom = 1836.0
+margin_bottom = 2839.0
 
 [node name="SpanLimiter" type="MarginContainer" parent="."]
 anchor_right = 1.0
@@ -186,21 +251,416 @@ align = 1
 autowrap = true
 
 [node name="InfoPanel" type="ColorRect" parent="SpanLimiter/Content"]
-margin_top = 720.0
-margin_bottom = 1020.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = 1530.0
 rect_min_size = Vector2( 0, 300 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 color = Color( 0.0862745, 0.545098, 0.403922, 1 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="SpanLimiter/Content/InfoPanel"]
+[node name="CenterContainer" type="CenterContainer" parent="SpanLimiter/Content/InfoPanel"]
+anchor_right = 1.0
+anchor_bottom = 0.392
+margin_top = -97.0
+margin_bottom = 84.24
+
+[node name="Introduction" type="Control" parent="SpanLimiter/Content/InfoPanel/CenterContainer"]
+margin_left = 140.0
+margin_right = 1140.0
+margin_bottom = 850.0
+rect_min_size = Vector2( 1000, 850 )
+
+[node name="Corner" type="TextureRect" parent="SpanLimiter/Content/InfoPanel/CenterContainer/Introduction"]
+anchor_left = 0.01
+anchor_top = 0.017
+anchor_right = 0.01
+anchor_bottom = 0.017
+margin_left = -44.24
+margin_top = -46.888
+margin_right = 43.76
+margin_bottom = 47.112
+rect_pivot_offset = Vector2( 44, 47 )
+texture = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Corner2" type="TextureRect" parent="SpanLimiter/Content/InfoPanel/CenterContainer/Introduction"]
+anchor_left = 0.986
+anchor_top = 0.011
+anchor_right = 0.986
+anchor_bottom = 0.011
+margin_left = -43.8641
+margin_top = -47.104
+margin_right = 44.136
+margin_bottom = 46.896
+rect_pivot_offset = Vector2( 59, 63 )
+texture = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Corner3" type="TextureRect" parent="SpanLimiter/Content/InfoPanel/CenterContainer/Introduction"]
+anchor_left = 0.011
+anchor_top = 0.983
+anchor_right = 0.011
+anchor_bottom = 0.983
+margin_left = -43.964
+margin_top = -47.112
+margin_right = 44.036
+margin_bottom = 46.888
+rect_pivot_offset = Vector2( 59, 63 )
+texture = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Corner4" type="TextureRect" parent="SpanLimiter/Content/InfoPanel/CenterContainer/Introduction"]
+anchor_left = 0.988
+anchor_top = 0.981
+anchor_right = 0.988
+anchor_bottom = 0.981
+margin_left = -44.312
+margin_top = -47.184
+margin_right = 43.688
+margin_bottom = 46.816
+rect_pivot_offset = Vector2( 59, 63 )
+texture = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="SpanLimiter/Content/InfoPanel/CenterContainer/Introduction"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+custom_styles/panel = SubResource( 4 )
 
-[node name="MarginContainer" type="Control" parent="SpanLimiter/Content/InfoPanel/VBoxContainer"]
-margin_bottom = 800.0
-rect_min_size = Vector2( 0, 800 )
+[node name="PanelContainer" type="PanelContainer" parent="SpanLimiter/Content/InfoPanel/CenterContainer/Introduction/PanelContainer"]
+margin_left = 11.0
+margin_top = 11.0
+margin_right = 989.0
+margin_bottom = 839.0
+custom_styles/panel = SubResource( 5 )
+
+[node name="Panel" type="Panel" parent="SpanLimiter/Content/InfoPanel/CenterContainer/Introduction/PanelContainer/PanelContainer"]
+margin_left = 13.0
+margin_top = 16.0
+margin_right = 965.0
+margin_bottom = 815.0
+custom_styles/panel = SubResource( 6 )
+
+[node name="IntroGraphics" type="TextureRect" parent="SpanLimiter/Content/InfoPanel/CenterContainer/Introduction/PanelContainer/PanelContainer/Panel"]
+anchor_right = 1.0
+margin_left = 159.0
+margin_top = -94.0
+margin_right = -167.0
+margin_bottom = 234.0
+texture = ExtResource( 10 )
+expand = true
+stretch_mode = 6
+
+[node name="Title" type="Label" parent="SpanLimiter/Content/InfoPanel/CenterContainer/Introduction/PanelContainer/PanelContainer/Panel"]
+anchor_right = 1.0
+margin_top = 214.0
+margin_bottom = 290.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 7 )
+text = "Introducing Arpeegees!!"
+align = 1
+
+[node name="Description" type="Label" parent="SpanLimiter/Content/InfoPanel/CenterContainer/Introduction/PanelContainer/PanelContainer/Panel"]
+anchor_right = 1.0
+margin_left = 50.0
+margin_top = 300.0
+margin_right = -50.0
+margin_bottom = 376.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 8 )
+text = "Inspired by the classic video game RPG's everyone loves, these adorable Hard Enamel pins come in randomly selected packs of 3 (three)!! 
+
+Fully designed by Arin Hanson, these pins are meant to evoke the nostalgic feeling of staying up late, battling monsters and becoming fully immersed in a fun, colorful, fantasy world!! Line them up as if they are engaged in a classic turn based RPG battle!"
+align = 1
+autowrap = true
+
+[node name="BottomLines" type="TextureRect" parent="SpanLimiter/Content/InfoPanel/CenterContainer/Introduction/PanelContainer/PanelContainer/Panel"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -66.0
+margin_bottom = -10.0
+texture = ExtResource( 13 )
+expand = true
+
+[node name="BottomArrow" type="TextureRect" parent="SpanLimiter/Content/InfoPanel/CenterContainer/Introduction/PanelContainer/PanelContainer/Panel"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -81.0
+margin_bottom = -45.0
+texture = ExtResource( 14 )
+stretch_mode = 6
+
+[node name="InnerCorner" type="TextureRect" parent="SpanLimiter/Content/InfoPanel/CenterContainer/Introduction"]
+anchor_left = 0.00961879
+anchor_top = 0.00868966
+anchor_right = 0.00961879
+anchor_bottom = 0.00868966
+margin_left = -37.964
+margin_top = -37.032
+margin_right = 38.036
+margin_bottom = 44.968
+rect_pivot_offset = Vector2( 51, 55 )
+texture = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="InnerCorner2" type="TextureRect" parent="SpanLimiter/Content/InfoPanel/CenterContainer/Introduction"]
+anchor_left = 0.986619
+anchor_top = 0.0106897
+anchor_right = 0.986619
+anchor_bottom = 0.0106897
+margin_left = -38.3121
+margin_top = -40.96
+margin_right = 37.688
+margin_bottom = 41.04
+rect_pivot_offset = Vector2( 51, 55 )
+texture = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="InnerCorner3" type="TextureRect" parent="SpanLimiter/Content/InfoPanel/CenterContainer/Introduction"]
+anchor_left = 0.011
+anchor_top = 0.98269
+anchor_right = 0.011
+anchor_bottom = 0.98269
+margin_left = -37.964
+margin_top = -40.968
+margin_right = 38.036
+margin_bottom = 41.032
+rect_pivot_offset = Vector2( 51, 55 )
+texture = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="InnerCorner4" type="TextureRect" parent="SpanLimiter/Content/InfoPanel/CenterContainer/Introduction"]
+anchor_left = 0.989
+anchor_top = 0.982845
+anchor_right = 0.989
+anchor_bottom = 0.982845
+margin_left = -38.036
+margin_top = -41.04
+margin_right = 37.964
+margin_bottom = 40.96
+rect_pivot_offset = Vector2( 51, 55 )
+texture = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="StrumpAd" type="Control" parent="SpanLimiter/Content"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 1522.0
+margin_bottom = 2242.0
+rect_min_size = Vector2( 1280, 720 )
+
+[node name="StumpClip" type="Control" parent="SpanLimiter/Content/StrumpAd"]
+anchor_left = 0.166
+anchor_top = 0.932
+anchor_right = 0.832
+anchor_bottom = 0.932
+margin_left = 0.519989
+margin_top = -570.04
+margin_right = 0.0400391
+margin_bottom = 4.95996
+rect_clip_content = true
+
+[node name="Stump" type="TextureRect" parent="SpanLimiter/Content/StrumpAd/StumpClip"]
+anchor_left = 0.063
+anchor_top = 1.0
+anchor_right = 0.919
+anchor_bottom = 1.0
+margin_left = -0.355995
+margin_top = -728.0
+margin_right = 0.33197
+margin_bottom = 2.0
+texture = ExtResource( 19 )
+expand = true
+stretch_mode = 5
+
+[node name="Path" type="TextureRect" parent="SpanLimiter/Content/StrumpAd"]
+anchor_left = 0.208
+anchor_top = 0.944
+anchor_right = 0.778
+anchor_bottom = 0.944
+margin_left = -0.23999
+margin_top = -364.68
+margin_right = 7.15991
+margin_bottom = 20.3199
+texture = ExtResource( 18 )
+expand = true
+stretch_mode = 5
+
+[node name="PacketImage" type="TextureRect" parent="SpanLimiter/Content/StrumpAd"]
+anchor_left = 0.208
+anchor_top = 0.944
+anchor_right = 0.778
+anchor_bottom = 0.944
+margin_left = 213.76
+margin_top = -426.68
+margin_right = -284.84
+margin_bottom = -112.68
+texture = ExtResource( 20 )
+expand = true
+stretch_mode = 5
+
+[node name="SaleTag" type="TextureRect" parent="SpanLimiter/Content/StrumpAd"]
+anchor_left = 0.208
+anchor_top = 0.944
+anchor_right = 0.778
+anchor_bottom = 0.944
+margin_left = 380.76
+margin_top = -240.68
+margin_right = -199.84
+margin_bottom = -140.68
+texture = ExtResource( 21 )
+expand = true
+stretch_mode = 5
+
+[node name="Title" type="Label" parent="SpanLimiter/Content/StrumpAd/SaleTag"]
+anchor_right = 1.0
+margin_left = 25.0
+margin_top = 19.0
+margin_right = -19.0
+margin_bottom = 95.0
+custom_colors/font_color = Color( 0.231373, 0.141176, 0.227451, 1 )
+custom_fonts/font = SubResource( 12 )
+text = "$25"
+
+[node name="PackInformation" type="Control" parent="SpanLimiter/Content"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 796.0
+margin_bottom = 1739.0
+
+[node name="PanelContainer" type="PanelContainer" parent="SpanLimiter/Content/PackInformation"]
+anchor_left = 0.218
+anchor_top = 0.066
+anchor_right = 0.776
+anchor_bottom = 0.884
+margin_left = -0.0400085
+margin_top = -0.237999
+margin_right = -0.280029
+margin_bottom = 0.387939
+custom_styles/panel = SubResource( 9 )
+
+[node name="MarginContainer" type="MarginContainer" parent="SpanLimiter/Content/PackInformation/PanelContainer"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 709.0
+margin_bottom = 767.0
+custom_constants/margin_right = 0
+custom_constants/margin_top = 70
+custom_constants/margin_left = 0
+custom_constants/margin_bottom = 0
+
+[node name="Back" type="ColorRect" parent="SpanLimiter/Content/PackInformation/PanelContainer/MarginContainer"]
+margin_top = 70.0
+margin_right = 704.0
+margin_bottom = 761.0
+color = Color( 0.972549, 0.905882, 0.823529, 1 )
+
+[node name="Pattern" type="TextureRect" parent="SpanLimiter/Content/PackInformation/PanelContainer"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 709.0
+margin_bottom = 767.0
+texture = ExtResource( 16 )
+expand = true
+stretch_mode = 5
+
+[node name="Container" type="Control" parent="SpanLimiter/Content/PackInformation/PanelContainer"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 709.0
+margin_bottom = 767.0
+
+[node name="Title" type="Label" parent="SpanLimiter/Content/PackInformation/PanelContainer/Container"]
+anchor_right = 1.0
+margin_left = 1.0
+margin_top = 102.0
+margin_right = 1.0
+margin_bottom = 207.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 10 )
+text = "Each bag contains 3 (three) randomly selected pins."
+align = 1
+autowrap = true
+
+[node name="Top" type="Label" parent="SpanLimiter/Content/PackInformation/PanelContainer/Container"]
+anchor_right = 1.0
+margin_left = 50.0
+margin_top = 242.0
+margin_right = -50.0
+margin_bottom = 362.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 11 )
+text = "The entire set of Wave 1 pins consist of:
+"
+align = 1
+autowrap = true
+
+[node name="Middle" type="Label" parent="SpanLimiter/Content/PackInformation/PanelContainer/Container"]
+anchor_right = 1.0
+margin_left = 127.0
+margin_top = 350.0
+margin_right = 27.0
+margin_bottom = 511.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 8 )
+text = "7 Hero Pins (facing left)
+7 Monster Pins (facing right)
+4 Menu Pins
+2 ULTRA RARE Mystery Pins"
+autowrap = true
+
+[node name="Bottom" type="Label" parent="SpanLimiter/Content/PackInformation/PanelContainer/Container"]
+anchor_right = 1.0
+margin_left = 50.0
+margin_top = 538.0
+margin_right = -50.0
+margin_bottom = 658.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 11 )
+text = "Each pack of 3 pins contains AT LEAST 1 (one) UNCOMMON OR HIGHER rarity pin! Try for your favorite one!"
+align = 1
+autowrap = true
+
+[node name="TopScroll" type="TextureRect" parent="SpanLimiter/Content/PackInformation"]
+margin_left = 193.0
+margin_top = 4.0
+margin_right = 1247.0
+margin_bottom = 107.0
+texture = ExtResource( 15 )
+
+[node name="BottomScroll" type="TextureRect" parent="SpanLimiter/Content/PackInformation"]
+margin_left = 193.0
+margin_top = 802.0
+margin_right = 1247.0
+margin_bottom = 905.0
+texture = ExtResource( 15 )
 
 [node name="Camera" type="Node2D" parent="."]
 script = ExtResource( 5 )
 _control_path = NodePath("../Boundaries")
+
+[node name="GameVisibilityNotifier" type="VisibilityNotifier2D" parent="."]
+unique_name_in_owner = true
+position = Vector2( 628, 324 )
