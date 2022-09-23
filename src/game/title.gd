@@ -5,11 +5,15 @@ signal battle_screen_requested()
 
 onready var _bag := $'%Bag' as PinBag
 onready var _shockwave := $'%Shockwave' as Control
+onready var _animation := $TitleAnimations as AnimationPlayer
 
 func _ready() -> void:
 	_bag.visible = false
 	_bag.connect('bag_exploded', self, '_on_bag_exploded')
 	_bag.connect('open_animation_finished', self, '_on_pin_bag_opened')
+
+func start() -> void:
+	_animation.play('intro')
 
 func _on_bag_exploded() -> void:
 	var shader := _shockwave.material as ShaderMaterial

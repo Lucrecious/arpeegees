@@ -94,5 +94,4 @@ anchor_bottom = 1.0
 mouse_filter = 2
 
 [node name="TitleAnimations" type="AnimationPlayer" parent="."]
-autoplay = "intro"
 anims/intro = SubResource( 1 )
