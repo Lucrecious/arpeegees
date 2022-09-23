@@ -40,6 +40,13 @@ anchor_bottom = 1.0
 margin_left = 1.28
 script = ExtResource( 2 )
 
+[node name="Background" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -1205.0
+margin_bottom = 2858.0
+color = Color( 0.0862745, 0.545098, 0.403922, 1 )
+
 [node name="Boundaries" type="Control" parent="."]
 anchor_left = 0.5
 anchor_top = 1.0
@@ -127,40 +134,47 @@ covered the land of"
 align = 1
 autowrap = true
 
-[node name="IntroPanel" type="PanelContainer" parent="SpanLimiter/Content/TopTitleBar"]
+[node name="IntroPanel" type="CenterContainer" parent="SpanLimiter/Content/TopTitleBar"]
 unique_name_in_owner = true
-anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 300.0
-margin_top = 232.0
-margin_right = -300.0
-margin_bottom = 435.0
-rect_min_size = Vector2( 550, 0 )
+margin_top = 560.0
+margin_bottom = 560.0
+mouse_filter = 2
+
+[node name="IntroPanelContainer" type="PanelContainer" parent="SpanLimiter/Content/TopTitleBar/IntroPanel"]
+margin_left = 365.0
+margin_top = 113.0
+margin_right = 915.0
+margin_bottom = 363.0
+rect_min_size = Vector2( 550, 250 )
 rect_clip_content = true
+mouse_filter = 2
 custom_styles/panel = SubResource( 2 )
 
-[node name="Wood" type="TextureRect" parent="SpanLimiter/Content/TopTitleBar/IntroPanel"]
+[node name="Wood" type="TextureRect" parent="SpanLimiter/Content/TopTitleBar/IntroPanel/IntroPanelContainer"]
 margin_left = 10.0
 margin_top = 10.0
-margin_right = 670.0
-margin_bottom = 193.0
+margin_right = 540.0
+margin_bottom = 240.0
+mouse_filter = 2
 texture = ExtResource( 9 )
 expand = true
 
-[node name="MarginContainer" type="MarginContainer" parent="SpanLimiter/Content/TopTitleBar/IntroPanel/Wood"]
+[node name="MarginContainer" type="MarginContainer" parent="SpanLimiter/Content/TopTitleBar/IntroPanel/IntroPanelContainer/Wood"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 custom_constants/margin_right = 20
 custom_constants/margin_top = 20
 custom_constants/margin_left = 20
 custom_constants/margin_bottom = 20
 
-[node name="Label" type="Label" parent="SpanLimiter/Content/TopTitleBar/IntroPanel/Wood/MarginContainer"]
+[node name="Label" type="Label" parent="SpanLimiter/Content/TopTitleBar/IntroPanel/IntroPanelContainer/Wood/MarginContainer"]
 margin_left = 20.0
-margin_top = 20.0
-margin_right = 640.0
-margin_bottom = 163.0
+margin_top = 43.0
+margin_right = 510.0
+margin_bottom = 186.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
 custom_constants/line_spacing = 2
@@ -172,10 +186,8 @@ align = 1
 autowrap = true
 
 [node name="InfoPanel" type="ColorRect" parent="SpanLimiter/Content"]
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_bottom = 1872.0
+margin_top = 720.0
+margin_bottom = 1020.0
 rect_min_size = Vector2( 0, 300 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -186,7 +198,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="MarginContainer" type="Control" parent="SpanLimiter/Content/InfoPanel/VBoxContainer"]
-margin_right = 1280.0
 margin_bottom = 800.0
 rect_min_size = Vector2( 0, 800 )
 
