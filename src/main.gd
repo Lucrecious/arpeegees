@@ -25,7 +25,11 @@ func _input(event: InputEvent) -> void:
 		return
 	
 	if event is InputEventMouseButton:
-		if event.pressed:
+		var is_mouse_button := bool(event.button_index == BUTTON_LEFT\
+				or event.button_index == BUTTON_RIGHT\
+				or event.button_index == BUTTON_MIDDLE)
+		
+		if event.pressed and is_mouse_button:
 			_intro_faded = true
 			_title_screen.start()
 			var fade_away := _intro_panel.create_tween()
