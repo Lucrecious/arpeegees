@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/landing_arpeegees.mp3-d9f4c967cf7d7eeafe551f5420b2c62d.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/landing_arpeegees.mp3"
+dest_files=[ "res://.import/landing_arpeegees.mp3-d9f4c967cf7d7eeafe551f5420b2c62d.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

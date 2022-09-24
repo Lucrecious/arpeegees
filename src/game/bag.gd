@@ -18,6 +18,7 @@ onready var _holder := $Holder as Control
 onready var _particles_spawn_hint := $'%StarParticlesHint' as Position2D
 onready var _star_particles := $'%StarParticles' as CPUParticles2D
 onready var _bag_pieces := $'%BagPieces' as Control
+onready var _sounds := NodE.get_child(self, SoundsComponent) as SoundsComponent
 
 func _ready() -> void:
 	connect('mouse_entered', self, '_on_mouse_entered')
@@ -46,6 +47,7 @@ func _shoot_particles(index: int) -> void:
 	particles.emitting = true
 	
 	shoot_tween.tween_interval(1.0)
+	shoot_tween.tween_callback(_sounds, 'play', ['LightShimmerPackage'])
 	shoot_tween.tween_property(particles, 'global_position', particles.global_position + relative_destination, .5)
 	shoot_tween.tween_callback(particles, 'set', ['emitting', false])
 

@@ -12,6 +12,7 @@ export(Array, Resource) var auto_start_player_pins := []
 export(Array, Resource) var auto_start_npc_pins := []
 export(bool) var auto_start_item := false
 export(PinItemPowerUp.Type) var auto_start_item_type := PinItemPowerUp.Type.HP
+onready var _sounds := NodE.get_child(self, SoundsComponent) as SoundsComponent
 
 var _layout: BattleLayout = null
 
@@ -157,6 +158,7 @@ func _balance_battle() -> void:
 		_turn_manager.use_item(item)
 	
 	var type_disadvanged := _turn_manager.balance_battle()
+	_sounds.play('EnragedHarpy')
 	
 	var disadvantage_dialog := ''
 	
@@ -235,6 +237,7 @@ func _drop_pins(positions: Array, pins: Array, item: PinItemPowerUp, item_positi
 		
 		var drop_tween := get_tree().create_tween()
 		drop_tween.tween_interval(rand_range(0.0, wait_sec))
+		drop_tween.tween_callback(_sounds, 'play', ['ShimmerArpeegees'])
 		drop_tween.tween_property(pin_node, 'global_position:y', position.y, bounce_sec)\
 			.set_ease(Tween.EASE_OUT)\
 			.set_trans(Tween.TRANS_BOUNCE)

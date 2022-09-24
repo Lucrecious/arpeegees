@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/shimmer_arpeegees.mp3-467f640bb3aaa54f121da928a32913b3.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/shimmer_arpeegees.mp3"
+dest_files=[ "res://.import/shimmer_arpeegees.mp3-467f640bb3aaa54f121da928a32913b3.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -74,11 +74,16 @@ func _on_turn_started_preview() -> SceneTreeTween:
 	var tween := create_tween()
 	if _narrator.is_speaking():
 		tween.tween_interval(0.1)
+		tween.tween_callback(self, '_debug_print', ['before speaking pause'])
 		TweenExtension.pause_until_signal(tween, _narrator, 'speaking_ended')
+		tween.tween_callback(self, '_debug_print', ['after speaking pause'])
 	
 	tween.tween_interval(0.01)
 	return tween
 
+func _debug_print(value: String) -> void:
+	print_debug(value)
+	
 func _do_npc_turn_section_start() -> void:
 	var keys := _situational_dialog.npc_overall_turn_started_dialog()
 	if keys.empty():
