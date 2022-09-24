@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://src/game/bag.gd" type="Script" id=1]
 [ext_resource path="res://assets/title/bag.png" type="Texture" id=2]
@@ -16,6 +16,10 @@
 [ext_resource path="res://assets/title/bag_piece7.png" type="Texture" id=14]
 [ext_resource path="res://src/game/bag_pieces.gd" type="Script" id=15]
 [ext_resource path="res://assets/title/bag_piece2.png" type="Texture" id=16]
+[ext_resource path="res://assets/sounds/light_shimmer_package.mp3" type="AudioStream" id=17]
+[ext_resource path="res://assets/sounds/expanding_package.mp3" type="AudioStream" id=18]
+[ext_resource path="res://assets/sounds/pop_package.mp3" type="AudioStream" id=19]
+[ext_resource path="res://src/resources/sounds.gd" type="Script" id=20]
 
 [sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 5 )
@@ -115,6 +119,26 @@ tracks/5/keys = {
 "values": [ {
 "args": [  ],
 "method": "explode_bag"
+} ]
+}
+tracks/6/type = "method"
+tracks/6/path = NodePath("Sounds")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"values": [ {
+"args": [ "ExpandingPackage" ],
+"method": "play"
+}, {
+"args": [ "LightShimmerPackage" ],
+"method": "play"
+}, {
+"args": [ "PopPackage" ],
+"method": "play"
 } ]
 }
 
@@ -270,3 +294,15 @@ position = Vector2( 103, 20 )
 unique_name_in_owner = true
 anims/RESET = SubResource( 5 )
 anims/open = SubResource( 3 )
+
+[node name="Sounds" type="Node" parent="."]
+script = ExtResource( 20 )
+
+[node name="ExpandingPackage" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 18 )
+
+[node name="LightShimmerPackage" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 17 )
+
+[node name="PopPackage" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 19 )

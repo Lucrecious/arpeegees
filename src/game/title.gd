@@ -6,6 +6,7 @@ signal battle_screen_requested()
 onready var _bag := $'%Bag' as PinBag
 onready var _shockwave := $'%Shockwave' as Control
 onready var _animation := $TitleAnimations as AnimationPlayer
+onready var _sounds := NodE.get_child(self, SoundsComponent) as SoundsComponent
 
 func _ready() -> void:
 	_bag.visible = false
@@ -58,5 +59,11 @@ func bounce_in_bag() -> void:
 	_bag.rect_position.y = original_y - 1000.0
 	_bag.visible = true
 	
-	get_tree().create_tween().tween_property(_bag, 'rect_position:y', original_y, 1.0)\
-		.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BOUNCE)
+	
+	var animation := get_tree().create_tween()
+	
+	animation.tween_property(_bag, 'rect_position:y', original_y, 1.0)\
+			.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_EXPO)
+	animation.tween_callback(_sounds, 'play', ['DropPackage'])
+	
+	
