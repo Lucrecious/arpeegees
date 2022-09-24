@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/scoop_harpy.mp3-188e4df0da1597da3a193ddde6eaa7a3.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/scoop_harpy.mp3"
+dest_files=[ "res://.import/scoop_harpy.mp3-188e4df0da1597da3a193ddde6eaa7a3.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

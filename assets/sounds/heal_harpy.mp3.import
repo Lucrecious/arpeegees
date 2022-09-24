@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/heal_harpy.mp3-f4961c54040a303dca39309a15353cc5.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/heal_harpy.mp3"
+dest_files=[ "res://.import/heal_harpy.mp3-f4961c54040a303dca39309a15353cc5.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/enraged_harpy.mp3-44eb358178cbf7682106a84cd3505d6f.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/enraged_harpy.mp3"
+dest_files=[ "res://.import/enraged_harpy.mp3-44eb358178cbf7682106a84cd3505d6f.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

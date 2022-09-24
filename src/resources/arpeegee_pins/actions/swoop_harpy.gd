@@ -20,14 +20,14 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	
 	ActionUtils.add_text_trigger(tween, self, 'NARRATOR_SWOOP_USE')
 	
-	tween.tween_callback(sounds, 'play', ['DiveBombSquish'])
+	tween.tween_callback(sounds, 'play', ['Squish'])
 	
 	tween.tween_property(squisher, 'height_factor', .3, .5)\
 			.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BOUNCE)
 	
 	tween.parallel().tween_property(squisher, 'squish_factor', .5, .5)
 	tween.tween_interval(.5)
-	tween.tween_callback(sounds, 'play', ['DiveBombAscend'])
+	tween.tween_callback(sounds, 'play', ['Ascend'])
 	tween.tween_callback(sprite_switcher, 'change', ['diveup'])
 	tween.tween_property(squisher, 'height_factor', 1.7, .2)
 	
@@ -38,10 +38,11 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	tween.tween_callback(sprite_switcher, 'change', ['diveclaws'])
 	tween.tween_interval(.7)
 	
+	tween.tween_callback(sounds, 'play', ['Descend'])
 	var actioner_position := actioner.global_position + relative + Vector2.UP * 50.0
 	tween.tween_property(actioner, 'global_position', actioner_position, .2)
 	
-	tween.tween_callback(sounds, 'play', ['DiveBombHit'])
+	tween.tween_callback(sounds, 'play', ['ScoopAttach'])
 	
 	var modified_stats := NodE.get_child(actioner, ModifiedPinStats) as ModifiedPinStats
 	var is_evading := FairRandom.is_evading(modified_stats.evasion)
@@ -53,6 +54,8 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 		tween.tween_interval(0.5)
 		
 		actioner_position += Vector2.UP * 300.0
+		
+		tween.tween_callback(sounds, 'play', ['Scoop'])
 		tween.tween_property(actioner, 'global_position', actioner_position, 0.5)\
 				.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
 		tween.parallel().tween_property(target, 'global_position', target.global_position + Vector2.UP * 300.0, 0.5)\
@@ -62,6 +65,8 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 		
 		tween.tween_property(target, 'global_position', target.global_position, 0.2)\
 				.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_EXPO)
+		
+		tween.tween_callback(sounds, 'play', ['Drop'])
 		
 		if modified_stats:
 			ActionUtils.add_attack_no_evade(tween, actioner, target, modified_stats.attack * 2.0)

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/ascend_harpy.mp3-9f29fa459efd820efd170e3811022702.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/ascend_harpy.mp3"
+dest_files=[ "res://.import/ascend_harpy.mp3-9f29fa459efd820efd170e3811022702.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

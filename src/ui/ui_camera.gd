@@ -33,6 +33,8 @@ func _hide_hud() -> void:
 	_hide_show_tween.tween_property(_battle.get_narrator(), 'rect_position:y',
 			_battle.get_original_narrator_position().y - _battle.get_narrator().rect_size.y - 100.0, 0.5)\
 			.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
+	
+	Music.pause_fade_out()
 
 func _show_hud() -> void:
 	if _hide_show_tween:
@@ -47,6 +49,8 @@ func _show_hud() -> void:
 	_hide_show_tween.tween_property(_battle.get_narrator(), 'rect_position:y',
 		_battle.get_original_narrator_position().y, 0.5)\
 		.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+	
+	Music.unpause_fade_in()
 
 func _input(event: InputEvent) -> void:
 	var viewport := _control.get_viewport()

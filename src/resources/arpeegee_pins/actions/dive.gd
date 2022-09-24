@@ -18,12 +18,12 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	
 	var tween := get_tree().create_tween()
 	
-	tween.tween_callback(sounds, 'play', ['DiveBombSquish'])
+	tween.tween_callback(sounds, 'play', ['Squish'])
 	
 	tween.tween_property(squisher, 'height_factor', .3, .5).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BOUNCE)
 	tween.parallel().tween_property(squisher, 'squish_factor', .5, .5)
 	tween.tween_interval(.5)
-	tween.tween_callback(sounds, 'play', ['DiveBombAscend'])
+	tween.tween_callback(sounds, 'play', ['Ascend'])
 	tween.tween_callback(sprite_switcher, 'change', ['diveup'])
 	tween.tween_property(squisher, 'height_factor', 1.7, .2)
 	
@@ -33,6 +33,8 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	tween.tween_callback(squisher, 'set', ['squish_factor', 1.0])
 	tween.tween_callback(sprite_switcher, 'change', ['divehead'])
 	tween.tween_interval(.7)
+	
+	tween.tween_callback(sounds, 'play', ['Descend'])
 	tween.tween_property(actioner, 'global_position', actioner.global_position + relative, .2)
 	
 	tween.tween_callback(sounds, 'play', ['DiveBombHit'])
@@ -51,6 +53,7 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	
 	ActionUtils.add_text_trigger(tween, self, 'NARRATOR_DIVE_BOMB_RECOIL')
 	
+	tween.tween_callback(sounds, 'play', ['DiveBombCry'])
 	ActionUtils.add_real_damage(tween, actioner, 2)
 	
 	tween.tween_callback(object, callback)

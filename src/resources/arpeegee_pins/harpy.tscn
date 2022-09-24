@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/sprites/harpy/harpy_idle.png" type="Texture" id=2]
@@ -7,12 +7,12 @@
 [ext_resource path="res://assets/sprites/harpy/harpy_hit.png" type="Texture" id=5]
 [ext_resource path="res://assets/shaders/pin_sprite_shader.gdshader" type="Shader" id=6]
 [ext_resource path="res://src/resources/arpeegee_pins/harpy.tres" type="Resource" id=7]
-[ext_resource path="res://assets/sounds/dive_bomb_preascend_harpy.mp3" type="AudioStream" id=8]
+[ext_resource path="res://assets/sounds/preascend_harpy.mp3" type="AudioStream" id=8]
 [ext_resource path="res://assets/sounds/dive_bomb_hit_harpy.mp3" type="AudioStream" id=9]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/actions.gd" type="Script" id=10]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/dive.gd" type="Script" id=11]
 [ext_resource path="res://lut/components/root_sprite.gd" type="Script" id=12]
-[ext_resource path="res://assets/sounds/dive_bomb_ascend_harpy.mp3" type="AudioStream" id=13]
+[ext_resource path="res://assets/sounds/ascend_harpy.mp3" type="AudioStream" id=13]
 [ext_resource path="res://assets/sprites/harpy/harpy_win.PNG" type="Texture" id=14]
 [ext_resource path="res://assets/sprites/harpy/harpy_dive_claws.png" type="Texture" id=15]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/swoop_harpy.gd" type="Script" id=16]
@@ -22,6 +22,14 @@
 [ext_resource path="res://src/resources/arpeegee_pins/actions/wing_gust_harpy.gd" type="Script" id=20]
 [ext_resource path="res://assets/sprites/harpy/harpy_magicuse.png" type="Texture" id=21]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/angelic_heal_harpy.gd" type="Script" id=22]
+[ext_resource path="res://assets/sounds/dive_bomb_cry_harpy.mp3" type="AudioStream" id=23]
+[ext_resource path="res://assets/sounds/descend_harpy.mp3" type="AudioStream" id=24]
+[ext_resource path="res://assets/sounds/scoop_harpy.mp3" type="AudioStream" id=25]
+[ext_resource path="res://assets/sounds/drop_harpy.mp3" type="AudioStream" id=26]
+[ext_resource path="res://assets/sounds/scoop_attach_harpy.mp3" type="AudioStream" id=27]
+[ext_resource path="res://assets/sounds/chop_harpy.mp3" type="AudioStream" id=28]
+[ext_resource path="res://assets/sounds/gust_harpy.mp3" type="AudioStream" id=29]
+[ext_resource path="res://assets/sounds/heal_harpy.mp3" type="AudioStream" id=30]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 6 )
@@ -136,6 +144,7 @@ script = ExtResource( 16 )
 script = ExtResource( 18 )
 attack_sprite_name = "wingattack"
 pin_action = ExtResource( 19 )
+hit_sfx_name = "Chop"
 
 [node name="ImpactHint" type="Position2D" parent="Actions/WingAttack" index="0"]
 position = Vector2( 78, -53 )
@@ -146,11 +155,35 @@ script = ExtResource( 20 )
 [node name="AngelicHeal" type="Node2D" parent="Actions" index="4"]
 script = ExtResource( 22 )
 
-[node name="DiveBombSquish" type="AudioStreamPlayer" parent="Sounds" index="0"]
+[node name="Squish" type="AudioStreamPlayer" parent="Sounds" index="0"]
 stream = ExtResource( 8 )
 
-[node name="DiveBombAscend" type="AudioStreamPlayer" parent="Sounds" index="1"]
+[node name="Ascend" type="AudioStreamPlayer" parent="Sounds" index="1"]
 stream = ExtResource( 13 )
 
-[node name="DiveBombHit" type="AudioStreamPlayer" parent="Sounds" index="2"]
+[node name="Descend" type="AudioStreamPlayer" parent="Sounds" index="2"]
+stream = ExtResource( 24 )
+
+[node name="DiveBombHit" type="AudioStreamPlayer" parent="Sounds" index="3"]
 stream = ExtResource( 9 )
+
+[node name="DiveBombCry" type="AudioStreamPlayer" parent="Sounds" index="4"]
+stream = ExtResource( 23 )
+
+[node name="ScoopAttach" type="AudioStreamPlayer" parent="Sounds" index="5"]
+stream = ExtResource( 27 )
+
+[node name="Scoop" type="AudioStreamPlayer" parent="Sounds" index="6"]
+stream = ExtResource( 25 )
+
+[node name="Drop" type="AudioStreamPlayer" parent="Sounds" index="7"]
+stream = ExtResource( 26 )
+
+[node name="Chop" type="AudioStreamPlayer" parent="Sounds" index="8"]
+stream = ExtResource( 28 )
+
+[node name="Gust" type="AudioStreamPlayer" parent="Sounds" index="9"]
+stream = ExtResource( 29 )
+
+[node name="Heal" type="AudioStreamPlayer" parent="Sounds" index="10"]
+stream = ExtResource( 30 )

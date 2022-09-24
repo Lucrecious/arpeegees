@@ -7,11 +7,14 @@ func pin_action() -> PinAction:
 
 func run(actioner: Node2D, object: Object, callback: String) -> void:
 	var sprite_switcher := NodE.get_child(actioner, SpriteSwitcher) as SpriteSwitcher
+	var sounds := NodE.get_child(actioner, SoundsComponent) as SoundsComponent
+	
 	var animation := create_tween()
 	
 	animation.tween_interval(0.5)
 	
 	animation.tween_callback(sprite_switcher, 'change', ['winggust'])
+	animation.tween_callback(sounds, 'play', ['Heal'])
 	
 	var heart_explosion := VFX.heart_explosion()
 	animation.tween_callback(NodE, 'add_children', [self, heart_explosion])

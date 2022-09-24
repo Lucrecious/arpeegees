@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/dive_bomb_cry_harpy.mp3-03321e348cdb5c54002951f07775bc62.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/dive_bomb_cry_harpy.mp3"
+dest_files=[ "res://.import/dive_bomb_cry_harpy.mp3-03321e348cdb5c54002951f07775bc62.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

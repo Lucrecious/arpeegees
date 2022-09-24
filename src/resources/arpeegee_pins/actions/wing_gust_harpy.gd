@@ -8,6 +8,7 @@ func pin_action() -> PinAction:
 func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> void:
 	var sprite_switcher := NodE.get_child(actioner, SpriteSwitcher) as SpriteSwitcher
 	var modified_stats := NodE.get_child(actioner, ModifiedPinStats) as ModifiedPinStats
+	var sounds := NodE.get_child(actioner, SoundsComponent) as SoundsComponent
 	
 	var gust := load('res://src/vfx/gust_harpy.tscn').instance() as CPUParticles2D
 	gust.z_index = Aura.Z_INDEX_FRONT
@@ -22,6 +23,7 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 		switch_secs.push_back(0.1)
 		speed_scales.push_back(4.0)
 	
+	animation.tween_callback(sounds, 'play', ['Gust'])
 	for i in switch_secs.size():
 		var sec := switch_secs[i] as float
 		var scale := speed_scales[i] as float
@@ -32,6 +34,8 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 		animation.tween_interval(sec)
 	
 	for t in targets:
+		print_debug('Chop is temporary played here, need to make new add attack that returns miss or not')
+		animation.tween_callback(sounds, 'play', ['Chop'])
 		ActionUtils.add_attack(animation, actioner, t, modified_stats.magic_attack)
 	
 	animation.tween_callback(gust, 'set', ['emitting', false])

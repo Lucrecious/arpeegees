@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/preascend_harpy.mp3-60ac14bc14a1262bdfb98814bdd61f77.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/preascend_harpy.mp3"
+dest_files=[ "res://.import/preascend_harpy.mp3-60ac14bc14a1262bdfb98814bdd61f77.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
