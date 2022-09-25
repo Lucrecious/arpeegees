@@ -22,8 +22,8 @@ func _on_npc_turn_started() -> void:
 		return
 	
 	var tween := create_tween()
-	if _narrator_ui.is_speaking():
-		TweenExtension.pause_until_signal(tween, _narrator_ui, 'speaking_ended')
+	TweenExtension.pause_until_signal_if_condition(tween, _narrator_ui, 'speaking_ended',
+			_narrator_ui, 'is_speaking')
 	
 	tween.tween_interval(1.0)
 	

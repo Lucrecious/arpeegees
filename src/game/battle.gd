@@ -144,7 +144,8 @@ func _do_intro_narration() -> void:
 			.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 	speaking_tween.tween_interval(0.5)
 	speaking_tween.tween_callback(_narrator, 'speak_tr', ['NARRATOR_BATTLE_INTRODUCTION_GENERIC', false])
-	TweenExtension.pause_until_signal(speaking_tween.parallel(), _narrator, 'speaking_ended')
+	TweenExtension.pause_until_signal_if_condition(speaking_tween.parallel(), _narrator, 'speaking_ended',
+			_narrator, 'is_speaking')
 	speaking_tween.tween_callback(self, '_balance_battle')
 
 func _balance_battle() -> void:
@@ -172,7 +173,8 @@ func _balance_battle() -> void:
 		_start_battle(nodes)
 	else:
 		var tween := create_tween()
-		TweenExtension.pause_until_signal(tween, _narrator, 'speaking_ended')
+		TweenExtension.pause_until_signal_if_condition(tween, _narrator, 'speaking_ended',
+				_narrator, 'is_speaking')
 		tween.tween_callback(self, '_start_battle', [nodes])
 		_narrator.speak_tr(disadvantage_dialog, true)
 
@@ -200,15 +202,9 @@ func _start_battle(nodes: Array) -> void:
 
 func _load_and_drop_pins(pins: Array, positions: Array, item: Node2D, item_position,
 		wait_sec: float, bounce_sec: float) -> void:
+	
+	# Start loading pins in background
 	var background_resource_loader := BackgroundResourceLoader.new()
-	get_tree().root.call_deferred('add_child', background_resource_loader)
-	
-	var tween := create_tween()
-	TweenExtension.pause_until_signal(tween, background_resource_loader, 'finished')
-	tween.tween_callback(background_resource_loader, 'queue_free')
-	tween.tween_callback(self, '_drop_pins', [positions, pins, item, item_position,
-			background_resource_loader, wait_sec, bounce_sec])
-	
 	var scene_paths := PoolStringArray([])
 	
 	for i in positions.size():
@@ -216,6 +212,15 @@ func _load_and_drop_pins(pins: Array, positions: Array, item: Node2D, item_posit
 		scene_paths.push_back(pin.scene_path)
 	
 	background_resource_loader.load(scene_paths)
+	get_tree().root.call_deferred('add_child', background_resource_loader)
+	
+	# do tween for waiting on it
+	var tween := create_tween()
+	TweenExtension.pause_until_signal_if_condition(tween, background_resource_loader, 'finished',
+			background_resource_loader, 'is_busy')
+	tween.tween_callback(background_resource_loader, 'queue_free')
+	tween.tween_callback(self, '_drop_pins', [positions, pins, item, item_position,
+			background_resource_loader, wait_sec, bounce_sec])
 
 func _drop_pins(positions: Array, pins: Array, item: PinItemPowerUp, item_position: Control,
 		loader: BackgroundResourceLoader, wait_sec: float, bounce_sec: float) -> void:

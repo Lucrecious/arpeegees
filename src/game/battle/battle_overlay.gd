@@ -72,11 +72,9 @@ func _on_turn_started_preview() -> SceneTreeTween:
 	
 	_previous_pin_turn = current
 	var tween := create_tween()
-	if _narrator.is_speaking():
-		tween.tween_interval(0.1)
-		tween.tween_callback(self, '_debug_print', ['before speaking pause'])
-		TweenExtension.pause_until_signal(tween, _narrator, 'speaking_ended')
-		tween.tween_callback(self, '_debug_print', ['after speaking pause'])
+	tween.tween_interval(0.1)
+	TweenExtension.pause_until_signal_if_condition(tween, _narrator, 'speaking_ended',
+			_narrator, 'is_speaking')
 	
 	tween.tween_interval(0.01)
 	return tween
@@ -131,15 +129,19 @@ func _on_action_picked(action_node: Node, targets: Array, pin: ArpeegeePinNode, 
 		assert(false)
 
 func _on_turn_finished() -> void:
+	_transition_to_next_turn()
+
+func _transition_to_next_turn() -> void:
 	var tween := create_tween()
 	
-	if _narrator.is_speaking():
-		TweenExtension.pause_until_signal(tween, _narrator, 'speaking_ended')
+	TweenExtension.pause_until_signal_if_condition(tween, _narrator, 'speaking_ended',
+			_narrator, 'is_speaking')
 	
 	tween.tween_callback(self, '_next_turn')
 
 func _next_turn() -> void:
 	var tween := _on_turn_started_preview()
+	
 	tween.tween_callback(_turn_manager, 'step_turn')
 
 var _current_pin: ArpeegeePinNode

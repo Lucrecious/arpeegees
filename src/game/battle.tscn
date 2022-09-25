@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://src/game/battle.gd" type="Script" id=1]
 [ext_resource path="res://src/game/battle/turn_manager.gd" type="Script" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://src/resources/sounds.gd" type="Script" id=21]
 [ext_resource path="res://assets/sounds/shimmer_arpeegees.mp3" type="AudioStream" id=22]
 [ext_resource path="res://assets/sounds/enraged_harpy.mp3" type="AudioStream" id=23]
+[ext_resource path="res://src/game/save_log.gd" type="Script" id=24]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0, 0.960784 )
@@ -198,6 +199,22 @@ mouse_filter = 0
 [node name="Narrator" parent="CanvasLayer/HUD/Control" instance=ExtResource( 3 )]
 unique_name_in_owner = true
 margin_bottom = 720.0
+
+[node name="SaveLog" type="Button" parent="CanvasLayer/HUD/Control"]
+margin_left = 1174.0
+margin_top = 9.0
+margin_right = 1270.0
+margin_bottom = 52.0
+text = "Save Log"
+script = ExtResource( 24 )
+
+[node name="ErrorDialog" type="AcceptDialog" parent="CanvasLayer/HUD/Control"]
+margin_left = 264.0
+margin_top = 326.0
+margin_right = 825.0
+margin_bottom = 536.0
+popup_exclusive = true
+dialog_autowrap = true
 
 [node name="Sounds" type="Node" parent="."]
 script = ExtResource( 21 )

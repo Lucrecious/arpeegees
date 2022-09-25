@@ -117,6 +117,7 @@ func _run_speaking_tween(text: String, start_signal: bool) -> void:
 	_label.text = ''
 	
 	_current_tween.tween_callback(self, 'emit_signal', ['text_started'])
+	_current_tween.parallel().tween_callback(Logger, 'info', ['text_started emitted'])
 	
 	for s in sentences:
 		_current_tween.tween_callback(self, '_set_is_typing', [true])
@@ -158,12 +159,14 @@ func _run_speaking_tween(text: String, start_signal: bool) -> void:
 	if not start_signal:
 		return
 	
+	Logger.info('speaking_started emitted')
 	emit_signal('speaking_started')
 
 func skip() -> void:
 	if not _current_tween:
 		return
 	
+	Logger.info('skip speaking')
 	_current_tween.stop()
 	_finished_speaking()
 
@@ -204,6 +207,7 @@ func _finished_speaking() -> void:
 	
 	if _queued_text.empty():
 		_is_speaking = false
+		Logger.info('speaking_ended emitted')
 		emit_signal('speaking_ended')
 		return
 	

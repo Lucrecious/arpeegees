@@ -31,7 +31,7 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	skew_stepper.offset_to_home_sec = 0.25
 	skew_stepper.between_offsets_sec = 0.5
 	
-	animation.tween_callback(sounds, 'play_random', ['DiscordSong', 2])
+	animation.tween_callback(sounds, 'play', ['DiscordSong1'])
 	
 	for i in 3:
 		skew_stepper.step()

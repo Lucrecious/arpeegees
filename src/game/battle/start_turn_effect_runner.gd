@@ -5,6 +5,9 @@ signal finished()
 
 var _is_busy := false
 
+func is_running() -> bool:
+	return _is_busy
+
 func run(pin: ArpeegeePinNode) -> bool:
 	if _is_busy:
 		print_stack()

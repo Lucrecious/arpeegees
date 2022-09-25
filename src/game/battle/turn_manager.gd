@@ -29,6 +29,7 @@ var _transform_queue := []
 onready var _start_turn_effect_runner := $StartTurnEffectRunner as StartTurnEffectRunner
 
 func initialize_turns(pins: Array) -> void:
+	
 	_ordered_pins = pins.duplicate()
 	_players = _get_type(ArpeegeePin.Type.Player)
 	_npcs = _get_type(ArpeegeePin.Type.NPC)
@@ -46,6 +47,7 @@ func initialize_turns(pins: Array) -> void:
 		
 		transformer.connect('transform_requested', self, '_on_pin_transform_requested', [p, transformer], CONNECT_ONESHOT)
 	
+	Logger.info('initialized and pins_changed emitted')
 	emit_signal('pins_changed')
 	emit_signal('initialized')
 
@@ -53,6 +55,7 @@ func use_item(item: PinItemPowerUp) -> void:
 	item.apply_power(_ordered_pins)
 
 func step_turn() -> void:
+	Logger.info('step to turn %d' % [_current_turn])
 	_do_turn(_current_turn)
 
 func get_npcs() -> Array:
@@ -78,10 +81,12 @@ func finish_turn() -> void:
 	
 	var end_condition := _is_game_finished()
 	if end_condition != EndCondition.None:
+		Logger.info('turn_finished and battle_ended emitted')
 		emit_signal('turn_finished')
 		emit_signal('battle_ended', end_condition)
 		return
 	
+	Logger.info('turn_finished emitted')
 	emit_signal('turn_finished')
 	
 	while true:
@@ -248,6 +253,7 @@ func _do_queued_transforms() -> void:
 	if not changed:
 		return
 	
+	Logger.info('pins_changed emitted')
 	emit_signal('pins_changed')
 
 func _get_type(type: int) -> Array:
@@ -266,16 +272,18 @@ func _do_turn(turn: int) -> void:
 	
 	var pin := get_turn_pin()
 	
-	var are_effects_running := _start_turn_effect_runner.run(pin)
+	_start_turn_effect_runner.run(pin)
 	var tween := create_tween()
-	if are_effects_running:
-		TweenExtension.pause_until_signal(tween, _start_turn_effect_runner, 'finished')
+	TweenExtension.pause_until_signal_if_condition(tween, _start_turn_effect_runner, 'finished',
+			_start_turn_effect_runner, 'is_running')
 	
 	_turn_started = true
 	var is_player := bool(pin.resource.type == ArpeegeePin.Type.Player)
 	if is_player:
+		tween.tween_callback(Logger, 'info', ['player_turn_started emitted'])
 		tween.tween_callback(self, 'emit_signal', ['player_turn_started'])
 	else:
+		tween.tween_callback(Logger, 'info', ['npc_turn_started emitted'])
 		tween.tween_callback(self, 'emit_signal', ['npc_turn_started'])
 
 func _is_game_finished() -> int:
