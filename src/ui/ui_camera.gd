@@ -9,9 +9,27 @@ onready var _game_visibility_notifier := $'%GameVisibilityNotifier' as Visibilit
 onready var _battle := $'%Battle' as BattleScreen
 onready var _original_bottom_bar_position := _battle.bottom_bar.rect_position
 
+var _on_browser_scroll_js_callback := JavaScript.create_callback(self, '_on_browser_scroll')
+var _web_scroll_overlay
+onready var _original_canvas_transform := _control.get_viewport().canvas_transform
+
 func _ready() -> void:
 	_game_visibility_notifier.connect('viewport_entered', self, '_on_viewport_entered')
 	_game_visibility_notifier.connect('viewport_exited', self, '_on_viewport_exited')
+	
+	if OS.get_name() == 'HTML5':
+		# move everything down
+		var offset_y := -_control.rect_position.y
+		get_parent().rect_position.y += offset_y
+		
+		var document := JavaScript.get_interface('document')
+		_web_scroll_overlay = document.getElementById('overlay')
+		_web_scroll_overlay.addEventListener('scroll', _on_browser_scroll_js_callback)
+
+func _on_browser_scroll(event):
+	var scroll_top := _web_scroll_overlay.scrollTop as int
+	var viewport := _control.get_viewport()
+	viewport.canvas_transform = _original_canvas_transform.translated(-Vector2.DOWN * scroll_top)
 
 func _on_viewport_entered(viewport: Viewport) -> void:
 	_show_hud()
@@ -53,6 +71,7 @@ func _show_hud() -> void:
 	Music.unpause_fade_in()
 
 func _input(event: InputEvent) -> void:
+	return
 	var viewport := _control.get_viewport()
 	
 	if event is InputEventPanGesture:

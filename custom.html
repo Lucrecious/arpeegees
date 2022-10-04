@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My Template</title>
+        <meta charset="UTF-8">
+        <style>
+            #overlay {
+                position: fixed;
+                pointer-events: none;
+                overflow-y: scroll;
+                width: 100%;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                z-index: 2;
+            }
+            #overlay::after {
+                content: '';
+                display: block;
+                height: 4022px;
+            }
+
+            #game {
+                z-index: 1;
+            }
+        </style>
+        <script>
+            window.onload = function() {
+                function scroller(event){
+                    scrollable=document.getElementById("overlay");
+                    switch(event.deltaMode){
+                        case 0: 		//DOM_DELTA_PIXEL		Chrome
+                        scrollable.scrollTop+=event.deltaY
+                        scrollable.scrollLeft+=event.deltaX
+                        break;
+                        case 1: 		//DOM_DELTA_LINE		Firefox
+                        scrollable.scrollTop+=15*event.deltaY
+                        scrollable.scrollLeft+=15*event.deltaX
+                        break;
+                        case 2: 		//DOM_DELTA_PAGE
+                        scrollable.scrollTop+=0.03*event.deltaY
+                        scrollable.scrollLeft+=0.03*event.deltaX
+                        break;
+                    }
+                    event.stopPropagation();
+                    event.preventDefault()
+                }
+
+                document.onwheel = scroller;
+            }
+        </script>
+    </head>
+    <body>
+        <div id="main">
+            <div id="game">
+                <canvas id="canvas">
+                </canvas>
+                <script src="$GODOT_URL"></script>
+                <script>
+                    var engine = new Engine($GODOT_CONFIG);
+                    engine.startGame();
+                </script>
+            </div>
+            <div id="overlay">
+            </div>
+        </div>
+    </body>
+</html>
