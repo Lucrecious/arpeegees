@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://src/game/title.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/main.gd" type="Script" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://assets/ui/website/Group 10.png" type="Texture" id=19]
 [ext_resource path="res://assets/ui/website/packet-image.png" type="Texture" id=20]
 [ext_resource path="res://assets/ui/website/Group 26.svg" type="Texture" id=21]
+[ext_resource path="res://src/ui/size_adapter.gd" type="Script" id=22]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -210,6 +211,12 @@ texture = ExtResource( 8 )
 expand = true
 stretch_mode = 5
 
+[node name="SizeAdapter" type="Node" parent="SpanLimiter/Content/TopTitleBar/CenterContainer"]
+script = ExtResource( 22 )
+_smaller_path = NodePath("../LogoSmaller")
+_bigger_path = NodePath("../Logo")
+size_limit = 1080
+
 [node name="LogoSmaller" type="TextureRect" parent="SpanLimiter/Content/TopTitleBar/CenterContainer" groups=["size_small"]]
 margin_left = 365.0
 margin_right = 915.0
@@ -232,6 +239,12 @@ text = "A dangerous blight has
 covered the land of"
 align = 1
 autowrap = true
+
+[node name="SizeAdapter" type="Node" parent="SpanLimiter/Content/TopTitleBar"]
+script = ExtResource( 22 )
+_smaller_path = NodePath("../LabelSmaller")
+_bigger_path = NodePath("../Label")
+size_limit = 1080
 
 [node name="LabelSmaller" type="Label" parent="SpanLimiter/Content/TopTitleBar" groups=["size_small"]]
 anchor_right = 1.0
@@ -510,6 +523,12 @@ texture = ExtResource( 11 )
 __meta__ = {
 "_edit_use_anchors_": true
 }
+
+[node name="InfoPanelSizeAdapter" type="Node" parent="SpanLimiter/Content"]
+script = ExtResource( 22 )
+_smaller_path = NodePath("../InfoPanelSmaller")
+_bigger_path = NodePath("../InfoPanel")
+size_limit = 1080
 
 [node name="InfoPanelSmaller" type="ColorRect" parent="SpanLimiter/Content" groups=["size_small"]]
 anchor_top = 1.0
@@ -846,7 +865,7 @@ custom_constants/margin_bottom = 0
 [node name="Back" type="ColorRect" parent="SpanLimiter/Content/StumpAd/StumpAdContainer/PackInformation/PanelContainer/MarginContainer"]
 margin_top = 70.0
 margin_right = 704.0
-margin_bottom = 761.0
+margin_bottom = 762.0
 color = Color( 0.972549, 0.905882, 0.823529, 1 )
 
 [node name="Pattern" type="TextureRect" parent="SpanLimiter/Content/StumpAd/StumpAdContainer/PackInformation/PanelContainer"]
@@ -928,6 +947,12 @@ margin_top = 802.0
 margin_right = 1247.0
 margin_bottom = 905.0
 texture = ExtResource( 15 )
+
+[node name="StumpAdSizeAdapter" type="Node" parent="SpanLimiter/Content"]
+script = ExtResource( 22 )
+_smaller_path = NodePath("../StumpAdSmaller")
+_bigger_path = NodePath("../StumpAd")
+size_limit = 1080
 
 [node name="StumpAdSmaller" type="CenterContainer" parent="SpanLimiter/Content" groups=["size_small"]]
 anchor_right = 1.0
