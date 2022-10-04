@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://src/game/title.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/main.gd" type="Script" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://assets/ui/website/Group 26.svg" type="Texture" id=21]
 [ext_resource path="res://src/ui/size_adapter.gd" type="Script" id=22]
 [ext_resource path="res://assets/ui/website/Path.png" type="Texture" id=23]
+[ext_resource path="res://src/website/swipe_open.gd" type="Script" id=24]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -1203,3 +1204,46 @@ margin_bottom = 40.2
 
 [node name="GameVisibilityNotifier" type="VisibilityNotifier2D" parent="Control"]
 unique_name_in_owner = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="SwipeOpen" type="Control" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 24 )
+
+[node name="BushLeft" type="ColorRect" parent="CanvasLayer/SwipeOpen"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.0509804, 0.368627, 0.270588, 1 )
+
+[node name="BustTop" type="TextureRect" parent="CanvasLayer/SwipeOpen/BushLeft"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 720.0
+margin_right = 720.0
+margin_bottom = 693.0
+rect_rotation = -90.0
+texture = ExtResource( 23 )
+expand = true
+stretch_mode = 5
+
+[node name="BushRight" type="ColorRect" parent="CanvasLayer/SwipeOpen"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.0509804, 0.368627, 0.270588, 1 )
+
+[node name="BustTop" type="TextureRect" parent="CanvasLayer/SwipeOpen/BushRight"]
+anchor_bottom = 1.0
+margin_left = -84.0
+margin_top = 720.0
+margin_right = 636.0
+margin_bottom = 86.0
+rect_rotation = -90.0
+texture = ExtResource( 23 )
+expand = true
+stretch_mode = 5
+flip_v = true
+
+[connection signal="tree_entered" from="CanvasLayer" to="CanvasLayer" method="set" binds= [ "visible", true ]]

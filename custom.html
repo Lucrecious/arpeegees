@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>My Template</title>
+        <title>Battle of the Arpeegees</title>
         <meta charset="UTF-8">
         <style>
             #overlay {
@@ -14,6 +14,7 @@
                 right: 0;
                 bottom: 0;
                 z-index: 2;
+                background-color: #0d5e45;
             }
             #overlay::after {
                 content: '';
@@ -26,6 +27,10 @@
             }
         </style>
         <script>
+            function delay(msec) {
+                return new Promise(resolve => setTimeout(resolve, msec))
+            }
+
             window.onload = function() {
                 function scroller(event){
                     scrollable=document.getElementById("overlay");
@@ -58,8 +63,19 @@
                 </canvas>
                 <script src="$GODOT_URL"></script>
                 <script>
+                    function _onProgress(current, total) {
+                        const overlay = document.getElementById("overlay")
+                        if (total > 0) {
+                            if (current === total) {
+                            }
+                        }
+                    }
+
                     var engine = new Engine($GODOT_CONFIG);
-                    engine.startGame();
+                    engine.startGame({ onProgress: _onProgress }).then(() => {
+                        overlay.style.backgroundColor = "transparent"
+                        console.log("GAME loaded!!!")
+                    })
                 </script>
             </div>
             <div id="overlay">
