@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://src/game/title.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/main.gd" type="Script" id=2]
@@ -22,6 +22,7 @@
 [ext_resource path="res://assets/ui/website/packet-image.png" type="Texture" id=20]
 [ext_resource path="res://assets/ui/website/Group 26.svg" type="Texture" id=21]
 [ext_resource path="res://src/ui/size_adapter.gd" type="Script" id=22]
+[ext_resource path="res://assets/ui/website/Path.png" type="Texture" id=23]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -176,29 +177,29 @@ auto_start = false
 unique_name_in_owner = true
 
 [node name="TopGrass" type="NinePatchRect" parent="SpanLimiter/Content/Game"]
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = -720.0
-margin_bottom = -560.0
-texture = ExtResource( 4 )
-patch_margin_left = 565
-patch_margin_right = 559
-axis_stretch_horizontal = 2
-
-[node name="TopGrassSizeAdapter" type="Node" parent="SpanLimiter/Content/Game"]
-script = ExtResource( 22 )
-_smaller_path = NodePath("../TopGrassSmaller")
-_bigger_path = NodePath("../TopGrass")
-size_limit = 1280
-
-[node name="TopGrassSmaller" type="TextureRect" parent="SpanLimiter/Content/Game"]
 visible = false
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -720.0
 margin_bottom = -560.0
+texture = ExtResource( 23 )
+patch_margin_left = 837
+patch_margin_right = 837
+axis_stretch_horizontal = 2
+
+[node name="TopGrassSizeAdapter" type="Node" parent="SpanLimiter/Content/Game"]
+script = ExtResource( 22 )
+_smaller_path = NodePath("../TopGrassSmaller")
+_bigger_path = NodePath("../TopGrass")
+size_limit = 1674
+
+[node name="TopGrassSmaller" type="TextureRect" parent="SpanLimiter/Content/Game"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -720.0
+margin_bottom = -461.0
 texture = ExtResource( 4 )
 expand = true
 stretch_mode = 5
