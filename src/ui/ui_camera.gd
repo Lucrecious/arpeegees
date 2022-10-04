@@ -26,7 +26,7 @@ func _ready() -> void:
 		get_parent().rect_position.y += offset_y
 		
 		var document := JavaScript.get_interface('document')
-		_web_scroll_overlay = document.getElementById('overlay')
+		_web_scroll_overlay = document.getElementById('scroll-overlay')
 		_web_scroll_overlay.addEventListener('scroll', _on_browser_scroll_js_callback)
 
 func _on_browser_scroll(event):

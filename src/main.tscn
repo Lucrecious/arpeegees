@@ -1210,6 +1210,7 @@ unique_name_in_owner = true
 [node name="SwipeOpen" type="Control" parent="CanvasLayer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 script = ExtResource( 24 )
 
 [node name="BushLeft" type="ColorRect" parent="CanvasLayer/SwipeOpen"]

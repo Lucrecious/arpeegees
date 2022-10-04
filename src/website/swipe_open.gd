@@ -17,6 +17,7 @@ func _ready() -> void:
 	fade_away.tween_interval(4.0)
 	fade_away.tween_property(self, 'modulate:a', 0.0, 0.5)\
 			.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+	fade_away.tween_callback(get_parent(), 'queue_free')
 	
 func _physics_process(delta: float) -> void:
 	_swipe_speed_pixels += SWIPE_ACCELERATION_PIXELS * delta
