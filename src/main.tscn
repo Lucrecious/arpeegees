@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://src/game/title.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/main.gd" type="Script" id=2]
@@ -24,6 +24,13 @@
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
+outline_size = 4
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=17]
+size = 48
 outline_size = 4
 outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
@@ -193,7 +200,8 @@ anchor_right = 1.0
 margin_top = 185.0
 margin_bottom = 685.0
 
-[node name="TextureButton" type="TextureRect" parent="SpanLimiter/Content/TopTitleBar/CenterContainer"]
+[node name="Logo" type="TextureRect" parent="SpanLimiter/Content/TopTitleBar/CenterContainer" groups=["size_normal"]]
+visible = false
 margin_left = 290.0
 margin_right = 990.0
 margin_bottom = 500.0
@@ -202,7 +210,17 @@ texture = ExtResource( 8 )
 expand = true
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="SpanLimiter/Content/TopTitleBar"]
+[node name="LogoSmaller" type="TextureRect" parent="SpanLimiter/Content/TopTitleBar/CenterContainer" groups=["size_small"]]
+margin_left = 365.0
+margin_right = 915.0
+margin_bottom = 500.0
+rect_min_size = Vector2( 550, 500 )
+texture = ExtResource( 8 )
+expand = true
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="SpanLimiter/Content/TopTitleBar" groups=["size_normal"]]
+visible = false
 anchor_right = 1.0
 margin_top = 58.0
 margin_bottom = 233.0
@@ -210,6 +228,19 @@ custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 3
 custom_constants/shadow_offset_y = 3
 custom_fonts/font = SubResource( 1 )
+text = "A dangerous blight has
+covered the land of"
+align = 1
+autowrap = true
+
+[node name="LabelSmaller" type="Label" parent="SpanLimiter/Content/TopTitleBar" groups=["size_small"]]
+anchor_right = 1.0
+margin_top = 58.0
+margin_bottom = 233.0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 3
+custom_constants/shadow_offset_y = 3
+custom_fonts/font = SubResource( 17 )
 text = "A dangerous blight has
 covered the land of"
 align = 1
