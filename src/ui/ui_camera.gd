@@ -13,11 +13,14 @@ var _on_browser_scroll_js_callback := JavaScript.create_callback(self, '_on_brow
 var _web_scroll_overlay
 onready var _original_canvas_transform := _control.get_viewport().canvas_transform
 
+var _using_web_scroll := false
+
 func _ready() -> void:
 	_game_visibility_notifier.connect('viewport_entered', self, '_on_viewport_entered')
 	_game_visibility_notifier.connect('viewport_exited', self, '_on_viewport_exited')
 	
 	if OS.get_name() == 'HTML5':
+		_using_web_scroll = true
 		# move everything down
 		var offset_y := -_control.rect_position.y
 		get_parent().rect_position.y += offset_y
@@ -71,7 +74,9 @@ func _show_hud() -> void:
 	Music.unpause_fade_in()
 
 func _input(event: InputEvent) -> void:
-	return
+	if _using_web_scroll:
+		return
+	
 	var viewport := _control.get_viewport()
 	
 	if event is InputEventPanGesture:
