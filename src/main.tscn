@@ -175,7 +175,25 @@ auto_start = false
 [node name="Title" parent="SpanLimiter/Content/Game" instance=ExtResource( 1 )]
 unique_name_in_owner = true
 
-[node name="TopGrass" type="TextureRect" parent="SpanLimiter/Content/Game"]
+[node name="TopGrass" type="NinePatchRect" parent="SpanLimiter/Content/Game"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -720.0
+margin_bottom = -560.0
+texture = ExtResource( 4 )
+patch_margin_left = 565
+patch_margin_right = 559
+axis_stretch_horizontal = 2
+
+[node name="TopGrassSizeAdapter" type="Node" parent="SpanLimiter/Content/Game"]
+script = ExtResource( 22 )
+_smaller_path = NodePath("../TopGrassSmaller")
+_bigger_path = NodePath("../TopGrass")
+size_limit = 1280
+
+[node name="TopGrassSmaller" type="TextureRect" parent="SpanLimiter/Content/Game"]
+visible = false
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
