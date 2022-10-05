@@ -15,6 +15,8 @@ func _ready() -> void:
 	_label_template.get_parent().remove_child(_label_template)
 	_selector.visible = false
 	
+	connect('mouse_exited', self, '_on_mouse_exited')
+	
 	_create_selector_tween()
 	
 	connect('option_hover_changed', self, '_on_option_hover_changed')
@@ -61,26 +63,12 @@ func clear() -> void:
 	for child in _vbox.get_children():
 		child.queue_free()
 
+func _on_mouse_exited() -> void:
+	reset_hover_index()
+
 func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
-		var mouse_motion := event as InputEventMouseMotion
-		
-		var hover_index := -1
-		for c in _vbox.get_children():
-			var label := c as Label
-			var rect := label.get_global_rect()
-			var mouse_position := label.get_global_mouse_position()
-			if not rect.has_point(mouse_position):
-				continue
-			
-			hover_index = label.get_index()
-			break
-		
-		if hover_index == _current_hover_index:
-			return
-		
-		_current_hover_index = hover_index
-		emit_signal('option_hover_changed')
+		update_hover_index()
 		return
 	
 	if event is InputEventMouseButton:
@@ -91,3 +79,28 @@ func _gui_input(event: InputEvent) -> void:
 			
 			emit_signal('option_picked', _current_hover_index)
 			return
+
+func reset_hover_index() -> void:
+	if _current_hover_index == -1:
+		return
+	
+	_current_hover_index = -1
+	emit_signal('option_hover_changed')
+
+func update_hover_index(keep_last := true, force_notification := false) -> void:
+	var hover_index := _current_hover_index if keep_last else -1
+	for c in _vbox.get_children():
+		var label := c as Label
+		var rect := label.get_global_rect()
+		var mouse_position := label.get_global_mouse_position()
+		if not rect.has_point(mouse_position):
+			continue
+		
+		hover_index = label.get_index()
+		break
+	
+	if not force_notification and hover_index == _current_hover_index:
+		return
+	
+	_current_hover_index = hover_index
+	emit_signal('option_hover_changed')

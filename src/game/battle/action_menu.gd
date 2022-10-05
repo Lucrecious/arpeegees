@@ -65,6 +65,7 @@ func _to_show() -> void:
 	visible = true
 	_pickable_targets_menu.visible = false
 	_action_pick_menu.visible = true
+	_action_pick_menu.update_hover_index(false, true)
 	emit_signal('shown')
 
 func initialize(pin: ArpeegeePinNode) -> void:
@@ -90,6 +91,7 @@ func _on_option_picked(index: int) -> void:
 	_current_index = index
 	_action_pick_menu.visible = false
 	_pickable_targets_menu.visible = true
+	_pickable_targets_menu.call_deferred('update_hover_index', false, true)
 	
 	for t in pickable_targets:
 		var pin := t as ArpeegeePinNode
@@ -110,6 +112,7 @@ func _on_target_picked(index: int, action_node: Node) -> void:
 	if index == targets.size():
 		_pickable_targets_menu.visible = false
 		_action_pick_menu.visible = true
+		_action_pick_menu.update_hover_index(false, true)
 		return
 	
 	var target := targets[index] as ArpeegeePinNode
