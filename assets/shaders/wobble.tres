@@ -8,12 +8,13 @@ uniform float offset_amount = 300.0;
 uniform float update_sec = .4;
 
 
-void fragment() {
-    vec2 offset = texture(uv_offset_texture, UV + floor(TIME / update_sec) * update_sec).xy * 2.0 - 1.0;
+vec4 wobble(sampler2D image, vec2 uv, float time) {
+    vec2 offset = texture(uv_offset_texture, uv + floor(time / update_sec) * update_sec).xy * 2.0 - 1.0;
     offset *= 1.0 / offset_amount;
     
-    COLOR = vec4(texture(TEXTURE, UV + offset).rgb, texture(TEXTURE, UV).a);
-}"
+    return vec4(texture(image, uv + offset).rgb, texture(image, uv).a);
+}
+"
 
 [sub_resource type="OpenSimplexNoise" id=3]
 period = 32.0

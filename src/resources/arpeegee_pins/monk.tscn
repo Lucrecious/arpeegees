@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/sprites/monk/monk_dead.png" type="Texture" id=2]
@@ -22,15 +22,17 @@
 [ext_resource path="res://assets/sounds/panchi_hit_monk.mp3" type="AudioStream" id=20]
 [ext_resource path="res://assets/sounds/panchi_windup_monk.mp3" type="AudioStream" id=21]
 [ext_resource path="res://assets/sounds/chikara_panchi_charge_monk.mp3" type="AudioStream" id=22]
+[ext_resource path="res://assets/shaders/wobble_noise.tres" type="Texture" id=23]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 5 )
-shader_param/line_color = Color( 1, 1, 1, 1 )
-shader_param/line_thickness = 0.0
 shader_param/fill_color = Color( 1, 1, 1, 1 )
 shader_param/color_mix = 0.0
 shader_param/top_skew = 0.0
 shader_param/squash = 1.0
+shader_param/offset_amount = 100.0
+shader_param/update_sec = 0.4
+shader_param/uv_offset_texture = ExtResource( 23 )
 
 [node name="Monk" instance=ExtResource( 1 )]
 nice_name = "Monk"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/sprites/bard/bard_idle.png" type="Texture" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://src/resources/arpeegee_pins/actions/four_chord_strum.gd" type="Script" id=18]
 [ext_resource path="res://src/resources/actions/bard_mandolin_swing.tres" type="Resource" id=19]
 [ext_resource path="res://assets/sounds/discord_alt_bard.mp3" type="AudioStream" id=20]
+[ext_resource path="res://assets/shaders/wobble_noise.tres" type="Texture" id=21]
 [ext_resource path="res://assets/sounds/mandolin_bash_bard.mp3" type="AudioStream" id=22]
 [ext_resource path="res://assets/sounds/discord_hit3_bard.mp3" type="AudioStream" id=23]
 [ext_resource path="res://assets/sounds/discord_hit1_bard.mp3" type="AudioStream" id=24]
@@ -30,12 +31,13 @@
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 7 )
-shader_param/line_color = Color( 1, 1, 1, 1 )
-shader_param/line_thickness = 0.0
 shader_param/fill_color = Color( 1, 1, 1, 1 )
 shader_param/color_mix = 0.0
 shader_param/top_skew = 0.0
 shader_param/squash = 1.0
+shader_param/offset_amount = 100.0
+shader_param/update_sec = 0.3
+shader_param/uv_offset_texture = ExtResource( 21 )
 
 [node name="Bard" instance=ExtResource( 1 )]
 nice_name = "Bard"

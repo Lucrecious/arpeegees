@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://src/game/battle.gd" type="Script" id=1]
 [ext_resource path="res://src/game/battle/turn_manager.gd" type="Script" id=2]
@@ -13,8 +13,6 @@
 [ext_resource path="res://assets/battle/ground.svg" type="Texture" id=11]
 [ext_resource path="res://assets/battle/sky.svg" type="Texture" id=12]
 [ext_resource path="res://assets/battle/grass.svg" type="Texture" id=13]
-[ext_resource path="res://assets/sprites/monk/monk_idle.png" type="Texture" id=14]
-[ext_resource path="res://assets/sprites/harpy/harpy_idle.png" type="Texture" id=15]
 [ext_resource path="res://src/game/situational_dialog.gd" type="Script" id=16]
 [ext_resource path="res://src/game/battle/start_turn_effect_runner.gd" type="Script" id=17]
 [ext_resource path="res://assets/sounds/landing_arpeegees.mp3" type="AudioStream" id=18]
@@ -131,25 +129,6 @@ margin_top = -245.0
 texture = ExtResource( 13 )
 expand = true
 stretch_mode = 5
-
-[node name="MockUp" type="Node2D" parent="Background"]
-visible = false
-position = Vector2( 140, 0 )
-
-[node name="Harpy" type="Sprite" parent="Background/MockUp"]
-position = Vector2( 493.085, 436 )
-scale = Vector2( 0.11, 0.11 )
-texture = ExtResource( 15 )
-
-[node name="Monk" type="Sprite" parent="Background/MockUp"]
-position = Vector2( 849.085, 360 )
-scale = Vector2( 0.11, 0.11 )
-texture = ExtResource( 14 )
-
-[node name="Bard" type="Sprite" parent="Background/MockUp"]
-position = Vector2( 765.085, 506 )
-scale = Vector2( 0.11, 0.11 )
-texture = ExtResource( 5 )
 
 [node name="BattleLayer" type="MarginContainer" parent="."]
 unique_name_in_owner = true
@@ -274,5 +253,3 @@ stream = ExtResource( 22 )
 
 [node name="EnragedHarpy" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 23 )
-
-[connection signal="ready" from="Background/MockUp" to="Background/MockUp" method="set" flags=6 binds= [ "visible", false ]]
