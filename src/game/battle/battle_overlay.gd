@@ -215,9 +215,9 @@ func _on_pin_health_changed(amount: int, pin: ArpeegeePinNode, damaged: bool) ->
 
 func _on_pin_critical_hit_or_evaded(pin: ArpeegeePinNode, is_critical: bool) -> void:
 	if is_critical:
-		VFX.floating_text(pin, 'CRITICAL!!', self)
+		VFX.floating_text(pin, 'CRITICAL!!', pin.get_parent())
 	else:
-		VFX.floating_text(pin, 'MISS', self)
+		VFX.floating_text(pin, 'MISS', pin.get_parent())
 
 func _on_pin_changed_relatives(relatives: Dictionary, pin: ArpeegeePinNode) -> void:
 	var texts := []
@@ -240,9 +240,9 @@ func _on_pin_changed_relatives(relatives: Dictionary, pin: ArpeegeePinNode) -> v
 	
 	var animation := create_tween()
 	for t in texts:
-		animation.tween_callback(VFX, 'floating_text', [pin, t, self])
+		animation.tween_callback(VFX, 'floating_text', [pin, t, pin.get_parent()])
 		animation.tween_interval(1.5)
 
 func _spawn_health_changed_floaty_number(pin: ArpeegeePinNode, amount: int, damaged: bool) -> void:	
 	amount = amount if not damaged else -amount
-	VFX.floating_number(pin, amount, self)
+	VFX.floating_number(pin, amount, pin.get_parent())

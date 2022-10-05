@@ -1206,6 +1206,7 @@ margin_bottom = 40.2
 unique_name_in_owner = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="SwipeOpen" type="Control" parent="CanvasLayer"]
 anchor_right = 1.0
