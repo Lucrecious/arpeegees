@@ -76,9 +76,10 @@ func _on_action_menu_action_hovered(action_node: Node) -> void:
 		
 		_darken_pins(_turn_manager.get_pins())
 		_whiten_pins(highlights)
-		_show_target_pins(highlights)
+		var faded := bool(action.target_type == PinAction.TargetType.Single)
+		_show_target_pins(highlights, faded)
 
-func _show_target_pins(pins: Array) -> void:
+func _show_target_pins(pins: Array, faded := false) -> void:
 	for p in _target_pointers:
 		p.visible = false
 	
@@ -86,6 +87,10 @@ func _show_target_pins(pins: Array) -> void:
 		var pin := pins[i] as ArpeegeePinNode
 		var pointer := _target_pointers[i] as Node2D
 		pointer.visible = true
+		if faded:
+			pointer.modulate.a = 0.85
+		else:
+			pointer.modulate.a = 1.0
 		
 		var bounding_box := NodE.get_child(pin, REferenceRect) as REferenceRect
 		var rect := bounding_box.global_rect()
@@ -94,7 +99,7 @@ func _show_target_pins(pins: Array) -> void:
 
 func _darken_pins(pins: Array) -> void:
 	for p in pins:
-		p.modulate = Color(0.25, 0.25, 0.25)
+		p.modulate = Color(0.5, 0.5, 0.5)
 
 func _whiten_pins(pins: Array) -> void:
 	for p in pins:
