@@ -7,12 +7,13 @@ onready var _narrator := NodE.get_sibling(self, NarratorUI) as NarratorUI
 onready var _situational_dialog := $SituationalDialog as SituationalDialog
 onready var _ai := $AI as NPCAI
 onready var _action_menu := $'%ActionMenu' as PinActionMenu
+onready var _character_pointer := $'%CharacterPointer' as Node2D
 
 func _ready() -> void:
 	_turn_manager.connect('initialized', self, 'set', ['mouse_filter', mouse_filter])
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	
-	_action_menu.visible = false
+	_action_menu.hidden()
 	
 	connect('mouse_exited', self, '_on_mouse_exited')
 	
@@ -22,6 +23,19 @@ func _ready() -> void:
 	
 	_turn_manager.connect('pins_changed', self, '_on_pins_changed')
 	_on_pins_changed()
+	
+	_turn_manager.connect('player_turn_started', self, '_on_pin_turn_started')
+	_turn_manager.connect('npc_turn_started', self, '_on_pin_turn_started')
+
+func _on_pin_turn_started() -> void:
+	var pin := _turn_manager.get_turn_pin()
+	Logger.info('turn started for pin "%s" at turn %d' % [pin.name, _turn_manager.turn_count()])
+	
+	var bounding_box := NodE.get_child(pin, REferenceRect) as REferenceRect
+	var rect := bounding_box.global_rect()
+	
+	var selector_location := rect.get_center() + Vector2.DOWN * ((rect.size.y / 2.0) + 16.0)
+	_character_pointer.global_position = selector_location
 
 var _pins_cache := []
 func _on_pins_changed() -> void:
@@ -97,7 +111,6 @@ func _show_action_menu(pin: ArpeegeePinNode, pin_actions: PinActions) -> void:
 	var action_nodes := pin_actions.get_pin_action_nodes()
 	
 	_action_menu.initialize(pin)
-	
 	_action_menu.connect('action_picked', self, '_on_action_picked', [pin, _action_menu], CONNECT_ONESHOT)
 	
 	for node in action_nodes:

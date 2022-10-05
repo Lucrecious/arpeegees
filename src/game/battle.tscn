@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://src/game/battle.gd" type="Script" id=1]
 [ext_resource path="res://src/game/battle/turn_manager.gd" type="Script" id=2]
@@ -13,6 +13,8 @@
 [ext_resource path="res://assets/battle/ground.svg" type="Texture" id=11]
 [ext_resource path="res://assets/battle/sky.svg" type="Texture" id=12]
 [ext_resource path="res://assets/battle/grass.svg" type="Texture" id=13]
+[ext_resource path="res://assets/ui/icons/character_pointer.svg" type="Texture" id=14]
+[ext_resource path="res://src/game/battle/action_menu_hover_highlighter.gd" type="Script" id=15]
 [ext_resource path="res://src/game/situational_dialog.gd" type="Script" id=16]
 [ext_resource path="res://src/game/battle/start_turn_effect_runner.gd" type="Script" id=17]
 [ext_resource path="res://assets/sounds/landing_arpeegees.mp3" type="AudioStream" id=18]
@@ -23,6 +25,70 @@
 [ext_resource path="res://assets/sounds/enraged_harpy.mp3" type="AudioStream" id=23]
 [ext_resource path="res://src/game/save_log.gd" type="Script" id=24]
 [ext_resource path="res://src/ui/size_adapter.gd" type="Script" id=25]
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "default"
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.95 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 8 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "default"
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.95 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 8 ) ]
+}
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0, 0.960784 )
@@ -148,19 +214,32 @@ position = Vector2( 200, 600 )
 scale = Vector2( 0.13, 0.13 )
 texture = ExtResource( 5 )
 
-[node name="ViewportContainer" type="ViewportContainer" parent="."]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-stretch = true
-
-[node name="BattleViewport" type="Viewport" parent="ViewportContainer"]
+[node name="CharacterPointer" type="Node2D" parent="."]
 unique_name_in_owner = true
-size = Vector2( 1280, 720 )
-size_override_stretch = true
-transparent_bg = true
-handle_input_locally = false
-render_target_update_mode = 0
+position = Vector2( 482, -4761 )
+
+[node name="Sprite" type="Sprite" parent="CharacterPointer"]
+texture = ExtResource( 14 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterPointer"]
+autoplay = "default"
+anims/RESET = SubResource( 3 )
+anims/default = SubResource( 4 )
+
+[node name="TargetPointers" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="TargetPointerTemplate" type="Node2D" parent="TargetPointers"]
+position = Vector2( 560, -4761 )
+rotation = 3.14159
+
+[node name="Sprite" type="Sprite" parent="TargetPointers/TargetPointerTemplate"]
+texture = ExtResource( 14 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TargetPointers/TargetPointerTemplate"]
+autoplay = "default"
+anims/RESET = SubResource( 5 )
+anims/default = SubResource( 6 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -202,6 +281,9 @@ margin_left = -194.5
 margin_top = -327.0
 margin_right = 194.5
 margin_bottom = 0.0
+
+[node name="ActionMenuHoverHighlighter" type="Node" parent="CanvasLayer/HUD/Control/BattleOverlay"]
+script = ExtResource( 15 )
 
 [node name="SituationalDialog" type="Node" parent="CanvasLayer/HUD/Control/BattleOverlay"]
 script = ExtResource( 16 )

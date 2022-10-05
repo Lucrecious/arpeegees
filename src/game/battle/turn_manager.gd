@@ -51,6 +51,9 @@ func initialize_turns(pins: Array) -> void:
 	emit_signal('pins_changed')
 	emit_signal('initialized')
 
+func turn_count() -> int:
+	return _current_turn
+
 func use_item(item: PinItemPowerUp) -> void:
 	item.apply_power(_ordered_pins)
 

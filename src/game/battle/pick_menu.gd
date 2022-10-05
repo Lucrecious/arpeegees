@@ -19,6 +19,9 @@ func _ready() -> void:
 	
 	connect('option_hover_changed', self, '_on_option_hover_changed')
 
+func get_hover_index() -> int:
+	return _current_hover_index
+
 func _create_selector_tween() -> void:
 	var animation := _selector.create_tween()
 	animation.set_loops()
