@@ -9,4 +9,5 @@ enum {
 	FocusKi,
 	ArmadilloStance,
 	ChikaraPanchi,
+	Crustify,
 }

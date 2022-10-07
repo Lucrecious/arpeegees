@@ -26,6 +26,7 @@ static func type_to_string(type: int) -> String:
 
 export(Type) var type := Type.MaxHealth
 export(float) var multiplier := 1.0
+export(int) var add_amount := 0
 
 func apply(value: int) -> int:
-	return int(ceil(value * multiplier))
+	return int(ceil(value * multiplier)) + add_amount

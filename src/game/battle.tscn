@@ -292,7 +292,6 @@ _turn_manager_path = NodePath("../TurnManager")
 [node name="AI" type="Node" parent="CanvasLayer/HUD/Control/BattleOverlay"]
 script = ExtResource( 9 )
 _narrator_ui_path = NodePath("../../Narrator")
-debug_action_index = 1
 
 [node name="TurnManager" type="Node" parent="CanvasLayer/HUD/Control/BattleOverlay"]
 unique_name_in_owner = true
