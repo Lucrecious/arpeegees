@@ -146,6 +146,7 @@ script = ExtResource( 16 )
 script = ExtResource( 18 )
 attack_sprite_name = "wingattack"
 pin_action = ExtResource( 19 )
+narration_key = "NARRATOR_WING_ATTACK_USE"
 hit_sfx_name = "Chop"
 
 [node name="ImpactHint" type="Position2D" parent="Actions/WingAttack" index="0"]

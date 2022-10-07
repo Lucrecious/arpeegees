@@ -183,7 +183,7 @@ func _add_attack_boost(nodes: Array, type: int) -> void:
 			ArpeegeePin.Type.NPC:
 				NodE.add_children(status_effects, Aura.create_enraged_auras())
 			ArpeegeePin.Type.Player:
-				assert(false, 'not implemented')
+				print_debug('balance battle from player not implemented')
 		
 		status_effects.add_instance(effect)
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://src/game/battle.gd" type="Script" id=1]
 [ext_resource path="res://src/game/battle/turn_manager.gd" type="Script" id=2]
@@ -18,13 +18,14 @@
 [ext_resource path="res://src/game/situational_dialog.gd" type="Script" id=16]
 [ext_resource path="res://src/game/battle/start_turn_effect_runner.gd" type="Script" id=17]
 [ext_resource path="res://assets/sounds/landing_arpeegees.mp3" type="AudioStream" id=18]
-[ext_resource path="res://src/resources/arpeegee_pins/harpy.tres" type="Resource" id=19]
+[ext_resource path="res://src/resources/arpeegee_pins/bard.tres" type="Resource" id=19]
 [ext_resource path="res://src/resources/arpeegee_pins/monk.tres" type="Resource" id=20]
 [ext_resource path="res://src/resources/sounds.gd" type="Script" id=21]
 [ext_resource path="res://assets/sounds/shimmer_arpeegees.mp3" type="AudioStream" id=22]
 [ext_resource path="res://assets/sounds/enraged_harpy.mp3" type="AudioStream" id=23]
 [ext_resource path="res://src/game/save_log.gd" type="Script" id=24]
 [ext_resource path="res://src/ui/size_adapter.gd" type="Script" id=25]
+[ext_resource path="res://src/resources/arpeegee_pins/blobbo.tres" type="Resource" id=26]
 
 [sub_resource type="Animation" id=3]
 length = 0.001
@@ -105,9 +106,8 @@ anchor_bottom = 1.0
 theme = ExtResource( 7 )
 script = ExtResource( 1 )
 auto_start = true
-auto_start_player_pins = [ ExtResource( 20 ) ]
-auto_start_npc_pins = [ ExtResource( 19 ) ]
-auto_start_item = true
+auto_start_player_pins = [ ExtResource( 20 ), ExtResource( 19 ) ]
+auto_start_npc_pins = [ ExtResource( 26 ) ]
 
 [node name="Background" type="Control" parent="."]
 anchor_top = 1.0
@@ -292,6 +292,7 @@ _turn_manager_path = NodePath("../TurnManager")
 [node name="AI" type="Node" parent="CanvasLayer/HUD/Control/BattleOverlay"]
 script = ExtResource( 9 )
 _narrator_ui_path = NodePath("../../Narrator")
+debug_action_index = 1
 
 [node name="TurnManager" type="Node" parent="CanvasLayer/HUD/Control/BattleOverlay"]
 unique_name_in_owner = true

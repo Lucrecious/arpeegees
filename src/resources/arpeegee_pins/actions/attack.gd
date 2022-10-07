@@ -6,6 +6,8 @@ export(String) var impact_hint_name := 'ImpactHint'
 export(String) var attack_sprite_name := 'attack'
 export(Resource) var pin_action: Resource = null
 export(bool) var walk := true
+export(bool) var physical := true
+export(String) var narration_key := ''
 
 export(String) var hit_sfx_name := ''
 export(String) var windup_sfx_name := ''
@@ -56,21 +58,17 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 		tween.tween_callback(sounds, 'play', [hit_sfx_name])
 	else:
 		tween.tween_callback(Sounds, 'play', ['GenericHit1'])
-
-	var is_mandolin := false
-	match pin_action().resource_path.get_file():
-		'bard_mandolin_swing.tres':
-			is_mandolin = true
+	
+	if pin_action().resource_path.get_file() == 'bard_mandolin_swing.tres':
 			if _times_used < 4:
 				ActionUtils.add_text_trigger(tween, self, 'NARRATOR_MANDOLIN_BASH_USE_%d' % [_times_used])
 				if _times_used == 3:
 					var transformer := NodE.get_child(actioner, Transformer) as Transformer
 					assert(transformer)
 					tween.tween_callback(transformer, 'request_transform')
-		'panchi_monk.tres':
-			ActionUtils.add_text_trigger(tween, self, 'NARRATOR_PANCHI_USE_1')
-		'wing_attack_harpy.tres':
-			ActionUtils.add_text_trigger(tween, self, 'NARRATOR_WING_ATTACK_USE')
+	else:
+		if not narration_key.empty():
+			ActionUtils.add_text_trigger(tween, self, narration_key)
 
 	var sprite_switcher := NodE.get_child(actioner, SpriteSwitcher) as SpriteSwitcher
 	if not attack_sprite_name.empty():
@@ -81,7 +79,10 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 
 	var modified_stats := NodE.get_child(actioner, ModifiedPinStats) as ModifiedPinStats
 	if modified_stats:
-		ActionUtils.add_attack(tween, actioner, target, modified_stats.attack)
+		if physical:
+			ActionUtils.add_attack(tween, actioner, target, modified_stats.attack)
+		else:
+			ActionUtils.add_magic_attack(tween, actioner, target, modified_stats.magic_attack)
 	else:
 		assert(false)
 

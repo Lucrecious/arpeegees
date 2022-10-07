@@ -43,7 +43,8 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	
 	var modified_stats := NodE.get_child(actioner, ModifiedPinStats) as ModifiedPinStats
 	if modified_stats:
-		ActionUtils.add_attack(tween, actioner, target, modified_stats.attack * 2.0)
+		ActionUtils.add_attack(tween, actioner, target,
+				ActionUtils.damage_with_factor(modified_stats.attack, 2.0))
 	else:
 		assert(false)
 	

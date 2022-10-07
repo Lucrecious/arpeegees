@@ -53,7 +53,40 @@ defence = 3
 magic_defence = 3
 evasion = 2
 
-[node name="Sprites" type="Node2D" parent="." index="10"]
+[node name="HealthBar" parent="." index="10"]
+z_index = 1
+
+[node name="MandolinBash" type="AudioStreamPlayer" parent="Sounds" index="0"]
+stream = ExtResource( 22 )
+
+[node name="DiscordSong1" type="AudioStreamPlayer" parent="Sounds" index="1"]
+stream = ExtResource( 20 )
+
+[node name="DiscordHit1" type="AudioStreamPlayer" parent="Sounds" index="2"]
+stream = ExtResource( 24 )
+
+[node name="DiscordHit2" type="AudioStreamPlayer" parent="Sounds" index="3"]
+stream = ExtResource( 25 )
+
+[node name="DiscordHit3" type="AudioStreamPlayer" parent="Sounds" index="4"]
+stream = ExtResource( 23 )
+
+[node name="DiscordFollowUpHit1" type="AudioStreamPlayer" parent="Sounds" index="5"]
+stream = ExtResource( 24 )
+
+[node name="DiscordFollowUpHit2" type="AudioStreamPlayer" parent="Sounds" index="6"]
+stream = ExtResource( 25 )
+
+[node name="DiscordFollowUpHit3" type="AudioStreamPlayer" parent="Sounds" index="7"]
+stream = ExtResource( 23 )
+
+[node name="ChordStrum" type="AudioStreamPlayer" parent="Sounds" index="8"]
+stream = ExtResource( 26 )
+
+[node name="HeckinGoodSong" type="AudioStreamPlayer" parent="Sounds" index="9"]
+stream = ExtResource( 27 )
+
+[node name="Sprites" type="Node2D" parent="." index="12"]
 material = SubResource( 1 )
 script = ExtResource( 16 )
 
@@ -108,7 +141,7 @@ position = Vector2( -17, -86 )
 scale = Vector2( 0.075, 0.075 )
 texture = ExtResource( 28 )
 
-[node name="Actions" type="Node2D" parent="." index="11"]
+[node name="Actions" type="Node2D" parent="." index="13"]
 script = ExtResource( 9 )
 
 [node name="MandolinBash" type="Node2D" parent="Actions" index="0"]
@@ -132,36 +165,6 @@ script = ExtResource( 15 )
 [node name="FourChordStrum" type="Node2D" parent="Actions" index="3"]
 script = ExtResource( 18 )
 
-[node name="Transformer" type="Node" parent="." index="12"]
+[node name="Transformer" type="Node" parent="." index="14"]
 script = ExtResource( 3 )
 transform_scene = ExtResource( 6 )
-
-[node name="MandolinBash" type="AudioStreamPlayer" parent="Sounds" index="0"]
-stream = ExtResource( 22 )
-
-[node name="DiscordSong1" type="AudioStreamPlayer" parent="Sounds" index="1"]
-stream = ExtResource( 20 )
-
-[node name="DiscordHit1" type="AudioStreamPlayer" parent="Sounds" index="2"]
-stream = ExtResource( 24 )
-
-[node name="DiscordHit2" type="AudioStreamPlayer" parent="Sounds" index="3"]
-stream = ExtResource( 25 )
-
-[node name="DiscordHit3" type="AudioStreamPlayer" parent="Sounds" index="4"]
-stream = ExtResource( 23 )
-
-[node name="DiscordFollowUpHit1" type="AudioStreamPlayer" parent="Sounds" index="5"]
-stream = ExtResource( 24 )
-
-[node name="DiscordFollowUpHit2" type="AudioStreamPlayer" parent="Sounds" index="6"]
-stream = ExtResource( 25 )
-
-[node name="DiscordFollowUpHit3" type="AudioStreamPlayer" parent="Sounds" index="7"]
-stream = ExtResource( 23 )
-
-[node name="ChordStrum" type="AudioStreamPlayer" parent="Sounds" index="8"]
-stream = ExtResource( 26 )
-
-[node name="HeckinGoodSong" type="AudioStreamPlayer" parent="Sounds" index="9"]
-stream = ExtResource( 27 )

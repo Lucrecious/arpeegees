@@ -93,7 +93,7 @@ static func damage_with_factor(amount: int, factor: float) -> int:
 	if is_equal_approx(factor, 0.0):
 		return 0
 	
-	return int(max(floor(float(amount) * factor), 1))
+	return int(max(ceil(float(amount) * factor), 1))
 
 static func add_jump(
 		tween: SceneTreeTween, pin: ArpeegeePinNode,

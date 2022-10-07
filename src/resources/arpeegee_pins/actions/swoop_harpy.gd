@@ -69,7 +69,8 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 		tween.tween_callback(sounds, 'play', ['Drop'])
 		
 		if modified_stats:
-			ActionUtils.add_attack_no_evade(tween, actioner, target, modified_stats.attack * 2.0)
+			var attack_amount := ActionUtils.damage_with_factor(modified_stats.attack, 2.0)
+			ActionUtils.add_attack_no_evade(tween, actioner, target, attack_amount)
 		else:
 			assert(false)
 		

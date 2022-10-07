@@ -1,0 +1,96 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
+[ext_resource path="res://lut/components/root_sprite.gd" type="Script" id=2]
+[ext_resource path="res://assets/sprites/blobbo/blobbo_idle.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/blobbo/blobbo_hit.png" type="Texture" id=4]
+[ext_resource path="res://assets/sprites/blobbo/blobbo_attack.png" type="Texture" id=5]
+[ext_resource path="res://assets/sprites/blobbo/blobbo_chear1.png" type="Texture" id=6]
+[ext_resource path="res://assets/shaders/pin_sprite_shader.gdshader" type="Shader" id=7]
+[ext_resource path="res://assets/shaders/wobble_noise.tres" type="Texture" id=8]
+[ext_resource path="res://src/resources/arpeegee_pins/actions/actions.gd" type="Script" id=9]
+[ext_resource path="res://src/resources/arpeegee_pins/actions/attack.gd" type="Script" id=10]
+[ext_resource path="res://src/resources/actions/a_slapa_goo_blobbo.tres" type="Resource" id=11]
+[ext_resource path="res://src/resources/arpeegee_pins/blobbo.tres" type="Resource" id=12]
+[ext_resource path="res://src/resources/arpeegee_pins/actions/splittin_goo.gd" type="Script" id=13]
+[ext_resource path="res://assets/sprites/effects/goo_green.png" type="Texture" id=14]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 7 )
+shader_param/fill_color = Color( 1, 1, 1, 1 )
+shader_param/color_mix = 0.0
+shader_param/top_skew = 0.0
+shader_param/squash = 1.0
+shader_param/offset_amount = 50.0
+shader_param/update_sec = 0.4
+shader_param/uv_offset_texture = ExtResource( 8 )
+
+[node name="Pin" instance=ExtResource( 1 )]
+nice_name = "Blobbo"
+_resource_set = ExtResource( 12 )
+
+[node name="DamageReceiver" parent="." index="5"]
+sprite_name = "hit"
+
+[node name="Health" parent="." index="6"]
+current = 20
+
+[node name="PinStats" parent="." index="7"]
+attack = 3
+magic_attack = 0
+defence = 3
+magic_defence = 2
+evasion = 5
+
+[node name="Sprites" type="Node2D" parent="." index="12"]
+material = SubResource( 1 )
+script = ExtResource( 2 )
+
+[node name="Idle" type="Sprite" parent="Sprites" index="0"]
+use_parent_material = true
+position = Vector2( 0, -65 )
+scale = Vector2( 0.12, 0.12 )
+texture = ExtResource( 3 )
+
+[node name="Attack" type="Sprite" parent="Sprites" index="1"]
+visible = false
+use_parent_material = true
+position = Vector2( 7, -51 )
+scale = Vector2( 0.075, 0.075 )
+texture = ExtResource( 5 )
+
+[node name="Hit" type="Sprite" parent="Sprites" index="2"]
+visible = false
+use_parent_material = true
+position = Vector2( 7, -51 )
+scale = Vector2( 0.075, 0.075 )
+texture = ExtResource( 4 )
+
+[node name="Win" type="Sprite" parent="Sprites" index="3"]
+visible = false
+use_parent_material = true
+position = Vector2( -1, -48 )
+scale = Vector2( 0.07, 0.07 )
+texture = ExtResource( 6 )
+
+[node name="Actions" type="Node2D" parent="." index="13"]
+script = ExtResource( 9 )
+
+[node name="ASlapaGoo" type="Node2D" parent="Actions" index="0"]
+script = ExtResource( 10 )
+pin_action = ExtResource( 11 )
+walk = false
+narration_key = "NARRATOR_A_SLAPA_GOO_USE"
+
+[node name="ImpactHint" type="Position2D" parent="Actions/ASlapaGoo" index="0"]
+position = Vector2( 83, -52 )
+
+[node name="SpittinGoo" type="Node2D" parent="Actions" index="1"]
+script = ExtResource( 13 )
+
+[node name="GooShot" type="Node2D" parent="Actions/SpittinGoo" index="0"]
+z_index = 1
+
+[node name="Sprite" type="Sprite" parent="Actions/SpittinGoo/GooShot" index="0"]
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 14 )

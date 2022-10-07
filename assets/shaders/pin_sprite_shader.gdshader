@@ -11,11 +11,20 @@ uniform float offset_amount = 300.0;
 uniform float update_sec = .4;
 
 
-vec4 wobble(sampler2D image, vec2 uv, float time) {
+vec2 wobble_offset(sampler2D image, vec2 uv, float time) {
     vec2 offset = texture(uv_offset_texture, uv + floor(time / update_sec) * update_sec).xy * 2.0 - 1.0;
     offset *= 1.0 / offset_amount;
-    
-    return vec4(texture(image, uv + offset).rgb, texture(image, uv).a);
+	return offset;
+}
+
+vec4 wobble(sampler2D image, vec2 uv, vec2 offset) {
+	vec4 offset_color = texture(image, uv + offset);
+	vec4 color = texture(image, uv);
+	if (offset_color.a < 0.001) {
+		offset_color.rgb = color.rgb;
+	}
+	
+    return vec4(offset_color.rgb, color.a);
 }
 
 float lerp(float start, float end, float weight) {
@@ -34,7 +43,7 @@ void vertex() {
 }
 
 void fragment() {
-	vec4 color = wobble(TEXTURE, UV, TIME);
-	
+	vec2 offset = wobble_offset(TEXTURE, UV, TIME);
+	vec4 color = wobble(TEXTURE, UV, offset);
 	COLOR = vec4(((color * (1.0 - color_mix)) + (fill_color * color_mix)).rgb, color.a);
 }

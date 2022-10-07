@@ -108,6 +108,7 @@ script = ExtResource( 13 )
 attack_sprite_name = "idle"
 pin_action = ExtResource( 12 )
 walk = false
+narration_key = "NARRATOR_PANCHI_USE_1"
 hit_sfx_name = "PanchiHit"
 windup_sfx_name = "PanchiWindUp"
 
