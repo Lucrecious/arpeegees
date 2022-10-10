@@ -1,0 +1,89 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/sprites/fishguy/fishguy_idle.png" type="Texture" id=2]
+[ext_resource path="res://lut/components/root_sprite.gd" type="Script" id=3]
+[ext_resource path="res://assets/sprites/fishguy/fishguy_hit.png" type="Texture" id=4]
+[ext_resource path="res://assets/sprites/fishguy/fishguy_stab.png" type="Texture" id=5]
+[ext_resource path="res://assets/sprites/fishguy/fishguy_dance.png" type="Texture" id=6]
+[ext_resource path="res://src/resources/arpeegee_pins/actions/attack.gd" type="Script" id=7]
+[ext_resource path="res://src/resources/arpeegee_pins/actions/actions.gd" type="Script" id=8]
+[ext_resource path="res://src/resources/actions/stab_fishguy.tres" type="Resource" id=9]
+[ext_resource path="res://src/resources/arpeegee_pins/actions/splash_fishguy.gd" type="Script" id=10]
+[ext_resource path="res://src/resources/arpeegee_pins/fishguy.tres" type="Resource" id=11]
+[ext_resource path="res://assets/shaders/pin_sprite_shader.gdshader" type="Shader" id=12]
+[ext_resource path="res://assets/shaders/wobble_noise.tres" type="Texture" id=13]
+[ext_resource path="res://src/resources/arpeegee_pins/actions/throw_fishguy.gd" type="Script" id=14]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 12 )
+shader_param/fill_color = Color( 1, 1, 1, 1 )
+shader_param/color_mix = 0.0
+shader_param/top_skew = 0.0
+shader_param/squash = 1.0
+shader_param/offset_amount = 80.0
+shader_param/update_sec = 0.4
+shader_param/uv_offset_texture = ExtResource( 13 )
+
+[node name="Fishguy" instance=ExtResource( 1 )]
+nice_name = "Fishguy"
+_resource_set = ExtResource( 11 )
+
+[node name="Health" parent="." index="6"]
+current = 25
+
+[node name="PinStats" parent="." index="7"]
+attack = 5
+magic_attack = 2
+defence = 3
+evasion = 2
+
+[node name="Sprites" type="Node2D" parent="." index="12"]
+material = SubResource( 1 )
+script = ExtResource( 3 )
+
+[node name="Idle" type="Sprite" parent="Sprites" index="0"]
+use_parent_material = true
+position = Vector2( 20, -96 )
+scale = Vector2( 0.15, 0.15 )
+texture = ExtResource( 2 )
+
+[node name="Stab" type="Sprite" parent="Sprites" index="1"]
+visible = false
+use_parent_material = true
+position = Vector2( 52, -100 )
+scale = Vector2( 0.15, 0.15 )
+texture = ExtResource( 5 )
+
+[node name="Hit" type="Sprite" parent="Sprites" index="2"]
+visible = false
+use_parent_material = true
+position = Vector2( 74, -94 )
+scale = Vector2( 0.15, 0.15 )
+texture = ExtResource( 4 )
+
+[node name="Win" type="Sprite" parent="Sprites" index="3"]
+visible = false
+use_parent_material = true
+position = Vector2( 42, -114 )
+scale = Vector2( 0.15, 0.15 )
+texture = ExtResource( 6 )
+
+[node name="Actions" type="Node2D" parent="." index="13"]
+script = ExtResource( 8 )
+
+[node name="Stab" type="Node2D" parent="Actions" index="0"]
+script = ExtResource( 7 )
+attack_sprite_name = "stab"
+pin_action = ExtResource( 9 )
+walk = false
+narration_key = "NARRATOR_STAB_USE"
+
+[node name="ImpactHint" type="Position2D" parent="Actions/Stab" index="0"]
+position = Vector2( 150, -55 )
+
+[node name="Throw" type="Node2D" parent="Actions" index="1"]
+script = ExtResource( 14 )
+
+[node name="Splash" type="Node2D" parent="Actions" index="2"]
+script = ExtResource( 10 )
