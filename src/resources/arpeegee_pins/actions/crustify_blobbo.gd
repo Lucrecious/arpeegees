@@ -23,6 +23,13 @@ func run(actioner: Node2D, object: Object, callback: String) -> void:
 	
 	animation.tween_interval(0.5)
 	
+	var shield_vfx := VFX.shield_vfx()
+	animation.tween_callback(get_parent(), 'add_child', [shield_vfx])
+	
+	var bounds := NodE.get_child(actioner, REferenceRect) as REferenceRect
+	animation.tween_callback(shield_vfx, 'set',
+			['global_position', bounds.global_rect().get_center()])
+	
 	var status_effects := NodE.get_child(actioner, StatusEffectsList) as StatusEffectsList
 	var status_effect := _create_defence_modifier()
 	animation.tween_callback(status_effects, 'add_instance', [status_effect])

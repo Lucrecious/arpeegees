@@ -3,11 +3,25 @@ extends Node
 const Z_INDEX_FRONT := 1
 
 const AuraTemplateScene := preload('res://src/resources/status_effects/aura.tscn')
-const SweatScene := preload('res://src/vfx/sweat.tscn')
+const DrippingScene := preload('res://src/vfx/dripping.tscn')
 
 func create_sweat_aura(pin: ArpeegeePinNode) -> Array:
-	var front := SweatScene.instance() as CPUParticles2D
+	var front := DrippingScene.instance() as CPUParticles2D
 	front.z_index = Z_INDEX_FRONT
+	front.scale_amount = 0.3
+	
+	var bounding_box := NodE.get_child(pin, REferenceRect) as REferenceRect
+	var rect := bounding_box.global_rect()
+	front.position.y -= rect.size.y
+	
+	return [front]
+
+func create_green_goo_aura(pin: ArpeegeePinNode) -> Array:
+	var front := DrippingScene.instance() as CPUParticles2D
+	front.z_index = Z_INDEX_FRONT
+	front.scale_amount = 0.5
+	front.texture = load('res://assets/sprites/effects/glow_circle.png')
+	front.color = Color('4deb5a')
 	
 	var bounding_box := NodE.get_child(pin, REferenceRect) as REferenceRect
 	var rect := bounding_box.global_rect()

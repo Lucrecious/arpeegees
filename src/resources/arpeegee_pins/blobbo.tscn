@@ -98,3 +98,14 @@ texture = ExtResource( 14 )
 
 [node name="Crustify" type="Node2D" parent="Actions" index="2"]
 script = ExtResource( 15 )
+
+[node name="GooTrap" type="Node2D" parent="Actions" index="3"]
+script = ExtResource( 13 )
+type = 1
+
+[node name="GooShot" type="Node2D" parent="Actions/GooTrap" index="0"]
+z_index = 1
+
+[node name="Sprite" type="Sprite" parent="Actions/GooTrap/GooShot" index="0"]
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 14 )

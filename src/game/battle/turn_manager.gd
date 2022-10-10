@@ -2,6 +2,7 @@ class_name TurnManager
 extends Node
 
 signal pins_changed()
+signal turn_started_before_actions()
 signal player_turn_started()
 signal npc_turn_started()
 signal turn_finished()
@@ -273,6 +274,8 @@ func _do_turn(turn: int) -> void:
 	if _turn_started:
 		return
 	
+	
+	emit_signal('turn_started_before_actions')
 	var pin := get_turn_pin()
 	
 	_start_turn_effect_runner.run(pin)

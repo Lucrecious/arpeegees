@@ -24,10 +24,9 @@ func _ready() -> void:
 	_turn_manager.connect('pins_changed', self, '_on_pins_changed')
 	_on_pins_changed()
 	
-	_turn_manager.connect('player_turn_started', self, '_on_pin_turn_started')
-	_turn_manager.connect('npc_turn_started', self, '_on_pin_turn_started')
+	_turn_manager.connect('initialized', self, '_update_character_pointer', [], CONNECT_ONESHOT)
 
-func _on_pin_turn_started() -> void:
+func _update_character_pointer() -> void:
 	var pin := _turn_manager.get_turn_pin()
 	Logger.info('turn started for pin "%s" at turn %d' % [pin.name, _turn_manager.turn_count()])
 	
@@ -82,7 +81,10 @@ func _on_turn_started_preview() -> SceneTreeTween:
 	if _previous_pin_turn and not _turn_manager._is_all_dead([current]):
 		if _previous_pin_turn.resource.type == ArpeegeePin.Type.Player\
 				and current.resource.type == ArpeegeePin.Type.NPC:
-			_do_npc_turn_section_start()
+			_do_turn_section_start(ArpeegeePin.Type.NPC)
+		elif _previous_pin_turn.resource.type == ArpeegeePin.Type.NPC\
+				and current.resource.type == ArpeegeePin.Type.Player:
+			_do_turn_section_start(ArpeegeePin.Type.Player)
 	
 	_previous_pin_turn = current
 	var tween := create_tween()
@@ -93,11 +95,8 @@ func _on_turn_started_preview() -> SceneTreeTween:
 	tween.tween_interval(0.01)
 	return tween
 
-func _debug_print(value: String) -> void:
-	print_debug(value)
-	
-func _do_npc_turn_section_start() -> void:
-	var keys := _situational_dialog.npc_overall_turn_started_dialog()
+func _do_turn_section_start(type: int) -> void:
+	var keys := _situational_dialog.get_overall_turn_started_dialog(type)
 	if keys.empty():
 		return
 	
@@ -105,6 +104,7 @@ func _do_npc_turn_section_start() -> void:
 		var chain := false
 		_narrator.speak_tr(keys[0], chain)
 	else:
+		print_debug(keys)
 		assert(false, 'multiple keys is not implemented yet')
 
 func _show_action_menu(pin: ArpeegeePinNode, pin_actions: PinActions) -> void:
@@ -153,6 +153,7 @@ func _transition_to_next_turn() -> void:
 	tween.tween_callback(self, '_next_turn')
 
 func _next_turn() -> void:
+	_update_character_pointer()
 	var tween := _on_turn_started_preview()
 	
 	tween.tween_callback(_turn_manager, 'step_turn')

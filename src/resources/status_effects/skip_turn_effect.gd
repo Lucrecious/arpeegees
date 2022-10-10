@@ -16,7 +16,6 @@ onready var _actions := NodE.get_child(_pin, PinActions) as PinActions
 func run_start_turn_effect() -> void:
 	var tween := create_tween()
 	tween.tween_interval(0.2)
-	tween.tween_callback(self, '_print_callback')
 	tween.tween_callback(self, 'emit_signal', ['start_turn_effect_finished'])
 	
 	runs_alive -= 1
@@ -27,14 +26,10 @@ func run_start_turn_effect() -> void:
 	
 	emit_signal('text_triggered', text_key)
 
-func _print_callback() -> void:
-	print('finished tired tween')
-
 func run_end_turn_effect() -> void:
 	_actions.set_moveless(false)
 
 	if runs_alive > 0:
 		return
 	
-	print('tired run end turn')
 	StatusEffect.queue_free_leave_particles_until_dead(get_parent())
