@@ -175,6 +175,11 @@ _global_script_classes=[ {
 "path": "res://lut/extension/geometry_extension.gd"
 }, {
 "base": "Node2D",
+"class": "GenericTargetAttack",
+"language": "GDScript",
+"path": "res://src/resources/arpeegee_pins/actions/attack.gd"
+}, {
+"base": "Node2D",
 "class": "GooShotTrapAction",
 "language": "GDScript",
 "path": "res://src/resources/arpeegee_pins/actions/splittin_goo.gd"
@@ -633,6 +638,7 @@ _global_script_class_icons={
 "FloatingText": "",
 "FuncREf": "",
 "GEometry": "",
+"GenericTargetAttack": "",
 "GooShotTrapAction": "",
 "Gravity": "",
 "Health": "",

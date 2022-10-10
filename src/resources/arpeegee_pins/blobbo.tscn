@@ -26,7 +26,7 @@ shader_param/offset_amount = 50.0
 shader_param/update_sec = 0.4
 shader_param/uv_offset_texture = ExtResource( 8 )
 
-[node name="Pin" instance=ExtResource( 1 )]
+[node name="Blobbo" instance=ExtResource( 1 )]
 nice_name = "Blobbo"
 _resource_set = ExtResource( 12 )
 

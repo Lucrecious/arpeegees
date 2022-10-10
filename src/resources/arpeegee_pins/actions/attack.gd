@@ -1,3 +1,4 @@
+class_name GenericTargetAttack
 extends Node2D
 
 signal text_triggered(translation)
