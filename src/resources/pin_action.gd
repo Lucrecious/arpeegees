@@ -5,6 +5,7 @@ enum TargetType {
 	Self,
 	Single,
 	AllEnemies,
+	AllAllies,
 }
 
 enum ActionType {

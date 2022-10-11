@@ -60,6 +60,9 @@ tracks/0/keys = {
 nice_name = "Fishguy"
 _resource_set = ExtResource( 11 )
 
+[node name="DamageReceiver" parent="." index="5"]
+sprite_name = "hit"
+
 [node name="Health" parent="." index="6"]
 current = 25
 
