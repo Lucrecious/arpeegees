@@ -1,5 +1,7 @@
 extends Node2D
 
+signal text_triggered(narration_key)
+
 export(String) var frame := ''
 
 func pin_action() -> PinAction:
@@ -23,6 +25,22 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 	animation.tween_interval(0.75)
 	
 	animation.tween_callback(sprite_switcher, 'change', ['Idle'])
+	
+	if targets.size() == 1:
+		ActionUtils.add_text_trigger(animation, self, 'NARRATOR_HOLY_SPARKLES_USE_NO_ALLY')
+	elif targets.size() > 1:
+		var any_dead := false
+		for t in targets:
+			var health := NodE.get_child(t, Health) as Health
+			if health.current > 0:
+				continue
+			any_dead = true
+			break
+		
+		if not any_dead:
+			ActionUtils.add_text_trigger(animation, self, 'NARRATOR_HOLY_SPARKLES_USE_WITH_ALLY')
+		else:
+			ActionUtils.add_text_trigger(animation, self, 'NARRATOR_HOLY_SPARKLES_USE_DEAD_ALLY')
 	
 	animation.tween_callback(object, callback)
 
