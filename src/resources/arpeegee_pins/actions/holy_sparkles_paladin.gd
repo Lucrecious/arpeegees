@@ -1,5 +1,7 @@
 extends Node2D
 
+export(String) var frame := ''
+
 func pin_action() -> PinAction:
 	return preload('res://src/resources/actions/holy_sparkles_paladin.tres') as PinAction
 
@@ -9,7 +11,7 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 	animation.tween_interval(0.5)
 	
 	var sprite_switcher := NodE.get_child(actioner, SpriteSwitcher) as SpriteSwitcher
-	animation.tween_callback(sprite_switcher, 'change', ['MagicHeal'])
+	animation.tween_callback(sprite_switcher, 'change', [frame])
 	
 	for t in targets:
 		var box := NodE.get_child(t, REferenceRect) as REferenceRect

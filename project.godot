@@ -184,10 +184,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/resources/arpeegee_pins/actions/multi_attack.gd"
 }, {
-"base": "Node2D",
+"base": "Reference",
 "class": "GenericSelfBuffSpell",
 "language": "GDScript",
-"path": "res://src/resources/arpeegee_pins/actions/bright_sparkles_paladin.gd"
+"path": "res://src/resources/arpeegee_pins/actions/general_self_buff.gd"
 }, {
 "base": "Node2D",
 "class": "GenericTargetAttack",

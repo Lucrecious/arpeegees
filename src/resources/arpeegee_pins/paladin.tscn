@@ -16,7 +16,7 @@
 [ext_resource path="res://assets/shaders/pin_sprite_shader.gdshader" type="Shader" id=14]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/multi_attack.gd" type="Script" id=15]
 [ext_resource path="res://src/resources/actions/tremendous_slash_paladin.tres" type="Resource" id=16]
-[ext_resource path="res://src/resources/arpeegee_pins/actions/bright_sparkles_paladin.gd" type="Script" id=17]
+[ext_resource path="res://src/resources/arpeegee_pins/actions/general_self_buff.gd" type="Script" id=17]
 [ext_resource path="res://src/resources/actions/bright_sparkles_paladin.tres" type="Resource" id=18]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/holy_sparkles_paladin.gd" type="Script" id=19]
 
@@ -122,3 +122,4 @@ narration_key = "NARRATOR_BRIGHT_SPARKLES_USE"
 
 [node name="HolySparkles" type="Node2D" parent="Actions" index="3"]
 script = ExtResource( 19 )
+frame = "magicheal"

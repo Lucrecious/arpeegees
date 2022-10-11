@@ -19,7 +19,7 @@
 [ext_resource path="res://src/game/battle/start_turn_effect_runner.gd" type="Script" id=17]
 [ext_resource path="res://assets/sounds/landing_arpeegees.mp3" type="AudioStream" id=18]
 [ext_resource path="res://src/resources/arpeegee_pins/monk.tres" type="Resource" id=19]
-[ext_resource path="res://src/resources/arpeegee_pins/paladin.tres" type="Resource" id=20]
+[ext_resource path="res://src/resources/arpeegee_pins/paladin_no_sword.tres" type="Resource" id=20]
 [ext_resource path="res://src/resources/sounds.gd" type="Script" id=21]
 [ext_resource path="res://assets/sounds/shimmer_arpeegees.mp3" type="AudioStream" id=22]
 [ext_resource path="res://assets/sounds/enraged_harpy.mp3" type="AudioStream" id=23]
@@ -217,6 +217,7 @@ texture = ExtResource( 5 )
 [node name="CharacterPointer" type="Node2D" parent="."]
 unique_name_in_owner = true
 position = Vector2( 482, -4761 )
+z_index = 2
 
 [node name="Sprite" type="Sprite" parent="CharacterPointer"]
 texture = ExtResource( 14 )
@@ -228,6 +229,7 @@ anims/default = SubResource( 4 )
 
 [node name="TargetPointers" type="Node2D" parent="."]
 unique_name_in_owner = true
+z_index = 2
 
 [node name="TargetPointerTemplate" type="Node2D" parent="TargetPointers"]
 position = Vector2( 560, -4761 )
