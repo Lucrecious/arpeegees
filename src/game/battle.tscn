@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://src/game/battle.gd" type="Script" id=1]
 [ext_resource path="res://src/game/battle/turn_manager.gd" type="Script" id=2]
@@ -25,7 +25,6 @@
 [ext_resource path="res://assets/sounds/enraged_harpy.mp3" type="AudioStream" id=23]
 [ext_resource path="res://src/game/save_log.gd" type="Script" id=24]
 [ext_resource path="res://src/ui/size_adapter.gd" type="Script" id=25]
-[ext_resource path="res://src/resources/arpeegee_pins/bard.tres" type="Resource" id=26]
 
 [sub_resource type="Animation" id=3]
 length = 0.001
@@ -106,7 +105,7 @@ anchor_bottom = 1.0
 theme = ExtResource( 7 )
 script = ExtResource( 1 )
 auto_start = true
-auto_start_player_pins = [ ExtResource( 20 ), ExtResource( 26 ) ]
+auto_start_player_pins = [ ExtResource( 20 ) ]
 auto_start_npc_pins = [ ExtResource( 19 ) ]
 
 [node name="Background" type="Control" parent="."]
@@ -292,7 +291,7 @@ _turn_manager_path = NodePath("../TurnManager")
 [node name="AI" type="Node" parent="CanvasLayer/HUD/Control/BattleOverlay"]
 script = ExtResource( 9 )
 _narrator_ui_path = NodePath("../../Narrator")
-debug_action_index = 0
+debug_action_index = 1
 
 [node name="TurnManager" type="Node" parent="CanvasLayer/HUD/Control/BattleOverlay"]
 unique_name_in_owner = true
