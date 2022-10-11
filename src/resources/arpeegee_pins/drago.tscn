@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
 [ext_resource path="res://lut/components/root_sprite.gd" type="Script" id=2]
@@ -9,10 +9,11 @@
 [ext_resource path="res://src/resources/arpeegee_pins/actions/actions.gd" type="Script" id=7]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/attack.gd" type="Script" id=8]
 [ext_resource path="res://src/resources/actions/bite_drago.tres" type="Resource" id=9]
-[ext_resource path="res://src/resources/arpeegee_pins/actions/tail_smack_drago.gd" type="Script" id=10]
+[ext_resource path="res://src/resources/arpeegee_pins/actions/multi_attack.gd" type="Script" id=10]
 [ext_resource path="res://src/resources/arpeegee_pins/drago.tres" type="Resource" id=11]
 [ext_resource path="res://assets/shaders/pin_sprite_shader.gdshader" type="Shader" id=12]
 [ext_resource path="res://assets/shaders/wobble_noise.tres" type="Texture" id=13]
+[ext_resource path="res://src/resources/actions/tail_smack_drago.tres" type="Resource" id=14]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 12 )
@@ -64,7 +65,7 @@ position = Vector2( 2, -110 )
 scale = Vector2( 0.15, 0.15 )
 texture = ExtResource( 5 )
 
-[node name="TailWhip" type="Sprite" parent="Sprites" index="3"]
+[node name="TailSmack" type="Sprite" parent="Sprites" index="3"]
 visible = false
 use_parent_material = true
 position = Vector2( 2, -120 )
@@ -85,6 +86,9 @@ position = Vector2( 69, -67 )
 
 [node name="TailSmack" type="Node2D" parent="Actions" index="1"]
 script = ExtResource( 10 )
+pin_action = ExtResource( 14 )
+attack_frame = "tailsmack"
+narration_key_single = "NARRATOR_TAIL_SMACK_USE"
 
 [node name="ImpactHint" type="Position2D" parent="Actions/TailSmack" index="0"]
 position = Vector2( 69, -67 )

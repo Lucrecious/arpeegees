@@ -30,6 +30,19 @@ func sparkle_explosions() -> Array:
 	
 	return [explosion]
 
+func bright_sparkles(pin: ArpeegeePinNode) -> void:
+	var box := NodE.get_child(pin, REferenceRect) as REferenceRect
+	for i in range(5):
+		var explosion := ExplosionTemplateScene.instance() as ExplosionParticles
+		explosion.spread = 180.0
+		explosion.scale_amount = 0.1
+		var texture := load('res://assets/sprites/effects/sparkle%d.png' % [i + 1])
+		explosion.texture = texture
+		explosion.amount = 4
+		
+		pin.get_parent().add_child(explosion)
+		explosion.global_position = box.global_rect().get_center()
+
 func random_sparkle_explosions() -> Array:
 	var sparkle1 := ExplosionTemplateScene.instance() as ExplosionParticles
 	sparkle1.spread = 180.0

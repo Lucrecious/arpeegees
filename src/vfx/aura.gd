@@ -43,6 +43,21 @@ func create_power_up_auras() -> Array:
 	
 	return [front, back]
 
+func create_bright_sparkles_aura() -> Array:
+	var auras := []
+	for i in 5:
+		var aura := AuraTemplateScene.instance() as AuraParticles
+		
+		var texture := load('res://assets/sprites/effects/sparkle%d.png' % [i + 1])
+		aura.texture = texture
+		aura.scale_amount = 0.05
+		aura.z_index = Z_INDEX_FRONT if i % 2 == 0 else aura.z_index
+		aura.amount = 2
+		
+		auras.push_back(aura)
+	
+	return auras
+
 func create_enraged_auras() -> Array:
 	var front := AuraTemplateScene.instance() as AuraParticles
 	front.texture = load('res://assets/sprites/effects/monster_enraged.png')
