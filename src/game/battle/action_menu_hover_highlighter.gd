@@ -65,8 +65,10 @@ func _on_action_menu_action_hovered(action_node: Node) -> void:
 		_show_target_pins([_turn_manager.get_turn_pin()])
 	elif action.target_type == PinAction.TargetType.AllEnemies\
 			or action.target_type == PinAction.TargetType.Single:
+		
 		var turn_pin := _turn_manager.get_turn_pin()
 		var highlights := []
+		
 		if turn_pin.resource.type == ArpeegeePin.Type.NPC:
 			highlights = _turn_manager.get_players()
 		elif turn_pin.resource.type == ArpeegeePin.Type.Player:
@@ -78,6 +80,20 @@ func _on_action_menu_action_hovered(action_node: Node) -> void:
 		_whiten_pins(highlights)
 		var faded := bool(action.target_type == PinAction.TargetType.Single)
 		_show_target_pins(highlights, faded)
+	elif action.target_type == PinAction.TargetType.AllAllies:
+		var turn_pin := _turn_manager.get_turn_pin()
+		var highlights := []
+		
+		if turn_pin.resource.type == ArpeegeePin.Type.NPC:
+			highlights = _turn_manager.get_npcs()
+		elif turn_pin.resource.type == ArpeegeePin.Type.Player:
+			highlights = _turn_manager.get_players()
+		else:
+			assert(false)
+		
+		_darken_pins(_turn_manager.get_pins())
+		_whiten_pins(highlights)
+		_show_target_pins(highlights, false)
 
 func _show_target_pins(pins: Array, faded := false) -> void:
 	for p in _target_pointers:

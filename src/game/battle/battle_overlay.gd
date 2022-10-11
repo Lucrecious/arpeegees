@@ -122,6 +122,8 @@ func _show_action_menu(pin: ArpeegeePinNode, pin_actions: PinActions) -> void:
 			_action_menu	.add_pin_action(node, [])
 		elif action.target_type == PinAction.TargetType.AllEnemies:
 			_action_menu.add_pin_action(node, [])
+		elif action.target_type == PinAction.TargetType.AllAllies:
+			_action_menu.add_pin_action(node, [])
 		else:
 			assert(false)
 
@@ -138,6 +140,9 @@ func _on_action_picked(action_node: Node, targets: Array, pin: ArpeegeePinNode, 
 	elif action.target_type == PinAction.TargetType.AllEnemies:
 		assert(targets.size() == 0)
 		_turn_manager.run_action_with_targets(pin, action_node.name, _turn_manager.get_npcs())
+	elif action.target_type == PinAction.TargetType.AllAllies:
+		assert(targets.size() == 0)
+		_turn_manager.run_action_with_targets(pin, action_node.name, _turn_manager.get_players())
 	else:
 		assert(false)
 

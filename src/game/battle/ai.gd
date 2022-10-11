@@ -45,6 +45,9 @@ func _on_npc_turn_started() -> void:
 	elif action.target_type == PinAction.TargetType.AllEnemies:
 		var players := _turn_manager.get_players()
 		tween.tween_callback(_turn_manager, 'run_action_with_targets', [pin, node.name, players])
+	elif action.target_type == PinAction.TargetType.AllAllies:
+		var npcs := _turn_manager.get_npcs()
+		tween.tween_callback(_turn_manager, 'run_action_with_targets', [pin, node.name, npcs])
 	else:
 		assert(false)
 		return
