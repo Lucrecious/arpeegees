@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
 [ext_resource path="res://lut/components/root_sprite.gd" type="Script" id=2]
@@ -12,6 +12,21 @@
 [ext_resource path="res://src/resources/arpeegee_pins/actions/attack.gd" type="Script" id=10]
 [ext_resource path="res://src/resources/arpeegee_pins/banan.tres" type="Resource" id=11]
 [ext_resource path="res://src/resources/actions/headbutt_banan.tres" type="Resource" id=12]
+[ext_resource path="res://src/resources/arpeegee_pins/actions/shoot_banan.gd" type="Script" id=13]
+[ext_resource path="res://assets/shaders/wobble_noise.tres" type="Texture" id=14]
+[ext_resource path="res://assets/shaders/pin_sprite_shader.gdshader" type="Shader" id=15]
+[ext_resource path="res://assets/sprites/banan/banan_bruised.PNG" type="Texture" id=16]
+[ext_resource path="res://assets/sprites/banan/banan_fullbruised.PNG" type="Texture" id=17]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 15 )
+shader_param/fill_color = Color( 1, 1, 1, 1 )
+shader_param/color_mix = 0.0
+shader_param/top_skew = 0.0
+shader_param/squash = 1.0
+shader_param/offset_amount = 80.0
+shader_param/update_sec = 0.4
+shader_param/uv_offset_texture = ExtResource( 14 )
 
 [node name="Banan" instance=ExtResource( 1 )]
 nice_name = "Banan"
@@ -21,36 +36,56 @@ _resource_set = ExtResource( 11 )
 current = 30
 
 [node name="Sprites" type="Node2D" parent="." index="12"]
+material = SubResource( 1 )
 script = ExtResource( 2 )
 
-[node name="Idle" type="Sprite" parent="Sprites" index="0"]
+[node name="Idle_Fully_Bruised" type="Sprite" parent="Sprites" index="0"]
+visible = false
+use_parent_material = true
+position = Vector2( -3, -77 )
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 17 )
+
+[node name="Idle_Bruised" type="Sprite" parent="Sprites" index="1"]
+visible = false
+use_parent_material = true
+position = Vector2( -3, -77 )
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 16 )
+
+[node name="Idle" type="Sprite" parent="Sprites" index="2"]
+use_parent_material = true
 position = Vector2( 0, -81 )
 scale = Vector2( 0.13, 0.13 )
 texture = ExtResource( 4 )
 
-[node name="Hurt" type="Sprite" parent="Sprites" index="1"]
+[node name="Hurt" type="Sprite" parent="Sprites" index="3"]
 visible = false
+use_parent_material = true
 position = Vector2( 9, -78 )
 scale = Vector2( 0.12, 0.12 )
 texture = ExtResource( 5 )
 
-[node name="Headbutt" type="Sprite" parent="Sprites" index="2"]
+[node name="Headbutt" type="Sprite" parent="Sprites" index="4"]
 visible = false
+use_parent_material = true
 position = Vector2( 10, -90 )
 scale = Vector2( 0.13, 0.13 )
 texture = ExtResource( 6 )
 
-[node name="PeelShoot" type="Sprite" parent="Sprites" index="3"]
+[node name="ShootBanan" type="Sprite" parent="Sprites" index="5"]
 visible = false
+use_parent_material = true
 position = Vector2( 40, -108 )
 scale = Vector2( 0.13, 0.13 )
 texture = ExtResource( 8 )
 
-[node name="Banan" type="Sprite" parent="Sprites/PeelShoot" index="0"]
+[node name="Banan" type="Sprite" parent="Sprites/ShootBanan" index="0"]
 texture = ExtResource( 7 )
 
-[node name="Win" type="Sprite" parent="Sprites" index="4"]
+[node name="Win" type="Sprite" parent="Sprites" index="6"]
 visible = false
+use_parent_material = true
 position = Vector2( 3, -76 )
 scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 9 )
@@ -65,3 +100,6 @@ pin_action = ExtResource( 12 )
 narration_key = "NARRATOR_HEADBUTT_USE"
 
 [node name="ImpactHint" type="Position2D" parent="Actions/Headbutt" index="0"]
+
+[node name="ShootBanan" type="Node2D" parent="Actions" index="1"]
+script = ExtResource( 13 )
