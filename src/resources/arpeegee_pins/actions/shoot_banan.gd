@@ -42,7 +42,7 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 			.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUAD)
 	
 	var stats := NodE.get_child(actioner, ModifiedPinStats) as ModifiedPinStats
-	var attack_amount := ActionUtils.damage_with_factor(stats.attack, 1.5)
+	var attack_amount := ActionUtils.damage_with_factor(stats.attack, 2.5)
 	ActionUtils.add_attack_no_evade(animation, actioner, target, attack_amount)
 	
 	animation.tween_interval(0.4)

@@ -52,6 +52,7 @@ func get_pin_action_nodes() -> Array:
 
 func run_action_with_targets(action_name: String, targets: Array, multiple: bool) -> void:
 	var node := NodE.get_child_by_name(self, action_name)
+	
 	if not node:
 		print_debug('%s failed to %s, signals will not be called!' % [_parent.name, action_name])
 		return
@@ -60,14 +61,20 @@ func run_action_with_targets(action_name: String, targets: Array, multiple: bool
 		print_debug('%s does not have a run method, signals will not be called!' % [node.get_path()])
 		return
 	
-	if targets.empty():
-		node.run(_parent, self, '_on_action_node_finished')
-	elif targets.size() == 1 and not multiple:
-		node.run(_parent, targets[0], self, '_on_action_node_finished')
-	else:
-		node.run(_parent, targets, self, '_on_action_node_finished')
-	
 	_is_running_action = true
+	
+	var slippable := NodE.get_child(node, BananSlippable, false) as BananSlippable
+	if slippable and slippable.is_activated():
+		var slip_animation := slippable.run_action_with_targets(_parent, targets)
+		slip_animation.tween_callback(self, '_on_action_node_finished')
+	else: # main functionality
+		if targets.empty():
+			node.run(_parent, self, '_on_action_node_finished')
+		elif targets.size() == 1 and not multiple:
+			node.run(_parent, targets[0], self, '_on_action_node_finished')
+		else:
+			node.run(_parent, targets, self, '_on_action_node_finished')
+	
 	emit_signal('action_started')
 	emit_signal('action_started_with_action_node', node)
 

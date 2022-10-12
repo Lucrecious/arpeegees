@@ -30,6 +30,7 @@ func _on_npc_turn_started() -> void:
 	var action_index := randi() % action_nodes.size()
 	if debug_action_index > -1:
 		action_index = debug_action_index
+		action_index = min(action_nodes.size() - 1, action_index)
 	
 	var node := action_nodes[action_index] as Node
 	var action := node.pin_action() as PinAction

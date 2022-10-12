@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/sprites/bard/bard_idle.png" type="Texture" id=2]
@@ -28,6 +28,7 @@
 [ext_resource path="res://assets/sounds/chord_strum_bard.mp3" type="AudioStream" id=26]
 [ext_resource path="res://assets/sounds/heckin_good_song_bard.mp3" type="AudioStream" id=27]
 [ext_resource path="res://assets/sprites/bard/bard_win.png" type="Texture" id=28]
+[ext_resource path="res://src/resources/arpeegee_pins/actions/slippable.gd" type="Script" id=29]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 7 )
@@ -52,9 +53,6 @@ magic_attack = 0
 defence = 3
 magic_defence = 3
 evasion = 2
-
-[node name="HealthBar" parent="." index="10"]
-z_index = 1
 
 [node name="MandolinBash" type="AudioStreamPlayer" parent="Sounds" index="0"]
 stream = ExtResource( 22 )
@@ -151,6 +149,9 @@ hit_sfx_name = "MandolinBash"
 
 [node name="ImpactHint" type="Position2D" parent="Actions/MandolinBash" index="0"]
 position = Vector2( -84, -96 )
+
+[node name="Slippable" type="Node" parent="Actions/MandolinBash" index="1"]
+script = ExtResource( 29 )
 
 [node name="Discord" type="Node2D" parent="Actions" index="1"]
 script = ExtResource( 10 )
