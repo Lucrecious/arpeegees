@@ -234,7 +234,7 @@ func _on_pin_health_changed(amount: int, pin: ArpeegeePinNode, damaged: bool) ->
 
 func _on_pin_critical_hit_or_evaded(pin: ArpeegeePinNode, is_critical: bool) -> void:
 	if is_critical:
-		VFX._text(pin, 'CRITICAL!!', pin.get_parent())
+		VFX.floating_text(pin, 'CRITICAL!!', pin.get_parent())
 	else:
 		VFX.floating_text(pin, 'MISS', pin.get_parent())
 
