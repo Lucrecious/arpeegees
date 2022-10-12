@@ -13,6 +13,8 @@ export(String) var narration_key := ''
 export(String) var hit_sfx_name := ''
 export(String) var windup_sfx_name := ''
 
+export(float) var attack_factor := 1.0
+
 onready var _impact_hint_node := NodE.get_child_by_name(self, impact_hint_name) as Node2D
 
 var _times_used := 0
@@ -59,7 +61,35 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 		tween.tween_callback(sounds, 'play', [hit_sfx_name])
 	else:
 		tween.tween_callback(Sounds, 'play', ['GenericHit1'])
+
+	var sprite_switcher := NodE.get_child(actioner, SpriteSwitcher) as SpriteSwitcher
+	if not attack_sprite_name.empty():
+		tween.tween_callback(sprite_switcher, 'change', [attack_sprite_name])
+
+	if _impact_hint_node:
+		tween.tween_callback(VFX, 'physical_impact', [actioner, _impact_hint_node])
 	
+	var white_mage_instakill := false
+	var modified_stats := NodE.get_child(actioner, ModifiedPinStats) as ModifiedPinStats
+	if modified_stats:
+		if physical:
+			var attack_amount := ActionUtils.damage_with_factor(modified_stats.attack, attack_factor)
+			if pin_action().resource_path.get_file() == 'desperate_staff_whack_white_mage.tres':
+				if randf() < 0.08:
+					attack_amount = 100_000
+					white_mage_instakill = true
+					
+			ActionUtils.add_attack(tween, actioner, target, attack_amount)
+		else:
+			var attack_amount := ActionUtils.damage_with_factor(modified_stats.magic_attack, attack_factor)
+			ActionUtils.add_magic_attack(tween, actioner, target, attack_amount)
+	else:
+		assert(false)
+
+	ActionUtils.add_shake(tween, actioner, position, Vector2(1, 0), 5.0, .35)
+	tween.tween_interval(.4)
+	tween.tween_callback(sprite_switcher, 'change', ['idle'])
+
 	if pin_action().resource_path.get_file() == 'bard_mandolin_swing.tres':
 			if _times_used < 4:
 				ActionUtils.add_text_trigger(tween, self, 'NARRATOR_MANDOLIN_BASH_USE_%d' % [_times_used])
@@ -71,25 +101,8 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 		if not narration_key.empty():
 			ActionUtils.add_text_trigger(tween, self, narration_key)
 
-	var sprite_switcher := NodE.get_child(actioner, SpriteSwitcher) as SpriteSwitcher
-	if not attack_sprite_name.empty():
-		tween.tween_callback(sprite_switcher, 'change', [attack_sprite_name])
-
-	if _impact_hint_node:
-		tween.tween_callback(VFX, 'physical_impact', [actioner, _impact_hint_node])
-
-	var modified_stats := NodE.get_child(actioner, ModifiedPinStats) as ModifiedPinStats
-	if modified_stats:
-		if physical:
-			ActionUtils.add_attack(tween, actioner, target, modified_stats.attack)
-		else:
-			ActionUtils.add_magic_attack(tween, actioner, target, modified_stats.magic_attack)
-	else:
-		assert(false)
-
-	ActionUtils.add_shake(tween, actioner, position, Vector2(1, 0), 5.0, .35)
-	tween.tween_interval(.4)
-	tween.tween_callback(sprite_switcher, 'change', ['idle'])
+	if white_mage_instakill:
+		ActionUtils.add_text_trigger(tween, self, 'NARRATOR_DESPERATE_STAFF_WHACK_KILL')
 
 	ActionUtils.add_walk(tween, actioner,
 			actioner.global_position + relative, actioner.global_position, 15.0, 5)

@@ -37,6 +37,10 @@ func damage(amount: int, type: int, is_critical: bool) -> void:
 	if not _enabled:
 		return
 	
+	if amount == 0:
+		hurt()
+		return
+	
 	var actual_damage := 0
 	if type == PinAction.AttackType.Normal:
 		actual_damage = ceil(amount * (amount / float(amount + _modified_stats.defence)))
