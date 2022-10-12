@@ -46,6 +46,7 @@ func _replace_idle_with_armadillo_stance(sprite_switcher: SpriteSwitcher) -> voi
 
 func _create_armadillo_stance_status_effect() -> StatusEffect:
 	var status_effect := StatusEffect.new()
+	status_effect.is_ailment = false
 	status_effect.stack_count = 1
 	status_effect.tag = StatusEffectTag.ArmadilloStance
 	

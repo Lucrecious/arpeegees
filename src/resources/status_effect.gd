@@ -5,6 +5,8 @@ var stack_count := 1
 
 var tag := -1
 
+var is_ailment := true
+
 static func queue_free_leave_particles_until_dead(status_effect: StatusEffect) -> void:
 	var particles := NodE.get_children(status_effect, CPUParticles2D)
 	

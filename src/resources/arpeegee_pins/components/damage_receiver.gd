@@ -83,5 +83,9 @@ func hurt() -> void:
 	
 	_current_hurt_tween.tween_callback(_sprite_switcher, 'change', ['idle'])
 
+func revive() -> void:
+	_health.current_set(ceil(_health.max_points * 0.3))
+	_sprite_switcher.change('idle')
+
 func _set_fill_color(ratio: float) -> void:
 	_root_sprite_shader.set_shader_param('color_mix', ratio)

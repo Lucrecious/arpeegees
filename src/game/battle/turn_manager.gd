@@ -27,6 +27,8 @@ var _current_turn := 0
 
 var _transform_queue := []
 
+var _redo_turn_queued := false
+
 onready var _start_turn_effect_runner := $StartTurnEffectRunner as StartTurnEffectRunner
 
 func initialize_turns(pins: Array) -> void:
@@ -54,6 +56,9 @@ func initialize_turns(pins: Array) -> void:
 
 func turn_count() -> int:
 	return _current_turn
+
+func queue_redo_turn() -> void:
+	_redo_turn_queued = true
 
 func use_item(item: PinItemPowerUp) -> void:
 	item.apply_power(_ordered_pins)
@@ -93,11 +98,15 @@ func finish_turn() -> void:
 	Logger.info('turn_finished emitted')
 	emit_signal('turn_finished')
 	
-	while true:
-		_current_turn += 1
-		pin = get_turn_pin()
-		if not _is_all_dead([pin]):
-			break
+	if _redo_turn_queued:
+		_redo_turn_queued = false
+	else:
+		while true:
+			_current_turn += 1
+			pin = get_turn_pin()
+			if not _is_all_dead([pin]):
+				break
+	
 	_turn_started = false
 
 func get_turn_pin() -> ArpeegeePinNode:
