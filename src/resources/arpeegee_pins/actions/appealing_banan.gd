@@ -28,6 +28,10 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 	
 	animation.tween_callback(self, '_add_slip_effect', [targets])
 	
+	var sparkles := get_tree().get_nodes_in_group('shiny_ground_particles')
+	if not sparkles.empty():
+		animation.tween_callback(sparkles[0], 'set', ['emitting', true])
+	
 	animation.tween_callback(sprite_switcher, 'change', ['idle'])
 	
 	ActionUtils.add_text_trigger(animation, self, 'NARRATOR_APPEALING_USE')

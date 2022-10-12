@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://src/game/battle.gd" type="Script" id=1]
 [ext_resource path="res://src/game/battle/turn_manager.gd" type="Script" id=2]
@@ -25,6 +25,10 @@
 [ext_resource path="res://assets/sounds/enraged_harpy.mp3" type="AudioStream" id=23]
 [ext_resource path="res://src/game/save_log.gd" type="Script" id=24]
 [ext_resource path="res://src/ui/size_adapter.gd" type="Script" id=25]
+[ext_resource path="res://assets/sprites/effects/sparkle1.png" type="Texture" id=26]
+
+[sub_resource type="Curve" id=7]
+_data = [ Vector2( 0.0112782, 0.0225226 ), 0.0, 0.0, 0, 0, Vector2( 0.661654, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Animation" id=3]
 length = 0.001
@@ -170,6 +174,27 @@ margin_top = -390.0
 texture = ExtResource( 11 )
 expand = true
 stretch_mode = 5
+
+[node name="CenterShiny" type="CenterContainer" parent="Background"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ShinyControl" type="Control" parent="Background/CenterShiny"]
+margin_left = 640.0
+margin_top = 360.0
+margin_right = 640.0
+margin_bottom = 360.0
+
+[node name="Shiny" type="CPUParticles2D" parent="Background/CenterShiny/ShinyControl" groups=["shiny_ground_particles"]]
+position = Vector2( 10, 152 )
+emitting = false
+amount = 5
+texture = ExtResource( 26 )
+emission_shape = 2
+emission_rect_extents = Vector2( 300, 50 )
+gravity = Vector2( 0, 0 )
+scale_amount = 0.01
+scale_amount_curve = SubResource( 7 )
 
 [node name="Grass" type="NinePatchRect" parent="Background"]
 anchor_top = 1.0
