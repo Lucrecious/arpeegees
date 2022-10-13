@@ -156,6 +156,7 @@ NARRATOR_THROW_A_ROCK_WITH_HANDS_USE,Geomancer hucks a rock like anyone can. See
 ,,
 RAISE_EARTH_NAME,Raise Earth,
 NARRATOR_RAISE_EARTH_USE,Geomancer surrounds themself with more rocks and debris.,
+NARRATOR_RAISE_EARTH_USE_NO_MORE_ROCKS,"Geomancer tries to pull up more rocks from the ground, but there are no more left!",
 ,,
 ROCK_WALL_NAME,Rock Wall,
 NARRATOR_RAISE_WALL_WITH_ALLY,"Geomancer raises a rock wall from the ground, protecting the heroes from physical attacks.",

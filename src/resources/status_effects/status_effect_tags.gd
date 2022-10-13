@@ -12,4 +12,5 @@ enum {
 	Crustify,
 	GooTrap,
 	BrightSparkles,
+	RaiseEarth,
 }

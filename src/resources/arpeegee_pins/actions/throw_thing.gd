@@ -4,7 +4,7 @@ signal text_triggered(narration_text)
 
 enum Type {
 	HandThrowRock,
-	MagicThrowBack,
+	MagicThrowRock,
 }
 
 export(Type) var type := Type.HandThrowRock
@@ -25,7 +25,7 @@ func _ready() -> void:
 func pin_action() -> PinAction:
 	if type == Type.HandThrowRock:
 		return preload('res://src/resources/actions/throw_rock_no_magic_geomancer.tres')
-	elif type == Type.MagicThrowBack:
+	elif type == Type.MagicThrowRock:
 		return preload('res://src/resources/actions/throw_rock_magic_geomancer.tres')
 	else:
 		assert(false)
@@ -62,17 +62,17 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	
 	animation.tween_callback(sprite_switcher, 'change', ['idle'])
 	
-	var stats := NodE.get_child(target, ModifiedPinStats) as ModifiedPinStats
+	var stats := NodE.get_child(actioner, ModifiedPinStats) as ModifiedPinStats
 	if type == Type.HandThrowRock:
 		ActionUtils.add_attack(animation, actioner, target, stats.attack)
-	elif type == Type.MagicThrowBack:
+	elif type == Type.MagicThrowRock:
 		ActionUtils.add_magic_attack(animation, actioner, target, stats.magic_attack)
 	else:
 		assert(false)
 	
 	if not narration_key.empty():
 		ActionUtils.add_text_trigger(animation, self, narration_key)
-	elif type == Type.MagicThrowBack:
+	elif type == Type.MagicThrowRock:
 		var throw_rock_hand := get_parent().get_child(0)
 		assert(throw_rock_hand.name == 'ThrowRock')
 		

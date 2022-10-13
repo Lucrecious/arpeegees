@@ -6,5 +6,5 @@
 script = ExtResource( 1 )
 nice_name = "ROCK_WALL_NAME"
 description = ""
-target_type = 1
+target_type = 3
 action_type = 2
