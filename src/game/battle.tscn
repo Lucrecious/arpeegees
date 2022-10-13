@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://src/game/battle.gd" type="Script" id=1]
 [ext_resource path="res://src/game/battle/turn_manager.gd" type="Script" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://lut/ui/span_limiter.gd" type="Script" id=10]
 [ext_resource path="res://assets/battle/ground.svg" type="Texture" id=11]
 [ext_resource path="res://assets/battle/sky.svg" type="Texture" id=12]
+[ext_resource path="res://src/game/battle/layout_one_two.tscn" type="PackedScene" id=13]
 [ext_resource path="res://assets/ui/icons/character_pointer.svg" type="Texture" id=14]
 [ext_resource path="res://src/game/battle/action_menu_hover_highlighter.gd" type="Script" id=15]
 [ext_resource path="res://src/game/situational_dialog.gd" type="Script" id=16]
@@ -306,7 +307,6 @@ anims/RESET = SubResource( 5 )
 anims/default = SubResource( 6 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="HUD" type="MarginContainer" parent="CanvasLayer"]
 anchor_right = 1.0
@@ -400,3 +400,5 @@ stream = ExtResource( 22 )
 
 [node name="EnragedHarpy" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 23 )
+
+[node name="OneTwoLayout" parent="." instance=ExtResource( 13 )]

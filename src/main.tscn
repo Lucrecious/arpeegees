@@ -215,13 +215,24 @@ texture = ExtResource( 26 )
 patch_margin_left = 353
 patch_margin_right = 349
 
-[node name="FillIn" type="ColorRect" parent="SpanLimiter/Content"]
+[node name="FillIn" type="Control" parent="SpanLimiter/Content"]
 anchor_top = 1.122
 anchor_right = 1.0
 anchor_bottom = 1.122
-margin_top = 0.159912
-margin_bottom = 2004.16
+margin_top = 4.15991
+margin_bottom = 2025.16
+
+[node name="ColorRect" type="ColorRect" parent="SpanLimiter/Content/FillIn"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -23.0
+margin_bottom = -23.0
 color = Color( 0.0862745, 0.545098, 0.403922, 1 )
+
+[node name="FillInAdapter" type="Node" parent="SpanLimiter/Content/FillIn"]
+script = ExtResource( 22 )
+_bigger_path = NodePath("..")
+size_limit = 1280
 
 [node name="Grass" type="TextureRect" parent="SpanLimiter/Content"]
 visible = false

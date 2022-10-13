@@ -72,13 +72,13 @@ script = ExtResource( 3 )
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -795.0
+margin_top = -539.0
 
 [node name="Control" type="Control" parent="Center"]
 margin_left = 539.0
-margin_top = 267.0
+margin_top = 139.0
 margin_right = 741.0
-margin_bottom = 527.0
+margin_bottom = 399.0
 rect_min_size = Vector2( 202, 260 )
 
 [node name="Bag" parent="Center/Control" instance=ExtResource( 1 )]

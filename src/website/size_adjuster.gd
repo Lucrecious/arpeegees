@@ -26,15 +26,15 @@ func adapt(size: float) -> void:
 	if disabled:
 		return
 	
+	var size_delta := size - size_limit_x
+	var aspect := _texture.texture.get_size().aspect()
+	var grow_amount := size_delta / aspect
+	var effective_texture_height := _texture.rect_size.x / aspect
+	
 	if size <= size_limit_x:
 		_texture.rect_position.y = height_offset
 		_texture.rect_size.y = size_y
 	else:
-		var size_delta := size - size_limit_x
-		var aspect := _texture.texture.get_size().aspect()
-		var grow_amount := size_delta / aspect
-		var effective_texture_height := _texture.rect_size.x / aspect
-		
 		if move_down:
 			_texture.rect_position.y = height_offset + grow_amount
 			_texture.rect_size.y = size_y + grow_amount
@@ -42,8 +42,8 @@ func adapt(size: float) -> void:
 			_texture.rect_position.y = height_offset - grow_amount
 			_texture.rect_size.y = size_y + grow_amount
 		
-		for i in _controls.size():
-			var control := _controls[i] as Control
-			var height_offset := copy_height_offsets[i] as int
-			var moved_position := _texture.rect_position.y + effective_texture_height + height_offset
-			control.rect_position.y = moved_position
+	for i in _controls.size():
+		var control := _controls[i] as Control
+		var height_offset := copy_height_offsets[i] as int
+		var moved_position := _texture.rect_position.y + effective_texture_height + height_offset
+		control.rect_position.y = moved_position
