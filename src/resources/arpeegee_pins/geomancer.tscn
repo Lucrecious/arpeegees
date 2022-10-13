@@ -137,6 +137,8 @@ script = ExtResource( 20 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Actions/RaiseEarth/Rocks" index="3"]
 
 [node name="RockWall" type="Node2D" parent="Actions" index="2"]
+script = ExtResource( 16 )
+type = 1
 
 [node name="MagicThrowRock" type="Node2D" parent="Actions" index="3"]
 script = ExtResource( 12 )

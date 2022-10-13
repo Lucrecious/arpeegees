@@ -13,4 +13,5 @@ enum {
 	GooTrap,
 	BrightSparkles,
 	RaiseEarth,
+	RockWall,
 }
