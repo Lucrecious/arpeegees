@@ -24,10 +24,10 @@
 [ext_resource path="res://assets/sounds/shimmer_arpeegees.mp3" type="AudioStream" id=22]
 [ext_resource path="res://assets/sounds/enraged_harpy.mp3" type="AudioStream" id=23]
 [ext_resource path="res://src/game/save_log.gd" type="Script" id=24]
-[ext_resource path="res://src/ui/size_adapter.gd" type="Script" id=25]
 [ext_resource path="res://assets/sprites/effects/sparkle1.png" type="Texture" id=26]
 [ext_resource path="res://src/resources/arpeegee_pins/blobbo.tres" type="Resource" id=27]
 [ext_resource path="res://src/resources/arpeegee_pins/geomancer.tres" type="Resource" id=28]
+[ext_resource path="res://src/website/size_adjuster.gd" type="Script" id=29]
 
 [sub_resource type="Curve" id=7]
 _data = [ Vector2( 0.0112782, 0.0225226 ), 0.0, 0.0, 0, 0, Vector2( 0.661654, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
@@ -176,58 +176,36 @@ anchor_bottom = 1.0
 margin_top = -720.0
 
 [node name="GrassBottom" type="ColorRect" parent="Background"]
+visible = false
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -720.0
 color = Color( 0.0862745, 0.545098, 0.403922, 1 )
 
-[node name="Sky" type="NinePatchRect" parent="Background"]
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = -720.0
-texture = ExtResource( 12 )
-patch_margin_left = 649
-patch_margin_right = 619
-
-[node name="SkySizeAdapter" type="Node" parent="Background"]
-script = ExtResource( 25 )
-_smaller_path = NodePath("../SkySmaller")
-_bigger_path = NodePath("../Sky")
-size_limit = 1280
+[node name="SkySizeAdjust" type="Node" parent="Background"]
+script = ExtResource( 29 )
+_path = NodePath("../SkySmaller")
+size_limit_x = 1280
+size_y = 720
+height_offset = -74
 
 [node name="SkySmaller" type="TextureRect" parent="Background"]
-visible = false
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -720.0
+margin_top = -794.0
+margin_bottom = -74.0
 texture = ExtResource( 12 )
 expand = true
 stretch_mode = 5
 
-[node name="Ground" type="NinePatchRect" parent="Background"]
+[node name="Ground" type="TextureRect" parent="Background"]
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -390.0
-texture = ExtResource( 11 )
-patch_margin_left = 632
-patch_margin_right = 636
-
-[node name="GroundSizeAdapter" type="Node" parent="Background"]
-script = ExtResource( 25 )
-_smaller_path = NodePath("../GroundSmaller")
-_bigger_path = NodePath("../Ground")
-size_limit = 1280
-
-[node name="GroundSmaller" type="TextureRect" parent="Background"]
-visible = false
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = -390.0
+margin_top = -298.0
+margin_bottom = 702.0
 texture = ExtResource( 11 )
 expand = true
 stretch_mode = 5
@@ -235,6 +213,8 @@ stretch_mode = 5
 [node name="CenterShiny" type="CenterContainer" parent="Background"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_top = 40.0
+margin_bottom = 40.0
 
 [node name="ShinyControl" type="Control" parent="Background/CenterShiny"]
 margin_left = 640.0
@@ -253,26 +233,23 @@ gravity = Vector2( 0, 0 )
 scale_amount = 0.01
 scale_amount_curve = SubResource( 7 )
 
-[node name="Grass" type="NinePatchRect" parent="Background"]
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = -245.0
-texture = ExtResource( 13 )
-patch_margin_left = 626
-patch_margin_right = 610
-
-[node name="GrassSizeAdapter" type="Node" parent="Background"]
-script = ExtResource( 25 )
-_smaller_path = NodePath("../GrassSmaller")
-_bigger_path = NodePath("../Grass")
-size_limit = 1280
+[node name="GrassSizeAdjuster" type="Node" parent="Background"]
+script = ExtResource( 29 )
+_path = NodePath("../GrassSmaller")
+size_limit_x = 1280
+size_y = 787
+height_offset = 540
+move_down = true
+disabled = true
 
 [node name="GrassSmaller" type="TextureRect" parent="Background"]
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -245.0
+margin_left = 2.0
+margin_top = -128.0
+margin_right = 2.0
+margin_bottom = 659.0
 texture = ExtResource( 13 )
 expand = true
 stretch_mode = 5
@@ -403,7 +380,6 @@ _turn_manager_path = NodePath("../TurnManager")
 [node name="AI" type="Node" parent="CanvasLayer/HUD/Control/BattleOverlay"]
 script = ExtResource( 9 )
 _narrator_ui_path = NodePath("../../Narrator")
-debug_action_index = 0
 
 [node name="TurnManager" type="Node" parent="CanvasLayer/HUD/Control/BattleOverlay" groups=["turn_manager"]]
 unique_name_in_owner = true
