@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://src/game/battle.gd" type="Script" id=1]
 [ext_resource path="res://src/game/battle/turn_manager.gd" type="Script" id=2]
@@ -12,7 +12,6 @@
 [ext_resource path="res://lut/ui/span_limiter.gd" type="Script" id=10]
 [ext_resource path="res://assets/battle/ground.svg" type="Texture" id=11]
 [ext_resource path="res://assets/battle/sky.svg" type="Texture" id=12]
-[ext_resource path="res://assets/battle/grass.svg" type="Texture" id=13]
 [ext_resource path="res://assets/ui/icons/character_pointer.svg" type="Texture" id=14]
 [ext_resource path="res://src/game/battle/action_menu_hover_highlighter.gd" type="Script" id=15]
 [ext_resource path="res://src/game/situational_dialog.gd" type="Script" id=16]
@@ -169,60 +168,58 @@ auto_start = true
 auto_start_player_pins = [ ExtResource( 28 ), ExtResource( 19 ) ]
 auto_start_npc_pins = [ ExtResource( 27 ) ]
 
-[node name="Background" type="Control" parent="."]
+[node name="SpanLimiter" type="MarginContainer" parent="."]
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -720.0
+script = ExtResource( 10 )
+min_span = 1280.0
 
-[node name="GrassBottom" type="ColorRect" parent="Background"]
-visible = false
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = -720.0
-color = Color( 0.0862745, 0.545098, 0.403922, 1 )
+[node name="Background" type="Control" parent="SpanLimiter"]
+margin_right = 1280.0
+margin_bottom = 720.0
 
-[node name="SkySizeAdjust" type="Node" parent="Background"]
+[node name="SkySizeAdjust" type="Node" parent="SpanLimiter/Background"]
 script = ExtResource( 29 )
 _path = NodePath("../SkySmaller")
 size_limit_x = 1280
 size_y = 720
 height_offset = -74
 
-[node name="SkySmaller" type="TextureRect" parent="Background"]
-anchor_top = 1.0
+[node name="SkySmaller" type="TextureRect" parent="SpanLimiter/Background"]
+anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = -794.0
-margin_bottom = -74.0
+anchor_bottom = 0.5
+margin_top = -434.0
+margin_bottom = 286.0
 texture = ExtResource( 12 )
 expand = true
 stretch_mode = 5
 
-[node name="Ground" type="TextureRect" parent="Background"]
-anchor_top = 1.0
+[node name="Ground" type="TextureRect" parent="SpanLimiter/Background/SkySmaller"]
+anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = -298.0
-margin_bottom = 702.0
+anchor_bottom = 0.5
+margin_top = 136.0
+margin_bottom = 1355.0
 texture = ExtResource( 11 )
 expand = true
 stretch_mode = 5
 
-[node name="CenterShiny" type="CenterContainer" parent="Background"]
+[node name="CenterShiny" type="CenterContainer" parent="SpanLimiter/Background"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 40.0
 margin_bottom = 40.0
 
-[node name="ShinyControl" type="Control" parent="Background/CenterShiny"]
+[node name="ShinyControl" type="Control" parent="SpanLimiter/Background/CenterShiny"]
 margin_left = 640.0
 margin_top = 360.0
 margin_right = 640.0
 margin_bottom = 360.0
 
-[node name="Shiny" type="CPUParticles2D" parent="Background/CenterShiny/ShinyControl" groups=["shiny_ground_particles"]]
+[node name="Shiny" type="CPUParticles2D" parent="SpanLimiter/Background/CenterShiny/ShinyControl" groups=["shiny_ground_particles"]]
 position = Vector2( 10, 152 )
 emitting = false
 amount = 5
@@ -232,27 +229,6 @@ emission_rect_extents = Vector2( 300, 50 )
 gravity = Vector2( 0, 0 )
 scale_amount = 0.01
 scale_amount_curve = SubResource( 7 )
-
-[node name="GrassSizeAdjuster" type="Node" parent="Background"]
-script = ExtResource( 29 )
-_path = NodePath("../GrassSmaller")
-size_limit_x = 1280
-size_y = 787
-height_offset = 540
-move_down = true
-disabled = true
-
-[node name="GrassSmaller" type="TextureRect" parent="Background"]
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 2.0
-margin_top = -128.0
-margin_right = 2.0
-margin_bottom = 659.0
-texture = ExtResource( 13 )
-expand = true
-stretch_mode = 5
 
 [node name="BattleLayer" type="MarginContainer" parent="."]
 unique_name_in_owner = true
@@ -330,6 +306,7 @@ anims/RESET = SubResource( 5 )
 anims/default = SubResource( 6 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="HUD" type="MarginContainer" parent="CanvasLayer"]
 anchor_right = 1.0
