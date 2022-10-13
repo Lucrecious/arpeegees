@@ -771,6 +771,7 @@ Aura="*res://src/vfx/aura.gd"
 Sounds="*res://src/resources/sounds.tscn"
 FairRandom="*res://src/game/fair_random.gd"
 Music="*res://src/game/music.tscn"
+Debug="*res://src/game/debug.gd"
 
 [debug]
 

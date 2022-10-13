@@ -7,9 +7,18 @@ var _player_pins := []
 var _npc_pins := []
 
 func _ready() -> void:
-	_pins = _get_and_load_pickable_pins('res://src/resources/arpeegee_pins/')
+	_pins = _get_and_load_pins('res://src/resources/arpeegee_pins/')
 	_player_pins = _get_of_type(_pins, ArpeegeePin.Type.Player)
 	_npc_pins = _get_of_type(_pins, ArpeegeePin.Type.NPC)
+
+func get_player_pin_resources() -> Array:
+	return _player_pins
+
+func get_npc_pin_resources() -> Array:
+	return _npc_pins
+
+func get_all_pin_resources () -> Array:
+	return _pins
 
 # always picks at least 1 player and 1 npc
 func pick_random(amount: int) -> Dictionary:
@@ -78,7 +87,7 @@ func _get_of_type(pins: Array, type: int) -> Array:
 	
 	return of_type
 
-func _get_and_load_pickable_pins(directory_path: String) -> Array:
+func _get_and_load_pins(directory_path: String, pickable := true) -> Array:
 	var pins := []
 	
 	var directory := Directory.new()
@@ -104,7 +113,7 @@ func _get_and_load_pickable_pins(directory_path: String) -> Array:
 			file_name = directory.get_next()
 			continue
 		
-		if arpeegee_pin.pickable:
+		if not pickable or arpeegee_pin.pickable:
 			pins.push_back(arpeegee_pin)
 		
 		file_name = directory.get_next()

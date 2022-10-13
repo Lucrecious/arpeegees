@@ -933,7 +933,7 @@ custom_constants/margin_bottom = 0
 [node name="Back" type="ColorRect" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer/MarginContainer"]
 margin_top = 70.0
 margin_right = 704.0
-margin_bottom = 761.0
+margin_bottom = 762.0
 color = Color( 0.972549, 0.905882, 0.823529, 1 )
 
 [node name="Pattern" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer"]

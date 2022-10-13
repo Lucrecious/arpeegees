@@ -11,11 +11,15 @@ func _enter_tree():
 
 func _ready() -> void:
 	_title_screen.connect('battle_screen_requested', self, '_on_battle_screen_requested')
-
+	
 func _on_battle_screen_requested(pin_amount: int) -> void:
 	_title_screen.get_parent().remove_child(_title_screen)
 	
 	var pins := ArpeegeePins.pick_random(3)
+	if Debug.allow_pick_pins:
+		var new_pins := Debug.get_picked_pins()
+		if not new_pins.empty():
+			pins = new_pins
 	
 	_battle_screen.start(pins)
 

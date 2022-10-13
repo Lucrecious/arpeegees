@@ -9,6 +9,8 @@ onready var _ai := $AI as NPCAI
 onready var _action_menu := $'%ActionMenu' as PinActionMenu
 onready var _character_pointer := $'%CharacterPointer' as Node2D
 
+var play_as_npcs := false
+
 func _ready() -> void:
 	_turn_manager.connect('initialized', self, 'set', ['mouse_filter', mouse_filter])
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -18,6 +20,8 @@ func _ready() -> void:
 	connect('mouse_exited', self, '_on_mouse_exited')
 	
 	_turn_manager.connect('player_turn_started', self, '_on_player_turn_started')
+	if Debug.play_as_npcs:
+		_turn_manager.connect('npc_turn_started', self, '_on_player_turn_started')
 	
 	_turn_manager.connect('turn_finished', self, '_on_turn_finished')
 	
@@ -113,38 +117,72 @@ func _show_action_menu(pin: ArpeegeePinNode, pin_actions: PinActions) -> void:
 	_action_menu.initialize(pin)
 	_action_menu.connect('action_picked', self, '_on_action_picked', [pin, _action_menu], CONNECT_ONESHOT)
 	
-	for node in action_nodes:
-		var action := node.pin_action() as PinAction
-		
-		if action.target_type == PinAction.TargetType.Single:
-			_action_menu.add_pin_action(node, _turn_manager.get_npcs())
-		elif action.target_type == PinAction.TargetType.Self:
-			_action_menu	.add_pin_action(node, [])
-		elif action.target_type == PinAction.TargetType.AllEnemies:
-			_action_menu.add_pin_action(node, [])
-		elif action.target_type == PinAction.TargetType.AllAllies:
-			_action_menu.add_pin_action(node, [])
-		else:
-			assert(false)
+	if pin.resource.type == ArpeegeePin.Type.Player:
+		for node in action_nodes:
+			var action := node.pin_action() as PinAction
+			
+			if action.target_type == PinAction.TargetType.Single:
+				_action_menu.add_pin_action(node, _turn_manager.get_npcs())
+			elif action.target_type == PinAction.TargetType.Self:
+				_action_menu	.add_pin_action(node, [])
+			elif action.target_type == PinAction.TargetType.AllEnemies:
+				_action_menu.add_pin_action(node, [])
+			elif action.target_type == PinAction.TargetType.AllAllies:
+				_action_menu.add_pin_action(node, [])
+			else:
+				assert(false)
+	elif pin.resource.type == ArpeegeePin.Type.NPC:
+		for node in action_nodes:
+			var action := node.pin_action() as PinAction
+			
+			if action.target_type == PinAction.TargetType.Single:
+				_action_menu.add_pin_action(node, _turn_manager.get_players())
+			elif action.target_type == PinAction.TargetType.Self:
+				_action_menu	.add_pin_action(node, [])
+			elif action.target_type == PinAction.TargetType.AllEnemies:
+				_action_menu.add_pin_action(node, [])
+			elif action.target_type == PinAction.TargetType.AllAllies:
+				_action_menu.add_pin_action(node, [])
+			else:
+				assert(false)
+	else:
+		assert(false)
 
 func _on_action_picked(action_node: Node, targets: Array, pin: ArpeegeePinNode, menu: PinActionMenu) -> void:
 	menu.clear()
 	
-	var action := action_node.pin_action() as PinAction
-	if action.target_type == PinAction.TargetType.Single:
-		assert(targets.size() == 1)
-		_turn_manager.run_action_with_target(pin, action_node.name, targets[0])
-	elif action.target_type == PinAction.TargetType.Self:
-		assert(targets.size() == 0)
-		_turn_manager.run_action(pin, action_node.name)
-	elif action.target_type == PinAction.TargetType.AllEnemies:
-		assert(targets.size() == 0)
-		_turn_manager.run_action_with_targets(pin, action_node.name, _turn_manager.get_npcs())
-	elif action.target_type == PinAction.TargetType.AllAllies:
-		assert(targets.size() == 0)
-		_turn_manager.run_action_with_targets(pin, action_node.name, _turn_manager.get_players())
-	else:
-		assert(false)
+	if pin.resource.type == ArpeegeePin.Type.Player:
+		var action := action_node.pin_action() as PinAction
+		if action.target_type == PinAction.TargetType.Single:
+			assert(targets.size() == 1)
+			_turn_manager.run_action_with_target(pin, action_node.name, targets[0])
+		elif action.target_type == PinAction.TargetType.Self:
+			assert(targets.size() == 0)
+			_turn_manager.run_action(pin, action_node.name)
+		elif action.target_type == PinAction.TargetType.AllEnemies:
+			assert(targets.size() == 0)
+			_turn_manager.run_action_with_targets(pin, action_node.name, _turn_manager.get_npcs())
+		elif action.target_type == PinAction.TargetType.AllAllies:
+			assert(targets.size() == 0)
+			_turn_manager.run_action_with_targets(pin, action_node.name, _turn_manager.get_players())
+		else:
+			assert(false)
+	elif pin.resource.type == ArpeegeePin.Type.NPC:
+		var action := action_node.pin_action() as PinAction
+		if action.target_type == PinAction.TargetType.Single:
+			assert(targets.size() == 1)
+			_turn_manager.run_action_with_target(pin, action_node.name, targets[0])
+		elif action.target_type == PinAction.TargetType.Self:
+			assert(targets.size() == 0)
+			_turn_manager.run_action(pin, action_node.name)
+		elif action.target_type == PinAction.TargetType.AllEnemies:
+			assert(targets.size() == 0)
+			_turn_manager.run_action_with_targets(pin, action_node.name, _turn_manager.get_players())
+		elif action.target_type == PinAction.TargetType.AllAllies:
+			assert(targets.size() == 0)
+			_turn_manager.run_action_with_targets(pin, action_node.name, _turn_manager.get_npcs())
+		else:
+			assert(false)
 
 func _on_turn_finished() -> void:
 	_transition_to_next_turn()

@@ -1,0 +1,64 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/ui/website_font_regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://src/game/debug_pin_pick.gd" type="Script" id=2]
+
+[sub_resource type="DynamicFont" id=2]
+size = 24
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=3]
+default_font = SubResource( 2 )
+
+[node name="CanvasLayer" type="CanvasLayer"]
+layer = 128
+
+[node name="DebugPick" type="Control" parent="." groups=["debug_pin_pick"]]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+theme = SubResource( 3 )
+script = ExtResource( 2 )
+
+[node name="CenterContainer" type="CenterContainer" parent="DebugPick"]
+anchor_right = 1.0
+margin_bottom = 58.0
+
+[node name="Center" type="MarginContainer" parent="DebugPick/CenterContainer"]
+margin_left = 453.0
+margin_top = 10.0
+margin_right = 826.0
+margin_bottom = 47.0
+
+[node name="HBox" type="HBoxContainer" parent="DebugPick/CenterContainer/Center"]
+margin_right = 373.0
+margin_bottom = 37.0
+custom_constants/separation = 50
+
+[node name="HeroesMenu" type="MenuButton" parent="DebugPick/CenterContainer/Center/HBox"]
+unique_name_in_owner = true
+margin_right = 96.0
+margin_bottom = 37.0
+text = "Heroes"
+flat = false
+switch_on_hover = true
+
+[node name="NPCsMenu" type="MenuButton" parent="DebugPick/CenterContainer/Center/HBox"]
+unique_name_in_owner = true
+margin_left = 146.0
+margin_right = 224.0
+margin_bottom = 37.0
+focus_mode = 2
+text = "NPCs"
+flat = false
+switch_on_hover = true
+
+[node name="PinMenu" type="MenuButton" parent="DebugPick/CenterContainer/Center/HBox"]
+unique_name_in_owner = true
+margin_left = 274.0
+margin_right = 373.0
+margin_bottom = 37.0
+focus_mode = 2
+text = "All Pins"
+flat = false
+switch_on_hover = true
