@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://src/game/battle.gd" type="Script" id=1]
 [ext_resource path="res://src/game/battle/turn_manager.gd" type="Script" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://lut/ui/span_limiter.gd" type="Script" id=10]
 [ext_resource path="res://assets/battle/ground.svg" type="Texture" id=11]
 [ext_resource path="res://assets/battle/sky.svg" type="Texture" id=12]
+[ext_resource path="res://assets/sprites/effects/ranger_arrow.png" type="Texture" id=13]
 [ext_resource path="res://assets/ui/icons/character_pointer.svg" type="Texture" id=14]
 [ext_resource path="res://src/game/battle/action_menu_hover_highlighter.gd" type="Script" id=15]
 [ext_resource path="res://src/game/situational_dialog.gd" type="Script" id=16]
@@ -323,6 +324,31 @@ position = Vector2( 200, 600 )
 scale = Vector2( 0.13, 0.13 )
 texture = ExtResource( 5 )
 
+[node name="ArrowRainControl" type="Control" parent="."]
+anchor_right = 1.0
+
+[node name="Anchor" type="Control" parent="ArrowRainControl"]
+anchor_left = 0.376
+anchor_right = 0.376
+margin_left = 274.72
+margin_top = -149.0
+margin_right = 314.72
+margin_bottom = -109.0
+
+[node name="Rain" type="CPUParticles2D" parent="ArrowRainControl/Anchor" groups=["rain_arrows"]]
+emitting = false
+amount = 20
+lifetime = 2.0
+speed_scale = 5.0
+texture = ExtResource( 13 )
+emission_shape = 2
+emission_rect_extents = Vector2( 350, 1 )
+direction = Vector2( -0.5, 1 )
+spread = 0.0
+initial_velocity = 800.0
+angle = 68.1
+scale_amount = 0.1
+
 [node name="CenterRockWall" type="CenterContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -381,7 +407,6 @@ anims/RESET = SubResource( 5 )
 anims/default = SubResource( 6 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="HUD" type="MarginContainer" parent="CanvasLayer"]
 anchor_right = 1.0
