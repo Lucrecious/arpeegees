@@ -71,20 +71,28 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	
 	var white_mage_instakill := false
 	var modified_stats := NodE.get_child(actioner, ModifiedPinStats) as ModifiedPinStats
-	if modified_stats:
-		if physical:
-			var attack_amount := ActionUtils.damage_with_factor(modified_stats.attack, attack_factor)
-			if pin_action().resource_path.get_file() == 'desperate_staff_whack_white_mage.tres':
-				if randf() < 0.08:
-					attack_amount = 100_000
-					white_mage_instakill = true
-					
-			ActionUtils.add_attack(tween, actioner, target, attack_amount)
-		else:
-			var attack_amount := ActionUtils.damage_with_factor(modified_stats.magic_attack, attack_factor)
-			ActionUtils.add_magic_attack(tween, actioner, target, attack_amount)
+	if physical:
+		print(pin_action().resource_path.get_file())
+		var attack_amount := ActionUtils.damage_with_factor(modified_stats.attack, attack_factor)
+		if pin_action().resource_path.get_file() == 'desperate_staff_whack_white_mage.tres':
+			if randf() < 0.08:
+				attack_amount = 100_000
+				white_mage_instakill = true
+		
+		elif pin_action().resource_path.get_file() == 'desperate_headbutt_hatless_mushboy.tres':
+			if randf() < 0.1:
+				attack_amount = ActionUtils.damage_with_factor(attack_amount, 8.0)
+		
+		var hit_type := ActionUtils.add_attack(tween, actioner, target, attack_amount)
+		
+		if pin_action().resource_path.get_file() == 'desperate_kick_hatless_mushboy.tres':
+			if hit_type != ActionUtils.HitType.Miss and randf() < 1.0:
+				var status_effects_list := NodE.get_child(target, StatusEffectsList) as StatusEffectsList
+				tween.tween_callback(status_effects_list, 'add_instance', [_create_desperate_kick_effect()])
 	else:
-		assert(false)
+		var attack_amount := ActionUtils.damage_with_factor(modified_stats.magic_attack, attack_factor)
+		ActionUtils.add_magic_attack(tween, actioner, target, attack_amount)
+
 
 	ActionUtils.add_shake(tween, actioner, position, Vector2(1, 0), 5.0, .35)
 	tween.tween_interval(.4)
@@ -108,3 +116,17 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 			actioner.global_position + relative, actioner.global_position, 15.0, 5)
 	
 	tween.tween_callback(object, callback)
+
+func _create_desperate_kick_effect() -> StatusEffect:
+	var status_effect := StatusEffect.new()
+	status_effect.stack_count = 1
+	status_effect.is_ailment = true
+	status_effect.tag = StatusEffectTag.DesperateKick
+	
+	var defence_modifier := StatModifier.new()
+	defence_modifier.type = StatModifier.Type.Defence
+	defence_modifier.add_amount = -3
+	
+	status_effect.add_child(defence_modifier)
+	
+	return status_effect

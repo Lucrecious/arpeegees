@@ -49,7 +49,7 @@ static func get_modified_stats(pin: ArpeegeePinNode) -> Dictionary:
 		var base_value := unmodified_stats.get(m.type, 0) as int
 		var new_value := m.apply(base_value) as int
 		var delta := new_value - base_value
-		modified_stats[m.type] = modified_stats[m.type] + delta
+		modified_stats[m.type] = max(modified_stats[m.type] + delta, 0)
 		relative_stats[m.type] = modified_stats[m.type] - unmodified_stats[m.type]
 	
 	var stats_dict := {

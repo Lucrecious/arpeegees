@@ -15,4 +15,5 @@ enum {
 	RaiseEarth,
 	RockWall,
 	Burning,
+	DesperateKick,
 }

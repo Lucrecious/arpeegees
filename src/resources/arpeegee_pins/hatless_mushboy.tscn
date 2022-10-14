@@ -1,0 +1,98 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/resources/arpeegee_pins/actions/actions.gd" type="Script" id=2]
+[ext_resource path="res://lut/components/root_sprite.gd" type="Script" id=3]
+[ext_resource path="res://src/resources/arpeegee_pins/actions/attack.gd" type="Script" id=4]
+[ext_resource path="res://assets/sprites/mushboy/mushboy_idle_nohat.PNG" type="Texture" id=5]
+[ext_resource path="res://assets/sprites/mushboy/mushboy_throw_self_hatless.png" type="Texture" id=6]
+[ext_resource path="res://assets/sprites/mushboy/mushboy_kick_hatless.png" type="Texture" id=7]
+[ext_resource path="res://assets/sprites/mushboy/mushboy_hit_hatless.png" type="Texture" id=8]
+[ext_resource path="res://assets/sprites/mushboy/mushboy_headbutt_hatless.png" type="Texture" id=9]
+[ext_resource path="res://src/resources/actions/desperate_headbutt_hatless_mushboy.tres" type="Resource" id=10]
+[ext_resource path="res://src/resources/actions/desperate_kick_hatless_mushboy.tres" type="Resource" id=11]
+[ext_resource path="res://src/resources/arpeegee_pins/hatless_mushboy.tres" type="Resource" id=12]
+[ext_resource path="res://assets/shaders/pin_sprite_shader.gdshader" type="Shader" id=13]
+[ext_resource path="res://assets/shaders/wobble_noise.tres" type="Texture" id=14]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 13 )
+shader_param/fill_color = Color( 1, 1, 1, 1 )
+shader_param/color_mix = 0.0
+shader_param/top_skew = 0.0
+shader_param/squash = 1.0
+shader_param/offset_amount = 80.0
+shader_param/update_sec = 0.4
+shader_param/uv_offset_texture = ExtResource( 14 )
+
+[node name="HatlessMushboy" instance=ExtResource( 1 )]
+nice_name = "Mushboy (Hatless)"
+_resource_set = ExtResource( 12 )
+
+[node name="Health" parent="." index="6"]
+current = 20
+
+[node name="PinStats" parent="." index="7"]
+magic_attack = 0
+defence = 3
+magic_defence = 3
+evasion = 3
+
+[node name="Sprites" type="Node2D" parent="." index="12"]
+material = SubResource( 1 )
+script = ExtResource( 3 )
+
+[node name="Idle" type="Sprite" parent="Sprites" index="0"]
+use_parent_material = true
+position = Vector2( -9, -70 )
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 5 )
+
+[node name="Kick" type="Sprite" parent="Sprites" index="1"]
+visible = false
+use_parent_material = true
+position = Vector2( 8, -88 )
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 7 )
+
+[node name="Headbutt" type="Sprite" parent="Sprites" index="2"]
+visible = false
+use_parent_material = true
+position = Vector2( 41, -90 )
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 9 )
+
+[node name="Hurt" type="Sprite" parent="Sprites" index="3"]
+visible = false
+use_parent_material = true
+position = Vector2( 28, -85 )
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 8 )
+
+[node name="TryingToSpore" type="Sprite" parent="Sprites" index="4"]
+visible = false
+use_parent_material = true
+position = Vector2( 28, -85 )
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 6 )
+
+[node name="Actions" type="Node2D" parent="." index="13"]
+script = ExtResource( 2 )
+
+[node name="DesperateHeadbutt" type="Node2D" parent="Actions" index="0"]
+script = ExtResource( 4 )
+attack_sprite_name = "headbutt"
+pin_action = ExtResource( 10 )
+
+[node name="ImpactHint" type="Position2D" parent="Actions/DesperateHeadbutt" index="0"]
+position = Vector2( 63, -91 )
+
+[node name="DesperateKick" type="Node2D" parent="Actions" index="1"]
+script = ExtResource( 4 )
+attack_sprite_name = "kick"
+pin_action = ExtResource( 11 )
+
+[node name="ImpactHint" type="Position2D" parent="Actions/DesperateKick" index="0"]
+position = Vector2( 65, -69 )
+
+[node name="TryingToSpore" type="Node2D" parent="Actions" index="2"]
