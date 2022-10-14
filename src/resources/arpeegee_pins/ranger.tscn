@@ -131,6 +131,7 @@ texture = ExtResource( 16 )
 script = ExtResource( 17 )
 
 [node name="Arrow" type="Node2D" parent="Actions/RainFromAbove" index="0"]
+visible = false
 position = Vector2( -139, -88 )
 z_index = 1
 
