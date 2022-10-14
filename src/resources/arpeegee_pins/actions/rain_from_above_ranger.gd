@@ -4,6 +4,10 @@ signal text_triggered(translation_key)
 
 onready var _arrow := $Arrow as Node2D
 
+var _boosted := false
+func boost() -> void:
+	_boosted = true
+
 func pin_action() -> PinAction:
 	return preload('res://src/resources/actions/rain_from_above_ranger.tres')
 
@@ -31,12 +35,17 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 		
 		var modified_stats := NodE.get_child(actioner, ModifiedPinStats) as ModifiedPinStats
 		var attack_amount := ActionUtils.damage_with_factor(modified_stats.attack, 0.5)
+		if _boosted:
+			attack_amount = ActionUtils.damage_with_factor(modified_stats.attack, 0.8)
+		
 		for t in targets:
 			ActionUtils.add_attack(animation, actioner, t, attack_amount)
 		
 		animation.tween_callback(rain_arrows, 'set', ['emitting', false])
 	else:
 		print_debug('not in battle scene')
+	
+	ActionUtils.add_text_trigger(animation, self, 'NARRATOR_RAIN_FROM_ABOVE_USE')
 	
 	animation.tween_interval(0.5)
 	animation.tween_callback(sprite_switcher, 'change', ['idle'])

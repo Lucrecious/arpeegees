@@ -11,6 +11,10 @@ export(Type) var type := Type.Regular
 
 onready var _arrow := $Arrow as Node2D
 
+var _boosted := false
+func boost() -> void:
+	_boosted = true
+
 func pin_action() -> PinAction:
 	if type == Type.Regular:
 		return preload('res://src/resources/actions/arrow_zip_ranger.tres')
@@ -36,7 +40,12 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	animation.tween_property(_arrow, 'global_position', target_position, 0.1)
 	
 	var modified_stats := NodE.get_child(actioner, ModifiedPinStats) as ModifiedPinStats
-	var hit_type := ActionUtils.add_attack(animation, actioner, target, modified_stats.attack)
+	
+	var attack_amount := modified_stats.attack
+	if _boosted:
+		attack_amount = ActionUtils.damage_with_factor(attack_amount, 1.3)
+	
+	var hit_type := ActionUtils.add_attack(animation, actioner, target, attack_amount)
 	animation.tween_callback(VFX, 'physical_impactv', [actioner, target_position])
 	
 	if type == Type.OnFire and hit_type != ActionUtils.HitType.Miss:
