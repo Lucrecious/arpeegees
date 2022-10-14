@@ -29,10 +29,10 @@ func _ready() -> void:
 	_on_pins_changed()
 	
 	_turn_manager.connect('initialized', self, '_update_character_pointer', [], CONNECT_ONESHOT)
+	get_viewport().connect('size_changed', self, '_update_character_pointer')
 
 func _update_character_pointer() -> void:
 	var pin := _turn_manager.get_turn_pin()
-	Logger.info('turn started for pin "%s" at turn %d' % [pin.name, _turn_manager.turn_count()])
 	
 	var bounding_box := NodE.get_child(pin, REferenceRect) as REferenceRect
 	var rect := bounding_box.global_rect()
@@ -197,6 +197,9 @@ func _transition_to_next_turn() -> void:
 
 func _next_turn() -> void:
 	_update_character_pointer()
+	var pin := _turn_manager.get_turn_pin()
+	Logger.info('turn started for pin "%s" at turn %d' % [pin.name, _turn_manager.turn_count()])
+	
 	var tween := _on_turn_started_preview()
 	
 	tween.tween_callback(_turn_manager, 'step_turn')
