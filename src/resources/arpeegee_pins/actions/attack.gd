@@ -72,7 +72,6 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	var white_mage_instakill := false
 	var modified_stats := NodE.get_child(actioner, ModifiedPinStats) as ModifiedPinStats
 	if physical:
-		print(pin_action().resource_path.get_file())
 		var attack_amount := ActionUtils.damage_with_factor(modified_stats.attack, attack_factor)
 		if pin_action().resource_path.get_file() == 'desperate_staff_whack_white_mage.tres':
 			if randf() < 0.08:
@@ -86,7 +85,7 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 		var hit_type := ActionUtils.add_attack(tween, actioner, target, attack_amount)
 		
 		if pin_action().resource_path.get_file() == 'desperate_kick_hatless_mushboy.tres':
-			if hit_type != ActionUtils.HitType.Miss and randf() < 1.0:
+			if hit_type != ActionUtils.HitType.Miss and randf() < 0.1:
 				var status_effects_list := NodE.get_child(target, StatusEffectsList) as StatusEffectsList
 				tween.tween_callback(status_effects_list, 'add_instance', [_create_desperate_kick_effect()])
 	else:

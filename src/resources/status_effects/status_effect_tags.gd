@@ -16,4 +16,5 @@ enum {
 	RockWall,
 	Burning,
 	DesperateKick,
+	AngryHatlessMushboy,
 }
