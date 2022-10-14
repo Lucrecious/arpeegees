@@ -26,7 +26,7 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 			animation.tween_property(peel, 'global_position', peel.global_position, 0.3)\
 					.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_QUAD)
 	
-	animation.tween_callback(self, '_add_slip_effect', [targets])
+	SlipEffect.add_slip_effect(animation, targets)
 	
 	var sparkles := get_tree().get_nodes_in_group('shiny_ground_particles')
 	if not sparkles.empty():
@@ -40,10 +40,4 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 	
 	animation.tween_callback(object, callback)
 
-func _add_slip_effect(targets: Array) -> void:
-	for t in targets:
-		var actions := NodE.get_child(t, PinActions) as PinActions
-		for n in actions.get_children():
-			var slippable := NodE.get_child(n, BananSlippable, false) as BananSlippable
-			if slippable:
-				slippable.is_slipping = true
+

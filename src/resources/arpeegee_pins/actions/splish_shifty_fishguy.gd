@@ -1,5 +1,13 @@
 extends Node2D
 
+enum Type {
+	Splish,
+	Puddle,
+}
+
+export(Type) var type := Type.Splish
+
+# splish
 const ATTACK_INCREASE := 0.1
 const MAX_ATTACK_FACTOR := 3.5
 
@@ -7,10 +15,23 @@ var attack_factor := 1.0
 
 onready var _particles := $Particles as CPUParticles2D
 
+var _is_blocked := false
+func is_blocked() -> bool:
+	return _is_blocked
+
 func pin_action() -> PinAction:
-	return preload('res://src/resources/actions/splish_shifty_fishguy.tres')
+	if type == Type.Splish:
+		return preload('res://src/resources/actions/splish_shifty_fishguy.tres')
+	elif type == Type.Puddle:
+		return preload('res://src/resources/actions/puddle_shifty_fishguy.tres')
+	
+	assert(false)
+	return null
 
 func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> void:
+	if type == Type.Puddle:
+		_is_blocked = true
+	
 	var animation := create_tween()
 	
 	animation.tween_interval(0.35)
@@ -20,12 +41,24 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 	
 	animation.tween_callback(_particles, 'set', ['emitting', true])
 	
+	if type == Type.Puddle:
+		var puddle_animation_player_group := get_tree().get_nodes_in_group('puddle_animation_player')
+		if puddle_animation_player_group.empty():
+			assert(false)
+		else:
+			var puddle_animation_player := puddle_animation_player_group[0] as AnimationPlayer
+			animation.tween_callback(puddle_animation_player, 'play', ['add_puddle'])
+	
 	animation.tween_interval(1.0)
 	var modified_stats := NodE.get_child(actioner, ModifiedPinStats) as ModifiedPinStats
 	var attack_amount := ActionUtils.damage_with_factor(
 			modified_stats.magic_attack, attack_factor)
-	for t in targets:
-		ActionUtils.add_attack(animation, actioner, t, attack_amount)
+	
+	if type == Type.Splish:
+		for t in targets:
+			ActionUtils.add_attack(animation, actioner, t, attack_amount)
+	elif type == Type.Puddle:
+		SlipEffect.add_slip_effect(animation, targets)
 	
 	animation.tween_callback(sprite_switcher, 'change', ['idle'])
 	

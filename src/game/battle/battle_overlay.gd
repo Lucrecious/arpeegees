@@ -32,6 +32,9 @@ func _ready() -> void:
 	get_viewport().connect('size_changed', self, '_update_character_pointer')
 
 func _update_character_pointer() -> void:
+	if _turn_manager.get_pin_count() == 0:
+		return
+	
 	var pin := _turn_manager.get_turn_pin()
 	
 	var bounding_box := NodE.get_child(pin, REferenceRect) as REferenceRect
