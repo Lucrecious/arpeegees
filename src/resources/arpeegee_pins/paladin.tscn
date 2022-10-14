@@ -18,7 +18,7 @@
 [ext_resource path="res://src/resources/actions/tremendous_slash_paladin.tres" type="Resource" id=16]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/general_self_buff.gd" type="Script" id=17]
 [ext_resource path="res://src/resources/actions/bright_sparkles_paladin.tres" type="Resource" id=18]
-[ext_resource path="res://src/resources/arpeegee_pins/actions/heal_paladin_white_mage.gd" type="Script" id=19]
+[ext_resource path="res://src/resources/arpeegee_pins/actions/heal_generic.gd" type="Script" id=19]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/slippable.gd" type="Script" id=20]
 
 [sub_resource type="ShaderMaterial" id=1]
