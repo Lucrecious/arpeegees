@@ -30,6 +30,9 @@ shader_param/uv_offset_texture = ExtResource( 14 )
 nice_name = "Mushboy (Hatless)"
 _resource_set = ExtResource( 12 )
 
+[node name="Particles" parent="." index="1"]
+position = Vector2( 2, -51 )
+
 [node name="Health" parent="." index="6"]
 current = 20
 
@@ -38,6 +41,9 @@ magic_attack = 0
 defence = 3
 magic_defence = 3
 evasion = 3
+
+[node name="HealthBar" parent="." index="10"]
+position = Vector2( -88, -193 )
 
 [node name="Sprites" type="Node2D" parent="." index="12"]
 material = SubResource( 1 )
