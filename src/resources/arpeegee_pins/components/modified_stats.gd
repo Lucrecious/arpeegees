@@ -18,7 +18,7 @@ var critical := 0
 onready var _status_effects := NodE.get_sibling(self, StatusEffectsList) as StatusEffectsList
 
 static func attack_with_critical(amount: int) -> int:
-	return int(ceil(amount * 4.0))
+	return int(ceil(amount * 2.5))
 
 func _ready() -> void:
 	_status_effects.connect('effect_added_or_removed', self, '_on_effect_added_or_removed')

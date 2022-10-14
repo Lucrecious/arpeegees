@@ -30,16 +30,16 @@ static func get_top_right_corner_screen(pin: Node2D) -> Vector2:
 	return position
 
 static func add_attack(tween:SceneTreeTween, actioner: ArpeegeePinNode, target: ArpeegeePinNode,
-		amount: int) -> void:
-	_add_attack(tween, actioner, target, amount, PinAction.AttackType.Normal, false)
+		amount: int, custom_critical := -1) -> void:
+	_add_attack(tween, actioner, target, amount, PinAction.AttackType.Normal, false, custom_critical)
 
 static func add_attack_no_evade(tween: SceneTreeTween, actioner: ArpeegeePinNode, target: ArpeegeePinNode,
 		amount: int) -> void:
-	_add_attack(tween, actioner, target, amount, PinAction.AttackType.Normal, true)
+	_add_attack(tween, actioner, target, amount, PinAction.AttackType.Normal, true, -1)
 
 static func add_magic_attack(tween: SceneTreeTween, actioner:ArpeegeePinNode, target: ArpeegeePinNode,
 		amount: int) -> void:
-	_add_attack(tween, actioner, target, amount, PinAction.AttackType.Magic, false)
+	_add_attack(tween, actioner, target, amount, PinAction.AttackType.Magic, false, -1)
 
 static func add_real_damage(tween: SceneTreeTween, target: ArpeegeePinNode, amount: int) -> void:
 	var damage_receiver := NodE.get_child(target, DamageReceiver) as DamageReceiver
@@ -50,7 +50,7 @@ static func add_miss(tween: SceneTreeTween, target: ArpeegeePinNode) -> void:
 	tween.tween_callback(damage_receiver, 'evade')
 
 static func _add_attack(tween: SceneTreeTween, actioner: ArpeegeePinNode, target: ArpeegeePinNode,
-		amount: int, type: int, no_evade: bool) -> void:
+		amount: int, type: int, no_evade: bool, custom_critical: int) -> void:
 	
 	var target_evasion := (NodE.get_child(target, ModifiedPinStats) as ModifiedPinStats).evasion
 	var damage_receiver := NodE.get_child(target, DamageReceiver) as DamageReceiver
@@ -62,7 +62,13 @@ static func _add_attack(tween: SceneTreeTween, actioner: ArpeegeePinNode, target
 		tween.tween_callback(damage_receiver, 'evade')
 	else:
 		var modified_stats := NodE.get_child(actioner, ModifiedPinStats) as ModifiedPinStats
-		var is_critical := FairRandom.is_critical(modified_stats.critical)
+		var critical_chance := 1
+		if custom_critical < 0:
+			critical_chance = modified_stats.critical
+		else:
+			critical_chance = custom_critical
+		
+		var is_critical := FairRandom.is_critical(critical_chance)
 		tween.tween_callback(damage_receiver, 'damage', [amount, type, is_critical])
 
 static func add_hurt(tween: SceneTreeTween, target: ArpeegeePinNode) -> void:

@@ -5,13 +5,14 @@ signal text_triggered(narration_text)
 enum Type {
 	HandThrowRock,
 	MagicThrowRock,
+	ThrowSpear,
 }
 
 export(Type) var type := Type.HandThrowRock
 export(String) var throw_frame := ''
 export(String) var narration_key := ''
 
-onready var _thing := get_child(0) as Sprite
+onready var _thing := get_child(0) as Node2D
 
 var _used := false
 
@@ -27,6 +28,8 @@ func pin_action() -> PinAction:
 		return preload('res://src/resources/actions/throw_rock_no_magic_geomancer.tres')
 	elif type == Type.MagicThrowRock:
 		return preload('res://src/resources/actions/throw_rock_magic_geomancer.tres')
+	elif type == Type.ThrowSpear:
+		return preload('res://src/resources/actions/throw_spear_shifty_fishguy.tres')
 	else:
 		assert(false)
 		return null
@@ -38,13 +41,15 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	
 	animation.tween_interval(0.5)
 	
+	var side := -sign(target.global_position.x - actioner.global_position.x)
+	
 	var material := Components.root_sprite(actioner).material as ShaderMaterial
-	TweenJuice.skew(animation, material, 0.0, 1.0, 0.35)\
+	TweenJuice.skew(animation, material, 0.0, side * 1.0, 0.35)\
 			.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
 	
 	animation.tween_interval(0.8)
 	
-	TweenJuice.skew(animation, material, 1.0, 0.0, 0.1)
+	TweenJuice.skew(animation, material, side * 1.0, 0.0, 0.1)
 	
 	var sprite_switcher := NodE.get_child(actioner, SpriteSwitcher) as SpriteSwitcher
 	animation.tween_callback(sprite_switcher, 'change', [throw_frame])
@@ -67,6 +72,9 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 		ActionUtils.add_attack(animation, actioner, target, stats.attack)
 	elif type == Type.MagicThrowRock:
 		ActionUtils.add_magic_attack(animation, actioner, target, stats.magic_attack)
+	elif type == Type.ThrowSpear:
+		var attack_amount := ActionUtils.damage_with_factor(stats.attack, 0.75)
+		ActionUtils.add_attack(animation, actioner, target, attack_amount, 5)
 	else:
 		assert(false)
 	
