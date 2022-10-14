@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource( 1 )
-nice_name = "STAB_NAME"
+nice_name = "SPLISH_NAME"
 description = ""
-target_type = 1
-action_type = 0
+target_type = 2
+action_type = 2
