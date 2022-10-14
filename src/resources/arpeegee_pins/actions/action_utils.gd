@@ -1,5 +1,10 @@
 class_name ActionUtils
 
+enum HitType {
+	Miss,
+	Hit,
+}
+
 static func get_closest_adjecent_position(actioner: Node2D, target: Node2D) -> Vector2:
 	var actioner_bounding_box := NodE.get_child(actioner, REferenceRect) as REferenceRect
 	var target_bounding_box := NodE.get_child(target, REferenceRect) as REferenceRect
@@ -30,16 +35,16 @@ static func get_top_right_corner_screen(pin: Node2D) -> Vector2:
 	return position
 
 static func add_attack(tween:SceneTreeTween, actioner: ArpeegeePinNode, target: ArpeegeePinNode,
-		amount: int, custom_critical := -1) -> void:
-	_add_attack(tween, actioner, target, amount, PinAction.AttackType.Normal, false, custom_critical)
+		amount: int, custom_critical := -1) -> int:
+	return _add_attack(tween, actioner, target, amount, PinAction.AttackType.Normal, false, custom_critical)
 
 static func add_attack_no_evade(tween: SceneTreeTween, actioner: ArpeegeePinNode, target: ArpeegeePinNode,
 		amount: int) -> void:
 	_add_attack(tween, actioner, target, amount, PinAction.AttackType.Normal, true, -1)
 
 static func add_magic_attack(tween: SceneTreeTween, actioner:ArpeegeePinNode, target: ArpeegeePinNode,
-		amount: int) -> void:
-	_add_attack(tween, actioner, target, amount, PinAction.AttackType.Magic, false, -1)
+		amount: int) -> int:
+	return _add_attack(tween, actioner, target, amount, PinAction.AttackType.Magic, false, -1)
 
 static func add_real_damage(tween: SceneTreeTween, target: ArpeegeePinNode, amount: int) -> void:
 	var damage_receiver := NodE.get_child(target, DamageReceiver) as DamageReceiver
@@ -50,7 +55,7 @@ static func add_miss(tween: SceneTreeTween, target: ArpeegeePinNode) -> void:
 	tween.tween_callback(damage_receiver, 'evade')
 
 static func _add_attack(tween: SceneTreeTween, actioner: ArpeegeePinNode, target: ArpeegeePinNode,
-		amount: int, type: int, no_evade: bool, custom_critical: int) -> void:
+		amount: int, type: int, no_evade: bool, custom_critical: int) -> int:
 	
 	var target_evasion := (NodE.get_child(target, ModifiedPinStats) as ModifiedPinStats).evasion
 	var damage_receiver := NodE.get_child(target, DamageReceiver) as DamageReceiver
@@ -70,6 +75,8 @@ static func _add_attack(tween: SceneTreeTween, actioner: ArpeegeePinNode, target
 		
 		var is_critical := FairRandom.is_critical(critical_chance)
 		tween.tween_callback(damage_receiver, 'damage', [amount, type, is_critical])
+
+	return HitType.Miss if is_miss else HitType.Hit
 
 static func add_hurt(tween: SceneTreeTween, target: ArpeegeePinNode) -> void:
 	var damage_receiver := NodE.get_child(target, DamageReceiver) as DamageReceiver
