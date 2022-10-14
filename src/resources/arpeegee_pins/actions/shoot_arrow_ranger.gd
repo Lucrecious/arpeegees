@@ -1,0 +1,49 @@
+extends Node2D
+
+enum Type {
+	Regular,
+	OnFire,
+}
+
+export(Type) var type := Type.Regular
+
+onready var _arrow := $Arrow as Node2D
+
+func pin_action() -> PinAction:
+	if type == Type.Regular:
+		return preload('res://src/resources/actions/arrow_zip_ranger.tres')
+	elif type == Type.OnFire:
+		return preload('res://src/resources/actions/arrows_en_fuego_ranger.tres')
+	assert(false)
+	return null
+
+func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> void:
+	var animation := create_tween()
+	
+	animation.tween_interval(0.4)
+	
+	var sprite_switcher := NodE.get_child(actioner, SpriteSwitcher) as SpriteSwitcher
+	animation.tween_callback(sprite_switcher, 'change', ['attack'])
+	animation.tween_callback(_arrow, 'set', ['visible', true])
+	animation.tween_interval(0.75)
+	
+	var target_box := NodE.get_child(target, REferenceRect) as REferenceRect
+	var target_position := target_box.global_rect().get_center()
+	animation.tween_property(_arrow, 'global_position', target_position, 0.1)
+	
+	var modified_stats := NodE.get_child(actioner, ModifiedPinStats) as ModifiedPinStats
+	ActionUtils.add_attack(animation, actioner, target, modified_stats.attack)
+	animation.tween_callback(VFX, 'physical_impactv', [actioner, target_position])
+	
+	if type == Type.OnFire:
+		var burn_status_effect := EffectFunctions.create_burn_status_effect(modified_stats.attack)
+		var list := NodE.get_child(target, StatusEffectsList) as StatusEffectsList
+		animation.tween_callback(list, 'add_instance', [burn_status_effect])
+	
+	animation.tween_callback(_arrow, 'set', ['visible', false])
+	animation.tween_callback(_arrow, 'set', ['global_position', _arrow.global_position])
+	
+	animation.tween_interval(0.75)
+	animation.tween_callback(sprite_switcher, 'change', ['idle'])
+	
+	animation.tween_callback(object, callback)

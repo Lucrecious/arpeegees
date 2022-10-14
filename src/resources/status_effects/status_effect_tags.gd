@@ -14,4 +14,5 @@ enum {
 	BrightSparkles,
 	RaiseEarth,
 	RockWall,
+	Burning,
 }
