@@ -17,4 +17,5 @@ enum {
 	Burning,
 	DesperateKick,
 	AngryHatlessMushboy,
+	Stalk,
 }

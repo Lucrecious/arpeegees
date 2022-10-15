@@ -34,7 +34,7 @@ class BurnEffect extends Node:
 		var damage_receiver := NodE.get_child(_pin, DamageReceiver) as DamageReceiver
 		var burn_amount := ActionUtils.damage_with_factor(attack_based, 0.3)
 		animation.tween_callback(damage_receiver, 'damage',
-				[burn_amount, PinAction.AttackType.Normal, false])
+				[burn_amount, PinAction.AttackType.Normal, false, null])
 		
 		animation.tween_callback(self, 'call_deferred',
 				['emit_signal', 'start_turn_effect_finished'])

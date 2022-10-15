@@ -1,0 +1,121 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/resources/arpeegee_pins/hunter.tres" type="Resource" id=2]
+[ext_resource path="res://src/resources/arpeegee_pins/actions/actions.gd" type="Script" id=3]
+[ext_resource path="res://lut/components/root_sprite.gd" type="Script" id=4]
+[ext_resource path="res://assets/sprites/hunter/hunter_idle.png" type="Texture" id=5]
+[ext_resource path="res://assets/sprites/hunter/hunter_stab1.png" type="Texture" id=6]
+[ext_resource path="res://assets/sprites/hunter/hunter_pounce.png" type="Texture" id=7]
+[ext_resource path="res://assets/sprites/hunter/hunter_hit.png" type="Texture" id=8]
+[ext_resource path="res://assets/sprites/hunter/hunter_stab2.png" type="Texture" id=9]
+[ext_resource path="res://assets/sprites/hunter/hunter_crouch.png" type="Texture" id=10]
+[ext_resource path="res://assets/sprites/hunter/hunter_dead.png" type="Texture" id=11]
+[ext_resource path="res://assets/sprites/hunter/hunter_win.png" type="Texture" id=12]
+[ext_resource path="res://assets/shaders/wobble_noise.tres" type="Texture" id=13]
+[ext_resource path="res://assets/shaders/pin_sprite_shader.gdshader" type="Shader" id=14]
+[ext_resource path="res://src/resources/arpeegee_pins/actions/attack.gd" type="Script" id=15]
+[ext_resource path="res://src/resources/actions/pounce_owo_hunter.tres" type="Resource" id=16]
+[ext_resource path="res://src/resources/arpeegee_pins/actions/stalk.gd" type="Script" id=17]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 14 )
+shader_param/fill_color = Color( 1, 1, 1, 1 )
+shader_param/color_mix = 0.0
+shader_param/top_skew = 0.0
+shader_param/squash = 1.0
+shader_param/offset_amount = 60.0
+shader_param/update_sec = 0.4
+shader_param/uv_offset_texture = ExtResource( 13 )
+
+[node name="Hunter" instance=ExtResource( 1 )]
+nice_name = "Hunter"
+_resource_set = ExtResource( 2 )
+
+[node name="Health" parent="." index="6"]
+current = 20
+
+[node name="PinStats" parent="." index="7"]
+attack = 5
+magic_attack = 0
+defence = 2
+magic_defence = 2
+evasion = 4
+
+[node name="HealthBar" parent="." index="10"]
+position = Vector2( -112, -266 )
+
+[node name="Sprites" type="Node2D" parent="." index="12"]
+material = SubResource( 1 )
+script = ExtResource( 4 )
+
+[node name="Idle" type="Sprite" parent="Sprites" index="0"]
+use_parent_material = true
+position = Vector2( 0, -100 )
+scale = Vector2( 0.13, 0.13 )
+texture = ExtResource( 5 )
+
+[node name="Pounce" type="Sprite" parent="Sprites" index="1"]
+visible = false
+use_parent_material = true
+position = Vector2( -16, -119 )
+scale = Vector2( 0.13, 0.13 )
+texture = ExtResource( 7 )
+
+[node name="Hurt" type="Sprite" parent="Sprites" index="2"]
+visible = false
+use_parent_material = true
+position = Vector2( -16, -100 )
+scale = Vector2( 0.08, 0.08 )
+texture = ExtResource( 8 )
+
+[node name="Stalk" type="Sprite" parent="Sprites" index="3"]
+visible = false
+use_parent_material = true
+position = Vector2( -16, -119 )
+scale = Vector2( 0.13, 0.13 )
+texture = ExtResource( 10 )
+
+[node name="Stab1" type="Sprite" parent="Sprites" index="4"]
+visible = false
+use_parent_material = true
+position = Vector2( -30, -107 )
+scale = Vector2( 0.08, 0.08 )
+texture = ExtResource( 6 )
+
+[node name="Stab2" type="Sprite" parent="Sprites" index="5"]
+visible = false
+use_parent_material = true
+position = Vector2( -34, -109 )
+scale = Vector2( 0.08, 0.08 )
+texture = ExtResource( 9 )
+
+[node name="Dead" type="Sprite" parent="Sprites" index="6"]
+visible = false
+use_parent_material = true
+position = Vector2( -7, -80 )
+scale = Vector2( 0.08, 0.08 )
+texture = ExtResource( 11 )
+
+[node name="Win" type="Sprite" parent="Sprites" index="7"]
+visible = false
+use_parent_material = true
+position = Vector2( -17, -97 )
+scale = Vector2( 0.08, 0.08 )
+texture = ExtResource( 12 )
+
+[node name="Actions" type="Node2D" parent="." index="13"]
+script = ExtResource( 3 )
+
+[node name="PounceOWO" type="Node2D" parent="Actions" index="0"]
+script = ExtResource( 15 )
+attack_sprite_name = "pounce"
+pin_action = ExtResource( 16 )
+walk = false
+narration_key = "NARRATOR_POUNCE_OWO_USE"
+
+[node name="ImpactHint" type="Position2D" parent="Actions/PounceOWO" index="0"]
+position = Vector2( -95, -102 )
+
+[node name="Stalk" type="Node2D" parent="Actions" index="1"]
+script = ExtResource( 17 )

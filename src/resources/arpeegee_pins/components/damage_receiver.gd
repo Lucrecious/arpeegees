@@ -3,6 +3,7 @@ extends Node2D
 
 signal critical_hit
 signal evaded
+signal hit(damager)
 
 export(String) var sprite_name := ''
 
@@ -33,7 +34,7 @@ func real_damage(amount: int) -> void:
 	if amount > 0:
 		hurt()
 
-func damage(amount: int, type: int, is_critical: bool) -> void:
+func damage(amount: int, type: int, is_critical: bool, damager: Node) -> void:
 	if not _enabled:
 		return
 	
@@ -54,6 +55,7 @@ func damage(amount: int, type: int, is_critical: bool) -> void:
 	
 	actual_damage = max(actual_damage, 1)
 	_health.damage(actual_damage)
+	emit_signal('hit', damager)
 	hurt()
 	if is_critical:
 		emit_signal('critical_hit')

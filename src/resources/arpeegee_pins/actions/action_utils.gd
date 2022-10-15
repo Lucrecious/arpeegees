@@ -74,7 +74,7 @@ static func _add_attack(tween: SceneTreeTween, actioner: ArpeegeePinNode, target
 			critical_chance = custom_critical
 		
 		var is_critical := FairRandom.is_critical(critical_chance)
-		tween.tween_callback(damage_receiver, 'damage', [amount, type, is_critical])
+		tween.tween_callback(damage_receiver, 'damage', [amount, type, is_critical, actioner])
 
 	return HitType.Miss if is_miss else HitType.Hit
 
