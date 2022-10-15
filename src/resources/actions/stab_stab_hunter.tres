@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource( 1 )
-nice_name = "MANDOLIN_BASH_ACTION_NAME"
+nice_name = "STAB_STAB_NAME"
 description = ""
-target_type = 1
+target_type = 2
 action_type = 0
