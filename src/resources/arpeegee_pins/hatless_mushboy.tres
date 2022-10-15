@@ -7,4 +7,4 @@ script = ExtResource( 1 )
 type = 1
 rarity = 1
 scene_path = "res://src/resources/arpeegee_pins/hatless_mushboy.tscn"
-pickable = true
+pickable = false

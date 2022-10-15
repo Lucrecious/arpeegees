@@ -11,14 +11,8 @@ func _ready() -> void:
 	_player_pins = _get_of_type(_pins, ArpeegeePin.Type.Player)
 	_npc_pins = _get_of_type(_pins, ArpeegeePin.Type.NPC)
 
-func get_player_pin_resources() -> Array:
-	return _player_pins
-
-func get_npc_pin_resources() -> Array:
-	return _npc_pins
-
-func get_all_pin_resources () -> Array:
-	return _pins
+func get_all_pin_resources() -> Array:
+	return _get_and_load_pins('res://src/resources/arpeegee_pins/', false)
 
 # always picks at least 1 player and 1 npc
 func pick_random(amount: int) -> Dictionary:

@@ -38,22 +38,29 @@ func get_picks() -> Dictionary:
 	return picks
 
 func _ready():
+	var pins := ArpeegeePins.get_all_pin_resources()
+	var heroes := []
+	var npcs := []
+	
+	for p in pins:
+		if p.type == ArpeegeePin.Type.NPC:
+			npcs.push_back(p)
+		elif p.type == ArpeegeePin.Type.Player:
+			heroes.push_back(p)
+	
 	var heroes_popup := _heroes_menu.get_popup()
-	var heroes := ArpeegeePins.get_player_pin_resources()
 	for i in heroes.size():
 		var h := heroes[i] as ArpeegeePin
 		heroes_popup.add_item(_file_path_to_readable(h))
 		heroes_popup.set_item_metadata(i, h)
 	
 	var npcs_popup := _npcs_menu.get_popup()
-	var npcs := ArpeegeePins.get_npc_pin_resources()
 	for i in npcs.size():
 		var n := npcs[i] as ArpeegeePin
 		npcs_popup.add_item(_file_path_to_readable(n))
 		npcs_popup.set_item_metadata(i, n)
 	
 	var pins_popup := _pins_menu.get_popup()
-	var pins := ArpeegeePins.get_all_pin_resources()
 	for i in pins.size():
 		var p := pins[i] as ArpeegeePin
 		pins_popup.add_item(_file_path_to_readable(p))
