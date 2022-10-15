@@ -117,12 +117,14 @@ static func add_jump(
 			.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUAD)
 
 static func add_walk(tween: SceneTreeTween, pin: ArpeegeePinNode, start_position: Vector2,
-		target_position: Vector2, step_height: float, steps: int) -> Vector2:
+		target_position: Vector2, step_height: float, steps: int, slow := false) -> Vector2:
 	var relative := target_position - start_position
 	
 	var step_vector := relative / steps
 	
 	var step_sec := .1
+	if slow:
+		step_sec = 0.35
 	
 	for i in steps:
 		var end_location := start_position + (step_vector * (i + 1)) as Vector2

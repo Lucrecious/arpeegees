@@ -18,4 +18,5 @@ enum {
 	DesperateKick,
 	AngryHatlessMushboy,
 	Stalk,
+	HopAround,
 }
