@@ -1,0 +1,76 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/resources/arpeegee_pins/banan_chopped.tres" type="Resource" id=2]
+[ext_resource path="res://assets/sprites/banan/banan_slices.png" type="Texture" id=3]
+[ext_resource path="res://lut/components/root_sprite.gd" type="Script" id=4]
+[ext_resource path="res://assets/sprites/banan/banan_slice3.png" type="Texture" id=5]
+[ext_resource path="res://assets/sprites/banan/banan_slice4.png" type="Texture" id=6]
+[ext_resource path="res://assets/sprites/banan/banan_slice5.png" type="Texture" id=7]
+[ext_resource path="res://src/vfx/up_down_motion.gd" type="Script" id=8]
+[ext_resource path="res://src/resources/arpeegee_pins/actions/actions.gd" type="Script" id=9]
+[ext_resource path="res://src/resources/arpeegee_pins/actions/surrounded_by_slices_banan_chopped.gd" type="Script" id=10]
+[ext_resource path="res://assets/shaders/wobble_noise.tres" type="Texture" id=11]
+[ext_resource path="res://assets/shaders/pin_sprite_shader.gdshader" type="Shader" id=12]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 12 )
+shader_param/fill_color = Color( 1, 1, 1, 1 )
+shader_param/color_mix = 0.0
+shader_param/top_skew = 0.0
+shader_param/squash = 1.0
+shader_param/offset_amount = 300.0
+shader_param/update_sec = 0.4
+shader_param/uv_offset_texture = ExtResource( 11 )
+
+[node name="ChoppedBanan" instance=ExtResource( 1 )]
+nice_name = "Banan (Chopped)"
+_resource_set = ExtResource( 2 )
+
+[node name="Health" parent="." index="6"]
+current = 20
+
+[node name="PinStats" parent="." index="7"]
+attack = 4
+magic_attack = 0
+defence = 2
+magic_defence = 3
+evasion = 8
+
+[node name="Sprites" type="Node2D" parent="." index="12"]
+material = SubResource( 1 )
+script = ExtResource( 4 )
+
+[node name="Slice2" type="Sprite" parent="Sprites" index="0"]
+visible = false
+position = Vector2( 18, -97.4 )
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 6 )
+script = ExtResource( 8 )
+
+[node name="Idle" type="Sprite" parent="Sprites" index="1"]
+position = Vector2( -5, -59 )
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 3 )
+
+[node name="Slice1" type="Sprite" parent="Sprites" index="2"]
+visible = false
+position = Vector2( 21, -30.4 )
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 5 )
+script = ExtResource( 8 )
+
+[node name="Slice3" type="Sprite" parent="Sprites" index="3"]
+visible = false
+position = Vector2( -41, -120.4 )
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 7 )
+script = ExtResource( 8 )
+
+[node name="Invisible" type="Sprite" parent="Sprites" index="4"]
+
+[node name="Actions" type="Node2D" parent="." index="13"]
+script = ExtResource( 9 )
+
+[node name="SurroundedBySlices" type="Node2D" parent="Actions" index="0"]
+script = ExtResource( 10 )

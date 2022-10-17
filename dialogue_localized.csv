@@ -212,3 +212,7 @@ NARRATOR_STALK_FIRST_TURN_AFTER_USE,"Hunter understands how their prey works, Hu
 ,,
 HOP_AROUND_NAME,Hop Around,
 NARRATOR_HOP_AROUND_USE,"Hunter starts hoppin' around all willy nilly, must be hard to hit now!",
+,,
+SURROUNDED_BY_SLICES_NAME,Surrounded by Slices,
+,,
+SLICE_BARRAGE_NAME,Slice Barrage,

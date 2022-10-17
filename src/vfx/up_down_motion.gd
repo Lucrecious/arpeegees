@@ -1,20 +1,15 @@
-extends Sprite
+extends Node
 
-const rocks := [
-	preload('res://assets/sprites/effects/rock2.png'),
-	preload('res://assets/sprites/effects/rock3.png'),
-	preload('res://assets/sprites/effects/rock4.png'),
-]
+const TOTAL_UP_DOWN_SEC := 3.0
 
-func _ready():
-	texture = rocks[randi() % rocks.size()]
+func start() -> void:
+	var animation := create_tween()
 	
-	var tween := create_tween()
-	
-	tween.tween_property(self, 'position', Vector2.UP * 35.0, 1.0).as_relative()\
+	animation.tween_property(self, 'position:y', 7.5, TOTAL_UP_DOWN_SEC / 2.0).as_relative()\
 			.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_QUAD)
-	tween.tween_property(self, 'position', Vector2.DOWN * 35.0, 1.0).as_relative()\
+			
+	animation.tween_property(self, 'position:y', -7.5, TOTAL_UP_DOWN_SEC / 2.0).as_relative()\
 			.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_QUAD)
 	
-	tween.custom_step(randf())
-	tween.set_loops()
+	animation.set_loops()
+	animation.custom_step(randf() * TOTAL_UP_DOWN_SEC)

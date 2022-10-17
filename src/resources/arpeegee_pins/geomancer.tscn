@@ -19,7 +19,7 @@
 [ext_resource path="res://assets/sprites/effects/rock4.png" type="Texture" id=17]
 [ext_resource path="res://assets/sprites/effects/rock2.png" type="Texture" id=18]
 [ext_resource path="res://assets/sprites/effects/rock3.png" type="Texture" id=19]
-[ext_resource path="res://src/vfx/up_down_motion.gd" type="Script" id=20]
+[ext_resource path="res://src/vfx/rocks_updown_geomancer.gd" type="Script" id=20]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 14 )

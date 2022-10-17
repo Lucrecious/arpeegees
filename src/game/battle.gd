@@ -246,7 +246,7 @@ func _drop_pins(positions: Array, pins: Array, item: PinItemPowerUp, item_positi
 		drop_tween.tween_property(pin_node, 'global_position:y', position.y, bounce_sec)\
 			.set_ease(Tween.EASE_OUT)\
 			.set_trans(Tween.TRANS_BOUNCE)
-		drop_tween.tween_callback(pin_node, 'stop_star_emission')
+		drop_tween.tween_callback(pin_node, 'post_drop_initialization')
 	
 	if item:
 		_battle_layer.add_child(item)
