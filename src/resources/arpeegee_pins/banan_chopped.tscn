@@ -1,8 +1,8 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/resources/arpeegee_pins/banan_chopped.tres" type="Resource" id=2]
-[ext_resource path="res://assets/sprites/banan/banan_slices.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/banan/banan_slice2.png" type="Texture" id=3]
 [ext_resource path="res://lut/components/root_sprite.gd" type="Script" id=4]
 [ext_resource path="res://assets/sprites/banan/banan_slice3.png" type="Texture" id=5]
 [ext_resource path="res://assets/sprites/banan/banan_slice4.png" type="Texture" id=6]
@@ -12,6 +12,11 @@
 [ext_resource path="res://src/resources/arpeegee_pins/actions/surrounded_by_slices_banan_chopped.gd" type="Script" id=10]
 [ext_resource path="res://assets/shaders/wobble_noise.tres" type="Texture" id=11]
 [ext_resource path="res://assets/shaders/pin_sprite_shader.gdshader" type="Shader" id=12]
+[ext_resource path="res://assets/sprites/banan/banan_slice6.png" type="Texture" id=13]
+[ext_resource path="res://assets/sprites/banan/banan_slice1.png" type="Texture" id=14]
+[ext_resource path="res://assets/sprites/banan/banan_slice7.png" type="Texture" id=15]
+[ext_resource path="res://assets/sprites/banan/banan_slice8.png" type="Texture" id=16]
+[ext_resource path="res://src/resources/arpeegee_pins/actions/slice_barrage_banan_chopped.gd" type="Script" id=17]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 12 )
@@ -19,7 +24,7 @@ shader_param/fill_color = Color( 1, 1, 1, 1 )
 shader_param/color_mix = 0.0
 shader_param/top_skew = 0.0
 shader_param/squash = 1.0
-shader_param/offset_amount = 300.0
+shader_param/offset_amount = 80.0
 shader_param/update_sec = 0.4
 shader_param/uv_offset_texture = ExtResource( 11 )
 
@@ -43,18 +48,101 @@ script = ExtResource( 4 )
 
 [node name="Slice2" type="Sprite" parent="Sprites" index="0"]
 visible = false
+use_parent_material = true
 position = Vector2( 18, -97.4 )
 scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 6 )
 script = ExtResource( 8 )
 
-[node name="Idle" type="Sprite" parent="Sprites" index="1"]
-position = Vector2( -5, -59 )
+[node name="Idle" type="Node2D" parent="Sprites" index="1"]
+use_parent_material = true
+position = Vector2( 0, -54 )
 scale = Vector2( 0.1, 0.1 )
+
+[node name="Slice8" type="Node2D" parent="Sprites/Idle" index="0"]
+use_parent_material = true
+position = Vector2( -400, 380 )
+scale = Vector2( 1, 1 )
+
+[node name="Sprite" type="Sprite" parent="Sprites/Idle/Slice8" index="0"]
+use_parent_material = true
+position = Vector2( 390, -420 )
+scale = Vector2( 1, 1 )
+texture = ExtResource( 16 )
+
+[node name="Slice7" type="Node2D" parent="Sprites/Idle" index="1"]
+use_parent_material = true
+position = Vector2( -140, 380 )
+scale = Vector2( 1, 1 )
+
+[node name="Sprite" type="Sprite" parent="Sprites/Idle/Slice7" index="0"]
+use_parent_material = true
+position = Vector2( 135, -439 )
+texture = ExtResource( 15 )
+
+[node name="Slice6" type="Node2D" parent="Sprites/Idle" index="2"]
+use_parent_material = true
+position = Vector2( 80, 220 )
+scale = Vector2( 1, 1 )
+
+[node name="Sprite" type="Sprite" parent="Sprites/Idle/Slice6" index="0"]
+use_parent_material = true
+position = Vector2( -85, -279 )
+texture = ExtResource( 13 )
+
+[node name="Slice5" type="Node2D" parent="Sprites/Idle" index="3"]
+use_parent_material = true
+position = Vector2( 220, 9.99994 )
+scale = Vector2( 1, 1 )
+
+[node name="Sprite" type="Sprite" parent="Sprites/Idle/Slice5" index="0"]
+use_parent_material = true
+position = Vector2( -225, -69 )
+texture = ExtResource( 7 )
+
+[node name="Slice4" type="Node2D" parent="Sprites/Idle" index="4"]
+use_parent_material = true
+position = Vector2( 270, -140 )
+scale = Vector2( 1, 1 )
+
+[node name="Sprite" type="Sprite" parent="Sprites/Idle/Slice4" index="0"]
+use_parent_material = true
+position = Vector2( -275, 81 )
+texture = ExtResource( 6 )
+
+[node name="Slice3" type="Node2D" parent="Sprites/Idle" index="5"]
+use_parent_material = true
+position = Vector2( 250, -390 )
+scale = Vector2( 1, 1 )
+
+[node name="Sprite" type="Sprite" parent="Sprites/Idle/Slice3" index="0"]
+use_parent_material = true
+position = Vector2( -255, 331 )
+texture = ExtResource( 5 )
+
+[node name="Slice2" type="Node2D" parent="Sprites/Idle" index="6"]
+use_parent_material = true
+position = Vector2( 150, -680 )
+
+[node name="Sprite" type="Sprite" parent="Sprites/Idle/Slice2" index="0"]
+use_parent_material = true
+position = Vector2( -155, 621 )
+scale = Vector2( 1, 1 )
 texture = ExtResource( 3 )
+
+[node name="Slice1" type="Node2D" parent="Sprites/Idle" index="7"]
+use_parent_material = true
+position = Vector2( 70, -980 )
+
+[node name="Sprite" type="Sprite" parent="Sprites/Idle/Slice1" index="0"]
+use_parent_material = true
+position = Vector2( -55, 911 )
+scale = Vector2( 1, 1 )
+texture = ExtResource( 14 )
 
 [node name="Slice1" type="Sprite" parent="Sprites" index="2"]
 visible = false
+use_parent_material = true
 position = Vector2( 21, -30.4 )
 scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 5 )
@@ -62,6 +150,7 @@ script = ExtResource( 8 )
 
 [node name="Slice3" type="Sprite" parent="Sprites" index="3"]
 visible = false
+use_parent_material = true
 position = Vector2( -41, -120.4 )
 scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 7 )
@@ -72,5 +161,8 @@ script = ExtResource( 8 )
 [node name="Actions" type="Node2D" parent="." index="13"]
 script = ExtResource( 9 )
 
-[node name="SurroundedBySlices" type="Node2D" parent="Actions" index="0"]
+[node name="SliceBarrage" type="Node2D" parent="Actions" index="0"]
+script = ExtResource( 17 )
+
+[node name="SurroundedBySlices" type="Node2D" parent="Actions" index="1"]
 script = ExtResource( 10 )
