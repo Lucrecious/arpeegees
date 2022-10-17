@@ -225,6 +225,7 @@ func _load_and_drop_pins(pins: Array, positions: Array, item: Node2D, item_posit
 func _drop_pins(positions: Array, pins: Array, item: PinItemPowerUp, item_position: Control,
 		loader: BackgroundResourceLoader, wait_sec: float, bounce_sec: float) -> void:
 	
+	
 	var pin_resources := loader.result as Array
 	for i in positions.size():
 		var pin := pins[i] as ArpeegeePin
@@ -235,6 +236,8 @@ func _drop_pins(positions: Array, pins: Array, item: PinItemPowerUp, item_positi
 		var control := positions[i] as Control
 		control.add_child(pin_node)
 		var position := control.get_global_rect().get_center()
+		
+		_add_pin_shadow(control, position, pin_node)
 		
 		pin_node.global_position = position + Vector2.UP * 1000.0
 		
@@ -261,6 +264,19 @@ func _drop_pins(positions: Array, pins: Array, item: PinItemPowerUp, item_positi
 			.set_trans(Tween.TRANS_BOUNCE)
 	
 	emit_signal('pins_dropped')
+
+func _add_pin_shadow(position: Control, global_position: Vector2, pin: ArpeegeePinNode) -> void:
+	if not position:
+		assert(false)
+		return
+	
+	var pin_shadow := preload('res://src/resources/arpeegee_pins/pin_shadow.tscn').instance() as PinShadow
+	var parent := position.get_parent() as Node
+	parent.add_child(pin_shadow)
+	parent.move_child(pin_shadow, 0)
+	pin_shadow.global_position = global_position
+	pin_shadow.attach_pin(pin)
+	
 
 func _input(input: InputEvent) -> void:
 	var mouse_button := input as InputEventMouseButton

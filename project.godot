@@ -339,6 +339,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/resources/items/item.gd"
 }, {
+"base": "Node2D",
+"class": "PinShadow",
+"language": "GDScript",
+"path": "res://src/resources/arpeegee_pins/pin_shadow.gd"
+}, {
 "base": "Node",
 "class": "PinStats",
 "language": "GDScript",
@@ -696,6 +701,7 @@ _global_script_class_icons={
 "PinActions": "",
 "PinBag": "",
 "PinItemPowerUp": "",
+"PinShadow": "",
 "PinStats": "",
 "PinStatsCanvas": "",
 "PlatformerJump": "",
