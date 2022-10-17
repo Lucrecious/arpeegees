@@ -275,7 +275,7 @@ func _add_pin_shadow(position: Control, global_position: Vector2, pin: ArpeegeeP
 	parent.add_child(pin_shadow)
 	parent.move_child(pin_shadow, 0)
 	pin_shadow.global_position = global_position
-	pin_shadow.attach_pin(pin)
+	pin_shadow.attach_pin(position, pin)
 	
 
 func _input(input: InputEvent) -> void:

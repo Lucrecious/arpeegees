@@ -3,17 +3,29 @@ extends Node2D
 
 const UPDATE_EVERY_SEC := 0.1
 
+var _position_control: Control
 var _attached_pin_node: ArpeegeePinNode
 var _pin_box: REferenceRect
 
 var _showing_tween: SceneTreeTween
+
+func _init().() -> void:
+	add_to_group('size_adapter')
 
 func _ready() -> void:
 	visible = false
 	scale = Vector2.ZERO
 	disappear()
 
-func attach_pin(pin: ArpeegeePinNode) -> void:
+func adapt(size: float) -> void:
+	if not _position_control:
+		return
+	
+	var position := _position_control.get_global_rect().get_center()
+	global_position = position
+
+func attach_pin(position_control: Control, pin: ArpeegeePinNode) -> void:
+	_position_control = position_control
 	_attached_pin_node = pin
 	_pin_box = NodE.get_child(pin, REferenceRect) as REferenceRect
 
