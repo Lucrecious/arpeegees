@@ -148,6 +148,7 @@ attack_sprite_name = "wingattack"
 pin_action = ExtResource( 19 )
 narration_key = "NARRATOR_WING_ATTACK_USE"
 hit_sfx_name = "Chop"
+attack_factor = 0.5
 
 [node name="ImpactHint" type="Position2D" parent="Actions/WingAttack" index="0"]
 position = Vector2( 78, -53 )

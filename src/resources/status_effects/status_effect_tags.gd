@@ -19,4 +19,6 @@ enum {
 	AngryHatlessMushboy,
 	Stalk,
 	HopAround,
+	Swoop,
+	WingAttack,
 }

@@ -69,8 +69,11 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 		tween.tween_callback(sounds, 'play', ['Drop'])
 		
 		if modified_stats:
-			var attack_amount := ActionUtils.damage_with_factor(modified_stats.attack, 2.0)
+			var attack_amount := ActionUtils.damage_with_factor(modified_stats.attack, 0.5)
 			ActionUtils.add_attack_no_evade(tween, actioner, target, attack_amount)
+			if randf() < 0.25:
+				var list := NodE.get_child(actioner, StatusEffectsList) as StatusEffectsList
+				tween.tween_callback(list, 'add_instance', [_create_status_effect()])
 		else:
 			assert(false)
 		
@@ -78,25 +81,21 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 		
 		ActionUtils.add_text_trigger(tween, self, 'NARRATOR_SWOOP_DROP')
 		
-		var list := NodE.get_child(actioner, StatusEffectsList) as StatusEffectsList
-		var status_effect := _create_tired_status_effect(actioner)
-		tween.tween_callback(list, 'add_instance', [status_effect])
-	
 	tween.tween_callback(sprite_switcher, 'change', ['idle'])
 	tween.tween_property(actioner, 'global_position', actioner.global_position, .3)
 	
 	tween.tween_callback(object, callback)
 
-func _create_tired_status_effect(pin: ArpeegeePinNode) -> StatusEffect:
+func _create_status_effect() -> StatusEffect:
 	var status_effect := StatusEffect.new()
-	status_effect.tag = StatusEffectTag.TiredAfterSwoop
+	status_effect.stack_count = 3
+	status_effect.tag = StatusEffectTag.Swoop
+	status_effect.is_ailment = false
 	
-	var skip_turn_effect := SkipTurnStartTurnEffect.new()
-	skip_turn_effect.text_key = 'NARRATOR_SWOOP_TOO_TIRED'
+	var stat_modifier := StatModifier.new()
+	stat_modifier.type = StatModifier.Type.Evasion
+	stat_modifier.add_amount = 1
 	
-	var sweat := Aura.create_sweat_aura(pin)
-	
-	status_effect.add_child(skip_turn_effect)
-	NodE.add_children(status_effect, sweat)
+	status_effect.add_child(stat_modifier)
 	
 	return status_effect

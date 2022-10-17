@@ -88,6 +88,10 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 			if hit_type != ActionUtils.HitType.Miss and randf() < 0.1:
 				var status_effects_list := NodE.get_child(target, StatusEffectsList) as StatusEffectsList
 				tween.tween_callback(status_effects_list, 'add_instance', [_create_desperate_kick_effect()])
+		elif pin_action().resource_path.get_file() == 'harpy.tres':
+			if hit_type != ActionUtils.HitType.Miss and randf() < 0.25:
+				var status_effects_list := NodE.get_child(target, StatusEffectsList) as StatusEffectsList
+				tween.tween_callback(status_effects_list, 'add_instance', [_create_wing_attack_effect()])
 	else:
 		var attack_amount := ActionUtils.damage_with_factor(modified_stats.magic_attack, attack_factor)
 		ActionUtils.add_magic_attack(tween, actioner, target, attack_amount)
@@ -115,6 +119,19 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 			actioner.global_position + relative, actioner.global_position, 15.0, 5)
 	
 	tween.tween_callback(object, callback)
+
+func _create_wing_attack_effect() -> StatusEffect:
+	var status_effect := StatusEffect.new()
+	status_effect.stack_count = 3
+	status_effect.is_ailment = true
+	status_effect.tag = StatusEffectTag.WingAttack
+	
+	var effect := StatModifier.new()
+	effect.type = StatModifier.Type.Defence
+	effect.add_amount = -1
+	status_effect.add_child(effect)
+	
+	return status_effect
 
 func _create_desperate_kick_effect() -> StatusEffect:
 	var status_effect := StatusEffect.new()
