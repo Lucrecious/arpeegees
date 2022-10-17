@@ -41,7 +41,7 @@ func adapt(size: float) -> void:
 		else:
 			_texture.rect_position.y = height_offset - grow_amount
 			_texture.rect_size.y = size_y + grow_amount
-		
+	
 	for i in _controls.size():
 		var control := _controls[i] as Control
 		var height_offset := copy_height_offsets[i] as int
