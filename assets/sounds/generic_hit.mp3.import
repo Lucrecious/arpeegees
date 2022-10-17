@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/generic_hit.mp3-d84c27e8af8415d0b9426089c8cd7e1e.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/generic_hit.mp3"
+dest_files=[ "res://.import/generic_hit.mp3-d84c27e8af8415d0b9426089c8cd7e1e.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

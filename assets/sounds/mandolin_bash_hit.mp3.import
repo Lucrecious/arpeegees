@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/mandolin_bash_hit.mp3-94c5f3b953ea5a118c0d9e6d2794bb25.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/mandolin_bash_hit.mp3"
+dest_files=[ "res://.import/mandolin_bash_hit.mp3-94c5f3b953ea5a118c0d9e6d2794bb25.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

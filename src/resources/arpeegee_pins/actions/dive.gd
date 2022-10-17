@@ -34,7 +34,7 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	tween.tween_callback(sprite_switcher, 'change', ['divehead'])
 	tween.tween_interval(.7)
 	
-	tween.tween_callback(sounds, 'play', ['Descend'])
+	tween.tween_callback(sounds, 'play', ['DiveBombCry'])
 	tween.tween_property(actioner, 'global_position', actioner.global_position + relative, .2)
 	
 	tween.tween_callback(sounds, 'play', ['DiveBombHit'])
@@ -51,10 +51,5 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	tween.tween_interval(.5)
 	tween.tween_callback(sprite_switcher, 'change', ['idle'])
 	tween.tween_property(actioner, 'global_position', actioner.global_position, .3)
-	
-	ActionUtils.add_text_trigger(tween, self, 'NARRATOR_DIVE_BOMB_RECOIL')
-	
-	tween.tween_callback(sounds, 'play', ['DiveBombCry'])
-	ActionUtils.add_real_damage(tween, actioner, 2)
 	
 	tween.tween_callback(object, callback)

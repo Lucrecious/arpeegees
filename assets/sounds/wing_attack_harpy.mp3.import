@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/wing_attack_harpy.mp3-8c2c8537854b34ef861529bf709d0d00.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/wing_attack_harpy.mp3"
+dest_files=[ "res://.import/wing_attack_harpy.mp3-8c2c8537854b34ef861529bf709d0d00.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

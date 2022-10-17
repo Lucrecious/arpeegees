@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/mandolin_hit_break_bard.mp3-6cc358839b10aa7e667eb0490de41f6e.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/mandolin_hit_break_bard.mp3"
+dest_files=[ "res://.import/mandolin_hit_break_bard.mp3-6cc358839b10aa7e667eb0490de41f6e.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

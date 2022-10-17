@@ -475,6 +475,7 @@ unique_name_in_owner = true
 margin_bottom = 720.0
 
 [node name="SaveLog" type="Button" parent="CanvasLayer/HUD/Control"]
+visible = false
 margin_left = 1174.0
 margin_top = 9.0
 margin_right = 1270.0

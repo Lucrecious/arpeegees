@@ -6,8 +6,8 @@
 [ext_resource path="res://assets/sounds/step_grass1.mp3" type="AudioStream" id=4]
 [ext_resource path="res://assets/sounds/step_grass2.mp3" type="AudioStream" id=5]
 [ext_resource path="res://assets/sounds/dash1.mp3" type="AudioStream" id=6]
-[ext_resource path="res://assets/sounds/panchi_hit_monk.mp3" type="AudioStream" id=7]
-[ext_resource path="res://assets/sounds/panchi_windup_monk.mp3" type="AudioStream" id=8]
+[ext_resource path="res://assets/sounds/generic_hit.mp3" type="AudioStream" id=7]
+[ext_resource path="res://assets/sounds/generic_windup.mp3" type="AudioStream" id=8]
 
 [node name="Sounds" type="Node"]
 script = ExtResource( 1 )
