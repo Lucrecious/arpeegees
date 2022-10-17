@@ -47,7 +47,9 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	var modified_stats := NodE.get_child(actioner, ModifiedPinStats) as ModifiedPinStats
 	var is_evading := FairRandom.is_evading(modified_stats.evasion)
 	
-	if false and is_evading:
+	var attacked := false
+	
+	if is_evading:
 		ActionUtils.add_miss(tween, target)
 		tween.tween_interval(0.5)
 	else:
@@ -71,9 +73,7 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 		if modified_stats:
 			var attack_amount := ActionUtils.damage_with_factor(modified_stats.attack, 0.5)
 			ActionUtils.add_attack_no_evade(tween, actioner, target, attack_amount)
-			if randf() < 0.25:
-				var list := NodE.get_child(actioner, StatusEffectsList) as StatusEffectsList
-				tween.tween_callback(list, 'add_instance', [_create_status_effect()])
+			attacked = true
 		else:
 			assert(false)
 		
@@ -83,6 +83,10 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 		
 	tween.tween_callback(sprite_switcher, 'change', ['idle'])
 	tween.tween_property(actioner, 'global_position', actioner.global_position, .3)
+	
+	if attacked and randf() < 0.25:
+		var list := NodE.get_child(actioner, StatusEffectsList) as StatusEffectsList
+		tween.tween_callback(list, 'add_instance', [_create_status_effect()])
 	
 	tween.tween_callback(object, callback)
 

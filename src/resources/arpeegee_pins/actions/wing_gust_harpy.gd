@@ -33,10 +33,16 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 		animation.tween_callback(sprite_switcher, 'change', ['idle'])
 		animation.tween_interval(sec)
 	
+	var hit := false
 	for t in targets:
-		print_debug('Chop is temporary played here, need to make new add attack that returns miss or not')
-		animation.tween_callback(sounds, 'play', ['Chop'])
-		ActionUtils.add_attack(animation, actioner, t, modified_stats.magic_attack)
+		var hit_type := ActionUtils.add_attack(animation, actioner, t, modified_stats.magic_attack)
+		if hit_type != ActionUtils.HitType.Miss:
+			hit = true
+	
+	if hit:
+		animation.tween_callback(sounds, 'play', ['GustHit'])
+	else:
+		print_debug('play miss sound here')
 	
 	animation.tween_callback(gust, 'set', ['emitting', false])
 	animation.tween_interval(1.0)

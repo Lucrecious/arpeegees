@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/sprites/harpy/harpy_idle.png" type="Texture" id=2]
@@ -31,6 +31,7 @@
 [ext_resource path="res://assets/sounds/gust_harpy.mp3" type="AudioStream" id=29]
 [ext_resource path="res://assets/sounds/heal_harpy.mp3" type="AudioStream" id=30]
 [ext_resource path="res://assets/shaders/wobble_noise.tres" type="Texture" id=31]
+[ext_resource path="res://assets/sounds/gust_hit_harpy.mp3" type="AudioStream" id=32]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 6 )
@@ -191,3 +192,6 @@ stream = ExtResource( 29 )
 
 [node name="Heal" type="AudioStreamPlayer" parent="Sounds" index="10"]
 stream = ExtResource( 30 )
+
+[node name="GustHit" type="AudioStreamPlayer" parent="Sounds" index="11"]
+stream = ExtResource( 32 )

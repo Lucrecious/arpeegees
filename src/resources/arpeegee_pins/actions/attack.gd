@@ -71,6 +71,9 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	
 	var white_mage_instakill := false
 	var modified_stats := NodE.get_child(actioner, ModifiedPinStats) as ModifiedPinStats
+	
+	var attacked_physically := false
+	
 	if physical:
 		var attack_amount := ActionUtils.damage_with_factor(modified_stats.attack, attack_factor)
 		if pin_action().resource_path.get_file() == 'desperate_staff_whack_white_mage.tres':
@@ -84,14 +87,12 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 		
 		var hit_type := ActionUtils.add_attack(tween, actioner, target, attack_amount)
 		
+		attacked_physically = hit_type != ActionUtils.HitType.Miss
+		
 		if pin_action().resource_path.get_file() == 'desperate_kick_hatless_mushboy.tres':
 			if hit_type != ActionUtils.HitType.Miss and randf() < 0.1:
 				var status_effects_list := NodE.get_child(target, StatusEffectsList) as StatusEffectsList
 				tween.tween_callback(status_effects_list, 'add_instance', [_create_desperate_kick_effect()])
-		elif pin_action().resource_path.get_file() == 'harpy.tres':
-			if hit_type != ActionUtils.HitType.Miss and randf() < 0.25:
-				var status_effects_list := NodE.get_child(target, StatusEffectsList) as StatusEffectsList
-				tween.tween_callback(status_effects_list, 'add_instance', [_create_wing_attack_effect()])
 	else:
 		var attack_amount := ActionUtils.damage_with_factor(modified_stats.magic_attack, attack_factor)
 		ActionUtils.add_magic_attack(tween, actioner, target, attack_amount)
@@ -117,6 +118,12 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 
 	ActionUtils.add_walk(tween, actioner,
 			actioner.global_position + relative, actioner.global_position, 15.0, 5)
+	
+	if pin_action().resource_path.get_file() == 'wing_attack_harpy.tres':
+		print(attacked_physically)
+		if attacked_physically and randf() < 0.25:
+			var status_effects_list := NodE.get_child(target, StatusEffectsList) as StatusEffectsList
+			tween.tween_callback(status_effects_list, 'add_instance', [_create_wing_attack_effect()])
 	
 	tween.tween_callback(object, callback)
 
