@@ -5,16 +5,11 @@ signal battle_screen_requested()
 
 onready var _bag := $'%Bag' as PinBag
 onready var _shockwave := $'%Shockwave' as Control
-onready var _animation := $TitleAnimations as AnimationPlayer
 onready var _sounds := NodE.get_child(self, SoundsComponent) as SoundsComponent
 
 func _ready() -> void:
-	_bag.visible = false
 	_bag.connect('bag_exploded', self, '_on_bag_exploded')
 	_bag.connect('open_animation_finished', self, '_on_pin_bag_opened')
-
-func start() -> void:
-	_animation.play('intro')
 
 func _on_bag_exploded() -> void:
 	var shader := _shockwave.material as ShaderMaterial
@@ -54,16 +49,3 @@ func _do_camera_shake_if_possible() -> void:
 func _on_pin_bag_opened() -> void:
 	emit_signal('battle_screen_requested', 3)
 
-func bounce_in_bag() -> void:
-	var original_y := _bag.rect_position.y
-	_bag.rect_position.y = original_y - 1000.0
-	_bag.visible = true
-	
-	
-	var animation := get_tree().create_tween()
-	
-	animation.tween_property(_bag, 'rect_position:y', original_y, 1.0)\
-			.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_EXPO)
-	animation.tween_callback(_sounds, 'play', ['DropPackage'])
-	
-	

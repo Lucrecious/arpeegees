@@ -35,7 +35,6 @@ func _input(event: InputEvent) -> void:
 		
 		if event.pressed and is_mouse_button:
 			_intro_faded = true
-			_title_screen.start()
 			var fade_away := _intro_panel.create_tween()
 			fade_away.tween_property(_intro_panel, 'modulate:a', 0.0, 1.0)\
 					.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)

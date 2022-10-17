@@ -323,8 +323,8 @@ autowrap = true
 unique_name_in_owner = true
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 560.0
-margin_bottom = 560.0
+margin_top = 323.0
+margin_bottom = 323.0
 mouse_filter = 2
 
 [node name="IntroPanelContainer" type="PanelContainer" parent="SpanLimiter/Content/TopTitleBar/IntroPanel"]

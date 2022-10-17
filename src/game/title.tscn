@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/game/bag.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/game/title.gd" type="Script" id=3]
@@ -45,24 +45,6 @@ shader_param/aberration = 0.477
 shader_param/width = 0.0475
 shader_param/feather = 0.082
 
-[sub_resource type="Animation" id=1]
-resource_name = "intro"
-length = 5.0
-tracks/0/type = "method"
-tracks/0/path = NodePath(".")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 1 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "bounce_in_bag"
-} ]
-}
-
 [node name="Title" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -94,9 +76,6 @@ material = SubResource( 3 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-
-[node name="TitleAnimations" type="AnimationPlayer" parent="."]
-anims/intro = SubResource( 1 )
 
 [node name="Sounds" type="Node" parent="."]
 script = ExtResource( 7 )
