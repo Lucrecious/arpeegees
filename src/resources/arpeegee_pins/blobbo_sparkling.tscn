@@ -1,0 +1,106 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/resources/arpeegee_pins/blobbo_sparkling.tres" type="Resource" id=2]
+[ext_resource path="res://src/resources/arpeegee_pins/actions/actions.gd" type="Script" id=3]
+[ext_resource path="res://lut/components/root_sprite.gd" type="Script" id=4]
+[ext_resource path="res://assets/sprites/shining_blobbo/shining_blobbo_idle.png" type="Texture" id=5]
+[ext_resource path="res://assets/sprites/shining_blobbo/purple_blobbo_attack.png" type="Texture" id=6]
+[ext_resource path="res://assets/sprites/shining_blobbo/purple_blobbo_happy.PNG" type="Texture" id=7]
+[ext_resource path="res://assets/sprites/shining_blobbo/purple_blobbo_hit.png" type="Texture" id=8]
+[ext_resource path="res://assets/sprites/shining_blobbo/purple_blobbo_shootgoo.png" type="Texture" id=9]
+[ext_resource path="res://assets/shaders/pin_sprite_shader.gdshader" type="Shader" id=10]
+[ext_resource path="res://assets/shaders/wobble_noise.tres" type="Texture" id=11]
+[ext_resource path="res://src/resources/arpeegee_pins/actions/attack.gd" type="Script" id=12]
+[ext_resource path="res://src/resources/actions/a_slapa_goo_blobbo_sparkling.tres" type="Resource" id=13]
+[ext_resource path="res://src/resources/arpeegee_pins/actions/spittin_goo_blobbo_sparkling.gd" type="Script" id=14]
+[ext_resource path="res://assets/sprites/effects/goo_purple.png" type="Texture" id=15]
+[ext_resource path="res://src/resources/arpeegee_pins/actions/sparkles_blobbo_sparkling.gd" type="Script" id=16]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 10 )
+shader_param/fill_color = Color( 1, 1, 1, 1 )
+shader_param/color_mix = 0.0
+shader_param/top_skew = 0.0
+shader_param/squash = 1.0
+shader_param/offset_amount = 50.0
+shader_param/update_sec = 0.4
+shader_param/uv_offset_texture = ExtResource( 11 )
+
+[node name="BlobboSparkling" instance=ExtResource( 1 )]
+nice_name = "Sparkling Blobbo"
+_resource_set = ExtResource( 2 )
+
+[node name="Health" parent="." index="6"]
+current = 25
+
+[node name="PinStats" parent="." index="7"]
+attack = 3
+magic_attack = 0
+defence = 4
+magic_defence = 4
+evasion = 4
+
+[node name="Sprites" type="Node2D" parent="." index="12"]
+material = SubResource( 1 )
+script = ExtResource( 4 )
+
+[node name="Idle" type="Sprite" parent="Sprites" index="0"]
+use_parent_material = true
+position = Vector2( 0, -89 )
+scale = Vector2( 0.15, 0.15 )
+texture = ExtResource( 5 )
+
+[node name="Slap" type="Sprite" parent="Sprites" index="1"]
+visible = false
+use_parent_material = true
+position = Vector2( 5, -64 )
+scale = Vector2( 0.09, 0.09 )
+texture = ExtResource( 6 )
+
+[node name="Hurt" type="Sprite" parent="Sprites" index="2"]
+visible = false
+use_parent_material = true
+position = Vector2( -1, -77 )
+scale = Vector2( 0.09, 0.09 )
+texture = ExtResource( 8 )
+
+[node name="Win" type="Sprite" parent="Sprites" index="3"]
+visible = false
+use_parent_material = true
+position = Vector2( 0, -76 )
+scale = Vector2( 0.11, 0.11 )
+texture = ExtResource( 7 )
+
+[node name="ShootGoo" type="Sprite" parent="Sprites" index="4"]
+visible = false
+use_parent_material = true
+position = Vector2( 29, -70 )
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 9 )
+
+[node name="Actions" type="Node2D" parent="." index="13"]
+script = ExtResource( 3 )
+
+[node name="ASlapAGoo" type="Node2D" parent="Actions" index="0"]
+script = ExtResource( 12 )
+attack_sprite_name = "slap"
+pin_action = ExtResource( 13 )
+walk = false
+
+[node name="ImpactHint" type="Position2D" parent="Actions/ASlapAGoo" index="0"]
+position = Vector2( 95, -63 )
+
+[node name="SpittinGoo" type="Node2D" parent="Actions" index="1"]
+script = ExtResource( 14 )
+
+[node name="Goo" type="Node2D" parent="Actions/SpittinGoo" index="0"]
+visible = false
+
+[node name="Sprite" type="Sprite" parent="Actions/SpittinGoo/Goo" index="0"]
+position = Vector2( 61, -76 )
+scale = Vector2( 0.09, 0.09 )
+texture = ExtResource( 15 )
+
+[node name="SPARKLES" type="Node2D" parent="Actions" index="2"]
+script = ExtResource( 16 )

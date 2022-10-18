@@ -21,4 +21,5 @@ enum {
 	HopAround,
 	Swoop,
 	WingAttack,
+	Sparkles,
 }
