@@ -16,8 +16,8 @@ func _on_pressed() -> void:
 	
 	if OS.get_name() == 'HTML5':
 		var data := PoolStringArray(Logger.get_memory()).join('\\n')
-		var ret = JavaScript.eval("save_file('%s')" % data)
-		print("eval returns: ", ret)
+		#var ret = JavaScript.eval("save_file('%s')" % data)
+		#print("eval returns: ", ret)
 	else:
 		print('TODO: print log')
 		return

@@ -3,7 +3,18 @@
     <head>
         <title>Battle of the Arpeegees</title>
         <meta charset="UTF-8">
+        <meta name='viewport' content='width=device-width, user-scalable=no' />
         <style>
+            #canvas {
+                display: block;
+                margin: 0;
+                color: white;
+            }
+
+            #canvas:focus {
+                outline: none;
+            }
+
             #scroll-overlay {
                 position: fixed;
                 pointer-events: none;
@@ -46,6 +57,7 @@
                 const overlay = document.getElementById("scroll-overlay");
 
                 function scroller(event){
+                    console.log("ON WHEEL")
                     switch(event.deltaMode){
                         case 0: 		//DOM_DELTA_PIXEL		Chrome
                         overlay.scrollTop+=event.deltaY
@@ -75,6 +87,9 @@
                 })
 
                 document.onwheel = scroller;
+                document.ontouchmove = function(event) {
+                    console.log("ON TOUCH MOVE")
+                }
             }
         </script>
     </head>
@@ -85,21 +100,14 @@
                 </canvas>
                 <script src="$GODOT_URL"></script>
                 <script>
-                    function _onProgress(current, total) {
-                        if (total > 0) {
-                            if (current === total) {
-                            }
-                        }
-                    }
-
                     var engine = new Engine($GODOT_CONFIG);
-                    engine.startGame({ onProgress: _onProgress }).then(() => {
+                    engine.startGame().then(() => {
                         const overlay = document.getElementById("scroll-overlay")
                         const coverOverlay = document.getElementById("cover-overlay")
 
                         overlay.style.backgroundColor = "transparent";
                         coverOverlay.style.backgroundColor = "transparent";
-                        console.log("GAME loaded!!!")
+                        console.log("Arpeegees Game Loaded")
                     })
                 </script>
             </div>

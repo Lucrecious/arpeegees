@@ -31,6 +31,7 @@ func _ready() -> void:
 
 func _on_browser_scroll(event):
 	var scroll_top := _web_scroll_overlay.scrollTop as int
+	print('scroll top: %d' % scroll_top)
 	var viewport := _control.get_viewport()
 	viewport.canvas_transform = _original_canvas_transform.translated(-Vector2.DOWN * scroll_top)
 
