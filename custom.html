@@ -17,11 +17,12 @@
 
             #scroll-overlay {
                 position: fixed;
-                pointer-events: none;
+                pointer-events: all;
                 overflow-y: scroll;
-                width: 20px;
+                /* width: 20px; */
                 top: 0;
-                left: calc(100% - 20px);
+                left: 0;
+                /* left: calc(100% - 20px); */
                 right: 0;
                 bottom: 0;
                 z-index: 2;
@@ -48,50 +49,6 @@
                 z-index: 1;
             }
         </style>
-        <script>
-            function delay(msec) {
-                return new Promise(resolve => setTimeout(resolve, msec))
-            }
-
-            window.onload = function() {
-                const overlay = document.getElementById("scroll-overlay");
-
-                function scroller(event){
-                    console.log("ON WHEEL")
-                    switch(event.deltaMode){
-                        case 0: 		//DOM_DELTA_PIXEL		Chrome
-                        overlay.scrollTop+=event.deltaY
-                        overlay.scrollLeft+=event.deltaX
-                        break;
-                        case 1: 		//DOM_DELTA_LINE		Firefox
-                        overlay.scrollTop+=15*event.deltaY
-                        overlay.scrollLeft+=15*event.deltaX
-                        break;
-                        case 2: 		//DOM_DELTA_PAGE
-                        overlay.scrollTop+=0.03*event.deltaY
-                        overlay.scrollLeft+=0.03*event.deltaX
-                        break;
-                    }
-                    event.stopPropagation();
-                    event.preventDefault()
-                }
-
-                
-                var main = document.getElementById("main")
-                main.addEventListener('mousemove', (event) => {
-                    if (event.clientX > window.innerWidth - 20) {
-                        overlay.style.pointerEvents = "all";
-                    } else {
-                        overlay.style.pointerEvents = "none";
-                    }
-                })
-
-                document.onwheel = scroller;
-                document.ontouchmove = function(event) {
-                    console.log("ON TOUCH MOVE")
-                }
-            }
-        </script>
     </head>
     <body>
         <div id="main">

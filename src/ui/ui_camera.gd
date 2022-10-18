@@ -9,7 +9,11 @@ onready var _game_visibility_notifier := $'%GameVisibilityNotifier' as Visibilit
 onready var _battle := $'%Battle' as BattleScreen
 onready var _original_bottom_bar_position := _battle.bottom_bar.rect_position
 
+const JAVASCRIPT_BUTTON_LEFT := 0
 var _on_browser_scroll_js_callback := JavaScript.create_callback(self, '_on_browser_scroll')
+var _on_browser_mousedown_js_callback := JavaScript.create_callback(self, '_on_browser_mousedown')
+var _on_browser_mouseup_js_callback := JavaScript.create_callback(self, '_on_browser_mouseup')
+
 var _web_scroll_overlay
 onready var _original_canvas_transform := _control.get_viewport().canvas_transform
 
@@ -28,12 +32,43 @@ func _ready() -> void:
 		var document := JavaScript.get_interface('document')
 		_web_scroll_overlay = document.getElementById('scroll-overlay')
 		_web_scroll_overlay.addEventListener('scroll', _on_browser_scroll_js_callback)
+		_web_scroll_overlay.addEventListener('mousedown', _on_browser_mousedown_js_callback)
+		_web_scroll_overlay.addEventListener('mouseup', _on_browser_mouseup_js_callback)
 
 func _on_browser_scroll(event):
 	var scroll_top := _web_scroll_overlay.scrollTop as int
-	print('scroll top: %d' % scroll_top)
 	var viewport := _control.get_viewport()
 	viewport.canvas_transform = _original_canvas_transform.translated(-Vector2.DOWN * scroll_top)
+
+func _on_browser_mousedown(args: Array):
+	var event = args[0]
+	if event.button != JAVASCRIPT_BUTTON_LEFT:
+		return
+	
+	var mousedown := _create_left_mouse_event(true)
+	print('mousedown %s %s' % [mousedown.position, get_global_mouse_position()])
+	get_tree().input_event(mousedown)
+
+func _on_browser_mouseup(args: Array):
+	var event = args[0]
+	if event.button != JAVASCRIPT_BUTTON_LEFT:
+		return
+	
+	var mouseup := _create_left_mouse_event(false)
+	print('mouseup %s %s' % [mouseup.position, get_global_mouse_position()])
+	get_tree().input_event(mouseup)
+
+func _create_left_mouse_event(pressed) -> InputEventMouseButton:
+	var mouse_button := InputEventMouseButton.new()
+	mouse_button.button_index = BUTTON_LEFT
+	mouse_button.button_mask = BUTTON_MASK_LEFT
+	mouse_button.pressed = pressed
+	
+	var position := _last_mouse_position
+	mouse_button.position = _last_mouse_global_position
+	mouse_button.global_position = position
+	
+	return mouse_button
 
 func _on_viewport_entered(viewport: Viewport) -> void:
 	_show_hud()
@@ -74,8 +109,13 @@ func _show_hud() -> void:
 	
 	Music.unpause_fade_in()
 
+var _last_mouse_position := Vector2.ZERO
+var _last_mouse_global_position := Vector2.ZERO
 func _input(event: InputEvent) -> void:
 	if _using_web_scroll:
+		if event is InputEventMouseMotion:
+			_last_mouse_position = event.position
+			_last_mouse_global_position = event.global_position
 		return
 	
 	var viewport := _control.get_viewport()
