@@ -3,13 +3,24 @@ extends Node2D
 
 signal text_triggered(translation_key)
 
-export(String) var spawn_position_hint_node := 'SpawnPositionHint'
-export(PackedScene) var projectile_scene: PackedScene = null
+enum Type {
+	HeckinGoodSong,
+	AnOkaySong,
+}
+
+export(Type) var type := Type.HeckinGoodSong
+export(String) var sing_frame := ''
 
 var buffed_from_four_chord_strum := false
 
 func pin_action() -> PinAction:
-	return preload('res://src/resources/actions/heckin_good_song.tres')
+	if type == Type.HeckinGoodSong:
+		return preload('res://src/resources/actions/heckin_good_song.tres')
+	elif type == Type.AnOkaySong:
+		return preload('res://src/resources/actions/an_okay_song_bard_mandolinless.tres')
+	else:
+		assert(false)
+		return preload('res://src/resources/actions/heckin_good_song.tres')
 
 func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> void:
 	var root_sprite := Components.root_sprite(actioner)
@@ -30,7 +41,7 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 	skew_stepper.between_offsets_sec = 0.6
 	skew_stepper.offset_to_home_sec = 0.5
 	
-	animation.tween_callback(sprite_switcher, 'change', ['heckingoodsong'])
+	animation.tween_callback(sprite_switcher, 'change', [sing_frame])
 	animation.tween_callback(sounds, 'play', ['HeckinGoodSong'])
 	
 	for i in 2:
@@ -43,10 +54,13 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 		var status_effect := _create_heckin_good_song_status_effect()
 		animation.tween_callback(status_effects, 'add_instance', [status_effect])
 	
-	if buffed_from_four_chord_strum:
-		ActionUtils.add_text_trigger(animation, self, 'NARRATOR_HECKIN_GOOD_SONG_POWERED_UP_USE_1')
-	else:
-		ActionUtils.add_text_trigger(animation, self, 'NARRATOR_HECKIN_GOOD_SONG_USE_1')
+	if type == Type.HeckinGoodSong:
+		if buffed_from_four_chord_strum:
+			ActionUtils.add_text_trigger(animation, self, 'NARRATOR_HECKIN_GOOD_SONG_POWERED_UP_USE_1')
+		else:
+			ActionUtils.add_text_trigger(animation, self, 'NARRATOR_HECKIN_GOOD_SONG_USE_1')
+	elif type == Type.AnOkaySong:
+		ActionUtils.add_text_trigger(animation, self, 'NARRATOR_AN_OKAY_SONG_NAME_USE')
 	
 	for i in 2:
 		skew_stepper.step()
@@ -69,10 +83,21 @@ func _add_explosion(animation: SceneTreeTween, explosion_parent: Node2D) -> void
 func _create_heckin_good_song_status_effect() -> StatusEffect:
 	var status_effect := StatusEffect.new()
 	status_effect.stack_count = 1
-	status_effect.tag = StatusEffectTag.HeckinGoodSong
+	
+	if type == Type.HeckinGoodSong:
+		status_effect.tag = StatusEffectTag.HeckinGoodSong
+	elif type == Type.AnOkaySong:
+		status_effect.tag = StatusEffectTag.AnOkaySong
 	
 	var heckin_good_song_effect := HeckinGoodSongDancingEffect.new()
-	heckin_good_song_effect.power_up()
+	if type == Type.HeckinGoodSong:
+		heckin_good_song_effect.narration_key = 'NARRATOR_HECKIN_GOOD_SONG_MONSTER_DISTRACTED'
+		heckin_good_song_effect.skip_turn_percent = 0.5
+		if buffed_from_four_chord_strum:
+			heckin_good_song_effect.power_up()
+	elif type == Type.AnOkaySong:
+		heckin_good_song_effect.narration_key = 'NARRATOR_AN_OKAY_SONG_DISTRACTED'
+		heckin_good_song_effect.skip_turn_percent = 0.3
 	var auras := Aura.create_note_auras()
 	NodE.add_children(status_effect, auras)
 	status_effect.add_child(heckin_good_song_effect)

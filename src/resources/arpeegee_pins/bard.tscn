@@ -168,6 +168,7 @@ position = Vector2( -6, -101 )
 
 [node name="HeckinGoodSong" type="Node2D" parent="Actions" index="2"]
 script = ExtResource( 15 )
+sing_frame = "heckingoodsong"
 
 [node name="FourChordStrum" type="Node2D" parent="Actions" index="3"]
 script = ExtResource( 18 )

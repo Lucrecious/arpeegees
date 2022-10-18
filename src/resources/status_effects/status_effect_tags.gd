@@ -22,4 +22,5 @@ enum {
 	Swoop,
 	WingAttack,
 	Sparkles,
+	AnOkaySong,
 }

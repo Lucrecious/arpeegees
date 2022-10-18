@@ -7,6 +7,7 @@ signal start_turn_effect_finished()
 signal text_triggered(translation_key)
 
 var skip_turn_percent := .5
+var narration_key := ''
 
 var _dancing_tween: SceneTreeTween
 var _is_powered_up := false
@@ -67,7 +68,7 @@ func run_start_turn_effect() -> void:
 		return
 	
 	_actions.set_moveless(true)
-	emit_signal('text_triggered', 'NARRATOR_HECKIN_GOOD_SONG_MONSTER_DISTRACTED')
+	emit_signal('text_triggered', narration_key)
 	
 
 func run_end_turn_effect() -> void:

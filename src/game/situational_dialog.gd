@@ -28,6 +28,10 @@ func _dancing_status_effect(pin_type: int) -> String:
 		_turns_dancing[pin_type] += 1
 		if _turns_dancing[pin_type] > 1:
 			translation_key = 'NARRATOR_HECKIN_GOOD_SONG_MONSTERS_DANCING'
+	elif _any_pin_has_status_effect(pin_type, StatusEffectTag.AnOkaySong):
+		_turns_dancing[pin_type] += 1
+		if _turns_dancing[pin_type] > 1:
+			translation_key = 'NARRATOR_AN_OKAY_SONG_MAYBE_DISTRACTED'
 	else:
 		_turns_dancing[pin_type] = 0
 	return translation_key
