@@ -20,7 +20,6 @@ func emit_stars() -> void:
 	_particles.emitting = true
 
 func post_drop_initialization() -> void:
-	print('post drop initialization')
 	stop_star_emission()
 
 func stop_star_emission() -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/sprites/bard/bard_idle_no_mandolin.png" type="Texture" id=2]
@@ -7,18 +7,23 @@
 [ext_resource path="res://assets/sprites/bard/bard_hit_nomandolin.png" type="Texture" id=5]
 [ext_resource path="res://lut/components/root_sprite.gd" type="Script" id=6]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/actions.gd" type="Script" id=7]
-[ext_resource path="res://src/resources/arpeegee_pins/actions/attack.gd" type="Script" id=8]
+[ext_resource path="res://src/resources/arpeegee_pins/actions/scream_bard_mandolinless.gd" type="Script" id=8]
 [ext_resource path="res://src/resources/arpeegee_pins/bard_no_mandolin.tres" type="Resource" id=9]
-[ext_resource path="res://src/resources/actions/generic_attack.tres" type="Resource" id=10]
+[ext_resource path="res://assets/sprites/bard/bard_win_nomandolin.png" type="Texture" id=10]
+[ext_resource path="res://assets/sprites/bard/bard_drunk_sing.png" type="Texture" id=11]
+[ext_resource path="res://assets/sprites/bard/bard_sing_nomandolin.png" type="Texture" id=12]
+[ext_resource path="res://assets/sprites/bard/bard_beatbox.png" type="Texture" id=13]
+[ext_resource path="res://assets/shaders/wobble_noise.tres" type="Texture" id=14]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 3 )
-shader_param/line_color = Color( 1, 1, 1, 1 )
-shader_param/line_thickness = 0.0
 shader_param/fill_color = Color( 1, 1, 1, 1 )
 shader_param/color_mix = 0.0
 shader_param/top_skew = 0.0
 shader_param/squash = 1.0
+shader_param/offset_amount = 60.0
+shader_param/update_sec = 0.4
+shader_param/uv_offset_texture = ExtResource( 14 )
 
 [node name="BardNoMandolin" instance=ExtResource( 1 )]
 nice_name = "Bard (Mandolin-less)"
@@ -45,27 +50,56 @@ scale = Vector2( 0.12, 0.12 )
 texture = ExtResource( 2 )
 centered = false
 
-[node name="Hurt" type="Sprite" parent="Sprites" index="1"]
+[node name="Scream" type="Sprite" parent="Sprites" index="1"]
+visible = false
+use_parent_material = true
+position = Vector2( -120, -183 )
+scale = Vector2( 0.08, 0.08 )
+texture = ExtResource( 11 )
+centered = false
+
+[node name="Sing" type="Sprite" parent="Sprites" index="2"]
+visible = false
+use_parent_material = true
+position = Vector2( -120, -183 )
+scale = Vector2( 0.08, 0.08 )
+texture = ExtResource( 12 )
+centered = false
+
+[node name="Beatbox" type="Sprite" parent="Sprites" index="3"]
+visible = false
+use_parent_material = true
+position = Vector2( -120, -183 )
+scale = Vector2( 0.08, 0.08 )
+texture = ExtResource( 13 )
+centered = false
+
+[node name="Hurt" type="Sprite" parent="Sprites" index="4"]
 visible = false
 use_parent_material = true
 position = Vector2( -22, -85 )
 scale = Vector2( 0.08, 0.08 )
 texture = ExtResource( 5 )
 
-[node name="Dead" type="Sprite" parent="Sprites" index="2"]
+[node name="Dead" type="Sprite" parent="Sprites" index="5"]
 visible = false
 use_parent_material = true
 position = Vector2( -37, -79 )
 scale = Vector2( 0.08, 0.08 )
 texture = ExtResource( 4 )
 
+[node name="Win" type="Sprite" parent="Sprites" index="6"]
+visible = false
+use_parent_material = true
+position = Vector2( -25, -95 )
+scale = Vector2( 0.08, 0.08 )
+texture = ExtResource( 10 )
+
 [node name="PinActions" type="Node2D" parent="." index="10"]
 script = ExtResource( 7 )
 
-[node name="Punch" type="Node2D" parent="PinActions" index="0"]
+[node name="Scream" type="Node2D" parent="PinActions" index="0"]
 script = ExtResource( 8 )
-attack_sprite_name = ""
-pin_action = ExtResource( 10 )
 
-[node name="ImpactHint" type="Position2D" parent="PinActions/Punch" index="0"]
-position = Vector2( -44, -55 )
+[node name="Hint" type="Position2D" parent="PinActions/Scream" index="0"]
+position = Vector2( -8, -98 )
