@@ -2,11 +2,26 @@ extends Node2D
 
 signal text_triggered(translation_key)
 
+enum Type {
+	Discord,
+	SingOutOfKey,
+}
+
+export(Type) var type := Type.Discord
+export(String) var frame := ''
+export(String) var song_name := ''
+export(String) var narration_key := ''
 export(String) var spawn_position_hint_node := 'SpawnPositionHint'
 export(PackedScene) var projectile_scene: PackedScene = null
 
 func pin_action() -> PinAction:
-	return preload('res://src/resources/actions/discord_bard.tres')
+	if type == Type.Discord:
+		return preload('res://src/resources/actions/discord_bard.tres') as PinAction
+	elif type == Type.SingOutOfKey:
+		return preload('res://src/resources/actions/sing_out_of_key_bard_mandolinless.tres') as PinAction
+	else:
+		assert(false)
+		return preload('res://src/resources/actions/discord_bard.tres') as PinAction
 
 func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> void:
 	var sprite_switcher := NodE.get_child(actioner, SpriteSwitcher) as SpriteSwitcher
@@ -24,14 +39,14 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	animation.tween_callback(Music, 'pause_fade_out')
 	
 	animation.tween_interval(0.5)
-	animation.tween_callback(sprite_switcher, 'change', ['discord'])
+	animation.tween_callback(sprite_switcher, 'change', [frame])
 	
 	var skew_stepper := JuiceSteppers.SkewBackAndForth.new(animation, root_sprite.material)
 	skew_stepper.offset = 0.3
 	skew_stepper.offset_to_home_sec = 0.25
 	skew_stepper.between_offsets_sec = 0.5
 	
-	animation.tween_callback(sounds, 'play', ['DiscordSong1'])
+	animation.tween_callback(sounds, 'play', [song_name])
 	
 	for i in 3:
 		skew_stepper.step()
@@ -43,7 +58,7 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	
 	skew_stepper.finish()
 	
-	ActionUtils.add_text_trigger(animation, self, 'NARRATOR_DISCORD_USE_1')
+	ActionUtils.add_text_trigger(animation, self, narration_key)
 	
 	animation.tween_callback(Music, 'unpause_fade_in')
 	
@@ -69,6 +84,15 @@ func _create_discord_status_effect(actioner: ArpeegeePinNode) -> StatusEffect:
 	status_effect.stack_count = 1
 	
 	var discord_effect := DiscordStartTurnEffect.new()
+	if type == Type.Discord:
+		discord_effect.narration_key = 'NARRATOR_DISCORD_RECOIL_EFFECT'
+		discord_effect.damage_factor = 0.5
+	elif type == Type.SingOutOfKey:
+		discord_effect.narration_key = 'NARRATOR_SING_OUT_OF_KEY_SECOND_TURN'
+		discord_effect.damage_factor = 0.2
+	else:
+		assert(false)
+	
 	discord_effect.bard_pin = actioner
 	status_effect.add_child(discord_effect)
 	

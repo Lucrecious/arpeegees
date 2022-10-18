@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/sprites/bard/bard_idle_no_mandolin.png" type="Texture" id=2]
@@ -14,6 +14,17 @@
 [ext_resource path="res://assets/sprites/bard/bard_sing_nomandolin.png" type="Texture" id=12]
 [ext_resource path="res://assets/sprites/bard/bard_beatbox.png" type="Texture" id=13]
 [ext_resource path="res://assets/shaders/wobble_noise.tres" type="Texture" id=14]
+[ext_resource path="res://src/resources/arpeegee_pins/actions/discord_bard.gd" type="Script" id=15]
+[ext_resource path="res://src/vfx/broken_notes.tscn" type="PackedScene" id=16]
+[ext_resource path="res://assets/sounds/discord_followup_hit3_bard.mp3" type="AudioStream" id=17]
+[ext_resource path="res://assets/sounds/discord_hit3_bard.mp3" type="AudioStream" id=18]
+[ext_resource path="res://assets/sounds/heckin_good_song_bard.mp3" type="AudioStream" id=19]
+[ext_resource path="res://assets/sounds/discord_hit2_bard.mp3" type="AudioStream" id=20]
+[ext_resource path="res://assets/sounds/discord_followup_hit1_bard.mp3" type="AudioStream" id=21]
+[ext_resource path="res://assets/sounds/discord_bard.mp3" type="AudioStream" id=22]
+[ext_resource path="res://assets/sounds/chord_strum_bard.mp3" type="AudioStream" id=23]
+[ext_resource path="res://assets/sounds/discord_followup_hit2_bard.mp3" type="AudioStream" id=24]
+[ext_resource path="res://assets/sounds/discord_hit1_bard.mp3" type="AudioStream" id=25]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 3 )
@@ -103,3 +114,41 @@ script = ExtResource( 8 )
 
 [node name="Hint" type="Position2D" parent="PinActions/Scream" index="0"]
 position = Vector2( -8, -98 )
+
+[node name="SingOutOfKey" type="Node2D" parent="PinActions" index="1"]
+script = ExtResource( 15 )
+type = 1
+frame = "sing"
+song_name = "DiscordSong1"
+narration_key = "NARRATOR_SING_OUT_OF_KEY_USE"
+projectile_scene = ExtResource( 16 )
+
+[node name="SpawnPositionHint" type="Node2D" parent="PinActions/SingOutOfKey" index="0"]
+position = Vector2( -13, -101 )
+
+[node name="DiscordSong1" type="AudioStreamPlayer" parent="Sounds" index="0"]
+stream = ExtResource( 22 )
+
+[node name="DiscordHit1" type="AudioStreamPlayer" parent="Sounds" index="1"]
+stream = ExtResource( 25 )
+
+[node name="DiscordHit2" type="AudioStreamPlayer" parent="Sounds" index="2"]
+stream = ExtResource( 20 )
+
+[node name="DiscordHit3" type="AudioStreamPlayer" parent="Sounds" index="3"]
+stream = ExtResource( 18 )
+
+[node name="DiscordFollowUpHit1" type="AudioStreamPlayer" parent="Sounds" index="4"]
+stream = ExtResource( 21 )
+
+[node name="DiscordFollowUpHit2" type="AudioStreamPlayer" parent="Sounds" index="5"]
+stream = ExtResource( 24 )
+
+[node name="DiscordFollowUpHit3" type="AudioStreamPlayer" parent="Sounds" index="6"]
+stream = ExtResource( 17 )
+
+[node name="ChordStrum" type="AudioStreamPlayer" parent="Sounds" index="7"]
+stream = ExtResource( 23 )
+
+[node name="HeckinGoodSong" type="AudioStreamPlayer" parent="Sounds" index="8"]
+stream = ExtResource( 19 )

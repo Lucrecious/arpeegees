@@ -6,6 +6,8 @@ const RUNS_ALIVE := 1
 signal start_turn_effect_finished()
 signal text_triggered(translation_key)
 
+var narration_key := ''
+var damage_factor := 1.0
 var bard_pin: ArpeegeePinNode
 var _notes_pairs := []
 var _bard_sounds: SoundsComponent
@@ -47,7 +49,7 @@ func run_start_turn_effect() -> void:
 	
 	var head_position := ActionUtils.get_head_position(_pin)
 	
-	ActionUtils.add_text_trigger(animation, self, 'NARRATOR_DISCORD_RECOIL_EFFECT')
+	ActionUtils.add_text_trigger(animation, self, narration_key)
 	
 	assert(_notes_pairs.size() == 3, 'I only have sounds for 3')
 	for i in _notes_pairs.size():

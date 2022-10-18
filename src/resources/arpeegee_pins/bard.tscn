@@ -158,6 +158,9 @@ script = ExtResource( 29 )
 
 [node name="Discord" type="Node2D" parent="Actions" index="1"]
 script = ExtResource( 10 )
+frame = "discord"
+song_name = "DiscordSong1"
+narration_key = "NARRATOR_DISCORD_USE_1"
 projectile_scene = ExtResource( 13 )
 
 [node name="SpawnPositionHint" type="Position2D" parent="Actions/Discord" index="0"]
