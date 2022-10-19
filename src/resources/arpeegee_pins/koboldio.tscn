@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/resources/arpeegee_pins/koboldio.tres" type="Resource" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://assets/shaders/pin_sprite_shader.gdshader" type="Shader" id=11]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/attack.gd" type="Script" id=12]
 [ext_resource path="res://src/resources/actions/swipe_koboldio.tres" type="Resource" id=13]
+[ext_resource path="res://src/resources/arpeegee_pins/actions/bite_koboldio.gd" type="Script" id=14]
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 11 )
@@ -88,6 +89,7 @@ narration_key = "NARRATOR_SWIPE_USE"
 position = Vector2( 75, -88 )
 
 [node name="Bite" type="Node2D" parent="Actions" index="1"]
+script = ExtResource( 14 )
 
 [node name="Disappear" type="Node2D" parent="Actions" index="2"]
 

@@ -1,0 +1,41 @@
+extends Node2D
+
+signal text_triggered(narration_key)
+
+const MIN_ATTACKS := 2
+const MAX_ATTACKS := 5
+
+func pin_action() -> PinAction:
+	return preload('res://src/resources/actions/bite_koboldio.tres')
+
+func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> void:
+	var animation := create_tween()
+	animation.tween_interval(0.35)
+	
+	var target_position := ActionUtils.get_closest_adjecent_position(actioner, target) + actioner.global_position
+	ActionUtils.add_walk(animation, actioner, actioner.global_position, target_position, 15.0, 5)
+	
+	var sprite_switcher := NodE.get_child(actioner, SpriteSwitcher) as SpriteSwitcher
+	var stats := NodE.get_child(actioner, ModifiedPinStats) as ModifiedPinStats
+	var damage := ActionUtils.damage_with_factor(stats.attack, 0.3)
+	
+	var attack_times := MIN_ATTACKS + randi() % (MAX_ATTACKS - MIN_ATTACKS)
+	for i in attack_times:
+		ActionUtils.add_wind_up(animation, actioner, target_position, -1)
+		ActionUtils.add_stab(animation, actioner, target_position)
+		
+		animation.tween_callback(sprite_switcher, 'change', ['bite'])
+		ActionUtils.add_attack(animation, actioner, target, damage)
+		
+		ActionUtils.add_shake(animation, actioner, target_position, Vector2.RIGHT, 10, 0.25)
+		
+		animation.tween_interval(0.5)
+		
+		animation.tween_callback(sprite_switcher, 'change', ['idle'])
+	
+	
+	animation.tween_interval(0.5)
+	
+	ActionUtils.add_walk(animation, actioner, target_position, actioner.global_position, 15.0, 5)
+	
+	animation.tween_callback(object, callback)
