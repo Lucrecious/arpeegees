@@ -23,4 +23,5 @@ enum {
 	WingAttack,
 	Sparkles,
 	AnOkaySong,
+	Bounce,
 }
