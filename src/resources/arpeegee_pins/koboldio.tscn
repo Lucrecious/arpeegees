@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/resources/arpeegee_pins/koboldio.tres" type="Resource" id=2]
@@ -17,6 +17,8 @@
 [ext_resource path="res://src/resources/arpeegee_pins/actions/disappear_koboldio.gd" type="Script" id=15]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/reappear_koboldio.gd" type="Script" id=16]
 [ext_resource path="res://src/resources/arpeegee_pins/components/transformer.gd" type="Script" id=17]
+[ext_resource path="res://assets/sprites/paladin/paladin_idle.png" type="Texture" id=18]
+[ext_resource path="res://assets/sprites/monk/monk_idle.png" type="Texture" id=19]
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 11 )
@@ -35,10 +37,10 @@ _resource_set = ExtResource( 2 )
 [node name="Transformer" type="Node" parent="." index="0"]
 script = ExtResource( 17 )
 
-[node name="Health" parent="." index="7"]
+[node name="Health" parent="." index="8"]
 current = 20
 
-[node name="PinStats" parent="." index="8"]
+[node name="PinStats" parent="." index="9"]
 attack = 5
 magic_attack = 2
 magic_defence = 2
@@ -81,6 +83,23 @@ use_parent_material = true
 position = Vector2( 6.00001, -93 )
 scale = Vector2( 0.12, 0.12 )
 texture = ExtResource( 8 )
+
+[node name="Paladin" type="Sprite" parent="Sprites" index="5"]
+visible = false
+use_parent_material = true
+position = Vector2( 35, -92 )
+scale = Vector2( 0.13, 0.13 )
+texture = ExtResource( 18 )
+flip_h = true
+
+[node name="Monk" type="Sprite" parent="Sprites" index="6"]
+visible = false
+use_parent_material = true
+position = Vector2( -71, -182 )
+scale = Vector2( 0.135, 0.135 )
+texture = ExtResource( 19 )
+centered = false
+flip_h = true
 
 [node name="Actions" type="Node2D" parent="." index="14"]
 script = ExtResource( 3 )

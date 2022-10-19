@@ -19,8 +19,8 @@ func run(actioner: Node2D, object: Object, callback: String) -> void:
 	animation.tween_interval(0.35)
 	
 	var chance := randf()
+	var root_sprite := Components.root_sprite(actioner)
 	if false and chance < 0.25:
-		var root_sprite := Components.root_sprite(actioner)
 		
 		animation.tween_property(root_sprite, 'modulate:a', 1.0, 1.0)\
 				.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
@@ -34,12 +34,21 @@ func run(actioner: Node2D, object: Object, callback: String) -> void:
 		ActionUtils.add_text_trigger(animation, self, 'NARRATOR_REAPPEAR_USE_KOBOLDIO')
 	
 	elif true or chance - 0.25 < 0.25:
-		var is_paladin := true #randf() < 0.5
+		var is_paladin := randf() < 0.5
 		var new_scene: PackedScene
+		var frame := ''
 		if is_paladin:
 			new_scene = preload('res://src/resources/arpeegee_pins/paladin.tscn')
+			frame = 'paladin'
 		else:
 			new_scene = preload('res://src/resources/arpeegee_pins/monk.tscn')
+			frame = 'monk'
+		
+		var sprite_switcher := NodE.get_child(actioner, SpriteSwitcher) as SpriteSwitcher
+		animation.tween_callback(sprite_switcher, 'change', [frame])
+		
+		animation.tween_property(root_sprite, 'modulate:a', 1.0, 1.0)\
+				.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 		
 		var transformer := NodE.get_child(actioner, Transformer) as Transformer
 		transformer.transform_scene = new_scene
