@@ -47,45 +47,15 @@ shader_param/uv_offset_texture = ExtResource( 21 )
 nice_name = "Bard"
 _resource_set = ExtResource( 8 )
 
-[node name="Health" parent="." index="6"]
+[node name="Health" parent="." index="7"]
 current = 20
 
-[node name="PinStats" parent="." index="7"]
+[node name="PinStats" parent="." index="8"]
 attack = 3
 magic_attack = 0
 defence = 3
 magic_defence = 3
 evasion = 2
-
-[node name="MandolinBash" type="AudioStreamPlayer" parent="Sounds" index="0"]
-stream = ExtResource( 22 )
-
-[node name="DiscordSong1" type="AudioStreamPlayer" parent="Sounds" index="1"]
-stream = ExtResource( 20 )
-
-[node name="DiscordHit1" type="AudioStreamPlayer" parent="Sounds" index="2"]
-stream = ExtResource( 24 )
-
-[node name="DiscordHit2" type="AudioStreamPlayer" parent="Sounds" index="3"]
-stream = ExtResource( 25 )
-
-[node name="DiscordHit3" type="AudioStreamPlayer" parent="Sounds" index="4"]
-stream = ExtResource( 23 )
-
-[node name="DiscordFollowUpHit1" type="AudioStreamPlayer" parent="Sounds" index="5"]
-stream = ExtResource( 32 )
-
-[node name="DiscordFollowUpHit2" type="AudioStreamPlayer" parent="Sounds" index="6"]
-stream = ExtResource( 30 )
-
-[node name="DiscordFollowUpHit3" type="AudioStreamPlayer" parent="Sounds" index="7"]
-stream = ExtResource( 31 )
-
-[node name="ChordStrum" type="AudioStreamPlayer" parent="Sounds" index="8"]
-stream = ExtResource( 26 )
-
-[node name="HeckinGoodSong" type="AudioStreamPlayer" parent="Sounds" index="9"]
-stream = ExtResource( 27 )
 
 [node name="Sprites" type="Node2D" parent="." index="12"]
 material = SubResource( 1 )
@@ -176,3 +146,33 @@ script = ExtResource( 18 )
 [node name="Transformer" type="Node" parent="." index="14"]
 script = ExtResource( 3 )
 transform_scene = ExtResource( 6 )
+
+[node name="MandolinBash" type="AudioStreamPlayer" parent="Sounds" index="0"]
+stream = ExtResource( 22 )
+
+[node name="DiscordSong1" type="AudioStreamPlayer" parent="Sounds" index="1"]
+stream = ExtResource( 20 )
+
+[node name="DiscordHit1" type="AudioStreamPlayer" parent="Sounds" index="2"]
+stream = ExtResource( 24 )
+
+[node name="DiscordHit2" type="AudioStreamPlayer" parent="Sounds" index="3"]
+stream = ExtResource( 25 )
+
+[node name="DiscordHit3" type="AudioStreamPlayer" parent="Sounds" index="4"]
+stream = ExtResource( 23 )
+
+[node name="DiscordFollowUpHit1" type="AudioStreamPlayer" parent="Sounds" index="5"]
+stream = ExtResource( 32 )
+
+[node name="DiscordFollowUpHit2" type="AudioStreamPlayer" parent="Sounds" index="6"]
+stream = ExtResource( 30 )
+
+[node name="DiscordFollowUpHit3" type="AudioStreamPlayer" parent="Sounds" index="7"]
+stream = ExtResource( 31 )
+
+[node name="ChordStrum" type="AudioStreamPlayer" parent="Sounds" index="8"]
+stream = ExtResource( 26 )
+
+[node name="HeckinGoodSong" type="AudioStreamPlayer" parent="Sounds" index="9"]
+stream = ExtResource( 27 )

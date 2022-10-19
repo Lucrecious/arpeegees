@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://src/resources/pin_action.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+nice_name = "MANDOLIN_WHACK_NAME"
+description = ""
+target_type = 1
+action_type = 0

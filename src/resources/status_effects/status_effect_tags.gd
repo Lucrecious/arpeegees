@@ -29,4 +29,5 @@ enum {
 	Smelly,
 	Disappeared,
 	ReappearedBuff,
+	MandolinPlay,
 }
