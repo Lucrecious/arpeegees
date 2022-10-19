@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/resources/arpeegee_pins/candle.tres" type="Resource" id=2]
@@ -6,15 +6,27 @@
 [ext_resource path="res://lut/components/root_sprite.gd" type="Script" id=4]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/actions.gd" type="Script" id=5]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/candle_actions_candle.gd" type="Script" id=6]
+[ext_resource path="res://assets/shaders/wobble_noise.tres" type="Texture" id=7]
+[ext_resource path="res://assets/shaders/pin_sprite_shader.gdshader" type="Shader" id=8]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 8 )
+shader_param/fill_color = Color( 1, 1, 1, 1 )
+shader_param/color_mix = 0.0
+shader_param/top_skew = 0.0
+shader_param/squash = 1.0
+shader_param/offset_amount = 50.0
+shader_param/update_sec = 0.4
+shader_param/uv_offset_texture = ExtResource( 7 )
 
 [node name="Candle" instance=ExtResource( 1 )]
 nice_name = "Candle"
 _resource_set = ExtResource( 2 )
 
-[node name="Health" parent="." index="6"]
+[node name="Health" parent="." index="7"]
 current = 20
 
-[node name="PinStats" parent="." index="7"]
+[node name="PinStats" parent="." index="8"]
 attack = 0
 magic_attack = 0
 defence = 3
@@ -22,9 +34,11 @@ magic_defence = 3
 evasion = 3
 
 [node name="Sprites" type="Node2D" parent="." index="12"]
+material = SubResource( 1 )
 script = ExtResource( 4 )
 
 [node name="Idle" type="Sprite" parent="Sprites" index="0"]
+use_parent_material = true
 position = Vector2( 1, -86 )
 scale = Vector2( 0.08, 0.08 )
 texture = ExtResource( 3 )

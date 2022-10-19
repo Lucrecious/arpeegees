@@ -33,7 +33,7 @@ func run(actioner: Node2D, object: Object, callback: String) -> void:
 	
 		ActionUtils.add_text_trigger(animation, self, 'NARRATOR_REAPPEAR_USE_KOBOLDIO')
 	
-	elif true or chance - 0.25 < 0.25:
+	elif chance - 0.25 < 0.25:
 		var is_paladin := randf() < 0.5
 		var new_scene: PackedScene
 		var frame := ''
@@ -53,9 +53,25 @@ func run(actioner: Node2D, object: Object, callback: String) -> void:
 		var transformer := NodE.get_child(actioner, Transformer) as Transformer
 		transformer.transform_scene = new_scene
 		animation.tween_callback(transformer, 'request_transform')
+		
+		if is_paladin:
+			ActionUtils.add_text_trigger(animation, self, 'NARRATOR_REAPPEAR_USE_PALADIN')
+		else:
+			ActionUtils.add_text_trigger(animation, self, 'NARRATOR_REAPPEAR_USE_MONK')
+		
 	else:
-		# come back as candle
-		pass
+		var transformer := NodE.get_child(actioner, Transformer) as Transformer
+		transformer.transform_scene = preload('res://src/resources/arpeegee_pins/candle.tscn')
+		
+		var sprite_switcher := NodE.get_child(actioner, SpriteSwitcher) as SpriteSwitcher
+		animation.tween_callback(sprite_switcher, 'change', ['candle'])
+		
+		animation.tween_property(root_sprite, 'modulate:a', 1.0, 1.0)\
+				.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+		
+		animation.tween_callback(transformer, 'request_transform')
+		
+		ActionUtils.add_text_trigger(animation, self, 'NARRATOR_REAPPEAR_USE_CANDLE')
 	
 	
 	animation.tween_callback(object, callback)
