@@ -112,6 +112,10 @@ spore_color = Color( 0.615686, 0.972549, 1, 1 )
 narration_key = "NARRATOR_SPLEEPY_SPORES_USE"
 
 [node name="SmellySpores" type="Node2D" parent="Actions" index="4"]
+script = ExtResource( 16 )
+type = 2
+spore_color = Color( 0.913725, 0.662745, 0, 1 )
+narration_key = "NARRATOR_SMELLY_SPORES_USE"
 
 [node name="Spores" type="CPUParticles2D" parent="Actions" index="5"]
 position = Vector2( 17, -109 )

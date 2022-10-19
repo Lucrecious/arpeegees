@@ -73,18 +73,36 @@ func _create_status_effect(target: Node2D) -> StatusEffect:
 		assert(false)
 		status_effect.tag = StatusEffectTag.Poision
 	
-	var effect: Node
 	var auras := Aura.create_spore_auras(spore_color)
 	if type == Type.Poison:
-		effect = EffectFunctions.Poison.new(target)
-	elif type == Type.Sleepy:
-		effect = EffectFunctions.Sleep.new(target)
-	elif type == Type.Smelly:
-		effect = null 
-
-	assert(effect)
+		var effect := EffectFunctions.Poison.new(target)
+		
+		status_effect.add_child(effect)
 	
-	status_effect.add_child(effect)
+	elif type == Type.Sleepy:
+		var effect := EffectFunctions.Sleep.new(target)
+		
+		status_effect.add_child(effect)
+	
+	elif type == Type.Smelly:
+		var stats := NodE.get_child(target, ModifiedPinStats) as ModifiedPinStats
+		var modifiers := []
+		if stats.attack > 1:
+			var attack_down := StatModifier.new()
+			attack_down.type = StatModifier.Type.Attack
+			attack_down.add_amount = -1
+			
+			modifiers.push_back(attack_down)
+		
+		if stats.magic_attack > 1:
+			var magic_attack_down := StatModifier.new()
+			magic_attack_down.type = StatModifier.Type.MagicAttack
+			magic_attack_down.add_amount = -1
+			
+			modifiers.push_back(magic_attack_down)
+		
+		NodE.add_children(status_effect, modifiers)
+	
 	NodE.add_children(status_effect, auras)
 	
 	return status_effect
