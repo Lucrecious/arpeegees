@@ -28,4 +28,5 @@ enum {
 	Sleep,
 	Smelly,
 	Disappeared,
+	ReappearedBuff,
 }

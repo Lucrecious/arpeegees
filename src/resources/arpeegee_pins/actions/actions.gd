@@ -33,7 +33,7 @@ func is_running_action() -> bool:
 func set_moveless(is_moveless: bool) -> void:
 	_is_moveless = is_moveless
 
-func get_pin_action_nodes() -> Array:
+func get_pin_action_nodes(check_if_blocked := true) -> Array:
 	if _is_moveless:
 		return []
 	
@@ -43,7 +43,7 @@ func get_pin_action_nodes() -> Array:
 		if not child.has_method('pin_action'):
 			continue
 		
-		if child.has_method('is_blocked') and child.is_blocked():
+		if check_if_blocked and child.has_method('is_blocked') and child.is_blocked():
 			continue
 		
 		pin_action_nodes.push_back(child)

@@ -222,6 +222,7 @@ func _load_and_drop_pins(pins: Array, positions: Array, item: Node2D, item_posit
 	tween.tween_callback(self, '_drop_pins', [positions, pins, item, item_position,
 			background_resource_loader, wait_sec, bounce_sec])
 
+var _position_control_to_pin_turn_index := {}
 func _drop_pins(positions: Array, pins: Array, item: PinItemPowerUp, item_position: Control,
 		loader: BackgroundResourceLoader, wait_sec: float, bounce_sec: float) -> void:
 	
@@ -237,9 +238,9 @@ func _drop_pins(positions: Array, pins: Array, item: PinItemPowerUp, item_positi
 		control.add_child(pin_node)
 		var position := control.get_global_rect().get_center()
 		
-		_add_pin_shadow(control, position, pin_node)
-		
 		pin_node.global_position = position + Vector2.UP * 1000.0
+		
+		_add_pin_shadow(control)
 		
 		pin_node.emit_stars()
 		
@@ -265,7 +266,8 @@ func _drop_pins(positions: Array, pins: Array, item: PinItemPowerUp, item_positi
 	
 	emit_signal('pins_dropped')
 
-func _add_pin_shadow(position: Control, global_position: Vector2, pin: ArpeegeePinNode) -> void:
+
+func _add_pin_shadow(position: Control) -> void:
 	if not position:
 		assert(false)
 		return
@@ -274,9 +276,8 @@ func _add_pin_shadow(position: Control, global_position: Vector2, pin: ArpeegeeP
 	var parent := position.get_parent() as Node
 	parent.add_child(pin_shadow)
 	parent.move_child(pin_shadow, 0)
-	pin_shadow.global_position = global_position
-	pin_shadow.attach_pin(position, pin)
 	
+	pin_shadow.attach_position(position)
 
 func _input(input: InputEvent) -> void:
 	var mouse_button := input as InputEventMouseButton

@@ -29,6 +29,8 @@ func run(actioner: Node2D, object: Object, callback: String) -> void:
 	var list := NodE.get_child(actioner, StatusEffectsList) as StatusEffectsList
 	animation.tween_callback(list, 'add_instance', [_create_status_effect()])
 	
+	animation.tween_callback(sprite_switcher, 'change', ['idle'])
+	
 	ActionUtils.add_text_trigger(animation, self, 'NARRATOR_DISAPPEAR_USE')
 	
 	animation.tween_callback(object, callback)

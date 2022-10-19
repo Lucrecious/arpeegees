@@ -76,6 +76,14 @@ func get_players() -> Array:
 func get_pins() -> Array:
 	return _ordered_pins.duplicate()
 
+func get_turn_index(pin: ArpeegeePinNode) -> int:
+	return _ordered_pins.find(pin)
+
+func get_pin_on_turn(turn: int) -> ArpeegeePinNode:
+	if turn < 0 or turn >= _ordered_pins.size():
+		return null
+	return _ordered_pins[turn]
+
 func get_pin_count() -> int:
 	return _ordered_pins.size()
 
@@ -252,6 +260,17 @@ func _do_queued_transforms() -> void:
 		var transformer := stuff.transformer as Transformer
 		
 		var new_pin := transformer.transform_scene.instance() as ArpeegeePinNode
+		
+		var new_pin_resource := new_pin._resource_set.duplicate() as ArpeegeePin
+		new_pin._resource_set = new_pin_resource
+		var new_pin_root_sprite := NodE.get_child(new_pin, RootSprite) as RootSprite
+		new_pin_root_sprite.material = new_pin_root_sprite.material.duplicate() as ShaderMaterial
+		
+		if new_pin_resource.type != pin.resource.type:
+			var actions := NodE.get_child(new_pin, PinActions) as PinActions
+			actions.scale.x = -1
+			new_pin_root_sprite.scale.x = -1
+			new_pin_resource.type = pin.resource.type
 		
 		pin.get_parent().add_child(new_pin)
 		new_pin.position = pin.position

@@ -25,7 +25,6 @@ static func queue_free_leave_particles_until_dead(status_effect: StatusEffect) -
 	
 	for p in particles:
 		queue_free_tween.tween_callback(p, 'queue_free')
-	
 
 
 func _ready() -> void:

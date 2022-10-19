@@ -41,7 +41,7 @@ func watch(node: ArpeegeePinNode) -> void:
 	
 	var pin_actions := NodE.get_child(node, PinActions) as PinActions
 	pin_actions.connect('action_started_with_action_node', self, '_on_pin_action_started', [pin_actions])
-	for p in pin_actions.get_pin_action_nodes():
+	for p in pin_actions.get_pin_action_nodes(false):
 		if p.has_signal('text_triggered'):
 			p.connect('text_triggered', self, '_on_action_node_text_triggered')
 	
@@ -57,7 +57,7 @@ func unwatch(node: ArpeegeePinNode) -> void:
 	var pin_actions := NodE.get_child(node, PinActions) as PinActions
 	pin_actions.disconnect('action_started_with_action_node', self, '_on_pin_action_started')
 	
-	for p in pin_actions.get_pin_action_nodes():
+	for p in pin_actions.get_pin_action_nodes(false):
 		if p.has_signal('text_triggered'):
 			p.disconnect('text_triggered', self, '_on_action_node_text_triggered')
 	
@@ -66,6 +66,7 @@ func unwatch(node: ArpeegeePinNode) -> void:
 	status_effects.disconnect('effect_removed', self, '_on_effect_removed')
 
 func _on_action_node_text_triggered(translation_key: String) -> void:
+	Logger.info('action node text triggred: %s' % [translation_key])
 	var chain := true
 	speak_tr(translation_key, chain)
 

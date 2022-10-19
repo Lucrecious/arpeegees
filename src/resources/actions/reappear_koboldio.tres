@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource( 1 )
-nice_name = "MANDOLIN_BASH_ACTION_NAME"
+nice_name = "REAPPEAR_NAME"
 description = ""
-target_type = 1
-action_type = 0
+target_type = 0
+action_type = 2

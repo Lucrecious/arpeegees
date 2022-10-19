@@ -17,6 +17,20 @@ func count_tags(tag: int) -> int:
 		count += int(tag == c.tag)
 	return count
 
+func get_from_tag(tag: int) -> Array:
+	var statuses := []
+	
+	for c in get_children():
+		if not c is StatusEffect:
+			continue
+		
+		if c.tag != tag:
+			continue
+		
+		statuses.push_back(c)
+	
+	return statuses
+
 func get_all() -> Array:
 	return NodE.get_children(self, StatusEffect)
 

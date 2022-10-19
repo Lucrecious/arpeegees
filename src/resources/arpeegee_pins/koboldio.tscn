@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/resources/arpeegee_pins/koboldio.tres" type="Resource" id=2]
@@ -15,6 +15,8 @@
 [ext_resource path="res://src/resources/actions/swipe_koboldio.tres" type="Resource" id=13]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/bite_koboldio.gd" type="Script" id=14]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/disappear_koboldio.gd" type="Script" id=15]
+[ext_resource path="res://src/resources/arpeegee_pins/actions/reappear_koboldio.gd" type="Script" id=16]
+[ext_resource path="res://src/resources/arpeegee_pins/components/transformer.gd" type="Script" id=17]
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 11 )
@@ -30,16 +32,19 @@ shader_param/uv_offset_texture = ExtResource( 10 )
 nice_name = "Koboldio"
 _resource_set = ExtResource( 2 )
 
-[node name="Health" parent="." index="6"]
+[node name="Transformer" type="Node" parent="." index="0"]
+script = ExtResource( 17 )
+
+[node name="Health" parent="." index="7"]
 current = 20
 
-[node name="PinStats" parent="." index="7"]
+[node name="PinStats" parent="." index="8"]
 attack = 5
 magic_attack = 2
 magic_defence = 2
 evasion = 2
 
-[node name="Sprites" type="Node2D" parent="." index="12"]
+[node name="Sprites" type="Node2D" parent="." index="13"]
 material = SubResource( 2 )
 script = ExtResource( 4 )
 
@@ -77,7 +82,7 @@ position = Vector2( 6.00001, -93 )
 scale = Vector2( 0.12, 0.12 )
 texture = ExtResource( 8 )
 
-[node name="Actions" type="Node2D" parent="." index="13"]
+[node name="Actions" type="Node2D" parent="." index="14"]
 script = ExtResource( 3 )
 
 [node name="Swipe" type="Node2D" parent="Actions" index="0"]
@@ -96,3 +101,4 @@ script = ExtResource( 14 )
 script = ExtResource( 15 )
 
 [node name="Reappear" type="Node2D" parent="Actions" index="3"]
+script = ExtResource( 16 )
