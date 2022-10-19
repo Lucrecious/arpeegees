@@ -1,0 +1,94 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/resources/arpeegee_pins/koboldio.tres" type="Resource" id=2]
+[ext_resource path="res://src/resources/arpeegee_pins/actions/actions.gd" type="Script" id=3]
+[ext_resource path="res://lut/components/root_sprite.gd" type="Script" id=4]
+[ext_resource path="res://assets/sprites/koboldio/koboldio_idle.png" type="Texture" id=5]
+[ext_resource path="res://assets/sprites/koboldio/koboldio_hit.png" type="Texture" id=6]
+[ext_resource path="res://assets/sprites/koboldio/koboldio_attack_claws.png" type="Texture" id=7]
+[ext_resource path="res://assets/sprites/koboldio/koboldio_nervous.PNG" type="Texture" id=8]
+[ext_resource path="res://assets/sprites/koboldio/koboldio_bite.png" type="Texture" id=9]
+[ext_resource path="res://assets/shaders/wobble_noise.tres" type="Texture" id=10]
+[ext_resource path="res://assets/shaders/pin_sprite_shader.gdshader" type="Shader" id=11]
+[ext_resource path="res://src/resources/arpeegee_pins/actions/attack.gd" type="Script" id=12]
+[ext_resource path="res://src/resources/actions/swipe_koboldio.tres" type="Resource" id=13]
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 11 )
+shader_param/fill_color = Color( 1, 1, 1, 1 )
+shader_param/color_mix = 0.0
+shader_param/top_skew = 0.0
+shader_param/squash = 1.0
+shader_param/offset_amount = 60.0
+shader_param/update_sec = 0.4
+shader_param/uv_offset_texture = ExtResource( 10 )
+
+[node name="Koboldio" instance=ExtResource( 1 )]
+nice_name = "Koboldio"
+_resource_set = ExtResource( 2 )
+
+[node name="Health" parent="." index="6"]
+current = 20
+
+[node name="PinStats" parent="." index="7"]
+attack = 5
+magic_attack = 2
+magic_defence = 2
+evasion = 2
+
+[node name="Sprites" type="Node2D" parent="." index="12"]
+material = SubResource( 2 )
+script = ExtResource( 4 )
+
+[node name="Idle" type="Sprite" parent="Sprites" index="0"]
+use_parent_material = true
+position = Vector2( 1, -90 )
+scale = Vector2( 0.15, 0.15 )
+texture = ExtResource( 5 )
+
+[node name="Swipe" type="Sprite" parent="Sprites" index="1"]
+visible = false
+use_parent_material = true
+position = Vector2( -7, -94 )
+scale = Vector2( 0.12, 0.12 )
+texture = ExtResource( 7 )
+
+[node name="Bite" type="Sprite" parent="Sprites" index="2"]
+visible = false
+use_parent_material = true
+position = Vector2( -7, -94 )
+scale = Vector2( 0.12, 0.12 )
+texture = ExtResource( 9 )
+
+[node name="Hurt" type="Sprite" parent="Sprites" index="3"]
+visible = false
+use_parent_material = true
+position = Vector2( 6.00001, -93 )
+scale = Vector2( 0.12, 0.12 )
+texture = ExtResource( 6 )
+
+[node name="Nervous" type="Sprite" parent="Sprites" index="4"]
+visible = false
+use_parent_material = true
+position = Vector2( 6.00001, -93 )
+scale = Vector2( 0.12, 0.12 )
+texture = ExtResource( 8 )
+
+[node name="Actions" type="Node2D" parent="." index="13"]
+script = ExtResource( 3 )
+
+[node name="Swipe" type="Node2D" parent="Actions" index="0"]
+script = ExtResource( 12 )
+attack_sprite_name = "swipe"
+pin_action = ExtResource( 13 )
+narration_key = "NARRATOR_SWIPE_USE"
+
+[node name="ImpactHint" type="Position2D" parent="Actions/Swipe" index="0"]
+position = Vector2( 75, -88 )
+
+[node name="Bite" type="Node2D" parent="Actions" index="1"]
+
+[node name="Disappear" type="Node2D" parent="Actions" index="2"]
+
+[node name="Reappear" type="Node2D" parent="Actions" index="3"]
