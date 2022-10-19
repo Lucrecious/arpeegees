@@ -27,4 +27,5 @@ enum {
 	Poison,
 	Sleep,
 	Smelly,
+	Disappeared,
 }
