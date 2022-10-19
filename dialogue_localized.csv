@@ -245,6 +245,8 @@ NARRATOR_POISON_SPORES_USE,Mushboy releases some poison spores!! I feel sick alr
 ,,
 SLEEPY_SPORES_NAME,Sleepy Spores,
 NARRATOR_SPLEEPY_SPORES_USE,Mushboy unleashes some Sleepy Spores! A hero has fallen asleep!! You can't fight if you're asleep!!,
+NARRATOR_SLEEPY_SPORES_STILL_ASLEEP,The hero is still asleep from the Sleepy Spores!,
+NARRATOR_SLEEPY_SPORES_WOKE_UP,The hero woke up from the Sleepy Spores!,
 ,,
 SMELLY_SPORES_NAME,Smelly Spores,
 NARRATOR_SMELLY_SPORES_USE,"Mushboy sprays out some Smelly Spores! Um, gross? I think your team might be a little upset by this.",

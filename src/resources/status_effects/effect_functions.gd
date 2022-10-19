@@ -12,6 +12,63 @@ static func create_burn_status_effect(attack_based: int) -> StatusEffect:
 	
 	return status_effect
 
+class Sleep extends Node:
+	signal start_turn_effect_finished()
+	signal text_triggered(narration_key)
+	
+	var _target: Node2D
+	
+	func _init(target: Node2D) -> void:
+		_target = target
+	
+	func run_start_turn_effect() -> void:
+		var animation := create_tween()
+		
+		var remove := false
+		if randf() < 0.5:
+			remove = true
+			ActionUtils.add_text_trigger(animation, self, 'NARRATOR_SLEEPY_SPORES_WOKE_UP')
+		else:
+			var actions := NodE.get_child(_target, PinActions) as PinActions
+			actions.set_moveless(true)
+			ActionUtils.add_text_trigger(animation, self, 'NARRATOR_SLEEPY_SPORES_STILL_ASLEEP')
+		
+		animation.tween_callback(self, 'emit_signal', ['start_turn_effect_finished'])
+		
+		if not remove:
+			return
+		
+		animation.tween_callback(StatusEffect, 'queue_free_leave_particles_until_dead', [get_parent()])
+	
+	func run_end_turn_effect() -> void:
+		var actions := NodE.get_child(_target, PinActions) as PinActions
+		actions.set_moveless(false)
+
+class Poison extends Node:
+	signal start_turn_effect_finished()
+	
+	var _target: Node2D
+	
+	func _init(target: Node2D) -> void:
+		_target = target
+	
+	func run_start_turn_effect() -> void:
+		var animation := create_tween()
+		
+		var health := NodE.get_child(_target, Health) as Health
+		var damage_receiver := NodE.get_child(_target, DamageReceiver) as DamageReceiver
+		var damage := ceil(health.max_points * 0.1)
+		var material := Components.root_sprite(_target).material as ShaderMaterial
+		
+		animation.tween_callback(material, 'set_shader_param', ['fill_color', Color.purple])
+		ActionUtils.add_shader_param_interpolation(animation,
+				material, 'color_mix', 0.0, 0.8, 0.5)
+		
+		animation.tween_callback(damage_receiver, 'real_damage', [damage])
+		
+		animation.tween_callback(self, 'emit_signal', ['start_turn_effect_finished'])
+
+
 class BurnEffect extends Node:
 	signal start_turn_effect_finished()
 	

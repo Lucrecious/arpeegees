@@ -24,4 +24,7 @@ enum {
 	Sparkles,
 	AnOkaySong,
 	Bounce,
+	Poison,
+	Sleep,
+	Smelly,
 }

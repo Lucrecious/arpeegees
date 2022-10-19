@@ -87,3 +87,19 @@ func create_note_auras() -> Array:
 	back.amount = 3
 	
 	return [front, back]
+
+func create_spore_auras(color: Color) -> Array:
+	var front := AuraTemplateScene.instance() as AuraParticles
+	front.texture = load('res://assets/sprites/effects/glow_circle.png')
+	front.scale_amount = 0.5
+	front.z_index = Z_INDEX_FRONT
+	front.amount = 2
+	front.color = color
+	
+	var back := AuraTemplateScene.instance() as AuraParticles
+	back.texture = load('res://assets/sprites/effects/glow_circle.png')
+	back.scale_amount = 0.5
+	back.amount = 2
+	back.color = color
+	
+	return [front, back]
