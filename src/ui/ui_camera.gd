@@ -77,10 +77,15 @@ func _on_viewport_exited(viewport: Viewport) -> void:
 	_hide_hud()
 
 var _hide_show_tween: SceneTreeTween
+var _mute_play_tween: SceneTreeTween
 func _hide_hud() -> void:
 	if _hide_show_tween:
 		_hide_show_tween.kill()
 		_hide_show_tween = null
+	
+	if _mute_play_tween:
+		_mute_play_tween.kill()
+		_mute_play_tween = null
 	
 	_hide_show_tween = _battle.bottom_bar.create_tween()
 	_hide_show_tween.tween_property(_battle.bottom_bar, 'rect_position:y',
@@ -91,12 +96,20 @@ func _hide_hud() -> void:
 			_battle.get_original_narrator_position().y - _battle.get_narrator().rect_size.y - 100.0, 0.5)\
 			.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
 	
-	Music.pause_fade_out()
+	var master_index := AudioServer.get_bus_index('Master')
+	_mute_play_tween = create_tween()
+	_mute_play_tween.tween_method(self, '_set_volume_on_bus', 0.0, -30.0, 1.0, [master_index])\
+			.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+	_mute_play_tween.tween_callback(AudioServer, 'set_bus_mute', [master_index, true])
 
 func _show_hud() -> void:
 	if _hide_show_tween:
 		_hide_show_tween.kill()
 		_hide_show_tween = null
+	
+	if _mute_play_tween:
+		_mute_play_tween.kill()
+		_mute_play_tween = null
 	
 	_hide_show_tween = _battle.bottom_bar.create_tween()
 	_hide_show_tween.tween_property(_battle.bottom_bar, 'rect_position:y',
@@ -107,7 +120,14 @@ func _show_hud() -> void:
 		_battle.get_original_narrator_position().y, 0.5)\
 		.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 	
-	Music.unpause_fade_in()
+	var master_index := AudioServer.get_bus_index('Master')
+	_mute_play_tween = create_tween()
+	_mute_play_tween.tween_callback(AudioServer, 'set_bus_mute', [master_index, false])
+	_mute_play_tween.tween_method(self, '_set_volume_on_bus', -30.0, 0.0, 1.0, [master_index])\
+			.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+
+func _set_volume_on_bus(volume_db: float, index: int) -> void:
+	AudioServer.set_bus_volume_db(index, volume_db)
 
 var _last_mouse_position := Vector2.ZERO
 var _last_mouse_global_position := Vector2.ZERO
