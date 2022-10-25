@@ -799,10 +799,6 @@ window/size/test_height=1080
 window/dpi/allow_hidpi=true
 window/stretch/aspect="keep_width"
 
-[editor_plugins]
-
-enabled=PoolStringArray( "res://addons/godot_xterm/plugin.cfg" )
-
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true
