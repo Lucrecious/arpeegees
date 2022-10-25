@@ -127,8 +127,6 @@ func _create_goo_trap_status_effect(pin: ArpeegeePinNode) -> StatusEffect:
 	return status_effect
 
 func _trap_succeeds() -> bool:
-	print_debug("at 100% for testing")
-	return true
 	return randf() < 0.3
 
 class GooTrapEffect extends Node:

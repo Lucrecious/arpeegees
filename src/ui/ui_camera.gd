@@ -46,7 +46,6 @@ func _on_browser_mousedown(args: Array):
 		return
 	
 	var mousedown := _create_left_mouse_event(true)
-	print('mousedown %s %s' % [mousedown.position, get_global_mouse_position()])
 	get_tree().input_event(mousedown)
 
 func _on_browser_mouseup(args: Array):
@@ -55,7 +54,6 @@ func _on_browser_mouseup(args: Array):
 		return
 	
 	var mouseup := _create_left_mouse_event(false)
-	print('mouseup %s %s' % [mouseup.position, get_global_mouse_position()])
 	get_tree().input_event(mouseup)
 
 func _create_left_mouse_event(pressed) -> InputEventMouseButton:
