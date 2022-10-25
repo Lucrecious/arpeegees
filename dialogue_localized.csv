@@ -77,6 +77,7 @@ NARRATOR_GOO_TRAP_SUCCEED,The goo is very binding! Our heroes can't attack for a
 NARRATOR_GOO_TRAP_FAIL,"The goo was too runny! It rolls right off. Um, gross!",
 NARRATOR_GOO_TRAP_CANNOT_MOVE,You can't attack! The goo is still too sticky!,
 NARRATOR_GOO_TRAP_DISSOLVES,The goo has lost its stickyness! You can move again!,
+NARRATOR_GOO_TRAP_ALREADY_GOOED,The heroes are already trapped in goo!,
 ,,
 BITE_NAME,Bite,
 NARRATOR_BITE_USE,Drago takes a dang BITE. YOUCH (yum),

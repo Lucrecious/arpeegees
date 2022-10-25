@@ -74,6 +74,7 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 	animation.tween_callback(sprite_switcher, 'change', ['idle'])
 	
 	var trap_succeeds := false
+	var already_trapped := false
 	
 	if type == Type.GooShot:
 		var modified_stats := NodE.get_child(actioner, ModifiedPinStats) as ModifiedPinStats
@@ -85,8 +86,11 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 			trap_succeeds = true
 			for t in targets:
 				var status_effects_list := NodE.get_child(t, StatusEffectsList) as StatusEffectsList
-				var status_effect := _create_goo_trap_status_effect(t)
-				animation.tween_callback(status_effects_list, 'add_instance', [status_effect])
+				if status_effects_list.count_tags(StatusEffectTag.GooTrap):
+					already_trapped = true
+				else:
+					var status_effect := _create_goo_trap_status_effect(t)
+					animation.tween_callback(status_effects_list, 'add_instance', [status_effect])
 	else:
 		assert(false)
 	
@@ -98,7 +102,10 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 	elif type == Type.GooTrap:
 		ActionUtils.add_text_trigger(animation, self, 'NARRATOR_GOO_TRAP_USE')
 		if trap_succeeds:
-			ActionUtils.add_text_trigger(animation, self, 'NARRATOR_GOO_TRAP_SUCCEED')
+			if already_trapped:
+				ActionUtils.add_text_trigger(animation, self, 'NARRATOR_GOO_TRAP_ALREADY_GOOED')
+			else:
+				ActionUtils.add_text_trigger(animation, self, 'NARRATOR_GOO_TRAP_SUCCEED')
 		else:
 			ActionUtils.add_text_trigger(animation, self, 'NARRATOR_GOO_TRAP_FAIL')
 	else:
