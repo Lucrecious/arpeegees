@@ -24,8 +24,12 @@ onready var _label := $'%Label' as Label
 onready var _narrator_head := $'%NarratorHead' as TextureRect
 onready var _textbox := $'%Textbox' as Control
 onready var _default_font := theme.default_font
+onready var _dialog_bubble := $DialogBubble as DialogBubble
 
 func _ready() -> void:
+	print(_dialog_bubble)
+	_dialog_bubble.show_text("hello world!")
+	
 	assert(_default_font)
 	
 	_narrator_head.texture = NARRATOR_MOUTH_CLOSED_TEXTURE

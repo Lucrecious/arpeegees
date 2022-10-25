@@ -84,11 +84,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://lut/extension/canvas_item_extension.gd"
 }, {
-"base": "Resource",
-"class": "Character",
-"language": "GDScript",
-"path": "res://addons/textalog/resources/character_class/character_class.gd"
-}, {
 "base": "Node",
 "class": "ChikaraPanchiEffect",
 "language": "GDScript",
@@ -148,11 +143,6 @@ _global_script_classes=[ {
 "class": "DebugMultiplayerAPI",
 "language": "GDScript",
 "path": "res://lut/network/debug_multiplayer.gd"
-}, {
-"base": "Control",
-"class": "DialogNode",
-"language": "GDScript",
-"path": "res://addons/textalog/nodes/dialog_node.gd"
 }, {
 "base": "IDirectionalInput",
 "class": "DirectionalButtonInput",
@@ -393,11 +383,6 @@ _global_script_classes=[ {
 "class": "PlatformerWallJump",
 "language": "GDScript",
 "path": "res://lut/components/wall_jump.gd"
-}, {
-"base": "Resource",
-"class": "Portrait",
-"language": "GDScript",
-"path": "res://addons/textalog/resources/portrait_class/portrait_class.gd"
 }, {
 "base": "AnimationPlayer",
 "class": "PriorityAnimationPlayer",
@@ -665,7 +650,6 @@ _global_script_class_icons={
 "CameraLimits": "",
 "CameraShake": "",
 "CanvasItEm": "",
-"Character": "res://addons/textalog/assets/icons/character_icon.png",
 "ChikaraPanchiEffect": "",
 "CollisionExtents": "",
 "ComponentDisabler": "",
@@ -678,7 +662,6 @@ _global_script_class_icons={
 "Death": "",
 "DeathTimer": "",
 "DebugMultiplayerAPI": "",
-"DialogNode": "",
 "DirectionalButtonInput": "",
 "DiscordStartTurnEffect": "",
 "Dodge": "",
@@ -727,7 +710,6 @@ _global_script_class_icons={
 "PlatformerTurnerListener": "",
 "PlatformerWallGrip": "",
 "PlatformerWallJump": "",
-"Portrait": "res://addons/textalog/assets/icons/portrait_icon.png",
 "PriorityAnimationPlayer": "",
 "PriorityNodePlaceholder": "",
 "Prompt_WaitForKey": "",
