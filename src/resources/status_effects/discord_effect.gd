@@ -49,8 +49,6 @@ func run_start_turn_effect() -> void:
 	
 	var head_position := ActionUtils.get_head_position(_pin)
 	
-	ActionUtils.add_text_trigger(animation, self, narration_key)
-	
 	assert(_notes_pairs.size() == 3, 'I only have sounds for 3')
 	for i in _notes_pairs.size():
 		var notes = _notes_pairs[i]
@@ -67,6 +65,7 @@ func run_start_turn_effect() -> void:
 	ActionUtils.add_magic_attack(animation, bard_pin, _pin,
 			ActionUtils.damage_with_factor(_modified_stats.attack, 0.5))
 	
+	ActionUtils.add_text_trigger(animation, self, narration_key)
 	runs_alive -= 1
 	
 	animation.tween_callback(self, 'emit_signal', ['start_turn_effect_finished'])

@@ -43,8 +43,6 @@ func run_start_turn_effect() -> void:
 	
 	position = ActionUtils.add_stab(tween, actioner, target_position)
 	tween.tween_callback(sounds, 'play', ['ChikaraPanchiHit'])
-
-	ActionUtils.add_text_trigger(tween, self, 'NARRATOR_CHIKARA_PANCHI_USE_ATTACK')
 	
 	tween.tween_callback(sprite_switcher, 'change', ['idle'])
 	
@@ -60,6 +58,8 @@ func run_start_turn_effect() -> void:
 	
 	ActionUtils.add_shake(tween, actioner, position, Vector2(1, 0), 5.0, .35)
 	tween.tween_interval(.4)
+	
+	ActionUtils.add_text_trigger(tween, self, 'NARRATOR_CHIKARA_PANCHI_USE_ATTACK')
 	
 	# switching it back after punch
 	tween.tween_callback(sprite_switcher, 'swap_map', ['powerup', 'idle'])
