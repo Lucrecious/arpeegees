@@ -48,6 +48,8 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 		
 		_add_attack_stab(animation, actioner, target2, target2_position, damage_per_attack, 'stab2')
 	
+	ActionUtils.add_text_trigger(animation, self, 'NARRATOR_STAB_STAB_USE')
+	
 	animation.tween_interval(0.2)
 	animation.tween_property(actioner, 'global_position', actioner.global_position, 0.1)
 	

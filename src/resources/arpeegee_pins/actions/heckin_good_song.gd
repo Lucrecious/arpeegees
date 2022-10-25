@@ -54,14 +54,6 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 		var status_effect := _create_heckin_good_song_status_effect()
 		animation.tween_callback(status_effects, 'add_instance', [status_effect])
 	
-	if type == Type.HeckinGoodSong:
-		if buffed_from_four_chord_strum:
-			ActionUtils.add_text_trigger(animation, self, 'NARRATOR_HECKIN_GOOD_SONG_POWERED_UP_USE_1')
-		else:
-			ActionUtils.add_text_trigger(animation, self, 'NARRATOR_HECKIN_GOOD_SONG_USE_1')
-	elif type == Type.AnOkaySong:
-		ActionUtils.add_text_trigger(animation, self, 'NARRATOR_AN_OKAY_SONG_NAME_USE')
-	
 	for i in 2:
 		skew_stepper.step()
 		_add_explosion(animation, explosion_parent)
@@ -69,6 +61,14 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 	
 	skew_stepper.finish()
 	animation.tween_interval(0.5)
+	
+	if type == Type.HeckinGoodSong:
+		if buffed_from_four_chord_strum:
+			ActionUtils.add_text_trigger(animation, self, 'NARRATOR_HECKIN_GOOD_SONG_POWERED_UP_USE_1')
+		else:
+			ActionUtils.add_text_trigger(animation, self, 'NARRATOR_HECKIN_GOOD_SONG_USE_1')
+	elif type == Type.AnOkaySong:
+		ActionUtils.add_text_trigger(animation, self, 'NARRATOR_AN_OKAY_SONG_NAME_USE')
 	
 	animation.tween_callback(Music, 'unpause_fade_in')
 	

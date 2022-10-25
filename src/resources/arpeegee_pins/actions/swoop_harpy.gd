@@ -18,8 +18,6 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	
 	var tween := get_tree().create_tween()
 	
-	ActionUtils.add_text_trigger(tween, self, 'NARRATOR_SWOOP_USE')
-	
 	tween.tween_callback(sounds, 'play', ['Squish'])
 	
 	tween.tween_property(squisher, 'height_factor', .3, .5)\
@@ -78,7 +76,9 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 			assert(false)
 		
 		tween.tween_interval(.5)
-
+	
+	ActionUtils.add_text_trigger(tween, self, 'NARRATOR_SWOOP_USE')
+	
 	tween.tween_callback(sprite_switcher, 'change', ['idle'])
 	tween.tween_property(actioner, 'global_position', actioner.global_position, .3)
 	

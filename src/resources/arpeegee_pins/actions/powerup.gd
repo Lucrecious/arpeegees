@@ -1,5 +1,7 @@
 extends Node2D
 
+signal text_triggered(text_triggered)
+
 func pin_action() -> PinAction:
 	return load('res://src/resources/actions/monk_powerup.tres') as PinAction
 
@@ -16,7 +18,13 @@ func run(actioner: Node2D, object: Object, callback: String) -> void:
 	tween.tween_callback(sounds, 'play', ['FocusKiCharge'])
 	
 	tween.tween_callback(status_effects_list, 'add_instance', [status_effect])
-	tween.tween_interval(1.3)
+	
+	tween.tween_interval(0.75)
+	
+	ActionUtils.add_text_trigger(tween, self, 'NARRATOR_FOCUS_KI_USE_1')
+	
+	tween.tween_interval(0.75)
+	
 	tween.tween_callback(sprite_switcher, 'change', ['idle'])
 	tween.tween_callback(object, callback)
 

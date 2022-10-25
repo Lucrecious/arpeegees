@@ -2,6 +2,8 @@ extends Node2D
 
 const BrokenNotes := preload('res://src/vfx/broken_notes.tscn')
 
+signal text_triggered(narration_key)
+
 var boosted := false
 
 onready var _position_hint := $Hint as Node2D
@@ -45,6 +47,8 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	animation.tween_callback(VFX, 'physical_impactv', [target, target_position])
 	
 	animation.tween_callback(thing, 'queue_free')
+	
+	ActionUtils.add_text_trigger(animation, self, 'NARRATOR_SCREAM_USE')
 	
 	animation.tween_interval(1.0)
 	animation.tween_callback(sprite_switcher, 'change', ['idle'])
