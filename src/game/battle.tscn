@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://src/game/battle.gd" type="Script" id=1]
 [ext_resource path="res://src/game/battle/turn_manager.gd" type="Script" id=2]
@@ -24,6 +24,7 @@
 [ext_resource path="res://assets/sounds/shimmer_arpeegees.mp3" type="AudioStream" id=22]
 [ext_resource path="res://assets/sounds/enraged_harpy.mp3" type="AudioStream" id=23]
 [ext_resource path="res://src/game/save_log.gd" type="Script" id=24]
+[ext_resource path="res://src/game/battle/y_sort_during_actions.gd" type="Script" id=25]
 [ext_resource path="res://assets/sprites/effects/sparkle1.png" type="Texture" id=26]
 [ext_resource path="res://src/resources/arpeegee_pins/blobbo.tres" type="Resource" id=27]
 [ext_resource path="res://src/resources/arpeegee_pins/geomancer.tres" type="Resource" id=28]
@@ -319,6 +320,10 @@ custom_constants/margin_top = 0
 custom_constants/margin_left = 0
 custom_constants/margin_bottom = 0
 script = ExtResource( 30 )
+
+[node name="YSortSiblingsDuringBattle" type="Node" parent="BattleLayer"]
+script = ExtResource( 25 )
+_turn_manager_path = NodePath("../../CanvasLayer/HUD/Control/BattleOverlay/TurnManager")
 
 [node name="Sprite" type="Sprite" parent="BattleLayer"]
 visible = false
