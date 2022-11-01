@@ -172,6 +172,10 @@ mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="BattleScreenPositionReference" type="Control" parent="SpanLimiter/Content/Game"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
 [node name="Battle" parent="SpanLimiter/Content/Game" instance=ExtResource( 3 )]
 unique_name_in_owner = true
 auto_start = false
@@ -188,6 +192,29 @@ mouse_filter = 2
 texture = ExtResource( 4 )
 expand = true
 stretch_mode = 5
+
+[node name="GameMargin" type="MarginContainer" parent="SpanLimiter/Content/Game"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+custom_constants/margin_right = 20
+custom_constants/margin_top = 20
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 20
+
+[node name="Content" type="Control" parent="SpanLimiter/Content/Game/GameMargin"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 1260.0
+margin_bottom = 700.0
+mouse_filter = 2
+
+[node name="RestartButton" type="Button" parent="SpanLimiter/Content/Game/GameMargin/Content"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -57.0
+margin_bottom = 20.0
+text = "Restart"
 
 [node name="GrassSizeAdjuster" type="Node" parent="SpanLimiter/Content"]
 script = ExtResource( 25 )
@@ -260,6 +287,7 @@ color = Color( 0.0509804, 0.368627, 0.270588, 1 )
 anchor_right = 1.0
 margin_top = 185.0
 margin_bottom = 685.0
+mouse_filter = 2
 
 [node name="Logo" type="TextureRect" parent="SpanLimiter/Content/TopTitleBar/CenterContainer" groups=["size_normal"]]
 visible = false
@@ -1297,4 +1325,5 @@ expand = true
 stretch_mode = 5
 flip_v = true
 
+[connection signal="pressed" from="SpanLimiter/Content/Game/GameMargin/Content/RestartButton" to="." method="restart_battle"]
 [connection signal="tree_entered" from="CanvasLayer" to="CanvasLayer" method="set" binds= [ "visible", true ]]

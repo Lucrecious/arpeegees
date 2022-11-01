@@ -11,7 +11,10 @@ func _enter_tree():
 
 func _ready() -> void:
 	_title_screen.connect('battle_screen_requested', self, '_on_battle_screen_requested')
-	
+
+func restart_battle() -> void:
+	_battle_screen.queue_free()
+
 func _on_battle_screen_requested(pin_amount: int) -> void:
 	_title_screen.get_parent().remove_child(_title_screen)
 	

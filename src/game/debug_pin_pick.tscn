@@ -23,12 +23,14 @@ script = ExtResource( 2 )
 [node name="CenterContainer" type="CenterContainer" parent="DebugPick"]
 anchor_right = 1.0
 margin_bottom = 58.0
+mouse_filter = 2
 
 [node name="Center" type="MarginContainer" parent="DebugPick/CenterContainer"]
 margin_left = 453.0
 margin_top = 10.0
 margin_right = 826.0
 margin_bottom = 47.0
+mouse_filter = 2
 
 [node name="HBox" type="HBoxContainer" parent="DebugPick/CenterContainer/Center"]
 margin_right = 373.0
