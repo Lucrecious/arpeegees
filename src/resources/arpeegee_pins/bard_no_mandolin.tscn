@@ -42,10 +42,10 @@ shader_param/uv_offset_texture = ExtResource( 14 )
 nice_name = "Bard (Mandolin-less)"
 _resource_set = ExtResource( 9 )
 
-[node name="Health" parent="." index="6"]
+[node name="Health" parent="." index="7"]
 current = 15
 
-[node name="PinStats" parent="." index="7"]
+[node name="PinStats" parent="." index="8"]
 attack = 2
 magic_attack = 0
 defence = 2

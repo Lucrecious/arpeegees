@@ -34,7 +34,7 @@ shader_param/uv_offset_texture = ExtResource( 14 )
 nice_name = "Banan"
 _resource_set = ExtResource( 11 )
 
-[node name="Health" parent="." index="6"]
+[node name="Health" parent="." index="7"]
 current = 30
 
 [node name="Sprites" type="Node2D" parent="." index="12"]

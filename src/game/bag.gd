@@ -21,10 +21,16 @@ onready var _bag_pieces := $'%BagPieces' as Control
 onready var _sounds := NodE.get_child(self, SoundsComponent) as SoundsComponent
 
 func _ready() -> void:
-	connect('mouse_entered', self, '_on_mouse_entered')
-	connect('mouse_exited', self, '_on_mouse_exited')
+	reset()
 	
 	_noise.period = .2
+
+func reset() -> void:
+	ObjEct.connect_once(self, 'mouse_entered', self, '_on_mouse_entered')
+	ObjEct.connect_once(self, 'mouse_exited', self, '_on_mouse_exited')
+	_animation.play('RESET')
+	_bag_pieces.reset()
+	_opened = false
 
 func explode_bag() -> void:
 	_bag_pieces.explode()

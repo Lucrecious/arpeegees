@@ -1,6 +1,15 @@
 extends Control
 
 onready var _pieces := get_children()
+onready var _pieces_positions := _positions_for_pieces(_pieces)
+
+func _positions_for_pieces(pieces: Array) -> Array:
+	var positions := []
+	
+	for p in pieces:
+		positions.push_back(p.rect_position)
+	
+	return positions
 
 var _speeds := []
 var _scale_speed := []
@@ -8,6 +17,19 @@ var _directions := []
 
 func _ready() -> void:
 	set_physics_process(false)
+
+func reset() -> void:
+	_speeds.clear()
+	_directions.clear()
+	_scale_speed.clear()
+	
+	for i in _pieces.size():
+		var p := _pieces[i] as Control
+		var v := _pieces_positions[i] as Vector2
+		p.rect_position = v
+		p.rect_scale = Vector2.ONE
+		p.modulate.a = 1.0
+		
 
 func explode() -> void:
 	set_physics_process(true)
@@ -24,8 +46,6 @@ func explode() -> void:
 	yield(get_tree().create_timer(0.75), 'timeout')
 	
 	set_physics_process(false)
-	
-	_pieces.clear()
 
 func _physics_process(delta: float) -> void:
 	for i in _pieces.size():

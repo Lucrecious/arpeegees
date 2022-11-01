@@ -264,6 +264,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://lut/level_editor2/commands.gd"
 }, {
+"base": "Control",
+"class": "MainNode",
+"language": "GDScript",
+"path": "res://src/main.gd"
+}, {
 "base": "Reference",
 "class": "MathE",
 "language": "GDScript",
@@ -686,6 +691,7 @@ _global_script_class_icons={
 "Level2": "",
 "LevelEditor2": "",
 "LevelEditor2Commands": "",
+"MainNode": "",
 "MathE": "",
 "ModifiedPinStats": "",
 "Move4": "",

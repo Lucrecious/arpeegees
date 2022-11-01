@@ -6,9 +6,9 @@ export(float) var hide_hud_threshold := 305.0
 
 onready var _control := NodE.get_node(self, _control_path, Control) as Control
 onready var _game_visibility_notifier := $'%GameVisibilityNotifier' as VisibilityNotifier2D
-onready var _battle := $'%Battle' as BattleScreen
-onready var _original_bottom_bar_position := _battle.bottom_bar.rect_position
-
+onready var _battle
+onready var _original_bottom_bar_position: Vector2
+onready var _main_node := NodE.get_ancestor(self, MainNode) as MainNode
 const JAVASCRIPT_BUTTON_LEFT := 0
 var _on_browser_scroll_js_callback := JavaScript.create_callback(self, '_on_browser_scroll')
 var _on_browser_mousedown_js_callback := JavaScript.create_callback(self, '_on_browser_mousedown')
@@ -20,6 +20,9 @@ onready var _original_canvas_transform := _control.get_viewport().canvas_transfo
 var _using_web_scroll := false
 
 func _ready() -> void:
+	_main_node.connect('battle_screen_changed', self, '_on_battle_screen_changed')
+	_update_battle_screen()
+	
 	_game_visibility_notifier.connect('viewport_entered', self, '_on_viewport_entered')
 	_game_visibility_notifier.connect('viewport_exited', self, '_on_viewport_exited')
 	
@@ -34,6 +37,16 @@ func _ready() -> void:
 		_web_scroll_overlay.addEventListener('scroll', _on_browser_scroll_js_callback)
 		_web_scroll_overlay.addEventListener('mousedown', _on_browser_mousedown_js_callback)
 		_web_scroll_overlay.addEventListener('mouseup', _on_browser_mouseup_js_callback)
+
+func _on_battle_screen_changed() -> void:
+	_update_battle_screen()
+
+func _update_battle_screen() -> void:
+	if not _main_node.get_battle_screen():
+		return
+	
+	_battle = _main_node.get_battle_screen()
+	_original_bottom_bar_position = _battle.bottom_bar.rect_position
 
 func _on_browser_scroll(event):
 	var scroll_top := _web_scroll_overlay.scrollTop as int

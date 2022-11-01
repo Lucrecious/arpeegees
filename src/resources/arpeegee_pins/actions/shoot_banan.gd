@@ -51,7 +51,7 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	
 	if bruised_level == 0:
 		animation.tween_callback(sprite_switcher, 'swap_map', ['idle', 'idle_bruised'])
-	elif bruised_level > 0:
+	elif bruised_level == 1:
 		animation.tween_callback(sprite_switcher, 'swap_map', ['idle', 'idle_fully_bruised'])
 	
 	bruised_level += 1

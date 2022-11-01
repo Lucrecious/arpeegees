@@ -11,6 +11,9 @@ func _ready() -> void:
 	_bag.connect('bag_exploded', self, '_on_bag_exploded')
 	_bag.connect('open_animation_finished', self, '_on_pin_bag_opened')
 
+func reset() -> void:
+	_bag.reset()
+
 func _on_bag_exploded() -> void:
 	var shader := _shockwave.material as ShaderMaterial
 	
