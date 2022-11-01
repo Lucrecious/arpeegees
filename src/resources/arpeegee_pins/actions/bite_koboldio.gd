@@ -19,6 +19,7 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	var stats := NodE.get_child(actioner, ModifiedPinStats) as ModifiedPinStats
 	var damage := ActionUtils.damage_with_factor(stats.attack, 0.3)
 	
+	var impact_position := NodE.get_child(target, REferenceRect).global_rect().get_center() as Vector2
 	var attack_times := MIN_ATTACKS + randi() % (MAX_ATTACKS - MIN_ATTACKS)
 	for i in attack_times:
 		ActionUtils.add_wind_up(animation, actioner, target_position, -1)
@@ -26,6 +27,8 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 		
 		animation.tween_callback(sprite_switcher, 'change', ['bite'])
 		ActionUtils.add_attack(animation, actioner, target, damage)
+		
+		animation.tween_callback(VFX, 'physical_impactv', [target, impact_position])
 		
 		ActionUtils.add_shake(animation, actioner, target_position, Vector2.RIGHT, 10, 0.25)
 		

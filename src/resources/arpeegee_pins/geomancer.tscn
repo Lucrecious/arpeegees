@@ -35,10 +35,10 @@ shader_param/uv_offset_texture = ExtResource( 15 )
 nice_name = "Geomancer"
 _resource_set = ExtResource( 2 )
 
-[node name="Health" parent="." index="6"]
+[node name="Health" parent="." index="7"]
 current = 25
 
-[node name="PinStats" parent="." index="7"]
+[node name="PinStats" parent="." index="8"]
 attack = 2
 magic_attack = 4
 defence = 5

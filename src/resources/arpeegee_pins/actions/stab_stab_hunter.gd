@@ -64,6 +64,10 @@ func _add_attack_stab(animation: SceneTreeTween, actioner: ArpeegeePinNode, targ
 	animation.tween_callback(sprite_switcher, 'change', [frame])
 	
 	ActionUtils.add_attack(animation, actioner, target, damage_amount)
+	
+	var impact_position := NodE.get_child(target, REferenceRect).global_rect().get_center() as Vector2
+	animation.tween_callback(VFX, 'physical_impactv', [target, impact_position])
+	
 	ActionUtils.add_shake(animation, actioner, target_position, Vector2(1, 0), 5.0, .35)
 	
 	animation.tween_interval(0.2)

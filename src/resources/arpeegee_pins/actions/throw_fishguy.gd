@@ -39,6 +39,9 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	var damage := floor(target_health.current / 2.0)
 	ActionUtils.add_attack(animation, actioner, target, damage)
 	
+	var vfx_position := NodE.get_child(target, REferenceRect).global_rect().get_center() as Vector2
+	animation.tween_callback(VFX, 'physical_impactv', [target, vfx_position])
+	
 	animation.tween_interval(0.3)
 	animation.tween_property(target, 'rotation_degrees', 0.0, 0.5)
 	

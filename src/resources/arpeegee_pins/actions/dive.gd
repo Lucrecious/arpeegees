@@ -48,6 +48,9 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	else:
 		assert(false)
 	
+	var impact_position := NodE.get_child(target, REferenceRect).global_rect().get_center() as Vector2
+	tween.tween_callback(VFX, 'physical_impactv', [target, impact_position])
+	
 	tween.tween_interval(.5)
 	tween.tween_callback(sprite_switcher, 'change', ['idle'])
 	tween.tween_property(actioner, 'global_position', actioner.global_position, .3)

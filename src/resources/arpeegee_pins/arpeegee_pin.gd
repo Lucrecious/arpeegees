@@ -26,3 +26,4 @@ func stop_star_emission() -> void:
 	if not _particles:
 		return
 	_particles.emitting = false
+

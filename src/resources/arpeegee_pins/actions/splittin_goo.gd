@@ -81,7 +81,7 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 		for t in targets:
 			var attack_amount := ActionUtils.damage_with_factor(modified_stats.attack, 0.5)
 			ActionUtils.add_attack(animation, actioner, t, attack_amount)
-			var hit_position := NodE.get_child(t, REferenceRect).global_rect().position as Vector2
+			var hit_position := NodE.get_child(t, REferenceRect).global_rect().get_center() as Vector2
 			animation.tween_callback(VFX, 'physical_impactv', [t, hit_position])
 	elif type == Type.GooTrap:
 		if _trap_succeeds():
