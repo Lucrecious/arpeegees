@@ -76,17 +76,17 @@ func run(actioner: Node2D, object: Object, callback: String) -> void:
 nice_name = "Paladin (Swordless)"
 _resource_set = ExtResource( 16 )
 
-[node name="Health" parent="." index="6"]
+[node name="Health" parent="." index="7"]
 current = 15
 
-[node name="PinStats" parent="." index="7"]
+[node name="PinStats" parent="." index="8"]
 attack = 2
 magic_attack = 0
 defence = 2
 magic_defence = 2
 evasion = 4
 
-[node name="HealthBar" parent="." index="10"]
+[node name="HealthBar" parent="." index="11"]
 position = Vector2( -99, -257 )
 
 [node name="Sprites" type="Node2D" parent="." index="12"]
@@ -96,42 +96,42 @@ script = ExtResource( 2 )
 [node name="Idle" type="Sprite" parent="Sprites" index="0"]
 use_parent_material = true
 position = Vector2( -19, -89 )
-scale = Vector2( 0.09, 0.09 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 3 )
 
 [node name="Attack" type="Sprite" parent="Sprites" index="1"]
 visible = false
 use_parent_material = true
-position = Vector2( -34, -82 )
-scale = Vector2( 0.085, 0.085 )
+position = Vector2( -36, -82 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 4 )
 
 [node name="Magic" type="Sprite" parent="Sprites" index="2"]
 visible = false
 use_parent_material = true
-position = Vector2( -18, -94 )
-scale = Vector2( 0.08, 0.08 )
+position = Vector2( -17, -97 )
+scale = Vector2( 0.333, 0.333 )
 texture = ExtResource( 8 )
 
 [node name="Hurt" type="Sprite" parent="Sprites" index="3"]
 visible = false
 use_parent_material = true
-position = Vector2( 14, -89 )
-scale = Vector2( 0.095, 0.095 )
+position = Vector2( 9, -91 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 6 )
 
 [node name="Dead" type="Sprite" parent="Sprites" index="4"]
 visible = false
 use_parent_material = true
-position = Vector2( -8, -90 )
-scale = Vector2( 0.085, 0.085 )
+position = Vector2( -8, -79 )
+scale = Vector2( 0.333, 0.333 )
 texture = ExtResource( 5 )
 
 [node name="Win" type="Sprite" parent="Sprites" index="5"]
 visible = false
 use_parent_material = true
 position = Vector2( -20, -98 )
-scale = Vector2( 0.085, 0.085 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 7 )
 
 [node name="Actions" type="Node2D" parent="." index="13"]
