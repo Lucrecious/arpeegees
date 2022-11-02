@@ -17,7 +17,7 @@ func _run_set(value: bool) -> void:
 		
 		var texture_path := ProjectSettings.globalize_path(texture.resource_path)
 		var scale_percent := sprite.scale.x * 3.0
-		var command := 'magick'
+		var command := '/usr/local/bin/magick'
 		var args := [ texture_path, '-resize %d%%' % [scale_percent * 100.0], '-filter Lanczos', texture_path ]
 		
 		var exit_code := OS.execute(command, args)
