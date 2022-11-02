@@ -20,6 +20,8 @@ func _run_set(value: bool) -> void:
 		var command := 'magick'
 		var args := [ texture_path, '-resize %d%%' % [scale_percent * 100.0], '-filter Lanczos', texture_path ]
 		
-		OS.execute(command, args)
+		var exit_code := OS.execute(command, args)
+		
+		print('exit code: ', exit_code)
 		
 		sprite.scale = Vector2.ONE / 3.0
