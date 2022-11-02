@@ -6,7 +6,7 @@ func _run_set(value: bool) -> void:
 	if not value:
 		return
 	
-	for n in get_parent().get_children():
+	for n in NodE.get_children_recursive(get_parent(), Sprite):
 		var sprite := n as Sprite
 		if not sprite:
 			continue
