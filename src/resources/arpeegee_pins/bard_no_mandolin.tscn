@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/sprites/bard/bard_idle_no_mandolin.png" type="Texture" id=2]
@@ -27,7 +27,6 @@
 [ext_resource path="res://assets/sounds/discord_hit1_bard.mp3" type="AudioStream" id=25]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/heckin_good_song.gd" type="Script" id=26]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/beatboxin_bard_mandolinless.gd" type="Script" id=27]
-[ext_resource path="res://src/image_resizer_tool.gd" type="Script" id=28]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 3 )
@@ -58,16 +57,16 @@ material = SubResource( 1 )
 script = ExtResource( 6 )
 
 [node name="Idle" type="Sprite" parent="Sprites" index="0"]
-visible = false
 use_parent_material = true
-position = Vector2( -66, -186 )
-scale = Vector2( 0.12, 0.12 )
+position = Vector2( -62, -181 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 2 )
 centered = false
 
 [node name="Scream" type="Sprite" parent="Sprites" index="1"]
+visible = false
 use_parent_material = true
-position = Vector2( -120, -183 )
+position = Vector2( -111, -175 )
 scale = Vector2( 0.333, 0.333 )
 texture = ExtResource( 11 )
 centered = false
@@ -75,41 +74,39 @@ centered = false
 [node name="Sing" type="Sprite" parent="Sprites" index="2"]
 visible = false
 use_parent_material = true
-position = Vector2( -120, -183 )
-scale = Vector2( 0.08, 0.08 )
+position = Vector2( -112, -175 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 12 )
 centered = false
 
 [node name="Beatbox" type="Sprite" parent="Sprites" index="3"]
 visible = false
 use_parent_material = true
-position = Vector2( -120, -183 )
-scale = Vector2( 0.08, 0.08 )
+position = Vector2( -111, -175 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 13 )
 centered = false
 
 [node name="Hurt" type="Sprite" parent="Sprites" index="4"]
+visible = false
 use_parent_material = true
-position = Vector2( -22, -85 )
+position = Vector2( -15, -82 )
 scale = Vector2( 0.333, 0.333 )
 texture = ExtResource( 5 )
 
 [node name="Dead" type="Sprite" parent="Sprites" index="5"]
+visible = false
 use_parent_material = true
-position = Vector2( -37, -79 )
+position = Vector2( -16, -79 )
 scale = Vector2( 0.333, 0.333 )
 texture = ExtResource( 4 )
 
 [node name="Win" type="Sprite" parent="Sprites" index="6"]
 visible = false
 use_parent_material = true
-position = Vector2( -25, -95 )
-scale = Vector2( 0.08, 0.08 )
+position = Vector2( -15, -92 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 10 )
-
-[node name="ImageResizerTool" type="Node" parent="Sprites" index="7"]
-script = ExtResource( 28 )
-_exceptions = [  ]
 
 [node name="PinActions" type="Node2D" parent="." index="10"]
 script = ExtResource( 7 )

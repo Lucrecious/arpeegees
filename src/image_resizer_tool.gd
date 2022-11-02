@@ -2,7 +2,7 @@ tool
 class_name ImageResizerTool
 extends Node
 
-export(PoolStringArray) var _exceptions := []
+export(PoolStringArray) var _exceptions := PoolStringArray([])
 
 export(bool) var _run := false setget _run_set
 func _run_set(value: bool) -> void:
