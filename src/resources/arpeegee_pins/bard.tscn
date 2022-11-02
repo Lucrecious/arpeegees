@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/sprites/bard/bard_idle.png" type="Texture" id=2]
@@ -32,7 +32,6 @@
 [ext_resource path="res://assets/sounds/discord_followup_hit2_bard.mp3" type="AudioStream" id=30]
 [ext_resource path="res://assets/sounds/discord_followup_hit3_bard.mp3" type="AudioStream" id=31]
 [ext_resource path="res://assets/sounds/discord_followup_hit1_bard.mp3" type="AudioStream" id=32]
-[ext_resource path="res://src/image_resizer_tool.gd" type="Script" id=33]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 7 )
@@ -62,58 +61,55 @@ evasion = 2
 material = SubResource( 1 )
 script = ExtResource( 16 )
 
-[node name="Node" type="Node" parent="Sprites" index="0"]
-script = ExtResource( 33 )
-
-[node name="Idle" type="Sprite" parent="Sprites" index="1"]
+[node name="Idle" type="Sprite" parent="Sprites" index="0"]
 use_parent_material = true
-position = Vector2( -66, -186 )
-scale = Vector2( 0.12, 0.12 )
+position = Vector2( -63, -181 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 2 )
 centered = false
 
-[node name="Discord" type="Sprite" parent="Sprites" index="2"]
+[node name="Discord" type="Sprite" parent="Sprites" index="1"]
 visible = false
 use_parent_material = true
-position = Vector2( -119, -183 )
-scale = Vector2( 0.08, 0.08 )
+position = Vector2( -113, -176 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 12 )
 centered = false
 
-[node name="HeckinGoodSong" type="Sprite" parent="Sprites" index="3"]
+[node name="HeckinGoodSong" type="Sprite" parent="Sprites" index="2"]
 visible = false
 use_parent_material = true
-position = Vector2( -120, -183 )
-scale = Vector2( 0.08, 0.08 )
+position = Vector2( -112, -176 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 17 )
 centered = false
 
-[node name="Hurt" type="Sprite" parent="Sprites" index="4"]
+[node name="Hurt" type="Sprite" parent="Sprites" index="3"]
 visible = false
 use_parent_material = true
-position = Vector2( -22, -85 )
-scale = Vector2( 0.08, 0.08 )
+position = Vector2( -13, -83 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 14 )
 
-[node name="Attack" type="Sprite" parent="Sprites" index="5"]
+[node name="Attack" type="Sprite" parent="Sprites" index="4"]
 visible = false
 use_parent_material = true
-position = Vector2( -25, -88 )
-scale = Vector2( 0.08, 0.08 )
+position = Vector2( -39, -86 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 5 )
 
-[node name="Dead" type="Sprite" parent="Sprites" index="6"]
+[node name="Dead" type="Sprite" parent="Sprites" index="5"]
 visible = false
 use_parent_material = true
-position = Vector2( -37, -79 )
-scale = Vector2( 0.08, 0.08 )
+position = Vector2( -26, -80 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 4 )
 
-[node name="Win" type="Sprite" parent="Sprites" index="7"]
+[node name="Win" type="Sprite" parent="Sprites" index="6"]
 visible = false
 use_parent_material = true
-position = Vector2( -17, -86 )
-scale = Vector2( 0.075, 0.075 )
+position = Vector2( -19, -88 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 28 )
 
 [node name="Actions" type="Node2D" parent="." index="13"]
