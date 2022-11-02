@@ -32,10 +32,10 @@ shader_param/uv_offset_texture = ExtResource( 11 )
 nice_name = "Banan (Chopped)"
 _resource_set = ExtResource( 2 )
 
-[node name="Health" parent="." index="6"]
+[node name="Health" parent="." index="7"]
 current = 20
 
-[node name="PinStats" parent="." index="7"]
+[node name="PinStats" parent="." index="8"]
 attack = 4
 magic_attack = 0
 defence = 2
@@ -50,109 +50,100 @@ script = ExtResource( 4 )
 visible = false
 use_parent_material = true
 position = Vector2( 18, -97.4 )
-scale = Vector2( 0.1, 0.1 )
+scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 6 )
 script = ExtResource( 8 )
 
 [node name="Idle" type="Node2D" parent="Sprites" index="1"]
 use_parent_material = true
-position = Vector2( 0, -54 )
-scale = Vector2( 0.1, 0.1 )
+position = Vector2( 6, -41 )
+scale = Vector2( 0.3, 0.3 )
 
 [node name="Slice8" type="Node2D" parent="Sprites/Idle" index="0"]
 use_parent_material = true
-position = Vector2( -400, 380 )
-scale = Vector2( 1, 1 )
+position = Vector2( -116.667, 83.3334 )
 
 [node name="Sprite" type="Sprite" parent="Sprites/Idle/Slice8" index="0"]
 use_parent_material = true
-position = Vector2( 390, -420 )
-scale = Vector2( 1, 1 )
+position = Vector2( 103.333, -133.333 )
 texture = ExtResource( 16 )
 
 [node name="Slice7" type="Node2D" parent="Sprites/Idle" index="1"]
 use_parent_material = true
-position = Vector2( -140, 380 )
-scale = Vector2( 1, 1 )
+position = Vector2( -56.6667, 73.3334 )
 
 [node name="Sprite" type="Sprite" parent="Sprites/Idle/Slice7" index="0"]
 use_parent_material = true
-position = Vector2( 135, -439 )
+position = Vector2( 46.6667, -133.333 )
 texture = ExtResource( 15 )
 
 [node name="Slice6" type="Node2D" parent="Sprites/Idle" index="2"]
 use_parent_material = true
-position = Vector2( 80, 220 )
-scale = Vector2( 1, 1 )
+position = Vector2( 6.66666, 36.6667 )
 
 [node name="Sprite" type="Sprite" parent="Sprites/Idle/Slice6" index="0"]
 use_parent_material = true
-position = Vector2( -85, -279 )
+position = Vector2( -30, -90 )
 texture = ExtResource( 13 )
 
 [node name="Slice5" type="Node2D" parent="Sprites/Idle" index="3"]
 use_parent_material = true
-position = Vector2( 220, 9.99994 )
-scale = Vector2( 1, 1 )
+position = Vector2( 53.3333, -33.3333 )
 
 [node name="Sprite" type="Sprite" parent="Sprites/Idle/Slice5" index="0"]
 use_parent_material = true
-position = Vector2( -225, -69 )
+position = Vector2( -63.3334, -9.99991 )
 texture = ExtResource( 7 )
 
 [node name="Slice4" type="Node2D" parent="Sprites/Idle" index="4"]
 use_parent_material = true
-position = Vector2( 270, -140 )
-scale = Vector2( 1, 1 )
+position = Vector2( 66.6667, -93.3333 )
 
 [node name="Sprite" type="Sprite" parent="Sprites/Idle/Slice4" index="0"]
 use_parent_material = true
-position = Vector2( -275, 81 )
+position = Vector2( -86.6667, 36.6667 )
 texture = ExtResource( 6 )
 
 [node name="Slice3" type="Node2D" parent="Sprites/Idle" index="5"]
 use_parent_material = true
-position = Vector2( 250, -390 )
-scale = Vector2( 1, 1 )
+position = Vector2( 73.3333, -163.333 )
 
 [node name="Sprite" type="Sprite" parent="Sprites/Idle/Slice3" index="0"]
 use_parent_material = true
-position = Vector2( -255, 331 )
+position = Vector2( -70, 106.667 )
 texture = ExtResource( 5 )
 
 [node name="Slice2" type="Node2D" parent="Sprites/Idle" index="6"]
 use_parent_material = true
-position = Vector2( 150, -680 )
+position = Vector2( 70, -236.667 )
 
 [node name="Sprite" type="Sprite" parent="Sprites/Idle/Slice2" index="0"]
 use_parent_material = true
-position = Vector2( -155, 621 )
-scale = Vector2( 1, 1 )
+position = Vector2( -50, 183.333 )
 texture = ExtResource( 3 )
 
 [node name="Slice1" type="Node2D" parent="Sprites/Idle" index="7"]
 use_parent_material = true
-position = Vector2( 70, -980 )
+position = Vector2( 43.3333, -333.333 )
 
 [node name="Sprite" type="Sprite" parent="Sprites/Idle/Slice1" index="0"]
 use_parent_material = true
-position = Vector2( -55, 911 )
-scale = Vector2( 1, 1 )
+position = Vector2( -10, 276.667 )
 texture = ExtResource( 14 )
 
 [node name="Slice1" type="Sprite" parent="Sprites" index="2"]
 visible = false
 use_parent_material = true
 position = Vector2( 21, -30.4 )
-scale = Vector2( 0.1, 0.1 )
+scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 5 )
 script = ExtResource( 8 )
 
 [node name="Slice3" type="Sprite" parent="Sprites" index="3"]
 visible = false
 use_parent_material = true
-position = Vector2( -41, -120.4 )
-scale = Vector2( 0.1, 0.1 )
+position = Vector2( -29, -108 )
+scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 7 )
 script = ExtResource( 8 )
 
