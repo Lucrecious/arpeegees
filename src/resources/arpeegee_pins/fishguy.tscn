@@ -79,28 +79,28 @@ script = ExtResource( 3 )
 [node name="Idle" type="Sprite" parent="Sprites" index="0"]
 use_parent_material = true
 position = Vector2( 20, -96 )
-scale = Vector2( 0.15, 0.15 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 2 )
 
 [node name="Stab" type="Sprite" parent="Sprites" index="1"]
 visible = false
 use_parent_material = true
 position = Vector2( 52, -100 )
-scale = Vector2( 0.15, 0.15 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 5 )
 
 [node name="Hit" type="Sprite" parent="Sprites" index="2"]
 visible = false
 use_parent_material = true
 position = Vector2( 74, -94 )
-scale = Vector2( 0.15, 0.15 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 4 )
 
 [node name="Win" type="Sprite" parent="Sprites" index="3"]
 visible = false
 use_parent_material = true
 position = Vector2( 42, -114 )
-scale = Vector2( 0.15, 0.15 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 6 )
 
 [node name="Actions" type="Node2D" parent="." index="13"]
