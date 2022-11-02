@@ -50,7 +50,6 @@ material = SubResource( 1 )
 script = ExtResource( 3 )
 
 [node name="Idle" type="Sprite" parent="Sprites" index="0"]
-visible = false
 use_parent_material = true
 position = Vector2( -9, -70 )
 scale = Vector2( 0.333333, 0.333333 )
