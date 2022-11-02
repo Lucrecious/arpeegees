@@ -32,57 +32,58 @@ shader_param/uv_offset_texture = ExtResource( 9 )
 nice_name = "Mushboy"
 _resource_set = ExtResource( 14 )
 
-[node name="Health" parent="." index="6"]
+[node name="Health" parent="." index="7"]
 current = 20
 
-[node name="PinStats" parent="." index="7"]
+[node name="PinStats" parent="." index="8"]
 magic_attack = 4
 defence = 4
 magic_defence = 4
 
 [node name="Sprites" type="Node2D" parent="." index="12"]
 material = SubResource( 1 )
+position = Vector2( 3, 0 )
 script = ExtResource( 4 )
 
 [node name="Idle" type="Sprite" parent="Sprites" index="0"]
+visible = false
 use_parent_material = true
 position = Vector2( -18, -58 )
-scale = Vector2( 0.12, 0.12 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 2 )
 
 [node name="Headbutt" type="Sprite" parent="Sprites" index="1"]
 visible = false
 use_parent_material = true
 position = Vector2( 1, -56 )
-scale = Vector2( 0.09, 0.09 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 8 )
 
 [node name="SporesSetup" type="Sprite" parent="Sprites" index="2"]
 visible = false
 use_parent_material = true
 position = Vector2( 14, -61 )
-scale = Vector2( 0.09, 0.09 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 6 )
 
 [node name="SporesPush" type="Sprite" parent="Sprites" index="3"]
 visible = false
 use_parent_material = true
 position = Vector2( 14, -61 )
-scale = Vector2( 0.09, 0.09 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 11 )
 
 [node name="Hurt" type="Sprite" parent="Sprites" index="4"]
 visible = false
 use_parent_material = true
 position = Vector2( 20, -49 )
-scale = Vector2( 0.08, 0.08 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 7 )
 
 [node name="Win" type="Sprite" parent="Sprites" index="5"]
-visible = false
 use_parent_material = true
-position = Vector2( -16, -52 )
-scale = Vector2( 0.08, 0.08 )
+position = Vector2( -12, -52 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 5 )
 
 [node name="Actions" type="Node2D" parent="." index="13"]
