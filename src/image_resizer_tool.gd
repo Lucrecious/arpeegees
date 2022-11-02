@@ -20,7 +20,7 @@ func _run_set(value: bool) -> void:
 		var command := '/usr/local/bin/magick'
 		var args := [ texture_path, '-resize %d%%' % [scale_percent * 100.0], '-filter Lanczos', texture_path ]
 		
-		var exit_code := OS.execute(command, args)
+		var exit_code := OS.execute(command, args, true, [], true)
 		
 		print('exit code: ', exit_code)
 		
