@@ -1,4 +1,5 @@
 tool
+class_name ImageResizerTool
 extends Node
 
 export(bool) var _run := false setget _run_set

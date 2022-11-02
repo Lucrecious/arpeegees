@@ -44,64 +44,67 @@ script = ExtResource( 2 )
 [node name="Idle_Fully_Bruised" type="Sprite" parent="Sprites" index="0"]
 visible = false
 use_parent_material = true
-position = Vector2( -3, -77 )
-scale = Vector2( 0.1, 0.1 )
+position = Vector2( 4, -77 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 17 )
 
 [node name="Idle_Bruised" type="Sprite" parent="Sprites" index="1"]
 visible = false
 use_parent_material = true
-position = Vector2( -3, -77 )
-scale = Vector2( 0.1, 0.1 )
+position = Vector2( 4, -77 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 16 )
 
 [node name="Idle" type="Sprite" parent="Sprites" index="2"]
+visible = false
 use_parent_material = true
-position = Vector2( 0, -81 )
-scale = Vector2( 0.13, 0.13 )
+position = Vector2( 8, -77 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 4 )
 
 [node name="Hurt" type="Sprite" parent="Sprites" index="3"]
 visible = false
 use_parent_material = true
 position = Vector2( 9, -78 )
-scale = Vector2( 0.12, 0.12 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 5 )
 
 [node name="Headbutt" type="Sprite" parent="Sprites" index="4"]
 visible = false
 use_parent_material = true
-position = Vector2( 10, -90 )
-scale = Vector2( 0.13, 0.13 )
+position = Vector2( 13, -90 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 6 )
 
 [node name="ShootBanan" type="Sprite" parent="Sprites" index="5"]
-visible = false
 use_parent_material = true
-position = Vector2( 40, -108 )
-scale = Vector2( 0.13, 0.13 )
+position = Vector2( 18, -85 )
+scale = Vector2( 0.333, 0.333 )
 texture = ExtResource( 8 )
 
 [node name="Banan" type="Sprite" parent="Sprites/ShootBanan" index="0"]
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 7 )
 
 [node name="Appealing" type="Sprite" parent="Sprites" index="6"]
 visible = false
 use_parent_material = true
 position = Vector2( 11, -84 )
-scale = Vector2( 0.13, 0.13 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 19 )
 
 [node name="Peel" type="Sprite" parent="Sprites/Appealing" index="0"]
+visible = false
 position = Vector2( -146.154, 869.231 )
 rotation = 3.00784
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 8 )
 
 [node name="Win" type="Sprite" parent="Sprites" index="7"]
 visible = false
 use_parent_material = true
-position = Vector2( 3, -76 )
-scale = Vector2( 0.1, 0.1 )
+position = Vector2( 10, -76 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 9 )
 
 [node name="Actions" type="Node2D" parent="." index="13"]
