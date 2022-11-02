@@ -50,50 +50,50 @@ script = ExtResource( 4 )
 
 [node name="Idle" type="Sprite" parent="Sprites" index="0"]
 use_parent_material = true
-position = Vector2( -5, -88 )
-scale = Vector2( 0.13, 0.13 )
+position = Vector2( -5, -87 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 5 )
 
 [node name="MagicThrow" type="Sprite" parent="Sprites" index="1"]
 visible = false
 use_parent_material = true
-position = Vector2( 2, -88 )
-scale = Vector2( 0.08, 0.08 )
+position = Vector2( 2, -82 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 7 )
 
 [node name="Throw" type="Sprite" parent="Sprites" index="2"]
 visible = false
 use_parent_material = true
-position = Vector2( -26, -83 )
-scale = Vector2( 0.08, 0.08 )
+position = Vector2( -26, -78 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 9 )
 
 [node name="Raise" type="Sprite" parent="Sprites" index="3"]
 visible = false
 use_parent_material = true
 position = Vector2( -14, -94 )
-scale = Vector2( 0.09, 0.09 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 8 )
 
 [node name="Hurt" type="Sprite" parent="Sprites" index="4"]
 visible = false
 use_parent_material = true
 position = Vector2( 2, -88 )
-scale = Vector2( 0.08, 0.08 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 6 )
 
 [node name="Win" type="Sprite" parent="Sprites" index="5"]
 visible = false
 use_parent_material = true
-position = Vector2( -2, -81 )
-scale = Vector2( 0.08, 0.08 )
+position = Vector2( -2, -78 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 10 )
 
 [node name="Dead" type="Sprite" parent="Sprites" index="6"]
 visible = false
 use_parent_material = true
-position = Vector2( -8, -84 )
-scale = Vector2( 0.08, 0.08 )
+position = Vector2( -8, -79 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 11 )
 
 [node name="Actions" type="Node2D" parent="." index="13"]
