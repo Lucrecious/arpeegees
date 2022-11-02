@@ -34,10 +34,10 @@ shader_param/uv_offset_texture = ExtResource( 12 )
 nice_name = "White Mage"
 _resource_set = ExtResource( 15 )
 
-[node name="Health" parent="." index="6"]
+[node name="Health" parent="." index="7"]
 current = 20
 
-[node name="PinStats" parent="." index="7"]
+[node name="PinStats" parent="." index="8"]
 magic_attack = 0
 defence = 3
 magic_defence = 5
@@ -50,49 +50,49 @@ script = ExtResource( 4 )
 [node name="Idle" type="Sprite" parent="Sprites" index="0"]
 use_parent_material = true
 position = Vector2( 0, -84 )
-scale = Vector2( 0.13, 0.13 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 2 )
 
 [node name="Magic" type="Sprite" parent="Sprites" index="1"]
 visible = false
 use_parent_material = true
 position = Vector2( -9, -76 )
-scale = Vector2( 0.1, 0.1 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 5 )
 
 [node name="Hurt" type="Sprite" parent="Sprites" index="2"]
 visible = false
 use_parent_material = true
 position = Vector2( 0, -84 )
-scale = Vector2( 0.13, 0.13 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 7 )
 
 [node name="Attack" type="Sprite" parent="Sprites" index="3"]
 visible = false
 use_parent_material = true
 position = Vector2( -37, -86 )
-scale = Vector2( 0.1, 0.1 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 6 )
 
 [node name="AttackDesperate" type="Sprite" parent="Sprites" index="4"]
 visible = false
 use_parent_material = true
 position = Vector2( -37, -86 )
-scale = Vector2( 0.1, 0.1 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 8 )
 
 [node name="Dead" type="Sprite" parent="Sprites" index="5"]
 visible = false
 use_parent_material = true
 position = Vector2( -27, -97 )
-scale = Vector2( 0.1, 0.1 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 9 )
 
 [node name="Win" type="Sprite" parent="Sprites" index="6"]
 visible = false
 use_parent_material = true
 position = Vector2( -15, -78 )
-scale = Vector2( 0.1, 0.1 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 10 )
 
 [node name="Actions" type="Node2D" parent="." index="13"]
