@@ -53,36 +53,36 @@ script = ExtResource( 4 )
 
 [node name="Idle" type="Sprite" parent="Sprites" index="0"]
 use_parent_material = true
-position = Vector2( 1, -90 )
-scale = Vector2( 0.15, 0.15 )
+position = Vector2( 4, -90 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 5 )
 
 [node name="Swipe" type="Sprite" parent="Sprites" index="1"]
 visible = false
 use_parent_material = true
-position = Vector2( -7, -94 )
-scale = Vector2( 0.12, 0.12 )
+position = Vector2( 3, -91 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 7 )
 
 [node name="Bite" type="Sprite" parent="Sprites" index="2"]
 visible = false
 use_parent_material = true
-position = Vector2( -7, -94 )
-scale = Vector2( 0.12, 0.12 )
+position = Vector2( 4, -94 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 9 )
 
 [node name="Hurt" type="Sprite" parent="Sprites" index="3"]
 visible = false
 use_parent_material = true
-position = Vector2( 6.00001, -93 )
-scale = Vector2( 0.12, 0.12 )
+position = Vector2( 9, -90 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 6 )
 
 [node name="Nervous" type="Sprite" parent="Sprites" index="4"]
 visible = false
 use_parent_material = true
-position = Vector2( 6.00001, -93 )
-scale = Vector2( 0.12, 0.12 )
+position = Vector2( 6, -89 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 8 )
 
 [node name="Paladin" type="Sprite" parent="Sprites" index="5"]
