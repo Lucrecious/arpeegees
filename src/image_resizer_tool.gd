@@ -26,7 +26,6 @@ func _run_set(value: bool) -> void:
 		
 		var full_command := PoolStringArray([command] + args).join(' ')
 		print('Running: %s' % [full_command])
-		print()
 		
 		var output := []
 		var exit_code := OS.execute(command, args, true, output, true)
@@ -38,3 +37,5 @@ func _run_set(value: bool) -> void:
 		
 		sprite.scale = Vector2.ONE / 3.0
 		print('Scaled "%s" successfully.' % [sprite.name])
+		print()
+		print()
