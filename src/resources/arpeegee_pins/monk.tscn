@@ -55,48 +55,48 @@ script = ExtResource( 7 )
 [node name="Idle" type="Sprite" parent="Sprites" index="0"]
 use_parent_material = true
 position = Vector2( -59, -182 )
-scale = Vector2( 0.135, 0.135 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 4 )
 centered = false
 
 [node name="ArmadilloStance" type="Sprite" parent="Sprites" index="1"]
 visible = false
 use_parent_material = true
-position = Vector2( -109, -235 )
-scale = Vector2( 0.105, 0.105 )
+position = Vector2( -105, -231 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 15 )
 centered = false
 
 [node name="Hurt" type="Sprite" parent="Sprites" index="2"]
 visible = false
 use_parent_material = true
-position = Vector2( -58, -190 )
+position = Vector2( -51, -166 )
 rotation = 0.717431
-scale = Vector2( 0.27, 0.068 )
+scale = Vector2( 0.5, 0.1 )
 texture = ExtResource( 4 )
 centered = false
 
 [node name="PowerUp" type="Sprite" parent="Sprites" index="3"]
 visible = false
 use_parent_material = true
-position = Vector2( -64, -189 )
-scale = Vector2( 0.13, 0.14 )
+position = Vector2( -61, -170 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 3 )
 centered = false
 
 [node name="Dead" type="Sprite" parent="Sprites" index="4"]
 visible = false
 use_parent_material = true
-position = Vector2( -134, -193 )
-scale = Vector2( 0.08, 0.08 )
+position = Vector2( -134, -186 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 2 )
 centered = false
 
 [node name="Win" type="Sprite" parent="Sprites" index="5"]
 visible = false
 use_parent_material = true
-position = Vector2( -82, -221 )
-scale = Vector2( 0.12, 0.13 )
+position = Vector2( -86, -212 )
+scale = Vector2( 0.35, 0.35 )
 texture = ExtResource( 19 )
 centered = false
 
