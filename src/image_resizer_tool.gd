@@ -17,12 +17,10 @@ func _run_set(value: bool) -> void:
 		
 		var texture_path := ProjectSettings.globalize_path(texture.resource_path)
 		var scale_percent := sprite.scale.x * 3.0
-		var command := '/usr/local/bin/magick'
-		var args := [ 
-			'"%s"' % [texture_path],
-			'-resize %d%%' % [scale_percent * 100.0],
-			'-filter Lanczos',
-			'"%s"' % [texture_path]
+		var command := '/Users/lucrecious/dev/project_arpeegees/arpeegees/resize_images'
+		var args := [
+			texture_path,
+			'%d' % [scale_percent * 100.0]
 		]
 		
 		var full_command := PoolStringArray([command] + args).join(' ')
@@ -30,7 +28,7 @@ func _run_set(value: bool) -> void:
 		print()
 		
 		var output := []
-		var exit_code := OS.execute(full_command, [], true, output, true)
+		var exit_code := OS.execute(command, args, true, output, true)
 		
 		print(output)
 		if exit_code != 0:
