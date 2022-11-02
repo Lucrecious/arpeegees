@@ -25,8 +25,14 @@ func _run_set(value: bool) -> void:
 			'"%s"' % [texture_path]
 		]
 		
-		var exit_code := OS.execute(command, args, true, [], true)
+		var full_command := PoolStringArray([command] + args).join(' ')
+		print('Running: %s' % [full_command])
+		print()
 		
+		var output := []
+		var exit_code := OS.execute(full_command, [], true, output, true)
+		
+		print(output)
 		if exit_code != 0:
 			print('exit code: ', exit_code)
 			return
