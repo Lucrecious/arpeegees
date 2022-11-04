@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
 [ext_resource path="res://lut/components/root_sprite.gd" type="Script" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://src/resources/arpeegee_pins/actions/splittin_goo.gd" type="Script" id=13]
 [ext_resource path="res://assets/sprites/effects/goo_green.png" type="Texture" id=14]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/crustify_blobbo.gd" type="Script" id=15]
+[ext_resource path="res://src/image_resizer_tool.gd" type="Script" id=16]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 7 )
@@ -94,8 +95,11 @@ visible = false
 z_index = 1
 
 [node name="Sprite" type="Sprite" parent="Actions/SpittinGoo/GooShot" index="0"]
-scale = Vector2( 0.1, 0.1 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 14 )
+
+[node name="ImageResizerTool" type="Node" parent="Actions/SpittinGoo/GooShot" index="1"]
+script = ExtResource( 16 )
 
 [node name="Crustify" type="Node2D" parent="Actions" index="2"]
 script = ExtResource( 15 )
@@ -109,5 +113,5 @@ visible = false
 z_index = 1
 
 [node name="Sprite" type="Sprite" parent="Actions/GooTrap/GooShot" index="0"]
-scale = Vector2( 0.1, 0.1 )
+scale = Vector2( 0.333, 0.333 )
 texture = ExtResource( 14 )
