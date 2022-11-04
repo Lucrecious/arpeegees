@@ -2,10 +2,17 @@ extends Node2D
 
 signal text_triggered(text_triggered)
 
+var _uses := 0
+
 func pin_action() -> PinAction:
 	return load('res://src/resources/actions/monk_powerup.tres') as PinAction
 
+func is_blocked() -> bool:
+	return _uses >= 3
+
 func run(actioner: Node2D, object: Object, callback: String) -> void:
+	_uses += 1
+	
 	var sprite_switcher := NodE.get_child(actioner, SpriteSwitcher) as SpriteSwitcher
 	var status_effects_list := NodE.get_child(actioner, StatusEffectsList) as StatusEffectsList
 	var sounds := NodE.get_child_by_name(actioner, 'Sounds')
