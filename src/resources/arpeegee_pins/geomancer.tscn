@@ -114,23 +114,22 @@ texture = ExtResource( 13 )
 script = ExtResource( 16 )
 
 [node name="Rocks" type="Node2D" parent="Actions/RaiseEarth" index="0"]
-visible = false
 
 [node name="Rock" type="Sprite" parent="Actions/RaiseEarth/Rocks" index="0"]
 position = Vector2( -71, -15 )
-scale = Vector2( 0.05, 0.05 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 18 )
 script = ExtResource( 20 )
 
 [node name="Rock2" type="Sprite" parent="Actions/RaiseEarth/Rocks" index="1"]
 position = Vector2( -7.00002, 32 )
-scale = Vector2( 0.05, 0.05 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 19 )
 script = ExtResource( 20 )
 
 [node name="Rock3" type="Sprite" parent="Actions/RaiseEarth/Rocks" index="2"]
 position = Vector2( 52, 0.300049 )
-scale = Vector2( 0.05, 0.05 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 17 )
 script = ExtResource( 20 )
 
@@ -146,7 +145,6 @@ type = 1
 throw_frame = "magicthrow"
 
 [node name="Rock" type="Sprite" parent="Actions/MagicThrowRock" index="0"]
-visible = false
 position = Vector2( -67, -94 )
-scale = Vector2( 0.05, 0.05 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 13 )
