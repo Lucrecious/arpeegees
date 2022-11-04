@@ -73,6 +73,17 @@ func get_npcs() -> Array:
 func get_players() -> Array:
 	return _players.duplicate()
 
+static func is_alive(pins: Array) -> Array:
+	var alive_pins := []
+	for p in pins:
+		var health := NodE.get_child(p, Health) as Health
+		if health.current <= 0:
+			continue
+		
+		alive_pins.push_back(p)
+	
+	return alive_pins
+
 func get_pins() -> Array:
 	return _ordered_pins.duplicate()
 

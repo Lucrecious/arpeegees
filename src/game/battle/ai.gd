@@ -37,7 +37,7 @@ func _on_npc_turn_started() -> void:
 	var action := node.pin_action() as PinAction
 	
 	if action.target_type == PinAction.TargetType.Single:
-		var players := _turn_manager.get_players()
+		var players := TurnManager.is_alive(_turn_manager.get_players())
 		
 		tween.tween_callback(_turn_manager, 'run_action_with_target',
 				[pin, node.name, players[randi() % players.size()]])

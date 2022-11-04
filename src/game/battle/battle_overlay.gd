@@ -125,7 +125,7 @@ func _show_action_menu(pin: ArpeegeePinNode, pin_actions: PinActions) -> void:
 			var action := node.pin_action() as PinAction
 			
 			if action.target_type == PinAction.TargetType.Single:
-				_action_menu.add_pin_action(node, _is_alive(_turn_manager.get_npcs()))
+				_action_menu.add_pin_action(node, TurnManager.is_alive(_turn_manager.get_npcs()))
 			elif action.target_type == PinAction.TargetType.Self:
 				_action_menu	.add_pin_action(node, [])
 			elif action.target_type == PinAction.TargetType.AllEnemies:
@@ -139,7 +139,7 @@ func _show_action_menu(pin: ArpeegeePinNode, pin_actions: PinActions) -> void:
 			var action := node.pin_action() as PinAction
 			
 			if action.target_type == PinAction.TargetType.Single:
-				_action_menu.add_pin_action(node, _is_alive(_turn_manager.get_players()))
+				_action_menu.add_pin_action(node, TurnManager.is_alive(_turn_manager.get_players()))
 			elif action.target_type == PinAction.TargetType.Self:
 				_action_menu	.add_pin_action(node, [])
 			elif action.target_type == PinAction.TargetType.AllEnemies:
@@ -150,17 +150,6 @@ func _show_action_menu(pin: ArpeegeePinNode, pin_actions: PinActions) -> void:
 				assert(false)
 	else:
 		assert(false)
-
-func _is_alive(pins: Array) -> Array:
-	var alive_pins := []
-	for p in pins:
-		var health := NodE.get_child(p, Health) as Health
-		if health.current <= 0:
-			continue
-		
-		alive_pins.push_back(p)
-	
-	return alive_pins
 
 func _on_action_picked(action_node: Node, targets: Array, pin: ArpeegeePinNode, menu: PinActionMenu) -> void:
 	menu.clear()
