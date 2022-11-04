@@ -112,7 +112,7 @@ z_index = 1
 
 [node name="Sprite" type="Sprite" parent="Actions/ArrowZip/Arrow" index="0"]
 position = Vector2( 95, -7 )
-scale = Vector2( 0.095, 0.095 )
+scale = Vector2( 0.333, 0.333 )
 texture = ExtResource( 13 )
 
 [node name="ArrowsEnFuego" type="Node2D" parent="Actions" index="1"]
