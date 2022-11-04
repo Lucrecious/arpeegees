@@ -126,7 +126,7 @@ z_index = 1
 
 [node name="Sprite" type="Sprite" parent="Actions/ArrowsEnFuego/Arrow" index="0"]
 position = Vector2( 95, -7 )
-scale = Vector2( 0.095, 0.095 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 16 )
 
 [node name="RainFromAbove" type="Node2D" parent="Actions" index="2"]
@@ -140,7 +140,7 @@ z_index = 1
 [node name="Sprite" type="Sprite" parent="Actions/RainFromAbove/Arrow" index="0"]
 position = Vector2( 150, -48 )
 rotation = 1.10559
-scale = Vector2( 0.095, 0.095 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 13 )
 
 [node name="MagicGhostSword" type="Node2D" parent="Actions" index="3"]
