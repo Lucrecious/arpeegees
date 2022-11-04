@@ -84,11 +84,15 @@ func hurt() -> void:
 		else:
 			_current_hurt_tween.tween_property(get_parent(), 'modulate:a', 0.0, 1.0)\
 					.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_EXPO)
+			_current_hurt_tween.tween_callback(get_parent(), 'set', ['visible', false])
 		return
 	
 	_current_hurt_tween.tween_callback(_sprite_switcher, 'change', ['idle'])
 
 func revive() -> void:
+	if not get_parent().visible:
+		get_parent().visible = true
+	
 	_health.current_set(ceil(_health.max_points * 0.3))
 	_sprite_switcher.change('idle')
 
