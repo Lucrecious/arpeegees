@@ -82,6 +82,7 @@ func _add_explosion(animation: SceneTreeTween, explosion_parent: Node2D) -> void
 
 func _create_heckin_good_song_status_effect() -> StatusEffect:
 	var status_effect := StatusEffect.new()
+	status_effect.is_ailment = false
 	status_effect.stack_count = 1
 	
 	if type == Type.HeckinGoodSong:

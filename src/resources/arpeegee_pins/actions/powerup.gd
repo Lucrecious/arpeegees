@@ -37,6 +37,7 @@ func run(actioner: Node2D, object: Object, callback: String) -> void:
 
 func _create_focus_ki_status_effect() -> StatusEffect:
 	var status_effect := StatusEffect.new()
+	status_effect.is_ailment = false
 	status_effect.stack_count = 3
 	status_effect.tag = StatusEffectTag.FocusKi
 	

@@ -3,6 +3,7 @@ extends Node
 
 static func create_burn_status_effect(attack_based: int) -> StatusEffect:
 	var status_effect := StatusEffect.new()
+	status_effect.is_ailment = true
 	status_effect.stack_count = 1
 	status_effect.tag = StatusEffectTag.Burning
 	
@@ -98,6 +99,7 @@ class BurnEffect extends Node:
 
 static func bright_sparkles(pin: ArpeegeePinNode) -> void:
 	var status_effect := StatusEffect.new()
+	status_effect.is_ailment = false
 	status_effect.stack_count = 3
 	status_effect.tag = StatusEffectTag.BrightSparkles
 	
