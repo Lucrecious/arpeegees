@@ -117,6 +117,7 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 
 func _create_goo_trap_status_effect(pin: ArpeegeePinNode) -> StatusEffect:
 	var status_effect := StatusEffect.new()
+	status_effect.is_ailment = true
 	status_effect.stack_count = 1
 	status_effect.tag = StatusEffectTag.GooTrap
 	
