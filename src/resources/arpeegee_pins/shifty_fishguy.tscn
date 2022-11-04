@@ -104,12 +104,11 @@ type = 2
 throw_frame = "throw"
 
 [node name="Spear" type="Node2D" parent="Actions/ThrowSpear" index="0"]
-visible = false
 position = Vector2( 178, -44 )
 
 [node name="Sprite" type="Sprite" parent="Actions/ThrowSpear/Spear" index="0"]
 position = Vector2( -108, 2.99998 )
-scale = Vector2( 0.1, 0.1 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 15 )
 
 [node name="Splish" type="Node2D" parent="Actions" index="2"]
