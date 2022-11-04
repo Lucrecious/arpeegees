@@ -5,6 +5,11 @@ signal text_triggered(narration_key)
 func pin_action() -> PinAction:
 	return preload('res://src/resources/actions/life2_white_mage.tres')
 
+func is_blocked() -> bool:
+	return _used
+
+var _used := false
+
 func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> void:
 	var animation := create_tween()
 	
@@ -30,6 +35,7 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 		
 		var damage_receiver := NodE.get_child(target, DamageReceiver) as DamageReceiver
 		animation.tween_callback(damage_receiver, 'revive')
+		_used = true
 		
 		animation.tween_interval(0.5)
 		
