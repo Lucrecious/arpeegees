@@ -95,11 +95,10 @@ position = Vector2( 95, -63 )
 script = ExtResource( 14 )
 
 [node name="Goo" type="Node2D" parent="Actions/SpittinGoo" index="0"]
-visible = false
 
 [node name="Sprite" type="Sprite" parent="Actions/SpittinGoo/Goo" index="0"]
 position = Vector2( 61, -76 )
-scale = Vector2( 0.09, 0.09 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 15 )
 
 [node name="SPARKLES" type="Node2D" parent="Actions" index="2"]
