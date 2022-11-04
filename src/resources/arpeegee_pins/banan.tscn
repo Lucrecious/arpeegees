@@ -56,7 +56,6 @@ scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 16 )
 
 [node name="Idle" type="Sprite" parent="Sprites" index="2"]
-visible = false
 use_parent_material = true
 position = Vector2( 8, -77 )
 scale = Vector2( 0.333333, 0.333333 )
@@ -77,6 +76,7 @@ scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 6 )
 
 [node name="ShootBanan" type="Sprite" parent="Sprites" index="5"]
+visible = false
 use_parent_material = true
 position = Vector2( 18, -85 )
 scale = Vector2( 0.333, 0.333 )
