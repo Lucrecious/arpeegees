@@ -71,7 +71,6 @@ material = SubResource( 1 )
 script = ExtResource( 12 )
 
 [node name="Idle" type="Sprite" parent="Sprites" index="0"]
-visible = false
 use_parent_material = true
 position = Vector2( -150, -177 )
 scale = Vector2( 0.333333, 0.333333 )
@@ -128,6 +127,7 @@ texture = ExtResource( 5 )
 centered = false
 
 [node name="Win" type="Sprite" parent="Sprites" index="7"]
+visible = false
 use_parent_material = true
 position = Vector2( -154, -269 )
 scale = Vector2( 0.333333, 0.333333 )
