@@ -42,7 +42,7 @@ func apply_power(pins: Array) -> void:
 func _trail_and_explosion(from_local: Vector2, to_global: Vector2) -> void:
 	var trail := CPUParticles2D.new()
 	trail.texture = load('res://assets/sprites/effects/sparkle5.png')
-	trail.scale_amount = 0.1
+	trail.scale_amount = 0.333
 	trail.amount = 10
 	trail.local_coords = false
 	trail.lifetime = 0.5

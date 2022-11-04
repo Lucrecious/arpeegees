@@ -25,7 +25,7 @@ func heart_explosion() -> Array:
 func sparkle_explosions() -> Array:
 	var explosion := ExplosionTemplateScene.instance() as ExplosionParticles
 	explosion.spread = 180.0
-	explosion.scale_amount = 0.1
+	explosion.scale_amount = 0.333
 	explosion.texture = load('res://assets/sprites/effects/sparkle5.png')
 	
 	return [explosion]
@@ -35,7 +35,7 @@ func bright_sparkles(pin: ArpeegeePinNode) -> void:
 	for i in range(5):
 		var explosion := ExplosionTemplateScene.instance() as ExplosionParticles
 		explosion.spread = 180.0
-		explosion.scale_amount = 0.1
+		explosion.scale_amount = 0.333
 		var texture := load('res://assets/sprites/effects/sparkle%d.png' % [i + 1])
 		explosion.texture = texture
 		explosion.amount = 4
@@ -46,7 +46,7 @@ func bright_sparkles(pin: ArpeegeePinNode) -> void:
 func random_sparkle_explosions() -> Array:
 	var sparkle1 := ExplosionTemplateScene.instance() as ExplosionParticles
 	sparkle1.spread = 180.0
-	sparkle1.scale_amount = 0.1
+	sparkle1.scale_amount = 0.333
 	sparkle1.amount = 5
 	sparkle1.initial_velocity_random = 0.5
 	sparkle1.texture = load(_random_sparkle_path())
@@ -54,7 +54,7 @@ func random_sparkle_explosions() -> Array:
 	
 	var sparkle2 := ExplosionTemplateScene.instance() as ExplosionParticles
 	sparkle2.spread = 180.0
-	sparkle2.scale_amount = 0.1
+	sparkle2.scale_amount = 0.333
 	sparkle2.amount = 5
 	sparkle2.initial_velocity_random = 0.5
 	sparkle2.texture = load(_random_sparkle_path())

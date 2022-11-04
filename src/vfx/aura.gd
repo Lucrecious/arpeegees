@@ -8,7 +8,7 @@ const DrippingScene := preload('res://src/vfx/dripping.tscn')
 func create_sweat_aura(pin: ArpeegeePinNode) -> Array:
 	var front := DrippingScene.instance() as CPUParticles2D
 	front.z_index = Z_INDEX_FRONT
-	front.scale_amount = 0.3
+	front.scale_amount = 0.333
 	
 	var bounding_box := NodE.get_child(pin, REferenceRect) as REferenceRect
 	var rect := bounding_box.global_rect()
@@ -50,7 +50,7 @@ func create_bright_sparkles_aura() -> Array:
 		
 		var texture := load('res://assets/sprites/effects/sparkle%d.png' % [i + 1])
 		aura.texture = texture
-		aura.scale_amount = 0.05
+		aura.scale_amount = 0.333
 		aura.z_index = Z_INDEX_FRONT if i % 2 == 0 else aura.z_index
 		aura.amount = 2
 		
