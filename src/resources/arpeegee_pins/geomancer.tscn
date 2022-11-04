@@ -114,6 +114,7 @@ texture = ExtResource( 13 )
 script = ExtResource( 16 )
 
 [node name="Rocks" type="Node2D" parent="Actions/RaiseEarth" index="0"]
+visible = false
 
 [node name="Rock" type="Sprite" parent="Actions/RaiseEarth/Rocks" index="0"]
 position = Vector2( -71, -15 )
@@ -145,6 +146,7 @@ type = 1
 throw_frame = "magicthrow"
 
 [node name="Rock" type="Sprite" parent="Actions/MagicThrowRock" index="0"]
+visible = false
 position = Vector2( -67, -94 )
 scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 13 )

@@ -299,6 +299,7 @@ margin_bottom = 308.0
 
 [node name="Shiny" type="CPUParticles2D" parent="SpanLimiter/Background/CenterShiny/ShinyControl" groups=["shiny_ground_particles"]]
 position = Vector2( 10, 152 )
+emitting = false
 amount = 5
 texture = ExtResource( 26 )
 emission_shape = 2
