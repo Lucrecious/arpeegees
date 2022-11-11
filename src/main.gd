@@ -37,6 +37,8 @@ func restart_battle() -> void:
 				.add_child_below_node(_battle_screen_position_reference, _title_screen)
 		_title_screen.reset()
 	
+	_battle_screen.restart_button.connect('pressed', self, 'restart_battle', [], CONNECT_DEFERRED)
+	
 	emit_signal('battle_screen_changed')
 	var size_x := get_viewport().get_size_override().x
 	get_tree().call_group('size_adapter', 'adapt', size_x)

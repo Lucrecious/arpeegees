@@ -499,6 +499,21 @@ margin_bottom = 536.0
 popup_exclusive = true
 dialog_autowrap = true
 
+[node name="RestartButtonHolder" type="Control" parent="CanvasLayer/HUD/Control"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="RestartButton" type="Button" parent="CanvasLayer/HUD/Control/RestartButtonHolder"]
+unique_name_in_owner = true
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -98.0
+margin_top = 39.0
+margin_right = -41.0
+margin_bottom = 79.0
+text = "Restart"
+
 [node name="Sounds" type="Node" parent="."]
 script = ExtResource( 21 )
 

@@ -23,9 +23,15 @@ onready var _narrator := $'%Narrator' as NarratorUI
 onready var _original_narrator_position := _narrator.rect_position
 
 onready var bottom_bar := $'%BlackGradient' as Control
+onready var restart_button := $'%RestartButton' as Button
+onready var _restart_button_holder := restart_button.get_parent() as Control
+
+onready var _restart_button_original_position := restart_button.rect_position
+onready var _restart_button_holder_original_position := _restart_button_holder.rect_position
 
 func _ready() -> void:
 	_narrator.rect_position += Vector2.LEFT * (_narrator.rect_size.x + 500.0)
+	_restart_button_holder.rect_position += Vector2.RIGHT * (restart_button.rect_size.x + 500.0)
 	
 	if auto_start:
 		var item_powerup: PinItemPowerUp
@@ -45,6 +51,9 @@ func get_narrator() -> NarratorUI:
 
 func get_original_narrator_position() -> Vector2:
 	return _original_narrator_position
+
+func get_restart_button_position() -> Vector2:
+	return _restart_button_original_position
 
 var _started := false
 func start(pins: Dictionary) -> void:
@@ -147,6 +156,9 @@ func _do_intro_narration() -> void:
 	TweenExtension.pause_until_signal_if_condition(speaking_tween.parallel(), _narrator, 'speaking_ended',
 			_narrator, 'is_speaking')
 	speaking_tween.tween_callback(self, '_balance_battle')
+	
+	speaking_tween.tween_property(_restart_button_holder, 'rect_position', _restart_button_holder_original_position, 0.5)\
+			.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 
 func _balance_battle() -> void:
 	_turn_manager.connect('battle_ended', self, '_on_battle_ended')
