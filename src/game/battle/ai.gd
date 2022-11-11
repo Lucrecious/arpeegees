@@ -18,7 +18,8 @@ func _on_npc_turn_started() -> void:
 	
 	var actions_node := NodE.get_child(pin, PinActions) as PinActions
 	var action_nodes := actions_node.get_pin_action_nodes()
-	if action_nodes.empty():
+	var health := NodE.get_child(pin, Health) as Health
+	if action_nodes.empty() or health.current <= 0:
 		_turn_manager.finish_turn()
 		return
 	

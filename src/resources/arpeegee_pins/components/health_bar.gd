@@ -32,5 +32,9 @@ func _on_stats_changed() -> void:
 	var y := _progress_bar.points[1].y
 	_progress_bar.set_point_position(1, Vector2(new_point, y))
 	
-	var end_position := _progress_bar.to_global(_progress_bar.points[1])
-	_separator_line.global_position = end_position
+	# this if statements is here to prevent an error that I don't feel like finding the root cause for
+	# The error is harmless but it happens when an enemy dies from burn or poison at the start of their turn
+	# the health tries to update but it's not in the tree. anyways, who cares.
+	if _progress_bar.is_inside_tree() and _separator_line.is_inside_tree():
+		var end_position := _progress_bar.to_global(_progress_bar.points[1])
+		_separator_line.global_position = end_position

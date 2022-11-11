@@ -68,6 +68,7 @@ class Poison extends Node:
 		animation.tween_callback(damage_receiver, 'real_damage', [damage])
 		
 		animation.tween_callback(self, 'emit_signal', ['start_turn_effect_finished'])
+		
 
 
 class BurnEffect extends Node:

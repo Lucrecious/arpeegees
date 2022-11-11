@@ -77,7 +77,8 @@ func _on_pins_changed() -> void:
 func _on_player_turn_started() -> void:
 	var pin := _turn_manager.get_turn_pin()
 	var pin_actions := NodE.get_child(pin, PinActions) as PinActions
-	if not pin_actions.get_pin_action_nodes().empty():
+	var health := NodE.get_child(pin, Health) as Health
+	if not pin_actions.get_pin_action_nodes().empty() and health.current > 0:
 		_show_action_menu(pin, pin_actions)
 	else:
 		_turn_manager.finish_turn()
