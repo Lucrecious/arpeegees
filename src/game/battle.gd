@@ -297,4 +297,4 @@ func _input(input: InputEvent) -> void:
 		return
 	
 	if mouse_button.pressed and mouse_button.button_index == BUTTON_LEFT:
-		_narrator.skip()
+		_narrator.speed_up_page()

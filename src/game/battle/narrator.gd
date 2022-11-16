@@ -97,7 +97,7 @@ func _speak(text: String, chain: bool) -> void:
 	_run_speaking_tween(text, true)
 
 func _run_speaking_tween(text: String, start_signal: bool) -> void:
-	var sentences := _prepare_text(text)
+	var pages := _prepare_text(text)
 	
 	_current_tween = create_tween()
 	_current_tween.tween_method(self, '_textbox_dissolve_level', 0.0, 1.0, DISSOLVE_IN_SEC)\
@@ -109,22 +109,23 @@ func _run_speaking_tween(text: String, start_signal: bool) -> void:
 	_current_tween.tween_callback(self, 'emit_signal', ['text_started'])
 	_current_tween.parallel().tween_callback(Logger, 'info', ['text_started emitted'])
 	
-	for s in sentences:
+	for p in pages:
+		_current_tween.tween_callback(self, '_reset_current_tween_speed_scale')
 		_current_tween.tween_callback(self, '_set_is_typing', [true])
 		
 		var length := 0
-		var total_thing := s.join('\n') as String
+		var total_thing := p.join('\n') as String
 		_current_tween.tween_callback(_label, 'set', ['text', total_thing])
 		_current_tween.tween_callback(_label, 'set', ['visible_characters', 0])
 		
 		var line_spaces := PoolIntArray([])
-		for i in s.size():
-			var line := s[i] as String
+		for i in p.size():
+			var line := p[i] as String
 			var new_line_length := int(line.length() + 1) # + 1 for the new line
 			line_spaces.push_back(line.count(' '))
 			
 			if i >= MAX_LINES_VISIBLE:
-				var remove_line_length := int(s[i - MAX_LINES_VISIBLE].length() + 1) # + 1 for new line
+				var remove_line_length := int(p[i - MAX_LINES_VISIBLE].length() + 1) # + 1 for new line
 				_current_tween.tween_callback(self, '_wrap_lines', [new_line_length, remove_line_length, length])
 				length -= remove_line_length
 			
@@ -134,6 +135,7 @@ func _run_speaking_tween(text: String, start_signal: bool) -> void:
 					length - new_line_length, length, new_line_length / LETTERS_PER_SEC)
 			
 		_current_tween.tween_callback(self, '_set_is_typing', [false])
+		_current_tween.tween_callback(self, '_reset_current_tween_speed_scale')
 		_current_tween.tween_interval(WAIT_BETWEEN_SENTENCES_SEC)
 	
 	_current_tween.tween_method(self, '_textbox_dissolve_level', 1.0, 0.5, DISSOLVE_OUT_SEC / 2.0)\
@@ -152,13 +154,22 @@ func _run_speaking_tween(text: String, start_signal: bool) -> void:
 	Logger.info('speaking_started emitted')
 	emit_signal('speaking_started')
 
-func skip() -> void:
+func speed_up_page() -> void:
 	if not _current_tween:
 		return
 	
-	Logger.info('skip speaking')
-	_current_tween.stop()
-	_finished_speaking()
+	if not _is_typing:
+		return
+	
+	Logger.info('speed up page text')
+	_current_tween.set_speed_scale(4.0)
+
+func _reset_current_tween_speed_scale() -> void:
+	if not _current_tween:
+		return
+	
+	Logger.info('reset text speed')
+	_current_tween.set_speed_scale(1.0)
 
 func _set_visible_characters(value: int) -> void:
 	if value > 0:
