@@ -160,7 +160,6 @@ func skip() -> void:
 	_current_tween.stop()
 	_finished_speaking()
 
-
 func _set_visible_characters(value: int) -> void:
 	if value > 0:
 		var space_count := _label.text.count(' ', 0, value)
