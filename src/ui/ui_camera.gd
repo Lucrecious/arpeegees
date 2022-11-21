@@ -58,6 +58,9 @@ func _on_browser_mousedown(args: Array):
 	if event.button != JAVASCRIPT_BUTTON_LEFT:
 		return
 	
+	var mouse_move := _create_mouse_move_event()
+	get_tree().input_event(mouse_move)
+	
 	var mousedown := _create_left_mouse_event(true)
 	get_tree().input_event(mousedown)
 
@@ -66,14 +69,18 @@ func _on_browser_mouseup(args: Array):
 	if event.button != JAVASCRIPT_BUTTON_LEFT:
 		return
 	
+	var mouse_move := _create_mouse_move_event()
+	get_tree().input_event(mouse_move)
+	
 	var mouseup := _create_left_mouse_event(false)
 	get_tree().input_event(mouseup)
 
 func _create_mouse_move_event() -> InputEventMouseMotion:
 	var mouse_motion := InputEventMouseMotion.new()
+	mouse_motion.position = _get_global_mouse_position_for_event()
+	mouse_motion.global_position = _get_local_mouse_position_for_event()
 	
 	return mouse_motion
-	
 
 func _create_left_mouse_event(pressed) -> InputEventMouseButton:
 	var mouse_button := InputEventMouseButton.new()
@@ -81,13 +88,18 @@ func _create_left_mouse_event(pressed) -> InputEventMouseButton:
 	mouse_button.button_mask = BUTTON_MASK_LEFT
 	mouse_button.pressed = pressed
 	
-	var scroll_top := _web_scroll_overlay.scrollTop as int
-	var global_position := get_viewport_transform() * (get_viewport().get_mouse_position() - Vector2.UP * scroll_top)
-	var local_position := get_viewport().get_mouse_position()
-	mouse_button.global_position =  local_position
-	mouse_button.position =  global_position
+	mouse_button.position =  _get_global_mouse_position_for_event()
+	mouse_button.global_position = _get_local_mouse_position_for_event()
 	
 	return mouse_button
+
+func _get_local_mouse_position_for_event() -> Vector2:
+	return get_viewport().get_mouse_position()
+
+func _get_global_mouse_position_for_event() -> Vector2:
+	var scroll_top := _web_scroll_overlay.scrollTop as int
+	var global_position := get_viewport_transform() * (get_viewport().get_mouse_position() - Vector2.UP * scroll_top)
+	return global_position
 
 func _on_viewport_entered(viewport: Viewport) -> void:
 	_show_hud()
