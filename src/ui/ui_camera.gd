@@ -69,15 +69,23 @@ func _on_browser_mouseup(args: Array):
 	var mouseup := _create_left_mouse_event(false)
 	get_tree().input_event(mouseup)
 
+func _create_mouse_move_event() -> InputEventMouseMotion:
+	var mouse_motion := InputEventMouseMotion.new()
+	
+	return mouse_motion
+	
+
 func _create_left_mouse_event(pressed) -> InputEventMouseButton:
 	var mouse_button := InputEventMouseButton.new()
 	mouse_button.button_index = BUTTON_LEFT
 	mouse_button.button_mask = BUTTON_MASK_LEFT
 	mouse_button.pressed = pressed
 	
-	var position := _last_mouse_position
-	mouse_button.position = _last_mouse_global_position
-	mouse_button.global_position = position
+	var scroll_top := _web_scroll_overlay.scrollTop as int
+	var global_position := get_viewport_transform() * (get_viewport().get_mouse_position() - Vector2.UP * scroll_top)
+	var local_position := get_viewport().get_mouse_position()
+	mouse_button.global_position =  local_position
+	mouse_button.position =  global_position
 	
 	return mouse_button
 
@@ -148,13 +156,8 @@ func _show_hud() -> void:
 func _set_volume_on_bus(volume_db: float, index: int) -> void:
 	AudioServer.set_bus_volume_db(index, volume_db)
 
-var _last_mouse_position := Vector2.ZERO
-var _last_mouse_global_position := Vector2.ZERO
 func _input(event: InputEvent) -> void:
 	if _using_web_scroll:
-		if event is InputEventMouseMotion:
-			_last_mouse_position = event.position
-			_last_mouse_global_position = event.global_position
 		return
 	
 	var viewport := _control.get_viewport()
