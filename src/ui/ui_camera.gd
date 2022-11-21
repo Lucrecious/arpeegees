@@ -58,6 +58,8 @@ func _on_browser_mousedown(args: Array):
 	if event.button != JAVASCRIPT_BUTTON_LEFT:
 		return
 	
+	Logger.verbose('browser mouse down')
+	
 	var mouse_move := _create_mouse_move_event()
 	get_tree().input_event(mouse_move)
 	
@@ -68,6 +70,8 @@ func _on_browser_mouseup(args: Array):
 	var event = args[0]
 	if event.button != JAVASCRIPT_BUTTON_LEFT:
 		return
+	
+	Logger.verbose('browser mouse up')
 	
 	var mouse_move := _create_mouse_move_event()
 	get_tree().input_event(mouse_move)
@@ -170,6 +174,11 @@ func _set_volume_on_bus(volume_db: float, index: int) -> void:
 
 func _input(event: InputEvent) -> void:
 	if _using_web_scroll:
+		if event is InputEventMouseMotion or event is InputEventMouseButton:
+			var initial_string := 'mouse motion' if event is InputEventMouseMotion else 'mouse button'
+			Logger.verbose('%s - gp (%.1f, %.1f) lp (%.1f, %.1f)' % [initial_string, event.global_position.x, event.global_position.y, event.position.x, event.position.y])
+		if event is InputEventMouseButton:
+			Logger.verbose('mouse button - %s' % ['pressed' if event.pressed else 'released'])
 		return
 	
 	var viewport := _control.get_viewport()
