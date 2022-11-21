@@ -35,8 +35,8 @@ func _ready() -> void:
 		var document := JavaScript.get_interface('document')
 		_web_scroll_overlay = document.getElementById('scroll-overlay')
 		_web_scroll_overlay.addEventListener('scroll', _on_browser_scroll_js_callback)
-		_web_scroll_overlay.addEventListener('mousedown', _on_browser_mousedown_js_callback)
-		_web_scroll_overlay.addEventListener('mouseup', _on_browser_mouseup_js_callback)
+		#_web_scroll_overlay.addEventListener('mousedown', _on_browser_mousedown_js_callback)
+		#_web_scroll_overlay.addEventListener('mouseup', _on_browser_mouseup_js_callback)
 
 func _on_battle_screen_changed() -> void:
 	_update_battle_screen()
@@ -174,11 +174,9 @@ func _set_volume_on_bus(volume_db: float, index: int) -> void:
 
 func _input(event: InputEvent) -> void:
 	if _using_web_scroll:
-		if event is InputEventMouseMotion or event is InputEventMouseButton:
-			var initial_string := 'mouse motion' if event is InputEventMouseMotion else 'mouse button'
-			Logger.verbose('%s - gp (%.1f, %.1f) lp (%.1f, %.1f)' % [initial_string, event.global_position.x, event.global_position.y, event.position.x, event.position.y])
 		if event is InputEventMouseButton:
-			Logger.verbose('mouse button - %s' % ['pressed' if event.pressed else 'released'])
+			Logger.info('%s - gp (%.1f, %.1f) lp (%.1f, %.1f)' % ['mouse pressed', event.global_position.x, event.global_position.y, event.position.x, event.position.y])
+			Logger.info('mouse button - %s' % ['pressed' if event.pressed else 'released'])
 		return
 	
 	var viewport := _control.get_viewport()
