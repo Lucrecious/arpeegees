@@ -202,7 +202,7 @@ NARRATOR_TRYING_TO_SPORE_USE_2,"Mushboy tries again to spore. Don't know why, bu
 NARRATOR_TRYING_TO_SPORE_USE_3,Mushboy once again tries to spore. IT WORKS! Just kidding.~It does nothing.~Mushboy is SUPER pissed!!,
 ,,
 POUNCE_OWO_NAME,Pounce OWO,
-NARRATOR_POUNCE_OWO_USE,"Hunter notices your vulnerability OWO what's this??""",
+NARRATOR_POUNCE_OWO_USE,Hunter notices your vulnerability OWO what's this??,
 ,,
 STAB_STAB_NAME,Stab Stab,
 NARRATOR_STAB_STAB_USE,"Hunter does a quick little stabby stab, OUCH!",
