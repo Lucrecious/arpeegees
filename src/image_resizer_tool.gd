@@ -3,6 +3,7 @@ class_name ImageResizerTool
 extends Node
 
 export(PoolStringArray) var _exceptions := PoolStringArray([])
+export(PoolStringArray) var _onlys := PoolStringArray([])
 
 export(bool) var _run := false setget _run_set
 func _run_set(value: bool) -> void:
@@ -12,6 +13,9 @@ func _run_set(value: bool) -> void:
 	for n in NodE.get_children_recursive(get_parent(), Sprite):
 		var sprite := n as Sprite
 		if not sprite:
+			continue
+		
+		if not _onlys.empty() and not sprite.name in _onlys:
 			continue
 		
 		if sprite.name in _exceptions:

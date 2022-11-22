@@ -44,7 +44,7 @@ func run_start_turn_effect() -> void:
 	position = ActionUtils.add_stab(tween, actioner, target_position)
 	tween.tween_callback(sounds, 'play', ['ChikaraPanchiHit'])
 	
-	tween.tween_callback(sprite_switcher, 'change', ['idle'])
+	tween.tween_callback(sprite_switcher, 'change', ['punch'])
 	
 	
 	tween.tween_callback(VFX, 'physical_impact', [actioner, hint_position])
@@ -63,6 +63,7 @@ func run_start_turn_effect() -> void:
 	
 	# switching it back after punch
 	tween.tween_callback(sprite_switcher, 'swap_map', ['powerup', 'idle'])
+	tween.tween_callback(sprite_switcher, 'change', ['idle'])
 	
 	ActionUtils.add_walk(tween, actioner,
 			actioner.global_position + relative, actioner.global_position, 15.0, 7)

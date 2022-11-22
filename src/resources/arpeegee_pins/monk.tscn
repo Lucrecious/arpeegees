@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/sprites/monk/monk_dead.png" type="Texture" id=2]
@@ -23,6 +23,8 @@
 [ext_resource path="res://assets/sounds/chikara_panchi_charge_monk.mp3" type="AudioStream" id=22]
 [ext_resource path="res://assets/shaders/wobble_noise.tres" type="Texture" id=23]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/slippable.gd" type="Script" id=24]
+[ext_resource path="res://assets/sprites/monk/monk_punch.png" type="Texture" id=25]
+[ext_resource path="res://assets/sprites/monk/monk_hit.png" type="Texture" id=26]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 5 )
@@ -70,13 +72,20 @@ centered = false
 [node name="Hurt" type="Sprite" parent="Sprites" index="2"]
 visible = false
 use_parent_material = true
-position = Vector2( -51, -166 )
-rotation = 0.717431
-scale = Vector2( 0.5, 0.1 )
-texture = ExtResource( 4 )
+position = Vector2( -73, -186 )
+scale = Vector2( 0.333333, 0.333333 )
+texture = ExtResource( 26 )
 centered = false
 
-[node name="PowerUp" type="Sprite" parent="Sprites" index="3"]
+[node name="Punch" type="Sprite" parent="Sprites" index="3"]
+visible = false
+use_parent_material = true
+position = Vector2( -86, -189 )
+scale = Vector2( 0.333333, 0.333333 )
+texture = ExtResource( 25 )
+centered = false
+
+[node name="PowerUp" type="Sprite" parent="Sprites" index="4"]
 visible = false
 use_parent_material = true
 position = Vector2( -61, -170 )
@@ -84,7 +93,7 @@ scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 3 )
 centered = false
 
-[node name="Dead" type="Sprite" parent="Sprites" index="4"]
+[node name="Dead" type="Sprite" parent="Sprites" index="5"]
 visible = false
 use_parent_material = true
 position = Vector2( -134, -186 )
@@ -92,7 +101,7 @@ scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 2 )
 centered = false
 
-[node name="Win" type="Sprite" parent="Sprites" index="5"]
+[node name="Win" type="Sprite" parent="Sprites" index="6"]
 visible = false
 use_parent_material = true
 position = Vector2( -86, -212 )
@@ -105,7 +114,7 @@ script = ExtResource( 6 )
 
 [node name="Panchi" type="Node2D" parent="Actions" index="0"]
 script = ExtResource( 13 )
-attack_sprite_name = "idle"
+attack_sprite_name = "punch"
 pin_action = ExtResource( 12 )
 walk = false
 narration_key = "NARRATOR_PANCHI_USE_1"
