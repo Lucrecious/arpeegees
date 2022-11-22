@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/resources/arpeegee_pins/paladin.tres" type="Resource" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://src/resources/actions/bright_sparkles_paladin.tres" type="Resource" id=18]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/heal_generic.gd" type="Script" id=19]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/slippable.gd" type="Script" id=20]
+[ext_resource path="res://assets/sprites/paladin/paladin_tremendous.png" type="Texture" id=21]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 14 )
@@ -72,21 +73,28 @@ position = Vector2( -43, -80 )
 scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 8 )
 
-[node name="MagicHeal" type="Sprite" parent="Sprites" index="3"]
+[node name="Slash" type="Sprite" parent="Sprites" index="3"]
+visible = false
+use_parent_material = true
+position = Vector2( -48, -94 )
+scale = Vector2( 0.333333, 0.333333 )
+texture = ExtResource( 21 )
+
+[node name="MagicHeal" type="Sprite" parent="Sprites" index="4"]
 visible = false
 use_parent_material = true
 position = Vector2( -29, -98 )
 scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 6 )
 
-[node name="MagicSparkles" type="Sprite" parent="Sprites" index="4"]
+[node name="MagicSparkles" type="Sprite" parent="Sprites" index="5"]
 visible = false
 use_parent_material = true
 position = Vector2( -27, -97 )
 scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 9 )
 
-[node name="Dead" type="Sprite" parent="Sprites" index="5"]
+[node name="Dead" type="Sprite" parent="Sprites" index="6"]
 visible = false
 use_parent_material = true
 position = Vector2( -2.38419e-07, -81 )
@@ -110,6 +118,7 @@ script = ExtResource( 20 )
 [node name="TremendousSlash" type="Node2D" parent="Actions" index="1"]
 script = ExtResource( 15 )
 pin_action = ExtResource( 16 )
+attack_frame = "slash"
 narration_key_single = "NARRATOR_TREMENDOUS_SLASH_USE_ONE_ENEMY"
 narration_key_multi = "NARRATOR_TREMENDOUS_SLASH_USE_MULTIPLE_ENEMIES"
 
