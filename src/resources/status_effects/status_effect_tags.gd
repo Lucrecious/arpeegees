@@ -30,4 +30,5 @@ enum {
 	Disappeared,
 	ReappearedBuff,
 	MandolinPlay,
+	ConfusionForSwordBlobbo,
 }
