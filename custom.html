@@ -58,7 +58,7 @@
                 <script src="$GODOT_URL"></script>
                 <script>
                     var create_mouse_event = function(eventName, otherEvent) {
-                        var event = document.createEvent('MouseEvents')
+                        var event = document.createEvent('MouseEvent')
                         event.initMouseEvent(eventName, true, true, window,
                             otherEvent.detail, otherEvent.screenX, otherEvent.screenY, otherEvent.clientX, otherEvent.clientY,
                             otherEvent.ctrlKey, otherEvent.altKey, otherEvent.shiftKey, otherEvent.metaKey,
@@ -75,7 +75,7 @@
 
                     var engine = new Engine($GODOT_CONFIG);
                     engine.startGame().then(() => {
-                        turn_on_sounds()
+                        //turn_on_sounds()
 
                         const overlay = document.getElementById("scroll-overlay")
                         const coverOverlay = document.getElementById("cover-overlay")
@@ -87,9 +87,8 @@
                         // })
 
                         // overlay.addEventListener('mouseup', (event) => {
-                        //     var canvas = document.getElementById("canvas")
                         //     var mouse_event = create_mouse_event('mouseup', event)
-                        //     canvas.dispatchEvent(mouse_event)
+                        //     window.dispatchEvent(mouse_event)
                         // })
 
                         overlay.style.backgroundColor = "transparent";

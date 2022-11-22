@@ -12,6 +12,8 @@ onready var _battle
 onready var _original_bottom_bar_position: Vector2
 onready var _main_node := NodE.get_ancestor(self, MainNode) as MainNode
 var _on_browser_scroll_js_callback := JavaScript.create_callback(self, '_on_browser_scroll')
+
+# unused callbacks
 var _on_browser_mousedown_js_callback := JavaScript.create_callback(self, '_on_browser_mousedown')
 var _on_browser_mouseup_js_callback := JavaScript.create_callback(self, '_on_browser_mouseup')
 
@@ -38,8 +40,8 @@ func _ready() -> void:
 		_web_scroll_overlay = document.getElementById('scroll-overlay')
 		_canvas_element = document.getElementById('canvas')
 		_web_scroll_overlay.addEventListener('scroll', _on_browser_scroll_js_callback)
-		_web_scroll_overlay.addEventListener('mousedown', _on_browser_mousedown_js_callback)
-		_web_scroll_overlay.addEventListener('mouseup', _on_browser_mouseup_js_callback)
+#		_web_scroll_overlay.addEventListener('mousedown', _on_browser_mousedown_js_callback)
+#		_web_scroll_overlay.addEventListener('mouseup', _on_browser_mouseup_js_callback)
 
 func _on_battle_screen_changed() -> void:
 	_update_battle_screen()
@@ -54,8 +56,8 @@ func _update_battle_screen() -> void:
 func _compute_position(canvas, rect, event) -> Vector2:
 	var rw = canvas.width / rect.width
 	var rh = canvas.height / rect.height
-	var x = (event.clientX - rect.x) * rw
-	var y = (event.clientY - rect.y) * rh
+	var x = ((event.clientX - rect.left) - rect.x) * rw
+	var y = ((event.clientY - rect.top) - rect.y) * rh
 	return Vector2(x, y)
 
 func _create_mouse_event(pressed: bool, local_position: Vector2) -> InputEventMouseButton:
@@ -175,9 +177,9 @@ func _input(event: InputEvent) -> void:
 	if _using_web_scroll:
 		return
 	
-	if event is InputEventMouseButton:
-		Logger.info('%s - gp (%.1f, %.1f) lp (%.1f, %.1f)' % ['mouse pressed', event.global_position.x, event.global_position.y, event.position.x, event.position.y])
-		Logger.info('mouse button - %s' % ['pressed' if event.pressed else 'released'])
+#	if event is InputEventMouseButton:
+#		Logger.info('%s - gp (%.1f, %.1f) lp (%.1f, %.1f)' % ['mouse pressed', event.global_position.x, event.global_position.y, event.position.x, event.position.y])
+#		Logger.info('mouse button - %s' % ['pressed' if event.pressed else 'released'])
 	
 	var viewport := _control.get_viewport()
 	
