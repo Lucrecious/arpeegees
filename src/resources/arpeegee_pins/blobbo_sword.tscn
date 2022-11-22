@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
 [ext_resource path="res://lut/components/root_sprite.gd" type="Script" id=2]
@@ -11,6 +11,8 @@
 [ext_resource path="res://assets/shaders/pin_sprite_shader.gdshader" type="Shader" id=9]
 [ext_resource path="res://assets/shaders/wobble_noise.tres" type="Texture" id=10]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/sword_spin.gd" type="Script" id=11]
+[ext_resource path="res://assets/sprites/effects/goo_green.png" type="Texture" id=12]
+[ext_resource path="res://src/resources/arpeegee_pins/actions/spittin_goo_blobbo_sparkling.gd" type="Script" id=13]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 9 )
@@ -78,5 +80,13 @@ script = ExtResource( 5 )
 script = ExtResource( 11 )
 
 [node name="SpittinGoo" type="Node2D" parent="Actions" index="1"]
+script = ExtResource( 13 )
+type = 1
+
+[node name="Goo" type="Sprite" parent="Actions/SpittinGoo" index="0"]
+visible = false
+position = Vector2( 40, -72 )
+scale = Vector2( 0.333, 0.333 )
+texture = ExtResource( 12 )
 
 [node name="Confusion" type="Node2D" parent="Actions" index="2"]
