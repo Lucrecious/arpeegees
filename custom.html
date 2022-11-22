@@ -59,7 +59,7 @@
                 <script>
                     var create_mouse_event = function(eventName, otherEvent) {
                         var event = document.createEvent('MouseEvents')
-                        event.initMouseEvent(eventName, false, true, otherEvent.view,
+                        event.initMouseEvent(eventName, true, true, window,
                             otherEvent.detail, otherEvent.screenX, otherEvent.screenY, otherEvent.clientX, otherEvent.clientY,
                             otherEvent.ctrlKey, otherEvent.altKey, otherEvent.shiftKey, otherEvent.metaKey,
                             otherEvent.button, otherEvent.target)
@@ -71,17 +71,17 @@
                         const overlay = document.getElementById("scroll-overlay")
                         const coverOverlay = document.getElementById("cover-overlay")
 
-                        overlay.addEventListener('mousedown', (event) => {
-                            var canvas = document.getElementById("canvas")
-                            var mouse_event = create_mouse_event('mousedown', event)
-                            canvas.dispatchEvent(mouse_event)
-                        })
+                        // overlay.addEventListener('mousedown', (event) => {
+                        //     var canvas = document.getElementById("canvas")
+                        //     var mouse_event = create_mouse_event('mousedown', event)
+                        //     canvas.dispatchEvent(mouse_event)
+                        // })
 
-                        overlay.addEventListener('mouseup', (event) => {
-                            var canvas = document.getElementById("canvas")
-                            var mouse_event = create_mouse_event('mouseup', event)
-                            canvas.dispatchEvent(mouse_event)
-                        })
+                        // overlay.addEventListener('mouseup', (event) => {
+                        //     var canvas = document.getElementById("canvas")
+                        //     var mouse_event = create_mouse_event('mouseup', event)
+                        //     canvas.dispatchEvent(mouse_event)
+                        // })
 
                         overlay.style.backgroundColor = "transparent";
                         coverOverlay.style.backgroundColor = "transparent";

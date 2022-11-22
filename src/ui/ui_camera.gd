@@ -1,6 +1,8 @@
 class_name UICamera
 extends Node2D
 
+const JAVASCRIPT_BUTTON_LEFT := 0
+
 export(NodePath) var _control_path := NodePath()
 export(float) var hide_hud_threshold := 305.0
 
@@ -9,12 +11,12 @@ onready var _game_visibility_notifier := $'%GameVisibilityNotifier' as Visibilit
 onready var _battle
 onready var _original_bottom_bar_position: Vector2
 onready var _main_node := NodE.get_ancestor(self, MainNode) as MainNode
-const JAVASCRIPT_BUTTON_LEFT := 0
 var _on_browser_scroll_js_callback := JavaScript.create_callback(self, '_on_browser_scroll')
 var _on_browser_mousedown_js_callback := JavaScript.create_callback(self, '_on_browser_mousedown')
 var _on_browser_mouseup_js_callback := JavaScript.create_callback(self, '_on_browser_mouseup')
 
 var _web_scroll_overlay
+var _canvas_element
 onready var _original_canvas_transform := _control.get_viewport().canvas_transform
 
 var _using_web_scroll := false
@@ -34,9 +36,10 @@ func _ready() -> void:
 		
 		var document := JavaScript.get_interface('document')
 		_web_scroll_overlay = document.getElementById('scroll-overlay')
+		_canvas_element = document.getElementById('canvas')
 		_web_scroll_overlay.addEventListener('scroll', _on_browser_scroll_js_callback)
-		#_web_scroll_overlay.addEventListener('mousedown', _on_browser_mousedown_js_callback)
-		#_web_scroll_overlay.addEventListener('mouseup', _on_browser_mouseup_js_callback)
+		_web_scroll_overlay.addEventListener('mousedown', _on_browser_mousedown_js_callback)
+		_web_scroll_overlay.addEventListener('mouseup', _on_browser_mouseup_js_callback)
 
 func _on_battle_screen_changed() -> void:
 	_update_battle_screen()
@@ -48,54 +51,50 @@ func _update_battle_screen() -> void:
 	_battle = _main_node.get_battle_screen()
 	_original_bottom_bar_position = _battle.bottom_bar.rect_position
 
+func _compute_position(canvas, rect, event) -> Vector2:
+	var rw = canvas.width / rect.width
+	var rh = canvas.height / rect.height
+	var x = (event.clientX - rect.x) * rw
+	var y = (event.clientY - rect.y) * rh
+	return Vector2(x, y)
+
+func _create_mouse_event(pressed: bool, local_position: Vector2) -> InputEventMouseButton:
+	var event := InputEventMouseButton.new()
+	event.pressed = pressed
+	event.button_index = BUTTON_LEFT
+	event.button_mask = BUTTON_MASK_LEFT
+	
+	event.position = local_position
+	
+	var scroll_top := _web_scroll_overlay.scrollTop as int
+	event.global_position = get_viewport_transform() * (local_position - Vector2.UP * scroll_top)
+	
+	return event
+
+func _on_browser_mousedown(args) -> void:
+	var event = args[0]
+	if event.button != JAVASCRIPT_BUTTON_LEFT:
+		return
+	
+	var rect = _canvas_element.getBoundingClientRect()
+	var position := _compute_position(_canvas_element, rect, event)
+	var godot_event := _create_mouse_event(true, position)
+	get_tree().input_event(godot_event)
+
+func _on_browser_mouseup(args) -> void:
+	var event = args[0]
+	if event.button != JAVASCRIPT_BUTTON_LEFT:
+		return
+	
+	var rect = _canvas_element.getBoundingClientRect()
+	var position := _compute_position(_canvas_element, rect, event)
+	var godot_event := _create_mouse_event(false, position)
+	get_tree().input_event(godot_event)
+
 func _on_browser_scroll(event):
 	var scroll_top := _web_scroll_overlay.scrollTop as int
 	var viewport := _control.get_viewport()
 	viewport.canvas_transform = _original_canvas_transform.translated(-Vector2.DOWN * scroll_top)
-
-func _on_browser_mousedown(args: Array):
-	var event = args[0]
-	if event.button != JAVASCRIPT_BUTTON_LEFT:
-		return
-	
-	Logger.verbose('browser mouse down')
-	
-	var mouse_move := _create_mouse_move_event()
-	get_tree().input_event(mouse_move)
-	
-	var mousedown := _create_left_mouse_event(true)
-	get_tree().input_event(mousedown)
-
-func _on_browser_mouseup(args: Array):
-	var event = args[0]
-	if event.button != JAVASCRIPT_BUTTON_LEFT:
-		return
-	
-	Logger.verbose('browser mouse up')
-	
-	var mouse_move := _create_mouse_move_event()
-	get_tree().input_event(mouse_move)
-	
-	var mouseup := _create_left_mouse_event(false)
-	get_tree().input_event(mouseup)
-
-func _create_mouse_move_event() -> InputEventMouseMotion:
-	var mouse_motion := InputEventMouseMotion.new()
-	mouse_motion.position = _get_global_mouse_position_for_event()
-	mouse_motion.global_position = _get_local_mouse_position_for_event()
-	
-	return mouse_motion
-
-func _create_left_mouse_event(pressed) -> InputEventMouseButton:
-	var mouse_button := InputEventMouseButton.new()
-	mouse_button.button_index = BUTTON_LEFT
-	mouse_button.button_mask = BUTTON_MASK_LEFT
-	mouse_button.pressed = pressed
-	
-	mouse_button.position =  _get_global_mouse_position_for_event()
-	mouse_button.global_position = _get_local_mouse_position_for_event()
-	
-	return mouse_button
 
 func _get_local_mouse_position_for_event() -> Vector2:
 	return get_viewport().get_mouse_position()
@@ -174,10 +173,11 @@ func _set_volume_on_bus(volume_db: float, index: int) -> void:
 
 func _input(event: InputEvent) -> void:
 	if _using_web_scroll:
-		if event is InputEventMouseButton:
-			Logger.info('%s - gp (%.1f, %.1f) lp (%.1f, %.1f)' % ['mouse pressed', event.global_position.x, event.global_position.y, event.position.x, event.position.y])
-			Logger.info('mouse button - %s' % ['pressed' if event.pressed else 'released'])
 		return
+	
+	if event is InputEventMouseButton:
+		Logger.info('%s - gp (%.1f, %.1f) lp (%.1f, %.1f)' % ['mouse pressed', event.global_position.x, event.global_position.y, event.position.x, event.position.y])
+		Logger.info('mouse button - %s' % ['pressed' if event.pressed else 'released'])
 	
 	var viewport := _control.get_viewport()
 	
