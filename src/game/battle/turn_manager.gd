@@ -31,6 +31,9 @@ var _redo_turn_queued := false
 
 onready var _start_turn_effect_runner := $StartTurnEffectRunner as StartTurnEffectRunner
 
+func _ready() -> void:
+	connect('pins_changed', self, '_on_pins_changed')
+
 func initialize_turns(pins: Array) -> void:
 	
 	_ordered_pins = pins.duplicate()
@@ -48,12 +51,15 @@ func initialize_turns(pins: Array) -> void:
 		if not transformer:
 			continue
 		
-		print('connect to %s transformer' % p.name)
+		Logger.info('connected transform from %s' % [p.name])
 		transformer.connect('transform_requested', self, '_on_pin_transform_requested', [p, transformer], CONNECT_ONESHOT)
 	
 	Logger.info('initialized and pins_changed emitted')
 	emit_signal('pins_changed')
 	emit_signal('initialized')
+
+func _on_pins_changed() -> void:
+	pass
 
 func turn_count() -> int:
 	return _current_turn
@@ -272,6 +278,12 @@ func _do_queued_transforms() -> void:
 		var transformer := stuff.transformer as Transformer
 		
 		var new_pin := transformer.transform_scene.instance() as ArpeegeePinNode
+		
+		var new_pin_transformer := NodE.get_child(new_pin, Transformer, false) as Transformer
+		if new_pin_transformer:
+			Logger.info('new pin transform connected from %s', new_pin.name)
+			new_pin_transformer.connect('transform_requested', self, '_on_pin_transform_requested', [new_pin, new_pin_transformer])
+		
 		
 		var new_pin_resource := new_pin._resource_set.duplicate() as ArpeegeePin
 		new_pin._resource_set = new_pin_resource

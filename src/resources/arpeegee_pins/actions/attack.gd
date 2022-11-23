@@ -27,7 +27,7 @@ func times_used() -> int:
 	return _times_used
 
 func run(actioner: Node2D, target: ArpeegeePinNode, object: Object, callback: String) -> void:
-	if target.resource.resource_path.get_file() == 'blobbo.tres' and pin_action().resource_path.get_file() == 'heavenly_slash_paladin.tres':
+	if target.filename.get_file() == 'blobbo.tscn' and pin_action().resource_path.get_file() == 'heavenly_slash_paladin.tres':
 		if randf() < 1.0:# 0.5:
 			print_debug('set to 100% get stuck')
 			_run_blobbo_steals_sword(actioner, target, object, callback)
@@ -196,7 +196,10 @@ func _run_blobbo_steals_sword(actioner: ArpeegeePinNode, target: ArpeegeePinNode
 	var paladin_transformer := NodE.get_child(actioner, Transformer) as Transformer
 	
 	animation.tween_callback(blobbo_transformer, 'request_transform')
+	blobbo_transformer.transform_scene = load('res://src/resources/arpeegee_pins/blobbo_sword.tscn')
+	
 	animation.tween_callback(paladin_transformer, 'request_transform')
+	paladin_transformer.transform_scene = load('res://src/resources/arpeegee_pins/paladin_no_sword.tscn')
 	
 	animation.tween_interval(0.5)
 	

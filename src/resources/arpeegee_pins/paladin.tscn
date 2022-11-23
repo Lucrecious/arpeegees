@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/resources/arpeegee_pins/paladin.tres" type="Resource" id=2]
@@ -22,7 +22,6 @@
 [ext_resource path="res://src/resources/arpeegee_pins/actions/slippable.gd" type="Script" id=20]
 [ext_resource path="res://assets/sprites/paladin/paladin_tremendous.png" type="Texture" id=21]
 [ext_resource path="res://assets/sprites/paladin/paladin_idle_noweapon.PNG" type="Texture" id=22]
-[ext_resource path="res://src/resources/arpeegee_pins/paladin_no_sword.tscn" type="PackedScene" id=23]
 [ext_resource path="res://src/resources/arpeegee_pins/components/transformer.gd" type="Script" id=24]
 
 [sub_resource type="ShaderMaterial" id=1]
@@ -152,4 +151,3 @@ frame = "magicheal"
 
 [node name="Transformer" type="Node" parent="." index="15"]
 script = ExtResource( 24 )
-transform_scene = ExtResource( 23 )
