@@ -48,6 +48,7 @@ func initialize_turns(pins: Array) -> void:
 		if not transformer:
 			continue
 		
+		print('connect to %s transformer' % p.name)
 		transformer.connect('transform_requested', self, '_on_pin_transform_requested', [p, transformer], CONNECT_ONESHOT)
 	
 	Logger.info('initialized and pins_changed emitted')
@@ -366,6 +367,7 @@ func _by_playable_by_topdown(node1: ArpeegeePinNode, node2: ArpeegeePinNode) -> 
 	return resource1.type == ArpeegeePin.Type.Player
 
 func _on_pin_transform_requested(pin: ArpeegeePinNode, transformer: Transformer) -> void:
+	Logger.info('transform requested from %s to resource %s' % [pin.name, transformer.transform_scene.resource_path.get_file()])
 	_transform_queue.push_back({ pin = pin, transformer = transformer })
 
 func _run_end_turn_effects(pin: ArpeegeePinNode) -> void:

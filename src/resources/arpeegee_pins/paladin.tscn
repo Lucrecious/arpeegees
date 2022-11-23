@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/resources/arpeegee_pins/paladin.tres" type="Resource" id=2]
@@ -21,6 +21,9 @@
 [ext_resource path="res://src/resources/arpeegee_pins/actions/heal_generic.gd" type="Script" id=19]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/slippable.gd" type="Script" id=20]
 [ext_resource path="res://assets/sprites/paladin/paladin_tremendous.png" type="Texture" id=21]
+[ext_resource path="res://assets/sprites/paladin/paladin_idle_noweapon.PNG" type="Texture" id=22]
+[ext_resource path="res://src/resources/arpeegee_pins/paladin_no_sword.tscn" type="PackedScene" id=23]
+[ext_resource path="res://src/resources/arpeegee_pins/components/transformer.gd" type="Script" id=24]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 14 )
@@ -59,42 +62,49 @@ position = Vector2( -14, -90 )
 scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 4 )
 
-[node name="Hit" type="Sprite" parent="Sprites" index="1"]
+[node name="IdleNoSword" type="Sprite" parent="Sprites" index="1"]
+visible = false
+use_parent_material = true
+position = Vector2( -14, -90 )
+scale = Vector2( 0.333333, 0.333333 )
+texture = ExtResource( 22 )
+
+[node name="Hit" type="Sprite" parent="Sprites" index="2"]
 visible = false
 use_parent_material = true
 position = Vector2( 7, -89 )
 scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 5 )
 
-[node name="Attack" type="Sprite" parent="Sprites" index="2"]
+[node name="Attack" type="Sprite" parent="Sprites" index="3"]
 visible = false
 use_parent_material = true
 position = Vector2( -43, -80 )
 scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 8 )
 
-[node name="Slash" type="Sprite" parent="Sprites" index="3"]
+[node name="Slash" type="Sprite" parent="Sprites" index="4"]
 visible = false
 use_parent_material = true
 position = Vector2( -48, -94 )
 scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 21 )
 
-[node name="MagicHeal" type="Sprite" parent="Sprites" index="4"]
+[node name="MagicHeal" type="Sprite" parent="Sprites" index="5"]
 visible = false
 use_parent_material = true
 position = Vector2( -29, -98 )
 scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 6 )
 
-[node name="MagicSparkles" type="Sprite" parent="Sprites" index="5"]
+[node name="MagicSparkles" type="Sprite" parent="Sprites" index="6"]
 visible = false
 use_parent_material = true
 position = Vector2( -27, -97 )
 scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 9 )
 
-[node name="Dead" type="Sprite" parent="Sprites" index="6"]
+[node name="Dead" type="Sprite" parent="Sprites" index="7"]
 visible = false
 use_parent_material = true
 position = Vector2( -2.38419e-07, -81 )
@@ -139,3 +149,7 @@ narration_key = "NARRATOR_BRIGHT_SPARKLES_USE"
 [node name="HolySparkles" type="Node2D" parent="Actions" index="3"]
 script = ExtResource( 19 )
 frame = "magicheal"
+
+[node name="Transformer" type="Node" parent="." index="15"]
+script = ExtResource( 24 )
+transform_scene = ExtResource( 23 )

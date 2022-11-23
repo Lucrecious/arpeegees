@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
 [ext_resource path="res://lut/components/root_sprite.gd" type="Script" id=2]
@@ -16,6 +16,10 @@
 [ext_resource path="res://assets/sprites/effects/goo_green.png" type="Texture" id=14]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/crustify_blobbo.gd" type="Script" id=15]
 [ext_resource path="res://src/image_resizer_tool.gd" type="Script" id=16]
+[ext_resource path="res://assets/sprites/paladin/paladin_blobbo_sword_stuck.png" type="Texture" id=17]
+[ext_resource path="res://assets/sprites/blobbo/blobbo_paladin_stabbed.PNG" type="Texture" id=18]
+[ext_resource path="res://src/resources/arpeegee_pins/blobbo_sword.tscn" type="PackedScene" id=19]
+[ext_resource path="res://src/resources/arpeegee_pins/components/transformer.gd" type="Script" id=20]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 7 )
@@ -75,6 +79,20 @@ position = Vector2( -1, -58 )
 scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 6 )
 
+[node name="SwordStuckPaladin" type="Sprite" parent="Sprites" index="4"]
+visible = false
+use_parent_material = true
+position = Vector2( 67, -93 )
+scale = Vector2( 0.333333, 0.333333 )
+texture = ExtResource( 17 )
+
+[node name="SwordStuck" type="Sprite" parent="Sprites" index="5"]
+visible = false
+use_parent_material = true
+position = Vector2( 2, -75 )
+scale = Vector2( 0.333333, 0.333333 )
+texture = ExtResource( 18 )
+
 [node name="Actions" type="Node2D" parent="." index="13"]
 script = ExtResource( 9 )
 
@@ -115,3 +133,7 @@ z_index = 1
 [node name="Sprite" type="Sprite" parent="Actions/GooTrap/GooShot" index="0"]
 scale = Vector2( 0.333, 0.333 )
 texture = ExtResource( 14 )
+
+[node name="Transformer" type="Node" parent="." index="15"]
+script = ExtResource( 20 )
+transform_scene = ExtResource( 19 )

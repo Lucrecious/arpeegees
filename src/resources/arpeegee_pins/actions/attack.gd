@@ -26,7 +26,13 @@ func pin_action() -> PinAction:
 func times_used() -> int:
 	return _times_used
 
-func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> void:
+func run(actioner: Node2D, target: ArpeegeePinNode, object: Object, callback: String) -> void:
+	if target.resource.resource_path.get_file() == 'blobbo.tres' and pin_action().resource_path.get_file() == 'heavenly_slash_paladin.tres':
+		if randf() < 1.0:# 0.5:
+			print_debug('set to 100% get stuck')
+			_run_blobbo_steals_sword(actioner, target, object, callback)
+			return
+	
 	var sounds := NodE.get_child(actioner, SoundsComponent) as SoundsComponent
 	
 	_times_used += 1
@@ -53,6 +59,7 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 		tween.tween_callback(sounds, 'play', [windup_sfx_name])
 	else:
 		tween.tween_callback(Sounds, 'play', ['GenericWindUp1'])
+	
 	position = ActionUtils.add_wind_up(tween, actioner, position, side)
 
 	position = ActionUtils.add_stab(tween, actioner, target_position)
@@ -153,3 +160,52 @@ func _create_desperate_kick_effect() -> StatusEffect:
 	status_effect.add_child(defence_modifier)
 	
 	return status_effect
+
+func _run_blobbo_steals_sword(actioner: ArpeegeePinNode, target: ArpeegeePinNode, object: Object, callback: String) -> void:
+	var animation := create_tween()
+	
+	animation.tween_interval(0.3)
+	
+	var position := actioner.global_position
+	var relative := ActionUtils.get_closest_adjecent_position(actioner, target)
+	var target_position := position + relative
+	
+	var side := -int(sign(relative.x))
+	
+	ActionUtils.add_walk(animation, actioner, actioner.global_position, target_position, 15, 5)
+	
+	animation.tween_interval(.3)
+	
+	ActionUtils.add_wind_up(animation, actioner, target_position, side)
+	
+	var sounds := NodE.get_child(actioner, SoundsComponent) as SoundsComponent
+	if not windup_sfx_name.empty():
+		animation.tween_callback(sounds, 'play', [windup_sfx_name])
+	else:
+		animation.tween_callback(Sounds, 'play', ['GenericWindUp1'])
+	
+	ActionUtils.add_stab(animation, actioner, target_position)
+	
+	var blobbo_sprite_switcher := NodE.get_child(target, SpriteSwitcher) as SpriteSwitcher
+	animation.tween_callback(blobbo_sprite_switcher, 'change', ['swordstuckpaladin'])
+	
+	var paladin_root_sprite := Components.root_sprite(actioner)
+	animation.tween_callback(paladin_root_sprite, 'set', ['visible', false])
+	
+	var blobbo_transformer := NodE.get_child(target, Transformer) as Transformer
+	var paladin_transformer := NodE.get_child(actioner, Transformer) as Transformer
+	
+	animation.tween_callback(blobbo_transformer, 'request_transform')
+	animation.tween_callback(paladin_transformer, 'request_transform')
+	
+	animation.tween_interval(0.5)
+	
+	var paladin_sprite_switcher := NodE.get_child(actioner, SpriteSwitcher) as SpriteSwitcher
+	animation.tween_callback(paladin_sprite_switcher, 'change', ['idlenosword'])
+	animation.tween_callback(paladin_root_sprite, 'set', ['visible', true])
+	
+	animation.tween_callback(blobbo_sprite_switcher, 'change', ['swordstuck'])
+	
+	ActionUtils.add_walk(animation, actioner, target_position, actioner.global_position, 15, 5)
+	
+	animation.tween_callback(object, callback)
