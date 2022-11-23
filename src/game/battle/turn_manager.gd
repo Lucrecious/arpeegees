@@ -284,7 +284,6 @@ func _do_queued_transforms() -> void:
 			Logger.info('new pin transform connected from %s', new_pin.name)
 			new_pin_transformer.connect('transform_requested', self, '_on_pin_transform_requested', [new_pin, new_pin_transformer])
 		
-		
 		var new_pin_resource := new_pin._resource_set.duplicate() as ArpeegeePin
 		new_pin._resource_set = new_pin_resource
 		var new_pin_root_sprite := NodE.get_child(new_pin, RootSprite) as RootSprite
@@ -297,6 +296,11 @@ func _do_queued_transforms() -> void:
 			new_pin_resource.type = pin.resource.type
 		
 		pin.get_parent().add_child(new_pin)
+		
+		var old_pin_health := NodE.get_child(pin, Health) as Health
+		var new_pin_health := NodE.get_child(new_pin, Health) as Health
+		
+		new_pin_health.current = min(old_pin_health.current, new_pin_health.current)
 		new_pin.position = pin.position
 		
 		_ordered_pins[old_pin_index] = new_pin
