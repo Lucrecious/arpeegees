@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
 [ext_resource path="res://lut/components/root_sprite.gd" type="Script" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://src/resources/arpeegee_pins/actions/heal_generic.gd" type="Script" id=18]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/slippable.gd" type="Script" id=19]
 [ext_resource path="res://assets/sprites/paladin/paladin_idle.png" type="Texture" id=20]
+[ext_resource path="res://src/resources/arpeegee_pins/actions/grab_sword_paladin_no_sword.gd" type="Script" id=21]
 [ext_resource path="res://src/resources/arpeegee_pins/components/transformer.gd" type="Script" id=22]
 
 [sub_resource type="ShaderMaterial" id=1]
@@ -179,6 +180,9 @@ narration_key = "NARRATOR_BRIGHT_SPARKLES_USE_NO_SWORD"
 [node name="HolySparkles" type="Node2D" parent="Actions" index="3"]
 script = ExtResource( 18 )
 frame = "magic"
+
+[node name="GrabSword" type="Node2D" parent="Actions" index="4"]
+script = ExtResource( 21 )
 
 [node name="Transformer" type="Node" parent="." index="15"]
 script = ExtResource( 22 )
