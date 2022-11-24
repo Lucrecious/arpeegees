@@ -35,8 +35,6 @@ func pin_action() -> PinAction:
 		return null
 
 func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> void:
-	_used = true
-	
 	var animation := create_tween()
 	
 	animation.tween_interval(0.5)
@@ -88,5 +86,7 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 			ActionUtils.add_text_trigger(animation, self, 'NARRATOR_THROW_A_ROCK_WITH_MAGIC_USE_ALT')
 		else:
 			ActionUtils.add_text_trigger(animation, self, 'NARRATOR_THROW_A_ROCK_WITH_MAGIC_USE')
+	
+	_used = true
 	
 	animation.tween_callback(object, callback)

@@ -107,7 +107,7 @@ narration_key = "NARRATOR_THROW_A_ROCK_WITH_HANDS_USE"
 [node name="Rock" type="Sprite" parent="Actions/ThrowRock" index="0"]
 visible = false
 position = Vector2( -106, -88 )
-scale = Vector2( 0.05, 0.05 )
+scale = Vector2( 0.333, 0.333 )
 texture = ExtResource( 13 )
 
 [node name="RaiseEarth" type="Node2D" parent="Actions" index="1"]
