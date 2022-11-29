@@ -32,11 +32,14 @@ mouse_filter = 2
 
 [node name="Right_1" type="ReferenceRect" parent="."]
 anchor_left = 0.745
-anchor_top = 0.882
+anchor_top = 0.834778
 anchor_right = 0.745
-anchor_bottom = 0.882
+anchor_bottom = 0.834778
 margin_left = -0.600098
 margin_top = -0.0400391
 margin_right = 39.3999
 margin_bottom = 39.96
 mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": true
+}

@@ -110,7 +110,7 @@ func _run_speaking_tween(text: String, start_signal: bool) -> void:
 	_current_tween.parallel().tween_callback(Logger, 'info', ['text_started emitted'])
 	
 	for p in pages:
-		_current_tween.tween_callback(self, '_reset_current_tween_speed_scale')
+		_current_tween.tween_callback(self, '_reset_current_tween_speed_scale', [false])
 		_current_tween.tween_callback(self, '_set_is_typing', [true])
 		
 		var length := 0
@@ -135,7 +135,7 @@ func _run_speaking_tween(text: String, start_signal: bool) -> void:
 					length - new_line_length, length, new_line_length / LETTERS_PER_SEC)
 			
 		_current_tween.tween_callback(self, '_set_is_typing', [false])
-		_current_tween.tween_callback(self, '_reset_current_tween_speed_scale')
+		_current_tween.tween_callback(self, '_reset_current_tween_speed_scale', [true])
 		_current_tween.tween_interval(WAIT_BETWEEN_SENTENCES_SEC)
 	
 	_current_tween.tween_method(self, '_textbox_dissolve_level', 1.0, 0.5, DISSOLVE_OUT_SEC / 2.0)\
@@ -154,22 +154,31 @@ func _run_speaking_tween(text: String, start_signal: bool) -> void:
 	Logger.info('speaking_started emitted')
 	emit_signal('speaking_started')
 
+var _page_sped_up := false
 func speed_up_page() -> void:
 	if not _current_tween:
 		return
 	
-	if not _is_typing:
-		return
-	
-	Logger.info('speed up page text')
-	_current_tween.set_speed_scale(4.0)
+	if _is_typing:
+		_current_tween.set_speed_scale(4.0)
+		Logger.info('speed up page text 4x')
+		_page_sped_up = true
+	elif not _is_typing and is_speaking():
+		_current_tween.set_speed_scale(2.0)
+		Logger.info('speed up page text 2x')
+		_page_sped_up = true
 
-func _reset_current_tween_speed_scale() -> void:
+func _reset_current_tween_speed_scale(before_interval: bool) -> void:
 	if not _current_tween:
 		return
 	
-	Logger.info('reset text speed')
-	_current_tween.set_speed_scale(1.0)
+	if _page_sped_up and before_interval:
+		Logger.info('reset text speed but faster')
+		_current_tween.set_speed_scale(2.0)
+	else:
+		_current_tween.set_speed_scale(1.0)
+		Logger.info('reset text speed to original')
+	_page_sped_up = false
 
 func _set_visible_characters(value: int) -> void:
 	if value > 0:

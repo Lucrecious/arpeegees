@@ -320,6 +320,7 @@ custom_constants/margin_top = 0
 custom_constants/margin_left = 0
 custom_constants/margin_bottom = 0
 script = ExtResource( 30 )
+original_y = -45.0
 
 [node name="YSortSiblingsDuringBattle" type="Node" parent="BattleLayer"]
 script = ExtResource( 25 )
