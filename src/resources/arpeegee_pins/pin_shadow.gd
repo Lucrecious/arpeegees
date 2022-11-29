@@ -31,10 +31,13 @@ func attach_position(position_control: Control) -> void:
 	_area.connect('area_exited', self, '_on_area_exited')
 	adapt(0)
 
-func _on_area_entered(_area) -> void:
+func _on_area_entered(__area) -> void:
 	appear()
 
-func _on_area_exited(_area) -> void:
+func _on_area_exited(__area) -> void:
+	if not _area.get_overlapping_areas().empty():
+		return
+	
 	disappear()
 
 func appear() -> void:
