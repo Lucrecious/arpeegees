@@ -44,8 +44,6 @@ class RemoveConfusionEffect extends Node:
 	signal start_turn_effect_finished()
 	signal text_triggered(translation_key)
 	
-	var actioner: ArpeegeePinNode = null
-
 	func run_start_turn_effect() -> void:
 		var animation := create_tween()
 		

@@ -20,12 +20,13 @@ func run(actioner: Node2D, object: Object, callback: String) -> void:
 	
 	var chance := randf()
 	var root_sprite := Components.root_sprite(actioner)
-	if false and chance < 0.25:
+	animation.tween_callback(self, '_remove_disappeared_effect', [list])
+	
+	if chance < 0.25:
 		
 		animation.tween_property(root_sprite, 'modulate:a', 1.0, 1.0)\
 				.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 		
-		animation.tween_callback(self, '_remove_disappeared_effect', [list])
 		
 		animation.tween_interval(1.0)
 		
