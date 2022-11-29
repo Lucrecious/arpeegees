@@ -65,17 +65,21 @@ class BounceStartTurnEffect extends Node:
 		var sprite_switcher := NodE.get_child(_actioner, SpriteSwitcher) as SpriteSwitcher
 		animation.tween_callback(sprite_switcher, 'change', ['headbutt'])
 		
-		var target_box := NodE.get_child(_target, REferenceRect) as REferenceRect
-		var target_position := target_box.global_rect().get_center()
-		
 		animation.tween_callback(_actioner, 'set', ['visible', true])
-		animation.tween_property(_actioner, 'global_position', target_position, 0.2)
 		
-		var stats := NodE.get_child(_actioner, ModifiedPinStats) as ModifiedPinStats
-		var damage := ActionUtils.damage_with_factor(stats.attack, 2.0)
-		ActionUtils.add_attack(animation, _actioner, _target, damage)
-		
-		animation.tween_interval(1.0)
+		if _target and is_instance_valid(_target):
+			var target_box := NodE.get_child(_target, REferenceRect) as REferenceRect
+			var target_position := target_box.global_rect().get_center()
+			
+			animation.tween_property(_actioner, 'global_position', target_position, 0.2)
+			
+			var stats := NodE.get_child(_actioner, ModifiedPinStats) as ModifiedPinStats
+			var damage := ActionUtils.damage_with_factor(stats.attack, 2.0)
+			ActionUtils.add_attack(animation, _actioner, _target, damage)
+			
+			animation.tween_interval(1.0)
+		else:
+			print_debug('add some text here that bounce has failed')
 		
 		animation.tween_callback(sprite_switcher, 'change', ['idle'])
 		

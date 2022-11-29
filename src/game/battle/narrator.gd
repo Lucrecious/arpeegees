@@ -15,7 +15,6 @@ const WAIT_BEFORE_FIRST_SENTENCE_SEC := 0.3
 const WAIT_BETWEEN_SENTENCES_SEC := 2.0
 const DISSOLVE_OUT_SEC := 0.5
 
-var _pin_nodes := []
 var _is_speaking := false
 var _queued_text := []
 var _is_typing := false
@@ -36,13 +35,13 @@ func is_speaking() -> bool:
 	return _is_speaking
 
 func watch(node: ArpeegeePinNode) -> void:
-	assert(not node in _pin_nodes)
-	_pin_nodes.push_back(node)
+	Logger.info('narrator watch %s' % [node.name])
 	
 	var pin_actions := NodE.get_child(node, PinActions) as PinActions
 	pin_actions.connect('action_started_with_action_node', self, '_on_pin_action_started', [pin_actions])
 	for p in pin_actions.get_pin_action_nodes(false):
 		if p.has_signal('text_triggered'):
+			Logger.info('connect text triggered to %s action node' % [p.name])
 			p.connect('text_triggered', self, '_on_action_node_text_triggered')
 	
 	var status_effects := NodE.get_child(node, StatusEffectsList) as StatusEffectsList
@@ -50,15 +49,14 @@ func watch(node: ArpeegeePinNode) -> void:
 	status_effects.connect('effect_removed', self, '_on_effect_removed')
 
 func unwatch(node: ArpeegeePinNode) -> void:
-	assert(node in _pin_nodes)
-	
-	_pin_nodes.erase(node)
+	Logger.info('unwatching node %s' % [node.name])
 	
 	var pin_actions := NodE.get_child(node, PinActions) as PinActions
 	pin_actions.disconnect('action_started_with_action_node', self, '_on_pin_action_started')
 	
 	for p in pin_actions.get_pin_action_nodes(false):
 		if p.has_signal('text_triggered'):
+			Logger.info('disconnect text triggered from %s action node' % [p.name])
 			p.disconnect('text_triggered', self, '_on_action_node_text_triggered')
 	
 	var status_effects := NodE.get_child(node, StatusEffectsList) as StatusEffectsList

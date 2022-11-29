@@ -18,7 +18,7 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 		damage_receiver.connect('hit', self, '_on_target_hit', [actioner])
 	
 	var status_effects_list := NodE.get_child(actioner, StatusEffectsList) as StatusEffectsList
-	status_effects_list.add_instance(_create_status_effect_to_remove_stalk_frame(actioner))
+	status_effects_list.add_instance(_create_status_effect_to_remove_stalk_frame())
 	
 	var animation := create_tween()
 	animation.tween_interval(0.35)
@@ -38,14 +38,13 @@ func _on_target_hit(damager: Node, actioner: Node) -> void:
 	var heal_amount := ceil(health.max_points * 0.1)
 	health.current_set(min(health.current + heal_amount, health.max_points))
 
-func _create_status_effect_to_remove_stalk_frame(actioner: Node) -> StatusEffect:
+func _create_status_effect_to_remove_stalk_frame() -> StatusEffect:
 	var status_effect := StatusEffect.new()
 	status_effect.is_ailment = false # because it can't be removed
 	status_effect.stack_count = 1
 	status_effect.tag = StatusEffectTag.Stalk
 	
 	var remove_stalk_effect := RemoveStalkEffect.new()
-	remove_stalk_effect.actioner = actioner
 	
 	status_effect.add_child(remove_stalk_effect)
 	
@@ -55,12 +54,10 @@ class RemoveStalkEffect extends Node:
 	signal start_turn_effect_finished()
 	signal text_triggered(translation_key)
 	
-	var actioner: ArpeegeePinNode = null
-
 	func run_start_turn_effect() -> void:
 		var animation := create_tween()
 		
-		assert(actioner)
+		var actioner := NodE.get_ancestor(self, ArpeegeePinNode) as ArpeegeePinNode
 		var sprite_switcher := NodE.get_child(actioner, SpriteSwitcher) as SpriteSwitcher
 		animation.tween_callback(sprite_switcher, 'swap_map', ['stalk', 'idle'])
 		

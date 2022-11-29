@@ -208,8 +208,8 @@ func _change_to_win_sprites(pins: Array) -> void:
 		sprite_switcher.change('win')
 
 func _start_battle(nodes: Array) -> void:
-	for n in nodes:
-		_narrator.watch(n)
+	#for n in nodes:
+	#	_narrator.watch(n)
 	_turn_manager.step_turn()
 
 func _load_and_drop_pins(pins: Array, positions: Array, item: Node2D, item_position,

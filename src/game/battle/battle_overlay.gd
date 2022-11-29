@@ -60,9 +60,13 @@ func _on_pins_changed() -> void:
 		
 		var modified_stats := NodE.get_child(pin, ModifiedPinStats) as ModifiedPinStats
 		modified_stats.disconnect('changed_relatives', self, '_on_pin_changed_relatives')
+		
+		_narrator.unwatch(pin)
 	
 	_pins_cache = _turn_manager.get_pins()
 	for pin in _pins_cache:
+		_narrator.watch(pin)
+		
 		var health := NodE.get_child(pin, Health) as Health
 		health.connect('increased', self, '_on_pin_health_changed', [pin, false])
 		health.connect('damaged', self, '_on_pin_health_changed', [pin, true])

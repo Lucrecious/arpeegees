@@ -42,7 +42,9 @@ func run(actioner: ArpeegeePinNode, object: Object, callback: String) -> void:
 	
 	var sprite_switcher := NodE.get_child(actioner, SpriteSwitcher) as SpriteSwitcher
 	
-	var succeed := randf() < 0.25
+	var probability := randf()
+	Logger.info('roll to take out sword (must be less than 0.25 to succeed): %f' % probability)
+	var succeed := probability < 0.25
 	if succeed:
 		var hurt_sword := blobbo_sprite_switcher.sprite('hurt')
 		var hurt_no_sword := blobbo_sprite_switcher.sprite('hurtnosword')

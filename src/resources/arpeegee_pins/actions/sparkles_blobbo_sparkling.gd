@@ -1,5 +1,7 @@
 extends Node2D
 
+# must be removed if blobbo somehow transformed
+
 func unblock() -> void:
 	_is_blocked = false
 

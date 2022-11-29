@@ -218,7 +218,7 @@ func _add_attack_boost(nodes: Array, type: int) -> void:
 		
 		match type:
 			ArpeegeePin.Type.NPC:
-				NodE.add_children(status_effects, Aura.create_enraged_auras())
+				NodE.add_children(effect, Aura.create_enraged_auras())
 			ArpeegeePin.Type.Player:
 				print_debug('balance battle from player not implemented')
 		
@@ -282,7 +282,7 @@ func _do_queued_transforms() -> void:
 		
 		var new_pin_transformer := NodE.get_child(new_pin, Transformer, false) as Transformer
 		if new_pin_transformer:
-			Logger.info('new pin transform connected from %s', new_pin.name)
+			Logger.info('new pin transform connected from %s' % new_pin.name)
 			new_pin_transformer.connect('transform_requested', self, '_on_pin_transform_requested', [new_pin, new_pin_transformer])
 		
 		var new_pin_resource := new_pin._resource_set.duplicate() as ArpeegeePin
