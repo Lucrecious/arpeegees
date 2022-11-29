@@ -203,6 +203,7 @@ func _add_attack_boost(nodes: Array, type: int) -> void:
 		var status_effects := NodE.get_child(n, StatusEffectsList) as StatusEffectsList
 		var effect := StatusEffect.new()
 		effect.tag = StatusEffectTag.Enraged
+		effect.is_ailment = false
 		
 		var attack := StatModifier.new()
 		attack.type = StatModifier.Type.Attack
@@ -303,6 +304,8 @@ func _do_queued_transforms() -> void:
 		new_pin_health.current = min(old_pin_health.current, new_pin_health.current)
 		new_pin.position = pin.position
 		
+		_transfer_status_effects(pin, new_pin)
+		
 		_ordered_pins[old_pin_index] = new_pin
 		_npcs = _get_type(ArpeegeePin.Type.NPC)
 		_players = _get_type(ArpeegeePin.Type.Player)
@@ -315,6 +318,17 @@ func _do_queued_transforms() -> void:
 	
 	Logger.info('pins_changed emitted')
 	emit_signal('pins_changed')
+
+func _transfer_status_effects(old_pin: ArpeegeePinNode, new_pin: ArpeegeePinNode) -> void:
+	var old_effects_list := NodE.get_child(old_pin, StatusEffectsList) as StatusEffectsList
+	var new_effects_list := NodE.get_child(new_pin, StatusEffectsList) as StatusEffectsList
+	
+	old_effects_list.set_block_signals(true)
+	
+	var old_effects := old_effects_list.get_all()
+	for child in old_effects:
+		old_effects_list.remove_child(child)
+		new_effects_list.add_instance(child)
 
 func _get_type(type: int) -> Array:
 	var pins_of_type := []

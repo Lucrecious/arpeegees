@@ -139,11 +139,12 @@ class GooTrapEffect extends Node:
 	const RUNS_ALIVE := 2
 
 	var runs_alive := RUNS_ALIVE
-
-	onready var _pin := NodE.get_ancestor(self, ArpeegeePinNode) as ArpeegeePinNode
-	onready var _actions := NodE.get_child(_pin, PinActions) as PinActions
 	
 	func run_start_turn_effect() -> void:
+		
+		var pin := NodE.get_ancestor(self, ArpeegeePinNode) as ArpeegeePinNode
+		var actions := NodE.get_child(pin, PinActions) as PinActions
+		
 		var tween := create_tween()
 		tween.tween_interval(0.2)
 		
@@ -157,8 +158,10 @@ class GooTrapEffect extends Node:
 		if runs_alive < 0:
 			return
 		
-		_actions.set_moveless(true)
+		actions.set_moveless(true)
 
 	func run_end_turn_effect() -> void:
-		_actions.set_moveless(false)
+		var pin := NodE.get_ancestor(self, ArpeegeePinNode) as ArpeegeePinNode
+		var actions := NodE.get_child(pin, PinActions) as PinActions
+		actions.set_moveless(false)
 

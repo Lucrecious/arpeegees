@@ -13,16 +13,17 @@ var _dancing_tween: SceneTreeTween
 var _is_powered_up := false
 
 onready var runs_alive := RUNS_ALIVE
-onready var _pin := NodE.get_ancestor(self, ArpeegeePinNode) as ArpeegeePinNode
-onready var _actions := NodE.get_child(_pin, PinActions) as PinActions
-onready var _sprite_switcher := NodE.get_child(_pin, SpriteSwitcher) as SpriteSwitcher
-onready var _root_sprite := Components.root_sprite(_pin)
 
 func _ready() -> void:
-	_actions.connect('action_started', self, '_on_action_started')
-	_actions.connect('action_ended', self, '_on_action_ended')
+	request_ready()
 	
-	if _actions.is_running_action():
+	var pin := NodE.get_ancestor(self, ArpeegeePinNode) as ArpeegeePinNode
+	var actions := NodE.get_child(pin, PinActions) as PinActions
+	
+	actions.connect('action_started', self, '_on_action_started')
+	actions.connect('action_ended', self, '_on_action_ended')
+	
+	if actions.is_running_action():
 		return
 	
 	_dancing_tween = _create_dancing_tween()
@@ -40,9 +41,12 @@ func _on_action_ended() -> void:
 	_dancing_tween.play()
 
 func _create_dancing_tween() -> SceneTreeTween:
+	var pin := NodE.get_ancestor(self, ArpeegeePinNode) as ArpeegeePinNode
+	var root_sprite := Components.root_sprite(pin)
+	
 	var animation := create_tween()
 	animation.set_loops()
-	var material := _root_sprite.material as ShaderMaterial
+	var material := root_sprite.material as ShaderMaterial
 	
 	var skew_stepper := JuiceSteppers.SkewBackAndForth.new(animation, material)
 	skew_stepper.offset = 0.07
@@ -67,12 +71,16 @@ func run_start_turn_effect() -> void:
 	if randf() > skip_turn_percent:
 		return
 	
-	_actions.set_moveless(true)
+	var pin := NodE.get_ancestor(self, ArpeegeePinNode) as ArpeegeePinNode
+	var actions := NodE.get_child(pin, PinActions) as PinActions
+	actions.set_moveless(true)
 	emit_signal('text_triggered', narration_key)
 	
 
 func run_end_turn_effect() -> void:
-	_actions.set_moveless(false)
+	var pin := NodE.get_ancestor(self, ArpeegeePinNode) as ArpeegeePinNode
+	var actions := NodE.get_child(pin, PinActions) as PinActions
+	actions.set_moveless(false)
 
 	if runs_alive > 0:
 		return
@@ -81,6 +89,9 @@ func run_end_turn_effect() -> void:
 	_reset_sprite()
 
 func _reset_sprite() -> void:
-	var shader := _root_sprite.material as ShaderMaterial
+	var pin := NodE.get_ancestor(self, ArpeegeePinNode) as ArpeegeePinNode
+	var root_sprite := Components.root_sprite(pin)
+	
+	var shader := root_sprite.material as ShaderMaterial
 	shader.set_shader_param('top_skew', 0.0)
 	shader.set_shader_param('squash', 1.0)

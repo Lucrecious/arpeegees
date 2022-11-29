@@ -75,12 +75,12 @@ func _create_status_effect(target: Node2D) -> StatusEffect:
 	
 	var auras := Aura.create_spore_auras(spore_color)
 	if type == Type.Poison:
-		var effect := EffectFunctions.Poison.new(target)
+		var effect := EffectFunctions.Poison.new()
 		
 		status_effect.add_child(effect)
 	
 	elif type == Type.Sleepy:
-		var effect := EffectFunctions.Sleep.new(target)
+		var effect := EffectFunctions.Sleep.new()
 		
 		status_effect.add_child(effect)
 	
