@@ -91,7 +91,12 @@ func run(actioner: Node2D, target: ArpeegeePinNode, object: Object, callback: St
 			if randf() < 0.1:
 				attack_amount = ActionUtils.damage_with_factor(attack_amount, 8.0)
 		
-		var hit_type := ActionUtils.add_attack(tween, actioner, target, attack_amount)
+		var hit_type := ActionUtils.HitType.Miss as int
+		if not white_mage_instakill:
+			hit_type = ActionUtils.add_attack(tween, actioner, target, attack_amount)
+		else:
+			ActionUtils.add_attack_no_evade(tween, actioner, target, attack_amount)
+			hit_type = ActionUtils.HitType.Hit
 		
 		attacked_physically = hit_type != ActionUtils.HitType.Miss
 		
@@ -126,7 +131,6 @@ func run(actioner: Node2D, target: ArpeegeePinNode, object: Object, callback: St
 			actioner.global_position + relative, actioner.global_position, 15.0, 5)
 	
 	if pin_action().resource_path.get_file() == 'wing_attack_harpy.tres':
-		print(attacked_physically)
 		if attacked_physically and randf() < 0.25:
 			var status_effects_list := NodE.get_child(target, StatusEffectsList) as StatusEffectsList
 			tween.tween_callback(status_effects_list, 'add_instance', [_create_wing_attack_effect()])
