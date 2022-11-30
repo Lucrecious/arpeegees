@@ -268,6 +268,10 @@ func _do_queued_transforms() -> void:
 	while not _transform_queue.empty():
 		var stuff := _transform_queue.pop_front() as Dictionary
 		var pin := stuff.pin as ArpeegeePinNode
+		var old_pin_health := NodE.get_child(pin, Health) as Health
+		
+		if old_pin_health.current <= 0:
+			continue
 		
 		var old_pin_index := _ordered_pins.find(pin)
 		
@@ -298,7 +302,6 @@ func _do_queued_transforms() -> void:
 		
 		pin.get_parent().add_child(new_pin)
 		
-		var old_pin_health := NodE.get_child(pin, Health) as Health
 		var new_pin_health := NodE.get_child(new_pin, Health) as Health
 		
 		new_pin_health.current = min(old_pin_health.current, new_pin_health.current)

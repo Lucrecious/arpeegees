@@ -55,7 +55,7 @@ func run(actioner: ArpeegeePinNode, object: Object, callback: String) -> void:
 		animation.tween_callback(sprite_switcher, 'change', ['idlesword'])
 		animation.tween_callback(root_sprite, 'set', ['visible', true])
 		
-		ActionUtils.add_attack_no_evade(animation, actioner, target, hard_coded_paladin_regular_attack * 3)
+		ActionUtils.add_attack_no_evade(animation, actioner, target, hard_coded_paladin_regular_attack * 100)
 		
 		var paladin_transformer := NodE.get_child(actioner, Transformer) as Transformer
 		paladin_transformer.transform_scene = load('res://src/resources/arpeegee_pins/paladin.tscn')

@@ -28,8 +28,7 @@ func times_used() -> int:
 
 func run(actioner: Node2D, target: ArpeegeePinNode, object: Object, callback: String) -> void:
 	if target.filename.get_file() == 'blobbo.tscn' and pin_action().resource_path.get_file() == 'heavenly_slash_paladin.tres':
-		if randf() < 1.0:# 0.5:
-			print_debug('set to 100% get stuck')
+		if randf() < 0.5:
 			_run_blobbo_steals_sword(actioner, target, object, callback)
 			return
 	

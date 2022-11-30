@@ -17,8 +17,7 @@ func run(actioner: Node2D, target: ArpeegeePinNode, object: Object, callback: St
 	
 	ActionUtils.add_stab(animation, actioner, target_position)
 	
-	print_debug('sword spin gives back sword 100% of the time')
-	if target.filename.get_file() == 'paladin_no_sword.tscn' and randf() < 1.0: # < 0.1:
+	if target.filename.get_file() == 'paladin_no_sword.tscn' and randf() < 0.1:
 		var paladin_root_sprite := Components.root_sprite(target)
 		
 		animation.tween_callback(sprite_switcher, 'change', ['stuckswordpaladin'])
