@@ -128,12 +128,12 @@ func _hide_hud() -> void:
 			_original_bottom_bar_position.y + _battle.bottom_bar.rect_size.y + 100.0, 0.5)\
 			.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
 	
-	_hide_show_tween.tween_property(_battle.get_narrator(), 'rect_position:y',
+	_hide_show_tween.parallel().tween_property(_battle.get_narrator(), 'rect_position:y',
 			_battle.get_original_narrator_position().y - _battle.get_narrator().rect_size.y - 100.0, 0.5)\
 			.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
 	
-	_hide_show_tween.tween_property(_battle.restart_button, 'rect_position',
-			_battle.get_restart_button_position() + Vector2.RIGHT * 500.0, 0.5)\
+	_hide_show_tween.parallel().tween_property(_battle.restart_button, 'rect_position:y',
+			_battle.get_restart_button_position().y - 100.0, 0.5)\
 			.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
 	
 	var master_index := AudioServer.get_bus_index('Master')
@@ -156,12 +156,12 @@ func _show_hud() -> void:
 			_original_bottom_bar_position.y, 0.5)\
 			.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 	
-	_hide_show_tween.tween_property(_battle.get_narrator(), 'rect_position:y',
+	_hide_show_tween.parallel().tween_property(_battle.get_narrator(), 'rect_position:y',
 		_battle.get_original_narrator_position().y, 0.5)\
 		.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 	
-	_hide_show_tween.tween_property(_battle.restart_button, 'rect_position',
-		_battle.get_restart_button_position(), 0.5)\
+	_hide_show_tween.parallel().tween_property(_battle.restart_button, 'rect_position:y',
+		_battle.get_restart_button_position().y, 0.5)\
 		.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 	
 	var master_index := AudioServer.get_bus_index('Master')

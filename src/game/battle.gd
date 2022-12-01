@@ -31,7 +31,7 @@ onready var _restart_button_holder_original_position := _restart_button_holder.r
 
 func _ready() -> void:
 	_narrator.rect_position += Vector2.LEFT * (_narrator.rect_size.x + 500.0)
-	_restart_button_holder.rect_position += Vector2.RIGHT * (restart_button.rect_size.x + 500.0)
+	_restart_button_holder.rect_position += Vector2.UP * (restart_button.rect_size.y + 100.0)
 	
 	if auto_start:
 		var item_powerup: PinItemPowerUp
@@ -157,7 +157,7 @@ func _do_intro_narration() -> void:
 			_narrator, 'is_speaking')
 	speaking_tween.tween_callback(self, '_balance_battle')
 	
-	speaking_tween.tween_property(_restart_button_holder, 'rect_position', _restart_button_holder_original_position, 0.5)\
+	speaking_tween.tween_property(_restart_button_holder, 'rect_position:y', _restart_button_holder_original_position.y, 0.5)\
 			.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 
 func _balance_battle() -> void:
