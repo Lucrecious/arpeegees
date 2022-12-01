@@ -7,4 +7,4 @@ script = ExtResource( 1 )
 nice_name = "SING_OUT_OF_KEY_NAME"
 description = ""
 target_type = 1
-action_type = 3
+is_special = false

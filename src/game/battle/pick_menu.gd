@@ -56,10 +56,18 @@ func set_header_text(value: String) -> void:
 func add_option(value: String) -> int:
 	var label_template := _label_template.duplicate() as HBoxContainer
 	var label := label_template.get_node('Label') as Label
+	var icon := label_template.get_node('Control/Icon') as TextureRect
+	icon.get_parent().rect_min_size = Vector2.ZERO
+	icon.texture = null
 	
 	label.text = value
 	_vbox.add_child(label_template)
 	return label_template.get_index()
+
+func set_icon(index: int, texture: Texture) -> void:
+	var icon := _vbox.get_child(index).get_node('Control/Icon') as TextureRect
+	icon.get_parent().rect_min_size = Vector2.ONE * 32.0
+	icon.texture = texture
 
 func clear() -> void:
 	for child in _vbox.get_children():

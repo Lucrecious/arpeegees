@@ -7,4 +7,4 @@ script = ExtResource( 1 )
 nice_name = "A_SLAPA_GOO_ACTION_NAME"
 description = ""
 target_type = 1
-action_type = 0
+is_special = false

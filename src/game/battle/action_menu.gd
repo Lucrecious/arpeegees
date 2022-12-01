@@ -74,9 +74,22 @@ func initialize(pin: ArpeegeePinNode) -> void:
 	_action_pick_menu.connect('option_picked', self, '_on_option_picked')
 	_action_pick_menu.set_header_text(pin.nice_name)
 
+func _get_action_icon_texture(target_type: int, is_special: bool) -> Texture:
+	if is_special:
+		return load('res://assets/ui/icons/special_move.png') as Texture
+	
+	match target_type:
+		PinAction.TargetType.Self: return load('res://assets/ui/icons/self_buff.png') as Texture
+		PinAction.TargetType.AllAllies: return load('res://assets/ui/icons/team_buff.png') as Texture
+		PinAction.TargetType.AllEnemies: return load('res://assets/ui/icons/multi_target.png') as Texture
+		PinAction.TargetType.Single: return load('res://assets/ui/icons/single_target.png') as Texture
+	
+	return null
+
 func add_pin_action(action_node: Node, pickable_targets: Array) -> void:
 	var pin_action := action_node.pin_action() as PinAction
 	var index := _action_pick_menu.add_option(pin_action.nice_name)
+	#_action_pick_menu.set_icon(index, _get_action_icon_texture(pin_action.target_type, pin_action.is_special))
 	
 	_index_to_action_node[index] = action_node
 	Logger.info('add pin actions %d -> %s' % [index, action_node])

@@ -7,4 +7,4 @@ script = ExtResource( 1 )
 nice_name = "SPARKLES_NAME"
 description = ""
 target_type = 0
-action_type = 1
+is_special = false

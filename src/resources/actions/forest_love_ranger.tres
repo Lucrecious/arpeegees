@@ -7,4 +7,4 @@ script = ExtResource( 1 )
 nice_name = "FOREST_LOVE_NAME"
 description = ""
 target_type = 3
-action_type = 2
+is_special = false

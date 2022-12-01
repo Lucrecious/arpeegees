@@ -68,6 +68,7 @@ margin_top = 15.0
 margin_right = 346.0
 margin_bottom = 54.0
 mouse_filter = 2
+custom_constants/separation = 0
 
 [node name="LabelTemplate" type="HBoxContainer" parent="VBox/PickMenu/Margin/VBox"]
 unique_name_in_owner = true
@@ -79,11 +80,13 @@ custom_constants/separation = 10
 margin_right = 32.0
 margin_bottom = 39.0
 rect_min_size = Vector2( 32, 32 )
+mouse_filter = 2
 
 [node name="Icon" type="TextureRect" parent="VBox/PickMenu/Margin/VBox/LabelTemplate/Control"]
 margin_right = 32.0
 margin_bottom = 39.0
 rect_min_size = Vector2( 32, 32 )
+mouse_filter = 2
 texture = ExtResource( 4 )
 expand = true
 

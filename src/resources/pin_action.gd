@@ -8,13 +8,6 @@ enum TargetType {
 	AllAllies,
 }
 
-enum ActionType {
-	Physical,
-	Buff,
-	Spell,
-	Projectile,
-}
-
 enum AttackType {
 	Normal,
 	Magic
@@ -23,4 +16,4 @@ enum AttackType {
 export(String) var nice_name := 'Action'
 export(String, MULTILINE) var description := ''
 export(TargetType) var target_type := TargetType.Single
-export(ActionType) var action_type := ActionType.Physical
+export(bool) var is_special := false
