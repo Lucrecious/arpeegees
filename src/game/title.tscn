@@ -57,18 +57,19 @@ anchor_bottom = 1.0
 margin_top = -539.0
 
 [node name="Control" type="Control" parent="Center"]
-margin_left = 539.0
-margin_top = 139.0
-margin_right = 741.0
-margin_bottom = 399.0
-rect_min_size = Vector2( 202, 260 )
+margin_left = 519.0
+margin_top = 116.0
+margin_right = 760.0
+margin_bottom = 422.0
+rect_min_size = Vector2( 241, 306 )
 
 [node name="Bag" parent="Center/Control" instance=ExtResource( 1 )]
 unique_name_in_owner = true
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_right = -202.0
-margin_bottom = -260.0
+anchor_right = 1.193
+anchor_bottom = 1.177
+margin_right = -240.986
+margin_bottom = -306.02
+rect_min_size = Vector2( 241, 306 )
 
 [node name="Shockwave" type="ColorRect" parent="."]
 unique_name_in_owner = true

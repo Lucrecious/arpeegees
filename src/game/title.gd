@@ -8,7 +8,6 @@ onready var _shockwave := $'%Shockwave' as Control
 onready var _sounds := NodE.get_child(self, SoundsComponent) as SoundsComponent
 
 func _ready() -> void:
-	_bag.connect('bag_exploded', self, '_on_bag_exploded')
 	_bag.connect('open_animation_finished', self, '_on_pin_bag_opened')
 
 func reset() -> void:

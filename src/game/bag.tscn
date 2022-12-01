@@ -1,332 +1,271 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://src/game/bag.gd" type="Script" id=1]
-[ext_resource path="res://assets/title/bag.png" type="Texture" id=2]
-[ext_resource path="res://assets/title/bag-tip.png" type="Texture" id=3]
-[ext_resource path="res://src/game/battle/star_particles.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/game/battle/bag_bulge.gdshader" type="Shader" id=5]
-[ext_resource path="res://assets/title/bag_piece8.png" type="Texture" id=6]
-[ext_resource path="res://assets/title/bag_piece6.png" type="Texture" id=7]
-[ext_resource path="res://assets/title/bag_piece3.png" type="Texture" id=8]
-[ext_resource path="res://assets/title/bag_piece1.png" type="Texture" id=9]
-[ext_resource path="res://assets/title/bag_piece10.png" type="Texture" id=10]
-[ext_resource path="res://assets/title/bag_piece9.png" type="Texture" id=11]
-[ext_resource path="res://assets/title/bag_piece4.png" type="Texture" id=12]
-[ext_resource path="res://assets/title/bag_piece5.png" type="Texture" id=13]
-[ext_resource path="res://assets/title/bag_piece7.png" type="Texture" id=14]
-[ext_resource path="res://src/game/bag_pieces.gd" type="Script" id=15]
-[ext_resource path="res://assets/title/bag_piece2.png" type="Texture" id=16]
+[ext_resource path="res://assets/title/complete_bag.png" type="Texture" id=2]
+[ext_resource path="res://assets/title/particles/animation0033.png" type="Texture" id=3]
+[ext_resource path="res://assets/title/particles/animation0042.png" type="Texture" id=4]
+[ext_resource path="res://assets/title/particles/animation0039.png" type="Texture" id=5]
+[ext_resource path="res://assets/title/particles/animation0048.png" type="Texture" id=6]
+[ext_resource path="res://assets/title/particles/animation0034.png" type="Texture" id=7]
+[ext_resource path="res://assets/title/particles/animation0045.png" type="Texture" id=8]
+[ext_resource path="res://assets/title/particles/animation0044.png" type="Texture" id=9]
+[ext_resource path="res://assets/title/particles/animation0036.png" type="Texture" id=10]
+[ext_resource path="res://assets/title/particles/animation0046.png" type="Texture" id=11]
+[ext_resource path="res://assets/title/particles/animation0041.png" type="Texture" id=12]
+[ext_resource path="res://assets/title/particles/animation0047.png" type="Texture" id=13]
+[ext_resource path="res://assets/title/particles/animation0035.png" type="Texture" id=14]
+[ext_resource path="res://assets/title/particles/animation0043.png" type="Texture" id=15]
+[ext_resource path="res://assets/title/particles/animation0038.png" type="Texture" id=16]
 [ext_resource path="res://assets/sounds/light_shimmer_package.mp3" type="AudioStream" id=17]
 [ext_resource path="res://assets/sounds/expanding_package.mp3" type="AudioStream" id=18]
 [ext_resource path="res://assets/sounds/pop_package.mp3" type="AudioStream" id=19]
 [ext_resource path="res://src/resources/sounds.gd" type="Script" id=20]
+[ext_resource path="res://assets/title/particles/animation0050.png" type="Texture" id=21]
+[ext_resource path="res://assets/title/particles/animation0040.png" type="Texture" id=22]
+[ext_resource path="res://assets/title/particles/animation0037.png" type="Texture" id=23]
+[ext_resource path="res://assets/title/particles/animation0049.png" type="Texture" id=24]
 
-[sub_resource type="ShaderMaterial" id=4]
-shader = ExtResource( 5 )
-shader_param/amount = 0.0
-shader_param/line_color = Color( 1, 1, 0, 1 )
-shader_param/line_thickness = 0.0
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 7 ), ExtResource( 14 ), ExtResource( 10 ), ExtResource( 23 ), ExtResource( 16 ), ExtResource( 5 ), ExtResource( 22 ), ExtResource( 12 ), ExtResource( 4 ), ExtResource( 15 ), ExtResource( 9 ), ExtResource( 8 ), ExtResource( 11 ), ExtResource( 13 ), ExtResource( 6 ), ExtResource( 24 ), ExtResource( 21 ), null ],
+"loop": false,
+"name": "default",
+"speed": 30.0
+} ]
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=1]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("Holder/BagBottom:visible")
+tracks/0/path = NodePath("Bag/BagSprite:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Holder/BagPieces:material:shader_param/amount")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Holder/BagPieces:material:shader_param/line_thickness")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("Holder/BagTop:rect_position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector2( 0, 0 ) ]
 }
-
-[sub_resource type="Animation" id=3]
-resource_name = "open"
-length = 3.0
-tracks/0/type = "value"
-tracks/0/path = NodePath("Holder/BagBottom:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
-}
 tracks/1/type = "value"
-tracks/1/path = NodePath("Holder/BagPieces:material:shader_param/amount")
+tracks/1/path = NodePath("Bag/BagSprite:rotation_degrees")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 1, 1.1, 1.11 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 0.0, 0.9, 1.0, 0.0 ]
+"values": [ 0.0 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Holder/BagPieces:material:shader_param/line_thickness")
+tracks/2/path = NodePath("Bag/BagSprite:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 1.1, 1.11 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 0.0, 4.7, 0.0 ]
+"values": [ Vector2( 1, 1 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("Holder/BagTop:rect_position")
+tracks/3/path = NodePath("AnimatedSprite:animation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 1.1, 1.9 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( -456, -3089 ) ]
+"values": [ "default" ]
 }
-tracks/4/type = "method"
-tracks/4/path = NodePath(".")
+tracks/4/type = "value"
+tracks/4/path = NodePath("AnimatedSprite:frame")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 1.1 ),
+"times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "shoot_all_particles"
-} ]
+"update": 0,
+"values": [ 0 ]
 }
-tracks/5/type = "method"
-tracks/5/path = NodePath(".")
+tracks/5/type = "value"
+tracks/5/path = NodePath("AnimatedSprite:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 1.1 ),
+"times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "explode_bag"
-} ]
+"update": 0,
+"values": [ false ]
 }
-tracks/6/type = "method"
-tracks/6/path = NodePath("Sounds")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
-"times": PoolRealArray( 0, 1.1 ),
+
+[sub_resource type="Animation" id=3]
+resource_name = "pop"
+length = 0.7
+loop = true
+step = 0.03
+tracks/0/type = "value"
+tracks/0/path = NodePath("Bag/BagSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.03, 0.06, 0.09, 0.12, 0.15, 0.18, 0.21, 0.24, 0.27, 0.3, 0.33, 0.36, 0.39, 0.42, 0.45, 0.48, 0.51, 0.69 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 8, 57 ), Vector2( 2, 56 ), Vector2( 7, 58 ), Vector2( 6, 94 ), Vector2( 5, 88 ), Vector2( 6, -36 ), Vector2( 6, -38 ), Vector2( 9, -10 ), Vector2( 10, -32 ), Vector2( 5, -38 ), Vector2( -4, 10 ), Vector2( 4, -37 ), Vector2( 5, -42 ), Vector2( 5, -13 ), Vector2( 3, -2 ), Vector2( 7, 4 ), Vector2( 3, 5 ), Vector2( 5, 10 ), Vector2( 5, 10 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Bag/BagSprite:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.03, 0.06, 0.09, 0.12, 0.15, 0.18, 0.21, 0.24, 0.27, 0.3, 0.33, 0.36, 0.39, 0.42, 0.45, 0.48, 0.51, 0.69 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 2.78249, 0.785981, 0.785981, 0.785981, -0.0352241, -0.0352241, -0.0352241, -0.0352241, -0.0352241, -0.0352241, -0.930594, 0.0781517, 0.439146, 0.439146, 0.439146, 0.439146, 0.439146, 0.439146, 0.439146 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Bag/BagSprite:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.03, 0.06, 0.09, 0.12, 0.15, 0.18, 0.21, 0.24, 0.27, 0.3, 0.33, 0.36, 0.39, 0.42, 0.45, 0.48, 0.51, 0.69 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1.20247, 0.78571 ), Vector2( 1.22114, 0.740987 ), Vector2( 1.30113, 0.740987 ), Vector2( 1.46112, 0.660994 ), Vector2( 1.42112, 0.660994 ), Vector2( 0.781092, 1.14099 ), Vector2( 0.741092, 1.14099 ), Vector2( 0.941117, 1.06097 ), Vector2( 0.781117, 1.14097 ), Vector2( 0.741117, 1.18097 ), Vector2( 1.02112, 0.940941 ), Vector2( 0.783097, 1.18094 ), Vector2( 0.703097, 1.18094 ), Vector2( 0.943091, 1.06156 ), Vector2( 1.02309, 1.02156 ), Vector2( 1.10309, 0.981558 ), Vector2( 1.10309, 0.981558 ), Vector2( 1.10309, 0.981558 ), Vector2( 1.10309, 0.981558 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AnimatedSprite:animation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.09 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "default" ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AnimatedSprite:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.09, 0.51, 0.54, 0.69 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0, 17, 18, 18 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("AnimatedSprite:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.09 ),
 "transitions": PoolRealArray( 1, 1 ),
-"values": [ {
-"args": [ "ExpandingPackage" ],
-"method": "play"
-}, {
-"args": [ "PopPackage" ],
-"method": "play"
-} ]
+"update": 1,
+"values": [ false, true ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "shake"
+length = 0.36
+step = 0.03
+tracks/0/type = "value"
+tracks/0/path = NodePath("Bag/BagSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.03, 0.06, 0.09, 0.12, 0.15, 0.18, 0.21, 0.24, 0.27, 0.3, 0.33 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( -2, 23 ), Vector2( 20, 35 ), Vector2( -6, 46 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Bag/BagSprite:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.03, 0.06, 0.09, 0.12, 0.15, 0.18, 0.21, 0.24, 0.27, 0.3, 0.33 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -3.24736, 5.06789, -0.231691, 1.55705, -9.80342, 11.8843, -2.09085, 2.48184, -2.37998, 2.4204, -2.05266 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Bag/BagSprite:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.03, 0.06, 0.09, 0.12, 0.15, 0.18, 0.21, 0.24, 0.27, 0.3, 0.33 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1.12249, 0.905648 ), Vector2( 1.12249, 0.865684 ), Vector2( 1.20247, 0.78571 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AnimatedSprite:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
 }
 
 [node name="Bag" type="Control"]
-margin_right = 212.0
-margin_bottom = 273.0
+margin_right = 242.0
+margin_bottom = 308.0
 rect_min_size = Vector2( 212, 273 )
 script = ExtResource( 1 )
 
-[node name="StarParticles" parent="." instance=ExtResource( 4 )]
-unique_name_in_owner = true
-position = Vector2( 103, 37 )
+[node name="Bag" type="Node2D" parent="."]
+position = Vector2( 119, 158 )
+scale = Vector2( 0.5, 0.5 )
 
-[node name="Holder" type="Control" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-rect_pivot_offset = Vector2( 202, 260 )
-mouse_filter = 2
+[node name="BagSprite" type="Node2D" parent="Bag"]
 
-[node name="BagTop" type="TextureRect" parent="Holder"]
-margin_right = 212.0
-margin_bottom = 33.0
-mouse_filter = 2
-texture = ExtResource( 3 )
-expand = true
-stretch_mode = 5
-
-[node name="BagPieces" type="Control" parent="Holder"]
-unique_name_in_owner = true
-material = SubResource( 4 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 17.0
-margin_bottom = 17.0
-mouse_filter = 2
-script = ExtResource( 15 )
-
-[node name="Piece1" type="TextureRect" parent="Holder/BagPieces"]
-use_parent_material = true
-anchor_right = 1.0
-anchor_bottom = 1.0
-rect_pivot_offset = Vector2( 106, 136 )
-mouse_filter = 2
-texture = ExtResource( 9 )
-expand = true
-stretch_mode = 5
-
-[node name="Piece2" type="TextureRect" parent="Holder/BagPieces"]
-use_parent_material = true
-anchor_right = 1.0
-anchor_bottom = 1.0
-rect_pivot_offset = Vector2( 106, 136 )
-mouse_filter = 2
-texture = ExtResource( 16 )
-expand = true
-stretch_mode = 5
-
-[node name="Piece3" type="TextureRect" parent="Holder/BagPieces"]
-use_parent_material = true
-anchor_right = 1.0
-anchor_bottom = 1.0
-rect_pivot_offset = Vector2( 106, 136 )
-mouse_filter = 2
-texture = ExtResource( 8 )
-expand = true
-stretch_mode = 5
-
-[node name="Piece4" type="TextureRect" parent="Holder/BagPieces"]
-use_parent_material = true
-anchor_right = 1.0
-anchor_bottom = 1.0
-rect_pivot_offset = Vector2( 106, 136 )
-mouse_filter = 2
-texture = ExtResource( 12 )
-expand = true
-stretch_mode = 5
-
-[node name="Piece5" type="TextureRect" parent="Holder/BagPieces"]
-use_parent_material = true
-anchor_right = 1.0
-anchor_bottom = 1.0
-rect_pivot_offset = Vector2( 106, 136 )
-mouse_filter = 2
-texture = ExtResource( 13 )
-expand = true
-stretch_mode = 5
-
-[node name="Piece6" type="TextureRect" parent="Holder/BagPieces"]
-use_parent_material = true
-anchor_right = 1.0
-anchor_bottom = 1.0
-rect_pivot_offset = Vector2( 106, 136 )
-mouse_filter = 2
-texture = ExtResource( 7 )
-expand = true
-stretch_mode = 5
-
-[node name="Piece7" type="TextureRect" parent="Holder/BagPieces"]
-use_parent_material = true
-anchor_right = 1.0
-anchor_bottom = 1.0
-rect_pivot_offset = Vector2( 106, 136 )
-mouse_filter = 2
-texture = ExtResource( 14 )
-expand = true
-stretch_mode = 5
-
-[node name="Piece8" type="TextureRect" parent="Holder/BagPieces"]
-use_parent_material = true
-anchor_right = 1.0
-anchor_bottom = 1.0
-rect_pivot_offset = Vector2( 106, 136 )
-mouse_filter = 2
-texture = ExtResource( 6 )
-expand = true
-stretch_mode = 5
-
-[node name="Piece9" type="TextureRect" parent="Holder/BagPieces"]
-use_parent_material = true
-anchor_right = 1.0
-anchor_bottom = 1.0
-rect_pivot_offset = Vector2( 106, 136 )
-mouse_filter = 2
-texture = ExtResource( 11 )
-expand = true
-stretch_mode = 5
-
-[node name="Piece10" type="TextureRect" parent="Holder/BagPieces"]
-use_parent_material = true
-anchor_right = 1.0
-anchor_bottom = 1.0
-rect_pivot_offset = Vector2( 106, 136 )
-mouse_filter = 2
-texture = ExtResource( 10 )
-expand = true
-stretch_mode = 5
-
-[node name="BagBottom" type="TextureRect" parent="Holder"]
-margin_top = 17.0
-margin_right = 214.0
-margin_bottom = 302.0
-rect_pivot_offset = Vector2( 107, 142 )
-mouse_filter = 2
+[node name="Sprite" type="Sprite" parent="Bag/BagSprite"]
+position = Vector2( 1.90051, -10.0841 )
 texture = ExtResource( 2 )
-expand = true
-stretch_mode = 5
 
-[node name="StarParticlesHint" type="Position2D" parent="Holder/BagBottom"]
-unique_name_in_owner = true
-position = Vector2( 103, 20 )
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+visible = false
+position = Vector2( 122, 186 )
+frames = SubResource( 4 )
 
 [node name="Animation" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
-anims/RESET = SubResource( 5 )
-anims/open = SubResource( 3 )
+anims/RESET = SubResource( 1 )
+anims/pop = SubResource( 3 )
+anims/shake = SubResource( 2 )
+next/shake = "pop"
 
 [node name="Sounds" type="Node" parent="."]
 script = ExtResource( 20 )
