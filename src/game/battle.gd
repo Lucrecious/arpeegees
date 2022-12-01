@@ -29,7 +29,11 @@ onready var _restart_button_holder := restart_button.get_parent() as Control
 onready var _restart_button_original_position := restart_button.rect_position
 onready var _restart_button_holder_original_position := _restart_button_holder.rect_position
 
+onready var _puddle_player := $'%PuddlePlayer' as AnimationPlayer
+
 func _ready() -> void:
+	_puddle_player.play('RESET')
+	
 	_narrator.rect_position += Vector2.LEFT * (_narrator.rect_size.x + 500.0)
 	_restart_button_holder.rect_position += Vector2.UP * (restart_button.rect_size.y + 100.0)
 	

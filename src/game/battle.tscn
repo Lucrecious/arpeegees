@@ -296,6 +296,7 @@ rect_min_size = Vector2( 600, 170 )
 color = Color( 0.427451, 0.490196, 1, 1 )
 
 [node name="PuddlePlayer" type="AnimationPlayer" parent="SpanLimiter/Background/CenterPuddle" groups=["puddle_animation_player"]]
+unique_name_in_owner = true
 anims/RESET = SubResource( 14 )
 anims/add_puddle = SubResource( 15 )
 

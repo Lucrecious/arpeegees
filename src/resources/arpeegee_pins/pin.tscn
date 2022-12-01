@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://src/resources/arpeegee_pins/components/sprite_switcher.gd" type="Script" id=1]
 [ext_resource path="res://src/game/battle/star_particles.tscn" type="PackedScene" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://lut/nodes/reference_rect.gd" type="Script" id=10]
 [ext_resource path="res://src/resources/arpeegee_pins/components/modified_stats.gd" type="Script" id=11]
 [ext_resource path="res://src/resources/sounds.gd" type="Script" id=12]
+[ext_resource path="res://src/resources/arpeegee_pins/shadow_area.gd" type="Script" id=13]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 22.0227
@@ -22,6 +23,7 @@ script = ExtResource( 8 )
 [node name="ShadowArea" type="Area2D" parent="."]
 collision_mask = 0
 monitoring = false
+script = ExtResource( 13 )
 
 [node name="Collision" type="CollisionShape2D" parent="ShadowArea"]
 shape = SubResource( 1 )
