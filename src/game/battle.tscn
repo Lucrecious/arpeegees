@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://src/game/battle.gd" type="Script" id=1]
 [ext_resource path="res://src/game/battle/turn_manager.gd" type="Script" id=2]
@@ -30,6 +30,7 @@
 [ext_resource path="res://src/resources/arpeegee_pins/geomancer.tres" type="Resource" id=28]
 [ext_resource path="res://src/website/size_adjuster.gd" type="Script" id=29]
 [ext_resource path="res://src/ui/battle_layer_size_adapt.gd" type="Script" id=30]
+[ext_resource path="res://assets/ui/DK Woolwich.otf" type="DynamicFontData" id=31]
 
 [sub_resource type="Shader" id=10]
 code = "shader_type canvas_item;
@@ -215,6 +216,20 @@ colors = PoolColorArray( 0, 0, 0, 1, 0, 0, 0, 0 )
 gradient = SubResource( 1 )
 fill_from = Vector2( 0.5, 1 )
 fill_to = Vector2( 0.5, 0 )
+
+[sub_resource type="DynamicFont" id=16]
+size = 48
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 31 )
+
+[sub_resource type="StyleBoxEmpty" id=17]
+
+[sub_resource type="StyleBoxEmpty" id=18]
+
+[sub_resource type="StyleBoxEmpty" id=19]
+
+[sub_resource type="StyleBoxEmpty" id=20]
 
 [node name="Battle" type="Control"]
 anchor_right = 1.0
@@ -509,11 +524,22 @@ anchor_bottom = 1.0
 unique_name_in_owner = true
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -98.0
+margin_left = -197.0
 margin_top = 39.0
-margin_right = -41.0
-margin_bottom = 79.0
+margin_right = -37.0
+margin_bottom = 96.0
+custom_colors/font_color_disabled = Color( 0.317647, 0.317647, 0.317647, 1 )
+custom_colors/font_color_focus = Color( 1, 1, 1, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 0.941176, 0.941176, 0.941176, 1 )
+custom_colors/font_color_pressed = Color( 0.827451, 0.827451, 0.827451, 1 )
+custom_fonts/font = SubResource( 16 )
+custom_styles/hover = SubResource( 17 )
+custom_styles/pressed = SubResource( 18 )
+custom_styles/focus = SubResource( 19 )
+custom_styles/normal = SubResource( 20 )
 text = "Restart"
+flat = true
 
 [node name="Sounds" type="Node" parent="."]
 script = ExtResource( 21 )
