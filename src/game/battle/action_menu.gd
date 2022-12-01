@@ -79,6 +79,7 @@ func add_pin_action(action_node: Node, pickable_targets: Array) -> void:
 	var index := _action_pick_menu.add_option(pin_action.nice_name)
 	
 	_index_to_action_node[index] = action_node
+	Logger.info('add pin actions %d -> %s' % [index, action_node])
 	_action_node_to_pickable_targets[action_node] = pickable_targets
 
 func _on_option_picked(index: int) -> void:

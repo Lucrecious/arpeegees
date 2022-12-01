@@ -6,7 +6,7 @@ signal option_picked(index)
 
 onready var _header := $'%Header' as Label
 onready var _vbox := $'%VBox' as VBoxContainer
-onready var _label_template := $'%LabelTemplate' as Label
+onready var _label_template := $'%LabelTemplate' as Control
 onready var _selector := $'%Selector' as Control
 
 var _current_hover_index := -1
@@ -54,10 +54,12 @@ func set_header_text(value: String) -> void:
 	_header.text = value
 
 func add_option(value: String) -> int:
-	var label := _label_template.duplicate() as Label
+	var label_template := _label_template.duplicate() as HBoxContainer
+	var label := label_template.get_node('Label') as Label
+	
 	label.text = value
-	_vbox.add_child(label)
-	return label.get_index()
+	_vbox.add_child(label_template)
+	return label_template.get_index()
 
 func clear() -> void:
 	for child in _vbox.get_children():
@@ -90,13 +92,13 @@ func reset_hover_index() -> void:
 func update_hover_index(keep_last := true, force_notification := false) -> void:
 	var hover_index := _current_hover_index if keep_last else -1
 	for c in _vbox.get_children():
-		var label := c as Label
-		var rect := label.get_global_rect()
-		var mouse_position := label.get_global_mouse_position()
+		var label_template := c as HBoxContainer
+		var rect := label_template.get_global_rect()
+		var mouse_position := label_template.get_global_mouse_position()
 		if not rect.has_point(mouse_position):
 			continue
 		
-		hover_index = label.get_index()
+		hover_index = label_template.get_index()
 		break
 	
 	if not force_notification and hover_index == _current_hover_index:

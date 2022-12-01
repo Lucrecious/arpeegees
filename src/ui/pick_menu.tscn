@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/ui/theme.tres" type="Theme" id=1]
 [ext_resource path="res://src/game/battle/pick_menu.gd" type="Script" id=2]
 [ext_resource path="res://assets/ui/icons/selector.png" type="Texture" id=3]
+[ext_resource path="res://assets/ui/icons/sword_attack.png" type="Texture" id=4]
 
 [node name="PickMenu" type="Control"]
 margin_right = 377.0
@@ -68,10 +69,29 @@ margin_right = 346.0
 margin_bottom = 54.0
 mouse_filter = 2
 
-[node name="LabelTemplate" type="Label" parent="VBox/PickMenu/Margin/VBox"]
+[node name="LabelTemplate" type="HBoxContainer" parent="VBox/PickMenu/Margin/VBox"]
 unique_name_in_owner = true
 margin_right = 331.0
 margin_bottom = 39.0
+custom_constants/separation = 10
+
+[node name="Control" type="Control" parent="VBox/PickMenu/Margin/VBox/LabelTemplate"]
+margin_right = 32.0
+margin_bottom = 39.0
+rect_min_size = Vector2( 32, 32 )
+
+[node name="Icon" type="TextureRect" parent="VBox/PickMenu/Margin/VBox/LabelTemplate/Control"]
+margin_right = 32.0
+margin_bottom = 39.0
+rect_min_size = Vector2( 32, 32 )
+texture = ExtResource( 4 )
+expand = true
+
+[node name="Label" type="Label" parent="VBox/PickMenu/Margin/VBox/LabelTemplate"]
+margin_left = 42.0
+margin_right = 331.0
+margin_bottom = 39.0
+size_flags_horizontal = 3
 theme_type_variation = "ActionMenuLabel"
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 2
