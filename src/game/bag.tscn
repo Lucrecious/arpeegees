@@ -122,6 +122,7 @@ tracks/6/keys = {
 
 [sub_resource type="Animation" id=3]
 resource_name = "pop"
+length = 1.2
 step = 0.005
 tracks/0/type = "value"
 tracks/0/path = NodePath("Bag/BagSprite:position")
@@ -234,10 +235,10 @@ tracks/8/loop_wrap = true
 tracks/8/imported = false
 tracks/8/enabled = true
 tracks/8/keys = {
-"times": PoolRealArray( 0.54 ),
+"times": PoolRealArray( 1.15 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
-"args": [ "" ],
+"args": [  ],
 "method": "pins_drop_ready"
 } ]
 }

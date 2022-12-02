@@ -50,8 +50,7 @@ func shoot_star() -> void:
 	star.position.x += _shoot_offsets[_shoot_times % _shoot_offsets.size()]
 	_shoot_times += 1
 
-func pins_drop_ready(animation_name: String) -> void:
-	assert(_animation.current_animation == 'pop')
+func pins_drop_ready() -> void:
 	emit_signal('open_animation_finished')
 
 func _on_mouse_entered() -> void:
