@@ -51,15 +51,15 @@ func post_drop_initialization() -> void:
 func _do_bounce() -> void:
 	var animation := create_tween()
 	
-	var squashes := [0.8, 1.2, 0.9, 1.0]
-	var scales_x := [1.1, 0.9, 1.05, 1.0]
+	var squashes := [0.6, 1.2, 0.8, 1.1, 1.0]
 	var last_sqaush := 1.0
+	var easing := Tween.EASE_OUT
 	for i in squashes.size():
 		var s := squashes[i] as float
-		var x := scales_x[i] as float
-		animation.tween_method(self, '_squash_param', last_sqaush, s, 0.15)\
-				.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+		animation.tween_method(self, '_squash_param', last_sqaush, s, 0.1)\
+				.set_ease(easing).set_trans(Tween.TRANS_QUAD)
 		last_sqaush = s
+		easing = Tween.EASE_IN_OUT
 
 func _squash_param(value: float) -> void:
 	_root_sprite.material.set_shader_param('squash', value)
