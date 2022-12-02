@@ -34,6 +34,9 @@ func post_drop_initialization() -> void:
 	var animation := create_tween()
 	animation.tween_property(_light_explode, 'frame', 2, SEC_PER_FRAME * 3)
 	animation.tween_callback(_root_sprite, 'set', ['visible', true])
+	
+	animation.tween_callback(self, '_do_bounce')
+	
 	animation.tween_property(_light_explode, 'frame', 9, SEC_PER_FRAME * 7)
 	
 	animation.tween_interval(1.0)
@@ -44,7 +47,23 @@ func post_drop_initialization() -> void:
 		animation.tween_property(_hp_bar, 'position:y', hp_position.y + SHAKE_OFFSETS[i % SHAKE_OFFSETS.size()], 0.04)
 	
 	animation.tween_callback(_hp_bar, 'set', ['position', hp_position])
+
+func _do_bounce() -> void:
+	var animation := create_tween()
 	
+	var squashes := [0.8, 1.2, 0.9, 1.0]
+	var scales_x := [1.1, 0.9, 1.05, 1.0]
+	var last_sqaush := 1.0
+	for i in squashes.size():
+		var s := squashes[i] as float
+		var x := scales_x[i] as float
+		animation.tween_method(self, '_squash_param', last_sqaush, s, 0.15)\
+				.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+		last_sqaush = s
+
+func _squash_param(value: float) -> void:
+	_root_sprite.material.set_shader_param('squash', value)
+
 func stop_star_emission() -> void:
 	ObjEct.group_call(_light_particles, 'set', ['emitting', false])
 
