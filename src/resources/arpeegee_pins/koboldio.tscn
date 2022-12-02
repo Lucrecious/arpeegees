@@ -53,51 +53,57 @@ script = ExtResource( 4 )
 
 [node name="Idle" type="Sprite" parent="Sprites" index="0"]
 use_parent_material = true
-position = Vector2( 4, -90 )
+position = Vector2( -91, -182 )
 scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 5 )
+centered = false
 
 [node name="Swipe" type="Sprite" parent="Sprites" index="1"]
 visible = false
 use_parent_material = true
-position = Vector2( 3, -91 )
+position = Vector2( -107, -251 )
 scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 7 )
+centered = false
 
 [node name="Bite" type="Sprite" parent="Sprites" index="2"]
 visible = false
 use_parent_material = true
-position = Vector2( 4, -94 )
+position = Vector2( -111, -254 )
 scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 9 )
+centered = false
 
 [node name="Hurt" type="Sprite" parent="Sprites" index="3"]
 visible = false
 use_parent_material = true
-position = Vector2( 9, -90 )
+position = Vector2( -113, -251 )
 scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 6 )
+centered = false
 
 [node name="Nervous" type="Sprite" parent="Sprites" index="4"]
 visible = false
 use_parent_material = true
-position = Vector2( 6, -89 )
+position = Vector2( -114, -248 )
 scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 8 )
+centered = false
 
 [node name="Paladin" type="Sprite" parent="Sprites" index="5"]
 visible = false
 use_parent_material = true
-position = Vector2( 35, -92 )
-scale = Vector2( 0.13, 0.13 )
+position = Vector2( -57, -185 )
+scale = Vector2( 0.333, 0.333 )
 texture = ExtResource( 18 )
+centered = false
 flip_h = true
 
 [node name="Monk" type="Sprite" parent="Sprites" index="6"]
 visible = false
 use_parent_material = true
-position = Vector2( -71, -182 )
-scale = Vector2( 0.135, 0.135 )
+position = Vector2( -79, -181 )
+scale = Vector2( 0.333, 0.333 )
 texture = ExtResource( 19 )
 centered = false
 flip_h = true

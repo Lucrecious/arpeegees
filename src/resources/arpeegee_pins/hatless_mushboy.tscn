@@ -30,9 +30,6 @@ shader_param/uv_offset_texture = ExtResource( 14 )
 nice_name = "Mushboy (Hatless)"
 _resource_set = ExtResource( 12 )
 
-[node name="Particles" parent="." index="2"]
-position = Vector2( 2, -51 )
-
 [node name="Health" parent="." index="7"]
 current = 20
 
@@ -51,37 +48,42 @@ script = ExtResource( 3 )
 
 [node name="Idle" type="Sprite" parent="Sprites" index="0"]
 use_parent_material = true
-position = Vector2( -9, -70 )
+position = Vector2( -116, -205 )
 scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 5 )
+centered = false
 
 [node name="Kick" type="Sprite" parent="Sprites" index="1"]
 visible = false
 use_parent_material = true
-position = Vector2( 8, -88 )
+position = Vector2( -117, -208 )
 scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 7 )
+centered = false
 
 [node name="Headbutt" type="Sprite" parent="Sprites" index="2"]
 visible = false
 use_parent_material = true
-position = Vector2( 41, -90 )
+position = Vector2( -111, -202 )
 scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 9 )
+centered = false
 
 [node name="Hurt" type="Sprite" parent="Sprites" index="3"]
 visible = false
 use_parent_material = true
-position = Vector2( 28, -85 )
+position = Vector2( -113, -205 )
 scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 8 )
+centered = false
 
 [node name="TryingToSpore" type="Sprite" parent="Sprites" index="4"]
 visible = false
 use_parent_material = true
-position = Vector2( 28, -85 )
+position = Vector2( -106, -202 )
 scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 6 )
+centered = false
 
 [node name="Actions" type="Node2D" parent="." index="13"]
 script = ExtResource( 2 )
