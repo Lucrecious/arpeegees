@@ -57,58 +57,66 @@ script = ExtResource( 3 )
 
 [node name="Idle" type="Sprite" parent="Sprites" index="0"]
 use_parent_material = true
-position = Vector2( -14, -90 )
+position = Vector2( -94, -185 )
 scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 4 )
+centered = false
 
 [node name="IdleNoSword" type="Sprite" parent="Sprites" index="1"]
 visible = false
 use_parent_material = true
-position = Vector2( -14, -90 )
+position = Vector2( -109, -213 )
 scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 22 )
+centered = false
 
 [node name="Hit" type="Sprite" parent="Sprites" index="2"]
 visible = false
 use_parent_material = true
-position = Vector2( 7, -89 )
+position = Vector2( -85, -210 )
 scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 5 )
+centered = false
 
 [node name="Attack" type="Sprite" parent="Sprites" index="3"]
 visible = false
 use_parent_material = true
-position = Vector2( -43, -80 )
+position = Vector2( -123, -196 )
 scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 8 )
+centered = false
 
 [node name="Slash" type="Sprite" parent="Sprites" index="4"]
 visible = false
 use_parent_material = true
-position = Vector2( -48, -94 )
+position = Vector2( -183, -185 )
 scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 21 )
+centered = false
 
 [node name="MagicHeal" type="Sprite" parent="Sprites" index="5"]
 visible = false
 use_parent_material = true
-position = Vector2( -29, -98 )
+position = Vector2( -105, -223 )
 scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 6 )
+centered = false
 
 [node name="MagicSparkles" type="Sprite" parent="Sprites" index="6"]
 visible = false
 use_parent_material = true
-position = Vector2( -27, -97 )
+position = Vector2( -102, -219 )
 scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 9 )
+centered = false
 
 [node name="Dead" type="Sprite" parent="Sprites" index="7"]
 visible = false
 use_parent_material = true
-position = Vector2( -2.38419e-07, -81 )
+position = Vector2( -123, -184 )
 scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 7 )
+centered = false
 
 [node name="Actions" type="Node2D" parent="." index="13"]
 script = ExtResource( 10 )
