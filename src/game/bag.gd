@@ -13,9 +13,7 @@ var _opened := false
 onready var _noise := OpenSimplexNoise.new()
 onready var _animation := $'%Animation' as AnimationPlayer
 onready var _bag_sprite := $Bag/BagSprite as Node2D
-onready var _shoot_star := $'%ShootStar' as Node2D
-onready var _particles := _shoot_star.get_node('LightParticles').get_children()
-onready var _shoot_star_position := _shoot_star.position
+onready var _shoot_hint := $ShootHint as Node2D
 
 func _ready() -> void:
 	reset()
@@ -28,8 +26,6 @@ func reset() -> void:
 	ObjEct.disconnect_once(_animation, 'animation_finished', self, '_on_animation_finished')
 	_animation.play('RESET')
 	_opened = false
-	_pop_times = 0
-	_shoot_star.get_child(0).visible = false
 
 func _open() -> void:
 	if _opened:
@@ -40,33 +36,23 @@ func _open() -> void:
 	disconnect('mouse_exited', self, '_on_mouse_exited')
 	_end_shake(true)
 	_animation.play('shake')
+	ObjEct.connect_once(_animation, 'animation_finished', self, '_on_animation_finished')
+	_shoot_times = 0
+	_shoot_offsets.shuffle()
 
+var _shoot_times := 0
+var _shoot_offsets := [0, 100, -100]
 func shoot_star() -> void:
-	_shoot_star.position = _shoot_star_position
-	var sprite := _shoot_star.get_child(0) as AnimatedSprite
-	sprite.visible = true
-	sprite.frame = 0
-	sprite.play()
-	ObjEct.group_call(_particles, 'set', ['emitting', true])
-	
-	var animation := create_tween()
-	animation.tween_property(_shoot_star, 'position:y', -500.0, 0.5).as_relative()\
-			.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
-	animation.tween_callback(sprite, 'set', ['visible', false])
-	animation.tween_callback(ObjEct, 'group_call', [_particles, 'set', ['emitting', false]])
+	var star := preload('res://src/resources/arpeegee_pins/shoot_star.tscn').instance() as Node2D
+	add_child(star)
+	star.global_position = _shoot_hint.global_position
+	star.position.x += _shoot_offsets[_shoot_times % _shoot_offsets.size()]
+	_shoot_times += 1
 
-var _pop_times := 0
-func count_pop() -> void:
-	_pop_times += 1
-
-	if _pop_times < 3:
-		return
-	
-	_animation.play('finish')
-	_animation.connect('animation_finished', self, '_on_animation_finished', [], CONNECT_ONESHOT)
-
-func _on_animation_finished(_animation_name: String) -> void:
-	emit_signal('open_animation_finished')
+func _on_animation_finished(animation_name: String) -> void:
+	if animation_name == 'finish':
+		ObjEct.disconnect_once(_animation, 'animation_finished', self, '_on_animation_finished')
+		emit_signal('open_animation_finished')
 
 func _on_mouse_entered() -> void:
 	_start_shake()

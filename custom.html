@@ -19,10 +19,8 @@
                 position: fixed;
                 pointer-events: all;
                 overflow-y: scroll;
-                /* width: 20px; */
                 top: 0;
                 left: 0;
-                /* left: calc(100% - 20px); */
                 right: 0;
                 bottom: 0;
                 z-index: 2;
@@ -35,19 +33,41 @@
             }
 
             #cover-overlay {
-                position: fixed;
-                pointer-events: none;
-                top: 0;
+                position: absolute;
                 left: 0;
+                top: 0;
                 right: 0;
                 bottom: 0;
-                z-index: 2;
-                background-color: #0d5e45;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                z-index: 3;
+                background-color: orange;
             }
 
             #game {
                 z-index: 1;
             }
+
+            #loading-bar {
+                background-color: black;
+            }
+
+            .center {
+                display: block;
+                margin: auto;
+                max-width: 500px;
+                /* max-height: 500px; */
+            }
+
+            #progress-bar {
+                position: absolute;
+                appearance: none;
+                margin-top: 100px;
+                width: 50%;
+            }
+
         </style>
     </head>
     <body>
@@ -57,39 +77,10 @@
                 </canvas>
                 <script src="$GODOT_URL"></script>
                 <script>
-                    var create_mouse_event = function(eventName, otherEvent) {
-                        var event = document.createEvent('MouseEvent')
-                        event.initMouseEvent(eventName, true, true, window,
-                            otherEvent.detail, otherEvent.screenX, otherEvent.screenY, otherEvent.clientX, otherEvent.clientY,
-                            otherEvent.ctrlKey, otherEvent.altKey, otherEvent.shiftKey, otherEvent.metaKey,
-                            otherEvent.button, otherEvent.target)
-                        return event
-                    }
-
-                    var turn_on_sounds = function() {
-                        var canvas = document.getElementById("canvas")
-                        var event = document.createEvent('MouseEvents')
-                        event.initEvent("mousedown", true, true)
-                        canvas.dispatchEvent(event)
-                    } 
-
                     var engine = new Engine($GODOT_CONFIG);
                     engine.startGame().then(() => {
-                        //turn_on_sounds()
-
                         const overlay = document.getElementById("scroll-overlay")
                         const coverOverlay = document.getElementById("cover-overlay")
-
-                        // overlay.addEventListener('mousedown', (event) => {
-                        //     var canvas = document.getElementById("canvas")
-                        //     var mouse_event = create_mouse_event('mousedown', event)
-                        //     canvas.dispatchEvent(mouse_event)
-                        // })
-
-                        // overlay.addEventListener('mouseup', (event) => {
-                        //     var mouse_event = create_mouse_event('mouseup', event)
-                        //     window.dispatchEvent(mouse_event)
-                        // })
 
                         overlay.style.backgroundColor = "transparent";
                         coverOverlay.style.backgroundColor = "transparent";
@@ -97,9 +88,11 @@
                     })
                 </script>
             </div>
-            <div id="cover-overlay">
-            </div>
             <div id="scroll-overlay">
+            </div>
+            <dev id="cover-overlay">
+                <img src="loadingbar.png" class="center">
+                </progress>
             </div>
         </div>
     </body>
