@@ -47,6 +47,7 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 		ActionUtils.add_attack(animation, actioner, target, damage)
 		animation.tween_callback(VFX, 'physical_impactv', [target, target_position])
 		
+		animation.tween_interval(0.25)
 		animation.tween_callback(sprite_switcher, 'change', ['idle'])
 		
 		animation.tween_callback(_goo, 'set', ['visible', false])
