@@ -45,7 +45,6 @@ func restart_battle() -> void:
 	
 
 func _on_battle_screen_requested(pin_amount: int) -> void:
-	_title_screen.get_parent().remove_child(_title_screen)
 	
 	var pins := ArpeegeePins.pick_random(3)
 	if Debug.allow_pick_pins:
@@ -53,7 +52,14 @@ func _on_battle_screen_requested(pin_amount: int) -> void:
 		if not new_pins.empty():
 			pins = new_pins
 	
+	_battle_screen.load_pins(pins)
+	
+	yield(_title_screen, 'bag_open_finished')
+	
+	_title_screen.get_parent().remove_child(_title_screen)
 	_battle_screen.start(pins)
+	
+	
 
 var _intro_faded := false
 func _input(event: InputEvent) -> void:

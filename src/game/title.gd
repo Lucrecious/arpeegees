@@ -2,16 +2,27 @@ class_name TitleScreen
 extends Control
 
 signal battle_screen_requested()
+signal bag_open_finished()
 
 onready var _bag := $'%Bag' as PinBag
 onready var _shockwave := $'%Shockwave' as Control
 onready var _sounds := NodE.get_child(self, SoundsComponent) as SoundsComponent
+var _bag_opened_finished := false
 
 func _ready() -> void:
-	_bag.connect('open_animation_finished', self, '_on_pin_bag_opened')
+	_bag.connect('open_animation_started', self, '_on_pin_bag_opened')
+	_bag.connect('open_animation_finished', self, '_on_pin_bag_opened_finished')
 
 func reset() -> void:
 	_bag.reset()
+	_bag_opened_finished = false
+
+func is_bag_opened_finished() -> bool:
+	return _bag_opened_finished
+
+func _on_pin_bag_opened_finished() -> void:
+	_bag_opened_finished = true
+	emit_signal('bag_open_finished')
 
 func _on_bag_exploded() -> void:
 	var shader := _shockwave.material as ShaderMaterial

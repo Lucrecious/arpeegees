@@ -59,6 +59,21 @@ func get_original_narrator_position() -> Vector2:
 func get_restart_button_position() -> Vector2:
 	return _restart_button_original_position
 
+var _pin_loader: BackgroundResourceLoader
+func load_pins(pins_dict: Dictionary) -> void:
+	# Start loading pins in background
+	_pin_loader = BackgroundResourceLoader.new()
+	var scene_paths := PoolStringArray([])
+	
+	var pins := (pins_dict.players + pins_dict.npcs) as Array
+	
+	for i in pins.size():
+		var pin := pins[i] as ArpeegeePin
+		scene_paths.push_back(pin.scene_path)
+	
+	_pin_loader.load(scene_paths)
+	get_tree().root.call_deferred('add_child', _pin_loader)
+
 var _started := false
 func start(pins: Dictionary) -> void:
 	if _started:
@@ -219,29 +234,20 @@ func _start_battle(nodes: Array) -> void:
 func _load_and_drop_pins(pins: Array, positions: Array, item: Node2D, item_position,
 		wait_sec: float, bounce_sec: float) -> void:
 	
-	# Start loading pins in background
-	var background_resource_loader := BackgroundResourceLoader.new()
-	var scene_paths := PoolStringArray([])
-	
-	for i in positions.size():
-		var pin := pins[i] as ArpeegeePin
-		scene_paths.push_back(pin.scene_path)
-	
-	background_resource_loader.load(scene_paths)
-	get_tree().root.call_deferred('add_child', background_resource_loader)
+	assert(_pin_loader)
 	
 	# do tween for waiting on it
 	var tween := create_tween()
-	TweenExtension.pause_until_signal_if_condition(tween, background_resource_loader, 'finished',
-			background_resource_loader, 'is_busy')
-	tween.tween_callback(background_resource_loader, 'queue_free')
+	TweenExtension.pause_until_signal_if_condition(tween, _pin_loader, 'finished',
+			_pin_loader, 'is_busy')
 	tween.tween_callback(self, '_drop_pins', [positions, pins, item, item_position,
-			background_resource_loader, wait_sec, bounce_sec])
+			_pin_loader, wait_sec, bounce_sec])
+	
+	_pin_loader = null
 
 var _position_control_to_pin_turn_index := {}
 func _drop_pins(positions: Array, pins: Array, item: PinItemPowerUp, item_position: Control,
 		loader: BackgroundResourceLoader, wait_sec: float, bounce_sec: float) -> void:
-	
 	
 	var pin_resources := loader.result as Array
 	for i in positions.size():
@@ -280,6 +286,7 @@ func _drop_pins(positions: Array, pins: Array, item: PinItemPowerUp, item_positi
 			.set_ease(Tween.EASE_OUT)\
 			.set_trans(Tween.TRANS_BOUNCE)
 	
+	loader.queue_free()
 	emit_signal('pins_dropped')
 
 

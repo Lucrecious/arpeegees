@@ -1,6 +1,7 @@
 class_name PinBag
 extends Control
 
+signal open_animation_started()
 signal open_animation_finished()
 
 const SHAKE_DEGREES := 10.0
@@ -39,6 +40,8 @@ func _open() -> void:
 	ObjEct.connect_once(_animation, 'animation_finished', self, '_on_animation_finished')
 	_shoot_times = 0
 	_shoot_offsets.shuffle()
+	
+	emit_signal('open_animation_started')
 
 var _shoot_times := 0
 var _shoot_offsets := [0, 100, -100]
