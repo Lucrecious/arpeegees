@@ -145,18 +145,14 @@ func _drop_character_pins(pins: Dictionary) -> void:
 		assert(false)
 		return
 	
-	var max_wait_sec := .5
-	var bounce_sec := 1.5
-	
 	var item_powerup := pins.item_powerup as PinItemPowerUp
 	var item_position := _layout.get_item_position()
 	
-	connect('pins_dropped', self, '_on_pins_dropped', [max_wait_sec + bounce_sec])
-	_load_and_drop_pins(players + npcs, right_positions + left_positions, item_powerup, item_position,
-			max_wait_sec, bounce_sec)
+	connect('pins_dropped', self, '_on_pins_dropped')
+	_load_and_drop_pins(players + npcs, right_positions + left_positions, item_powerup, item_position)
 
-func _on_pins_dropped(wait_sec: float) -> void:
-	_wait_for_drop_to_finish(wait_sec)
+func _on_pins_dropped() -> void:
+	_wait_for_drop_to_finish(1.0)
 
 func _wait_for_drop_to_finish(wait_sec: float) -> void:
 	Music.play_theme()
@@ -231,8 +227,7 @@ func _start_battle(nodes: Array) -> void:
 	#	_narrator.watch(n)
 	_turn_manager.step_turn()
 
-func _load_and_drop_pins(pins: Array, positions: Array, item: Node2D, item_position,
-		wait_sec: float, bounce_sec: float) -> void:
+func _load_and_drop_pins(pins: Array, positions: Array, item: Node2D, item_position) -> void:
 	
 	assert(_pin_loader)
 	
@@ -241,13 +236,16 @@ func _load_and_drop_pins(pins: Array, positions: Array, item: Node2D, item_posit
 	TweenExtension.pause_until_signal_if_condition(tween, _pin_loader, 'finished',
 			_pin_loader, 'is_busy')
 	tween.tween_callback(self, '_drop_pins', [positions, pins, item, item_position,
-			_pin_loader, wait_sec, bounce_sec])
+			_pin_loader])
 	
 	_pin_loader = null
 
 var _position_control_to_pin_turn_index := {}
 func _drop_pins(positions: Array, pins: Array, item: PinItemPowerUp, item_position: Control,
-		loader: BackgroundResourceLoader, wait_sec: float, bounce_sec: float) -> void:
+		loader: BackgroundResourceLoader) -> void:
+	
+	var drop_times := [0.0, 0.05, 0.1, 0.15, 0.2]
+	drop_times.shuffle()
 	
 	var pin_resources := loader.result as Array
 	for i in positions.size():
@@ -260,16 +258,16 @@ func _drop_pins(positions: Array, pins: Array, item: PinItemPowerUp, item_positi
 		control.add_child(pin_node)
 		var position := control.get_global_rect().get_center()
 		
-		pin_node.global_position = position + Vector2.UP * 1000.0
+		pin_node.global_position = position + Vector2.UP * 900.0
 		
 		_add_pin_shadow(control)
 		
 		pin_node.emit_stars()
 		
 		var drop_tween := get_tree().create_tween()
-		drop_tween.tween_interval(rand_range(0.0, wait_sec))
+		drop_tween.tween_interval(drop_times[i])
 		drop_tween.tween_callback(_sounds, 'play', ['ShimmerArpeegees'])
-		drop_tween.tween_property(pin_node, 'global_position:y', position.y, bounce_sec)\
+		drop_tween.tween_property(pin_node, 'global_position:y', position.y, 0.7)\
 			.set_ease(Tween.EASE_IN)\
 			.set_trans(Tween.TRANS_CUBIC)
 		drop_tween.tween_callback(pin_node, 'post_drop_initialization')
@@ -281,8 +279,8 @@ func _drop_pins(positions: Array, pins: Array, item: PinItemPowerUp, item_positi
 		item.global_position = position + Vector2.UP * 1000.0
 		
 		var drop_tween := get_tree().create_tween()
-		drop_tween.tween_interval(rand_range(0.0, wait_sec))
-		drop_tween.tween_property(item, 'global_position:y', position.y, bounce_sec)\
+		drop_tween.tween_interval(drop_times[positions.size()])
+		drop_tween.tween_property(item, 'global_position:y', position.y, 1.0)\
 			.set_ease(Tween.EASE_OUT)\
 			.set_trans(Tween.TRANS_BOUNCE)
 	

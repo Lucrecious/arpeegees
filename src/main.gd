@@ -56,10 +56,11 @@ func _on_battle_screen_requested(pin_amount: int) -> void:
 	
 	yield(_title_screen, 'bag_open_finished')
 	
-	_title_screen.get_parent().remove_child(_title_screen)
 	_battle_screen.start(pins)
 	
+	yield(get_tree().create_timer(1.0), 'timeout')
 	
+	_title_screen.get_parent().remove_child(_title_screen)
 
 var _intro_faded := false
 func _input(event: InputEvent) -> void:

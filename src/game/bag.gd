@@ -24,7 +24,6 @@ func _ready() -> void:
 func reset() -> void:
 	ObjEct.connect_once(self, 'mouse_entered', self, '_on_mouse_entered')
 	ObjEct.connect_once(self, 'mouse_exited', self, '_on_mouse_exited')
-	ObjEct.disconnect_once(_animation, 'animation_finished', self, '_on_animation_finished')
 	_animation.play('RESET')
 	_opened = false
 
@@ -37,7 +36,6 @@ func _open() -> void:
 	disconnect('mouse_exited', self, '_on_mouse_exited')
 	_end_shake(true)
 	_animation.play('shake')
-	ObjEct.connect_once(_animation, 'animation_finished', self, '_on_animation_finished')
 	_shoot_times = 0
 	_shoot_offsets.shuffle()
 	
@@ -52,10 +50,9 @@ func shoot_star() -> void:
 	star.position.x += _shoot_offsets[_shoot_times % _shoot_offsets.size()]
 	_shoot_times += 1
 
-func _on_animation_finished(animation_name: String) -> void:
-	if animation_name == 'finish':
-		ObjEct.disconnect_once(_animation, 'animation_finished', self, '_on_animation_finished')
-		emit_signal('open_animation_finished')
+func pins_drop_ready(animation_name: String) -> void:
+	assert(_animation.current_animation == 'pop')
+	emit_signal('open_animation_finished')
 
 func _on_mouse_entered() -> void:
 	_start_shake()
