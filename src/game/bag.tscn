@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://src/game/bag.gd" type="Script" id=1]
 [ext_resource path="res://assets/title/complete_bag.png" type="Texture" id=2]
@@ -24,6 +24,19 @@
 [ext_resource path="res://assets/title/particles/animation0040.png" type="Texture" id=22]
 [ext_resource path="res://assets/title/particles/animation0037.png" type="Texture" id=23]
 [ext_resource path="res://assets/title/particles/animation0049.png" type="Texture" id=24]
+[ext_resource path="res://assets/title/star/start/animation0062.png" type="Texture" id=25]
+[ext_resource path="res://assets/title/star/start/animation0061.png" type="Texture" id=26]
+[ext_resource path="res://assets/title/star/start/animation0063.png" type="Texture" id=27]
+[ext_resource path="res://assets/title/star/shootup/animation0069.png" type="Texture" id=28]
+[ext_resource path="res://assets/title/star/shootup/animation0067.png" type="Texture" id=29]
+[ext_resource path="res://assets/title/star/shootup/animation0070.png" type="Texture" id=30]
+[ext_resource path="res://assets/title/star/shootup/animation0068.png" type="Texture" id=31]
+[ext_resource path="res://assets/title/star/shootup/animation0064.png" type="Texture" id=32]
+[ext_resource path="res://assets/title/star/shootup/animation0066.png" type="Texture" id=33]
+[ext_resource path="res://assets/title/star/shootup/animation0065.png" type="Texture" id=34]
+[ext_resource path="res://assets/title/star/trail_particles/plus.png" type="Texture" id=35]
+[ext_resource path="res://assets/title/star/trail_particles/line.png" type="Texture" id=36]
+[ext_resource path="res://assets/title/star/trail_particles/dot.png" type="Texture" id=37]
 
 [sub_resource type="SpriteFrames" id=4]
 animations = [ {
@@ -32,6 +45,25 @@ animations = [ {
 "name": "default",
 "speed": 30.0
 } ]
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ null, ExtResource( 26 ), ExtResource( 25 ), ExtResource( 27 ), null ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=7]
+animations = [ {
+"frames": [ ExtResource( 32 ), ExtResource( 34 ), ExtResource( 33 ), ExtResource( 29 ), ExtResource( 31 ), ExtResource( 28 ), ExtResource( 30 ) ],
+"loop": false,
+"name": "default",
+"speed": 20.0
+} ]
+
+[sub_resource type="Curve" id=8]
+_data = [ Vector2( 0.0300752, 0.968919 ), 0.0, -1.18312, 0, 0, Vector2( 0.977444, 0 ), 0.0197527, 0.0, 0, 0 ]
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -72,7 +104,7 @@ tracks/2/keys = {
 "values": [ Vector2( 1, 1 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("AnimatedSprite:animation")
+tracks/3/path = NodePath("BigSpark:animation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -84,7 +116,7 @@ tracks/3/keys = {
 "values": [ "default" ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("AnimatedSprite:frame")
+tracks/4/path = NodePath("BigSpark:frame")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -96,7 +128,7 @@ tracks/4/keys = {
 "values": [ 0 ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("AnimatedSprite:visible")
+tracks/5/path = NodePath("BigSpark:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -107,20 +139,72 @@ tracks/5/keys = {
 "update": 0,
 "values": [ false ]
 }
+tracks/6/type = "value"
+tracks/6/path = NodePath("StartStar:animation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ "default" ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("StartStar:frame")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Bag:modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
 
-[sub_resource type="Animation" id=3]
-resource_name = "pop"
-length = 0.7
-loop = true
-step = 0.03
+[sub_resource type="Animation" id=6]
+resource_name = "finish"
+length = 0.5
 tracks/0/type = "value"
-tracks/0/path = NodePath("Bag/BagSprite:position")
+tracks/0/path = NodePath("Bag:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.03, 0.06, 0.09, 0.12, 0.15, 0.18, 0.21, 0.24, 0.27, 0.3, 0.33, 0.36, 0.39, 0.42, 0.45, 0.48, 0.51, 0.69 ),
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "pop"
+length = 1.06
+loop = true
+step = 0.03
+tracks/0/type = "value"
+tracks/0/path = NodePath("Bag/BagSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.045, 0.09, 0.135, 0.18, 0.225, 0.27, 0.315, 0.36, 0.405, 0.45, 0.495, 0.54, 0.585, 0.63, 0.675, 0.72, 0.765, 1.05 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 8, 57 ), Vector2( 2, 56 ), Vector2( 7, 58 ), Vector2( 6, 94 ), Vector2( 5, 88 ), Vector2( 6, -36 ), Vector2( 6, -38 ), Vector2( 9, -10 ), Vector2( 10, -32 ), Vector2( 5, -38 ), Vector2( -4, 10 ), Vector2( 4, -37 ), Vector2( 5, -42 ), Vector2( 5, -13 ), Vector2( 3, -2 ), Vector2( 7, 4 ), Vector2( 3, 5 ), Vector2( 5, 10 ), Vector2( 5, 10 ) ]
@@ -128,11 +212,11 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/path = NodePath("Bag/BagSprite:rotation_degrees")
 tracks/1/interp = 1
-tracks/1/loop_wrap = true
+tracks/1/loop_wrap = false
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.03, 0.06, 0.09, 0.12, 0.15, 0.18, 0.21, 0.24, 0.27, 0.3, 0.33, 0.36, 0.39, 0.42, 0.45, 0.48, 0.51, 0.69 ),
+"times": PoolRealArray( 0, 0.045, 0.09, 0.135, 0.18, 0.225, 0.27, 0.315, 0.36, 0.405, 0.45, 0.495, 0.54, 0.585, 0.63, 0.675, 0.72, 0.765, 1.05 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ 2.78249, 0.785981, 0.785981, 0.785981, -0.0352241, -0.0352241, -0.0352241, -0.0352241, -0.0352241, -0.0352241, -0.930594, 0.0781517, 0.439146, 0.439146, 0.439146, 0.439146, 0.439146, 0.439146, 0.439146 ]
@@ -140,55 +224,107 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/path = NodePath("Bag/BagSprite:scale")
 tracks/2/interp = 1
-tracks/2/loop_wrap = true
+tracks/2/loop_wrap = false
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.03, 0.06, 0.09, 0.12, 0.15, 0.18, 0.21, 0.24, 0.27, 0.3, 0.33, 0.36, 0.39, 0.42, 0.45, 0.48, 0.51, 0.69 ),
+"times": PoolRealArray( 0, 0.045, 0.09, 0.135, 0.18, 0.225, 0.27, 0.315, 0.36, 0.405, 0.45, 0.495, 0.54, 0.585, 0.63, 0.675, 0.72, 0.765, 1.05 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 1.20247, 0.78571 ), Vector2( 1.22114, 0.740987 ), Vector2( 1.30113, 0.740987 ), Vector2( 1.46112, 0.660994 ), Vector2( 1.42112, 0.660994 ), Vector2( 0.781092, 1.14099 ), Vector2( 0.741092, 1.14099 ), Vector2( 0.941117, 1.06097 ), Vector2( 0.781117, 1.14097 ), Vector2( 0.741117, 1.18097 ), Vector2( 1.02112, 0.940941 ), Vector2( 0.783097, 1.18094 ), Vector2( 0.703097, 1.18094 ), Vector2( 0.943091, 1.06156 ), Vector2( 1.02309, 1.02156 ), Vector2( 1.10309, 0.981558 ), Vector2( 1.10309, 0.981558 ), Vector2( 1.10309, 0.981558 ), Vector2( 1.10309, 0.981558 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("AnimatedSprite:animation")
+tracks/3/path = NodePath("BigSpark:animation")
 tracks/3/interp = 1
-tracks/3/loop_wrap = true
+tracks/3/loop_wrap = false
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0.09 ),
+"times": PoolRealArray( 0.135 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ "default" ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("AnimatedSprite:frame")
+tracks/4/path = NodePath("BigSpark:frame")
 tracks/4/interp = 1
-tracks/4/loop_wrap = true
+tracks/4/loop_wrap = false
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0.09, 0.51, 0.54, 0.69 ),
+"times": PoolRealArray( 0.135, 0.765, 0.81, 1.05 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ 0, 17, 18, 18 ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("AnimatedSprite:visible")
+tracks/5/path = NodePath("BigSpark:visible")
 tracks/5/interp = 1
-tracks/5/loop_wrap = true
+tracks/5/loop_wrap = false
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0, 0.09 ),
+"times": PoolRealArray( 0, 0.135 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ false, true ]
 }
+tracks/6/type = "method"
+tracks/6/path = NodePath(".")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 1.05 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "count_pop"
+} ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("StartStar:animation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0.33 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "default" ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("StartStar:frame")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0.33, 0.39, 0.45, 0.51, 0.57 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4 ]
+}
+tracks/9/type = "method"
+tracks/9/path = NodePath(".")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0.57 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "shoot_star"
+} ]
+}
 
 [sub_resource type="Animation" id=2]
 resource_name = "shake"
-length = 0.36
+length = 0.54
 step = 0.03
 tracks/0/type = "value"
 tracks/0/path = NodePath("Bag/BagSprite:position")
@@ -197,7 +333,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.03, 0.06, 0.09, 0.12, 0.15, 0.18, 0.21, 0.24, 0.27, 0.3, 0.33 ),
+"times": PoolRealArray( 0, 0.045, 0.09, 0.135, 0.18, 0.225, 0.27, 0.315, 0.36, 0.405, 0.45, 0.495 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( -2, 23 ), Vector2( 20, 35 ), Vector2( -6, 46 ) ]
@@ -209,7 +345,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.03, 0.06, 0.09, 0.12, 0.15, 0.18, 0.21, 0.24, 0.27, 0.3, 0.33 ),
+"times": PoolRealArray( 0, 0.045, 0.09, 0.135, 0.18, 0.225, 0.27, 0.315, 0.36, 0.405, 0.45, 0.495 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ 0.0, -3.24736, 5.06789, -0.231691, 1.55705, -9.80342, 11.8843, -2.09085, 2.48184, -2.37998, 2.4204, -2.05266 ]
@@ -221,13 +357,13 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.03, 0.06, 0.09, 0.12, 0.15, 0.18, 0.21, 0.24, 0.27, 0.3, 0.33 ),
+"times": PoolRealArray( 0, 0.045, 0.09, 0.135, 0.18, 0.225, 0.27, 0.315, 0.36, 0.405, 0.45, 0.495 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1.12249, 0.905648 ), Vector2( 1.12249, 0.865684 ), Vector2( 1.20247, 0.78571 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("AnimatedSprite:visible")
+tracks/3/path = NodePath("BigSpark:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -255,14 +391,69 @@ scale = Vector2( 0.5, 0.5 )
 position = Vector2( 1.90051, -10.0841 )
 texture = ExtResource( 2 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+[node name="BigSpark" type="AnimatedSprite" parent="."]
 visible = false
 position = Vector2( 122, 186 )
 frames = SubResource( 4 )
 
+[node name="StartStar" type="AnimatedSprite" parent="."]
+position = Vector2( 126, 15 )
+frames = SubResource( 5 )
+
+[node name="ShootStar" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2( 118, 146 )
+
+[node name="Sprite" type="AnimatedSprite" parent="ShootStar"]
+visible = false
+position = Vector2( -32, -39 )
+frames = SubResource( 7 )
+centered = false
+
+[node name="Plus" type="CPUParticles2D" parent="ShootStar"]
+position = Vector2( 4, 43 )
+emitting = false
+amount = 50
+local_coords = false
+texture = ExtResource( 35 )
+emission_shape = 2
+emission_rect_extents = Vector2( 50, 1 )
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 50.0
+scale_amount_curve = SubResource( 8 )
+
+[node name="Dots" type="CPUParticles2D" parent="ShootStar"]
+position = Vector2( 4, 43 )
+emitting = false
+amount = 50
+local_coords = false
+texture = ExtResource( 37 )
+emission_shape = 2
+emission_rect_extents = Vector2( 50, 1 )
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 50.0
+scale_amount_curve = SubResource( 8 )
+
+[node name="Lines" type="CPUParticles2D" parent="ShootStar"]
+position = Vector2( 4, 43 )
+emitting = false
+amount = 50
+lifetime = 2.0
+local_coords = false
+texture = ExtResource( 36 )
+emission_shape = 2
+emission_rect_extents = Vector2( 50, 1 )
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 50.0
+scale_amount_curve = SubResource( 8 )
+
 [node name="Animation" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
 anims/RESET = SubResource( 1 )
+anims/finish = SubResource( 6 )
 anims/pop = SubResource( 3 )
 anims/shake = SubResource( 2 )
 next/shake = "pop"
