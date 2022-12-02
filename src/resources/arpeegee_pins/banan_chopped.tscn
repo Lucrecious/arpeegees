@@ -65,8 +65,9 @@ position = Vector2( -116.667, 83.3334 )
 
 [node name="Sprite" type="Sprite" parent="Sprites/Idle/Slice8" index="0"]
 use_parent_material = true
-position = Vector2( 103.333, -133.333 )
+position = Vector2( -203.334, -543.333 )
 texture = ExtResource( 16 )
+centered = false
 
 [node name="Slice7" type="Node2D" parent="Sprites/Idle" index="1"]
 use_parent_material = true
@@ -74,8 +75,9 @@ position = Vector2( -56.6667, 73.3334 )
 
 [node name="Sprite" type="Sprite" parent="Sprites/Idle/Slice7" index="0"]
 use_parent_material = true
-position = Vector2( 46.6667, -133.333 )
+position = Vector2( -260, -543.333 )
 texture = ExtResource( 15 )
+centered = false
 
 [node name="Slice6" type="Node2D" parent="Sprites/Idle" index="2"]
 use_parent_material = true
@@ -83,8 +85,9 @@ position = Vector2( 6.66666, 36.6667 )
 
 [node name="Sprite" type="Sprite" parent="Sprites/Idle/Slice6" index="0"]
 use_parent_material = true
-position = Vector2( -30, -90 )
+position = Vector2( -336.667, -500 )
 texture = ExtResource( 13 )
+centered = false
 
 [node name="Slice5" type="Node2D" parent="Sprites/Idle" index="3"]
 use_parent_material = true
@@ -92,8 +95,9 @@ position = Vector2( 53.3333, -33.3333 )
 
 [node name="Sprite" type="Sprite" parent="Sprites/Idle/Slice5" index="0"]
 use_parent_material = true
-position = Vector2( -63.3334, -9.99991 )
+position = Vector2( -370, -420 )
 texture = ExtResource( 7 )
+centered = false
 
 [node name="Slice4" type="Node2D" parent="Sprites/Idle" index="4"]
 use_parent_material = true
@@ -101,8 +105,9 @@ position = Vector2( 66.6667, -93.3333 )
 
 [node name="Sprite" type="Sprite" parent="Sprites/Idle/Slice4" index="0"]
 use_parent_material = true
-position = Vector2( -86.6667, 36.6667 )
+position = Vector2( -393.333, -373.334 )
 texture = ExtResource( 6 )
+centered = false
 
 [node name="Slice3" type="Node2D" parent="Sprites/Idle" index="5"]
 use_parent_material = true
@@ -110,8 +115,9 @@ position = Vector2( 73.3333, -163.333 )
 
 [node name="Sprite" type="Sprite" parent="Sprites/Idle/Slice3" index="0"]
 use_parent_material = true
-position = Vector2( -70, 106.667 )
+position = Vector2( -376.667, -303.333 )
 texture = ExtResource( 5 )
+centered = false
 
 [node name="Slice2" type="Node2D" parent="Sprites/Idle" index="6"]
 use_parent_material = true
@@ -119,8 +125,9 @@ position = Vector2( 70, -236.667 )
 
 [node name="Sprite" type="Sprite" parent="Sprites/Idle/Slice2" index="0"]
 use_parent_material = true
-position = Vector2( -50, 183.333 )
+position = Vector2( -356.667, -226.667 )
 texture = ExtResource( 3 )
+centered = false
 
 [node name="Slice1" type="Node2D" parent="Sprites/Idle" index="7"]
 use_parent_material = true
@@ -128,8 +135,9 @@ position = Vector2( 43.3333, -333.333 )
 
 [node name="Sprite" type="Sprite" parent="Sprites/Idle/Slice1" index="0"]
 use_parent_material = true
-position = Vector2( -10, 276.667 )
+position = Vector2( -316.667, -133.333 )
 texture = ExtResource( 14 )
+centered = false
 
 [node name="Slice1" type="Sprite" parent="Sprites" index="2"]
 visible = false

@@ -53,44 +53,50 @@ script = ExtResource( 2 )
 
 [node name="Idle" type="Sprite" parent="Sprites" index="0"]
 use_parent_material = true
-position = Vector2( 0, -81 )
+position = Vector2( -73, -171 )
 scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 3 )
+centered = false
 
 [node name="Attack" type="Sprite" parent="Sprites" index="1"]
 visible = false
 use_parent_material = true
-position = Vector2( 14, -63 )
+position = Vector2( -96, -192 )
 scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 5 )
+centered = false
 
 [node name="Hit" type="Sprite" parent="Sprites" index="2"]
 visible = false
 use_parent_material = true
-position = Vector2( 16, -58 )
+position = Vector2( -81, -189 )
 scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 4 )
+centered = false
 
 [node name="Win" type="Sprite" parent="Sprites" index="3"]
 visible = false
 use_parent_material = true
-position = Vector2( -1, -58 )
+position = Vector2( -92, -182 )
 scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 6 )
+centered = false
 
 [node name="SwordStuckPaladin" type="Sprite" parent="Sprites" index="4"]
 visible = false
 use_parent_material = true
-position = Vector2( 67, -93 )
+position = Vector2( -113, -214 )
 scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 17 )
+centered = false
 
 [node name="SwordStuck" type="Sprite" parent="Sprites" index="5"]
 visible = false
 use_parent_material = true
-position = Vector2( 2, -75 )
+position = Vector2( -109, -218 )
 scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 18 )
+centered = false
 
 [node name="Actions" type="Node2D" parent="." index="13"]
 script = ExtResource( 9 )
