@@ -1,7 +1,7 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://src/resources/arpeegee_pins/components/sprite_switcher.gd" type="Script" id=1]
-[ext_resource path="res://src/game/battle/star_particles.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/resources/arpeegee_pins/light_particles.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/resources/arpeegee_pins/components/damage_receiver.gd" type="Script" id=3]
 [ext_resource path="res://lut/components/health.gd" type="Script" id=4]
 [ext_resource path="res://src/resources/arpeegee_pins/components/status_effects_list.gd" type="Script" id=5]
@@ -13,12 +13,42 @@
 [ext_resource path="res://src/resources/arpeegee_pins/components/modified_stats.gd" type="Script" id=11]
 [ext_resource path="res://src/resources/sounds.gd" type="Script" id=12]
 [ext_resource path="res://src/resources/arpeegee_pins/shadow_area.gd" type="Script" id=13]
+[ext_resource path="res://assets/title/star/shootdown/shootdown.png" type="Texture" id=14]
+[ext_resource path="res://assets/title/star/shootdown/animation0099.png" type="Texture" id=15]
+[ext_resource path="res://assets/title/star/shootdown/animation0093.png" type="Texture" id=16]
+[ext_resource path="res://assets/title/star/shootdown/animation0086.png" type="Texture" id=17]
+[ext_resource path="res://assets/title/star/shootdown/animation0091.png" type="Texture" id=18]
+[ext_resource path="res://assets/title/star/shootdown/animation0102.png" type="Texture" id=19]
+[ext_resource path="res://assets/title/star/shootdown/animation0089.png" type="Texture" id=20]
+[ext_resource path="res://assets/title/star/shootdown/animation0087.png" type="Texture" id=21]
+[ext_resource path="res://assets/title/star/shootdown/animation0096.png" type="Texture" id=22]
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ null, ExtResource( 17 ), ExtResource( 21 ), ExtResource( 20 ), ExtResource( 18 ), ExtResource( 16 ), ExtResource( 22 ), ExtResource( 15 ), ExtResource( 19 ), null ],
+"loop": false,
+"name": "default",
+"speed": 10.0
+} ]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 22.0227
 
 [node name="Pin" type="Node2D"]
 script = ExtResource( 8 )
+
+[node name="StartAnimation" type="Node2D" parent="."]
+
+[node name="LightDown" type="Sprite" parent="StartAnimation"]
+position = Vector2( 0, -82 )
+texture = ExtResource( 14 )
+
+[node name="LightExplode" type="AnimatedSprite" parent="StartAnimation"]
+position = Vector2( 1, -134 )
+z_index = 2
+frames = SubResource( 2 )
+
+[node name="LightParticles" parent="StartAnimation" instance=ExtResource( 2 )]
 
 [node name="ShadowArea" type="Area2D" parent="."]
 collision_mask = 0
@@ -30,10 +60,6 @@ shape = SubResource( 1 )
 
 [node name="SelectIndicater" type="Node" parent="."]
 script = ExtResource( 6 )
-
-[node name="Particles" parent="." instance=ExtResource( 2 )]
-unique_name_in_owner = true
-position = Vector2( -1, -162 )
 
 [node name="SpriteSwitcher" type="Node2D" parent="."]
 script = ExtResource( 1 )

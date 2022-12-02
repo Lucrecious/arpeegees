@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://src/game/bag.gd" type="Script" id=1]
 [ext_resource path="res://assets/title/complete_bag.png" type="Texture" id=2]
@@ -34,9 +34,7 @@
 [ext_resource path="res://assets/title/star/shootup/animation0064.png" type="Texture" id=32]
 [ext_resource path="res://assets/title/star/shootup/animation0066.png" type="Texture" id=33]
 [ext_resource path="res://assets/title/star/shootup/animation0065.png" type="Texture" id=34]
-[ext_resource path="res://assets/title/star/trail_particles/plus.png" type="Texture" id=35]
-[ext_resource path="res://assets/title/star/trail_particles/line.png" type="Texture" id=36]
-[ext_resource path="res://assets/title/star/trail_particles/dot.png" type="Texture" id=37]
+[ext_resource path="res://src/resources/arpeegee_pins/light_particles.tscn" type="PackedScene" id=35]
 
 [sub_resource type="SpriteFrames" id=4]
 animations = [ {
@@ -59,11 +57,8 @@ animations = [ {
 "frames": [ ExtResource( 32 ), ExtResource( 34 ), ExtResource( 33 ), ExtResource( 29 ), ExtResource( 31 ), ExtResource( 28 ), ExtResource( 30 ) ],
 "loop": false,
 "name": "default",
-"speed": 20.0
+"speed": 10.0
 } ]
-
-[sub_resource type="Curve" id=8]
-_data = [ Vector2( 0.0300752, 0.968919 ), 0.0, -1.18312, 0, 0, Vector2( 0.977444, 0 ), 0.0197527, 0.0, 0, 0 ]
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -196,7 +191,7 @@ tracks/0/keys = {
 resource_name = "pop"
 length = 1.06
 loop = true
-step = 0.03
+step = 0.005
 tracks/0/type = "value"
 tracks/0/path = NodePath("Bag/BagSprite:position")
 tracks/0/interp = 1
@@ -290,7 +285,7 @@ tracks/7/loop_wrap = true
 tracks/7/imported = false
 tracks/7/enabled = true
 tracks/7/keys = {
-"times": PoolRealArray( 0.33 ),
+"times": PoolRealArray( 0.315 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ "default" ]
@@ -302,7 +297,7 @@ tracks/8/loop_wrap = true
 tracks/8/imported = false
 tracks/8/enabled = true
 tracks/8/keys = {
-"times": PoolRealArray( 0.33, 0.39, 0.45, 0.51, 0.57 ),
+"times": PoolRealArray( 0.315, 0.36, 0.45, 0.495, 0.57 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 3, 4 ]
@@ -410,45 +405,7 @@ position = Vector2( -32, -39 )
 frames = SubResource( 7 )
 centered = false
 
-[node name="Plus" type="CPUParticles2D" parent="ShootStar"]
-position = Vector2( 4, 43 )
-emitting = false
-amount = 50
-local_coords = false
-texture = ExtResource( 35 )
-emission_shape = 2
-emission_rect_extents = Vector2( 50, 1 )
-spread = 180.0
-gravity = Vector2( 0, 0 )
-initial_velocity = 50.0
-scale_amount_curve = SubResource( 8 )
-
-[node name="Dots" type="CPUParticles2D" parent="ShootStar"]
-position = Vector2( 4, 43 )
-emitting = false
-amount = 50
-local_coords = false
-texture = ExtResource( 37 )
-emission_shape = 2
-emission_rect_extents = Vector2( 50, 1 )
-spread = 180.0
-gravity = Vector2( 0, 0 )
-initial_velocity = 50.0
-scale_amount_curve = SubResource( 8 )
-
-[node name="Lines" type="CPUParticles2D" parent="ShootStar"]
-position = Vector2( 4, 43 )
-emitting = false
-amount = 50
-lifetime = 2.0
-local_coords = false
-texture = ExtResource( 36 )
-emission_shape = 2
-emission_rect_extents = Vector2( 50, 1 )
-spread = 180.0
-gravity = Vector2( 0, 0 )
-initial_velocity = 50.0
-scale_amount_curve = SubResource( 8 )
+[node name="LightParticles" parent="ShootStar" instance=ExtResource( 35 )]
 
 [node name="Animation" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true

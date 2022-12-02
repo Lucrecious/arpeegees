@@ -14,6 +14,7 @@ onready var _noise := OpenSimplexNoise.new()
 onready var _animation := $'%Animation' as AnimationPlayer
 onready var _bag_sprite := $Bag/BagSprite as Node2D
 onready var _shoot_star := $'%ShootStar' as Node2D
+onready var _particles := _shoot_star.get_node('LightParticles').get_children()
 onready var _shoot_star_position := _shoot_star.position
 
 func _ready() -> void:
@@ -28,6 +29,7 @@ func reset() -> void:
 	_animation.play('RESET')
 	_opened = false
 	_pop_times = 0
+	_shoot_star.get_child(0).visible = false
 
 func _open() -> void:
 	if _opened:
@@ -45,15 +47,13 @@ func shoot_star() -> void:
 	sprite.visible = true
 	sprite.frame = 0
 	sprite.play()
-	
-	var particles := NodE.get_children(_shoot_star, CPUParticles2D)
-	ObjEct.group_call(particles, 'set', ['emitting', true])
+	ObjEct.group_call(_particles, 'set', ['emitting', true])
 	
 	var animation := create_tween()
-	animation.tween_property(_shoot_star, 'position:y', -500.0, 0.25).as_relative()\
-			.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
+	animation.tween_property(_shoot_star, 'position:y', -500.0, 0.5).as_relative()\
+			.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 	animation.tween_callback(sprite, 'set', ['visible', false])
-	animation.tween_callback(ObjEct, 'group_call', [particles, 'set', ['emitting', false]])
+	animation.tween_callback(ObjEct, 'group_call', [_particles, 'set', ['emitting', false]])
 
 var _pop_times := 0
 func count_pop() -> void:

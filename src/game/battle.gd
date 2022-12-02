@@ -264,8 +264,8 @@ func _drop_pins(positions: Array, pins: Array, item: PinItemPowerUp, item_positi
 		drop_tween.tween_interval(rand_range(0.0, wait_sec))
 		drop_tween.tween_callback(_sounds, 'play', ['ShimmerArpeegees'])
 		drop_tween.tween_property(pin_node, 'global_position:y', position.y, bounce_sec)\
-			.set_ease(Tween.EASE_OUT)\
-			.set_trans(Tween.TRANS_BOUNCE)
+			.set_ease(Tween.EASE_IN)\
+			.set_trans(Tween.TRANS_CUBIC)
 		drop_tween.tween_callback(pin_node, 'post_drop_initialization')
 	
 	if item:
