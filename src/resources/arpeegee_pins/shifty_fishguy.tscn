@@ -55,37 +55,42 @@ script = ExtResource( 5 )
 
 [node name="Idle" type="Sprite" parent="Sprites" index="0"]
 use_parent_material = true
-position = Vector2( 37, -90 )
+position = Vector2( -81, -182 )
 scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 3 )
+centered = false
 
 [node name="Hit" type="Sprite" parent="Sprites" index="1"]
 visible = false
 use_parent_material = true
-position = Vector2( 72, -93 )
+position = Vector2( -123, -245 )
 scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 7 )
+centered = false
 
 [node name="Snicker" type="Sprite" parent="Sprites" index="2"]
 visible = false
 use_parent_material = true
-position = Vector2( 75, -109 )
+position = Vector2( -147, -271 )
 scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 6 )
+centered = false
 
 [node name="Stab" type="Sprite" parent="Sprites" index="3"]
 visible = false
 use_parent_material = true
-position = Vector2( 69, -109 )
+position = Vector2( -157, -272 )
 scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 11 )
+centered = false
 
 [node name="Throw" type="Sprite" parent="Sprites" index="4"]
 visible = false
 use_parent_material = true
-position = Vector2( 69, -109 )
+position = Vector2( -151, -266 )
 scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 9 )
+centered = false
 
 [node name="Actions" type="Node2D" parent="." index="13"]
 script = ExtResource( 4 )
@@ -104,6 +109,7 @@ type = 2
 throw_frame = "throw"
 
 [node name="Spear" type="Node2D" parent="Actions/ThrowSpear" index="0"]
+visible = false
 position = Vector2( 178, -44 )
 
 [node name="Sprite" type="Sprite" parent="Actions/ThrowSpear/Spear" index="0"]
