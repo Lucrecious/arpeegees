@@ -15,14 +15,16 @@ onready var _root_sprite := Components.root_sprite(self)
 onready var _hp_bar := get_node('HealthBar') as Node2D
 
 func _ready() -> void:
+	_light_down.visible = false
+	if not resource:
+		print_debug('warning: resource missing')
+
+
+func emit_stars() -> void:
 	_hp_bar.visible = false
 	_light_explode.frame = 0
 	_light_down.visible = true
 	_root_sprite.visible = false
-	if not resource:
-		print_debug('warning: resource missing')
-
-func emit_stars() -> void:
 	ObjEct.group_call(_light_particles, 'set', ['emitting', true])
 
 const SEC_PER_FRAME := 0.05

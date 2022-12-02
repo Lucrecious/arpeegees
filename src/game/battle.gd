@@ -37,8 +37,6 @@ func _ready() -> void:
 	_narrator.rect_position += Vector2.LEFT * (_narrator.rect_size.x + 500.0)
 	_restart_button_holder.rect_position += Vector2.UP * (restart_button.rect_size.y + 100.0)
 	
-	_turn_manager.connect('turn_started_before_actions', self, '_on_turn_started_before_actions')
-	
 	if auto_start:
 		var item_powerup: PinItemPowerUp
 		if auto_start_item:
@@ -101,16 +99,6 @@ func start(pins: Dictionary) -> void:
 	_layout = _create_battle_layout(layout_scene, pins)
 	_drop_character_pins(pins)
 
-func _on_turn_started_before_actions() -> void:
-	var pins := _turn_manager.get_pins()
-	for p in pins:
-		if p.filename.get_file() == 'mushboy.tscn':
-			var status_effects_list := NodE.get_child(p, StatusEffectsList) as StatusEffectsList
-			if status_effects_list.count_tags(StatusEffectTag.Bounce) > 0:
-				continue
-		
-		var control := p.get_parent() as Control
-		p.global_position = control.get_global_rect().get_center()
 		
 func _configure_viewport(viewport: Viewport) -> void:
 	var max_superscaling := 2560

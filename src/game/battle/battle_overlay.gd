@@ -24,6 +24,7 @@ func _ready() -> void:
 		_turn_manager.connect('npc_turn_started', self, '_on_player_turn_started')
 	
 	_turn_manager.connect('turn_finished', self, '_on_turn_finished')
+	_turn_manager.connect('turn_started_before_actions', self, '_on_turn_started_before_actions')
 	
 	_turn_manager.connect('pins_changed', self, '_on_pins_changed')
 	_on_pins_changed()
@@ -42,6 +43,19 @@ func _update_character_pointer() -> void:
 	
 	var selector_location := rect.get_center() + Vector2.DOWN * ((rect.size.y / 2.0) + 16.0)
 	_character_pointer.global_position = selector_location
+
+func _on_turn_started_before_actions() -> void:
+	var pins := _turn_manager.get_pins()
+	for p in pins:
+		if p.filename.get_file() == 'mushboy.tscn':
+			var status_effects_list := NodE.get_child(p, StatusEffectsList) as StatusEffectsList
+			if status_effects_list.count_tags(StatusEffectTag.Bounce) > 0:
+				continue
+		
+		var control := p.get_parent() as Control
+		p.global_position = control.get_global_rect().get_center()
+	
+	_update_character_pointer()
 
 var _pins_cache := []
 func _on_pins_changed() -> void:
