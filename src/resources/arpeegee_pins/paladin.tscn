@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/resources/arpeegee_pins/paladin.tres" type="Resource" id=2]
@@ -22,7 +22,9 @@
 [ext_resource path="res://src/resources/arpeegee_pins/actions/slippable.gd" type="Script" id=20]
 [ext_resource path="res://assets/sprites/paladin/paladin_tremendous.png" type="Texture" id=21]
 [ext_resource path="res://assets/sprites/paladin/paladin_idle_noweapon.PNG" type="Texture" id=22]
+[ext_resource path="res://assets/sounds/TREMENDOUS_SLASH_PALADIN.mp3" type="AudioStream" id=23]
 [ext_resource path="res://src/resources/arpeegee_pins/components/transformer.gd" type="Script" id=24]
+[ext_resource path="res://assets/sounds/BRIGHT_SPARKLES_PALADIN.mp3" type="AudioStream" id=25]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 14 )
@@ -138,6 +140,7 @@ pin_action = ExtResource( 16 )
 attack_frame = "slash"
 narration_key_single = "NARRATOR_TREMENDOUS_SLASH_USE_ONE_ENEMY"
 narration_key_multi = "NARRATOR_TREMENDOUS_SLASH_USE_MULTIPLE_ENEMIES"
+hit_sfx = "TremendousSlash"
 
 [node name="ImpactHint" type="Position2D" parent="Actions/TremendousSlash" index="0"]
 position = Vector2( -103, -99 )
@@ -152,10 +155,17 @@ use_frame = "magicsparkles"
 use_vfx_call = "bright_sparkles"
 effect_call = "bright_sparkles"
 narration_key = "NARRATOR_BRIGHT_SPARKLES_USE"
+sfx = "BrightSparkles"
 
 [node name="HolySparkles" type="Node2D" parent="Actions" index="3"]
 script = ExtResource( 19 )
 frame = "magicheal"
+
+[node name="TremendousSlash" type="AudioStreamPlayer" parent="Sounds" index="0"]
+stream = ExtResource( 23 )
+
+[node name="BrightSparkles" type="AudioStreamPlayer" parent="Sounds" index="1"]
+stream = ExtResource( 25 )
 
 [node name="Transformer" type="Node" parent="." index="15"]
 script = ExtResource( 24 )

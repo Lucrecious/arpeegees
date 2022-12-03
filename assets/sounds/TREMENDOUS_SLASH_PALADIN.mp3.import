@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/TREMENDOUS_SLASH_PALADIN.mp3-c2973fe1e574f96a4a30b6e512467291.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/TREMENDOUS_SLASH_PALADIN.mp3"
+dest_files=[ "res://.import/TREMENDOUS_SLASH_PALADIN.mp3-c2973fe1e574f96a4a30b6e512467291.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

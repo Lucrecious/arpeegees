@@ -8,6 +8,7 @@ export(String) var use_frame := ''
 export(String) var use_vfx_call := ''
 export(String) var effect_call := ''
 export(String) var narration_key := ''
+export(String) var sfx := ''
 
 
 func pin_action() -> PinAction:
@@ -24,6 +25,10 @@ func run(actioner: Node2D, object: Object, callback: String) -> void:
 	
 	if not use_vfx_call.empty():
 		animation.tween_callback(VFX, use_vfx_call, [actioner])
+	
+	if not sfx.empty():
+		var sounds := NodE.get_child(actioner, SoundsComponent)
+		animation.tween_callback(sounds, 'play', [sfx])
 	
 	if not effect_call.empty():
 		animation.tween_callback(EffectFunctions, effect_call, [actioner])

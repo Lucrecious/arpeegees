@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/BRIGHT_SPARKLES_PALADIN.mp3-72254f3c0ece7d9e0f77aef706ad8c71.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/BRIGHT_SPARKLES_PALADIN.mp3"
+dest_files=[ "res://.import/BRIGHT_SPARKLES_PALADIN.mp3-72254f3c0ece7d9e0f77aef706ad8c71.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

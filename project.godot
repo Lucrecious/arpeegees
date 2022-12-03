@@ -189,7 +189,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/resources/arpeegee_pins/actions/multi_attack.gd"
 }, {
-"base": "Reference",
+"base": "Node2D",
 "class": "GenericSelfBuffSpell",
 "language": "GDScript",
 "path": "res://src/resources/arpeegee_pins/actions/general_self_buff.gd"
