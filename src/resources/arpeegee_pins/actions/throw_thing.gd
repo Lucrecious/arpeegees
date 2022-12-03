@@ -41,6 +41,8 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	
 	var side := -sign(target.global_position.x - actioner.global_position.x)
 	
+	animation.tween_callback(Sounds, 'play', ['GenericWindUp1'])
+	
 	var material := Components.root_sprite(actioner).material as ShaderMaterial
 	TweenJuice.skew(animation, material, 0.0, side * 1.0, 0.35)\
 			.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
@@ -66,10 +68,13 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	animation.tween_callback(sprite_switcher, 'change', ['idle'])
 	
 	var stats := NodE.get_child(actioner, ModifiedPinStats) as ModifiedPinStats
+	var sounds := NodE.get_child(actioner, SoundsComponent)
 	if type == Type.HandThrowRock:
 		ActionUtils.add_attack(animation, actioner, target, stats.attack)
+		animation.tween_callback(sounds, 'play', ['RockHit'])
 	elif type == Type.MagicThrowRock:
 		ActionUtils.add_magic_attack(animation, actioner, target, stats.magic_attack)
+		animation.tween_callback(sounds, 'play', ['MagicRockHit'])
 	elif type == Type.ThrowSpear:
 		var attack_amount := ActionUtils.damage_with_factor(stats.attack, 0.75)
 		ActionUtils.add_attack(animation, actioner, target, attack_amount, 5)

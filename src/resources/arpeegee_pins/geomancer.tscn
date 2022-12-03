@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/resources/arpeegee_pins/geomancer.tres" type="Resource" id=2]
@@ -16,6 +16,9 @@
 [ext_resource path="res://assets/shaders/pin_sprite_shader.gdshader" type="Shader" id=14]
 [ext_resource path="res://assets/shaders/wobble_noise.tres" type="Texture" id=15]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/spells_geomancer.gd" type="Script" id=16]
+[ext_resource path="res://assets/sounds/ROCK_WALL_GEOMANCER.mp3" type="AudioStream" id=17]
+[ext_resource path="res://assets/sounds/THROW_A_ROCK_MAGIC_GEOMANCER.mp3" type="AudioStream" id=18]
+[ext_resource path="res://assets/sounds/THROW_A_ROCK_HAND_GEOMANCER.mp3" type="AudioStream" id=19]
 [ext_resource path="res://assets/sprites/geomancer/geomancer_rockthrow.png" type="Texture" id=22]
 [ext_resource path="res://assets/sprites/geomancer/geomancer_norockshurt.png" type="Texture" id=23]
 [ext_resource path="res://assets/sprites/geomancer/geomancer_win.png" type="Texture" id=24]
@@ -167,3 +170,12 @@ visible = false
 position = Vector2( -67, -94 )
 scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 13 )
+
+[node name="RockHit" type="AudioStreamPlayer" parent="Sounds" index="0"]
+stream = ExtResource( 19 )
+
+[node name="MagicRockHit" type="AudioStreamPlayer" parent="Sounds" index="1"]
+stream = ExtResource( 18 )
+
+[node name="RaiseEarth" type="AudioStreamPlayer" parent="Sounds" index="2"]
+stream = ExtResource( 17 )

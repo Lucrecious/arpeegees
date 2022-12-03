@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/ROCK_WALL_GEOMANCER.mp3-c9f2aac2f565207e067ae7f4f7cdb0e4.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/ROCK_WALL_GEOMANCER.mp3"
+dest_files=[ "res://.import/ROCK_WALL_GEOMANCER.mp3-c9f2aac2f565207e067ae7f4f7cdb0e4.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

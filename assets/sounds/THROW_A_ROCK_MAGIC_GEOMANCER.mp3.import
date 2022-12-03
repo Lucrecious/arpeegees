@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/THROW_A_ROCK_MAGIC_GEOMANCER.mp3-e4d0569b3363d0f24e880cf38160ab63.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/THROW_A_ROCK_MAGIC_GEOMANCER.mp3"
+dest_files=[ "res://.import/THROW_A_ROCK_MAGIC_GEOMANCER.mp3-e4d0569b3363d0f24e880cf38160ab63.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

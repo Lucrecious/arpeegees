@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/THROW_A_ROCK_HAND_GEOMANCER.mp3-1b02840f7a0ce54916f1bb27f3fab79d.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/THROW_A_ROCK_HAND_GEOMANCER.mp3"
+dest_files=[ "res://.import/THROW_A_ROCK_HAND_GEOMANCER.mp3-1b02840f7a0ce54916f1bb27f3fab79d.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

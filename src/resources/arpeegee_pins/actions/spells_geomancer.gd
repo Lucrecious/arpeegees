@@ -35,6 +35,9 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 	var sprite_switcher := NodE.get_child(actioner, SpriteSwitcher) as SpriteSwitcher
 	animation.tween_callback(sprite_switcher, 'change', ['raise'])
 	
+	var sounds := NodE.get_child(actioner, SoundsComponent)
+	animation.tween_callback(sounds, 'play', ['RaiseEarth'])
+	
 	_is_blocked = true
 	if type == Type.RaiseEarth:
 		animation.tween_interval(1.0)
