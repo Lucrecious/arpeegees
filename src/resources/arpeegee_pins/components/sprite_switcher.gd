@@ -19,6 +19,8 @@ func sprite(name: String) -> Node2D:
 	return sprite
 
 func swap_map(one: String, other: String) -> void:
+	one = one.to_lower()
+	other = other.to_lower()
 	
 	var node := _name_to_sprite.get(one, null) as Node2D
 	if not node:

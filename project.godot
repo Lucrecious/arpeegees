@@ -199,11 +199,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/resources/arpeegee_pins/actions/attack.gd"
 }, {
-"base": "Sprite",
-"class": "GeomancerSpriteWithRocks",
-"language": "GDScript",
-"path": "res://src/resources/geomancer_sprite.gd"
-}, {
 "base": "Node2D",
 "class": "GooShotTrapAction",
 "language": "GDScript",
@@ -688,7 +683,6 @@ _global_script_class_icons={
 "GenericHitAllEnemiesAttack": "",
 "GenericSelfBuffSpell": "",
 "GenericTargetAttack": "",
-"GeomancerSpriteWithRocks": "",
 "GooShotTrapAction": "",
 "Gravity": "",
 "Health": "",

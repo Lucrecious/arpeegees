@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/resources/arpeegee_pins/geomancer.tres" type="Resource" id=2]
@@ -16,11 +16,6 @@
 [ext_resource path="res://assets/shaders/pin_sprite_shader.gdshader" type="Shader" id=14]
 [ext_resource path="res://assets/shaders/wobble_noise.tres" type="Texture" id=15]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/spells_geomancer.gd" type="Script" id=16]
-[ext_resource path="res://assets/sprites/effects/rock4.png" type="Texture" id=17]
-[ext_resource path="res://assets/sprites/effects/rock2.png" type="Texture" id=18]
-[ext_resource path="res://assets/sprites/effects/rock3.png" type="Texture" id=19]
-[ext_resource path="res://src/vfx/rocks_updown_geomancer.gd" type="Script" id=20]
-[ext_resource path="res://src/resources/geomancer_sprite.gd" type="Script" id=21]
 [ext_resource path="res://assets/sprites/geomancer/geomancer_rockthrow.png" type="Texture" id=22]
 [ext_resource path="res://assets/sprites/geomancer/geomancer_norockshurt.png" type="Texture" id=23]
 [ext_resource path="res://assets/sprites/geomancer/geomancer_win.png" type="Texture" id=24]
@@ -60,10 +55,16 @@ position = Vector2( -48, -116 )
 scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 6 )
 centered = false
-script = ExtResource( 21 )
-with_rocks = ExtResource( 5 )
 
-[node name="MagicThrow" type="Sprite" parent="Sprites" index="1"]
+[node name="IdleRocks" type="Sprite" parent="Sprites" index="1"]
+visible = false
+use_parent_material = true
+position = Vector2( -107, -130 )
+scale = Vector2( 0.333333, 0.333333 )
+texture = ExtResource( 5 )
+centered = false
+
+[node name="MagicThrow" type="Sprite" parent="Sprites" index="2"]
 visible = false
 use_parent_material = true
 position = Vector2( -84, -138 )
@@ -71,17 +72,23 @@ scale = Vector2( 0.333, 0.333 )
 texture = ExtResource( 7 )
 centered = false
 
-[node name="Throw" type="Sprite" parent="Sprites" index="2"]
+[node name="Throw" type="Sprite" parent="Sprites" index="3"]
 visible = false
 use_parent_material = true
 position = Vector2( -113, -138 )
 scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 9 )
 centered = false
-script = ExtResource( 21 )
-with_rocks = ExtResource( 22 )
 
-[node name="Raise" type="Sprite" parent="Sprites" index="3"]
+[node name="ThrowRocks" type="Sprite" parent="Sprites" index="4"]
+visible = false
+use_parent_material = true
+position = Vector2( -114, -137 )
+scale = Vector2( 0.333333, 0.333333 )
+texture = ExtResource( 22 )
+centered = false
+
+[node name="Raise" type="Sprite" parent="Sprites" index="5"]
 visible = false
 use_parent_material = true
 position = Vector2( -122, -170 )
@@ -89,27 +96,39 @@ scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 8 )
 centered = false
 
-[node name="Hurt" type="Sprite" parent="Sprites" index="4"]
+[node name="Hurt" type="Sprite" parent="Sprites" index="6"]
 visible = false
 use_parent_material = true
 position = Vector2( -51, -116 )
 scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 23 )
 centered = false
-script = ExtResource( 21 )
-with_rocks = ExtResource( 25 )
 
-[node name="Win" type="Sprite" parent="Sprites" index="5"]
+[node name="HurtRocks" type="Sprite" parent="Sprites" index="7"]
+visible = false
+use_parent_material = true
+position = Vector2( -80, -146 )
+scale = Vector2( 0.333333, 0.333333 )
+texture = ExtResource( 25 )
+centered = false
+
+[node name="Win" type="Sprite" parent="Sprites" index="8"]
 visible = false
 use_parent_material = true
 position = Vector2( -104, -137 )
 scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 10 )
 centered = false
-script = ExtResource( 21 )
-with_rocks = ExtResource( 24 )
 
-[node name="Dead" type="Sprite" parent="Sprites" index="6"]
+[node name="WinRocks" type="Sprite" parent="Sprites" index="9"]
+visible = false
+use_parent_material = true
+position = Vector2( -105, -137 )
+scale = Vector2( 0.333333, 0.333333 )
+texture = ExtResource( 24 )
+centered = false
+
+[node name="Dead" type="Sprite" parent="Sprites" index="10"]
 visible = false
 use_parent_material = true
 position = Vector2( -128, -135 )
@@ -133,29 +152,6 @@ texture = ExtResource( 13 )
 
 [node name="RaiseEarth" type="Node2D" parent="Actions" index="1"]
 script = ExtResource( 16 )
-
-[node name="Rocks" type="Node2D" parent="Actions/RaiseEarth" index="0"]
-visible = false
-
-[node name="Rock" type="Sprite" parent="Actions/RaiseEarth/Rocks" index="0"]
-position = Vector2( -71, -15 )
-scale = Vector2( 0.333333, 0.333333 )
-texture = ExtResource( 18 )
-script = ExtResource( 20 )
-
-[node name="Rock2" type="Sprite" parent="Actions/RaiseEarth/Rocks" index="1"]
-position = Vector2( -7.00002, 32 )
-scale = Vector2( 0.333333, 0.333333 )
-texture = ExtResource( 19 )
-script = ExtResource( 20 )
-
-[node name="Rock3" type="Sprite" parent="Actions/RaiseEarth/Rocks" index="2"]
-position = Vector2( 52, 0.300049 )
-scale = Vector2( 0.333333, 0.333333 )
-texture = ExtResource( 17 )
-script = ExtResource( 20 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Actions/RaiseEarth/Rocks" index="3"]
 
 [node name="RockWall" type="Node2D" parent="Actions" index="2"]
 script = ExtResource( 16 )

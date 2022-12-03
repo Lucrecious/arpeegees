@@ -25,6 +25,8 @@ func pin_action() -> PinAction:
 
 var _uses := 0
 
+var sprites_rocks := ['idle', 'throw', 'hurt', 'win']
+
 func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> void:
 	var animation := create_tween()
 	
@@ -33,33 +35,19 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 	var sprite_switcher := NodE.get_child(actioner, SpriteSwitcher) as SpriteSwitcher
 	animation.tween_callback(sprite_switcher, 'change', ['raise'])
 	
+	_is_blocked = true
 	if type == Type.RaiseEarth:
-		var rocks: Node2D = null
-		if _uses == 0:
-			rocks = get_child(0) as Node2D
-			rocks.visible = true
-			rocks.modulate.a = 0.0
-		elif _uses == 1:
-			rocks = get_child(0).duplicate()
-			rocks.position = Vector2.ZERO
-			rocks.modulate.a = 0.0
-			add_child(rocks)
+		animation.tween_interval(1.0)
 		
-		if rocks:
-			var y := [-25, -70][_uses] as float
-			animation.tween_property(rocks, 'position:y', y, 1.0)
-			animation.parallel().tween_property(rocks, 'modulate:a', 1.0, 0.5)
-			
-			var status_effects := NodE.get_child(actioner, StatusEffectsList) as StatusEffectsList
-			animation.tween_callback(status_effects, 'add_instance', [_create_raise_earth_status()])
-			
-			ActionUtils.add_text_trigger(animation, self, 'NARRATOR_RAISE_EARTH_USE')
-		else:
-			ActionUtils.add_text_trigger(animation, self, 'NARRATOR_RAISE_EARTH_USE_NO_MORE_ROCKS')
+		for rocks in sprites_rocks:
+			animation.tween_callback(sprite_switcher, 'swap_map', [rocks, '%sRocks' % rocks])
 		
+		var status_effects := NodE.get_child(actioner, StatusEffectsList) as StatusEffectsList
+		animation.tween_callback(status_effects, 'add_instance', [_create_raise_earth_status()])
+		
+		ActionUtils.add_text_trigger(animation, self, 'NARRATOR_RAISE_EARTH_USE')
+	
 	elif type == Type.RockWall:
-		_is_blocked = true
-		
 		if _uses == 0:
 			var rock_wall_animation_player_group := get_tree().get_nodes_in_group('rock_wall_animation_player')
 			if not rock_wall_animation_player_group.empty():
@@ -105,7 +93,7 @@ func _add_rock_wall_defences(targets: Array) -> void:
 
 func _create_raise_earth_status() -> StatusEffect:
 	var status_effect := StatusEffect.new()
-	status_effect.stack_count = 2
+	status_effect.stack_count = 1
 	status_effect.tag = StatusEffectTag.RaiseEarth
 	status_effect.is_ailment = false
 	
