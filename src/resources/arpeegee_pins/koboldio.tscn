@@ -109,7 +109,6 @@ centered = false
 flip_h = true
 
 [node name="Candle" type="Sprite" parent="Sprites" index="7"]
-visible = false
 use_parent_material = true
 position = Vector2( -64, -168 )
 scale = Vector2( 0.05, 0.05 )

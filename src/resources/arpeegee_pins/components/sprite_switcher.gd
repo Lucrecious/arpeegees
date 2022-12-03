@@ -19,6 +19,7 @@ func sprite(name: String) -> Node2D:
 	return sprite
 
 func swap_map(one: String, other: String) -> void:
+	
 	var node := _name_to_sprite.get(one, null) as Node2D
 	if not node:
 		assert(false)
@@ -33,8 +34,8 @@ func swap_map(one: String, other: String) -> void:
 	_name_to_sprite[other] = node
 	
 	if other_node.visible:
-		node.visible = true
 		other_node.visible = false
+		node.visible = true
 	elif node.visible:
 		node.visible = false
 		other_node.visible = true

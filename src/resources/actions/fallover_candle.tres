@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource( 1 )
-nice_name = "GET_BRIGHTER_NAME"
+nice_name = "FALL_OVER_NAME"
 description = ""
 target_type = 0
 is_special = false
