@@ -124,6 +124,7 @@ narration_key = "NARRATOR_DESPERATE_STAFF_WHACK_USE"
 attack_factor = 0.0
 
 [node name="ImpactHint" type="Node2D" parent="Actions/DesperateStaffWhack" index="0"]
+position = Vector2( -114, -137 )
 
 [node name="Slippable" type="Node" parent="Actions/DesperateStaffWhack" index="1"]
 script = ExtResource( 16 )
