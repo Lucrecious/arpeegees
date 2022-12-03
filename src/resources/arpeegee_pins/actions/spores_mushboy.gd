@@ -9,8 +9,9 @@ enum Type {
 }
 
 export(Type) var type := Type.Poison
-export(Color) var spore_color := Color.white
 export(String) var narration_key := ''
+export(Texture) var spore_texture: Texture = null
+export(float) var scale_amount := 1.0
 
 onready var _spore_shooter := NodE.get_sibling_by_name(self, 'Spores') as CPUParticles2D
 
@@ -39,8 +40,14 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	var target_position := target_box.global_rect().get_center()
 	var direction := target_position - actioner.global_position
 	
-	_spore_shooter.color = spore_color
+	_spore_shooter.texture = spore_texture
+	_spore_shooter.scale_amount = scale_amount
 	_spore_shooter.direction = direction
+	if type == Type.Smelly:
+		_spore_shooter.angle = 90.0
+	else:
+		_spore_shooter.angle = 0.0
+	
 	animation.tween_callback(_spore_shooter, 'set', ['emitting', true])
 	animation.tween_interval(0.75)
 	animation.tween_callback(_spore_shooter, 'set', ['emitting', false])
@@ -73,7 +80,7 @@ func _create_status_effect(target: Node2D) -> StatusEffect:
 		assert(false)
 		status_effect.tag = StatusEffectTag.Poision
 	
-	var auras := Aura.create_spore_auras(spore_color)
+	var auras := Aura.create_spore_auras(spore_texture, scale_amount)
 	if type == Type.Poison:
 		var effect := EffectFunctions.Poison.new()
 		
