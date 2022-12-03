@@ -63,17 +63,45 @@ func run_action_with_targets(action_name: String, targets: Array, multiple: bool
 	
 	_is_running_action = true
 	
-	var slippable := NodE.get_child(node, BananSlippable, false) as BananSlippable
-	if slippable and slippable.is_activated():
-		var slip_animation := slippable.run_action_with_targets(_parent, targets)
-		slip_animation.tween_callback(self, '_on_action_node_finished')
-	else: # main functionality
-		if targets.empty():
-			node.run(_parent, self, '_on_action_node_finished')
-		elif targets.size() == 1 and not multiple:
-			node.run(_parent, targets[0], self, '_on_action_node_finished')
-		else:
-			node.run(_parent, targets, self, '_on_action_node_finished')
+	var can_attack := true
+	
+	# extra handling for things that can cause attack to miss
+	if targets.size() == 1 and targets[0].filename.get_file() == 'mushboy.tscn':
+		var status_effects_list := NodE.get_child(targets[0], StatusEffectsList) as StatusEffectsList
+		if status_effects_list.count_tags(StatusEffectTag.Bounce) > 0:
+			can_attack = false
+			
+			var miss_animation := create_tween()
+			
+			miss_animation.tween_interval(0.5)
+			
+			ActionUtils.add_text_trigger(miss_animation, node, 'NARRATOR_MUSHBOY_EVADE_IN_BOUNCE')
+			
+			miss_animation.tween_callback(self, '_on_action_node_finished')
+	elif targets.size() > 0:
+		var mushboy = null
+		for t in targets:
+			if t.filename.get_file() == 'mushboy.tscn':
+				var status_effects_list := NodE.get_child(t, StatusEffectsList) as StatusEffectsList
+				if status_effects_list.count_tags(StatusEffectTag.Bounce) > 0:
+					mushboy = t
+				break
+		
+		if mushboy:
+			targets.erase(mushboy)
+	
+	if can_attack:
+		var slippable := NodE.get_child(node, BananSlippable, false) as BananSlippable
+		if slippable and slippable.is_activated():
+			var slip_animation := slippable.run_action_with_targets(_parent, targets)
+			slip_animation.tween_callback(self, '_on_action_node_finished')
+		else: # main functionality
+			if targets.empty():
+				node.run(_parent, self, '_on_action_node_finished')
+			elif targets.size() == 1 and not multiple:
+				node.run(_parent, targets[0], self, '_on_action_node_finished')
+			else:
+				node.run(_parent, targets, self, '_on_action_node_finished')
 	
 	emit_signal('action_started')
 	emit_signal('action_started_with_action_node', node)
