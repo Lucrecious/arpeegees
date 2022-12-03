@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/STALK_HUNTER.mp3-6839ca3e2db087b5a917c298b4fb78ac.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/STALK_HUNTER.mp3"
+dest_files=[ "res://.import/STALK_HUNTER.mp3-6839ca3e2db087b5a917c298b4fb78ac.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

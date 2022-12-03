@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/POUNCE_OWO_HUNTER.mp3-200ec5abe756596c3626eee3bdbbc6dc.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/POUNCE_OWO_HUNTER.mp3"
+dest_files=[ "res://.import/POUNCE_OWO_HUNTER.mp3-200ec5abe756596c3626eee3bdbbc6dc.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
