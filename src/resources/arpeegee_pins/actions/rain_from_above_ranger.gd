@@ -14,7 +14,13 @@ func pin_action() -> PinAction:
 func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> void:
 	var animation := create_tween()
 	
+	animation.tween_callback(Music, 'pause_fade_out')
+	
+	var sounds := NodE.get_child(actioner, SoundsComponent) as SoundsComponent
+	animation.tween_callback(sounds, 'play', ['RainFromAbove'])
+	
 	animation.tween_interval(0.35)
+	
 	
 	var sprite_switcher := NodE.get_child(actioner, SpriteSwitcher) as SpriteSwitcher
 	animation.tween_callback(sprite_switcher, 'change', ['attackair2'])
@@ -40,6 +46,8 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 		for t in targets:
 			ActionUtils.add_attack(animation, actioner, t, attack_amount)
 		
+		animation.tween_callback(sounds, 'play', ['RainFromAboveHit'])
+		
 		
 		animation.tween_callback(rain_arrows, 'set', ['emitting', false])
 	else:
@@ -51,6 +59,7 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 	
 	ActionUtils.add_text_trigger(animation, self, 'NARRATOR_RAIN_FROM_ABOVE_USE')
 	
+	animation.tween_callback(Music, 'unpause_fade_in')
 	animation.tween_interval(0.5)
 	animation.tween_callback(sprite_switcher, 'change', ['idle'])
 	

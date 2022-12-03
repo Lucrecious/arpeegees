@@ -5,12 +5,22 @@ signal text_triggered(translation_key)
 func pin_action() -> PinAction:
 	return preload('res://src/resources/actions/magic_ghost_sword_ranger.tres')
 
+var _used := false
+
+func is_blocked() -> bool:
+	return _used
+
 func run(actioner: Node2D,object: Object, callback: String) -> void:
+	_used = true
+	
 	var animation := create_tween()
 	
 	animation.tween_interval(0.35)
 	
 	animation.tween_callback(self, '_add_magic_ghost_sword')
+	
+	var sounds := NodE.get_child(actioner, SoundsComponent)
+	animation.tween_callback(sounds, 'play', ['MagicGhostSwordAppears'])
 	
 	var sword := get_child(0) as Node2D
 	sword.visible = true

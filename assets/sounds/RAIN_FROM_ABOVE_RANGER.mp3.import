@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/RAIN_FROM_ABOVE_RANGER.mp3-2dadf49efd75de4c77fa04c68cbc4a71.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/RAIN_FROM_ABOVE_RANGER.mp3"
+dest_files=[ "res://.import/RAIN_FROM_ABOVE_RANGER.mp3-2dadf49efd75de4c77fa04c68cbc4a71.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

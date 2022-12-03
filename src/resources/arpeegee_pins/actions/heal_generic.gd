@@ -39,8 +39,7 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 		for t in targets:
 			var hearts := VFX.heart_explosion()
 			animation.tween_callback(NodE, 'add_children', [t, hearts])
-			if type == Type.Heal3:
-				animation.tween_callback(sounds, 'play', ['Heal3'])
+			animation.tween_callback(Sounds, 'play', ['GenericHeal'])
 			
 			if type == Type.Heal3 or type == Type.ForestLove:
 				var root_sprite := NodE.get_child(t, RootSprite) as RootSprite

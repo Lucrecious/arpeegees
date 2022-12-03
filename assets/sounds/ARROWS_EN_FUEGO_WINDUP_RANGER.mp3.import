@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/ARROWS_EN_FUEGO_WINDUP_RANGER.mp3-af1a66ac64a88ea311364f0ce8e05ffc.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/ARROWS_EN_FUEGO_WINDUP_RANGER.mp3"
+dest_files=[ "res://.import/ARROWS_EN_FUEGO_WINDUP_RANGER.mp3-af1a66ac64a88ea311364f0ce8e05ffc.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

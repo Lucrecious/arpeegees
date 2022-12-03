@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/resources/sounds.gd" type="Script" id=1]
 [ext_resource path="res://assets/sounds/step_grass3.mp3" type="AudioStream" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://assets/sounds/dash1.mp3" type="AudioStream" id=6]
 [ext_resource path="res://assets/sounds/generic_hit.mp3" type="AudioStream" id=7]
 [ext_resource path="res://assets/sounds/generic_windup.mp3" type="AudioStream" id=8]
+[ext_resource path="res://assets/sounds/HEAL_3_WHITEMAGE.mp3" type="AudioStream" id=9]
 
 [node name="Sounds" type="Node"]
 script = ExtResource( 1 )
@@ -32,3 +33,6 @@ stream = ExtResource( 7 )
 
 [node name="GenericWindUp1" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
+
+[node name="GenericHeal" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )

@@ -28,12 +28,19 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	
 	animation.tween_interval(0.4)
 	
+	var sounds := NodE.get_child(actioner, SoundsComponent)
 	var sprite_switcher := NodE.get_child(actioner, SpriteSwitcher) as SpriteSwitcher
 	animation.tween_callback(sprite_switcher, 'change', ['attack'])
 	animation.tween_callback(_arrow, 'set', ['visible', true])
+	
+	if type == Type.OnFire:
+		animation.tween_callback(sounds, 'play', ['ArrowEnFuegoWindUp'])
+	
 	animation.tween_interval(0.75)
 	if type == Type.OnFire:
 		animation.tween_interval(0.5)
+	
+	animation.tween_callback(sounds, 'play', ['ArrowZip'])
 	
 	var target_box := NodE.get_child(target, REferenceRect) as REferenceRect
 	var target_position := target_box.global_rect().get_center()

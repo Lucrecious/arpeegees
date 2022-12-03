@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/MAGIC_GHOST_SWORD_RANGER.mp3-fc69cc9d231b10615c2919a231f7239b.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/MAGIC_GHOST_SWORD_RANGER.mp3"
+dest_files=[ "res://.import/MAGIC_GHOST_SWORD_RANGER.mp3-fc69cc9d231b10615c2919a231f7239b.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

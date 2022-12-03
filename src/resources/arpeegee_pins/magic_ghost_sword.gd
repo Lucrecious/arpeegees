@@ -4,8 +4,12 @@ func add_attack(animation: SceneTreeTween, pin: ArpeegeePinNode, targets: Array,
 	for t in targets:
 		var target_position := ActionUtils.get_closest_adjecent_position(pin, t) + pin.global_position
 		
+		animation.tween_callback(Sounds, 'play', ['Dash1'])
+		
 		animation.tween_property(self, 'global_position', target_position, 0.25)\
 				.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+		
+		animation.tween_callback(Sounds, 'play', ['GenericWindUp1'])
 		
 		animation.tween_property(self, 'rotation_degrees', 15.0, 0.75)\
 				.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
@@ -13,6 +17,8 @@ func add_attack(animation: SceneTreeTween, pin: ArpeegeePinNode, targets: Array,
 		animation.tween_property(self, 'rotation_degrees', -80.0, 0.07)
 		
 		ActionUtils.add_magic_attack(animation, pin, t, attack_amount)
+		
+		animation.tween_callback(Sounds, 'play', ['GenericHit1'])
 		
 		animation.tween_interval(0.5)
 		animation.tween_property(self, 'rotation_degrees', 0.0, 0.5)\

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/ARROW_ZIP_RANGER.mp3-3c7a270f395832f08b06395e8013f5e1.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/ARROW_ZIP_RANGER.mp3"
+dest_files=[ "res://.import/ARROW_ZIP_RANGER.mp3-3c7a270f395832f08b06395e8013f5e1.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
