@@ -27,7 +27,7 @@ func pin_action() -> PinAction:
 
 func run(actioner: Node2D, object: Object, callback: String) -> void:
 	var animation := create_tween()
-	animation.tween_interval(1.0)
+	animation.tween_interval(0.35)
 	
 	var sprite_switcher := NodE.get_child(actioner, SpriteSwitcher) as SpriteSwitcher
 	var frame := 'idle'
@@ -39,8 +39,8 @@ func run(actioner: Node2D, object: Object, callback: String) -> void:
 		get_parent().get_node('GetBrighter')._is_blocked = true
 		_is_blocked = true
 	
-	sprite_switcher.swap_map('idle', frame)
+	animation.tween_callback(sprite_switcher, 'swap_map', ['idle', frame])
 	
-	animation.tween_interval(1.0)
+	animation.tween_interval(0.35)
 	
 	animation.tween_callback(object, callback)

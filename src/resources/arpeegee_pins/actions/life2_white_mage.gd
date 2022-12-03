@@ -35,6 +35,10 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 		
 		var damage_receiver := NodE.get_child(target, DamageReceiver) as DamageReceiver
 		animation.tween_callback(damage_receiver, 'revive')
+		
+		var sounds := NodE.get_child(actioner, SoundsComponent)
+		animation.tween_callback(sounds, 'play', ['Life2'])
+		
 		_used = true
 		
 		animation.tween_interval(0.5)

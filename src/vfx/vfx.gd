@@ -25,7 +25,7 @@ func heart_explosion() -> Array:
 func sparkle_explosions() -> Array:
 	var explosion := ExplosionTemplateScene.instance() as ExplosionParticles
 	explosion.spread = 180.0
-	explosion.scale_amount = 0.333
+	explosion.scale_amount = 0.7
 	explosion.texture = load('res://assets/sprites/effects/sparkle5.png')
 	
 	return [explosion]

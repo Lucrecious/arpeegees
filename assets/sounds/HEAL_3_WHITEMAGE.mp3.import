@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/HEAL_3_WHITEMAGE.mp3-6fafbd94e1c352ee4c12fdde71054ca5.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/HEAL_3_WHITEMAGE.mp3"
+dest_files=[ "res://.import/HEAL_3_WHITEMAGE.mp3-6fafbd94e1c352ee4c12fdde71054ca5.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/MEDICINAL_SPARKLES_WHITEMAGE.mp3-14cbb414fdfeb93c9c4024b65ce4799e.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/MEDICINAL_SPARKLES_WHITEMAGE.mp3"
+dest_files=[ "res://.import/MEDICINAL_SPARKLES_WHITEMAGE.mp3-14cbb414fdfeb93c9c4024b65ce4799e.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

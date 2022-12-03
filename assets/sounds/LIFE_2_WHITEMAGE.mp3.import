@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/LIFE_2_WHITEMAGE.mp3-61b19cfee9f3618fa6c50a64c784b90f.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/LIFE_2_WHITEMAGE.mp3"
+dest_files=[ "res://.import/LIFE_2_WHITEMAGE.mp3-61b19cfee9f3618fa6c50a64c784b90f.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
