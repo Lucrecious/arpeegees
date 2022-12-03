@@ -19,7 +19,7 @@
 [ext_resource path="res://src/resources/arpeegee_pins/components/transformer.gd" type="Script" id=17]
 [ext_resource path="res://assets/sprites/paladin/paladin_idle.png" type="Texture" id=18]
 [ext_resource path="res://assets/sprites/monk/monk_idle.png" type="Texture" id=19]
-[ext_resource path="res://assets/sprites/effects/tophat2.png" type="Texture" id=20]
+[ext_resource path="res://assets/sprites/koboldio/candle.png" type="Texture" id=20]
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 11 )
@@ -109,9 +109,10 @@ centered = false
 flip_h = true
 
 [node name="Candle" type="Sprite" parent="Sprites" index="7"]
+visible = false
 use_parent_material = true
-position = Vector2( -64, -168 )
-scale = Vector2( 0.05, 0.05 )
+position = Vector2( -30, -194 )
+scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 20 )
 centered = false
 flip_h = true

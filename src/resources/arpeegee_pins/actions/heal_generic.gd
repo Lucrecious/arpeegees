@@ -42,7 +42,20 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 				var material := root_sprite.material as ShaderMaterial
 				
 				if type == Type.ForestLove:
+					var center := NodE.get_child(t, REferenceRect).global_rect().get_center() as Vector2
 					animation.tween_callback(material, 'set_shader_param', ['fill_color', Color.forestgreen])
+					
+					var love_sprite := get_child(0)
+					animation.tween_callback(love_sprite, 'set', ['global_position', center])
+					animation.tween_callback(love_sprite, 'set', ['modulate', Color.transparent])
+					animation.tween_callback(love_sprite, 'set', ['visible', true])
+					animation.tween_property(love_sprite, 'modulate:a', 1.0, 0.25)
+					animation.tween_interval(0.25)
+					animation.tween_property(love_sprite, 'rotation_degrees', 360.0, 1.0)
+					animation.tween_interval(0.25)
+					animation.tween_property(love_sprite, 'modulate:a', 0.0, 0.25)
+					animation.tween_callback(love_sprite, 'set', ['visible', false])
+					animation.tween_callback(love_sprite, 'set', ['rotation_degrees', 0])
 				
 				ActionUtils.add_shader_param_interpolation(animation, material,
 						'color_mix', 0.0, 0.8, 0.75)\
