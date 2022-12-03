@@ -5,6 +5,18 @@ const Z_INDEX_FRONT := 1
 const AuraTemplateScene := preload('res://src/resources/status_effects/aura.tscn')
 const DrippingScene := preload('res://src/vfx/dripping.tscn')
 
+func create_burn_aura() -> Array:
+	var aura := AuraTemplateScene.instance() as CPUParticles2D
+	aura.scale_amount = 0.333
+	aura.scale_amount_curve = null
+	aura.amount = 3
+	aura.z_index = Z_INDEX_FRONT
+	aura.angular_velocity = 0.0
+	aura.angular_velocity_curve = null
+	aura.texture = load('res://assets/sprites/effects/fx_burn.png')
+	
+	return [aura]
+
 func create_sweat_aura(pin: ArpeegeePinNode) -> Array:
 	var front := DrippingScene.instance() as CPUParticles2D
 	front.z_index = Z_INDEX_FRONT

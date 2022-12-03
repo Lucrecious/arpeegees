@@ -11,6 +11,8 @@ static func create_burn_status_effect(attack_based: int) -> StatusEffect:
 	burn.attack_based = attack_based
 	status_effect.add_child(burn)
 	
+	NodE.add_children(status_effect, Aura.create_burn_aura())
+	
 	return status_effect
 
 class Sleep extends Node:
