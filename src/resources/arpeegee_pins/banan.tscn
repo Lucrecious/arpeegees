@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
 [ext_resource path="res://lut/components/root_sprite.gd" type="Script" id=2]
@@ -18,7 +18,15 @@
 [ext_resource path="res://assets/sprites/banan/banan_bruised.PNG" type="Texture" id=16]
 [ext_resource path="res://assets/sprites/banan/banan_fullbruised.PNG" type="Texture" id=17]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/appealing_banan.gd" type="Script" id=18]
-[ext_resource path="res://assets/sprites/banan/banan_nopeel.png" type="Texture" id=19]
+[ext_resource path="res://assets/sprites/banan/bananbruised_shootwnopeel.png" type="Texture" id=19]
+[ext_resource path="res://assets/sprites/banan/banansuperbruised_hurt.png" type="Texture" id=20]
+[ext_resource path="res://assets/sprites/banan/bananbruised_hurt.png" type="Texture" id=21]
+[ext_resource path="res://assets/sprites/banan/bananbruised_headbutt.png" type="Texture" id=22]
+[ext_resource path="res://assets/sprites/banan/banansuperbruised_headbutt.png" type="Texture" id=23]
+[ext_resource path="res://assets/sprites/banan/banannopeelbruised_hearteyes.png" type="Texture" id=24]
+[ext_resource path="res://assets/sprites/banan/banannopeelsuperbruised_hearteyes.png" type="Texture" id=25]
+[ext_resource path="res://assets/sprites/banan/banansuperbruised_shootnopeel.png" type="Texture" id=27]
+[ext_resource path="res://assets/sprites/banan/banannopeel_hearteyes.png" type="Texture" id=28]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 15 )
@@ -64,7 +72,23 @@ scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 4 )
 centered = false
 
-[node name="Hurt" type="Sprite" parent="Sprites" index="3"]
+[node name="Hurt_Fully_Bruised" type="Sprite" parent="Sprites" index="3"]
+visible = false
+use_parent_material = true
+position = Vector2( -52, -151 )
+scale = Vector2( 0.333333, 0.333333 )
+texture = ExtResource( 20 )
+centered = false
+
+[node name="Hurt_Bruised" type="Sprite" parent="Sprites" index="4"]
+visible = false
+use_parent_material = true
+position = Vector2( -52, -151 )
+scale = Vector2( 0.333333, 0.333333 )
+texture = ExtResource( 21 )
+centered = false
+
+[node name="Hurt" type="Sprite" parent="Sprites" index="5"]
 visible = false
 use_parent_material = true
 position = Vector2( -79, -175 )
@@ -72,7 +96,23 @@ scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 5 )
 centered = false
 
-[node name="Headbutt" type="Sprite" parent="Sprites" index="4"]
+[node name="Headbutt_Fully_Bruised" type="Sprite" parent="Sprites" index="6"]
+visible = false
+use_parent_material = true
+position = Vector2( -50, -110 )
+scale = Vector2( 0.333333, 0.333333 )
+texture = ExtResource( 23 )
+centered = false
+
+[node name="Headbutt_Bruised" type="Sprite" parent="Sprites" index="7"]
+visible = false
+use_parent_material = true
+position = Vector2( -50, -110 )
+scale = Vector2( 0.333333, 0.333333 )
+texture = ExtResource( 22 )
+centered = false
+
+[node name="Headbutt" type="Sprite" parent="Sprites" index="8"]
 visible = false
 use_parent_material = true
 position = Vector2( -78, -189 )
@@ -80,7 +120,7 @@ scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 6 )
 centered = false
 
-[node name="ShootBanan" type="Sprite" parent="Sprites" index="5"]
+[node name="ShootBanan_Fully_Bruised" type="Sprite" parent="Sprites" index="9"]
 visible = false
 use_parent_material = true
 position = Vector2( -65, -203 )
@@ -88,28 +128,96 @@ scale = Vector2( 0.333, 0.333 )
 texture = ExtResource( 8 )
 centered = false
 
-[node name="Banan" type="Sprite" parent="Sprites/ShootBanan" index="0"]
-scale = Vector2( 0.333333, 0.333333 )
-texture = ExtResource( 7 )
+[node name="Banan" type="Sprite" parent="Sprites/ShootBanan_Fully_Bruised" index="0"]
+position = Vector2( 255.255, 225.225 )
+rotation = -0.651268
+scale = Vector2( 1.001, 1.001 )
+texture = ExtResource( 27 )
 centered = false
 
-[node name="Appealing" type="Sprite" parent="Sprites" index="6"]
+[node name="ShootBanan_Bruised" type="Sprite" parent="Sprites" index="10"]
 visible = false
 use_parent_material = true
-position = Vector2( -53, -156 )
-scale = Vector2( 0.333333, 0.333333 )
-texture = ExtResource( 19 )
-centered = false
-
-[node name="Peel" type="Sprite" parent="Sprites/Appealing" index="0"]
-visible = false
-position = Vector2( -146.154, 869.231 )
-rotation = 3.00784
-scale = Vector2( 0.333333, 0.333333 )
+position = Vector2( -65, -203 )
+scale = Vector2( 0.333, 0.333 )
 texture = ExtResource( 8 )
 centered = false
 
-[node name="Win" type="Sprite" parent="Sprites" index="7"]
+[node name="Banan2" type="Sprite" parent="Sprites/ShootBanan_Bruised" index="0"]
+position = Vector2( 228.228, 279.279 )
+rotation = -0.815201
+scale = Vector2( 1.001, 1.001 )
+texture = ExtResource( 19 )
+centered = false
+
+[node name="ShootBanan" type="Sprite" parent="Sprites" index="11"]
+visible = false
+use_parent_material = true
+position = Vector2( -65, -203 )
+scale = Vector2( 0.333, 0.333 )
+texture = ExtResource( 8 )
+centered = false
+
+[node name="Banan3" type="Sprite" parent="Sprites/ShootBanan" index="0"]
+scale = Vector2( 1.001, 1.001 )
+texture = ExtResource( 7 )
+centered = false
+
+[node name="Appealing_Fully_Bruised" type="Sprite" parent="Sprites" index="12"]
+visible = false
+use_parent_material = true
+position = Vector2( -44, -151 )
+scale = Vector2( 0.333333, 0.333333 )
+texture = ExtResource( 25 )
+centered = false
+
+[node name="Peel" type="Node2D" parent="Sprites/Appealing_Fully_Bruised" index="0"]
+position = Vector2( 135, 357 )
+scale = Vector2( 0.999999, 0.999999 )
+
+[node name="Peel" type="Sprite" parent="Sprites/Appealing_Fully_Bruised/Peel" index="0"]
+position = Vector2( 285, 438 )
+rotation = 3.00784
+texture = ExtResource( 8 )
+centered = false
+
+[node name="Appealing_Bruised" type="Sprite" parent="Sprites" index="13"]
+visible = false
+use_parent_material = true
+position = Vector2( -44, -151 )
+scale = Vector2( 0.333333, 0.333333 )
+texture = ExtResource( 24 )
+centered = false
+
+[node name="Peel2" type="Node2D" parent="Sprites/Appealing_Bruised" index="0"]
+position = Vector2( 135, 357 )
+scale = Vector2( 0.999999, 0.999999 )
+
+[node name="Peel" type="Sprite" parent="Sprites/Appealing_Bruised/Peel2" index="0"]
+position = Vector2( 285, 438 )
+rotation = 3.00784
+texture = ExtResource( 8 )
+centered = false
+
+[node name="Appealing" type="Sprite" parent="Sprites" index="14"]
+visible = false
+use_parent_material = true
+position = Vector2( -44, -151 )
+scale = Vector2( 0.333333, 0.333333 )
+texture = ExtResource( 28 )
+centered = false
+
+[node name="Peel3" type="Node2D" parent="Sprites/Appealing" index="0"]
+position = Vector2( 135, 357 )
+scale = Vector2( 0.999999, 0.999999 )
+
+[node name="Peel" type="Sprite" parent="Sprites/Appealing/Peel3" index="0"]
+position = Vector2( 285, 438 )
+rotation = 3.00784
+texture = ExtResource( 8 )
+centered = false
+
+[node name="Win" type="Sprite" parent="Sprites" index="15"]
 visible = false
 use_parent_material = true
 position = Vector2( -99, -213 )

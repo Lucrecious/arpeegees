@@ -7,6 +7,8 @@ var bruised_level := 0
 func pin_action() -> PinAction:
 	return preload('res://src/resources/actions/shoot_banan.tres') as PinAction
 
+const bruising_sprites := ['idle', 'hurt', 'headbutt', 'shootbanan', 'appealing']
+
 func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> void:
 	var animation := create_tween()
 	
@@ -49,10 +51,11 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	
 	animation.tween_property(banan, 'global_position', banan_original_position, 0.3)
 	
-	if bruised_level == 0:
-		animation.tween_callback(sprite_switcher, 'swap_map', ['idle', 'idle_bruised'])
-	elif bruised_level == 1:
-		animation.tween_callback(sprite_switcher, 'swap_map', ['idle', 'idle_fully_bruised'])
+	for n in bruising_sprites:
+		if bruised_level == 0:
+			animation.tween_callback(sprite_switcher, 'swap_map', [n, '%s_bruised' % n])
+		elif bruised_level == 1:
+			animation.tween_callback(sprite_switcher, 'swap_map', [n, '%s_fully_bruised' % n])
 	
 	bruised_level += 1
 	animation.tween_callback(sprite_switcher, 'change', ['idle'])
