@@ -42,11 +42,10 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	var modified_stats := NodE.get_child(actioner, ModifiedPinStats) as ModifiedPinStats
 	
 	var attack_amount := modified_stats.attack
-	if _boosted:
-		attack_amount = ActionUtils.damage_with_factor(attack_amount, 1.3)
 	
 	var hit_type := ActionUtils.add_attack(animation, actioner, target, attack_amount)
 	animation.tween_callback(VFX, 'physical_impactv', [actioner, target_position])
+	
 	
 	if type == Type.OnFire and hit_type != ActionUtils.HitType.Miss:
 		var burn_status_effect := EffectFunctions.create_burn_status_effect(modified_stats.attack)
@@ -55,6 +54,10 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	
 	animation.tween_callback(_arrow, 'set', ['visible', false])
 	animation.tween_callback(_arrow, 'set', ['global_position', _arrow.global_position])
+	
+	if _boosted:
+		var ghostsword := get_parent().get_node('MagicGhostSword/GhostSword')
+		ghostsword.add_attack(animation, actioner, [target], 1)
 	
 	if type == Type.Regular:
 		ActionUtils.add_text_trigger(animation, self, 'NARRATOR_ARROW_ZIP_USE')

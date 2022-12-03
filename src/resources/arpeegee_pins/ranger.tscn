@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/resources/arpeegee_pins/ranger.tres" type="Resource" id=2]
@@ -20,6 +20,8 @@
 [ext_resource path="res://src/resources/arpeegee_pins/actions/magic_ghost_sword_ranger.gd" type="Script" id=18]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/heal_generic.gd" type="Script" id=19]
 [ext_resource path="res://assets/sprites/ranger/ranger_forestlove.png" type="Texture" id=20]
+[ext_resource path="res://src/resources/arpeegee_pins/magic_ghost_sword.gd" type="Script" id=21]
+[ext_resource path="res://assets/sprites/ranger/ranger_magicsword.png" type="Texture" id=22]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 14 )
@@ -152,7 +154,18 @@ scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 13 )
 
 [node name="MagicGhostSword" type="Node2D" parent="Actions" index="3"]
+position = Vector2( 79, -3 )
 script = ExtResource( 18 )
+
+[node name="GhostSword" type="Node2D" parent="Actions/MagicGhostSword" index="0"]
+visible = false
+script = ExtResource( 21 )
+
+[node name="Sprite" type="Sprite" parent="Actions/MagicGhostSword/GhostSword" index="0"]
+position = Vector2( -8, -109 )
+rotation = -0.951129
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 22 )
 
 [node name="ForestLove" type="Node2D" parent="Actions" index="4"]
 script = ExtResource( 19 )

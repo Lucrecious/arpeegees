@@ -35,15 +35,19 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 		
 		var modified_stats := NodE.get_child(actioner, ModifiedPinStats) as ModifiedPinStats
 		var attack_amount := ActionUtils.damage_with_factor(modified_stats.attack, 0.5)
-		if _boosted:
-			attack_amount = ActionUtils.damage_with_factor(modified_stats.attack, 0.8)
+		
 		
 		for t in targets:
 			ActionUtils.add_attack(animation, actioner, t, attack_amount)
 		
+		
 		animation.tween_callback(rain_arrows, 'set', ['emitting', false])
 	else:
 		print_debug('not in battle scene')
+	
+	if _boosted:
+			var sword := get_parent().get_node('MagicGhostSword/GhostSword')
+			sword.add_attack(animation, actioner, targets, 1)
 	
 	ActionUtils.add_text_trigger(animation, self, 'NARRATOR_RAIN_FROM_ABOVE_USE')
 	
