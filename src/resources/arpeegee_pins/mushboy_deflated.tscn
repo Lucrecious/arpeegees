@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/resources/arpeegee_pins/mushboy_deflated.tres" type="Resource" id=2]
@@ -10,6 +10,8 @@
 [ext_resource path="res://src/resources/arpeegee_pins/actions/consecutive_hit_attack.gd" type="Script" id=8]
 [ext_resource path="res://assets/shaders/pin_sprite_shader.gdshader" type="Shader" id=9]
 [ext_resource path="res://assets/shaders/wobble_noise.tres" type="Texture" id=10]
+[ext_resource path="res://src/resources/arpeegee_pins/actions/attack.gd" type="Script" id=11]
+[ext_resource path="res://src/resources/actions/struggle_mushboy_deflated.tres" type="Resource" id=12]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 9 )
@@ -54,7 +56,6 @@ texture = ExtResource( 6 )
 centered = false
 
 [node name="Headbutt" type="Sprite" parent="Sprites" index="2"]
-visible = false
 use_parent_material = true
 position = Vector2( -78, -159 )
 scale = Vector2( 0.333333, 0.333333 )
@@ -71,3 +72,10 @@ attack_frame = "headbutt"
 narration_key = "NARRATOR_SLOPPY_SLAP_USE"
 
 [node name="Struggle" type="Node2D" parent="Actions" index="1"]
+script = ExtResource( 11 )
+attack_sprite_name = "headbutt"
+pin_action = ExtResource( 12 )
+narration_key = "NARRATOR_STRUGGLE_USE"
+
+[node name="ImpactHint" type="Position2D" parent="Actions/Struggle" index="0"]
+position = Vector2( 62, -71 )

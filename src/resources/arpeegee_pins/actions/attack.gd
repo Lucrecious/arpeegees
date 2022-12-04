@@ -76,6 +76,7 @@ func run(actioner: Node2D, target: ArpeegeePinNode, object: Object, callback: St
 		tween.tween_callback(VFX, 'physical_impact', [actioner, _impact_hint_node])
 	
 	var white_mage_instakill := false
+	var deflated_mushboy_struggle_extra_damage := false
 	var modified_stats := NodE.get_child(actioner, ModifiedPinStats) as ModifiedPinStats
 	
 	var attacked_physically := false
@@ -90,6 +91,12 @@ func run(actioner: Node2D, target: ArpeegeePinNode, object: Object, callback: St
 		elif pin_action().resource_path.get_file() == 'desperate_headbutt_hatless_mushboy.tres':
 			if randf() < 0.1:
 				attack_amount = ActionUtils.damage_with_factor(attack_amount, 8.0)
+		elif pin_action().resource_path.get_file() == 'struggle_mushboy_deflated.tres':
+			var chance := randf()
+			Logger.info('Mushboy used struggle and rolled %.2f' % [chance])
+			if chance < 0.2:
+				attack_amount = ActionUtils.damage_with_factor(attack_amount, 10.0)
+				deflated_mushboy_struggle_extra_damage = true
 		
 		var hit_type := ActionUtils.HitType.Miss as int
 		if not white_mage_instakill:
@@ -126,7 +133,9 @@ func run(actioner: Node2D, target: ArpeegeePinNode, object: Object, callback: St
 
 	if white_mage_instakill:
 		ActionUtils.add_text_trigger(tween, self, 'NARRATOR_DESPERATE_STAFF_WHACK_KILL')
-
+	elif attacked_physically and deflated_mushboy_struggle_extra_damage:
+		ActionUtils.add_text_trigger(tween, self, 'NARRATOR_STRUGGLE_USE_DAMAGE')
+	
 	ActionUtils.add_walk(tween, actioner,
 			actioner.global_position + relative, actioner.global_position, 15.0, 5)
 	
