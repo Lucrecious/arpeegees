@@ -101,6 +101,7 @@ NARRATOR_POKE_WITH_BANAN_CONFUSE,You become utterly confused at how this is a th
 BANAN_BAZOOKA_NAME,Banan Bazooka,
 NARRATOR_BANAN_BAZOOKA_USE,Looks like Fishguy is...~charging up some kind of attack?~Uh oh.,
 NARRATOR_BANAN_BAZOOKA_SHOOT,WOAH!~Banan rocket!!~That did a lot of damage!!,
+NARRATOR_BANAN_BAZOOKA_FAILED,"For some unknown reason, Banan failed to fire from the Bazooka!",
 ,,
 FRIENDSHIP_NEVER_DIES_NAME,Friendship Never Dies,
 NARRATOR_FRIENDSHIP_NEVER_DIES_USE,The power of friendship is the strongest of all!! You're gobsmacked by their undying comraderie!!,

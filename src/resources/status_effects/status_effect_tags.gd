@@ -31,4 +31,5 @@ enum {
 	ReappearedBuff,
 	MandolinPlay,
 	ConfusionForSwordBlobbo,
+	FishguyBananBazookaCharge,
 }
