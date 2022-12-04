@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/resources/arpeegee_pins/mushboy_deflated.tres" type="Resource" id=2]
@@ -7,6 +7,19 @@
 [ext_resource path="res://lut/components/root_sprite.gd" type="Script" id=5]
 [ext_resource path="res://assets/sprites/mushboy/mushboy_hit_deflated.png" type="Texture" id=6]
 [ext_resource path="res://assets/sprites/mushboy/mushboy_headbutt_deflatted.png" type="Texture" id=7]
+[ext_resource path="res://src/resources/arpeegee_pins/actions/consecutive_hit_attack.gd" type="Script" id=8]
+[ext_resource path="res://assets/shaders/pin_sprite_shader.gdshader" type="Shader" id=9]
+[ext_resource path="res://assets/shaders/wobble_noise.tres" type="Texture" id=10]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 9 )
+shader_param/fill_color = Color( 1, 1, 1, 1 )
+shader_param/color_mix = 0.0
+shader_param/top_skew = 0.0
+shader_param/squash = 1.0
+shader_param/offset_amount = 80.0
+shader_param/update_sec = 0.4
+shader_param/uv_offset_texture = ExtResource( 10 )
 
 [node name="DeflatedMushboy" instance=ExtResource( 1 )]
 nice_name = "Deflated Mushboy"
@@ -22,25 +35,29 @@ magic_defence = 3
 evasion = 2
 
 [node name="Sprites" type="Node2D" parent="." index="13"]
+material = SubResource( 1 )
 script = ExtResource( 5 )
 
 [node name="Idle" type="Sprite" parent="Sprites" index="0"]
+use_parent_material = true
 position = Vector2( -98, -186 )
-scale = Vector2( 0.09, 0.09 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 3 )
 centered = false
 
 [node name="Hurt" type="Sprite" parent="Sprites" index="1"]
 visible = false
+use_parent_material = true
 position = Vector2( -83, -166 )
-scale = Vector2( 0.08, 0.08 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 6 )
 centered = false
 
-[node name="Heatbutt" type="Sprite" parent="Sprites" index="2"]
+[node name="Headbutt" type="Sprite" parent="Sprites" index="2"]
 visible = false
-position = Vector2( -90, -167 )
-scale = Vector2( 0.08, 0.08 )
+use_parent_material = true
+position = Vector2( -78, -159 )
+scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 7 )
 centered = false
 
@@ -48,5 +65,9 @@ centered = false
 script = ExtResource( 4 )
 
 [node name="SloppySlap" type="Node2D" parent="Actions" index="0"]
+script = ExtResource( 8 )
+type = 1
+attack_frame = "headbutt"
+narration_key = "NARRATOR_SLOPPY_SLAP_USE"
 
 [node name="Struggle" type="Node2D" parent="Actions" index="1"]

@@ -13,7 +13,7 @@
 [ext_resource path="res://assets/shaders/pin_sprite_shader.gdshader" type="Shader" id=11]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/attack.gd" type="Script" id=12]
 [ext_resource path="res://src/resources/actions/swipe_koboldio.tres" type="Resource" id=13]
-[ext_resource path="res://src/resources/arpeegee_pins/actions/bite_koboldio.gd" type="Script" id=14]
+[ext_resource path="res://src/resources/arpeegee_pins/actions/consecutive_hit_attack.gd" type="Script" id=14]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/disappear_koboldio.gd" type="Script" id=15]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/reappear_koboldio.gd" type="Script" id=16]
 [ext_resource path="res://src/resources/arpeegee_pins/components/transformer.gd" type="Script" id=17]
@@ -131,6 +131,7 @@ position = Vector2( 75, -88 )
 
 [node name="Bite" type="Node2D" parent="Actions" index="1"]
 script = ExtResource( 14 )
+attack_frame = "bite"
 
 [node name="Disappear" type="Node2D" parent="Actions" index="2"]
 script = ExtResource( 15 )
