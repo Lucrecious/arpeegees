@@ -39,6 +39,8 @@ func run(actioner: ArpeegeePinNode, target: ArpeegeePinNode, object: Object, cal
 	
 	animation.tween_callback(sprite_switcher, 'change', [frame])
 	
+	_flame_particles.spread = 20.0
+	_flame_particles.amount = 24
 	animation.tween_callback(_flame_particles, 'set', ['emitting', true])
 	
 	animation.tween_interval(2.0)
