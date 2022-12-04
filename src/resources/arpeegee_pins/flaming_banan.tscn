@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
+
+[node name="FlamingBanan" instance=ExtResource( 1 )]
+nice_name = "Flaming Banan"

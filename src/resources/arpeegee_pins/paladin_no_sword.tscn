@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
 [ext_resource path="res://lut/components/root_sprite.gd" type="Script" id=2]
@@ -22,6 +22,8 @@
 [ext_resource path="res://assets/sprites/paladin/paladin_idle.png" type="Texture" id=20]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/grab_sword_paladin_no_sword.gd" type="Script" id=21]
 [ext_resource path="res://src/resources/arpeegee_pins/components/transformer.gd" type="Script" id=22]
+[ext_resource path="res://src/resources/arpeegee_pins/actions/general_self_buff.gd" type="Script" id=23]
+[ext_resource path="res://assets/sounds/BRIGHT_SPARKLES_PALADIN.mp3" type="AudioStream" id=24]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 10 )
@@ -32,48 +34,6 @@ shader_param/squash = 1.0
 shader_param/offset_amount = 100.0
 shader_param/update_sec = 0.4
 shader_param/uv_offset_texture = ExtResource( 9 )
-
-[sub_resource type="GDScript" id=2]
-script/source = "class_name GenericSelfBuffSpell
-extends Node2D
-
-signal text_triggered(narration_key)
-
-export(Resource) var pin_action: Resource = null
-export(String) var use_frame := ''
-export(String) var use_vfx_call := ''
-export(String) var effect_call := ''
-export(String) var narration_key := ''
-
-
-func pin_action() -> PinAction:
-	return pin_action as PinAction
-
-func run(actioner: Node2D, object: Object, callback: String) -> void:
-	var animation := create_tween()
-	
-	animation.tween_interval(0.5)
-	
-	var sprite_switcher := NodE.get_child(actioner, SpriteSwitcher) as SpriteSwitcher
-	if not use_frame.empty():
-		animation.tween_callback(sprite_switcher, 'change', [use_frame])
-	
-	if not use_vfx_call.empty():
-		animation.tween_callback(VFX, use_vfx_call, [actioner])
-	
-	if not effect_call.empty():
-		animation.tween_callback(EffectFunctions, effect_call, [actioner])
-	
-	if not narration_key.empty():
-		ActionUtils.add_text_trigger(animation, self, narration_key)
-	
-	animation.tween_interval(0.75)
-	
-	if not use_frame.empty():
-		animation.tween_callback(sprite_switcher, 'change', ['idle'])
-	
-	animation.tween_callback(object, callback)
-"
 
 [node name="PaladinSwordless" instance=ExtResource( 1 )]
 nice_name = "Paladin (Swordless)"
@@ -177,12 +137,13 @@ position = Vector2( -79, -75 )
 script = ExtResource( 19 )
 
 [node name="BrightSparkles" type="Node2D" parent="Actions" index="2"]
-script = SubResource( 2 )
+script = ExtResource( 23 )
 pin_action = ExtResource( 17 )
 use_frame = "magic"
 use_vfx_call = "bright_sparkles"
 effect_call = "bright_sparkles"
-narration_key = "NARRATOR_BRIGHT_SPARKLES_USE_NO_SWORD"
+narration_key = "NARRATOR_BRIGHT_SPARKLES_USE"
+sfx = "BrightSparkles"
 
 [node name="HolySparkles" type="Node2D" parent="Actions" index="3"]
 script = ExtResource( 18 )
@@ -190,6 +151,9 @@ frame = "magic"
 
 [node name="GrabSword" type="Node2D" parent="Actions" index="4"]
 script = ExtResource( 21 )
+
+[node name="BrightSparkles" type="AudioStreamPlayer" parent="Sounds" index="0"]
+stream = ExtResource( 24 )
 
 [node name="Transformer" type="Node" parent="." index="15"]
 script = ExtResource( 22 )
