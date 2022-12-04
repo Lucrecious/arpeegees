@@ -1,0 +1,106 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/resources/arpeegee_pins/fishguy_banan.tres" type="Resource" id=2]
+[ext_resource path="res://src/resources/arpeegee_pins/actions/actions.gd" type="Script" id=3]
+[ext_resource path="res://lut/components/root_sprite.gd" type="Script" id=4]
+[ext_resource path="res://assets/sprites/fishguy/fishguy_banan_idle.PNG" type="Texture" id=5]
+[ext_resource path="res://assets/sprites/fishguy/fishguy_banan_stab.png" type="Texture" id=6]
+[ext_resource path="res://assets/sprites/fishguy/fishguy_banan_hit.png" type="Texture" id=7]
+[ext_resource path="res://assets/sprites/fishguy/fishguy_banan_dance.png" type="Texture" id=8]
+[ext_resource path="res://assets/sprites/fishguy/fishguywbanan_loaded.png" type="Texture" id=9]
+[ext_resource path="res://assets/sprites/fishguy/fishguywbanan_dance.png" type="Texture" id=10]
+[ext_resource path="res://assets/sprites/fishguy/fishguywbanan_shoot.png" type="Texture" id=11]
+[ext_resource path="res://assets/shaders/pin_sprite_shader.gdshader" type="Shader" id=12]
+[ext_resource path="res://assets/shaders/wobble_noise.tres" type="Texture" id=13]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 12 )
+shader_param/fill_color = Color( 1, 1, 1, 1 )
+shader_param/color_mix = 0.0
+shader_param/top_skew = 0.0
+shader_param/squash = 1.0
+shader_param/offset_amount = 90.0
+shader_param/update_sec = 0.4
+shader_param/uv_offset_texture = ExtResource( 13 )
+
+[node name="FishguyWithBanan" instance=ExtResource( 1 )]
+nice_name = "Fishguy with Banan"
+_resource_set = ExtResource( 2 )
+
+[node name="Health" parent="." index="7"]
+current = 30
+
+[node name="PinStats" parent="." index="8"]
+attack = 6
+magic_attack = 2
+defence = 3
+evasion = 2
+
+[node name="Sprites" type="Node2D" parent="." index="13"]
+material = SubResource( 1 )
+script = ExtResource( 4 )
+
+[node name="Idle" type="Sprite" parent="Sprites" index="0"]
+use_parent_material = true
+position = Vector2( -107, -218 )
+scale = Vector2( 0.09, 0.09 )
+texture = ExtResource( 5 )
+centered = false
+
+[node name="Poke" type="Sprite" parent="Sprites" index="1"]
+visible = false
+use_parent_material = true
+position = Vector2( -144, -247 )
+scale = Vector2( 0.145, 0.145 )
+texture = ExtResource( 6 )
+centered = false
+
+[node name="BazookaCharge" type="Sprite" parent="Sprites" index="2"]
+visible = false
+use_parent_material = true
+position = Vector2( -100, -188 )
+scale = Vector2( 0.16, 0.16 )
+texture = ExtResource( 9 )
+centered = false
+
+[node name="BazookaShoot" type="Sprite" parent="Sprites" index="3"]
+visible = false
+use_parent_material = true
+position = Vector2( -90, -197 )
+scale = Vector2( 0.16, 0.16 )
+texture = ExtResource( 11 )
+centered = false
+
+[node name="FriendshipNeverDies" type="Sprite" parent="Sprites" index="4"]
+visible = false
+use_parent_material = true
+position = Vector2( -108, -222 )
+scale = Vector2( 0.16, 0.16 )
+texture = ExtResource( 10 )
+centered = false
+
+[node name="Hurt" type="Sprite" parent="Sprites" index="5"]
+visible = false
+use_parent_material = true
+position = Vector2( -128, -240 )
+scale = Vector2( 0.14, 0.14 )
+texture = ExtResource( 7 )
+centered = false
+
+[node name="Win" type="Sprite" parent="Sprites" index="6"]
+visible = false
+use_parent_material = true
+position = Vector2( -167, -260 )
+scale = Vector2( 0.135, 0.135 )
+texture = ExtResource( 8 )
+centered = false
+
+[node name="Actions" type="Node2D" parent="." index="14"]
+script = ExtResource( 3 )
+
+[node name="PokeWithBanan" type="Node2D" parent="Actions" index="0"]
+
+[node name="BananBazooka" type="Node2D" parent="Actions" index="1"]
+
+[node name="FriendshipNeverDies" type="Node2D" parent="Actions" index="2"]
