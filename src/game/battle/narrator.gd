@@ -263,3 +263,11 @@ func _set_is_typing(value: bool) -> void:
 	
 	_is_typing = value
 
+func _process(_delta: float) -> void:
+	if not _is_typing:
+		return
+	
+	if Engine.get_idle_frames() % 5 != 0:
+		return
+	
+	Sounds.play('SpeakingBlip1')
