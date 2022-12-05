@@ -105,7 +105,7 @@ position = Vector2( 161, 140 )
 scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 14 )
 
-[node name="Cheering" type="Sprite" parent="HBoxContainer/NarratorRect/Control/CenterContainer/Jester/Sprites"]
+[node name="Cheer" type="Sprite" parent="HBoxContainer/NarratorRect/Control/CenterContainer/Jester/Sprites"]
 visible = false
 position = Vector2( 161, 140 )
 scale = Vector2( 0.333333, 0.333333 )
@@ -123,7 +123,7 @@ position = Vector2( 161, 140 )
 scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 3 )
 
-[node name="Surprise" type="Sprite" parent="HBoxContainer/NarratorRect/Control/CenterContainer/Jester/Sprites"]
+[node name="Surprised" type="Sprite" parent="HBoxContainer/NarratorRect/Control/CenterContainer/Jester/Sprites"]
 visible = false
 position = Vector2( 161, 140 )
 scale = Vector2( 0.333333, 0.333333 )

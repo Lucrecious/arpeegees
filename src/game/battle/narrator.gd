@@ -104,11 +104,22 @@ func _run_speaking_tween(text: String, start_signal: bool) -> void:
 	_current_tween.tween_callback(self, 'emit_signal', ['text_started'])
 	_current_tween.parallel().tween_callback(Logger, 'info', ['text_started emitted'])
 	
-	for p in pages:
+	var has_emotion := false
+	for p_i in pages.size():
+		var p := pages[p_i] as PoolStringArray
+		
+		if p.size() == 1 and p[0].begins_with('{') and p[0].ends_with('}'):
+			var emotion := p[0].lstrip('{').rstrip('}')
+			_current_tween.tween_callback(_narrator_sprite_switcher, 'change', [emotion])
+			has_emotion = true
+			continue
+		elif not has_emotion:
+			_current_tween.tween_callback(_narrator_sprite_switcher, 'change', ['talk'])
+		
+		has_emotion = false
+		
 		_current_tween.tween_callback(self, '_reset_current_tween_speed_scale', [false])
 		_current_tween.tween_callback(self, '_set_is_typing', [true])
-		
-		_current_tween.tween_callback(_narrator_sprite_switcher, 'change', ['talk'])
 		
 		var length := 0
 		var total_thing := p.join('\n') as String
@@ -131,13 +142,14 @@ func _run_speaking_tween(text: String, start_signal: bool) -> void:
 			_current_tween.tween_method(self, '_set_visible_characters',
 					length - new_line_length, length, new_line_length / LETTERS_PER_SEC)
 		
-		_current_tween.tween_callback(_narrator_sprite_switcher, 'change', ['neutral'])
 		_current_tween.tween_callback(self, '_set_is_typing', [false])
 		_current_tween.tween_callback(self, '_reset_current_tween_speed_scale', [true])
 		_current_tween.tween_interval(WAIT_BETWEEN_SENTENCES_SEC)
 	
 	_current_tween.tween_method(self, '_textbox_dissolve_level', 1.0, 0.5, DISSOLVE_OUT_SEC / 2.0)\
 		.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_LINEAR)
+	
+	_current_tween.tween_callback(_narrator_sprite_switcher, 'change', ['neutral'])
 	
 	_current_tween.tween_callback(_label, 'set', ['visible_characters', 0])
 	_current_tween.tween_method(self, '_textbox_dissolve_level', 0.5, 0.0, DISSOLVE_OUT_SEC / 2.0)\
@@ -200,7 +212,10 @@ func _prepare_text(text: String) -> Array:
 	var phrases := Array(STring.split_phrases(text))
 	for i in phrases.size():
 		var phrase := phrases[i] as String
-		phrases[i] = STring.autowrap(phrase, _label.rect_size.x, _default_font)
+		if phrase.begins_with('{') and phrase.ends_with('}'):
+			phrases[i] = PoolStringArray([phrase])
+		else:
+			phrases[i] = STring.autowrap(phrase, _label.rect_size.x, _default_font)
 	
 	return phrases
 
