@@ -154,6 +154,7 @@ script = ExtResource( 21 )
 
 [node name="BrightSparkles" type="AudioStreamPlayer" parent="Sounds" index="0"]
 stream = ExtResource( 24 )
+bus = "SFX"
 
 [node name="Transformer" type="Node" parent="." index="15"]
 script = ExtResource( 22 )

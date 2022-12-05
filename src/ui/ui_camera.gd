@@ -136,7 +136,7 @@ func _hide_hud() -> void:
 			_battle.get_restart_button_position().y - 100.0, 0.5)\
 			.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
 	
-	var master_index := AudioServer.get_bus_index('Master')
+	var master_index := AudioServer.get_bus_index('All')
 	_mute_play_tween = create_tween()
 	_mute_play_tween.tween_method(self, '_set_volume_on_bus', 0.0, -30.0, 1.0, [master_index])\
 			.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
@@ -164,7 +164,7 @@ func _show_hud() -> void:
 		_battle.get_restart_button_position().y, 0.5)\
 		.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 	
-	var master_index := AudioServer.get_bus_index('Master')
+	var master_index := AudioServer.get_bus_index('All')
 	_mute_play_tween = create_tween()
 	_mute_play_tween.tween_callback(AudioServer, 'set_bus_mute', [master_index, false])
 	_mute_play_tween.tween_method(self, '_set_volume_on_bus', -30.0, 0.0, 1.0, [master_index])\

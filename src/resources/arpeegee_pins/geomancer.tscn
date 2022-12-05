@@ -173,9 +173,12 @@ texture = ExtResource( 13 )
 
 [node name="RockHit" type="AudioStreamPlayer" parent="Sounds" index="0"]
 stream = ExtResource( 19 )
+bus = "SFX"
 
 [node name="MagicRockHit" type="AudioStreamPlayer" parent="Sounds" index="1"]
 stream = ExtResource( 18 )
+bus = "SFX"
 
 [node name="RaiseEarth" type="AudioStreamPlayer" parent="Sounds" index="2"]
 stream = ExtResource( 17 )
+bus = "SFX"

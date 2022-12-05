@@ -143,18 +143,24 @@ script = ExtResource( 14 )
 
 [node name="FocusKiCharge" type="AudioStreamPlayer" parent="Sounds" index="0"]
 stream = ExtResource( 18 )
+bus = "SFX"
 
 [node name="ArmadilloStance" type="AudioStreamPlayer" parent="Sounds" index="1"]
 stream = ExtResource( 17 )
+bus = "SFX"
 
 [node name="PanchiHit" type="AudioStreamPlayer" parent="Sounds" index="2"]
 stream = ExtResource( 21 )
+bus = "SFX"
 
 [node name="ChikaraPanchiCharge" type="AudioStreamPlayer" parent="Sounds" index="3"]
 stream = ExtResource( 22 )
+bus = "SFX"
 
 [node name="ChikaraPanchiWindUp" type="AudioStreamPlayer" parent="Sounds" index="4"]
 stream = ExtResource( 11 )
+bus = "SFX"
 
 [node name="ChikaraPanchiHit" type="AudioStreamPlayer" parent="Sounds" index="5"]
 stream = ExtResource( 16 )
+bus = "SFX"

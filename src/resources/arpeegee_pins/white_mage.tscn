@@ -146,6 +146,8 @@ frame = "magic"
 
 [node name="Life2" type="AudioStreamPlayer" parent="Sounds" index="0"]
 stream = ExtResource( 21 )
+bus = "SFX"
 
 [node name="MedicinalSparkles" type="AudioStreamPlayer" parent="Sounds" index="1"]
 stream = ExtResource( 20 )
+bus = "SFX"

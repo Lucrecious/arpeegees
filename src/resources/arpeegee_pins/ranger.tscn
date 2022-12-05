@@ -185,15 +185,20 @@ texture = ExtResource( 20 )
 
 [node name="RainFromAbove" type="AudioStreamPlayer" parent="Sounds" index="0"]
 stream = ExtResource( 23 )
+bus = "SFX"
 
 [node name="RainFromAboveHit" type="AudioStreamPlayer" parent="Sounds" index="1"]
 stream = ExtResource( 24 )
+bus = "SFX"
 
 [node name="MagicGhostSwordAppears" type="AudioStreamPlayer" parent="Sounds" index="2"]
 stream = ExtResource( 26 )
+bus = "SFX"
 
 [node name="ArrowZip" type="AudioStreamPlayer" parent="Sounds" index="3"]
 stream = ExtResource( 25 )
+bus = "SFX"
 
 [node name="ArrowEnFuegoWindUp" type="AudioStreamPlayer" parent="Sounds" index="4"]
 stream = ExtResource( 27 )
+bus = "SFX"
