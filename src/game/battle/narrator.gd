@@ -7,8 +7,6 @@ signal speaking_ended()
 
 const MAX_LINES_VISIBLE := 3
 
-const NARRATOR_MOUTH_OPEN_TEXTURE := preload('res://assets/ui/narrator/narrator_speaking.png')
-const NARRATOR_MOUTH_CLOSED_TEXTURE := preload('res://assets/ui/narrator/narrator_silent.png')
 const LETTERS_PER_SEC := 25.0
 const DISSOLVE_IN_SEC := 0.5
 const WAIT_BEFORE_FIRST_SENTENCE_SEC := 0.3
@@ -20,14 +18,13 @@ var _queued_text := []
 var _is_typing := false
 
 onready var _label := $'%Label' as Label
-onready var _narrator_head := $'%NarratorHead' as TextureRect
+onready var _narrator_head := $'%Jester' as Node2D
+onready var _narrator_sprite_switcher := NodE.get_child(_narrator_head, SpriteSwitcher) as SpriteSwitcher
 onready var _textbox := $'%Textbox' as Control
 onready var _default_font := theme.default_font
 
 func _ready() -> void:
 	assert(_default_font)
-	
-	_narrator_head.texture = NARRATOR_MOUTH_CLOSED_TEXTURE
 	
 	_textbox_dissolve_level(0.0)
 	
@@ -111,6 +108,8 @@ func _run_speaking_tween(text: String, start_signal: bool) -> void:
 		_current_tween.tween_callback(self, '_reset_current_tween_speed_scale', [false])
 		_current_tween.tween_callback(self, '_set_is_typing', [true])
 		
+		_current_tween.tween_callback(_narrator_sprite_switcher, 'change', ['talk'])
+		
 		var length := 0
 		var total_thing := p.join('\n') as String
 		_current_tween.tween_callback(_label, 'set', ['text', total_thing])
@@ -131,7 +130,8 @@ func _run_speaking_tween(text: String, start_signal: bool) -> void:
 			
 			_current_tween.tween_method(self, '_set_visible_characters',
 					length - new_line_length, length, new_line_length / LETTERS_PER_SEC)
-			
+		
+		_current_tween.tween_callback(_narrator_sprite_switcher, 'change', ['neutral'])
 		_current_tween.tween_callback(self, '_set_is_typing', [false])
 		_current_tween.tween_callback(self, '_reset_current_tween_speed_scale', [true])
 		_current_tween.tween_interval(WAIT_BETWEEN_SENTENCES_SEC)
@@ -247,17 +247,4 @@ func _set_is_typing(value: bool) -> void:
 		return
 	
 	_is_typing = value
-	if not _is_typing:
-		_narrator_head.texture = NARRATOR_MOUTH_CLOSED_TEXTURE
 
-func _process(delta: float) -> void:
-	if not _is_typing:
-		return
-	
-	if Engine.get_idle_frames() % 5 == 0:
-		Sounds.play('SpeakingBlip1')
-		if _narrator_head.texture == NARRATOR_MOUTH_OPEN_TEXTURE:
-			_narrator_head.texture = NARRATOR_MOUTH_CLOSED_TEXTURE
-		else:
-			_narrator_head.texture = NARRATOR_MOUTH_OPEN_TEXTURE
-	

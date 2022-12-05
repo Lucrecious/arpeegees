@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/narrator_silent.png-d970de0c034b665edaf08a3702afb892.stex"
+path="res://.import/jester_talking.png-d54442d74bff5235a5212d06ffe0eb42.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/narrator/narrator_silent.png"
-dest_files=[ "res://.import/narrator_silent.png-d970de0c034b665edaf08a3702afb892.stex" ]
+source_file="res://assets/ui/narrator/jester_talking.png"
+dest_files=[ "res://.import/jester_talking.png-d54442d74bff5235a5212d06ffe0eb42.stex" ]
 
 [params]
 

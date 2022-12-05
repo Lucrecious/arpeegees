@@ -1,7 +1,7 @@
 class_name SpriteSwitcher
 extends Node2D
 
-const IDLE_SPRITE_NAME := 'idle'
+export(String) var default_sprite := 'idle'
 
 var _name_to_sprite := {}
 
@@ -11,11 +11,11 @@ func _ready() -> void:
 	for s in _sprites.get_children():
 		_name_to_sprite[s.name.to_lower()] = s
 	
-	assert(IDLE_SPRITE_NAME in _name_to_sprite)
+	assert(default_sprite in _name_to_sprite)
 
 func sprite(name: String) -> Node2D:
 	name = name.to_lower()
-	var sprite := _name_to_sprite.get(name, _name_to_sprite[IDLE_SPRITE_NAME]) as Node2D
+	var sprite := _name_to_sprite.get(name, _name_to_sprite[default_sprite]) as Node2D
 	return sprite
 
 func swap_map(one: String, other: String) -> void:

@@ -34,6 +34,7 @@
 
             #cover-overlay {
                 position: absolute;
+                pointer-events: none;
                 left: 0;
                 top: 0;
                 right: 0;
@@ -43,29 +44,27 @@
                 align-items: center;
 
                 z-index: 3;
-                background-color: orange;
+                background-color: transparent;
             }
 
             #game {
                 z-index: 1;
             }
 
-            #loading-bar {
-                background-color: black;
-            }
-
             .center {
+                position: relative;
                 display: block;
                 margin: auto;
-                max-width: 500px;
-                /* max-height: 500px; */
+                max-width: 50%;
             }
 
-            #progress-bar {
-                position: absolute;
-                appearance: none;
-                margin-top: 100px;
-                width: 50%;
+            #loadingbartext {
+                z-index: 4;
+            }
+
+            #loadingbar {
+                margin-top: -3.5%;
+                z-index: 3;
             }
 
         </style>
@@ -78,19 +77,53 @@
                 <script src="$GODOT_URL"></script>
                 <script>
                     var engine = new Engine($GODOT_CONFIG);
-                    engine.startGame().then(() => {
+                    const progressUpdates = [0.0, 0.1, 0.5, 0.9, .99]
+
+                    let updateProgress = function(percent) {
+                        let new_index = 0;
+                        for (let i = 0; i < progressUpdates.length; i++) {
+                            let percentBarrier = progressUpdates[i];
+                            if (percent < percentBarrier) {
+                                break;
+                            }
+                            new_index = i;
+                        }
+
+                        let new_image_src = `loadingbarbar${new_index}.png`
+                        let loadingbarImg = document.getElementById('loadingbar');
+                        if (new_image_src === loadingbarImg.src) {
+                            return;
+                        }
+
+                        loadingbarImg.src = new_image_src;
+                    }
+
+                    engine.startGame({
+                        'onProgress': function (current, total) {
+                            let finishedPercent = current / total;
+                            updateProgress(finishedPercent);
+                        }
+                    }).then(() => {
                         const overlay = document.getElementById("scroll-overlay")
                         const coverOverlay = document.getElementById("cover-overlay")
 
                         overlay.style.backgroundColor = "transparent";
-                        coverOverlay.style.backgroundColor = "transparent";
+                        coverOverlay.style.visibility = "hidden";
                         console.log("Arpeegees Game Loaded")
-                    })
+                    });
                 </script>
             </div>
             <div id="scroll-overlay">
             </div>
             <dev id="cover-overlay">
+                <div>
+                    <img src="loadingbartext.png" id="loadingbartext" class="center">
+                    <img src="loadingbarbar0.png" id="loadingbar" class="center">
+                    <link rel="preload" href="loadingbarbar1.png" as="image">
+                    <link rel="preload" href="loadingbarbar2.png" as="image">
+                    <link rel="preload" href="loadingbarbar3.png" as="image">
+                    <link rel="preload" href="loadingbarbar4.png" as="image">
+                </div>
             </div>
         </div>
     </body>

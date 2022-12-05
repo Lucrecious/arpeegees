@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/narrator_speaking.png-22ac1782b14cb1ca1dbbe9a9333df67d.stex"
+path="res://.import/jester_cheering.png-64cc9dab609d899bc144d391cb94fe59.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/narrator/narrator_speaking.png"
-dest_files=[ "res://.import/narrator_speaking.png-22ac1782b14cb1ca1dbbe9a9333df67d.stex" ]
+source_file="res://assets/ui/narrator/jester_cheering.png"
+dest_files=[ "res://.import/jester_cheering.png-64cc9dab609d899bc144d391cb94fe59.stex" ]
 
 [params]
 
