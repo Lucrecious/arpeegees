@@ -89,6 +89,7 @@ script = ExtResource( 4 )
 [node name="MandolinWhack" type="Node2D" parent="Actions" index="0"]
 script = ExtResource( 9 )
 pin_action = ExtResource( 10 )
+narration_key = "MANDOLIN_WHACK_USE_NAME"
 
 [node name="ImpactHint" type="Position2D" parent="Actions/MandolinWhack" index="0"]
 position = Vector2( 129, -74 )
