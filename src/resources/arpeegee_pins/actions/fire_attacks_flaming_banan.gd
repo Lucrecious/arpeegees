@@ -1,5 +1,7 @@
 extends Node2D
 
+signal text_triggered(narration_key)
+
 enum Type {
 	Flamethrower,
 	FlameBreath,
@@ -61,6 +63,11 @@ func run(actioner: ArpeegeePinNode, target: ArpeegeePinNode, object: Object, cal
 		var burning_status_effect := EffectFunctions.create_burn_status_effect(burn_attack)
 		var status_effects_list := NodE.get_child(target, StatusEffectsList) as StatusEffectsList
 		animation.tween_callback(status_effects_list, 'add_instance', [burning_status_effect])
+	
+	if type == Type.FlameBreath:
+		ActionUtils.add_text_trigger(animation, self, 'NARRATOR_FLAME_BREATH_USE')
+	elif type == Type.Flamethrower:
+		ActionUtils.add_text_trigger(animation, self, 'NARRATOR_FLAMETHROWER_USE')
 	
 	animation.tween_callback(_flame_particles, 'set', ['emitting', false])
 	

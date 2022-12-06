@@ -41,6 +41,13 @@ func run(actioner: Node2D, object: Object, callback: String) -> void:
 	
 	animation.tween_callback(sprite_switcher, 'swap_map', ['idle', frame])
 	
+	if type == Type.Candle:
+		ActionUtils.add_text_trigger(animation, self, 'NARRATOR_CANDLE_USE')
+	elif type == Type.GetBrighter:
+		ActionUtils.add_text_trigger(animation, self, 'NARRATOR_GET_BRIGHTER_USE')
+	elif type == Type.FallOver:
+		ActionUtils.add_text_trigger(animation, self, 'NARRATOR_FALL_OVER_USE')
+	
 	animation.tween_interval(0.35)
 	
 	animation.tween_callback(object, callback)

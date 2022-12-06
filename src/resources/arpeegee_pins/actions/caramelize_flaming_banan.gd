@@ -1,5 +1,7 @@
 extends Node2D
 
+signal text_triggered(narration_key)
+
 onready var _flame_particles := get_parent().get_node('FlameParticles') as CPUParticles2D
 
 func pin_action() -> PinAction:
@@ -18,6 +20,8 @@ func run(actioner: ArpeegeePinNode, targets: Array, object: Object, callback: St
 	animation.tween_callback(_flame_particles, 'set', ['emitting', true])
 	
 	animation.tween_interval(2.0)
+	
+	ActionUtils.add_text_trigger(animation, self, 'NARRATOR_CARAMELIZE_USE')
 	
 	animation.tween_callback(_flame_particles, 'set', ['emitting', false])
 	animation.tween_callback(sprite_switcher, 'change', ['idle'])

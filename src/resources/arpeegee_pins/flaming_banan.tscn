@@ -79,6 +79,7 @@ script = ExtResource( 3 )
 script = ExtResource( 5 )
 attack_sprite_name = "idle"
 pin_action = ExtResource( 6 )
+narration_key = "NARRATOR_BURNING_TOUCH_USE"
 
 [node name="ImpactHint" type="Node2D" parent="Actions/BurningTouch" index="0"]
 position = Vector2( 48, -117 )
