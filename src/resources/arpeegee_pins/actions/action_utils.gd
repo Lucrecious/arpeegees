@@ -3,6 +3,7 @@ class_name ActionUtils
 enum HitType {
 	Miss,
 	Hit,
+	CriticalHit,
 }
 
 static func get_closest_adjecent_position(actioner: Node2D, target: Node2D) -> Vector2:
@@ -60,6 +61,7 @@ static func _add_attack(tween: SceneTreeTween, actioner: ArpeegeePinNode, target
 	var target_evasion := (NodE.get_child(target, ModifiedPinStats) as ModifiedPinStats).evasion
 	var damage_receiver := NodE.get_child(target, DamageReceiver) as DamageReceiver
 	var is_miss := not no_evade
+	var is_critical := false
 	if is_miss:
 		is_miss = FairRandom.is_evading(target_evasion)
 	
@@ -73,10 +75,16 @@ static func _add_attack(tween: SceneTreeTween, actioner: ArpeegeePinNode, target
 		else:
 			critical_chance = custom_critical
 		
-		var is_critical := FairRandom.is_critical(critical_chance)
+		is_critical = FairRandom.is_critical(critical_chance)
 		tween.tween_callback(damage_receiver, 'damage', [amount, type, is_critical, actioner])
-
-	return HitType.Miss if is_miss else HitType.Hit
+	
+	if is_miss:
+		return HitType.Miss
+	
+	if is_critical:
+		return HitType.CriticalHit
+	
+	return HitType.Hit
 
 static func add_hurt(tween: SceneTreeTween, target: ArpeegeePinNode) -> void:
 	var damage_receiver := NodE.get_child(target, DamageReceiver) as DamageReceiver

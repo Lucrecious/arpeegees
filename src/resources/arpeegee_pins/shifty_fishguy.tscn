@@ -99,6 +99,7 @@ script = ExtResource( 4 )
 script = ExtResource( 13 )
 attack_sprite_name = "stab"
 pin_action = ExtResource( 12 )
+narration_key = "NARRATOR_STAB_USE_SHIFTY_FISH_GUY"
 
 [node name="ImpactHint" type="Position2D" parent="Actions/Stab" index="0"]
 position = Vector2( 197, -57 )
@@ -107,6 +108,7 @@ position = Vector2( 197, -57 )
 script = ExtResource( 14 )
 type = 2
 throw_frame = "throw"
+narration_key = "NARRATOR_THROW_SPEAR_USE"
 
 [node name="Spear" type="Node2D" parent="Actions/ThrowSpear" index="0"]
 visible = false

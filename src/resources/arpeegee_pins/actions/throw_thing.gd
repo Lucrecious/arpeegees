@@ -69,20 +69,23 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	
 	var stats := NodE.get_child(actioner, ModifiedPinStats) as ModifiedPinStats
 	var sounds := NodE.get_child(actioner, SoundsComponent)
+	var hit_type := ActionUtils.HitType.Miss as int
 	if type == Type.HandThrowRock:
-		ActionUtils.add_attack(animation, actioner, target, stats.attack)
+		hit_type = ActionUtils.add_attack(animation, actioner, target, stats.attack)
 		animation.tween_callback(sounds, 'play', ['RockHit'])
 	elif type == Type.MagicThrowRock:
-		ActionUtils.add_magic_attack(animation, actioner, target, stats.magic_attack)
+		hit_type = ActionUtils.add_magic_attack(animation, actioner, target, stats.magic_attack)
 		animation.tween_callback(sounds, 'play', ['MagicRockHit'])
 	elif type == Type.ThrowSpear:
 		var attack_amount := ActionUtils.damage_with_factor(stats.attack, 0.75)
-		ActionUtils.add_attack(animation, actioner, target, attack_amount, 5)
+		hit_type = ActionUtils.add_attack(animation, actioner, target, attack_amount, 5)
 	else:
 		assert(false)
 	
 	if not narration_key.empty():
 		ActionUtils.add_text_trigger(animation, self, narration_key)
+		if hit_type == ActionUtils.HitType.CriticalHit and type == Type.ThrowSpear:
+			ActionUtils.add_text_trigger(animation, self, 'NARRATOR_THROW_SPEAR_USE_WITH_CRIT')
 	elif type == Type.MagicThrowRock:
 		var throw_rock_hand := get_parent().get_child(0)
 		assert(throw_rock_hand.name == 'ThrowRock')

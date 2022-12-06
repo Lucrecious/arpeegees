@@ -1,5 +1,7 @@
 extends Node2D
 
+signal text_triggered(narration_key)
+
 enum Type {
 	Splish,
 	Puddle,
@@ -28,6 +30,7 @@ func pin_action() -> PinAction:
 	assert(false)
 	return null
 
+var _uses := 0
 func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> void:
 	if type == Type.Puddle:
 		_is_blocked = true
@@ -60,8 +63,18 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 	elif type == Type.Puddle:
 		SlipEffect.add_slip_effect(animation, targets)
 	
+	if type == Type.Splish:
+		if _uses < 1:
+			ActionUtils.add_text_trigger(animation, self, 'NARRATOR_SPLISH_USE_1')
+		else:
+			ActionUtils.add_text_trigger(animation, self, 'NARRATOR_SPLISH_USE_2')
+	elif type == Type.Puddle:
+		ActionUtils.add_text_trigger(animation, self, 'NARRATOR_PUDDLE_USE')
+	
 	animation.tween_callback(sprite_switcher, 'change', ['idle'])
 	
 	var next_attack_factor := min(attack_factor + ATTACK_INCREASE, MAX_ATTACK_FACTOR)
 	animation.tween_callback(self, 'set', ['attack_factor', next_attack_factor])
 	animation.tween_callback(object, callback)
+	
+	_uses += 1
