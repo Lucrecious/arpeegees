@@ -101,10 +101,14 @@ func _show_target_pins(pins: Array, faded := false) -> void:
 	
 	for i in pins.size():
 		var pin := pins[i] as ArpeegeePinNode
+		var health := NodE.get_child(pin, Health) as Health
+		if health.current <= 0:
+			continue
+		
 		var pointer := _target_pointers[i] as Node2D
 		pointer.visible = true
 		if faded:
-			pointer.modulate.a = 0.85
+			pointer.modulate.a = 0.5
 		else:
 			pointer.modulate.a = 1.0
 		
