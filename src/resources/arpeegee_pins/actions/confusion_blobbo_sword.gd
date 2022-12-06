@@ -1,5 +1,6 @@
 extends Node2D
 
+signal text_triggered(narration_key)
 
 func pin_action() -> PinAction:
 	return preload('res://src/resources/actions/confusion_blobbo_sword.tres')
@@ -16,6 +17,8 @@ func run(actioner: ArpeegeePinNode, object: Object, callback: String) -> void:
 	
 	var status_effects_list := NodE.get_child(actioner, StatusEffectsList) as StatusEffectsList
 	animation.tween_callback(status_effects_list, 'add_instance', [_create_confusion_effect()])
+	
+	ActionUtils.add_text_trigger(animation, self, 'NARRATOR_CONFUSION_USE')
 	
 	animation.tween_callback(sprite_switcher, 'change', ['idle'])
 	

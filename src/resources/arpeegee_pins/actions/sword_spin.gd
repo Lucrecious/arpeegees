@@ -1,5 +1,7 @@
 extends Node2D
 
+signal text_triggered(narration_key)
+
 func pin_action() -> PinAction:
 	return preload('res://src/resources/actions/sword_spin_blobbo.tres') as PinAction
 
@@ -17,7 +19,11 @@ func run(actioner: Node2D, target: ArpeegeePinNode, object: Object, callback: St
 	
 	ActionUtils.add_stab(animation, actioner, target_position)
 	
+	var took_sword_back := false
+	
 	if target.filename.get_file() == 'paladin_no_sword.tscn' and randf() < 0.1:
+		took_sword_back = true
+		
 		var paladin_root_sprite := Components.root_sprite(target)
 		
 		animation.tween_callback(sprite_switcher, 'change', ['stuckswordpaladin'])
@@ -51,5 +57,8 @@ func run(actioner: Node2D, target: ArpeegeePinNode, object: Object, callback: St
 		
 		ActionUtils.add_walk(animation, actioner, after_winddown, actioner.global_position, 15, 5)
 	
+	ActionUtils.add_text_trigger(animation, self, 'NARRATOR_SWORD_SPIN_USE')
+	if took_sword_back:
+		ActionUtils.add_text_trigger(animation, self, 'NARRATOR_SWORD_SPIN_USE_SWORD_BACK')
 	
 	animation.tween_callback(object, callback)

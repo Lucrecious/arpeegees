@@ -337,6 +337,7 @@ NARRATOR_IS_THIS_FOOD_USE_CAUSE_MISS,Bard tried to attack but the pain of having
 ,,
 SWORD_SPIN_NAME,Sword Spin,
 NARRATOR_SWORD_SPIN_USE,{cheer} Blobbo does a SPIN ATTACK!~Holy crap! {determined} You better get that sword back!,
+NARRATOR_SWORD_SPIN_USE_SWORD_BACK,Oh.~It looks like you did.~Nice.,
 ,,
 CONFUSION_NAME,Confusion,
 NARRATOR_CONFUSION_USE,Blobbo raises its defense for a second while it tries to parse out what's going on with the sword...,
