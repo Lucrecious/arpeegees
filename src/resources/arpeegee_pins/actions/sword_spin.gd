@@ -21,7 +21,9 @@ func run(actioner: Node2D, target: ArpeegeePinNode, object: Object, callback: St
 	
 	var took_sword_back := false
 	
-	if target.filename.get_file() == 'paladin_no_sword.tscn' and randf() < 0.1:
+	var chance_to_grab := randf()
+	Logger.info('attempting to grab? targeting paladin no sword? %s with %s' % [target.filename.get_file() == 'paladin_no_sword.tscn', chance_to_grab])
+	if target.filename.get_file() == 'paladin_no_sword.tscn' and chance_to_grab < 0.1:
 		took_sword_back = true
 		
 		var paladin_root_sprite := Components.root_sprite(target)
