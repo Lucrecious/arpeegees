@@ -207,14 +207,25 @@ func _add_attack_boost(nodes: Array, type: int) -> void:
 		
 		var attack := StatModifier.new()
 		attack.type = StatModifier.Type.Attack
-		attack.multiplier = 1.5
+		attack.add_amount = 3
 		
 		var magic_attack := StatModifier.new()
 		magic_attack.type = StatModifier.Type.MagicAttack
-		attack.multiplier = 1.5
+		attack.add_amount = 3
 		
-		effect.add_child(attack)
-		effect.add_child(magic_attack)
+		var defence := StatModifier.new()
+		defence.type = StatModifier.Type.Defence
+		defence.add_amount = 1
+		
+		var magic_defence := StatModifier.new()
+		magic_defence.type = StatModifier.Type.MagicDefence
+		magic_defence.add_amount = 1
+		
+		var max_health := StatModifier.new()
+		max_health.type = StatModifier.Type.MaxHealth
+		max_health.multiplier = 2.0
+		
+		NodE.add_children(effect, [attack, magic_attack, defence, magic_defence, max_health])
 		
 		match type:
 			ArpeegeePin.Type.NPC:
@@ -223,6 +234,9 @@ func _add_attack_boost(nodes: Array, type: int) -> void:
 				print_debug('balance battle from player not implemented')
 		
 		status_effects.add_instance(effect)
+		
+		var health := NodE.get_child(n, Health) as Health
+		health.current_set(health.current * 2.0)
 
 #func _increase_evasion(nodes: Array) -> void:
 #	for n in nodes:
