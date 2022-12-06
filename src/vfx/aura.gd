@@ -31,9 +31,8 @@ func create_sweat_aura(pin: ArpeegeePinNode) -> Array:
 func create_green_goo_aura(pin: ArpeegeePinNode) -> Array:
 	var front := DrippingScene.instance() as CPUParticles2D
 	front.z_index = Z_INDEX_FRONT
-	front.scale_amount = 0.5
-	front.texture = load('res://assets/sprites/effects/glow_circle.png')
-	front.color = Color('4deb5a')
+	front.scale_amount = 0.2
+	front.texture = load('res://assets/sprites/effects/goo_glob.png')
 	
 	var bounding_box := NodE.get_child(pin, REferenceRect) as REferenceRect
 	var rect := bounding_box.global_rect()

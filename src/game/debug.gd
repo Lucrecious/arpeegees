@@ -1,7 +1,7 @@
 extends Node
 
-var play_as_npcs := false
-var allow_pick_pins := false
+var play_as_npcs := true
+var allow_pick_pins := true
 
 func get_picked_pins() -> Dictionary:
 	var debug_pick_group := get_tree().get_nodes_in_group('debug_pin_pick')

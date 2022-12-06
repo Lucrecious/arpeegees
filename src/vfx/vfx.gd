@@ -6,11 +6,10 @@ const FloatingTextScene := preload('res://src/vfx/floating_text.tscn')
 
 func goo_explosions() -> Array:
 	var explosion := ExplosionTemplateScene.instance() as ExplosionParticles
-	explosion.texture = load('res://assets/sprites/effects/glow_circle.png')
-	explosion.scale_amount = 1.0
+	explosion.texture = load('res://assets/sprites/effects/goo_glob.png')
+	explosion.scale_amount = 0.2
 	explosion.amount = 30
 	explosion.spread = 180.0
-	explosion.color = Color('4deb5a')
 	
 	return [explosion]
 
