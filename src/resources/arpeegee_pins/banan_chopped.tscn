@@ -32,6 +32,12 @@ shader_param/uv_offset_texture = ExtResource( 11 )
 nice_name = "Banan (Chopped)"
 _resource_set = ExtResource( 2 )
 
+[node name="SpriteSwitcher" parent="." index="3"]
+exceptions = PoolStringArray( "Slice1", "Slice2", "Slice3" )
+
+[node name="DamageReceiver" parent="." index="6"]
+sprite_name = "idle"
+
 [node name="Health" parent="." index="7"]
 current = 20
 

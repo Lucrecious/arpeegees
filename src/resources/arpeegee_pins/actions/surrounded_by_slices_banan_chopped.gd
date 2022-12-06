@@ -1,5 +1,7 @@
 extends Node2D
 
+signal text_triggered(narration_key)
+
 var _is_blocked := false
 func is_blocked() -> bool:
 	return _is_blocked
@@ -27,6 +29,8 @@ func run(actioner: Node2D, object: Object, callback: String) -> void:
 		slice.start()
 		animation.tween_property(slice, 'self_modulate:a', 1.0, 1.0)
 	
+	ActionUtils.add_text_trigger(animation, self, 'NARRATOR_SURROUNDED_BY_SLICES_USE')
+	
 	animation.tween_callback(object, callback)
 
 func _on_hit(hitter, actioner: ArpeegeePinNode) -> void:
@@ -48,3 +52,6 @@ func _on_hit(hitter, actioner: ArpeegeePinNode) -> void:
 	var animation := create_tween()
 	animation.tween_interval(0.5)
 	animation.tween_callback(damage_receiver, 'damage', [damage_amount, PinAction.AttackType.Normal, false, actioner])
+	
+	Logger.info('calling text trigger for "NARRATOR_SURROUNDED_BY_SLICES_DAMAGE" during actioner damage receiver')
+	ActionUtils.add_text_trigger(animation, self, 'NARRATOR_SURROUNDED_BY_SLICES_DAMAGE')

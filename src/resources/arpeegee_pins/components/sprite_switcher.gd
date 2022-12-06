@@ -2,6 +2,7 @@ class_name SpriteSwitcher
 extends Node2D
 
 export(String) var default_sprite := 'idle'
+export(PoolStringArray) var exceptions := PoolStringArray([])
 
 var _name_to_sprite := {}
 
@@ -9,6 +10,8 @@ onready var _sprites := NodE.get_sibling_by_name(self, 'Sprites') as Node2D
 
 func _ready() -> void:
 	for s in _sprites.get_children():
+		if s.name in exceptions:
+			continue
 		_name_to_sprite[s.name.to_lower()] = s
 	
 	assert(default_sprite in _name_to_sprite)

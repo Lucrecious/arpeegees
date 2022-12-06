@@ -1,8 +1,9 @@
 extends Node2D
 
+signal text_triggered(narration_key)
+
 const MIN_HITS := 2
 const MAX_HITS := 7
-
 
 func pin_action() -> PinAction:
 	return load('res://src/resources/actions/slice_barrage_banan_chopped.tres') as PinAction
@@ -32,6 +33,8 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 		animation.tween_callback(slice, 'set', ['visible', false])
 		
 		animation.tween_interval(0.35)
+	
+	ActionUtils.add_text_trigger(animation, self, 'NARRATOR_SLICE_BARRAGE_USE')
 	
 	animation.tween_interval(1.0)
 	
