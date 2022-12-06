@@ -1,5 +1,7 @@
 extends Node2D
 
+signal text_triggered(narration_key)
+
 const MIN_HITS := 2
 const MAX_HITS := 5
 
@@ -54,6 +56,10 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 		animation.tween_callback(_goo, 'set', ['global_position', _goo.global_position])
 		
 		animation.tween_interval(0.35)
+	
+			
+	if type == Type.Sparkling:
+		ActionUtils.add_text_trigger(animation, self, 'NARRATOR_SPITTIN_GOO_PURPLE')
 	
 	animation.tween_interval(0.5)
 	animation.tween_callback(object, callback)

@@ -1,6 +1,6 @@
 extends Node2D
 
-# must be removed if blobbo somehow transformed
+signal text_triggered(narration_key)
 
 func unblock() -> void:
 	_is_blocked = false
@@ -26,6 +26,8 @@ func run(actioner: Node2D, object: Object, callback: String) -> void:
 	
 	var sparkles := VFX.sparkle_explosions()
 	animation.tween_callback(NodE, 'add_children', [actioner, sparkles])
+	
+	ActionUtils.add_text_trigger(animation, self, 'NARRATOR_SPARKLES_USE')
 	
 	animation.tween_interval(1.5)
 	animation.tween_callback(sprite_switcher, 'change', ['idle'])
