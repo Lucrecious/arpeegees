@@ -132,6 +132,7 @@ position = Vector2( 75, -88 )
 [node name="Bite" type="Node2D" parent="Actions" index="1"]
 script = ExtResource( 14 )
 attack_frame = "bite"
+narration_key = "NARRATOR_BITE_USE_KOBOLDIO"
 
 [node name="Disappear" type="Node2D" parent="Actions" index="2"]
 script = ExtResource( 15 )

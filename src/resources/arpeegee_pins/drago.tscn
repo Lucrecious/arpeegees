@@ -83,7 +83,7 @@ script = ExtResource( 7 )
 script = ExtResource( 8 )
 attack_sprite_name = "bite"
 pin_action = ExtResource( 9 )
-narration_key = "Drago takes a dang BITE. YOUCH (yum)"
+narration_key = "NARRATOR_BITE_USE"
 
 [node name="ImpactHint" type="Position2D" parent="Actions/Bite" index="0"]
 position = Vector2( 69, -67 )

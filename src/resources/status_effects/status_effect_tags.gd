@@ -2,7 +2,6 @@ class_name StatusEffectTag
 
 enum {
 	Enraged,
-	TiredAfterSwoop,
 	ItemPowerUp,
 	Discord,
 	HeckinGoodSong,
