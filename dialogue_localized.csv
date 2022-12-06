@@ -225,7 +225,7 @@ NARRATOR_FOREST_LOVE_USE_WITH_ALLY,"Ranger communicates with the forest, envelop
 NARRATOR_FOREST_LOVE_USE_ALONE,Ranger communicates with the forest and becomes enveloped in its healing energy.,
 ,,
 DESPERATE_HEADBUTT_NAME,Desperate Headbutt,
-NARRATOR_DESPERATE_HEADBUTT_USE,"Mushboy headbutts you. {sad} Hey, they're trying. Don't laugh.",
+NARRATOR_DESPERATE_HEADBUTT_USE,"Mushboy headbutts you. {sad} Hey, they're trying.~Don't laugh.",
 NARRATOR_DESPERATE_HEADBUTT_USE_CRITICAL,{shock} WOAH!~GEEZ!~WHAT~THE HEY?~THAT HURT!,
 ,,
 DESPERATE_KICK_NAME,Desperate Kick,

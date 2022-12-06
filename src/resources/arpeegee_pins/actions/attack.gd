@@ -80,6 +80,7 @@ func run(actioner: Node2D, target: ArpeegeePinNode, object: Object, callback: St
 	var modified_stats := NodE.get_child(actioner, ModifiedPinStats) as ModifiedPinStats
 	
 	var attacked_physically := false
+	var hatless_mushboy_hits_critical := false
 	
 	if physical:
 		var attack_amount := ActionUtils.damage_with_factor(modified_stats.attack, attack_factor)
@@ -91,6 +92,8 @@ func run(actioner: Node2D, target: ArpeegeePinNode, object: Object, callback: St
 		elif pin_action().resource_path.get_file() == 'desperate_headbutt_hatless_mushboy.tres':
 			if randf() < 0.1:
 				attack_amount = ActionUtils.damage_with_factor(attack_amount, 8.0)
+				hatless_mushboy_hits_critical = true
+				
 		elif pin_action().resource_path.get_file() == 'struggle_mushboy_deflated.tres':
 			var chance := randf()
 			Logger.info('Mushboy used struggle and rolled %.2f' % [chance])
@@ -111,6 +114,9 @@ func run(actioner: Node2D, target: ArpeegeePinNode, object: Object, callback: St
 			if hit_type != ActionUtils.HitType.Miss and randf() < 0.1:
 				var status_effects_list := NodE.get_child(target, StatusEffectsList) as StatusEffectsList
 				tween.tween_callback(status_effects_list, 'add_instance', [_create_desperate_kick_effect()])
+			
+			if hit_type == ActionUtils.HitType.CriticalHit:
+				hatless_mushboy_hits_critical = true
 	else:
 		var attack_amount := ActionUtils.damage_with_factor(modified_stats.magic_attack, attack_factor)
 		ActionUtils.add_magic_attack(tween, actioner, target, attack_amount)
@@ -135,6 +141,12 @@ func run(actioner: Node2D, target: ArpeegeePinNode, object: Object, callback: St
 		ActionUtils.add_text_trigger(tween, self, 'NARRATOR_DESPERATE_STAFF_WHACK_KILL')
 	elif attacked_physically and deflated_mushboy_struggle_extra_damage:
 		ActionUtils.add_text_trigger(tween, self, 'NARRATOR_STRUGGLE_USE_DAMAGE')
+	
+	if attacked_physically and hatless_mushboy_hits_critical:
+		if pin_action().resource_path.get_file() == 'desperate_headbutt_hatless_mushboy.tres':
+			ActionUtils.add_text_trigger(tween, self, 'NARRATOR_DESPERATE_HEADBUTT_USE_CRITICAL')
+		elif pin_action().resource_path.get_file() == 'desperate_kick_hatless_mushboy.tres':
+			ActionUtils.add_text_trigger(tween, self, 'NARRATOR_DESPERATE_KICK_USE_CRITICAL')
 	
 	ActionUtils.add_walk(tween, actioner,
 			actioner.global_position + relative, actioner.global_position, 15.0, 5)

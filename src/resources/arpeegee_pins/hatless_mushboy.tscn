@@ -92,6 +92,7 @@ script = ExtResource( 2 )
 script = ExtResource( 4 )
 attack_sprite_name = "headbutt"
 pin_action = ExtResource( 10 )
+narration_key = "NARRATOR_DESPERATE_HEADBUTT_USE"
 
 [node name="ImpactHint" type="Position2D" parent="Actions/DesperateHeadbutt" index="0"]
 position = Vector2( 63, -91 )
@@ -100,6 +101,7 @@ position = Vector2( 63, -91 )
 script = ExtResource( 4 )
 attack_sprite_name = "kick"
 pin_action = ExtResource( 11 )
+narration_key = "NARRATOR_DESPERATE_KICK_USE"
 
 [node name="ImpactHint" type="Position2D" parent="Actions/DesperateKick" index="0"]
 position = Vector2( 65, -69 )

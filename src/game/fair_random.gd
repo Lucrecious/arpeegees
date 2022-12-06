@@ -56,7 +56,7 @@ func _next_critical(critical_stat: int) -> bool:
 
 func _get_critical_chance(critical_stat: int) -> float:
 	var critical_ratio := critical_stat / float(ModifiedPinStats.CRITICAL_MAX)
-	return float(lerp(0, 0.5, critical_ratio))
+	return critical_ratio
 
 func randomness_size() -> int:
 	return RANDOMNESS_SIZE_MIN + randi() % (RANDOMNESS_SIZE_MAX - RANDOMNESS_SIZE_MIN)
