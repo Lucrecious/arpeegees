@@ -36,7 +36,7 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	var sprite_switcher := NodE.get_child(actioner, SpriteSwitcher) as SpriteSwitcher
 	var target_status_effects := NodE.get_child(target, StatusEffectsList) as StatusEffectsList
 	var modified_stats := NodE.get_child(actioner, ModifiedPinStats) as ModifiedPinStats
-	var attack_damage := ActionUtils.damage_with_factor(modified_stats.attack, 0.5)
+	var attack_damage := ActionUtils.damage_with_factor(modified_stats.attack, 1.0)
 	var spawn_position_hint := get_node(spawn_position_hint_node).global_position as Vector2
 	var root_sprite := NodE.get_child(actioner, RootSprite) as RootSprite
 	var sounds := NodE.get_child(actioner, SoundsComponent) as SoundsComponent
@@ -93,10 +93,10 @@ func _create_discord_status_effect(actioner: ArpeegeePinNode) -> StatusEffect:
 	var discord_effect := DiscordStartTurnEffect.new()
 	if type == Type.Discord:
 		discord_effect.narration_key = 'NARRATOR_DISCORD_RECOIL_EFFECT'
-		discord_effect.damage_factor = 0.5
+		discord_effect.damage_factor = 1.0
 	elif type == Type.SingOutOfKey:
 		discord_effect.narration_key = 'NARRATOR_SING_OUT_OF_KEY_SECOND_TURN'
-		discord_effect.damage_factor = 0.2
+		discord_effect.damage_factor = 0.5
 	else:
 		assert(false)
 	
