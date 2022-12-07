@@ -5,6 +5,7 @@ const BrokenNotes := preload('res://src/vfx/broken_notes.tscn')
 signal text_triggered(narration_key)
 
 var boosted := false
+var is_this_food := false
 
 onready var _position_hint := $Hint as Node2D
 
@@ -15,12 +16,17 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	var animation := create_tween()
 	animation.tween_interval(0.35)
 	
+	if is_this_food and IsThisFood.too_sad_to_attack():
+		IsThisFood.add_is_this_food(animation, self, object, callback)
+		return
+	
 	var root_sprite := Components.root_sprite(actioner)
 	var material := root_sprite.material as ShaderMaterial
 	TweenJuice.skew(animation, material, 0.0, 0.5, 1.0)\
 			.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 	
 	animation.tween_interval(0.35)
+	
 	TweenJuice.skew(animation, material, 0.5, 0.0, 0.1)
 	
 	var sprite_switcher := NodE.get_child(actioner, SpriteSwitcher) as SpriteSwitcher

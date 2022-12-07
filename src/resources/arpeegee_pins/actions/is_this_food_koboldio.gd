@@ -14,6 +14,16 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 	
 	ActionUtils.add_text_trigger(animation, self, 'NARRATOR_IS_THIS_FOOD_USE')
 	
+	for t in targets:
+		if t.filename.get_file() != 'bard_no_mandolin.tscn':
+			continue
+		
+		var actions := NodE.get_child(t, PinActions) as PinActions
+		for action in actions.get_children():
+			assert('is_this_food' in action)
+			action.is_this_food = true
+		break
+	
 	animation.tween_interval(1.0)
 	animation.tween_callback(sprite_switcher, 'change', ['idle'])
 	

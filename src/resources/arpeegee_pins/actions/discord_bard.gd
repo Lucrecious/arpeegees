@@ -14,6 +14,8 @@ export(String) var narration_key := ''
 export(String) var spawn_position_hint_node := 'SpawnPositionHint'
 export(PackedScene) var projectile_scene: PackedScene = null
 
+var is_this_food := false
+
 func pin_action() -> PinAction:
 	if type == Type.Discord:
 		return preload('res://src/resources/actions/discord_bard.tres') as PinAction
@@ -24,6 +26,13 @@ func pin_action() -> PinAction:
 		return preload('res://src/resources/actions/discord_bard.tres') as PinAction
 
 func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> void:
+	var animation := create_tween()
+	
+	if is_this_food and IsThisFood.too_sad_to_attack():
+		animation.tween_interval(0.35)
+		IsThisFood.add_is_this_food(animation, self, object, callback)
+		return
+	
 	var sprite_switcher := NodE.get_child(actioner, SpriteSwitcher) as SpriteSwitcher
 	var target_status_effects := NodE.get_child(target, StatusEffectsList) as StatusEffectsList
 	var modified_stats := NodE.get_child(actioner, ModifiedPinStats) as ModifiedPinStats
@@ -33,8 +42,6 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	var sounds := NodE.get_child(actioner, SoundsComponent) as SoundsComponent
 	
 	var status_effect := _create_discord_status_effect(actioner)
-	
-	var animation := create_tween()
 	
 	animation.tween_callback(Music, 'pause_fade_out')
 	

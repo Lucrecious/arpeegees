@@ -12,6 +12,7 @@ export(Type) var type := Type.HeckinGoodSong
 export(String) var sing_frame := ''
 
 var buffed_from_four_chord_strum := false
+var is_this_food := false
 
 func pin_action() -> PinAction:
 	if type == Type.HeckinGoodSong:
@@ -32,6 +33,11 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 		explosion_parent = actioner
 	
 	var animation := create_tween()
+	
+	if is_this_food and IsThisFood.too_sad_to_attack():
+		animation.tween_interval(0.35)
+		IsThisFood.add_is_this_food(animation, self, object, callback)
+		return
 	
 	animation.tween_callback(Music, 'pause_fade_out')
 	

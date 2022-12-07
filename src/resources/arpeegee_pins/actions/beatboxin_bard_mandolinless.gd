@@ -2,6 +2,8 @@ extends Node2D
 
 signal text_triggered(narration_key)
 
+var is_this_food := false
+
 func pin_action() -> PinAction:
 	return preload('res://src/resources/actions/beatboxin_bard_mandolinless.tres')
 
@@ -12,6 +14,10 @@ func run(actioner: Node2D, object: Object, callback: String) -> void:
 	
 	var animation := create_tween()
 	animation.tween_interval(0.35)
+	
+	if is_this_food and IsThisFood.too_sad_to_attack():
+		IsThisFood.add_is_this_food(animation, self, object, callback)
+		return
 	
 	var sprite_switcher := NodE.get_child(actioner, SpriteSwitcher) as SpriteSwitcher
 	animation.tween_callback(sprite_switcher, 'change', ['beatbox'])
