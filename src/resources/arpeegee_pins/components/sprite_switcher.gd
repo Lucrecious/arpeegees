@@ -16,6 +16,9 @@ func _ready() -> void:
 	
 	assert(default_sprite in _name_to_sprite)
 
+func get_all_sprite_names() -> PoolStringArray:
+	return PoolStringArray(_name_to_sprite.keys())
+
 func sprite(name: String) -> Node2D:
 	name = name.to_lower()
 	var sprite := _name_to_sprite.get(name, _name_to_sprite[default_sprite]) as Node2D

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
 [ext_resource path="res://lut/components/root_sprite.gd" type="Script" id=2]
@@ -15,7 +15,6 @@
 [ext_resource path="res://src/resources/arpeegee_pins/actions/splittin_goo.gd" type="Script" id=13]
 [ext_resource path="res://assets/sprites/effects/goo_green.png" type="Texture" id=14]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/crustify_blobbo.gd" type="Script" id=15]
-[ext_resource path="res://src/image_resizer_tool.gd" type="Script" id=16]
 [ext_resource path="res://assets/sprites/paladin/paladin_blobbo_sword_stuck.png" type="Texture" id=17]
 [ext_resource path="res://assets/sprites/blobbo/blobbo_paladin_stabbed.PNG" type="Texture" id=18]
 [ext_resource path="res://assets/sprites/blobbo/blobbo_fear1.png" type="Texture" id=19]
@@ -124,10 +123,6 @@ position = Vector2( -109, -218 )
 scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 18 )
 centered = false
-
-[node name="ImageResizerTool" type="Node" parent="Sprites" index="9"]
-script = ExtResource( 16 )
-_onlys = PoolStringArray( "Fear1", "Fear2", "Fear3" )
 
 [node name="Actions" type="Node2D" parent="." index="13"]
 script = ExtResource( 9 )

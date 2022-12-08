@@ -77,9 +77,9 @@ func _on_pin_action_started(action_node: Node2D, _actions: PinActions) -> void:
 var _current_tween: SceneTreeTween = null
 func speak_tr(translation_key: String, chain: bool) -> void:
 	var dialogue := tr(translation_key)
-	_speak(dialogue, chain)
+	speak(dialogue, chain)
 
-func _speak(text: String, chain: bool) -> void:
+func speak(text: String, chain: bool) -> void:
 	if _current_tween:
 		if chain:
 			_queued_text.push_back(text)

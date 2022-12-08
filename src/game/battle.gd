@@ -172,12 +172,12 @@ func _do_intro_narration() -> void:
 	speaking_tween.tween_callback(_narrator, 'speak_tr', ['NARRATOR_BATTLE_INTRODUCTION_GENERIC', false])
 	TweenExtension.pause_until_signal_if_condition(speaking_tween.parallel(), _narrator, 'speaking_ended',
 			_narrator, 'is_speaking')
-	speaking_tween.tween_callback(self, '_balance_battle')
+	speaking_tween.tween_callback(self, '_do_start_battle_effects')
 	
 	speaking_tween.tween_property(_restart_button_holder, 'rect_position:y', _restart_button_holder_original_position.y, 0.5)\
 			.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 
-func _balance_battle() -> void:
+func _do_start_battle_effects() -> void:
 	_turn_manager.connect('battle_ended', self, '_on_battle_ended')
 	
 	var nodes := NodE.get_children_recursive(_battle_layer, ArpeegeePinNode)
@@ -188,7 +188,6 @@ func _balance_battle() -> void:
 		_turn_manager.use_item(item)
 	
 	var type_disadvanged := _turn_manager.balance_battle()
-	_sounds.play('EnragedHarpy')
 	
 	var disadvantage_dialog := ''
 	
@@ -198,14 +197,40 @@ func _balance_battle() -> void:
 		ArpeegeePin.Type.NPC:
 			disadvantage_dialog = 'NARRATOR_MONSTER_FILL_WITH_EVIL'
 	
-	if disadvantage_dialog.empty():
-		_start_battle(nodes)
-	else:
-		var tween := create_tween()
-		TweenExtension.pause_until_signal_if_condition(tween, _narrator, 'speaking_ended',
-				_narrator, 'is_speaking')
-		tween.tween_callback(self, '_start_battle', [nodes])
-		_narrator.speak_tr(disadvantage_dialog, true)
+	var tween := create_tween()
+	
+	if not disadvantage_dialog.empty():
+		tween.tween_callback(_sounds, 'play', ['EnragedHarpy'])
+		tween.tween_callback(_narrator, 'speak_tr', [disadvantage_dialog, true])
+		_add_speaking_pause(tween, _narrator)
+	
+	_add_fear_effects(tween)
+	
+	tween.tween_callback(self, '_start_battle', [nodes])
+
+func _add_speaking_pause(tween: SceneTreeTween, narrator: NarratorUI) -> void:
+	TweenExtension.pause_until_signal_if_condition(tween, narrator,
+			'speaking_ended', _narrator, 'is_speaking')
+
+func _add_fear_effects(animation: SceneTreeTween) -> void:
+	if _get_arpeegee_by_file('hunter.tscn') != null:
+		for file in ['drago.tscn', 'blobbo.tscn', 'koboldio.tscn']:
+			var pin := _get_arpeegee_by_file(file)
+			if not pin:
+				continue
+			
+			var fear_effect := EffectFunctions.create_fear_status_effect()
+			var list := NodE.get_child(pin, StatusEffectsList) as StatusEffectsList
+			list.add_instance(fear_effect)
+			EffectFunctions.add_fear_narration(pin, _narrator, animation)
+			_add_speaking_pause(animation, _narrator)
+
+func _get_arpeegee_by_file(file: String) -> ArpeegeePinNode:
+	for pin in _turn_manager.get_pins():
+		if pin.filename.get_file() == file:
+			return pin
+		
+	return null
 
 func _on_battle_ended(end_condition: int) -> void:
 	if end_condition == TurnManager.EndCondition.NPCsDead:
