@@ -39,6 +39,14 @@ func _on_npc_turn_started() -> void:
 	
 	if action.target_type == PinAction.TargetType.Single:
 		var players := TurnManager.is_alive(_turn_manager.get_players())
+		var wont_attack_paladin := NodE.get_child(pin, WontAttackPaladin, false) as WontAttackPaladin
+		if wont_attack_paladin:
+			players = TurnManager.remove_by_file(players, 'paladin.tscn')
+			players = TurnManager.remove_by_file(players, 'paladin_no_sword.tscn')
+			if players.empty():
+				_narrator_ui.speak_tr('NARRATOR_KOBOLDIO_FRIENDLY_PALADIN', true)
+				_turn_manager.finish_turn()
+				return
 		
 		tween.tween_callback(_turn_manager, 'run_action_with_target',
 				[pin, node.name, players[randi() % players.size()]])
@@ -46,7 +54,9 @@ func _on_npc_turn_started() -> void:
 	elif action.target_type == PinAction.TargetType.Self:
 		tween.tween_callback(_turn_manager, 'run_action', [pin, node.name])
 	elif action.target_type == PinAction.TargetType.AllEnemies:
-		var players := _turn_manager.get_players()
+		var players := TurnManager.is_alive(_turn_manager.get_players())
+		
+		
 		tween.tween_callback(_turn_manager, 'run_action_with_targets', [pin, node.name, players])
 	elif action.target_type == PinAction.TargetType.AllAllies:
 		var npcs := _turn_manager.get_npcs()

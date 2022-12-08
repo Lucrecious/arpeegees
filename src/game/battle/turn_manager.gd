@@ -238,6 +238,14 @@ func _add_attack_boost(nodes: Array, type: int) -> void:
 		var health := NodE.get_child(n, Health) as Health
 		health.current_set(health.current * 2.0)
 
+static func remove_by_file(pins: Array, file: String) -> Array:
+	var new_pins := []
+	for p in pins:
+		if p.filename.get_file() == file:
+			continue
+		new_pins.push_back(p)
+	return new_pins
+
 #func _increase_evasion(nodes: Array) -> void:
 #	for n in nodes:
 #		var status_effects := NodE.get_child(n, StatusEffectsList) as StatusEffectsList

@@ -71,6 +71,13 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 		elif not narration_key_single.empty():
 			ActionUtils.add_text_trigger(tween, self, narration_key_single)
 	
+	var actioner_file := actioner.filename.get_file()
+	if actioner_file == 'paladin.tscn' or actioner_file == 'paladin_no_sword.tscn':
+		for t in targets:
+			var wont_attack_paladin := NodE.get_child(t, WontAttackPaladin) as WontAttackPaladin
+			if wont_attack_paladin:
+				wont_attack_paladin.add_post_hit(tween, self)
+	
 	if not attack_frame.empty():
 		tween.tween_callback(sprite_switcher, 'change', ['idle'])
 

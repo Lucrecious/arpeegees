@@ -129,7 +129,6 @@ func run(actioner: Node2D, target: ArpeegeePinNode, object: Object, callback: St
 		var attack_amount := ActionUtils.damage_with_factor(modified_stats.magic_attack, attack_factor)
 		ActionUtils.add_magic_attack(tween, actioner, target, attack_amount)
 
-
 	ActionUtils.add_shake(tween, actioner, position, Vector2(1, 0), 5.0, .35)
 	tween.tween_interval(.4)
 	tween.tween_callback(sprite_switcher, 'change', ['idle'])
@@ -148,6 +147,12 @@ func run(actioner: Node2D, target: ArpeegeePinNode, object: Object, callback: St
 	if not get_meta('banan_love_text_done', false) and attacked_physically and add_banan_in_love_text:
 		set_meta('banan_love_text_done', true)
 		ActionUtils.add_text_trigger(tween, self, 'NARRATOR_BANAN_GETS_HIT_BY_STAFF')
+	
+	var actioner_file := actioner.filename.get_file()
+	if actioner_file == 'paladin.tscn' or actioner_file == 'paladin_no_sword.tscn':
+		var wont_attack_paladin := NodE.get_child(target, WontAttackPaladin, false) as WontAttackPaladin
+		if wont_attack_paladin:
+			wont_attack_paladin.add_post_hit(tween, self)
 	
 	if white_mage_instakill:
 		ActionUtils.add_text_trigger(tween, self, 'NARRATOR_DESPERATE_STAFF_WHACK_KILL')

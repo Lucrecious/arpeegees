@@ -208,11 +208,25 @@ func _do_start_battle_effects() -> void:
 	
 	_add_banan_effects(tween)
 	
+	_add_koboldio_paladin_friendly_effects(tween)
+	
 	tween.tween_callback(self, '_start_battle', [nodes])
 
 func _add_speaking_pause(tween: SceneTreeTween, narrator: NarratorUI) -> void:
 	TweenExtension.pause_until_signal_if_condition(tween, narrator,
 			'speaking_ended', _narrator, 'is_speaking')
+
+func _add_koboldio_paladin_friendly_effects(animation: SceneTreeTween) -> void:
+	var koboldio := _get_arpeegee_by_file('koboldio.tscn')
+	if not koboldio:
+		return
+	
+	var paladin := _get_arpeegee_by_file('paladin.tscn')
+	if not paladin:
+		return
+	
+	animation.tween_callback(_narrator, 'speak_tr', ['NARRATOR_KOBOLDIO_FRIENDLY_PALADIN', true])
+	_add_speaking_pause(animation, _narrator)
 
 func _add_banan_effects(animation: SceneTreeTween) -> void:
 	var banan := _get_arpeegee_by_file('banan.tscn')

@@ -33,4 +33,5 @@ enum {
 	FishguyBananBazookaCharge,
 	Fear,
 	BlobboAbsorbedPunch,
+	HeartbrokenKoboldio,
 }

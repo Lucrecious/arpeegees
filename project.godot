@@ -653,6 +653,11 @@ _global_script_classes=[ {
 "class": "WobbleLabel",
 "language": "GDScript",
 "path": "res://src/ui/wobble_label.gd"
+}, {
+"base": "Node",
+"class": "WontAttackPaladin",
+"language": "GDScript",
+"path": "res://src/resources/arpeegee_pins/components/wont_attack_paladin.gd"
 } ]
 _global_script_class_icons={
 "ActionUtils": "",
@@ -783,7 +788,8 @@ _global_script_class_icons={
 "VFXNotesPair": "",
 "Velocity": "",
 "Velocity3": "",
-"WobbleLabel": ""
+"WobbleLabel": "",
+"WontAttackPaladin": ""
 }
 
 [application]
