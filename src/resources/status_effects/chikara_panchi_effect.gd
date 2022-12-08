@@ -55,20 +55,45 @@ func run_start_turn_effect() -> void:
 	
 	tween.tween_callback(sprite_switcher, 'change', ['punch'])
 	
-	
 	tween.tween_callback(VFX, 'physical_impact', [actioner, hint_position])
 	
-	var modified_stats := NodE.get_child(actioner, ModifiedPinStats) as ModifiedPinStats
-	if modified_stats:
-		var attack_amount := ActionUtils.damage_with_factor(modified_stats.attack, 2.5)
-		ActionUtils.add_attack(tween, actioner, target, attack_amount)
+	var blobbo_absorbed := false
+	if target.filename.get_file() == 'blobbo.tscn':
+		blobbo_absorbed = true
+		
+		var blobbo_sprite_switcher := NodE.get_child(target, SpriteSwitcher) as SpriteSwitcher
+		tween.tween_callback(blobbo_sprite_switcher, 'change', ['hit'])
+		tween.tween_interval(0.4)
+		tween.tween_callback(blobbo_sprite_switcher, 'change', ['idle'])
+		
+		var absorbed_punch_effect := StatusEffect.new()
+		absorbed_punch_effect.is_ailment = false
+		absorbed_punch_effect.stack_count = 1
+		absorbed_punch_effect.tag = StatusEffectTag.BlobboAbsorbedPunch
+		
+		var attack := StatModifier.new()
+		attack.multiplier = 2.0
+		attack.type = StatModifier.Type.Attack
+		absorbed_punch_effect.add_child(attack)
+		
+		var blobbo_effects_list := NodE.get_child(target, StatusEffectsList) as StatusEffectsList
+		tween.tween_callback(blobbo_effects_list, 'add_instance', [absorbed_punch_effect])
+
 	else:
-		assert(false)
+		var modified_stats := NodE.get_child(actioner, ModifiedPinStats) as ModifiedPinStats
+		if modified_stats:
+			var attack_amount := ActionUtils.damage_with_factor(modified_stats.attack, 2.5)
+			ActionUtils.add_attack(tween, actioner, target, attack_amount)
+		else:
+			assert(false)
 	
 	ActionUtils.add_shake(tween, actioner, position, Vector2(1, 0), 5.0, .35)
 	tween.tween_interval(.4)
 	
-	ActionUtils.add_text_trigger(tween, self, 'NARRATOR_CHIKARA_PANCHI_USE_ATTACK')
+	if blobbo_absorbed:
+		ActionUtils.add_text_trigger(tween, self, 'NARRATOR_BLOBBO_ABSORBS_CHAKIRA_PANCHI')
+	else:
+		ActionUtils.add_text_trigger(tween, self, 'NARRATOR_CHIKARA_PANCHI_USE_ATTACK')
 	
 	# switching it back after punch
 	tween.tween_callback(sprite_switcher, 'swap_map', ['powerup', 'idle'])

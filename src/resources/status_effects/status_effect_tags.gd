@@ -32,4 +32,5 @@ enum {
 	ConfusionForSwordBlobbo,
 	FishguyBananBazookaCharge,
 	Fear,
+	BlobboAbsorbedPunch,
 }
