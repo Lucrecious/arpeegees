@@ -9,7 +9,7 @@ static func create_fear_status_effect() -> StatusEffect:
 	
 	return status_effect
 
-static func add_fear_narration(arpeegee: ArpeegeePinNode, narrator: NarratorUI, animation: SceneTreeTween) -> void:
+static func add_fear_narration_and_effect(arpeegee: ArpeegeePinNode, narrator: NarratorUI, animation: SceneTreeTween) -> void:
 	animation.tween_interval(0.5)
 	
 	var sprite_switcher := NodE.get_child(arpeegee, SpriteSwitcher) as SpriteSwitcher
@@ -22,13 +22,13 @@ static func add_fear_narration(arpeegee: ArpeegeePinNode, narrator: NarratorUI, 
 	
 	var fear_sprite_name := fear_sprites[randi() % fear_sprites.size()]
 	
-	animation.tween_callback(sprite_switcher, 'change', [fear_sprite_name])
+	animation.tween_callback(sprite_switcher, 'swap_map', ['idle', fear_sprite_name])
 	
-	#var narration_key := 'NARRATOR_SHAKES_WITH_FEAR_%d' % [randi() % 3 + 1]
-	#var narration_text := arpeegee.tr('NARRATOR_SHAKES_WITH_FEAR_1')
-	#narration_text = narration_text % [arpeegee.nice_name]
+	var narration_key := 'NARRATOR_SHAKES_WITH_FEAR_%d' % [randi() % 3 + 1]
+	var narration_text := arpeegee.tr('NARRATOR_SHAKES_WITH_FEAR_1')
+	narration_text = narration_text % [arpeegee.nice_name]
 	
-	animation.tween_callback(narrator, 'speak', ['for some reason text doesn\'t fucking word.', true])
+	animation.tween_callback(narrator, 'speak', [narration_text, true])
 	
 
 static func create_burn_status_effect(attack_based: int) -> StatusEffect:

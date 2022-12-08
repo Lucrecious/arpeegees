@@ -65,8 +65,19 @@ func run_action_with_targets(action_name: String, targets: Array, multiple: bool
 	
 	var can_attack := true
 	
+	var parent_effects_list := NodE.get_child(_parent, StatusEffectsList) as StatusEffectsList
+	if parent_effects_list.count_tags(StatusEffectTag.Fear) and randf() < 0.5:
+		can_attack = false
+		
+		var fear_animation := create_tween()
+		fear_animation.tween_interval(0.35)
+		
+		ActionUtils.add_text_trigger(fear_animation, node, 'NARRATOR_CANT_ATTACK_DUE_TO_FEAR')
+		
+		fear_animation.tween_callback(self, '_on_action_node_finished')
+	
 	# extra handling for things that can cause attack to miss
-	if targets.size() == 1 and targets[0].filename.get_file() == 'mushboy.tscn':
+	elif targets.size() == 1 and targets[0].filename.get_file() == 'mushboy.tscn':
 		var status_effects_list := NodE.get_child(targets[0], StatusEffectsList) as StatusEffectsList
 		if status_effects_list.count_tags(StatusEffectTag.Bounce) > 0:
 			can_attack = false

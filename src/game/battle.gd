@@ -222,7 +222,7 @@ func _add_fear_effects(animation: SceneTreeTween) -> void:
 			var fear_effect := EffectFunctions.create_fear_status_effect()
 			var list := NodE.get_child(pin, StatusEffectsList) as StatusEffectsList
 			list.add_instance(fear_effect)
-			EffectFunctions.add_fear_narration(pin, _narrator, animation)
+			EffectFunctions.add_fear_narration_and_effect(pin, _narrator, animation)
 			_add_speaking_pause(animation, _narrator)
 
 func _get_arpeegee_by_file(file: String) -> ArpeegeePinNode:
