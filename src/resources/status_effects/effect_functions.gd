@@ -1,6 +1,14 @@
 class_name EffectFunctions
 extends Node
 
+static func create_fear_status_effect() -> StatusEffect:
+	var status_effect := StatusEffect.new()
+	status_effect.tag = StatusEffectTag.Fear
+	status_effect.is_ailment = false
+	status_effect.stack_count = 1
+	
+	return status_effect
+
 static func create_burn_status_effect(attack_based: int) -> StatusEffect:
 	var status_effect := StatusEffect.new()
 	status_effect.is_ailment = true
