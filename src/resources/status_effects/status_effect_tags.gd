@@ -35,4 +35,5 @@ enum {
 	BlobboAbsorbedPunch,
 	HeartbrokenKoboldio,
 	BananBruised,
+	MushboyPostMesmerized,
 }
