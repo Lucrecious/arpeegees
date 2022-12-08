@@ -16,6 +16,16 @@ var _pin_actions: PinActions
 func run_start_turn_effect() -> void:
 	assert(actioner and sprite_switcher and target and hint_position)
 	
+	var tween := get_tree().create_tween()
+	if not target or not is_instance_valid(target):
+		ActionUtils.add_text_trigger(tween, self, 'NARRATOR_CHAKIRA_PANCHI_FAILED')
+		tween.tween_interval(0.35)
+		tween.tween_callback(sprite_switcher, 'swap_map', ['powerup', 'idle'])
+		tween.tween_callback(sprite_switcher, 'change', ['idle'])
+		
+		tween.tween_callback(self, 'emit_signal', ['start_turn_effect_finished'])
+		return
+	
 	var sounds := NodE.get_child_by_name(actioner, 'Sounds')
 	
 	_pin_actions = NodE.get_child(actioner, PinActions) as PinActions
@@ -29,7 +39,6 @@ func run_start_turn_effect() -> void:
 	
 	var side := -int(sign(relative.x))
 	
-	var tween := get_tree().create_tween()
 	tween.tween_callback(Sounds, 'play', ['Dash1'])
 	
 	position += relative

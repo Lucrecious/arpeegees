@@ -79,7 +79,7 @@ class BounceStartTurnEffect extends Node:
 			
 			animation.tween_interval(1.0)
 		else:
-			print_debug('add some text here that bounce has failed')
+			ActionUtils.add_text_trigger(animation, self, 'NARRATOR_MUSHBOY_BOUNCE_FAILED')
 		
 		animation.tween_callback(sprite_switcher, 'change', ['idle'])
 		
