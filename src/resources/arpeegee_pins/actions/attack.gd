@@ -92,17 +92,17 @@ func run(actioner: Node2D, target: ArpeegeePinNode, object: Object, callback: St
 	
 	if physical:
 		var attack_amount := ActionUtils.damage_with_factor(modified_stats.attack, attack_factor)
-		if pin_action().resource_path.get_file() == 'desperate_staff_whack_white_mage.tres':
+		if pin_action_is_filename('desperate_staff_whack_white_mage.tres'):
 			if randf() < 0.08:
 				attack_amount = 100_000
 				white_mage_instakill = true
 		
-		elif pin_action().resource_path.get_file() == 'desperate_headbutt_hatless_mushboy.tres':
+		elif pin_action_is_filename('desperate_headbutt_hatless_mushboy.tres'):
 			if randf() < 0.1:
 				attack_amount = ActionUtils.damage_with_factor(attack_amount, 8.0)
 				hatless_mushboy_hits_critical = true
 				
-		elif pin_action().resource_path.get_file() == 'struggle_mushboy_deflated.tres':
+		elif pin_action_is_filename('struggle_mushboy_deflated.tres'):
 			var chance := randf()
 			Logger.info('Mushboy used struggle and rolled %.2f' % [chance])
 			if chance < 0.2:
@@ -118,7 +118,7 @@ func run(actioner: Node2D, target: ArpeegeePinNode, object: Object, callback: St
 		
 		attacked_physically = hit_type != ActionUtils.HitType.Miss
 		
-		if pin_action().resource_path.get_file() == 'desperate_kick_hatless_mushboy.tres':
+		if pin_action_is_filename('desperate_kick_hatless_mushboy.tres'):
 			if hit_type != ActionUtils.HitType.Miss and randf() < 0.1:
 				var status_effects_list := NodE.get_child(target, StatusEffectsList) as StatusEffectsList
 				tween.tween_callback(status_effects_list, 'add_instance', [_create_desperate_kick_effect()])
@@ -134,7 +134,7 @@ func run(actioner: Node2D, target: ArpeegeePinNode, object: Object, callback: St
 	tween.tween_interval(.4)
 	tween.tween_callback(sprite_switcher, 'change', ['idle'])
 
-	if pin_action().resource_path.get_file() == 'bard_mandolin_swing.tres':
+	if pin_action_is_filename('bard_mandolin_swing.tres'):
 			if _times_used < 4:
 				ActionUtils.add_text_trigger(tween, self, 'NARRATOR_MANDOLIN_BASH_USE_%d' % [_times_used])
 				if _times_used == 3:
@@ -155,15 +155,15 @@ func run(actioner: Node2D, target: ArpeegeePinNode, object: Object, callback: St
 		ActionUtils.add_text_trigger(tween, self, 'NARRATOR_STRUGGLE_USE_DAMAGE')
 	
 	if attacked_physically and hatless_mushboy_hits_critical:
-		if pin_action().resource_path.get_file() == 'desperate_headbutt_hatless_mushboy.tres':
+		if pin_action_is_filename('desperate_headbutt_hatless_mushboy.tres'):
 			ActionUtils.add_text_trigger(tween, self, 'NARRATOR_DESPERATE_HEADBUTT_USE_CRITICAL')
-		elif pin_action().resource_path.get_file() == 'desperate_kick_hatless_mushboy.tres':
+		elif pin_action_is_filename('desperate_kick_hatless_mushboy.tres'):
 			ActionUtils.add_text_trigger(tween, self, 'NARRATOR_DESPERATE_KICK_USE_CRITICAL')
 	
 	ActionUtils.add_walk(tween, actioner,
 			actioner.global_position + relative, actioner.global_position, 15.0, 5)
 	
-	if pin_action().resource_path.get_file() == 'wing_attack_harpy.tres':
+	if pin_action_is_filename('wing_attack_harpy.tres'):
 		if attacked_physically and randf() < 0.25:
 			var status_effects_list := NodE.get_child(target, StatusEffectsList) as StatusEffectsList
 			tween.tween_callback(status_effects_list, 'add_instance', [_create_wing_attack_effect()])
