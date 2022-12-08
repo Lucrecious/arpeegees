@@ -23,6 +23,9 @@ func pin_action() -> PinAction:
 	assert(pin_action is PinAction)
 	return pin_action as PinAction
 
+func pin_action_is_filename(filename: String) -> bool:
+	return pin_action().resource_path.get_file() == filename
+
 func times_used() -> int:
 	return _times_used
 
@@ -82,6 +85,11 @@ func run(actioner: Node2D, target: ArpeegeePinNode, object: Object, callback: St
 	var attacked_physically := false
 	var hatless_mushboy_hits_critical := false
 	
+	var add_banan_in_love_text := false
+	if (pin_action_is_filename('desperate_staff_whack_white_mage.tres') or pin_action_is_filename('useless_staff_whack_white_mage.tres'))\
+			and target.filename.get_file() == 'banan.tscn':
+		add_banan_in_love_text = true
+	
 	if physical:
 		var attack_amount := ActionUtils.damage_with_factor(modified_stats.attack, attack_factor)
 		if pin_action().resource_path.get_file() == 'desperate_staff_whack_white_mage.tres':
@@ -136,7 +144,11 @@ func run(actioner: Node2D, target: ArpeegeePinNode, object: Object, callback: St
 	else:
 		if not narration_key.empty():
 			ActionUtils.add_text_trigger(tween, self, narration_key)
-
+	
+	if not get_meta('banan_love_text_done', false) and attacked_physically and add_banan_in_love_text:
+		set_meta('banan_love_text_done', true)
+		ActionUtils.add_text_trigger(tween, self, 'NARRATOR_BANAN_GETS_HIT_BY_STAFF')
+	
 	if white_mage_instakill:
 		ActionUtils.add_text_trigger(tween, self, 'NARRATOR_DESPERATE_STAFF_WHACK_KILL')
 	elif attacked_physically and deflated_mushboy_struggle_extra_damage:
