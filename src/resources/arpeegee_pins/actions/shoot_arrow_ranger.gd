@@ -50,9 +50,16 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	
 	var attack_amount := modified_stats.attack
 	
-	var hit_type := ActionUtils.add_attack(animation, actioner, target, attack_amount)
+	var cap_remover := NodE.get_child(target, CapRemover, false) as CapRemover
+	
+	var hit_type := ActionUtils.HitType.Miss as int
+	if not cap_remover:
+		hit_type = ActionUtils.add_attack(animation, actioner, target, attack_amount)
+	
 	animation.tween_callback(VFX, 'physical_impactv', [actioner, target_position])
 	
+	if cap_remover:
+		cap_remover.add_animation_on_hit(animation, self)
 	
 	if type == Type.OnFire and hit_type != ActionUtils.HitType.Miss:
 		var burn_status_effect := EffectFunctions.create_burn_status_effect(modified_stats.attack)
@@ -66,12 +73,13 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 		var ghostsword := get_parent().get_node('MagicGhostSword/GhostSword')
 		ghostsword.add_attack(animation, actioner, [target], 1)
 	
-	if type == Type.Regular:
-		ActionUtils.add_text_trigger(animation, self, 'NARRATOR_ARROW_ZIP_USE')
-	elif type == Type.OnFire:
-		ActionUtils.add_text_trigger(animation, self, 'NARRATOR_ARROWS_EN_FUEGO_USE')
-		if hit_type != ActionUtils.HitType.Miss:
-			ActionUtils.add_text_trigger(animation, self, 'NARRATOR_ARROWS_EN_FUEGO_HIT_ENEMY')
+	if not cap_remover:
+		if type == Type.Regular:
+			ActionUtils.add_text_trigger(animation, self, 'NARRATOR_ARROW_ZIP_USE')
+		elif type == Type.OnFire:
+			ActionUtils.add_text_trigger(animation, self, 'NARRATOR_ARROWS_EN_FUEGO_USE')
+			if hit_type != ActionUtils.HitType.Miss:
+				ActionUtils.add_text_trigger(animation, self, 'NARRATOR_ARROWS_EN_FUEGO_HIT_ENEMY')
 	
 	animation.tween_interval(0.75)
 	animation.tween_callback(sprite_switcher, 'change', ['idle'])

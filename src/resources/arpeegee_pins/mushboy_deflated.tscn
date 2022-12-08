@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/resources/arpeegee_pins/mushboy_deflated.tres" type="Resource" id=2]
@@ -12,6 +12,11 @@
 [ext_resource path="res://assets/shaders/wobble_noise.tres" type="Texture" id=10]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/attack.gd" type="Script" id=11]
 [ext_resource path="res://src/resources/actions/struggle_mushboy_deflated.tres" type="Resource" id=12]
+[ext_resource path="res://src/resources/arpeegee_pins/components/cap_remover.gd" type="Script" id=13]
+[ext_resource path="res://src/resources/arpeegee_pins/hatless_mushboy.tscn" type="PackedScene" id=14]
+[ext_resource path="res://src/resources/arpeegee_pins/components/transformer.gd" type="Script" id=15]
+[ext_resource path="res://assets/sprites/mushboy/mushboy_hit_hatless.png" type="Texture" id=16]
+[ext_resource path="res://assets/sprites/mushboy/mushboy_idle_nohat.PNG" type="Texture" id=17]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 9 )
@@ -36,7 +41,14 @@ defence = 3
 magic_defence = 3
 evasion = 2
 
-[node name="Sprites" type="Node2D" parent="." index="13"]
+[node name="Transformer" type="Node" parent="." index="13"]
+script = ExtResource( 15 )
+transform_scene = ExtResource( 14 )
+
+[node name="CapRemover" type="Node" parent="." index="14"]
+script = ExtResource( 13 )
+
+[node name="Sprites" type="Node2D" parent="." index="15"]
 material = SubResource( 1 )
 script = ExtResource( 5 )
 
@@ -47,7 +59,23 @@ scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 3 )
 centered = false
 
-[node name="Hurt" type="Sprite" parent="Sprites" index="1"]
+[node name="HatlessHurt" type="Sprite" parent="Sprites" index="1"]
+visible = false
+use_parent_material = true
+position = Vector2( -113, -216 )
+scale = Vector2( 0.333333, 0.333333 )
+texture = ExtResource( 16 )
+centered = false
+
+[node name="HatlessIdle" type="Sprite" parent="Sprites" index="2"]
+visible = false
+use_parent_material = true
+position = Vector2( -114, -208 )
+scale = Vector2( 0.333333, 0.333333 )
+texture = ExtResource( 17 )
+centered = false
+
+[node name="Hurt" type="Sprite" parent="Sprites" index="3"]
 visible = false
 use_parent_material = true
 position = Vector2( -83, -166 )
@@ -55,7 +83,7 @@ scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 6 )
 centered = false
 
-[node name="Headbutt" type="Sprite" parent="Sprites" index="2"]
+[node name="Headbutt" type="Sprite" parent="Sprites" index="4"]
 visible = false
 use_parent_material = true
 position = Vector2( -78, -159 )
@@ -63,7 +91,7 @@ scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 7 )
 centered = false
 
-[node name="Actions" type="Node2D" parent="." index="14"]
+[node name="Actions" type="Node2D" parent="." index="16"]
 script = ExtResource( 4 )
 
 [node name="SloppySlap" type="Node2D" parent="Actions" index="0"]
