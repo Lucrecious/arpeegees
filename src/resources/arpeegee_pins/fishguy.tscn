@@ -83,7 +83,15 @@ scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 2 )
 centered = false
 
-[node name="Stab" type="Sprite" parent="Sprites" index="1"]
+[node name="Dance" type="Sprite" parent="Sprites" index="1"]
+visible = false
+use_parent_material = true
+position = Vector2( -168, -288 )
+scale = Vector2( 0.333333, 0.333333 )
+texture = ExtResource( 6 )
+centered = false
+
+[node name="Stab" type="Sprite" parent="Sprites" index="2"]
 visible = false
 use_parent_material = true
 position = Vector2( -152, -256 )
@@ -91,7 +99,7 @@ scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 5 )
 centered = false
 
-[node name="Hit" type="Sprite" parent="Sprites" index="2"]
+[node name="Hit" type="Sprite" parent="Sprites" index="3"]
 visible = false
 use_parent_material = true
 position = Vector2( -138, -245 )
@@ -99,7 +107,7 @@ scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 4 )
 centered = false
 
-[node name="Win" type="Sprite" parent="Sprites" index="3"]
+[node name="Win" type="Sprite" parent="Sprites" index="4"]
 visible = false
 use_parent_material = true
 position = Vector2( -168, -288 )

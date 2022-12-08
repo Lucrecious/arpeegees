@@ -5,7 +5,7 @@ signal text_triggered(translation_key)
 func pin_action() -> PinAction:
 	return preload('res://src/resources/actions/four_chord_strum.tres')
 
-func run(actioner: Node2D, object: Object, callback: String) -> void:
+func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> void:
 	var actions := NodE.get_child(actioner, PinActions) as PinActions
 	var heckin_good_song := NodE.get_child(actions, HeckinGoodSongPinAction) as HeckinGoodSongPinAction
 	var root_sprite := Components.root_sprite(actioner)
@@ -42,6 +42,9 @@ func run(actioner: Node2D, object: Object, callback: String) -> void:
 	skew_stepper.finish()
 	
 	ActionUtils.add_text_trigger(animation, self, 'NARRATOR_FOUR_CHORD_STRUM_USE_1')
+	
+	for t in targets:
+		EffectFunctions.add_dance_frame_and_narration(t, self, animation)
 	
 	animation.tween_callback(Music, 'unpause_fade_in')
 	

@@ -19,7 +19,32 @@ static func add_banan_in_love_narration_and_effect(banan: ArpeegeePinNode, white
 	animation.tween_callback(sprite_switcher, 'swap_map', ['idle', 'love'])
 	
 	animation.tween_callback(narrator, 'speak_tr', ['NARRATOR_BANAN_LOVES_STAFF', true])
+
+static func add_dance_frame_and_narration(target: ArpeegeePinNode, action_node: Node, animation: SceneTreeTween) -> void:
+	if target.get_meta('dancing_frame_from_bard', false):
+		return
 	
+	var file := target.filename.get_file() as String
+	if file == 'fishguy.tscn' or file == 'harpy.tscn':
+		target.set_meta('dancing_frame_from_bard', true)
+		
+		var target_sprite_switcher := NodE.get_child(target, SpriteSwitcher) as SpriteSwitcher
+		animation.tween_callback(target_sprite_switcher, 'swap_map', ['idle', 'dance'])
+		
+		if file == 'fishguy.tscn':
+			ActionUtils.add_text_trigger(animation, action_node, 'NARRATOR_FISHGUY_DANCES_TO_BARD_MUSIC')
+		elif file == 'harpy.tscn':
+			ActionUtils.add_text_trigger(animation, action_node, 'NARRATOR_HARPY_DANCES_TO_BARD_MUSIC')
+	
+	elif file == 'banan.tscn':
+		target.set_meta('dancing_frame_from_bard', true)
+		
+		var banan_sprite_switcher := NodE.get_child(target, SpriteSwitcher) as SpriteSwitcher
+		animation.tween_callback(banan_sprite_switcher, 'swap_map', ['idle', 'love'])
+		animation.tween_callback(banan_sprite_switcher, 'swap_map', ['idle_bruised', 'love_bruised'])
+		animation.tween_callback(banan_sprite_switcher, 'swap_map', ['idle_fully_bruised', 'love_fully_bruised'])
+		
+		ActionUtils.add_text_trigger(animation, action_node, 'NARRATOR_BANAN_DANCES_TO_BARD_MUSIC')
 
 static func add_fear_narration_and_effect(arpeegee: ArpeegeePinNode, narrator: NarratorUI, animation: SceneTreeTween) -> void:
 	animation.tween_interval(0.5)

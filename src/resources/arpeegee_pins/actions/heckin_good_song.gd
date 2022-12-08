@@ -76,11 +76,16 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 	elif type == Type.AnOkaySong:
 		ActionUtils.add_text_trigger(animation, self, 'NARRATOR_AN_OKAY_SONG_NAME_USE')
 	
+	if type == Type.HeckinGoodSong:
+		for t in targets:
+			EffectFunctions.add_dance_frame_and_narration(t, self, animation)
+	
 	animation.tween_callback(Music, 'unpause_fade_in')
 	
 	animation.tween_callback(sprite_switcher, 'change', ['idle'])
 	
 	animation.tween_callback(object, callback)
+
 
 func _add_explosion(animation: SceneTreeTween, explosion_parent: Node2D) -> void:
 	var explosion := VFX.note_explosion(false)

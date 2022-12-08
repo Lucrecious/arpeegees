@@ -6,5 +6,5 @@
 script = ExtResource( 1 )
 nice_name = "FOUR_CHORD_STRUM_ACTION_NAME"
 description = ""
-target_type = 0
+target_type = 2
 is_special = false

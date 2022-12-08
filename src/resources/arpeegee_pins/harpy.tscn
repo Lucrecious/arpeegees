@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/sprites/harpy/harpy_idle.png" type="Texture" id=2]
@@ -32,6 +32,7 @@
 [ext_resource path="res://assets/sounds/heal_harpy.mp3" type="AudioStream" id=30]
 [ext_resource path="res://assets/shaders/wobble_noise.tres" type="Texture" id=31]
 [ext_resource path="res://assets/sounds/gust_hit_harpy.mp3" type="AudioStream" id=32]
+[ext_resource path="res://assets/sprites/harpy/harpy_happy.png" type="Texture" id=33]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 6 )
@@ -77,7 +78,15 @@ scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 2 )
 centered = false
 
-[node name="DiveHead" type="Sprite" parent="Sprites" index="1"]
+[node name="Dance" type="Sprite" parent="Sprites" index="1"]
+visible = false
+use_parent_material = true
+position = Vector2( -203, -253 )
+scale = Vector2( 0.333333, 0.333333 )
+texture = ExtResource( 33 )
+centered = false
+
+[node name="DiveHead" type="Sprite" parent="Sprites" index="2"]
 visible = false
 use_parent_material = true
 position = Vector2( -225, -287 )
@@ -85,7 +94,7 @@ scale = Vector2( 0.333, 0.333 )
 texture = ExtResource( 4 )
 centered = false
 
-[node name="DiveUp" type="Sprite" parent="Sprites" index="2"]
+[node name="DiveUp" type="Sprite" parent="Sprites" index="3"]
 visible = false
 use_parent_material = true
 position = Vector2( -8, 225 )
@@ -94,7 +103,7 @@ scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 4 )
 centered = false
 
-[node name="DiveClaws" type="Sprite" parent="Sprites" index="3"]
+[node name="DiveClaws" type="Sprite" parent="Sprites" index="4"]
 visible = false
 use_parent_material = true
 position = Vector2( -229, -274 )
@@ -102,7 +111,7 @@ scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 15 )
 centered = false
 
-[node name="WingAttack" type="Sprite" parent="Sprites" index="4"]
+[node name="WingAttack" type="Sprite" parent="Sprites" index="5"]
 visible = false
 use_parent_material = true
 position = Vector2( -229, -274 )
@@ -110,7 +119,7 @@ scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 17 )
 centered = false
 
-[node name="WingGust" type="Sprite" parent="Sprites" index="5"]
+[node name="WingGust" type="Sprite" parent="Sprites" index="6"]
 visible = false
 use_parent_material = true
 position = Vector2( -215, -271 )
@@ -118,7 +127,7 @@ scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 21 )
 centered = false
 
-[node name="HitAndDeath" type="Sprite" parent="Sprites" index="6"]
+[node name="HitAndDeath" type="Sprite" parent="Sprites" index="7"]
 visible = false
 use_parent_material = true
 position = Vector2( -216, -266 )
@@ -126,7 +135,7 @@ scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 5 )
 centered = false
 
-[node name="Win" type="Sprite" parent="Sprites" index="7"]
+[node name="Win" type="Sprite" parent="Sprites" index="8"]
 visible = false
 use_parent_material = true
 position = Vector2( -154, -269 )
