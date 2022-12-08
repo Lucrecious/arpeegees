@@ -9,6 +9,18 @@ static func create_fear_status_effect() -> StatusEffect:
 	
 	return status_effect
 
+static func add_banan_in_love_narration_and_effect(banan: ArpeegeePinNode, white_mage: ArpeegeePinNode, narrator: NarratorUI, animation: SceneTreeTween) -> void:
+	animation.tween_interval(0.5)
+	
+	var sprite_switcher := NodE.get_child(banan, SpriteSwitcher) as SpriteSwitcher
+	
+	animation.tween_callback(sprite_switcher, 'swap_map', ['idle_bruised', 'love_bruised'])
+	animation.tween_callback(sprite_switcher, 'swap_map', ['idle_fully_bruised', 'love_fully_bruised'])
+	animation.tween_callback(sprite_switcher, 'swap_map', ['idle', 'love'])
+	
+	animation.tween_callback(narrator, 'speak_tr', ['NARRATOR_BANAN_LOVES_STAFF', true])
+	
+
 static func add_fear_narration_and_effect(arpeegee: ArpeegeePinNode, narrator: NarratorUI, animation: SceneTreeTween) -> void:
 	animation.tween_interval(0.5)
 	

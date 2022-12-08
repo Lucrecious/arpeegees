@@ -206,11 +206,25 @@ func _do_start_battle_effects() -> void:
 	
 	_add_fear_effects(tween)
 	
+	_add_banan_effects(tween)
+	
 	tween.tween_callback(self, '_start_battle', [nodes])
 
 func _add_speaking_pause(tween: SceneTreeTween, narrator: NarratorUI) -> void:
 	TweenExtension.pause_until_signal_if_condition(tween, narrator,
 			'speaking_ended', _narrator, 'is_speaking')
+
+func _add_banan_effects(animation: SceneTreeTween) -> void:
+	var banan := _get_arpeegee_by_file('banan.tscn')
+	if not banan:
+		return
+	
+	var white_mage := _get_arpeegee_by_file('white_mage.tscn')
+	if not white_mage:
+		return
+	
+	EffectFunctions.add_banan_in_love_narration_and_effect(banan, white_mage, _narrator, animation)
+	_add_speaking_pause(animation, _narrator)
 
 func _add_fear_effects(animation: SceneTreeTween) -> void:
 	if _get_arpeegee_by_file('hunter.tscn') != null:
