@@ -71,6 +71,12 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 	else:
 		assert(false)
 	
+	var mesmerizeds := get_tree().get_nodes_in_group('mushboy_mesmerized')
+	if type == Type.RaiseEarth and not mesmerizeds.empty():
+		for mesmerized in mesmerizeds:
+			animation.tween_callback(mesmerized, 'add_mesmerize')
+			ActionUtils.add_text_trigger(animation, self, 'NARRATOR_MUSHBOY_MESMERIZED_BY_ROCKS')
+	
 	_uses += 1
 	
 	animation.tween_interval(0.4)

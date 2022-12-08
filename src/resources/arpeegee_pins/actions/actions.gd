@@ -65,6 +65,18 @@ func run_action_with_targets(action_name: String, targets: Array, multiple: bool
 	
 	var can_attack := true
 	
+	if _parent.filename.get_file() == 'mushboy.tscn':
+		var mesmerized := NodE.get_child(_parent, Mesmerized, false) as Mesmerized
+		if mesmerized and mesmerized.is_mesmerized() and randf() < 0.5:
+			can_attack = false
+			
+			var mesmerized_animation := create_tween()
+			mesmerized_animation.tween_interval(0.35)
+			
+			ActionUtils.add_text_trigger(mesmerized_animation, node, 'NARRATOR_MUSHBOY_CANT_ATTACK_MESMERIZED')
+			
+			mesmerized_animation.tween_callback(self, '_on_action_node_finished')
+	
 	var parent_effects_list := NodE.get_child(_parent, StatusEffectsList) as StatusEffectsList
 	if parent_effects_list.count_tags(StatusEffectTag.Fear) and randf() < 0.5:
 		can_attack = false

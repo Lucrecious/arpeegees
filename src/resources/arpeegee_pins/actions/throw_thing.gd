@@ -97,10 +97,15 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	
 		
 	if hit_type != ActionUtils.HitType.Miss:
-		var bruiser := NodE.get_child(target, Bruiser) as Bruiser
+		var bruiser := NodE.get_child(target, Bruiser, false) as Bruiser
 		if bruiser:
 			animation.tween_callback(bruiser, 'bruise')
 			ActionUtils.add_text_trigger(animation, self, 'NARRATOR_BANAN_BRUISED_BY_ROCKS')
+		
+		var mesmerizeds := get_tree().get_nodes_in_group('mushboy_mesmerized')
+		for m in mesmerizeds:
+			animation.tween_callback(m, 'remove_mesmerize')
+			ActionUtils.add_text_trigger(animation, self, 'NARRATOR_MUSHBOY_ATTACKED_BY_GEOMANCER_MESMERIZED')
 	
 	_used = true
 	

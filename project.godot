@@ -295,6 +295,11 @@ _global_script_classes=[ {
 "path": "res://lut/extension/math_extension.gd"
 }, {
 "base": "Node",
+"class": "Mesmerized",
+"language": "GDScript",
+"path": "res://src/resources/arpeegee_pins/components/mesmerized.gd"
+}, {
+"base": "Node",
 "class": "ModifiedPinStats",
 "language": "GDScript",
 "path": "res://src/resources/arpeegee_pins/components/modified_stats.gd"
@@ -722,6 +727,7 @@ _global_script_class_icons={
 "LevelEditor2Commands": "",
 "MainNode": "",
 "MathE": "",
+"Mesmerized": "",
 "ModifiedPinStats": "",
 "Move4": "",
 "Move4Directions": "",
