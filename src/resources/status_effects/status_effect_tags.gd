@@ -34,4 +34,5 @@ enum {
 	Fear,
 	BlobboAbsorbedPunch,
 	HeartbrokenKoboldio,
+	BananBruised,
 }

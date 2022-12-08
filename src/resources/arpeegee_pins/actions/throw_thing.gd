@@ -95,6 +95,13 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 		else:
 			ActionUtils.add_text_trigger(animation, self, 'NARRATOR_THROW_A_ROCK_WITH_MAGIC_USE')
 	
+		
+	if hit_type != ActionUtils.HitType.Miss:
+		var bruiser := NodE.get_child(target, Bruiser) as Bruiser
+		if bruiser:
+			animation.tween_callback(bruiser, 'bruise')
+			ActionUtils.add_text_trigger(animation, self, 'NARRATOR_BANAN_BRUISED_BY_ROCKS')
+	
 	_used = true
 	
 	animation.tween_callback(object, callback)

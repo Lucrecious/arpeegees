@@ -54,6 +54,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/game/battle.gd"
 }, {
+"base": "Node",
+"class": "Bruiser",
+"language": "GDScript",
+"path": "res://src/resources/arpeegee_pins/components/bruiser.gd"
+}, {
 "base": "IButtonInput",
 "class": "ButtonInput",
 "language": "GDScript",
@@ -669,6 +674,7 @@ _global_script_class_icons={
 "BananSlippable": "",
 "BattleLayout": "",
 "BattleScreen": "",
+"Bruiser": "",
 "ButtonInput": "",
 "Camera3Pivot": "",
 "CameraFollow": "",

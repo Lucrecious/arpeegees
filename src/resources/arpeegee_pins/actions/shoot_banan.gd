@@ -2,12 +2,8 @@ extends Node2D
 
 signal text_triggered(narration_key)
 
-var bruised_level := 0
-
 func pin_action() -> PinAction:
 	return preload('res://src/resources/actions/shoot_banan.tres') as PinAction
-
-const bruising_sprites := ['idle', 'hurt', 'headbutt', 'shootbanan', 'appealing']
 
 func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> void:
 	var animation := create_tween()
@@ -51,13 +47,9 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	
 	animation.tween_property(banan, 'global_position', banan_original_position, 0.3)
 	
-	for n in bruising_sprites:
-		if bruised_level == 0:
-			animation.tween_callback(sprite_switcher, 'swap_map', [n, '%s_bruised' % n])
-		elif bruised_level == 1:
-			animation.tween_callback(sprite_switcher, 'swap_map', [n, '%s_fully_bruised' % n])
+	var bruiser := NodE.get_child(actioner, Bruiser) as Bruiser
+	animation.tween_callback(bruiser, 'bruise')
 	
-	bruised_level += 1
 	animation.tween_callback(sprite_switcher, 'change', ['idle'])
 	
 	ActionUtils.add_text_trigger(animation, self, 'NARRATOR_SHOOT_BANAN_USE')
