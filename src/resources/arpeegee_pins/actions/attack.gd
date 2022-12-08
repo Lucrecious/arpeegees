@@ -85,11 +85,15 @@ func run(actioner: Node2D, target: ArpeegeePinNode, object: Object, callback: St
 	var attacked_physically := false
 	var hatless_mushboy_hits_critical := false
 	
+	var target_file := target.filename.get_file()
+	
 	var add_banan_in_love_text := false
 	if (pin_action_is_filename('desperate_staff_whack_white_mage.tres') or pin_action_is_filename('useless_staff_whack_white_mage.tres'))\
-			and target.filename.get_file() == 'banan.tscn':
+			and target_file == 'banan.tscn':
 		add_banan_in_love_text = true
 	
+	var banan_chopped := false
+
 	if physical:
 		var attack_amount := ActionUtils.damage_with_factor(modified_stats.attack, attack_factor)
 		if pin_action_is_filename('desperate_staff_whack_white_mage.tres'):
@@ -115,6 +119,14 @@ func run(actioner: Node2D, target: ArpeegeePinNode, object: Object, callback: St
 		else:
 			ActionUtils.add_attack_no_evade(tween, actioner, target, attack_amount)
 			hit_type = ActionUtils.HitType.Hit
+		
+		if hit_type != ActionUtils.HitType.Miss and pin_action_is_filename('heavenly_slash_paladin.tres') and target_file == 'banan.tscn':
+			banan_chopped = true
+			var chopped_transformer := target.get_node('ChoppedTransformer') as Transformer
+			tween.tween_callback(chopped_transformer, 'request_transform')
+			
+			var banan_sprite_switcher := NodE.get_child(target, SpriteSwitcher) as SpriteSwitcher
+			tween.tween_callback(banan_sprite_switcher, 'swap_map', ['idle', 'choppedidle'])
 		
 		attacked_physically = hit_type != ActionUtils.HitType.Miss
 		
@@ -147,6 +159,9 @@ func run(actioner: Node2D, target: ArpeegeePinNode, object: Object, callback: St
 	if not get_meta('banan_love_text_done', false) and attacked_physically and add_banan_in_love_text:
 		set_meta('banan_love_text_done', true)
 		ActionUtils.add_text_trigger(tween, self, 'NARRATOR_BANAN_GETS_HIT_BY_STAFF')
+	
+	if banan_chopped:
+		ActionUtils.add_text_trigger(tween, self, 'NARRATOR_PALADIN_SLICES_BANAN_INTO_CHOPPED_BANAN')
 	
 	var actioner_file := actioner.filename.get_file()
 	if actioner_file == 'paladin.tscn' or actioner_file == 'paladin_no_sword.tscn':

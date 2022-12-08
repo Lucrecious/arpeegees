@@ -55,9 +55,12 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 		tween.tween_callback(VFX, 'physical_impact', [actioner, _impact_hint])
 
 	var modified_stats := NodE.get_child(actioner, ModifiedPinStats) as ModifiedPinStats
+	
+	var hits := {}
 	for t in targets:
 		var attack_amount := ActionUtils.damage_with_factor(modified_stats.attack, attack_factor)
-		ActionUtils.add_attack(tween, actioner, t, attack_amount)
+		var hit_type := ActionUtils.add_attack(tween, actioner, t, attack_amount)
+		hits[t] = hit_type
 
 	ActionUtils.add_shake(tween, actioner, position, Vector2(1, 0), 5.0, .35)
 	tween.tween_interval(.4)
@@ -73,10 +76,21 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 	
 	var actioner_file := actioner.filename.get_file()
 	if actioner_file == 'paladin.tscn' or actioner_file == 'paladin_no_sword.tscn':
+		assert(pin_action().resource_path.get_file() == 'tremendous_slash_paladin.tres')
 		for t in targets:
-			var wont_attack_paladin := NodE.get_child(t, WontAttackPaladin) as WontAttackPaladin
+			var wont_attack_paladin := NodE.get_child(t, WontAttackPaladin, false) as WontAttackPaladin
 			if wont_attack_paladin:
 				wont_attack_paladin.add_post_hit(tween, self)
+			
+			if t.filename.get_file() == 'banan.tscn':
+				if hits[t] != ActionUtils.HitType.Miss:
+					var chopped_transformer := t.get_node('ChoppedTransformer') as Transformer
+					tween.tween_callback(chopped_transformer, 'request_transform')
+					
+					var banan_sprite_switcher := NodE.get_child(t, SpriteSwitcher) as SpriteSwitcher
+					tween.tween_callback(banan_sprite_switcher, 'swap_map', ['idle', 'choppedidle'])
+					
+					ActionUtils.add_text_trigger(tween, self, 'NARRATOR_PALADIN_SLICES_BANAN_INTO_CHOPPED_BANAN')
 	
 	if not attack_frame.empty():
 		tween.tween_callback(sprite_switcher, 'change', ['idle'])
