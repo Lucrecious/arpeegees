@@ -162,7 +162,7 @@ class BurnEffect extends Node:
 		animation.tween_callback(self, 'call_deferred',
 				['emit_signal', 'start_turn_effect_finished'])
 
-static func bright_sparkles(pin: ArpeegeePinNode) -> void:
+static func bright_sparkles(pin: ArpeegeePinNode, boosted: bool) -> void:
 	var status_effect := StatusEffect.new()
 	status_effect.is_ailment = false
 	status_effect.stack_count = 3
@@ -170,7 +170,7 @@ static func bright_sparkles(pin: ArpeegeePinNode) -> void:
 	
 	var modifier := StatModifier.new()
 	modifier.type = StatModifier.Type.Critical
-	modifier.multiplier = 1.5
+	modifier.multiplier = 1.5 * (Constants.HAIR_COMB_SPARKLES_BOOST_MULTIPLIER if boosted else 1.0)
 	
 	status_effect.add_child(modifier)
 	var auras := Aura.create_bright_sparkles_aura()

@@ -210,11 +210,45 @@ func _do_start_battle_effects() -> void:
 	
 	_add_koboldio_paladin_friendly_effects(tween)
 	
+	_add_fishguy_stroking_paladins_hair(tween)
+	
 	tween.tween_callback(self, '_start_battle', [nodes])
 
 func _add_speaking_pause(tween: SceneTreeTween, narrator: NarratorUI) -> void:
 	TweenExtension.pause_until_signal_if_condition(tween, narrator,
 			'speaking_ended', _narrator, 'is_speaking')
+
+func _add_fishguy_stroking_paladins_hair(animation: SceneTreeTween) -> void:
+	var fishguy := _get_arpeegee_by_file('fishguy.tscn')
+	if not fishguy:
+		return
+	
+	var paladin := _get_arpeegee_by_file('paladin.tscn')
+	if not paladin:
+		return
+	
+	animation.tween_interval(0.5)
+	
+	var target_position := ActionUtils.get_closest_adjecent_position(fishguy, paladin) + fishguy.global_position
+	
+	ActionUtils.add_walk(animation, fishguy, fishguy.global_position, target_position, 15.0, 5)
+	
+	var fishguy_sprite_switcher := NodE.get_child(fishguy, SpriteSwitcher) as SpriteSwitcher
+	animation.tween_callback(fishguy_sprite_switcher, 'change', ['dance'])
+	
+	animation.tween_callback(_narrator, 'speak_tr', ['NARRATOR_FISHGUY_STROKES_PALADIN_HAIR', true])
+	_add_speaking_pause(animation, _narrator)
+	
+	animation.tween_interval(0.5)
+	
+	var sparkle_abilities := get_tree().get_nodes_in_group('sparkle_ability')
+	for s in sparkle_abilities:
+		if not s.has_method('boost_from_combing'):
+			return
+		s.boost_from_combing()
+	
+	animation.tween_callback(fishguy_sprite_switcher, 'change', ['idle'])
+	ActionUtils.add_walk(animation, fishguy, target_position, fishguy.global_position, 15.0, 5)
 
 func _add_koboldio_paladin_friendly_effects(animation: SceneTreeTween) -> void:
 	var koboldio := _get_arpeegee_by_file('koboldio.tscn')

@@ -125,6 +125,11 @@ _global_script_classes=[ {
 "path": "res://lut/components/constant_velocity.gd"
 }, {
 "base": "Node",
+"class": "Constants",
+"language": "GDScript",
+"path": "res://src/game/constants.gd"
+}, {
+"base": "Node",
 "class": "Controller",
 "language": "GDScript",
 "path": "res://lut/input/controller.gd"
@@ -203,11 +208,6 @@ _global_script_classes=[ {
 "class": "GenericHitAllEnemiesAttack",
 "language": "GDScript",
 "path": "res://src/resources/arpeegee_pins/actions/multi_attack.gd"
-}, {
-"base": "Node2D",
-"class": "GenericSelfBuffSpell",
-"language": "GDScript",
-"path": "res://src/resources/arpeegee_pins/actions/general_self_buff.gd"
 }, {
 "base": "Node2D",
 "class": "GenericTargetAttack",
@@ -703,6 +703,7 @@ _global_script_class_icons={
 "Component_CaptureCursor": "",
 "Components": "",
 "ConstantVelocity": "",
+"Constants": "",
 "Controller": "",
 "Controller_BindedActions": "",
 "DamageReceiver": "",
@@ -719,7 +720,6 @@ _global_script_class_icons={
 "FuncREf": "",
 "GEometry": "",
 "GenericHitAllEnemiesAttack": "",
-"GenericSelfBuffSpell": "",
 "GenericTargetAttack": "",
 "GooShotTrapAction": "",
 "Gravity": "",

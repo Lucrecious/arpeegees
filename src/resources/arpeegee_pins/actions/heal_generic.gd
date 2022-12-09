@@ -12,6 +12,10 @@ enum Type {
 export(Type) var type := Type.HolySparkles
 export(String) var frame := ''
 
+var _boosted := false
+func boost_from_combing() -> void:
+	_boosted = true
+
 func block() -> void:
 	_is_blocked = true
 
@@ -148,7 +152,7 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 func _heal_targets(targets: Array) -> void:
 	var percent_to_heal := 0.0
 	if type == Type.HolySparkles:
-		percent_to_heal = 0.2
+		percent_to_heal = 0.2 * (Constants.HAIR_COMB_SPARKLES_BOOST_MULTIPLIER if _boosted else 1.0)
 	elif type == Type.Heal3:
 		percent_to_heal = 0.5
 	elif type == Type.ForestLove:

@@ -22,7 +22,7 @@
 [ext_resource path="res://assets/sprites/paladin/paladin_idle.png" type="Texture" id=20]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/grab_sword_paladin_no_sword.gd" type="Script" id=21]
 [ext_resource path="res://src/resources/arpeegee_pins/components/transformer.gd" type="Script" id=22]
-[ext_resource path="res://src/resources/arpeegee_pins/actions/general_self_buff.gd" type="Script" id=23]
+[ext_resource path="res://src/resources/arpeegee_pins/actions/bright_sparkles_paladin.gd" type="Script" id=23]
 [ext_resource path="res://assets/sounds/BRIGHT_SPARKLES_PALADIN.mp3" type="AudioStream" id=24]
 
 [sub_resource type="ShaderMaterial" id=1]
