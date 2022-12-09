@@ -6,5 +6,5 @@
 script = ExtResource( 1 )
 nice_name = "SPLASH_NAME"
 description = ""
-target_type = 0
+target_type = 2
 is_special = false

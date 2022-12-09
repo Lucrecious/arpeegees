@@ -39,4 +39,5 @@ enum {
 	HarpyEnamored,
 	BoostAgainstPaladinWhiteMage,
 	SparkleFromRare,
+	HunterGooedUp,
 }

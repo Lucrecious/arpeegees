@@ -86,6 +86,7 @@ func run(actioner: Node2D, target: ArpeegeePinNode, object: Object, callback: St
 	var hatless_mushboy_hits_critical := false
 	
 	var target_file := target.filename.get_file()
+	var actioner_file := actioner.filename.get_file()
 	
 	var add_banan_in_love_text := false
 	if (pin_action_is_filename('desperate_staff_whack_white_mage.tres') or pin_action_is_filename('useless_staff_whack_white_mage.tres'))\
@@ -93,6 +94,7 @@ func run(actioner: Node2D, target: ArpeegeePinNode, object: Object, callback: St
 		add_banan_in_love_text = true
 	
 	var banan_chopped := false
+	var hunter_gooed_up := false
 
 	if physical:
 		var attack_amount := ActionUtils.damage_with_factor(modified_stats.attack, attack_factor)
@@ -119,6 +121,13 @@ func run(actioner: Node2D, target: ArpeegeePinNode, object: Object, callback: St
 		else:
 			ActionUtils.add_attack_no_evade(tween, actioner, target, attack_amount)
 			hit_type = ActionUtils.HitType.Hit
+		
+		if actioner_file == 'hunter.tscn' and target_file == 'blobbo.tscn':
+			assert(pin_action_is_filename('pounce_owo_hunter.tres'))
+			
+			hunter_gooed_up = true
+			var gooer := NodE.get_child(actioner, HunterGooedUp) as HunterGooedUp
+			tween.tween_callback(gooer, 'enable_goo')
 		
 		if hit_type != ActionUtils.HitType.Miss and pin_action_is_filename('heavenly_slash_paladin.tres') and target_file == 'banan.tscn':
 			banan_chopped = true
@@ -156,6 +165,9 @@ func run(actioner: Node2D, target: ArpeegeePinNode, object: Object, callback: St
 		if not narration_key.empty():
 			ActionUtils.add_text_trigger(tween, self, narration_key)
 	
+	if hunter_gooed_up:
+		ActionUtils.add_text_trigger(tween, self, 'NARRATOR_HUNTER_GOOED_UP_FROM_BLOBBO')
+	
 	if not get_meta('banan_love_text_done', false) and attacked_physically and add_banan_in_love_text:
 		set_meta('banan_love_text_done', true)
 		ActionUtils.add_text_trigger(tween, self, 'NARRATOR_BANAN_GETS_HIT_BY_STAFF')
@@ -163,7 +175,6 @@ func run(actioner: Node2D, target: ArpeegeePinNode, object: Object, callback: St
 	if banan_chopped:
 		ActionUtils.add_text_trigger(tween, self, 'NARRATOR_PALADIN_SLICES_BANAN_INTO_CHOPPED_BANAN')
 	
-	var actioner_file := actioner.filename.get_file()
 	if actioner_file == 'paladin.tscn' or actioner_file == 'paladin_no_sword.tscn':
 		var wont_attack_paladin := NodE.get_child(target, WontAttackPaladin, false) as WontAttackPaladin
 		if wont_attack_paladin:
