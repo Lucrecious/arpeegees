@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/resources/arpeegee_pins/hunter.tres" type="Resource" id=2]
@@ -21,6 +21,10 @@
 [ext_resource path="res://src/resources/arpeegee_pins/actions/hope_around_hunter.gd" type="Script" id=19]
 [ext_resource path="res://assets/sounds/STALK_HUNTER.mp3" type="AudioStream" id=20]
 [ext_resource path="res://assets/sounds/POUNCE_OWO_HUNTER.mp3" type="AudioStream" id=21]
+[ext_resource path="res://assets/sprites/effects/tophat2.png" type="Texture" id=22]
+[ext_resource path="res://src/resources/arpeegee_pins/components/top_hatter.gd" type="Script" id=23]
+[ext_resource path="res://assets/sprites/effects/tophat1.png" type="Texture" id=24]
+[ext_resource path="res://assets/sprites/effects/tophat3.png" type="Texture" id=25]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 14 )
@@ -146,3 +150,24 @@ bus = "SFX"
 [node name="Stalk" type="AudioStreamPlayer" parent="Sounds" index="1"]
 stream = ExtResource( 20 )
 bus = "SFX"
+
+[node name="TopHatter" type="Node2D" parent="." index="15"]
+position = Vector2( -8, -156 )
+script = ExtResource( 23 )
+
+[node name="Hat1" type="Sprite" parent="TopHatter" index="0"]
+visible = false
+scale = Vector2( 0.333, 0.333 )
+texture = ExtResource( 24 )
+
+[node name="Hat2" type="Sprite" parent="TopHatter" index="1"]
+visible = false
+position = Vector2( 0, -15 )
+scale = Vector2( 0.333, 0.333 )
+texture = ExtResource( 22 )
+
+[node name="Hat3" type="Sprite" parent="TopHatter" index="2"]
+visible = false
+position = Vector2( 4, -13 )
+scale = Vector2( 0.333, 0.333 )
+texture = ExtResource( 25 )

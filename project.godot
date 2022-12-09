@@ -455,6 +455,11 @@ _global_script_classes=[ {
 "path": "res://lut/extension/random_extension.gd"
 }, {
 "base": "Node2D",
+"class": "RareSparkles",
+"language": "GDScript",
+"path": "res://src/resources/arpeegee_pins/components/rare_sparkles.gd"
+}, {
+"base": "Node2D",
 "class": "ResolutionSprite",
 "language": "GDScript",
 "path": "res://src/resources/resolution_sprite2d.gd"
@@ -598,6 +603,11 @@ _global_script_classes=[ {
 "class": "TitleScreen",
 "language": "GDScript",
 "path": "res://src/game/title.gd"
+}, {
+"base": "Node2D",
+"class": "TopHatter",
+"language": "GDScript",
+"path": "res://src/resources/arpeegee_pins/components/top_hatter.gd"
 }, {
 "base": "Node",
 "class": "TrEe",
@@ -769,6 +779,7 @@ _global_script_class_icons={
 "REsource": "",
 "RNG": "",
 "RaNdom": "",
+"RareSparkles": "",
 "ResolutionSprite": "",
 "RingBuffer": "",
 "RootSprite": "",
@@ -798,6 +809,7 @@ _global_script_class_icons={
 "TileMapCursor": "",
 "TimEr": "",
 "TitleScreen": "",
+"TopHatter": "",
 "TrEe": "",
 "Transformer": "",
 "TurnBased_Command": "",

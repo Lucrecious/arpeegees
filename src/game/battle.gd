@@ -214,11 +214,50 @@ func _do_start_battle_effects() -> void:
 	
 	_add_monster_boost_if_against_paladin_and_white_mage(tween)
 	
+	_add_hats_if_all_pins_uncommon(tween)
+	
+	_add_sparkles_if_all_pins_rare(tween)
+	
 	tween.tween_callback(self, '_start_battle', [nodes])
 
 func _add_speaking_pause(tween: SceneTreeTween, narrator: NarratorUI) -> void:
 	TweenExtension.pause_until_signal_if_condition(tween, narrator,
 			'speaking_ended', _narrator, 'is_speaking')
+
+func _add_sparkles_if_all_pins_rare(animation: SceneTreeTween) -> void:
+	var pins := _turn_manager.get_pins()
+	for p in pins:
+		var pin := p as ArpeegeePinNode
+		if pin.resource.rarity != ArpeegeePin.Rarity.Rare:
+			return
+	
+	animation.tween_callback(_narrator, 'speak_tr', ['NARRATOR_ALL_PIN_RARE_SPARKLE', true])
+	_add_speaking_pause(animation, _narrator)
+	
+	animation.tween_interval(0.35)
+	for p in pins:
+		var rare_sparkles := NodE.get_child(p, RareSparkles) as RareSparkles
+		animation.tween_callback(rare_sparkles, 'enable')
+
+func _add_hats_if_all_pins_uncommon(animation: SceneTreeTween) -> void:
+	var pins := _turn_manager.get_pins()
+	for p in pins:
+		var pin := p as ArpeegeePinNode
+		if pin.resource.rarity != ArpeegeePin.Rarity.Uncommon:
+			return
+	
+	animation.tween_callback(_narrator, 'speak_tr', ['NARRATOR_ALL_PINS_UNCOMMON_HATS', true])
+	_add_speaking_pause(animation, _narrator)
+	
+	animation.tween_interval(0.35)
+	
+	var pin_indices := range(pins.size())
+	pin_indices.shuffle()
+	for i in pin_indices:
+		var pin := pins[i] as Node
+		var top_hat := NodE.get_child(pin, TopHatter) as TopHatter
+		animation.tween_callback(top_hat, 'enable', [i % 3])
+		
 
 func _add_monster_boost_if_against_paladin_and_white_mage(animation: SceneTreeTween) -> void:
 	var paladin := _get_arpeegee_by_file('paladin.tscn')

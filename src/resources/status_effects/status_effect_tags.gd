@@ -38,4 +38,5 @@ enum {
 	MushboyPostMesmerized,
 	HarpyEnamored,
 	BoostAgainstPaladinWhiteMage,
+	SparkleFromRare,
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/sprites/bard/bard_idle.png" type="Texture" id=2]
@@ -32,6 +32,10 @@
 [ext_resource path="res://assets/sounds/discord_followup_hit2_bard.mp3" type="AudioStream" id=30]
 [ext_resource path="res://assets/sounds/discord_followup_hit3_bard.mp3" type="AudioStream" id=31]
 [ext_resource path="res://assets/sounds/discord_followup_hit1_bard.mp3" type="AudioStream" id=32]
+[ext_resource path="res://src/resources/arpeegee_pins/components/top_hatter.gd" type="Script" id=33]
+[ext_resource path="res://assets/sprites/effects/tophat1.png" type="Texture" id=34]
+[ext_resource path="res://assets/sprites/effects/tophat2.png" type="Texture" id=35]
+[ext_resource path="res://assets/sprites/effects/tophat3.png" type="Texture" id=36]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 7 )
@@ -186,3 +190,25 @@ bus = "SFX"
 [node name="HeckinGoodSong" type="AudioStreamPlayer" parent="Sounds" index="9"]
 stream = ExtResource( 27 )
 bus = "SFX"
+
+[node name="TopHatter" type="Node2D" parent="." index="16"]
+position = Vector2( -7, -154 )
+script = ExtResource( 33 )
+
+[node name="Hat1" type="Sprite" parent="TopHatter" index="0"]
+visible = false
+position = Vector2( 9, 4 )
+scale = Vector2( 0.333, 0.333 )
+texture = ExtResource( 34 )
+
+[node name="Hat2" type="Sprite" parent="TopHatter" index="1"]
+visible = false
+position = Vector2( 9, -18 )
+scale = Vector2( 0.333, 0.333 )
+texture = ExtResource( 35 )
+
+[node name="Hat3" type="Sprite" parent="TopHatter" index="2"]
+visible = false
+position = Vector2( 9, -25 )
+scale = Vector2( 0.333, 0.333 )
+texture = ExtResource( 36 )
