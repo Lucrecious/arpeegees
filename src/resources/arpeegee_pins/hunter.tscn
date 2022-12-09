@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/resources/arpeegee_pins/hunter.tres" type="Resource" id=2]
@@ -25,6 +25,15 @@
 [ext_resource path="res://src/resources/arpeegee_pins/components/top_hatter.gd" type="Script" id=23]
 [ext_resource path="res://assets/sprites/effects/tophat1.png" type="Texture" id=24]
 [ext_resource path="res://assets/sprites/effects/tophat3.png" type="Texture" id=25]
+[ext_resource path="res://assets/sprites/hunter/hunter_win_goo.png" type="Texture" id=26]
+[ext_resource path="res://assets/sprites/hunter/hunter_hit_goo.png" type="Texture" id=27]
+[ext_resource path="res://assets/sprites/hunter/hunter_crouch_goo.png" type="Texture" id=28]
+[ext_resource path="res://assets/sprites/hunter/hunter_pounce_goo.png" type="Texture" id=29]
+[ext_resource path="res://assets/sprites/hunter/hunter_stab2_goo.png" type="Texture" id=30]
+[ext_resource path="res://assets/sprites/hunter/hunter_dead_goo.png" type="Texture" id=31]
+[ext_resource path="res://assets/sprites/hunter/hunter_stab1_goo.png" type="Texture" id=32]
+[ext_resource path="res://assets/sprites/hunter/hunter_idle_goo.PNG" type="Texture" id=33]
+[ext_resource path="res://src/image_resizer_tool.gd" type="Script" id=34]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 14 )
@@ -64,7 +73,15 @@ scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 5 )
 centered = false
 
-[node name="Pounce" type="Sprite" parent="Sprites" index="1"]
+[node name="Idle_Goo" type="Sprite" parent="Sprites" index="1"]
+visible = false
+use_parent_material = true
+position = Vector2( -100, -228 )
+scale = Vector2( 0.095, 0.095 )
+texture = ExtResource( 33 )
+centered = false
+
+[node name="Pounce" type="Sprite" parent="Sprites" index="2"]
 visible = false
 use_parent_material = true
 position = Vector2( -124, -240 )
@@ -72,7 +89,15 @@ scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 7 )
 centered = false
 
-[node name="Hurt" type="Sprite" parent="Sprites" index="2"]
+[node name="Pounce_Goo" type="Sprite" parent="Sprites" index="3"]
+visible = false
+use_parent_material = true
+position = Vector2( -127, -245 )
+scale = Vector2( 0.13, 0.13 )
+texture = ExtResource( 29 )
+centered = false
+
+[node name="Hurt" type="Sprite" parent="Sprites" index="4"]
 visible = false
 use_parent_material = true
 position = Vector2( -108, -202 )
@@ -80,7 +105,15 @@ scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 8 )
 centered = false
 
-[node name="Stalk" type="Sprite" parent="Sprites" index="3"]
+[node name="Hurt_Goo" type="Sprite" parent="Sprites" index="5"]
+visible = false
+use_parent_material = true
+position = Vector2( -112, -213 )
+scale = Vector2( 0.08, 0.08 )
+texture = ExtResource( 27 )
+centered = false
+
+[node name="Stalk" type="Sprite" parent="Sprites" index="6"]
 visible = false
 use_parent_material = true
 position = Vector2( -122, -242 )
@@ -88,7 +121,15 @@ scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 10 )
 centered = false
 
-[node name="Stab1" type="Sprite" parent="Sprites" index="4"]
+[node name="Stalk_Goo" type="Sprite" parent="Sprites" index="7"]
+visible = false
+use_parent_material = true
+position = Vector2( -116, -232 )
+scale = Vector2( 0.12, 0.12 )
+texture = ExtResource( 28 )
+centered = false
+
+[node name="Stab1" type="Sprite" parent="Sprites" index="8"]
 visible = false
 use_parent_material = true
 position = Vector2( -142, -215 )
@@ -96,7 +137,15 @@ scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 6 )
 centered = false
 
-[node name="Stab2" type="Sprite" parent="Sprites" index="5"]
+[node name="Stab1_Goo" type="Sprite" parent="Sprites" index="9"]
+visible = false
+use_parent_material = true
+position = Vector2( -147, -225 )
+scale = Vector2( 0.08, 0.08 )
+texture = ExtResource( 32 )
+centered = false
+
+[node name="Stab2" type="Sprite" parent="Sprites" index="10"]
 visible = false
 use_parent_material = true
 position = Vector2( -140, -214 )
@@ -104,7 +153,15 @@ scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 9 )
 centered = false
 
-[node name="Dead" type="Sprite" parent="Sprites" index="6"]
+[node name="Stab2_Goo" type="Sprite" parent="Sprites" index="11"]
+visible = false
+use_parent_material = true
+position = Vector2( -143, -223 )
+scale = Vector2( 0.08, 0.08 )
+texture = ExtResource( 30 )
+centered = false
+
+[node name="Dead" type="Sprite" parent="Sprites" index="12"]
 visible = false
 use_parent_material = true
 position = Vector2( -120, -183 )
@@ -112,13 +169,33 @@ scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 11 )
 centered = false
 
-[node name="Win" type="Sprite" parent="Sprites" index="7"]
+[node name="Dead_Goo" type="Sprite" parent="Sprites" index="13"]
+visible = false
+use_parent_material = true
+position = Vector2( -122, -189 )
+scale = Vector2( 0.08, 0.08 )
+texture = ExtResource( 31 )
+centered = false
+
+[node name="Win" type="Sprite" parent="Sprites" index="14"]
 visible = false
 use_parent_material = true
 position = Vector2( -100, -207 )
 scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 12 )
 centered = false
+
+[node name="Win_Goo" type="Sprite" parent="Sprites" index="15"]
+visible = false
+use_parent_material = true
+position = Vector2( -103, -214 )
+scale = Vector2( 0.08, 0.08 )
+texture = ExtResource( 26 )
+centered = false
+
+[node name="ImageResizerTool" type="Node" parent="Sprites" index="16"]
+script = ExtResource( 34 )
+_onlys = PoolStringArray( "Idle_Goo", "Pounce_Goo", "Hurt_Goo", "Stalk_Goo", "Stab1_Goo", "Stab2_Goo", "Dead_Goo", "Win_Goo" )
 
 [node name="Actions" type="Node2D" parent="." index="13"]
 script = ExtResource( 3 )
