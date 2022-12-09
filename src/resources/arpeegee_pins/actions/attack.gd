@@ -31,7 +31,7 @@ func times_used() -> int:
 
 func run(actioner: Node2D, target: ArpeegeePinNode, object: Object, callback: String) -> void:
 	if target.filename.get_file() == 'blobbo.tscn' and pin_action().resource_path.get_file() == 'heavenly_slash_paladin.tres':
-		if randf() < 0.5:
+		if randf() < 0.1:
 			_run_blobbo_steals_sword(actioner, target, object, callback)
 			return
 	
@@ -284,5 +284,7 @@ func _run_blobbo_steals_sword(actioner: ArpeegeePinNode, target: ArpeegeePinNode
 	animation.tween_callback(blobbo_sprite_switcher, 'change', ['swordstuck'])
 	
 	ActionUtils.add_walk(animation, actioner, target_position, actioner.global_position, 15, 5)
+	
+	ActionUtils.add_text_trigger(animation, self, 'NARRATOR_PALADIN_GIVES_BLOBBO_SWORD')
 	
 	animation.tween_callback(object, callback)
