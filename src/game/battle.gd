@@ -212,11 +212,52 @@ func _do_start_battle_effects() -> void:
 	
 	_add_fishguy_stroking_paladins_hair(tween)
 	
+	_add_monster_boost_if_against_paladin_and_white_mage(tween)
+	
 	tween.tween_callback(self, '_start_battle', [nodes])
 
 func _add_speaking_pause(tween: SceneTreeTween, narrator: NarratorUI) -> void:
 	TweenExtension.pause_until_signal_if_condition(tween, narrator,
 			'speaking_ended', _narrator, 'is_speaking')
+
+func _add_monster_boost_if_against_paladin_and_white_mage(animation: SceneTreeTween) -> void:
+	var paladin := _get_arpeegee_by_file('paladin.tscn')
+	if not paladin:
+		return
+	
+	var white_mage := _get_arpeegee_by_file('white_mage.tscn')
+	if not white_mage:
+		return
+	
+	animation.tween_interval(0.5)
+	
+	for n in _turn_manager.get_npcs():
+		var status_effect := StatusEffect.new()
+		status_effect.is_ailment = false
+		status_effect.stack_count = 1
+		status_effect.tag = StatusEffectTag.BoostAgainstPaladinWhiteMage
+		
+		var attack := _create_stat_modifier_multiplier(StatModifier.Type.Attack, 1.5)
+		var defence := _create_stat_modifier_multiplier(StatModifier.Type.Defence, 1.5)
+		var attack_magic := _create_stat_modifier_multiplier(StatModifier.Type.MagicAttack, 1.5)
+		var defence_magic := _create_stat_modifier_multiplier(StatModifier.Type.MagicDefence, 1.5)
+		
+		NodE.add_children(status_effect, [attack, defence, attack_magic, defence_magic])
+		
+		var effects_list := NodE.get_child(n, StatusEffectsList)
+		animation.tween_callback(effects_list, 'add_instance', [status_effect])
+		
+		animation.tween_interval(0.35)
+	
+	animation.tween_callback(_narrator, 'speak_tr', ['NARRATOR_ANY_MONSTER_VS_PALADIN_WHITE_MAGE', true])
+	_add_speaking_pause(animation, _narrator)
+
+func _create_stat_modifier_multiplier(type: int, multiplier: float) -> StatModifier:
+	var stat_modifier := StatModifier.new()
+	stat_modifier.type = type
+	stat_modifier.multiplier = multiplier
+	
+	return stat_modifier
 
 func _add_fishguy_stroking_paladins_hair(animation: SceneTreeTween) -> void:
 	var fishguy := _get_arpeegee_by_file('fishguy.tscn')

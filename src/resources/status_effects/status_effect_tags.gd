@@ -37,4 +37,5 @@ enum {
 	BananBruised,
 	MushboyPostMesmerized,
 	HarpyEnamored,
+	BoostAgainstPaladinWhiteMage,
 }
