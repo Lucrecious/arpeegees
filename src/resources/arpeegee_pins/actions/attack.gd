@@ -95,6 +95,7 @@ func run(actioner: Node2D, target: ArpeegeePinNode, object: Object, callback: St
 	
 	var banan_chopped := false
 	var hunter_gooed_up := false
+	var mushboy_popped := false
 
 	if physical:
 		var attack_amount := ActionUtils.damage_with_factor(modified_stats.attack, attack_factor)
@@ -121,6 +122,13 @@ func run(actioner: Node2D, target: ArpeegeePinNode, object: Object, callback: St
 		else:
 			ActionUtils.add_attack_no_evade(tween, actioner, target, attack_amount)
 			hit_type = ActionUtils.HitType.Hit
+		
+		if actioner_file == 'monk.tscn' and target_file == 'mushboy.tscn' and _is_focused_kied(actioner):
+			mushboy_popped = true
+			assert(pin_action_is_filename('panchi_monk.tres'))
+			
+			var cap_popper := NodE.get_child(target, CapPopper) as CapPopper
+			cap_popper.pop(tween)
 		
 		if actioner_file == 'hunter.tscn' and target_file == 'blobbo.tscn':
 			assert(pin_action_is_filename('pounce_owo_hunter.tres'))
@@ -161,6 +169,8 @@ func run(actioner: Node2D, target: ArpeegeePinNode, object: Object, callback: St
 					var transformer := NodE.get_child(actioner, Transformer) as Transformer
 					assert(transformer)
 					tween.tween_callback(transformer, 'request_transform')
+	elif mushboy_popped:
+		ActionUtils.add_text_trigger(tween, self, 'NARRATOR_MUSHBOY_CAP_EXPLODES_ALL_POISONED')
 	else:
 		if not narration_key.empty():
 			ActionUtils.add_text_trigger(tween, self, narration_key)
@@ -207,6 +217,10 @@ func run(actioner: Node2D, target: ArpeegeePinNode, object: Object, callback: St
 			tween.tween_callback(status_effects_list, 'add_instance', [_create_wing_attack_effect()])
 	
 	tween.tween_callback(object, callback)
+
+func _is_focused_kied(monk: Node2D) -> bool:
+	var effects_list := NodE.get_child(monk, StatusEffectsList) as StatusEffectsList
+	return effects_list.count_tags(StatusEffectTag.FocusKi) > 0
 
 func _create_wing_attack_effect() -> StatusEffect:
 	var status_effect := StatusEffect.new()

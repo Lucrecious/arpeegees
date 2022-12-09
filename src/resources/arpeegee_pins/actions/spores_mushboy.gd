@@ -78,7 +78,7 @@ func _create_status_effect(target: Node2D) -> StatusEffect:
 		status_effect.tag = StatusEffectTag.Smelly
 	else:
 		assert(false)
-		status_effect.tag = StatusEffectTag.Poision
+		status_effect.tag = StatusEffectTag.Poison
 	
 	var auras := Aura.create_spore_auras(spore_texture, scale_amount)
 	if type == Type.Poison:

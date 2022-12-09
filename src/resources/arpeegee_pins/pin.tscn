@@ -34,7 +34,7 @@ animations = [ {
 [sub_resource type="CircleShape2D" id=1]
 radius = 22.0227
 
-[node name="Pin" type="Node2D"]
+[node name="Pin" type="Node2D" groups=["arpeegee_pin_node"]]
 script = ExtResource( 8 )
 
 [node name="StartAnimation" type="Node2D" parent="."]
