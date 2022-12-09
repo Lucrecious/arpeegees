@@ -139,7 +139,7 @@ frame = "magic"
 [node name="Life2" type="Node2D" parent="Actions" index="3"]
 script = ExtResource( 19 )
 
-[node name="MedicinalSparkles" type="Node2D" parent="Actions" index="4"]
+[node name="MedicinalSparkles" type="Node2D" parent="Actions" index="4" groups=["sparkle_ability"]]
 script = ExtResource( 18 )
 type = 2
 frame = "magic"

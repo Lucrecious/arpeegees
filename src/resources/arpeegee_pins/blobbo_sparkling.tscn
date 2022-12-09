@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/resources/arpeegee_pins/blobbo_sparkling.tres" type="Resource" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://src/resources/arpeegee_pins/actions/spittin_goo_blobbo_sparkling.gd" type="Script" id=14]
 [ext_resource path="res://assets/sprites/effects/goo_purple.png" type="Texture" id=15]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/sparkles_blobbo_sparkling.gd" type="Script" id=16]
+[ext_resource path="res://src/resources/arpeegee_pins/components/sparkles_kiss.gd" type="Script" id=17]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 10 )
@@ -41,7 +42,10 @@ defence = 4
 magic_defence = 4
 evasion = 4
 
-[node name="Sprites" type="Node2D" parent="." index="12"]
+[node name="SparklesKiss" type="Node" parent="." index="12" groups=["blobbo_kiss"]]
+script = ExtResource( 17 )
+
+[node name="Sprites" type="Node2D" parent="." index="13"]
 material = SubResource( 1 )
 script = ExtResource( 4 )
 
@@ -52,23 +56,7 @@ scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 5 )
 centered = false
 
-[node name="Slap" type="Sprite" parent="Sprites" index="1"]
-visible = false
-use_parent_material = true
-position = Vector2( -101, -184 )
-scale = Vector2( 0.333333, 0.333333 )
-texture = ExtResource( 6 )
-centered = false
-
-[node name="Hurt" type="Sprite" parent="Sprites" index="2"]
-visible = false
-use_parent_material = true
-position = Vector2( -93, -202 )
-scale = Vector2( 0.333333, 0.333333 )
-texture = ExtResource( 8 )
-centered = false
-
-[node name="Win" type="Sprite" parent="Sprites" index="3"]
+[node name="LoveSparkles" type="Sprite" parent="Sprites" index="1"]
 visible = false
 use_parent_material = true
 position = Vector2( -112, -212 )
@@ -76,7 +64,31 @@ scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 7 )
 centered = false
 
-[node name="ShootGoo" type="Sprite" parent="Sprites" index="4"]
+[node name="Slap" type="Sprite" parent="Sprites" index="2"]
+visible = false
+use_parent_material = true
+position = Vector2( -101, -184 )
+scale = Vector2( 0.333333, 0.333333 )
+texture = ExtResource( 6 )
+centered = false
+
+[node name="Hurt" type="Sprite" parent="Sprites" index="3"]
+visible = false
+use_parent_material = true
+position = Vector2( -93, -202 )
+scale = Vector2( 0.333333, 0.333333 )
+texture = ExtResource( 8 )
+centered = false
+
+[node name="Win" type="Sprite" parent="Sprites" index="4"]
+visible = false
+use_parent_material = true
+position = Vector2( -112, -212 )
+scale = Vector2( 0.333333, 0.333333 )
+texture = ExtResource( 7 )
+centered = false
+
+[node name="ShootGoo" type="Sprite" parent="Sprites" index="5"]
 visible = false
 use_parent_material = true
 position = Vector2( -102, -201 )
@@ -84,7 +96,7 @@ scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 9 )
 centered = false
 
-[node name="Actions" type="Node2D" parent="." index="13"]
+[node name="Actions" type="Node2D" parent="." index="14"]
 script = ExtResource( 3 )
 
 [node name="ASlapAGoo" type="Node2D" parent="Actions" index="0"]
@@ -108,5 +120,5 @@ position = Vector2( 61, -76 )
 scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 15 )
 
-[node name="SPARKLES" type="Node2D" parent="Actions" index="2"]
+[node name="SPARKLES" type="Node2D" parent="Actions" index="2" groups=["sparkle_ability"]]
 script = ExtResource( 16 )

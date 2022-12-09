@@ -12,6 +12,13 @@ enum Type {
 export(Type) var type := Type.HolySparkles
 export(String) var frame := ''
 
+func block() -> void:
+	_is_blocked = true
+
+var _is_blocked := false
+func is_blocked() -> bool:
+	return _is_blocked
+
 func pin_action() -> PinAction:
 	if type == Type.HolySparkles:
 		return preload('res://src/resources/actions/holy_sparkles_paladin.tres') as PinAction
@@ -84,6 +91,15 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 		assert(false)
 	
 	
+	if type == Type.HolySparkles:
+		var enamored := get_tree().get_nodes_in_group('harpy_enamored')
+		for e in enamored:
+			if e.is_enamored():
+				continue
+			
+			animation.tween_callback(e, 'enamore')
+			ActionUtils.add_text_trigger(animation, self, 'NARRATOR_HARPY_LOVES_SPARKLES')
+	
 	animation.tween_interval(0.75)
 	
 	animation.tween_callback(sprite_switcher, 'change', ['Idle'])
@@ -121,6 +137,11 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 		ActionUtils.add_text_trigger(animation, self, 'NARRATOR_MEDICINAL_SPARKLES_USE')
 	else:
 		assert(false)
+	
+	if type == Type.MedicinalSparkles or type == Type.HolySparkles:
+		var blobbo_kiss := get_tree().get_nodes_in_group('blobbo_kiss')
+		for b in blobbo_kiss:
+			b.add_sparkles_kiss(animation, self, actioner)
 	
 	animation.tween_callback(object, callback)
 

@@ -168,6 +168,13 @@ func run(actioner: Node2D, target: ArpeegeePinNode, object: Object, callback: St
 		var wont_attack_paladin := NodE.get_child(target, WontAttackPaladin, false) as WontAttackPaladin
 		if wont_attack_paladin:
 			wont_attack_paladin.add_post_hit(tween, self)
+		
+		var enamored := get_tree().get_nodes_in_group('harpy_enamored')
+		for e in enamored:
+			if not e.is_enamored():
+				continue
+			tween.tween_callback(e, 'ruin_enamore')
+			ActionUtils.add_text_trigger(tween, self, 'NARRATOR_HARPY_LOSES_TRUST_IN_SPARKLES')
 	
 	if white_mage_instakill:
 		ActionUtils.add_text_trigger(tween, self, 'NARRATOR_DESPERATE_STAFF_WHACK_KILL')

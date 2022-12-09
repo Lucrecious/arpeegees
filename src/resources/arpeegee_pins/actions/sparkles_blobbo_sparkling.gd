@@ -2,6 +2,9 @@ extends Node2D
 
 signal text_triggered(narration_key)
 
+func block() -> void:
+	_is_blocked = true
+
 func unblock() -> void:
 	_is_blocked = false
 

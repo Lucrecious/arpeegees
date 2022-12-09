@@ -36,4 +36,5 @@ enum {
 	HeartbrokenKoboldio,
 	BananBruised,
 	MushboyPostMesmerized,
+	HarpyEnamored,
 }

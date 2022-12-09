@@ -148,7 +148,7 @@ position = Vector2( -103, -99 )
 [node name="Slippable" type="Node" parent="Actions/TremendousSlash" index="1"]
 script = ExtResource( 20 )
 
-[node name="BrightSparkles" type="Node2D" parent="Actions" index="2"]
+[node name="BrightSparkles" type="Node2D" parent="Actions" index="2" groups=["sparkle_ability"]]
 script = ExtResource( 17 )
 pin_action = ExtResource( 18 )
 use_frame = "magicsparkles"
@@ -157,7 +157,7 @@ effect_call = "bright_sparkles"
 narration_key = "NARRATOR_BRIGHT_SPARKLES_USE"
 sfx = "BrightSparkles"
 
-[node name="HolySparkles" type="Node2D" parent="Actions" index="3"]
+[node name="HolySparkles" type="Node2D" parent="Actions" index="3" groups=["sparkle_ability"]]
 script = ExtResource( 19 )
 frame = "magicheal"
 

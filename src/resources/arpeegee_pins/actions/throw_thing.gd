@@ -104,6 +104,8 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 		
 		var mesmerizeds := get_tree().get_nodes_in_group('mushboy_mesmerized')
 		for m in mesmerizeds:
+			if not m.is_mesmerized():
+				continue
 			animation.tween_callback(m, 'remove_mesmerize')
 			ActionUtils.add_text_trigger(animation, self, 'NARRATOR_MUSHBOY_ATTACKED_BY_GEOMANCER_MESMERIZED')
 	
