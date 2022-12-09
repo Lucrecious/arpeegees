@@ -5,6 +5,6 @@
 [resource]
 script = ExtResource( 1 )
 type = 1
-rarity = 1
+rarity = 3
 scene_path = "res://src/resources/arpeegee_pins/shifty_fishguy.tscn"
-pickable = true
+pickable = false

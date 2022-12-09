@@ -9,6 +9,7 @@ enum Type {
 
 enum Rarity {
 	Common,
+	Uncommon,
 	Rare,
 	UltraRare,
 }
