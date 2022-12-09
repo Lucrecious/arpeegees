@@ -47,12 +47,10 @@ func initialize_turns(pins: Array) -> void:
 		return
 	
 	for p in _ordered_pins:
-		var transformer := NodE.get_child(p, Transformer, false) as Transformer
-		if not transformer:
-			continue
-		
-		Logger.info('connected transform from %s' % [p.name])
-		transformer.connect('transform_requested', self, '_on_pin_transform_requested', [p, transformer], CONNECT_ONESHOT)
+		var transformers := NodE.get_children(p, Transformer)
+		for transformer in transformers:
+			Logger.info('connected transform from %s' % [p.name])
+			transformer.connect('transform_requested', self, '_on_pin_transform_requested', [p, transformer], CONNECT_ONESHOT)
 	
 	Logger.info('initialized and pins_changed emitted')
 	emit_signal('pins_changed')
@@ -286,6 +284,8 @@ func _on_action_ended() -> void:
 	finish_turn()
 
 func _do_queued_transforms() -> void:
+	# old transforms do not need to be disconnected because they get deleted
+	
 	var changed := false
 	while not _transform_queue.empty():
 		var stuff := _transform_queue.pop_front() as Dictionary
@@ -306,8 +306,8 @@ func _do_queued_transforms() -> void:
 		
 		var new_pin := transformer.transform_scene.instance() as ArpeegeePinNode
 		
-		var new_pin_transformer := NodE.get_child(new_pin, Transformer, false) as Transformer
-		if new_pin_transformer:
+		var new_pin_transformers := NodE.get_children(new_pin, Transformer)
+		for new_pin_transformer in new_pin_transformers:
 			Logger.info('new pin transform connected from %s' % new_pin.name)
 			new_pin_transformer.connect('transform_requested', self, '_on_pin_transform_requested', [new_pin, new_pin_transformer])
 		

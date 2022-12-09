@@ -19,7 +19,6 @@ func _ready() -> void:
 	if not resource:
 		print_debug('warning: resource missing')
 
-
 func emit_stars() -> void:
 	_hp_bar.visible = false
 	_light_explode.frame = 0

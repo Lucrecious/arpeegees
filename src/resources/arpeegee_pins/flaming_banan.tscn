@@ -30,7 +30,7 @@ offsets = PoolRealArray( 0.00470588, 0.856471, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
 
 [node name="FlamingBanan" instance=ExtResource( 1 )]
-nice_name = "Flaming Banan"
+nice_name = "Banan Foster"
 _resource_set = ExtResource( 11 )
 
 [node name="DamageReceiver" parent="." index="6"]

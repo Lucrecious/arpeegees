@@ -61,7 +61,8 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	if cap_remover:
 		cap_remover.add_animation_on_hit(animation, self)
 	
-	if type == Type.OnFire and hit_type != ActionUtils.HitType.Miss:
+	# doesn't affect banan because it gets turned into Banan Foster
+	if type == Type.OnFire and hit_type != ActionUtils.HitType.Miss and target.filename.get_file() != 'banan.tscn':
 		var burn_status_effect := EffectFunctions.create_burn_status_effect(modified_stats.attack)
 		var list := NodE.get_child(target, StatusEffectsList) as StatusEffectsList
 		animation.tween_callback(list, 'add_instance', [burn_status_effect])
@@ -80,6 +81,12 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 			ActionUtils.add_text_trigger(animation, self, 'NARRATOR_ARROWS_EN_FUEGO_USE')
 			if hit_type != ActionUtils.HitType.Miss:
 				ActionUtils.add_text_trigger(animation, self, 'NARRATOR_ARROWS_EN_FUEGO_HIT_ENEMY')
+	
+	if type == Type.OnFire and hit_type != ActionUtils.HitType.Miss and target.filename.get_file() == 'banan.tscn':
+		var transformer := target.get_node('FlameTransformer') as Transformer
+		animation.tween_callback(transformer, 'request_transform')
+		ActionUtils.add_text_trigger(animation, self, 'NARRATOR_BANAN_TURNS_INTO_BANAN_FOSTER_FROM_FIRE')
+		
 	
 	animation.tween_interval(0.75)
 	animation.tween_callback(sprite_switcher, 'change', ['idle'])
