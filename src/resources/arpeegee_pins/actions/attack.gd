@@ -161,14 +161,32 @@ func run(actioner: Node2D, target: ArpeegeePinNode, object: Object, callback: St
 	ActionUtils.add_shake(tween, actioner, position, Vector2(1, 0), 5.0, .35)
 	tween.tween_interval(.4)
 	tween.tween_callback(sprite_switcher, 'change', ['idle'])
-
+	
+	var koboldio_steals_mandolin := false
 	if pin_action_is_filename('bard_mandolin_swing.tres'):
 			if _times_used < 4:
-				ActionUtils.add_text_trigger(tween, self, 'NARRATOR_MANDOLIN_BASH_USE_%d' % [_times_used])
-				if _times_used == 3:
-					var transformer := NodE.get_child(actioner, Transformer) as Transformer
-					assert(transformer)
-					tween.tween_callback(transformer, 'request_transform')
+				if target_file == 'koboldio.tscn':
+					koboldio_steals_mandolin = true
+					
+					var koboldio_transformer := NodE.get_child(target, Transformer) as Transformer
+					var bard_transformer := NodE.get_child(actioner, Transformer) as Transformer
+					
+					tween.tween_callback(koboldio_transformer, 'request_transform')
+					tween.tween_callback(bard_transformer, 'request_transform')
+					
+					var bard_switcher := NodE.get_child(actioner, SpriteSwitcher) as SpriteSwitcher
+					var koboldio_switcher := NodE.get_child(target, SpriteSwitcher) as SpriteSwitcher
+					
+					tween.tween_callback(bard_switcher, 'swap_map', ['idle', 'idlenomandolin'])
+					tween.tween_callback(koboldio_switcher, 'swap_map', ['idle', 'idlewithmandolin'])
+					
+					ActionUtils.add_text_trigger(tween, self, 'NARRATOR_KOBOLDIO_STEALS_MANDOLIN')
+				else:
+					ActionUtils.add_text_trigger(tween, self, 'NARRATOR_MANDOLIN_BASH_USE_%d' % [_times_used])
+					if _times_used == 3:
+						var transformer := NodE.get_child(actioner, Transformer) as Transformer
+						assert(transformer)
+						tween.tween_callback(transformer, 'request_transform')
 	elif mushboy_popped:
 		ActionUtils.add_text_trigger(tween, self, 'NARRATOR_MUSHBOY_CAP_EXPLODES_ALL_POISONED')
 	else:

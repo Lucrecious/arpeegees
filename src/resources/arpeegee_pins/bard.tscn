@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/sprites/bard/bard_idle.png" type="Texture" id=2]
@@ -36,6 +36,7 @@
 [ext_resource path="res://assets/sprites/effects/tophat1.png" type="Texture" id=34]
 [ext_resource path="res://assets/sprites/effects/tophat2.png" type="Texture" id=35]
 [ext_resource path="res://assets/sprites/effects/tophat3.png" type="Texture" id=36]
+[ext_resource path="res://assets/sprites/bard/bard_idle_no_mandolin.png" type="Texture" id=37]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 7 )
@@ -72,7 +73,15 @@ scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 2 )
 centered = false
 
-[node name="Discord" type="Sprite" parent="Sprites" index="1"]
+[node name="IdleNoMandolin" type="Sprite" parent="Sprites" index="1"]
+visible = false
+use_parent_material = true
+position = Vector2( -64, -187 )
+scale = Vector2( 0.38, 0.38 )
+texture = ExtResource( 37 )
+centered = false
+
+[node name="Discord" type="Sprite" parent="Sprites" index="2"]
 visible = false
 use_parent_material = true
 position = Vector2( -113, -176 )
@@ -80,7 +89,7 @@ scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 12 )
 centered = false
 
-[node name="HeckinGoodSong" type="Sprite" parent="Sprites" index="2"]
+[node name="HeckinGoodSong" type="Sprite" parent="Sprites" index="3"]
 visible = false
 use_parent_material = true
 position = Vector2( -112, -176 )
@@ -88,28 +97,28 @@ scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 17 )
 centered = false
 
-[node name="Hurt" type="Sprite" parent="Sprites" index="3"]
+[node name="Hurt" type="Sprite" parent="Sprites" index="4"]
 visible = false
 use_parent_material = true
 position = Vector2( -13, -83 )
 scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 14 )
 
-[node name="Attack" type="Sprite" parent="Sprites" index="4"]
+[node name="Attack" type="Sprite" parent="Sprites" index="5"]
 visible = false
 use_parent_material = true
 position = Vector2( -39, -86 )
 scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 5 )
 
-[node name="Dead" type="Sprite" parent="Sprites" index="5"]
+[node name="Dead" type="Sprite" parent="Sprites" index="6"]
 visible = false
 use_parent_material = true
 position = Vector2( -26, -80 )
 scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 4 )
 
-[node name="Win" type="Sprite" parent="Sprites" index="6"]
+[node name="Win" type="Sprite" parent="Sprites" index="7"]
 visible = false
 use_parent_material = true
 position = Vector2( -19, -88 )
