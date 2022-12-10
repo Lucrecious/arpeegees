@@ -244,36 +244,6 @@ static func remove_by_file(pins: Array, file: String) -> Array:
 		new_pins.push_back(p)
 	return new_pins
 
-#func _increase_evasion(nodes: Array) -> void:
-#	for n in nodes:
-#		var status_effects := NodE.get_child(n, StatusEffectsList) as StatusEffectsList
-#
-#		var effect := StatusEffect.new()
-#		effect.stack_count = 1
-#		effect.tag = StatusEffectTag.Enraged
-#
-#		var modifier := StatModifier.new()
-#		modifier.type = StatModifier.Type.Evasion
-#		modifier.multiplier = 1.5
-#
-#		effect.add_child(modifier)
-#
-#		status_effects.add_instance(effect)
-#
-#func _increase_health(nodes: Array) -> void:
-#	for n in nodes:
-#		var status_effects := NodE.get_child(n, StatusEffectsList) as StatusEffectsList
-#		var effect := StatusEffect.new()
-#		var modifier := StatModifier.new()
-#		modifier.type = StatModifier.Type.MaxHealth
-#		modifier.multiplier = 2.0
-#
-#		var health := NodE.get_child(n, Health) as Health
-#		health.current = modifier.apply(health.current)
-#
-#		effect.add_child(modifier)
-#		status_effects.add_instance(effect)
-
 func _on_action_started() -> void:
 	_is_running_action = true
 
@@ -316,6 +286,7 @@ func _do_queued_transforms() -> void:
 		var new_pin_root_sprite := NodE.get_child(new_pin, RootSprite) as RootSprite
 		new_pin_root_sprite.material = new_pin_root_sprite.material.duplicate() as ShaderMaterial
 		
+		# flip the pin if it's a different type
 		if new_pin_resource.type != pin.resource.type:
 			var actions := NodE.get_child(new_pin, PinActions) as PinActions
 			actions.scale.x = -1

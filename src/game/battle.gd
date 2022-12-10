@@ -220,6 +220,8 @@ func _do_start_battle_effects() -> void:
 	
 	_add_monk_geomancer_effect(tween)
 	
+	_add_fishguy_banan_combine(tween)
+	
 	tween.tween_callback(self, '_start_battle', [nodes])
 
 func _add_speaking_pause(tween: SceneTreeTween, narrator: NarratorUI) -> void:
