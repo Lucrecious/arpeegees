@@ -40,4 +40,6 @@ enum {
 	BoostAgainstPaladinWhiteMage,
 	SparkleFromRare,
 	HunterGooedUp,
+	MonkRockBreakingRoutine, # to add the MonkBreaksRock effect
+	MonkBreaksRocks, # to add 5% more power
 }

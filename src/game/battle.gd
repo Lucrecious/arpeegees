@@ -218,11 +218,27 @@ func _do_start_battle_effects() -> void:
 	
 	_add_sparkles_if_all_pins_rare(tween)
 	
+	_add_monk_geomancer_effect(tween)
+	
 	tween.tween_callback(self, '_start_battle', [nodes])
 
 func _add_speaking_pause(tween: SceneTreeTween, narrator: NarratorUI) -> void:
 	TweenExtension.pause_until_signal_if_condition(tween, narrator,
 			'speaking_ended', _narrator, 'is_speaking')
+
+func _add_monk_geomancer_effect(animation: SceneTreeTween) -> void:
+	var monk := _get_arpeegee_by_file('monk.tscn')
+	if not monk:
+		return
+	
+	var geomancer := _get_arpeegee_by_file('geomancer.tscn')
+	if not geomancer:
+		return
+	
+	animation.tween_interval(0.35)
+	
+	var status_effect_list := NodE.get_child(monk, StatusEffectsList) as StatusEffectsList
+	animation.tween_callback(status_effect_list, 'add_instance', [EffectFunctions.create_break_rocks_routine_effect()])
 
 func _add_sparkles_if_all_pins_rare(animation: SceneTreeTween) -> void:
 	var pins := _turn_manager.get_pins()

@@ -132,7 +132,56 @@ class Poison extends Node:
 		animation.tween_callback(damage_receiver, 'real_damage', [damage])
 		
 		animation.tween_callback(self, 'emit_signal', ['start_turn_effect_finished'])
+
+static func create_break_rocks_routine_effect() -> StatusEffect:
+	var status_effect := StatusEffect.new()
+	status_effect.is_ailment = false
+	status_effect.stack_count = 1
+	status_effect.tag = StatusEffectTag.MonkRockBreakingRoutine
+	
+	var break_rocks := BreakRocksRoutineEffect.new()
+	status_effect.add_child(break_rocks)
+	
+	return status_effect
+
+class BreakRocksRoutineEffect extends Node:
+	signal start_turn_effect_finished()
+	signal text_triggered(narration_key)
+	
+	func _create_break_rocks_effect() -> StatusEffect:
+		var status_effect := StatusEffect.new()
+		status_effect.is_ailment = false
+		status_effect.stack_count = 4
+		status_effect.tag = StatusEffectTag.MonkBreaksRocks
 		
+		var attack := StatModifier.new()
+		attack.type = StatModifier.Type.Attack
+		attack.add_amount = 1
+		
+		status_effect.add_child(attack)
+		
+		return status_effect
+	
+	func run_start_turn_effect() -> void:
+		var animation := create_tween()
+		
+		animation.tween_interval(0.35)
+		
+		var pin := NodE.get_ancestor(self, ArpeegeePinNode) as ArpeegeePinNode
+		var switcher := NodE.get_child(pin, SpriteSwitcher) as SpriteSwitcher
+		
+		animation.tween_callback(switcher, 'change', ['punch'])
+		
+		animation.tween_interval(0.5)
+		
+		animation.tween_callback(switcher, 'change', ['idle'])
+		
+		var list := NodE.get_child(pin, StatusEffectsList) as StatusEffectsList
+		animation.tween_callback(list, 'add_instance', [_create_break_rocks_effect()])
+		
+		ActionUtils.add_text_trigger(animation, self, 'NARRATOR_MONK_BREAKING_GEOMANCER_ROCKS')
+		
+		animation.tween_callback(self, 'emit_signal', ['start_turn_effect_finished'])
 
 
 class BurnEffect extends Node:
