@@ -315,6 +315,34 @@ func _do_queued_transforms() -> void:
 	Logger.info('pins_changed emitted')
 	emit_signal('pins_changed')
 
+func banan_fishguy_combine() -> void:
+	var fishguy := get_pin_by_filename('fishguy.tscn')
+	var banan := get_pin_by_filename('banan.tscn')
+	assert(banan and fishguy)
+	
+	_ordered_pins.erase(fishguy)
+	fishguy.queue_free()
+	banan.queue_free()
+	
+	var banan_index := _ordered_pins.find(banan)
+	var fishguy_banan := load('res://src/resources/arpeegee_pins/fishguy_banan.tscn').instance() as ArpeegeePinNode
+	banan.get_parent().add_child(fishguy_banan)
+	fishguy_banan.position = banan.position
+	
+	_ordered_pins[banan_index] = fishguy_banan
+	_npcs = _get_type(ArpeegeePin.Type.NPC)
+	_players = _get_type(ArpeegeePin.Type.Player)
+	
+	Logger.info('pins_changed emitted')
+	emit_signal('pins_changed')
+
+func get_pin_by_filename(filename: String) -> ArpeegeePinNode:
+	for pin in get_pins():
+		if pin.filename.get_file() == filename:
+			return pin
+		
+	return null
+
 func _transfer_status_effects(old_pin: ArpeegeePinNode, new_pin: ArpeegeePinNode) -> void:
 	var old_effects_list := NodE.get_child(old_pin, StatusEffectsList) as StatusEffectsList
 	var new_effects_list := NodE.get_child(new_pin, StatusEffectsList) as StatusEffectsList

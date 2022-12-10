@@ -228,12 +228,36 @@ func _add_speaking_pause(tween: SceneTreeTween, narrator: NarratorUI) -> void:
 	TweenExtension.pause_until_signal_if_condition(tween, narrator,
 			'speaking_ended', _narrator, 'is_speaking')
 
+func _add_fishguy_banan_combine(animation: SceneTreeTween) -> void:
+	var fishguy := _turn_manager.get_pin_by_filename('fishguy.tscn')
+	if not fishguy:
+		return
+	
+	var banan := _turn_manager.get_pin_by_filename('banan.tscn')
+	if not banan:
+		return
+	
+	animation.tween_interval(0.35)
+	
+	ActionUtils.add_walk(animation, fishguy, fishguy.global_position, banan.global_position, 15.0, 5)
+	
+	var fishguy_swticher := NodE.get_child(fishguy, SpriteSwitcher) as SpriteSwitcher
+	animation.tween_callback(fishguy_swticher, 'change', ['dance'])
+	
+	animation.tween_interval(1.0)
+	
+	animation.tween_callback(_turn_manager, 'banan_fishguy_combine')
+	
+	animation.tween_callback(_narrator, 'speak_tr', ['NARRATOR_FISHGUY_BANAN_COMBINE', true])
+	
+	_add_speaking_pause(animation, _narrator)
+
 func _add_monk_geomancer_effect(animation: SceneTreeTween) -> void:
-	var monk := _get_arpeegee_by_file('monk.tscn')
+	var monk := _turn_manager.get_pin_by_filename('monk.tscn')
 	if not monk:
 		return
 	
-	var geomancer := _get_arpeegee_by_file('geomancer.tscn')
+	var geomancer := _turn_manager.get_pin_by_filename('geomancer.tscn')
 	if not geomancer:
 		return
 	
@@ -278,11 +302,11 @@ func _add_hats_if_all_pins_uncommon(animation: SceneTreeTween) -> void:
 		
 
 func _add_monster_boost_if_against_paladin_and_white_mage(animation: SceneTreeTween) -> void:
-	var paladin := _get_arpeegee_by_file('paladin.tscn')
+	var paladin := _turn_manager.get_pin_by_filename('paladin.tscn')
 	if not paladin:
 		return
 	
-	var white_mage := _get_arpeegee_by_file('white_mage.tscn')
+	var white_mage := _turn_manager.get_pin_by_filename('white_mage.tscn')
 	if not white_mage:
 		return
 	
@@ -317,11 +341,11 @@ func _create_stat_modifier_multiplier(type: int, multiplier: float) -> StatModif
 	return stat_modifier
 
 func _add_fishguy_stroking_paladins_hair(animation: SceneTreeTween) -> void:
-	var fishguy := _get_arpeegee_by_file('fishguy.tscn')
+	var fishguy := _turn_manager.get_pin_by_filename('fishguy.tscn')
 	if not fishguy:
 		return
 	
-	var paladin := _get_arpeegee_by_file('paladin.tscn')
+	var paladin := _turn_manager.get_pin_by_filename('paladin.tscn')
 	if not paladin:
 		return
 	
@@ -349,11 +373,11 @@ func _add_fishguy_stroking_paladins_hair(animation: SceneTreeTween) -> void:
 	ActionUtils.add_walk(animation, fishguy, target_position, fishguy.global_position, 15.0, 5)
 
 func _add_koboldio_paladin_friendly_effects(animation: SceneTreeTween) -> void:
-	var koboldio := _get_arpeegee_by_file('koboldio.tscn')
+	var koboldio := _turn_manager.get_pin_by_filename('koboldio.tscn')
 	if not koboldio:
 		return
 	
-	var paladin := _get_arpeegee_by_file('paladin.tscn')
+	var paladin := _turn_manager.get_pin_by_filename('paladin.tscn')
 	if not paladin:
 		return
 	
@@ -361,11 +385,11 @@ func _add_koboldio_paladin_friendly_effects(animation: SceneTreeTween) -> void:
 	_add_speaking_pause(animation, _narrator)
 
 func _add_banan_effects(animation: SceneTreeTween) -> void:
-	var banan := _get_arpeegee_by_file('banan.tscn')
+	var banan := _turn_manager.get_pin_by_filename('banan.tscn')
 	if not banan:
 		return
 	
-	var white_mage := _get_arpeegee_by_file('white_mage.tscn')
+	var white_mage := _turn_manager.get_pin_by_filename('white_mage.tscn')
 	if not white_mage:
 		return
 	
@@ -373,9 +397,9 @@ func _add_banan_effects(animation: SceneTreeTween) -> void:
 	_add_speaking_pause(animation, _narrator)
 
 func _add_fear_effects(animation: SceneTreeTween) -> void:
-	if _get_arpeegee_by_file('hunter.tscn') != null:
+	if _turn_manager.get_pin_by_filename('hunter.tscn') != null:
 		for file in ['drago.tscn', 'blobbo.tscn', 'koboldio.tscn']:
-			var pin := _get_arpeegee_by_file(file)
+			var pin := _turn_manager.get_pin_by_filename(file)
 			if not pin:
 				continue
 			
@@ -384,13 +408,6 @@ func _add_fear_effects(animation: SceneTreeTween) -> void:
 			list.add_instance(fear_effect)
 			EffectFunctions.add_fear_narration_and_effect(pin, _narrator, animation)
 			_add_speaking_pause(animation, _narrator)
-
-func _get_arpeegee_by_file(file: String) -> ArpeegeePinNode:
-	for pin in _turn_manager.get_pins():
-		if pin.filename.get_file() == file:
-			return pin
-		
-	return null
 
 func _on_battle_ended(end_condition: int) -> void:
 	if end_condition == TurnManager.EndCondition.NPCsDead:
