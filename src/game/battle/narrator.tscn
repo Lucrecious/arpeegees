@@ -138,9 +138,9 @@ texture = ExtResource( 8 )
 [node name="Textbox" type="TextureRect" parent="HBoxContainer"]
 unique_name_in_owner = true
 material = SubResource( 3 )
-margin_left = 263.0
+margin_left = 297.0
 margin_top = 28.0
-margin_right = 698.0
+margin_right = 732.0
 margin_bottom = 294.0
 mouse_filter = 2
 size_flags_horizontal = 3
