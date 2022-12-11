@@ -38,8 +38,9 @@ func _on_target_hit(damager: Node, actioner: Node) -> void:
 		return
 	
 	var health := NodE.get_child(actioner, Health) as Health
-	var heal_amount := ceil(health.max_points * 0.1)
-	health.current_set(min(health.current + heal_amount, health.max_points))
+	var stats := NodE.get_child(actioner, ModifiedPinStats) as ModifiedPinStats
+	var heal_amount := ceil(stats.max_health * 0.1)
+	health.current_set(min(health.current + heal_amount, stats.max_health))
 
 func _create_status_effect_to_remove_stalk_frame() -> StatusEffect:
 	var status_effect := StatusEffect.new()

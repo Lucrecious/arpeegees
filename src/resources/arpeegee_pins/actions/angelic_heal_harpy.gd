@@ -20,7 +20,8 @@ func run(actioner: Node2D, object: Object, callback: String) -> void:
 	animation.tween_callback(NodE, 'add_children', [self, heart_explosion])
 	
 	var health := NodE.get_child(actioner, Health) as Health
-	animation.tween_callback(health, 'current_set', [min(health.current + 5, health.max_points)])
+	var stats := NodE.get_child(actioner, ModifiedPinStats) as ModifiedPinStats
+	animation.tween_callback(health, 'current_set', [min(health.current + 5, stats.max_health)])
 	
 	animation.tween_interval(0.75)
 	animation.tween_callback(sprite_switcher, 'change', ['idle'])

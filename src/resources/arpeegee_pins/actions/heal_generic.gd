@@ -175,8 +175,9 @@ func _heal_targets(targets: Array) -> void:
 	
 	for t in targets:
 		var health := NodE.get_child(t, Health) as Health
-		var new_points := health.current + (health.max_points * percent_to_heal)
-		health.current_set(min(new_points, health.max_points))
+		var pin_stats := NodE.get_child(t, ModifiedPinStats) as ModifiedPinStats
+		var new_points := health.current + (pin_stats.max_health * percent_to_heal)
+		health.current_set(min(new_points, pin_stats.max_health))
 
 func _heal_status_ailments(targets: Array) -> void:
 	for t in targets:

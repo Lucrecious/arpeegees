@@ -16,6 +16,9 @@ var evasion := 0
 var critical := 0
 
 onready var _status_effects := NodE.get_sibling(self, StatusEffectsList) as StatusEffectsList
+onready var _health := NodE.get_sibling(self, Health) as Health
+onready var _health_initial_max := _health.current
+
 
 static func attack_with_critical(amount: int) -> int:
 	return int(ceil(amount * 2.5))

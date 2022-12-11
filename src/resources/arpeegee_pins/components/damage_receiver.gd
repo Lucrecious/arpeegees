@@ -93,7 +93,7 @@ func revive() -> void:
 	if not get_parent().visible:
 		get_parent().visible = true
 	
-	_health.current_set(ceil(_health.max_points * 0.3))
+	_health.current_set(ceil(_modified_stats.max_health * 0.3))
 	_sprite_switcher.change('idle')
 
 func _set_fill_color(ratio: float) -> void:

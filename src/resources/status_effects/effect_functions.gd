@@ -122,7 +122,8 @@ class Poison extends Node:
 		
 		var health := NodE.get_child(target, Health) as Health
 		var damage_receiver := NodE.get_child(target, DamageReceiver) as DamageReceiver
-		var damage := ceil(health.max_points * 0.1)
+		var stats := NodE.get_child(target, ModifiedPinStats) as ModifiedPinStats
+		var damage := ceil(stats.max_health * 0.1)
 		var material := Components.root_sprite(target).material as ShaderMaterial
 		
 		animation.tween_callback(material, 'set_shader_param', ['fill_color', Color.purple])
