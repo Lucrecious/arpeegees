@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=2]
+[gd_scene load_steps=60 format=2]
 
 [ext_resource path="res://src/game/title.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/main.gd" type="Script" id=2]
@@ -33,6 +33,15 @@
 [ext_resource path="res://assets/battle/Path-1_night.png" type="Texture" id=31]
 [ext_resource path="res://assets/battle/Path-1_evening.png" type="Texture" id=32]
 [ext_resource path="res://src/ui/color_day_night_cycle.gd" type="Script" id=33]
+[ext_resource path="res://assets/sprites/koboldio/koboldio_idle.png" type="Texture" id=34]
+[ext_resource path="res://assets/sprites/koboldio/koboldio_hit.png" type="Texture" id=35]
+[ext_resource path="res://src/website/click_toggle_sprites.gd" type="Script" id=36]
+[ext_resource path="res://assets/sprites/blobbo/blobbo_idle.png" type="Texture" id=37]
+[ext_resource path="res://assets/sprites/blobbo/blobbo_hit.png" type="Texture" id=38]
+[ext_resource path="res://assets/sprites/monk/monk_hit.png" type="Texture" id=39]
+[ext_resource path="res://assets/sprites/paladin/paladin_hurt.png" type="Texture" id=40]
+[ext_resource path="res://assets/sprites/monk/monk_idle.png" type="Texture" id=41]
+[ext_resource path="res://assets/sprites/paladin/paladin_idle.png" type="Texture" id=42]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -985,7 +994,7 @@ custom_constants/margin_bottom = 0
 [node name="Back" type="ColorRect" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer/MarginContainer"]
 margin_top = 70.0
 margin_right = 704.0
-margin_bottom = 762.0
+margin_bottom = 761.0
 color = Color( 0.972549, 0.905882, 0.823529, 1 )
 
 [node name="Pattern" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer"]
@@ -1067,6 +1076,89 @@ margin_top = 802.0
 margin_right = 1247.0
 margin_bottom = 905.0
 texture = ExtResource( 15 )
+
+[node name="Koboldio" type="TextureButton" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation"]
+show_behind_parent = true
+margin_left = 957.0
+margin_top = 179.0
+margin_right = 1134.0
+margin_bottom = 423.0
+rect_rotation = 14.9633
+action_mode = 0
+script = ExtResource( 36 )
+
+[node name="Idle" type="Sprite" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/Koboldio"]
+position = Vector2( 85.9265, 108.493 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 34 )
+
+[node name="Hit" type="Sprite" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/Koboldio"]
+visible = false
+position = Vector2( 114.544, 105.191 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 35 )
+
+[node name="Blobbo" type="TextureButton" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation"]
+show_behind_parent = true
+margin_left = 923.0
+margin_top = 404.0
+margin_right = 1118.0
+margin_bottom = 652.0
+rect_rotation = 11.1937
+action_mode = 0
+script = ExtResource( 36 )
+
+[node name="Idle" type="Sprite" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/Blobbo"]
+position = Vector2( 84.8715, 119.803 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 37 )
+
+[node name="Hit" type="Sprite" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/Blobbo"]
+position = Vector2( 152.445, 162.497 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 38 )
+
+[node name="Paladin" type="TextureButton" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation"]
+show_behind_parent = true
+margin_left = 186.0
+margin_top = 185.0
+margin_right = 300.0
+margin_bottom = 419.0
+rect_rotation = -7.47355
+action_mode = 0
+script = ExtResource( 36 )
+
+[node name="Idle" type="Sprite" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/Paladin"]
+position = Vector2( 43.7691, 104.582 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 42 )
+
+[node name="Hit" type="Sprite" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/Paladin"]
+visible = false
+position = Vector2( 45.622, 105.833 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 40 )
+
+[node name="Monk" type="TextureButton" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation"]
+show_behind_parent = true
+margin_left = 173.0
+margin_top = 396.0
+margin_right = 300.0
+margin_bottom = 657.0
+rect_rotation = -7.47355
+action_mode = 0
+script = ExtResource( 36 )
+
+[node name="Idle" type="Sprite" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/Monk"]
+position = Vector2( 77.7233, 130.215 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 41 )
+
+[node name="Hit" type="Sprite" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/Monk"]
+visible = false
+position = Vector2( 73.8873, 128.704 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 39 )
 
 [node name="StumpAdSizeAdapter" type="Node" parent="SpanLimiter/Content/WebsiteContent"]
 script = ExtResource( 22 )
@@ -1294,6 +1386,90 @@ margin_bottom = 784.0
 texture = ExtResource( 15 )
 expand = true
 stretch_mode = 6
+
+[node name="Koboldio" type="TextureButton" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation"]
+show_behind_parent = true
+margin_left = 737.144
+margin_top = 179.0
+margin_right = 914.144
+margin_bottom = 423.0
+rect_rotation = 14.9633
+action_mode = 0
+script = ExtResource( 36 )
+
+[node name="Idle" type="Sprite" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/Koboldio"]
+position = Vector2( 85.9265, 108.493 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 34 )
+
+[node name="Hit" type="Sprite" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/Koboldio"]
+visible = false
+position = Vector2( 114.544, 105.191 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 35 )
+
+[node name="Blobbo" type="TextureButton" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation"]
+show_behind_parent = true
+margin_left = 703.143
+margin_top = 404.0
+margin_right = 898.143
+margin_bottom = 652.0
+rect_rotation = 11.1937
+action_mode = 0
+script = ExtResource( 36 )
+
+[node name="Idle" type="Sprite" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/Blobbo"]
+position = Vector2( 84.8715, 119.803 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 37 )
+
+[node name="Hit" type="Sprite" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/Blobbo"]
+visible = false
+position = Vector2( 152.445, 162.497 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 38 )
+
+[node name="Paladin" type="TextureButton" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation"]
+show_behind_parent = true
+margin_left = 186.0
+margin_top = 185.0
+margin_right = 300.0
+margin_bottom = 419.0
+rect_rotation = -7.47355
+action_mode = 0
+script = ExtResource( 36 )
+
+[node name="Idle" type="Sprite" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/Paladin"]
+position = Vector2( 43.7691, 104.582 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 42 )
+
+[node name="Hit" type="Sprite" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/Paladin"]
+visible = false
+position = Vector2( 45.622, 105.833 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 40 )
+
+[node name="Monk" type="TextureButton" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation"]
+show_behind_parent = true
+margin_left = 173.0
+margin_top = 396.0
+margin_right = 300.0
+margin_bottom = 657.0
+rect_rotation = -7.47355
+action_mode = 0
+script = ExtResource( 36 )
+
+[node name="Idle" type="Sprite" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/Monk"]
+position = Vector2( 77.7233, 130.215 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 41 )
+
+[node name="Hit" type="Sprite" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/Monk"]
+visible = false
+position = Vector2( 73.8873, 128.704 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 39 )
 
 [node name="Camera" type="Node2D" parent="."]
 script = ExtResource( 5 )
