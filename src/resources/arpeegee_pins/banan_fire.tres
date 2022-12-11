@@ -7,4 +7,4 @@ script = ExtResource( 1 )
 type = 1
 rarity = 2
 scene_path = "res://src/resources/arpeegee_pins/flaming_banan.tscn"
-pickable = true
+pickable = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://src/game/bag.gd" type="Script" id=1]
 [ext_resource path="res://assets/title/complete_bag.png" type="Texture" id=2]
@@ -24,6 +24,7 @@
 [ext_resource path="res://assets/title/particles/animation0040.png" type="Texture" id=22]
 [ext_resource path="res://assets/title/particles/animation0037.png" type="Texture" id=23]
 [ext_resource path="res://assets/title/particles/animation0049.png" type="Texture" id=24]
+[ext_resource path="res://assets/title/finger.png" type="Texture" id=25]
 
 [sub_resource type="SpriteFrames" id=4]
 animations = [ {
@@ -317,6 +318,11 @@ scale = Vector2( 0.5, 0.5 )
 position = Vector2( 150, 180 )
 scale = Vector2( 1.65, 1.65 )
 texture = ExtResource( 2 )
+
+[node name="Finger" type="Sprite" parent="Bag"]
+position = Vector2( -338, -90 )
+scale = Vector2( 0.478846, 0.478846 )
+texture = ExtResource( 25 )
 
 [node name="BigSpark" type="AnimatedSprite" parent="."]
 visible = false

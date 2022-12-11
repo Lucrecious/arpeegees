@@ -15,21 +15,37 @@ onready var _noise := OpenSimplexNoise.new()
 onready var _animation := $'%Animation' as AnimationPlayer
 onready var _bag_sprite := $Bag/BagSprite as Node2D
 onready var _shoot_hint := $ShootHint as Node2D
+onready var _finger := $Bag/Finger as Sprite
 
 func _ready() -> void:
 	reset()
 	
 	_noise.period = .2
 
+var _finger_animation: SceneTreeTween
 func reset() -> void:
 	ObjEct.connect_once(self, 'mouse_entered', self, '_on_mouse_entered')
 	ObjEct.connect_once(self, 'mouse_exited', self, '_on_mouse_exited')
 	_animation.play('RESET')
 	_opened = false
+	
+	_finger.modulate.a = 1.0
+	
+	_finger_animation = create_tween()
+	_finger_animation.tween_callback(_finger, 'set', ['rotation_degrees', 0.0])
+	_finger_animation.tween_property(_finger, 'rotation_degrees', -30.0, 1.5)\
+			.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
+	_finger_animation.set_loops()
 
 func _open() -> void:
 	if _opened:
 		return
+	
+	_finger_animation.kill()
+	_finger_animation = null
+	
+	var fade_out_finger := create_tween()
+	fade_out_finger.tween_property(_finger, 'modulate:a', 0.0, 0.2)
 	
 	_opened = true
 	disconnect('mouse_entered', self, '_on_mouse_entered')
