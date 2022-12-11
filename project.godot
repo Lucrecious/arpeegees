@@ -115,6 +115,11 @@ _global_script_classes=[ {
 "path": "res://lut/components/extents.gd"
 }, {
 "base": "Node",
+"class": "ColorDayNightCycle",
+"language": "GDScript",
+"path": "res://src/ui/color_day_night_cycle.gd"
+}, {
+"base": "Node",
 "class": "ComponentDisabler",
 "language": "GDScript",
 "path": "res://lut/components/disabler.gd"
@@ -599,6 +604,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/ui/target_selector.gd"
 }, {
+"base": "Node",
+"class": "TextureDayNightCycle",
+"language": "GDScript",
+"path": "res://src/ui/texture_day_night_cycle.gd"
+}, {
 "base": "Control",
 "class": "TileActionMode",
 "language": "GDScript",
@@ -726,6 +736,7 @@ _global_script_class_icons={
 "CapRemover": "",
 "ChikaraPanchiEffect": "",
 "CollisionExtents": "",
+"ColorDayNightCycle": "",
 "ComponentDisabler": "",
 "Component_CaptureCursor": "",
 "Components": "",
@@ -823,6 +834,7 @@ _global_script_class_icons={
 "StatusEffectTag": "",
 "StatusEffectsList": "",
 "TargetSelector": "",
+"TextureDayNightCycle": "",
 "TileActionMode": "",
 "TileMapCursor": "",
 "TimEr": "",
@@ -868,6 +880,7 @@ Sounds="*res://src/resources/sounds.tscn"
 FairRandom="*res://src/game/fair_random.gd"
 Music="*res://src/game/music.tscn"
 Debug="*res://src/game/debug.gd"
+TimeCycle="*res://src/ui/time_cycle.gd"
 
 [debug]
 

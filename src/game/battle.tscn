@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=2]
+[gd_scene load_steps=57 format=2]
 
 [ext_resource path="res://src/game/battle.gd" type="Script" id=1]
 [ext_resource path="res://src/game/battle/turn_manager.gd" type="Script" id=2]
@@ -10,7 +10,7 @@
 [ext_resource path="res://src/game/battle/battle_overlay.gd" type="Script" id=8]
 [ext_resource path="res://src/game/battle/ai.gd" type="Script" id=9]
 [ext_resource path="res://lut/ui/span_limiter.gd" type="Script" id=10]
-[ext_resource path="res://assets/battle/ground.png" type="Texture" id=11]
+[ext_resource path="res://assets/battle/sky_evening.png" type="Texture" id=11]
 [ext_resource path="res://assets/battle/sky.png" type="Texture" id=12]
 [ext_resource path="res://assets/sprites/effects/ranger_arrow.png" type="Texture" id=13]
 [ext_resource path="res://assets/ui/icons/character_pointer.svg" type="Texture" id=14]
@@ -31,6 +31,11 @@
 [ext_resource path="res://src/website/size_adjuster.gd" type="Script" id=29]
 [ext_resource path="res://src/ui/battle_layer_size_adapt.gd" type="Script" id=30]
 [ext_resource path="res://assets/ui/DK Woolwich.otf" type="DynamicFontData" id=31]
+[ext_resource path="res://src/ui/texture_day_night_cycle.gd" type="Script" id=32]
+[ext_resource path="res://assets/battle/ground_evening.png" type="Texture" id=33]
+[ext_resource path="res://assets/battle/ground_night.png" type="Texture" id=34]
+[ext_resource path="res://assets/battle/ground.png" type="Texture" id=35]
+[ext_resource path="res://assets/battle/sky_night.png" type="Texture" id=36]
 
 [sub_resource type="Shader" id=10]
 code = "shader_type canvas_item;
@@ -275,9 +280,21 @@ anchor_right = 1.0
 anchor_bottom = 0.5
 margin_top = 136.0
 margin_bottom = 1355.0
-texture = ExtResource( 11 )
+texture = ExtResource( 35 )
 expand = true
 stretch_mode = 5
+
+[node name="TextureDayNightCycle" type="Node" parent="SpanLimiter/Background/SkySmaller/Ground"]
+script = ExtResource( 32 )
+day = ExtResource( 35 )
+evening = ExtResource( 33 )
+night = ExtResource( 34 )
+
+[node name="TextureDayNightCycle" type="Node" parent="SpanLimiter/Background/SkySmaller"]
+script = ExtResource( 32 )
+day = ExtResource( 12 )
+evening = ExtResource( 11 )
+night = ExtResource( 36 )
 
 [node name="CenterPuddle" type="CenterContainer" parent="SpanLimiter/Background"]
 anchor_top = 1.0
