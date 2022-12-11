@@ -147,6 +147,19 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 		for b in blobbo_kiss:
 			b.add_sparkles_kiss(animation, self, actioner)
 	
+	if type == Type.Heal3 and not targets.empty() and targets[0].filename.get_file() == 'fishguy.tscn':
+		var fishguy := targets[0] as Node
+		var fishguy_sprite_switcher := NodE.get_child(fishguy, SpriteSwitcher) as SpriteSwitcher
+		animation.tween_callback(fishguy_sprite_switcher, 'change', ['dance'])
+		
+		animation.tween_interval(1.0)
+		
+		var health := NodE.get_child(fishguy, Health) as Health
+		animation.tween_callback(health, 'set_block_signals', [true])
+		animation.tween_callback(health, 'damage', [100_000])
+		
+		ActionUtils.add_text_trigger(animation, self, 'NARRATOR_FISHGUY_HUMBLED_BY_HEAL3')
+	
 	animation.tween_callback(object, callback)
 
 func _heal_targets(targets: Array) -> void:
