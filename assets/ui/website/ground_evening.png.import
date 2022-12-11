@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ground.svg-e6d25d874b85125c9b57d5264d610fb8.stex"
+path="res://.import/ground_evening.png-95ffc0367a3088b241f6a491da4141db.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/battle/ground.svg"
-dest_files=[ "res://.import/ground.svg-e6d25d874b85125c9b57d5264d610fb8.stex" ]
+source_file="res://assets/ui/website/ground_evening.png"
+dest_files=[ "res://.import/ground_evening.png-95ffc0367a3088b241f6a491da4141db.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/sky.svg-151adb32b26b4f2270dce87c833575b6.stex"
+path="res://.import/ground.png-3f2aae2f8ed80e2d2f7287b0a1fbca3d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/battle/sky.svg"
-dest_files=[ "res://.import/sky.svg-151adb32b26b4f2270dce87c833575b6.stex" ]
+source_file="res://assets/battle/ground.png"
+dest_files=[ "res://.import/ground.png-3f2aae2f8ed80e2d2f7287b0a1fbca3d.stex" ]
 
 [params]
 
