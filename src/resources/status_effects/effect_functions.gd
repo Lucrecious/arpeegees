@@ -40,9 +40,9 @@ static func add_dance_frame_and_narration(target: ArpeegeePinNode, action_node: 
 		target.set_meta('dancing_frame_from_bard', true)
 		
 		var banan_sprite_switcher := NodE.get_child(target, SpriteSwitcher) as SpriteSwitcher
-		animation.tween_callback(banan_sprite_switcher, 'swap_map', ['idle', 'love'])
-		animation.tween_callback(banan_sprite_switcher, 'swap_map', ['idle_bruised', 'love_bruised'])
-		animation.tween_callback(banan_sprite_switcher, 'swap_map', ['idle_fully_bruised', 'love_fully_bruised'])
+		animation.tween_callback(banan_sprite_switcher, 'swap_map', ['idle', 'dance'])
+		animation.tween_callback(banan_sprite_switcher, 'swap_map', ['idle_bruised', 'dance_bruised'])
+		animation.tween_callback(banan_sprite_switcher, 'swap_map', ['idle_fully_bruised', 'dance_fully_bruised'])
 		
 		ActionUtils.add_text_trigger(animation, action_node, 'NARRATOR_BANAN_DANCES_TO_BARD_MUSIC')
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
 [ext_resource path="res://lut/components/root_sprite.gd" type="Script" id=2]
@@ -35,6 +35,10 @@
 [ext_resource path="res://assets/sprites/banan/banan_slices.png" type="Texture" id=33]
 [ext_resource path="res://src/resources/arpeegee_pins/components/rare_sparkles.tscn" type="PackedScene" id=34]
 [ext_resource path="res://src/resources/arpeegee_pins/fishguy_banan.tscn" type="PackedScene" id=35]
+[ext_resource path="res://assets/sprites/banan/banan_dance.png" type="Texture" id=36]
+[ext_resource path="res://assets/sprites/banan/banansuperbruised_dance.png" type="Texture" id=37]
+[ext_resource path="res://assets/sprites/banan/bananbruised_dance.png" type="Texture" id=38]
+[ext_resource path="res://assets/sprites/banan/banansuperbruised_hearteyes.png" type="Texture" id=40]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 15 )
@@ -91,9 +95,9 @@ centered = false
 [node name="Love_Fully_Bruised" type="Sprite" parent="Sprites" index="4"]
 visible = false
 use_parent_material = true
-position = Vector2( -97, -214 )
+position = Vector2( -63, -169 )
 scale = Vector2( 0.333333, 0.333333 )
-texture = ExtResource( 17 )
+texture = ExtResource( 40 )
 centered = false
 
 [node name="Love_Bruised" type="Sprite" parent="Sprites" index="5"]
@@ -112,7 +116,31 @@ scale = Vector2( 0.333, 0.333 )
 texture = ExtResource( 9 )
 centered = false
 
-[node name="Hurt_Fully_Bruised" type="Sprite" parent="Sprites" index="7"]
+[node name="Dance_Fully_Bruised" type="Sprite" parent="Sprites" index="7"]
+visible = false
+use_parent_material = true
+position = Vector2( -61, -175 )
+scale = Vector2( 0.333333, 0.333333 )
+texture = ExtResource( 37 )
+centered = false
+
+[node name="Dance_Bruised" type="Sprite" parent="Sprites" index="8"]
+visible = false
+use_parent_material = true
+position = Vector2( -63, -176 )
+scale = Vector2( 0.333333, 0.333333 )
+texture = ExtResource( 38 )
+centered = false
+
+[node name="Dance" type="Sprite" parent="Sprites" index="9"]
+visible = false
+use_parent_material = true
+position = Vector2( -65, -175 )
+scale = Vector2( 0.333333, 0.333333 )
+texture = ExtResource( 36 )
+centered = false
+
+[node name="Hurt_Fully_Bruised" type="Sprite" parent="Sprites" index="10"]
 visible = false
 use_parent_material = true
 position = Vector2( -52, -151 )
@@ -120,7 +148,7 @@ scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 20 )
 centered = false
 
-[node name="Hurt_Bruised" type="Sprite" parent="Sprites" index="8"]
+[node name="Hurt_Bruised" type="Sprite" parent="Sprites" index="11"]
 visible = false
 use_parent_material = true
 position = Vector2( -52, -151 )
@@ -128,7 +156,7 @@ scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 21 )
 centered = false
 
-[node name="Hurt" type="Sprite" parent="Sprites" index="9"]
+[node name="Hurt" type="Sprite" parent="Sprites" index="12"]
 visible = false
 use_parent_material = true
 position = Vector2( -79, -175 )
@@ -136,7 +164,7 @@ scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 5 )
 centered = false
 
-[node name="Headbutt_Fully_Bruised" type="Sprite" parent="Sprites" index="10"]
+[node name="Headbutt_Fully_Bruised" type="Sprite" parent="Sprites" index="13"]
 visible = false
 use_parent_material = true
 position = Vector2( -50, -110 )
@@ -144,7 +172,7 @@ scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 23 )
 centered = false
 
-[node name="Headbutt_Bruised" type="Sprite" parent="Sprites" index="11"]
+[node name="Headbutt_Bruised" type="Sprite" parent="Sprites" index="14"]
 visible = false
 use_parent_material = true
 position = Vector2( -50, -110 )
@@ -152,7 +180,7 @@ scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 22 )
 centered = false
 
-[node name="Headbutt" type="Sprite" parent="Sprites" index="12"]
+[node name="Headbutt" type="Sprite" parent="Sprites" index="15"]
 visible = false
 use_parent_material = true
 position = Vector2( -78, -189 )
@@ -160,7 +188,7 @@ scale = Vector2( 0.333333, 0.333333 )
 texture = ExtResource( 6 )
 centered = false
 
-[node name="ShootBanan_Fully_Bruised" type="Sprite" parent="Sprites" index="13"]
+[node name="ShootBanan_Fully_Bruised" type="Sprite" parent="Sprites" index="16"]
 visible = false
 use_parent_material = true
 position = Vector2( -65, -203 )
@@ -175,7 +203,7 @@ scale = Vector2( 1.001, 1.001 )
 texture = ExtResource( 27 )
 centered = false
 
-[node name="ShootBanan_Bruised" type="Sprite" parent="Sprites" index="14"]
+[node name="ShootBanan_Bruised" type="Sprite" parent="Sprites" index="17"]
 visible = false
 use_parent_material = true
 position = Vector2( -65, -203 )
@@ -190,7 +218,7 @@ scale = Vector2( 1.001, 1.001 )
 texture = ExtResource( 19 )
 centered = false
 
-[node name="ShootBanan" type="Sprite" parent="Sprites" index="15"]
+[node name="ShootBanan" type="Sprite" parent="Sprites" index="18"]
 visible = false
 use_parent_material = true
 position = Vector2( -65, -203 )
@@ -203,7 +231,7 @@ scale = Vector2( 1.001, 1.001 )
 texture = ExtResource( 7 )
 centered = false
 
-[node name="Appealing_Fully_Bruised" type="Sprite" parent="Sprites" index="16"]
+[node name="Appealing_Fully_Bruised" type="Sprite" parent="Sprites" index="19"]
 visible = false
 use_parent_material = true
 position = Vector2( -44, -151 )
@@ -221,7 +249,7 @@ rotation = 3.00784
 texture = ExtResource( 8 )
 centered = false
 
-[node name="Appealing_Bruised" type="Sprite" parent="Sprites" index="17"]
+[node name="Appealing_Bruised" type="Sprite" parent="Sprites" index="20"]
 visible = false
 use_parent_material = true
 position = Vector2( -44, -151 )
@@ -239,7 +267,7 @@ rotation = 3.00784
 texture = ExtResource( 8 )
 centered = false
 
-[node name="Appealing" type="Sprite" parent="Sprites" index="18"]
+[node name="Appealing" type="Sprite" parent="Sprites" index="21"]
 visible = false
 use_parent_material = true
 position = Vector2( -44, -151 )
@@ -257,7 +285,7 @@ rotation = 3.00784
 texture = ExtResource( 8 )
 centered = false
 
-[node name="Win" type="Sprite" parent="Sprites" index="19"]
+[node name="Win" type="Sprite" parent="Sprites" index="22"]
 visible = false
 use_parent_material = true
 position = Vector2( -99, -213 )
