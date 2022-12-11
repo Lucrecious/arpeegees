@@ -16,8 +16,9 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 			continue
 		
 		var gooer := NodE.get_child(t, HunterGooedUp) as HunterGooedUp
-		animation.tween_callback(gooer, 'disable_goo')
-		ActionUtils.add_text_trigger(animation, self, 'NARRATOR_HUNTER_CLEANED_UP_BY_FISHGUY')
+		if gooer.is_gooed():
+			animation.tween_callback(gooer, 'disable_goo')
+			ActionUtils.add_text_trigger(animation, self, 'NARRATOR_HUNTER_CLEANED_UP_BY_FISHGUY')
 	
 	
 	

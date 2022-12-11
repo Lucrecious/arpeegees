@@ -132,10 +132,11 @@ func run(actioner: Node2D, target: ArpeegeePinNode, object: Object, callback: St
 		
 		if actioner_file == 'hunter.tscn' and target_file == 'blobbo.tscn':
 			assert(pin_action_is_filename('pounce_owo_hunter.tres'))
-			
-			hunter_gooed_up = true
 			var gooer := NodE.get_child(actioner, HunterGooedUp) as HunterGooedUp
-			tween.tween_callback(gooer, 'enable_goo')
+			
+			if not gooer.is_gooed():
+				hunter_gooed_up = true
+				gooer.enable_goo(tween)
 		
 		if hit_type != ActionUtils.HitType.Miss and pin_action_is_filename('heavenly_slash_paladin.tres') and target_file == 'banan.tscn':
 			banan_chopped = true

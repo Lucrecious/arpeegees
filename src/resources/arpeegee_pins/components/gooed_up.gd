@@ -7,17 +7,17 @@ func is_gooed() -> bool:
 	return _is_gooed
 
 var _goo_sprites := ['idle', 'pounce', 'hurt', 'stalk', 'stab1', 'stab2', 'dead', 'win']
-func enable_goo() -> void:
+func enable_goo(animation: SceneTreeTween) -> void:
 	if _is_gooed:
 		return
 	_is_gooed = true
 	
 	var sprite_switcher := NodE.get_sibling(self, SpriteSwitcher) as SpriteSwitcher
 	for s in _goo_sprites:
-		sprite_switcher.swap_map(s, '%s_Goo' % s)
+		animation.tween_callback(sprite_switcher, 'swap_map', [s, '%s_Goo' % s])
 	
 	var status_effects_list := NodE.get_sibling(self, StatusEffectsList) as StatusEffectsList
-	status_effects_list.add_instance(_create_gooed_up_status_effect())
+	animation.tween_callback(status_effects_list, 'add_instance', [_create_gooed_up_status_effect()])
 
 func disable_goo() -> void:
 	if not _is_gooed:
