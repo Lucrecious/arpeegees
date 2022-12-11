@@ -44,15 +44,15 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	
 	var target_box := NodE.get_child(target, REferenceRect) as REferenceRect
 	var target_position := target_box.global_rect().get_center()
+	
 	animation.tween_property(_arrow, 'global_position', target_position, 0.1)
 	
 	var modified_stats := NodE.get_child(actioner, ModifiedPinStats) as ModifiedPinStats
 	
 	var attack_amount := modified_stats.attack
 	
-	var cap_remover := NodE.get_child(target, CapRemover, false) as CapRemover
-	
 	var hit_type := ActionUtils.HitType.Miss as int
+	var cap_remover := NodE.get_child(target, CapRemover, false) as CapRemover
 	if not cap_remover:
 		hit_type = ActionUtils.add_attack(animation, actioner, target, attack_amount)
 	
