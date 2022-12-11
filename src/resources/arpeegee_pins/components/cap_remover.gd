@@ -8,6 +8,12 @@ func add_animation_on_hit(animation: SceneTreeTween, narrator_caller: Object) ->
 	var transformer := get_parent().get_node('HatlessTransform') as Transformer
 	
 	animation.tween_callback(_sprite_switcher, 'change', ['hatlesshurt'])
+	
+	var cap := _sprite_switcher.sprite('hatlesshurt').get_child(0) as Node2D
+	animation.tween_property(cap, 'position', (Vector2.UP / 2.0 + Vector2.LEFT) * 1000.0, 0.4)
+	animation.tween_property(cap, 'modulate:a', 0.0, 0.4)
+	animation.tween_callback(cap, 'set', ['visible', false])
+	
 	animation.tween_interval(0.5)
 	animation.tween_callback(_sprite_switcher, 'change', ['hatlessidle'])
 	
