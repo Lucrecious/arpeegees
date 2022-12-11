@@ -51,7 +51,7 @@ func _on_option_hover_changed() -> void:
 		emit_signal('target_hovered', null)
 		return
 	
-	var pin := targets[index] as ArpeegeePinNode
+	var pin = targets[index]
 	emit_signal('target_hovered', pin)
 
 func _to_hide() -> void:
@@ -74,22 +74,9 @@ func initialize(pin: ArpeegeePinNode) -> void:
 	_action_pick_menu.connect('option_picked', self, '_on_option_picked')
 	_action_pick_menu.set_header_text(pin.nice_name)
 
-func _get_action_icon_texture(target_type: int, is_special: bool) -> Texture:
-	if is_special:
-		return load('res://assets/ui/icons/special_move.png') as Texture
-	
-	match target_type:
-		PinAction.TargetType.Self: return load('res://assets/ui/icons/self_buff.png') as Texture
-		PinAction.TargetType.AllAllies: return load('res://assets/ui/icons/team_buff.png') as Texture
-		PinAction.TargetType.AllEnemies: return load('res://assets/ui/icons/multi_target.png') as Texture
-		PinAction.TargetType.Single: return load('res://assets/ui/icons/single_target.png') as Texture
-	
-	return null
-
 func add_pin_action(action_node: Node, pickable_targets: Array) -> void:
 	var pin_action := action_node.pin_action() as PinAction
 	var index := _action_pick_menu.add_option(pin_action.nice_name)
-	#_action_pick_menu.set_icon(index, _get_action_icon_texture(pin_action.target_type, pin_action.is_special))
 	
 	_index_to_action_node[index] = action_node
 	Logger.info('add pin actions %d -> %s' % [index, action_node])
@@ -107,11 +94,17 @@ func _on_option_picked(index: int) -> void:
 	_pickable_targets_menu.visible = true
 	_pickable_targets_menu.call_deferred('update_hover_index', false, true)
 	
-	for t in pickable_targets:
-		var pin := t as ArpeegeePinNode
-		_pickable_targets_menu.add_option(pin.nice_name)
-	
-	_pickable_targets_menu.add_option('BACK')
+	if pickable_targets.size() == 2 and action_node.pin_action().target_type == PinAction.TargetType.Heal3:
+		_pickable_targets_menu.add_option('MENU_OPTION_ALL_ALLIES')
+		
+		assert(pickable_targets[1].filename.get_file() == 'fishguy.tscn')
+		_pickable_targets_menu.add_option(pickable_targets[1].nice_name)
+	else:
+		for t in pickable_targets:
+			var pin := t as ArpeegeePinNode
+			_pickable_targets_menu.add_option(pin.nice_name)
+		
+	_pickable_targets_menu.add_option('MENU_OPTION_BACK')
 	
 	_pickable_targets_menu.connect('option_picked', self, '_on_target_picked', [action_node])
 
@@ -129,7 +122,7 @@ func _on_target_picked(index: int, action_node: Node) -> void:
 		_action_pick_menu.update_hover_index(false, true)
 		return
 	
-	var target := targets[index] as ArpeegeePinNode
+	var target = targets[index]
 	emit_signal('action_picked', action_node, [target])
 
 func clear() -> void:

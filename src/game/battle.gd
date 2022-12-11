@@ -112,12 +112,6 @@ func _configure_viewport(viewport: Viewport) -> void:
 	viewport.get_texture().flags = Texture.FLAG_FILTER
 	viewport.canvas_transform = viewport.canvas_transform.scaled(Vector2.ONE * scale)
 
-#func _process(delta):
-#	if Engine.get_idle_frames() % 5 != 0:
-#		return
-#
-#	printt(_battle_viewport.size, _battle_viewport.canvas_transform.get_scale())
-
 func _is_two_one_layout(left_size: int, right_size: int) -> bool:
 	return left_size == 2 and right_size == 1
 

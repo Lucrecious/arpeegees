@@ -45,10 +45,12 @@ func _on_action_menu_hidden() -> void:
 	for p in _turn_manager.get_pins():
 		p.modulate = Color.white
 
-func _on_action_menu_target_hovered(target: ArpeegeePinNode) -> void:
+func _on_action_menu_target_hovered(target) -> void:
 	_darken_pins(_turn_manager.get_pins())
-		
-	if target:
+	if target is Array:
+		_whiten_pins(target)
+		_show_target_pins(target)
+	elif target is ArpeegeePinNode:
 		_whiten_pins([target])
 		_show_target_pins([target])
 

@@ -151,6 +151,13 @@ func _show_action_menu(pin: ArpeegeePinNode, pin_actions: PinActions) -> void:
 				_action_menu.add_pin_action(node, [])
 			elif action.target_type == PinAction.TargetType.AllAllies:
 				_action_menu.add_pin_action(node, [])
+			elif action.target_type == PinAction.TargetType.Heal3:
+				var fishguy := _turn_manager.get_pin_by_filename('fishguy.tscn')
+				if fishguy and NodE.get_child(fishguy, Health).current > 0:
+					var alive_players := TurnManager.is_alive(_turn_manager.get_players())
+					_action_menu.add_pin_action(node, [alive_players, fishguy])
+				else:
+					_action_menu.add_pin_action(node, [])
 			else:
 				assert(false)
 	elif pin.resource.type == ArpeegeePin.Type.NPC:
@@ -187,6 +194,13 @@ func _on_action_picked(action_node: Node, targets: Array, pin: ArpeegeePinNode, 
 		elif action.target_type == PinAction.TargetType.AllAllies:
 			assert(targets.size() == 0)
 			_turn_manager.run_action_with_targets(pin, action_node.name, _turn_manager.get_players())
+		elif action.target_type == PinAction.TargetType.Heal3:
+			if targets.empty():
+				_turn_manager.run_action_with_targets(pin, action_node.name, _turn_manager.get_players())
+			elif targets[0] is Array:
+				_turn_manager.run_action_with_targets(pin, action_node.name, targets[0])
+			else:
+				_turn_manager.run_action_with_targets(pin, action_node.name, targets)
 		else:
 			assert(false)
 	elif pin.resource.type == ArpeegeePin.Type.NPC:

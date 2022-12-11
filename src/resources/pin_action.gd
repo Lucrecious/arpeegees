@@ -6,6 +6,7 @@ enum TargetType {
 	Single,
 	AllEnemies,
 	AllAllies,
+	Heal3,
 }
 
 enum AttackType {

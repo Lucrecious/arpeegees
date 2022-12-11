@@ -60,7 +60,7 @@ tracks/0/keys = {
 "values": [ 0.0, 31.5899, 31.5899, -49.1875, -49.1875, 0.0 ]
 }
 
-[node name="Fishguy" instance=ExtResource( 1 )]
+[node name="Fishguy" groups=["fishguy_pin"] instance=ExtResource( 1 )]
 nice_name = "Fishguy"
 _resource_set = ExtResource( 11 )
 

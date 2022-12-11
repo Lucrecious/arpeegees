@@ -6,5 +6,5 @@
 script = ExtResource( 1 )
 nice_name = "HEAL3_NAME"
 description = ""
-target_type = 3
+target_type = 4
 is_special = false
