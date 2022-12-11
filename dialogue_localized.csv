@@ -407,5 +407,7 @@ NARRATOR_FISHGUY_BANAN_COMBINE,{cheer} Fishguy thinks this configuration is bett
 ,,
 NARRATOR_FISHGUY_HUMBLED_BY_HEAL3,{determined} Fishguy is humbled by this display of kindness and gives the victory to you!,
 ,,
+NARRATOR_DRAGO_BREATHS_FIRE_ON_ROCKS,"Drago thinks Geomancer's rocks are ice! Drago tries to melt them with fire breath, but they ignite!!",
+,,
 MENU_OPTION_ALL_ALLIES,All Allies,
 MENU_OPTION_BACK,Back,

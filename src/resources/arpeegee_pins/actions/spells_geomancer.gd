@@ -84,6 +84,20 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 	animation.tween_interval(0.4)
 	animation.tween_callback(sprite_switcher, 'change', ['idle'])
 	
+	if type == Type.RaiseEarth:
+		var breath_fires := get_tree().get_nodes_in_group('drago_breath_fire')
+		for b in breath_fires:
+			b.breath_fire(animation)
+			ActionUtils.add_text_trigger(animation, self, 'NARRATOR_DRAGO_BREATHS_FIRE_ON_ROCKS')
+			
+			animation.tween_callback(sprite_switcher, 'swap_map', ['idle', 'idlefire'])
+			animation.tween_callback(sprite_switcher, 'change', ['scaredfire'])
+			for sibling in get_parent().get_children():
+				if not sibling.has_method('light_rock_on_fire'):
+					continue
+				
+				animation.tween_callback(sibling, 'light_rock_on_fire')
+	
 	animation.tween_callback(object, callback)
 
 func _add_rock_wall_defences(targets: Array) -> void:

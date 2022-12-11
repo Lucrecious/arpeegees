@@ -14,6 +14,11 @@ export(String) var narration_key := ''
 
 onready var _thing := get_child(0) as Node2D
 
+var _rocks_on_fire := false
+func light_rock_on_fire() -> void:
+	_rocks_on_fire = true
+	get_child(0).get_child(0).visible = true
+
 var _used := false
 
 func is_used() -> bool:
@@ -108,6 +113,20 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 				continue
 			animation.tween_callback(m, 'remove_mesmerize')
 			ActionUtils.add_text_trigger(animation, self, 'NARRATOR_MUSHBOY_ATTACKED_BY_GEOMANCER_MESMERIZED')
+		
+		if _rocks_on_fire:
+			if target.filename.get_file() == 'banan.tscn':
+				var transformer := target.get_node('FlameTransformer') as Transformer
+				animation.tween_callback(transformer, 'request_transform')
+				ActionUtils.add_text_trigger(animation, self, 'NARRATOR_BANAN_TURNS_INTO_BANAN_FOSTER_FROM_FIRE')
+			else:
+				var burn_probability := randf()
+				if burn_probability < 1.0:
+					var target_effects_list := NodE.get_child(target, StatusEffectsList) as StatusEffectsList
+					
+					var burn_attack_base := stats.attack if type == Type.HandThrowRock else stats.magic_attack
+					var burn_status_effect := EffectFunctions.create_burn_status_effect(burn_attack_base)
+					animation.tween_callback(target_effects_list, 'add_instance', [burn_status_effect])
 	
 	_used = true
 	
