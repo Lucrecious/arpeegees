@@ -98,7 +98,7 @@ func _on_option_picked(index: int) -> void:
 		_pickable_targets_menu.add_option('MENU_OPTION_ALL_ALLIES')
 		
 		assert(pickable_targets[1].filename.get_file() == 'fishguy.tscn')
-		_pickable_targets_menu.add_option(pickable_targets[1].nice_name)
+		_pickable_targets_menu.add_option(pickable_targets[1].nice_name + '?')
 	else:
 		for t in pickable_targets:
 			var pin := t as ArpeegeePinNode

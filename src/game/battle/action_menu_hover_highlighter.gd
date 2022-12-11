@@ -96,6 +96,13 @@ func _on_action_menu_action_hovered(action_node: Node) -> void:
 		_darken_pins(_turn_manager.get_pins())
 		_whiten_pins(highlights)
 		_show_target_pins(highlights, false)
+	elif action.target_type == PinAction.TargetType.Heal3:
+		_darken_pins(_turn_manager.get_pins())
+		
+		var fishguy := _turn_manager.get_pin_by_filename('fishguy.tscn')
+		var highlights := _turn_manager.get_players() + [fishguy]
+		_whiten_pins(highlights)
+		_show_target_pins(highlights, true)
 
 func _show_target_pins(pins: Array, faded := false) -> void:
 	for p in _target_pointers:
