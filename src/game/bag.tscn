@@ -309,18 +309,20 @@ script = ExtResource( 1 )
 position = Vector2( 197, 1 )
 
 [node name="Bag" type="Node2D" parent="."]
-position = Vector2( 119, 158 )
+position = Vector2( 195, 247 )
 scale = Vector2( 0.5, 0.5 )
 
 [node name="BagSprite" type="Node2D" parent="Bag"]
 
 [node name="Sprite" type="Sprite" parent="Bag/BagSprite"]
-position = Vector2( 150, 180 )
+position = Vector2( -2, 2 )
 scale = Vector2( 1.65, 1.65 )
 texture = ExtResource( 2 )
 
+[node name="Position2D" type="Position2D" parent="Bag/BagSprite/Sprite"]
+
 [node name="Finger" type="Sprite" parent="Bag"]
-position = Vector2( -338, -90 )
+position = Vector2( -508, -364 )
 scale = Vector2( 0.478846, 0.478846 )
 texture = ExtResource( 25 )
 
