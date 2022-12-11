@@ -162,14 +162,14 @@ func _run_action_with_targets(pin: ArpeegeePinNode, action_name: String, targets
 func is_running_action() -> bool:
 	return _is_running_action
 
-func balance_battle() -> int:
+func balance_battle(animation: SceneTreeTween) -> int:
 	var disadvantaged_nodes := _get_disadvantaged_nodes(_ordered_pins)
 	
 	if disadvantaged_nodes.empty():
 		return -1
 	
 	var type := disadvantaged_nodes[0].resource.type as int
-	_add_attack_boost(disadvantaged_nodes, type)
+	animation.tween_callback(self, '_add_attack_boost', [disadvantaged_nodes, type])
 	return type
 
 func _get_disadvantaged_nodes(nodes: Array) -> Array:

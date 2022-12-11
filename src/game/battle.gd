@@ -97,6 +97,7 @@ func start(pins: Dictionary) -> void:
 		return
 	
 	_layout = _create_battle_layout(layout_scene, pins)
+	
 	_drop_character_pins(pins)
 
 		
@@ -181,22 +182,10 @@ func _do_start_battle_effects() -> void:
 	if item:
 		_turn_manager.use_item(item)
 	
-	var type_disadvanged := _turn_manager.balance_battle()
-	
-	var disadvantage_dialog := ''
-	
-	match type_disadvanged:
-		ArpeegeePin.Type.Player:
-			disadvantage_dialog = 'NARRATOR_HERO_FILLED_WITH_GUTS'
-		ArpeegeePin.Type.NPC:
-			disadvantage_dialog = 'NARRATOR_MONSTER_FILL_WITH_EVIL'
-	
 	var tween := create_tween()
+	_add_shifty_fishguy_reveal(tween, _narrator)
 	
-	if not disadvantage_dialog.empty():
-		tween.tween_callback(_sounds, 'play', ['EnragedHarpy'])
-		tween.tween_callback(_narrator, 'speak_tr', [disadvantage_dialog, true])
-		_add_speaking_pause(tween, _narrator)
+	_add_balance_battle(tween)
 	
 	_add_fear_effects(tween)
 	
@@ -221,6 +210,40 @@ func _do_start_battle_effects() -> void:
 func _add_speaking_pause(tween: SceneTreeTween, narrator: NarratorUI) -> void:
 	TweenExtension.pause_until_signal_if_condition(tween, narrator,
 			'speaking_ended', _narrator, 'is_speaking')
+
+func _add_balance_battle(animation: SceneTreeTween) -> void:
+	var type_disadvanged := _turn_manager.balance_battle(animation)
+	
+	var disadvantage_dialog := ''
+	
+	match type_disadvanged:
+		ArpeegeePin.Type.Player:
+			disadvantage_dialog = 'NARRATOR_HERO_FILLED_WITH_GUTS'
+		ArpeegeePin.Type.NPC:
+			disadvantage_dialog = 'NARRATOR_MONSTER_FILL_WITH_EVIL'
+	
+	if not disadvantage_dialog.empty():
+		animation.tween_callback(_sounds, 'play', ['EnragedHarpy'])
+		animation.tween_callback(_narrator, 'speak_tr', [disadvantage_dialog, true])
+		_add_speaking_pause(animation, _narrator)
+
+func _add_shifty_fishguy_reveal(animation: SceneTreeTween, narrator: NarratorUI) -> void:
+	var shifty := _turn_manager.get_pin_by_filename('shifty_fishguy.tscn')
+	if not shifty:
+		return
+	
+	shifty.visible = true
+	shifty.modulate.a = 0.0
+	
+	var target_position := shifty.get_parent().get_global_rect().get_center() as Vector2
+	
+	animation.tween_callback(shifty, 'set', ['global_position', target_position])
+	
+	animation.tween_property(shifty, 'modulate:a', 1.0, 1.0)\
+			.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+	
+	animation.tween_callback(narrator, 'speak_tr', ['NARRATOR_SHIFTY_FISHGUY_REVEAL', true])
+	_add_speaking_pause(animation, narrator)
 
 func _add_fishguy_banan_combine(animation: SceneTreeTween) -> void:
 	var fishguy := _turn_manager.get_pin_by_filename('fishguy.tscn')
@@ -460,6 +483,10 @@ func _drop_pins(positions: Array, pins: Array, item: PinItemPowerUp, item_positi
 		
 		_add_pin_shadow(control)
 		
+		if pin_node.filename.get_file() == 'shifty_fishguy.tscn':
+			pin_node.visible = false
+			continue
+			
 		pin_node.emit_stars()
 		
 		var drop_tween := get_tree().create_tween()

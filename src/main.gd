@@ -52,6 +52,15 @@ func _on_battle_screen_requested(pin_amount: int) -> void:
 		if not new_pins.empty():
 			pins = new_pins
 	
+	var ultra_rare_count := 0
+	for p in pins.players + pins.npcs:
+		var pin := p as ArpeegeePin
+		if pin.rarity == ArpeegeePin.Rarity.UltraRare:
+			ultra_rare_count += 1
+	
+	if ultra_rare_count == 2 and pins.players.size() == 1 and pins.npcs.size() == 1:
+		pins.npcs.push_back(load('res://src/resources/arpeegee_pins/shifty_fishguy.tres'))
+	
 	_battle_screen.load_pins(pins)
 	
 	yield(_title_screen, 'bag_open_finished')
