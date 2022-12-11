@@ -51,25 +51,25 @@ anchor_bottom = 1.0
 script = ExtResource( 3 )
 
 [node name="Center" type="CenterContainer" parent="."]
-anchor_top = 1.0
+anchor_top = 0.992
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -453.0
+margin_top = -570.24
+margin_bottom = -6.0
 
 [node name="Control" type="Control" parent="Center"]
-margin_left = 519.0
-margin_top = 73.0
-margin_right = 760.0
-margin_bottom = 379.0
-rect_min_size = Vector2( 241, 306 )
+margin_left = 445.0
+margin_top = 37.0
+margin_right = 834.0
+margin_bottom = 533.0
+rect_min_size = Vector2( 389, 496 )
 
 [node name="Bag" parent="Center/Control" instance=ExtResource( 1 )]
 unique_name_in_owner = true
-anchor_right = 1.193
-anchor_bottom = 1.177
-margin_right = -240.986
-margin_bottom = -306.02
-rect_min_size = Vector2( 241, 306 )
+anchor_right = 0.995
+anchor_bottom = 0.996
+margin_right = -0.0550232
+margin_bottom = -0.0160217
 
 [node name="Shockwave" type="ColorRect" parent="."]
 unique_name_in_owner = true

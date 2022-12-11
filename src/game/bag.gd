@@ -42,7 +42,7 @@ func _open() -> void:
 	emit_signal('open_animation_started')
 
 var _shoot_times := 0
-var _shoot_offsets := [0, 100, -100]
+var _shoot_offsets := [0, 150, -150]
 func shoot_star() -> void:
 	var star := preload('res://src/resources/arpeegee_pins/shoot_star.tscn').instance() as Node2D
 	add_child(star)

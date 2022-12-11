@@ -196,8 +196,8 @@ size_limit_x = 1280
 size_y = 787
 height_offset = 566
 move_down = true
-_paths_copies = [ NodePath("../WebsiteContent"), NodePath("../Game/BattleScreenPositionReference"), NodePath("../FillIn") ]
-copy_height_offsets = [ 0, -810, -5 ]
+_paths_copies = [ NodePath("../WebsiteContent"), NodePath("../Game/BattleScreenPositionReference"), NodePath("../FillIn"), NodePath("../Game/Title") ]
+copy_height_offsets = [ 0, -810, -5, -810 ]
 
 [node name="SizeAdapter" type="Node" parent="SpanLimiter/Content"]
 script = ExtResource( 22 )
