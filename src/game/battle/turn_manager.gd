@@ -297,10 +297,12 @@ func _do_queued_transforms() -> void:
 		
 		var new_pin_health := NodE.get_child(new_pin, Health) as Health
 		
-		new_pin_health.current = min(old_pin_health.current, new_pin_health.current)
 		new_pin.position = pin.position
 		
 		_transfer_status_effects(pin, new_pin)
+		
+		var stats := NodE.get_child(new_pin, ModifiedPinStats) as ModifiedPinStats
+		new_pin_health.current = min(old_pin_health.current, stats.max_health)
 		
 		_ordered_pins[old_pin_index] = new_pin
 		_npcs = _get_type(ArpeegeePin.Type.NPC)

@@ -31,7 +31,8 @@ func times_used() -> int:
 
 func run(actioner: Node2D, target: ArpeegeePinNode, object: Object, callback: String) -> void:
 	if target.filename.get_file() == 'blobbo.tscn' and pin_action().resource_path.get_file() == 'heavenly_slash_paladin.tres':
-		if randf() < 0.1:
+		print_debug('should be 0.1')
+		if randf() < 1.0:
 			_run_blobbo_steals_sword(actioner, target, object, callback)
 			return
 	
