@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/POP_BAG.mp3-cbb0752c3b04661ebab6c65d0d1e9c6b.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/POP_BAG.mp3"
+dest_files=[ "res://.import/POP_BAG.mp3-cbb0752c3b04661ebab6c65d0d1e9c6b.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

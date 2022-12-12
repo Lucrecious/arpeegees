@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://src/game/bag.gd" type="Script" id=1]
 [ext_resource path="res://assets/title/complete_bag.png" type="Texture" id=2]
@@ -16,9 +16,7 @@
 [ext_resource path="res://assets/title/particles/animation0035.png" type="Texture" id=14]
 [ext_resource path="res://assets/title/particles/animation0043.png" type="Texture" id=15]
 [ext_resource path="res://assets/title/particles/animation0038.png" type="Texture" id=16]
-[ext_resource path="res://assets/sounds/light_shimmer_package.mp3" type="AudioStream" id=17]
-[ext_resource path="res://assets/sounds/expanding_package.mp3" type="AudioStream" id=18]
-[ext_resource path="res://assets/sounds/pop_package.mp3" type="AudioStream" id=19]
+[ext_resource path="res://assets/sounds/POP_BAG.mp3" type="AudioStream" id=18]
 [ext_resource path="res://src/resources/sounds.gd" type="Script" id=20]
 [ext_resource path="res://assets/title/particles/animation0050.png" type="Texture" id=21]
 [ext_resource path="res://assets/title/particles/animation0040.png" type="Texture" id=22]
@@ -243,6 +241,20 @@ tracks/8/keys = {
 "method": "pins_drop_ready"
 } ]
 }
+tracks/9/type = "method"
+tracks/9/path = NodePath("Sounds")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "BagPop" ],
+"method": "play"
+} ]
+}
 
 [sub_resource type="Animation" id=2]
 resource_name = "shake"
@@ -342,11 +354,5 @@ next/shake = "pop"
 [node name="Sounds" type="Node" parent="."]
 script = ExtResource( 20 )
 
-[node name="ExpandingPackage" type="AudioStreamPlayer" parent="Sounds"]
+[node name="BagPop" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 18 )
-
-[node name="LightShimmerPackage" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource( 17 )
-
-[node name="PopPackage" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource( 19 )

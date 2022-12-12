@@ -16,6 +16,7 @@ onready var _animation := $'%Animation' as AnimationPlayer
 onready var _bag_sprite := $Bag/BagSprite as Node2D
 onready var _shoot_hint := $ShootHint as Node2D
 onready var _finger := $Bag/Finger as Sprite
+onready var _sounds := $Sounds as SoundsComponent
 
 func _ready() -> void:
 	reset()
