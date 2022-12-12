@@ -57,6 +57,9 @@ func run(actioner: ArpeegeePinNode, object: Object, callback: String) -> void:
 		
 		ActionUtils.add_attack_no_evade(animation, actioner, target, hard_coded_paladin_regular_attack * 3.0)
 		
+		var sounds := NodE.get_child(actioner, SoundsComponent)
+		animation.tween_callback(sounds, 'play', ['GooeyHit'])
+		
 		var paladin_transformer := NodE.get_child(actioner, Transformer) as Transformer
 		paladin_transformer.transform_scene = load('res://src/resources/arpeegee_pins/paladin.tscn')
 		

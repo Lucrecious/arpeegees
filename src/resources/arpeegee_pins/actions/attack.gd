@@ -301,6 +301,8 @@ func _run_blobbo_steals_sword(actioner: ArpeegeePinNode, target: ArpeegeePinNode
 	var blobbo_sprite_switcher := NodE.get_child(target, SpriteSwitcher) as SpriteSwitcher
 	animation.tween_callback(blobbo_sprite_switcher, 'change', ['swordstuckpaladin'])
 	
+	animation.tween_callback(sounds, 'play', ['SwordStuck'])
+	
 	var paladin_root_sprite := Components.root_sprite(actioner)
 	animation.tween_callback(paladin_root_sprite, 'set', ['visible', false])
 	

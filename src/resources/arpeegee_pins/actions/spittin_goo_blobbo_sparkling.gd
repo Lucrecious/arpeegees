@@ -35,9 +35,13 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	var attack_times := MIN_HITS + randi() % (MAX_HITS - MIN_HITS)
 	var stats := NodE.get_child(actioner, ModifiedPinStats) as ModifiedPinStats
 	var damage := ActionUtils.damage_with_factor(stats.attack, 0.3)
+	var sounds := NodE.get_child(actioner, SoundsComponent)
 	for i in attack_times:
+		animation.tween_callback(Sounds, 'play', ['WindUpAttack'])
 		TweenJuice.skew(animation, material, 0.0, -0.3, 0.5)\
 				.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+				
+		animation.tween_callback(Sounds, 'play', ['Dash1'])
 		TweenJuice.skew(animation, material, -0.3, 0.0, 0.1)
 		
 		if type == Type.Sparkling:
@@ -48,6 +52,8 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 		
 		ActionUtils.add_attack(animation, actioner, target, damage)
 		animation.tween_callback(VFX, 'physical_impactv', [target, target_position])
+		
+		animation.tween_callback(sounds, 'play', ['GooShot'])
 		
 		animation.tween_interval(0.25)
 		animation.tween_callback(sprite_switcher, 'change', ['idle'])

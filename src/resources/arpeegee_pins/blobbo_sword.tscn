@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
 [ext_resource path="res://lut/components/root_sprite.gd" type="Script" id=2]
@@ -18,6 +18,8 @@
 [ext_resource path="res://assets/sprites/blobbo/blobbo_idle.png" type="Texture" id=16]
 [ext_resource path="res://assets/sprites/blobbo/blobbo_hit.png" type="Texture" id=17]
 [ext_resource path="res://src/resources/arpeegee_pins/components/transformer.gd" type="Script" id=18]
+[ext_resource path="res://assets/sounds/SWORD_SPIN_BLOBBO.mp3" type="AudioStream" id=19]
+[ext_resource path="res://assets/sounds/SPITTIN_GOO_BLOBBO.mp3" type="AudioStream" id=20]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 9 )
@@ -42,6 +44,12 @@ magic_attack = 0
 defence = 3
 magic_defence = 2
 evasion = 4
+
+[node name="SwordSpin" type="AudioStreamPlayer" parent="Sounds" index="0"]
+stream = ExtResource( 19 )
+
+[node name="GooShot" type="AudioStreamPlayer" parent="Sounds" index="1"]
+stream = ExtResource( 20 )
 
 [node name="Sprites" type="Node2D" parent="." index="13"]
 material = SubResource( 1 )

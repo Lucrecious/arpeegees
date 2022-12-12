@@ -15,6 +15,9 @@ func run(actioner: Node2D, target: ArpeegeePinNode, object: Object, callback: St
 	
 	var target_position := ActionUtils.get_closest_adjecent_position(actioner, target) + actioner.global_position
 	
+	var sounds := NodE.get_child(actioner, SoundsComponent)
+	animation.tween_callback(sounds, 'play', ['SwordSpin'])
+	
 	ActionUtils.add_wind_up(animation, actioner, actioner.global_position, -1)
 	
 	ActionUtils.add_stab(animation, actioner, target_position)
@@ -30,6 +33,8 @@ func run(actioner: Node2D, target: ArpeegeePinNode, object: Object, callback: St
 		
 		animation.tween_callback(sprite_switcher, 'change', ['stuckswordpaladin'])
 		animation.tween_callback(paladin_root_sprite, 'set', ['visible', false])
+		
+		animation.tween_callback(sounds, 'play', ['SpittinGoo'])
 		
 		animation.tween_interval(0.5)
 
@@ -52,6 +57,8 @@ func run(actioner: Node2D, target: ArpeegeePinNode, object: Object, callback: St
 		var stats := NodE.get_child(actioner, ModifiedPinStats) as ModifiedPinStats
 		ActionUtils.add_attack(animation, actioner, target, stats.attack)
 		animation.tween_callback(VFX, 'physical_impactv', [target, target.global_position])
+		
+		animation.tween_callback(Sounds, 'play', ['Damage'])
 		
 		var after_winddown := ActionUtils.add_wind_up(animation, actioner, target.global_position, -1)
 		
