@@ -46,7 +46,10 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	
 	var side := -sign(target.global_position.x - actioner.global_position.x)
 	
-	animation.tween_callback(Sounds, 'play', ['WindUpAttack'])
+	if type == Type.MagicThrowRock:
+		animation.tween_callback(Sounds, 'play', ['WindUpMagic'])
+	else:
+		animation.tween_callback(Sounds, 'play', ['WindUpAttack'])
 	
 	var material := Components.root_sprite(actioner).material as ShaderMaterial
 	TweenJuice.skew(animation, material, 0.0, side * 1.0, 0.35)\

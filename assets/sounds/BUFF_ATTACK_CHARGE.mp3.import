@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/BUFF_ATTACK_CHARGE.mp3-7367e42a40d028063603afe7ad6117ee.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/BUFF_ATTACK_CHARGE.mp3"
+dest_files=[ "res://.import/BUFF_ATTACK_CHARGE.mp3-7367e42a40d028063603afe7ad6117ee.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://src/resources/sounds.gd" type="Script" id=1]
 [ext_resource path="res://assets/sounds/step_grass3.mp3" type="AudioStream" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://assets/sounds/CONFIRM_UI.mp3" type="AudioStream" id=12]
 [ext_resource path="res://assets/sounds/HEALTH_POPUP_UI.mp3" type="AudioStream" id=13]
 [ext_resource path="res://assets/sounds/PUNCH_LIGHT.mp3" type="AudioStream" id=14]
+[ext_resource path="res://assets/sounds/BUFF_ATTACK_CHARGE.mp3" type="AudioStream" id=15]
 
 [node name="Sounds" type="Node"]
 script = ExtResource( 1 )
@@ -68,4 +69,8 @@ bus = "SFX"
 
 [node name="GenericHeal" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
+bus = "SFX"
+
+[node name="BuffAttackCharge" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 15 )
 bus = "SFX"

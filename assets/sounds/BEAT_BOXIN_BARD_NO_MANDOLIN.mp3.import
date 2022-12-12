@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/BEAT_BOXIN_BARD_NO_MANDOLIN.mp3-5cf21e71c34f57159bb5bc0e37068069.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/BEAT_BOXIN_BARD_NO_MANDOLIN.mp3"
+dest_files=[ "res://.import/BEAT_BOXIN_BARD_NO_MANDOLIN.mp3-5cf21e71c34f57159bb5bc0e37068069.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

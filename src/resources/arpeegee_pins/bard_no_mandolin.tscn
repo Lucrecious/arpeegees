@@ -21,13 +21,13 @@
 [ext_resource path="res://assets/sounds/AN_OKAY_SONG_BARD_NO_MANDOLIN.mp3" type="AudioStream" id=19]
 [ext_resource path="res://assets/sounds/discord_hit2_bard.mp3" type="AudioStream" id=20]
 [ext_resource path="res://assets/sounds/discord_followup_hit1_bard.mp3" type="AudioStream" id=21]
-[ext_resource path="res://assets/music/SCREAM_BARD_NO_MANDOLIN.mp3" type="AudioStream" id=22]
+[ext_resource path="res://assets/sounds/SCREAM_BARD_NO_MANDOLIN.mp3" type="AudioStream" id=22]
 [ext_resource path="res://assets/sounds/SING_OUT_OF_KEY_BARD_NO_MANDOLIN.mp3" type="AudioStream" id=23]
 [ext_resource path="res://assets/sounds/discord_followup_hit2_bard.mp3" type="AudioStream" id=24]
 [ext_resource path="res://assets/sounds/discord_hit1_bard.mp3" type="AudioStream" id=25]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/heckin_good_song.gd" type="Script" id=26]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/beatboxin_bard_mandolinless.gd" type="Script" id=27]
-[ext_resource path="res://assets/music/BEAT_BOXIN_BARD_NO_MANDOLIN.mp3" type="AudioStream" id=28]
+[ext_resource path="res://assets/sounds/BEAT_BOXIN_BARD_NO_MANDOLIN.mp3" type="AudioStream" id=28]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 3 )
