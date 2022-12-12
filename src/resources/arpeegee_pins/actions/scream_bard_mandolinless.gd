@@ -32,6 +32,9 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	var sprite_switcher := NodE.get_child(actioner, SpriteSwitcher) as SpriteSwitcher
 	animation.tween_callback(sprite_switcher, 'change', ['scream'])
 	
+	var sounds := NodE.get_child(actioner, SoundsComponent) as SoundsComponent
+	animation.tween_callback(sounds, 'play', ['Scream'])
+	
 	var thing := BrokenNotes.instance() as Node2D
 	thing.z_index = 1
 	thing.visible = false
@@ -51,6 +54,8 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	var damage := ActionUtils.damage_with_factor(stats.attack, factor)
 	ActionUtils.add_attack(animation, actioner, target, damage)
 	animation.tween_callback(VFX, 'physical_impactv', [target, target_position])
+	
+	animation.tween_callback(Sounds, 'play', ['LightPunch'])
 	
 	animation.tween_callback(thing, 'queue_free')
 	

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/AN_OKAY_SONG_BARD_NO_MANDOLIN.mp3-3288631d487f037fd7b2441760435198.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/AN_OKAY_SONG_BARD_NO_MANDOLIN.mp3"
+dest_files=[ "res://.import/AN_OKAY_SONG_BARD_NO_MANDOLIN.mp3-3288631d487f037fd7b2441760435198.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

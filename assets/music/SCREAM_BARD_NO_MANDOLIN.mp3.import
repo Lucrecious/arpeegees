@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/SCREAM_BARD_NO_MANDOLIN.mp3-192233258f15fa2d82914f91ee93f986.mp3str"
+
+[deps]
+
+source_file="res://assets/music/SCREAM_BARD_NO_MANDOLIN.mp3"
+dest_files=[ "res://.import/SCREAM_BARD_NO_MANDOLIN.mp3-192233258f15fa2d82914f91ee93f986.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

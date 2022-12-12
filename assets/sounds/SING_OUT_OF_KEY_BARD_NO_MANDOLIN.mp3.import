@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/SING_OUT_OF_KEY_BARD_NO_MANDOLIN.mp3-e647ade616aff0a855b2a0e2bb0897ad.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/SING_OUT_OF_KEY_BARD_NO_MANDOLIN.mp3"
+dest_files=[ "res://.import/SING_OUT_OF_KEY_BARD_NO_MANDOLIN.mp3-e647ade616aff0a855b2a0e2bb0897ad.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

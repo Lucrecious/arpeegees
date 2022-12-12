@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/PUNCH_LIGHT.mp3-974c6b13f8147225c4c1525fbb7dd327.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/PUNCH_LIGHT.mp3"
+dest_files=[ "res://.import/PUNCH_LIGHT.mp3-974c6b13f8147225c4c1525fbb7dd327.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
