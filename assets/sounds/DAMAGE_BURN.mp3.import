@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/DAMAGE_BURN.mp3-af26d94f7e1a6533af198b4a38acce5f.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/DAMAGE_BURN.mp3"
+dest_files=[ "res://.import/DAMAGE_BURN.mp3-af26d94f7e1a6533af198b4a38acce5f.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
