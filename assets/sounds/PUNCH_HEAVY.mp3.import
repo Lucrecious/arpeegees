@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/PUNCH_HEAVY.mp3-046dedc50e76928ceb6a1f1e15197855.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/PUNCH_HEAVY.mp3"
+dest_files=[ "res://.import/PUNCH_HEAVY.mp3-046dedc50e76928ceb6a1f1e15197855.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -19,7 +19,7 @@
 [ext_resource path="res://assets/sounds/armadillo_stance_monk.mp3" type="AudioStream" id=17]
 [ext_resource path="res://assets/sounds/focus_ki_charge_monk.mp3" type="AudioStream" id=18]
 [ext_resource path="res://assets/sprites/monk/monk_win.png" type="Texture" id=19]
-[ext_resource path="res://assets/sounds/panchi_monk.mp3" type="AudioStream" id=21]
+[ext_resource path="res://assets/sounds/PUNCH_HEAVY.mp3" type="AudioStream" id=20]
 [ext_resource path="res://assets/sounds/chikara_panchi_charge_monk.mp3" type="AudioStream" id=22]
 [ext_resource path="res://assets/shaders/wobble_noise.tres" type="Texture" id=23]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/slippable.gd" type="Script" id=24]
@@ -150,7 +150,7 @@ stream = ExtResource( 17 )
 bus = "SFX"
 
 [node name="PanchiHit" type="AudioStreamPlayer" parent="Sounds" index="2"]
-stream = ExtResource( 21 )
+stream = ExtResource( 20 )
 bus = "SFX"
 
 [node name="ChikaraPanchiCharge" type="AudioStreamPlayer" parent="Sounds" index="3"]
