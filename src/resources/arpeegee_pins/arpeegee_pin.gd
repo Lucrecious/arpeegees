@@ -42,6 +42,7 @@ func post_drop_initialization() -> void:
 	
 	animation.tween_interval(1.0)
 	
+	animation.tween_callback(Sounds, 'play', ['HealthPopUpUI'])
 	animation.tween_callback(_hp_bar, 'set', ['visible', true])
 	var hp_position := _hp_bar.position
 	for i in 5:

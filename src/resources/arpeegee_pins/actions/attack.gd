@@ -61,7 +61,7 @@ func run(actioner: Node2D, target: ArpeegeePinNode, object: Object, callback: St
 	if not windup_sfx_name.empty():
 		tween.tween_callback(sounds, 'play', [windup_sfx_name])
 	else:
-		tween.tween_callback(Sounds, 'play', ['GenericWindUp1'])
+		tween.tween_callback(Sounds, 'play', ['WindUpAttack'])
 	
 	position = ActionUtils.add_wind_up(tween, actioner, position, side)
 
@@ -290,7 +290,7 @@ func _run_blobbo_steals_sword(actioner: ArpeegeePinNode, target: ArpeegeePinNode
 	if not windup_sfx_name.empty():
 		animation.tween_callback(sounds, 'play', [windup_sfx_name])
 	else:
-		animation.tween_callback(Sounds, 'play', ['GenericWindUp1'])
+		animation.tween_callback(Sounds, 'play', ['WindUpAttack'])
 	
 	ActionUtils.add_stab(animation, actioner, target_position)
 	

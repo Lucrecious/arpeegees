@@ -9,7 +9,7 @@ func add_attack(animation: SceneTreeTween, pin: ArpeegeePinNode, targets: Array,
 		animation.tween_property(self, 'global_position', target_position, 0.25)\
 				.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 		
-		animation.tween_callback(Sounds, 'play', ['GenericWindUp1'])
+		animation.tween_callback(Sounds, 'play', ['WindUpAttack'])
 		
 		animation.tween_property(self, 'rotation_degrees', 15.0, 0.75)\
 				.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)

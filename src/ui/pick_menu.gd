@@ -20,6 +20,10 @@ func _ready() -> void:
 		add_option('test %d' % i)
 	
 	connect('option_hover_changed', self, '_on_option_hover_changed')
+	connect('option_picked', self, '_on_option_picked')
+
+func _on_option_picked(_index: int) -> void:
+	Sounds.play('ConfirmUI')
 
 func _create_selector_tween() -> void:
 	var animation := _selector.create_tween()
@@ -33,6 +37,7 @@ func _create_selector_tween() -> void:
 	animation.tween_callback(sprite, 'set', ['rect_position', original_sprite_position])
 
 func _on_option_hover_changed() -> void:
+	Sounds.play('SelectingUI')
 	_update_selector()
 
 func _update_selector() -> void:

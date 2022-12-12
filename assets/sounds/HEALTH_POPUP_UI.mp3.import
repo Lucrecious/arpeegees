@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/HEALTH_POPUP_UI.mp3-c7ce60740fc05a2fb526e0cbdbe7557e.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/HEALTH_POPUP_UI.mp3"
+dest_files=[ "res://.import/HEALTH_POPUP_UI.mp3-c7ce60740fc05a2fb526e0cbdbe7557e.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

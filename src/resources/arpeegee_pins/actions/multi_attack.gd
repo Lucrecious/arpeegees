@@ -37,7 +37,7 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 	
 	tween.tween_interval(.3)
 
-	tween.tween_callback(Sounds, 'play', ['GenericWindUp1'])
+	tween.tween_callback(Sounds, 'play', ['WindUpAttack'])
 	position = ActionUtils.add_wind_up(tween, actioner, position, side)
 
 	position = ActionUtils.add_stab(tween, actioner, target_position)

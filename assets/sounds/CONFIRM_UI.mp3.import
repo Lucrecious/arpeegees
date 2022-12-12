@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/CONFIRM_UI.mp3-5d517a1e7950dd405dea0b5c0d1d4d33.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/CONFIRM_UI.mp3"
+dest_files=[ "res://.import/CONFIRM_UI.mp3-5d517a1e7950dd405dea0b5c0d1d4d33.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

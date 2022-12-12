@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/WINDUP_MAGIC.mp3-fe991f90ee167a33da51d87ea3c1852d.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/WINDUP_MAGIC.mp3"
+dest_files=[ "res://.import/WINDUP_MAGIC.mp3-fe991f90ee167a33da51d87ea3c1852d.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

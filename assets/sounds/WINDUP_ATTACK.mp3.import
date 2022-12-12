@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/WINDUP_ATTACK.mp3-1c64e7cf0d9ae8fbfd38d335a06baee2.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/WINDUP_ATTACK.mp3"
+dest_files=[ "res://.import/WINDUP_ATTACK.mp3-1c64e7cf0d9ae8fbfd38d335a06baee2.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
