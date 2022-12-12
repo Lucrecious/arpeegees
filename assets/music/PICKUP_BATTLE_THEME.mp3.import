@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/PICKUP_BATTLE_THEME.mp3-975b90a6cc88ada799210d5b9c6265d6.mp3str"
+
+[deps]
+
+source_file="res://assets/music/PICKUP_BATTLE_THEME.mp3"
+dest_files=[ "res://.import/PICKUP_BATTLE_THEME.mp3-975b90a6cc88ada799210d5b9c6265d6.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

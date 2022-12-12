@@ -1,10 +1,17 @@
 extends Node
 
 onready var _battle1 := $Battle1 as AudioStreamPlayer
+onready var _pickup := $PickUp as AudioStreamPlayer
 onready var _battle1_default_db := -7.0
 
 func play_theme() -> void:
 	_battle1.volume_db = _battle1_default_db
+	_pickup.volume_db = _battle1_default_db
+	
+	_pickup.play()
+	
+	yield(get_tree().create_timer(0.4), 'timeout')
+	
 	_battle1.play()
 
 func stop_theme() -> void:

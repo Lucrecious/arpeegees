@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/VICTORY_FANFARE.mp3-cd5c489c734cb1917931a7f1ec8ab81b.mp3str"
+
+[deps]
+
+source_file="res://assets/music/VICTORY_FANFARE.mp3"
+dest_files=[ "res://.import/VICTORY_FANFARE.mp3-cd5c489c734cb1917931a7f1ec8ab81b.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
