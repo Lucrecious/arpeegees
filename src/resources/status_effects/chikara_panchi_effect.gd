@@ -17,6 +17,12 @@ func run_start_turn_effect() -> void:
 	assert(actioner and sprite_switcher and target and hint_position)
 	
 	var tween := get_tree().create_tween()
+	
+	var health := NodE.get_child(actioner, Health) as Health
+	if health.current <= 0:
+		tween.tween_callback(self, 'emit_signal', ['start_turn_effect_finished'])
+		return
+	
 	if not target or not is_instance_valid(target):
 		ActionUtils.add_text_trigger(tween, self, 'NARRATOR_CHAKIRA_PANCHI_FAILED')
 		tween.tween_interval(0.35)
