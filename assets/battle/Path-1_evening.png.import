@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Combined-Shape.png-0d729ee1e4546e8088747ff1319d36bb.stex"
+path="res://.import/Path-1_evening.png-693eee01d3091ecb8b1407e4a616b63d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/website/Combined-Shape.png"
-dest_files=[ "res://.import/Combined-Shape.png-0d729ee1e4546e8088747ff1319d36bb.stex" ]
+source_file="res://assets/battle/Path-1_evening.png"
+dest_files=[ "res://.import/Path-1_evening.png-693eee01d3091ecb8b1407e4a616b63d.stex" ]
 
 [params]
 

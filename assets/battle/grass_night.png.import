@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/topleaves.svg-b74b88d6a1e1bdfec581671ca14fdc08.stex"
+path="res://.import/grass_night.png-ac7bd45b062b0761c1e09d676ecbb0f6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/battle/topleaves.svg"
-dest_files=[ "res://.import/topleaves.svg-b74b88d6a1e1bdfec581671ca14fdc08.stex" ]
+source_file="res://assets/battle/grass_night.png"
+dest_files=[ "res://.import/grass_night.png-ac7bd45b062b0761c1e09d676ecbb0f6.stex" ]
 
 [params]
 

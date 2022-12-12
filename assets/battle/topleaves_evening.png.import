@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Path-1.svg-d205eb6d7cf68f8175670a37d6f51455.stex"
+path="res://.import/topleaves_evening.png-e4b28363bc555c79c3c2f2e0b2881407.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/website/Path-1.svg"
-dest_files=[ "res://.import/Path-1.svg-d205eb6d7cf68f8175670a37d6f51455.stex" ]
+source_file="res://assets/battle/topleaves_evening.png"
+dest_files=[ "res://.import/topleaves_evening.png-e4b28363bc555c79c3c2f2e0b2881407.stex" ]
 
 [params]
 

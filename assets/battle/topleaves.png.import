@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/grass.svg-9e2847af15f0dcf94d60250f2210684e.stex"
+path="res://.import/topleaves.png-889ed1ee68b27418ac29fedb609c7bbd.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/battle/grass.svg"
-dest_files=[ "res://.import/grass.svg-9e2847af15f0dcf94d60250f2210684e.stex" ]
+source_file="res://assets/battle/topleaves.png"
+dest_files=[ "res://.import/topleaves.png-889ed1ee68b27418ac29fedb609c7bbd.stex" ]
 
 [params]
 
