@@ -15,6 +15,9 @@ func run(actioner: ArpeegeePinNode, target: ArpeegeePinNode, object: Object, cal
 	var sprite_switcher := NodE.get_child(actioner, SpriteSwitcher)
 	animation.tween_callback(sprite_switcher, 'swap_map', ['idle', 'bazookacharge'])
 	
+	var sounds := NodE.get_child(actioner, SoundsComponent)
+	animation.tween_callback(sounds, 'play', ['ChargeBazooka'])
+	
 	var status_effects_list := NodE.get_child(actioner, StatusEffectsList)
 	animation.tween_callback(status_effects_list, 'add_instance', [_create_charge_status_effect(target)])
 	
@@ -57,6 +60,9 @@ class BananShootEffect extends StartTurnEffectRunner:
 			animation.tween_callback(sprite_switcher, 'swap_map', ['idle', 'bazookacharge'])
 			animation.tween_callback(sprite_switcher, 'change', ['bazookashoot'])
 			
+			var sounds := NodE.get_child(pin, SoundsComponent)
+			animation.tween_callback(sounds, 'play', ['ShootBazooka'])
+			
 			var pin_actions := NodE.get_child(pin, PinActions) as PinActions
 			var banan_sprite := pin_actions.get_node('BananBazooka/Banan') as Node2D
 			animation.tween_callback(banan_sprite, 'set', ['visible', true])
@@ -68,6 +74,8 @@ class BananShootEffect extends StartTurnEffectRunner:
 			var stats := NodE.get_child(pin, ModifiedPinStats) as ModifiedPinStats
 			ActionUtils.add_attack_no_evade(animation, pin, target, stats.attack * 2.5)
 			animation.tween_callback(VFX, 'physical_impactv', [target, target.global_position])
+			
+			animation.tween_callback(Sounds, 'play', ['DamageHeavy'])
 			
 			animation.tween_callback(banan_sprite, 'set', ['position', banan_sprite.position])
 			

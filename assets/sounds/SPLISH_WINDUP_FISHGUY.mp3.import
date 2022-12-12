@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/SPLISH_WINDUP_FISHGUY.mp3-8d626686aac479be28794e7683ca73c1.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/SPLISH_WINDUP_FISHGUY.mp3"
+dest_files=[ "res://.import/SPLISH_WINDUP_FISHGUY.mp3-8d626686aac479be28794e7683ca73c1.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

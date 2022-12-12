@@ -7,12 +7,18 @@ func pin_action() -> PinAction:
 
 func run(actioner: ArpeegeePinNode, targets: Array, object: Object, callback: String) -> void:
 	var animation := create_tween()
+	
+	animation.tween_callback(Music, 'pause_fade_out')
+	
 	animation.tween_interval(0.35)
 	
 	var factor_damage := rand_range(1.0, 4.0)
 	
 	var sprite_switcher := NodE.get_child(actioner, SpriteSwitcher)
 	animation.tween_callback(sprite_switcher, 'change', ['friendshipneverdies'])
+	
+	var sounds := NodE.get_child(actioner, SoundsComponent)
+	animation.tween_callback(sounds, 'play', ['FriendshipNeverDies'])
 	
 	animation.tween_interval(1.0)
 	
@@ -22,6 +28,7 @@ func run(actioner: ArpeegeePinNode, targets: Array, object: Object, callback: St
 	for t in targets:
 		ActionUtils.add_magic_attack(animation, actioner, t, damage)
 	
+	animation.tween_callback(Music, 'unpause_fade_in')
 	animation.tween_interval(0.5)
 	animation.tween_callback(sprite_switcher, 'change', ['idle'])
 	

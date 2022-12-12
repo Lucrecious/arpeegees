@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/BANAN_BAZOOKA_WINDUP_FISHGUY_WITH_BANAN.mp3-eb4024286fa4df02a7b2fab4990f118a.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/BANAN_BAZOOKA_WINDUP_FISHGUY_WITH_BANAN.mp3"
+dest_files=[ "res://.import/BANAN_BAZOOKA_WINDUP_FISHGUY_WITH_BANAN.mp3-eb4024286fa4df02a7b2fab4990f118a.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

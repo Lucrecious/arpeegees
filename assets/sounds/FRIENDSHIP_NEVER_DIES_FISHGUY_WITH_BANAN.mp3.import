@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/FRIENDSHIP_NEVER_DIES_FISHGUY_WITH_BANAN.mp3-d9e3aa388af3c2e53ad58bc8217a74a1.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/FRIENDSHIP_NEVER_DIES_FISHGUY_WITH_BANAN.mp3"
+dest_files=[ "res://.import/FRIENDSHIP_NEVER_DIES_FISHGUY_WITH_BANAN.mp3-d9e3aa388af3c2e53ad58bc8217a74a1.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
