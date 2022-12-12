@@ -25,6 +25,9 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	animation.tween_interval(0.9)
 	
 	# the throw
+	var sounds := NodE.get_child(actioner, SoundsComponent)
+	animation.tween_callback(sounds, 'play', ['Throw'])
+	
 	var lift_height := 400.0
 	animation.tween_property(target, 'position', Vector2.UP * lift_height, 0.2)\
 			.as_relative().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
@@ -41,6 +44,8 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	
 	var vfx_position := NodE.get_child(target, REferenceRect).global_rect().get_center() as Vector2
 	animation.tween_callback(VFX, 'physical_impactv', [target, vfx_position])
+	
+	animation.tween_callback(sounds, 'play', ['DropHit'])
 	
 	animation.tween_interval(0.3)
 	animation.tween_property(target, 'rotation_degrees', 0.0, 0.5)

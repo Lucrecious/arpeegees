@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/THROW_FISHGUY.mp3-d8e1fa6b4a0c35e93d0a14066048c47a.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/THROW_FISHGUY.mp3"
+dest_files=[ "res://.import/THROW_FISHGUY.mp3-d8e1fa6b4a0c35e93d0a14066048c47a.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

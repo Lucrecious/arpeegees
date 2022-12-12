@@ -11,6 +11,9 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 	animation.tween_interval(0.5)
 	ActionUtils.add_text_trigger(animation, self, 'NARRATOR_SPLASH_USE')
 	
+	var sounds := NodE.get_child(actioner, SoundsComponent)
+	animation.tween_callback(sounds, 'play', ['Splash'])
+	
 	for t in targets:
 		if t.filename.get_file() != 'hunter.tscn':
 			continue
