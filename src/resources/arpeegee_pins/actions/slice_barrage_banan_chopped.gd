@@ -22,11 +22,19 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	var damage_amount := ActionUtils.damage_with_factor(stats.attack, 0.3)
 	var attack_times := MIN_HITS + (randi() % (MAX_HITS - MIN_HITS))
 	var slice_order := slices_node.get_children()
+	
+	var sounds := NodE.get_child(actioner, SoundsComponent)
+	
 	for i in attack_times:
 		var slice := slice_order[i] as Node2D
+		
+		animation.tween_callback(sounds, 'play', ['SliceBarrage'])
+		
 		animation.tween_property(slice, 'global_position', target_center, 0.75)\
 				.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_EXPO)
 		ActionUtils.add_attack(animation, actioner, target, damage_amount)
+		
+		animation.tween_callback(Sounds, 'play', ['DamageLight'])
 		
 		animation.tween_callback(VFX, 'physical_impactv', [target, target_center])
 		

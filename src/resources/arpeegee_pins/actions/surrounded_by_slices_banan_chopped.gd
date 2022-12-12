@@ -19,6 +19,10 @@ func run(actioner: Node2D, object: Object, callback: String) -> void:
 	animation.tween_interval(0.35)
 	
 	var root_sprite := Components.root_sprite(actioner)
+	
+	var sounds := NodE.get_child(actioner, SoundsComponent)
+	animation.tween_callback(sounds, 'play', ['SurroundedBySlices'])
+	
 	for i in 3:
 		var slice := root_sprite.get_node('Slice%d' % [i + 1])
 		if not slice.has_method('start'):
@@ -52,6 +56,8 @@ func _on_hit(hitter, actioner: ArpeegeePinNode) -> void:
 	var animation := create_tween()
 	animation.tween_interval(0.5)
 	animation.tween_callback(damage_receiver, 'damage', [damage_amount, PinAction.AttackType.Normal, false, actioner])
+	
+	animation.tween_callback(Sounds, 'play', ['DamageLight'])
 	
 	Logger.info('calling text trigger for "NARRATOR_SURROUNDED_BY_SLICES_DAMAGE" during actioner damage receiver')
 	ActionUtils.add_text_trigger(animation, self, 'NARRATOR_SURROUNDED_BY_SLICES_DAMAGE')
