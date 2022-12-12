@@ -105,6 +105,8 @@ script = ExtResource( 11 )
 attack_sprite_name = "headbutt"
 pin_action = ExtResource( 12 )
 narration_key = "NARRATOR_STRUGGLE_USE"
+use_global_sounds = true
+hit_sfx_name = "DamageLight"
 
 [node name="ImpactHint" type="Position2D" parent="Actions/Struggle" index="0"]
 position = Vector2( 62, -71 )
