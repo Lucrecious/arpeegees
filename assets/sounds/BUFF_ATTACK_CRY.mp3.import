@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/BUFF_ATTACK_CRY.mp3-c11a4e490ffff8931f6d5aae5fedb68a.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/BUFF_ATTACK_CRY.mp3"
+dest_files=[ "res://.import/BUFF_ATTACK_CRY.mp3-c11a4e490ffff8931f6d5aae5fedb68a.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

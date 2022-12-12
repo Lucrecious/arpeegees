@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/SLASH.mp3-74e6b289f51fd7ffb2105e776fe7cf4c.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/SLASH.mp3"
+dest_files=[ "res://.import/SLASH.mp3-74e6b289f51fd7ffb2105e776fe7cf4c.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

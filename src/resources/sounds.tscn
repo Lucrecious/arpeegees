@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://src/resources/sounds.gd" type="Script" id=1]
 [ext_resource path="res://assets/sounds/step_grass3.mp3" type="AudioStream" id=2]
@@ -15,6 +15,8 @@
 [ext_resource path="res://assets/sounds/HEALTH_POPUP_UI.mp3" type="AudioStream" id=13]
 [ext_resource path="res://assets/sounds/PUNCH_LIGHT.mp3" type="AudioStream" id=14]
 [ext_resource path="res://assets/sounds/BUFF_ATTACK_CHARGE.mp3" type="AudioStream" id=15]
+[ext_resource path="res://assets/sounds/SLASH.mp3" type="AudioStream" id=16]
+[ext_resource path="res://assets/sounds/BUFF_ATTACK_CRY.mp3" type="AudioStream" id=17]
 
 [node name="Sounds" type="Node"]
 script = ExtResource( 1 )
@@ -59,6 +61,10 @@ bus = "SFX"
 stream = ExtResource( 14 )
 bus = "SFX"
 
+[node name="Slash" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 16 )
+bus = "SFX"
+
 [node name="WindUpAttack" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )
 bus = "SFX"
@@ -73,4 +79,8 @@ bus = "SFX"
 
 [node name="BuffAttackCharge" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 15 )
+bus = "SFX"
+
+[node name="BuffAttackCry" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 17 )
 bus = "SFX"

@@ -66,7 +66,7 @@ func _add_attack_stab(animation: SceneTreeTween, actioner: ArpeegeePinNode, targ
 	var sprite_switcher := NodE.get_child(actioner, SpriteSwitcher) as SpriteSwitcher
 	animation.tween_callback(sprite_switcher, 'change', [frame])
 	
-	animation.tween_callback(Sounds, 'play', ['GenericHit1'])
+	animation.tween_callback(Sounds, 'play', ['Slash'])
 	ActionUtils.add_attack(animation, actioner, target, damage_amount)
 	
 	var impact_position := NodE.get_child(target, REferenceRect).global_rect().get_center() as Vector2

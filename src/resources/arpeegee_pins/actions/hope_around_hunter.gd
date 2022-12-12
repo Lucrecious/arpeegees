@@ -28,6 +28,7 @@ func run(actioner: Node2D, object: Object, callback: String) -> void:
 	
 	var status_effects_list := NodE.get_child(actioner, StatusEffectsList) as StatusEffectsList
 	animation.tween_callback(status_effects_list, 'add_instance', [_create_status_effect(actioner)])
+	animation.tween_callback(Sounds, 'play', ['BuffAttackCry'])
 	
 	ActionUtils.add_text_trigger(animation, self, 'NARRATOR_HOP_AROUND_USE')
 	
