@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/FLAMETHROWER_FLAMING_BANAN.mp3-3bdb62566162b0731032c007ecace0eb.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/FLAMETHROWER_FLAMING_BANAN.mp3"
+dest_files=[ "res://.import/FLAMETHROWER_FLAMING_BANAN.mp3-3bdb62566162b0731032c007ecace0eb.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

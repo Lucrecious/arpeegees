@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/BURNING_TOUCH_FLAMING_BANAN.mp3-2faa5ec81b2a39a3b46ad77dd4281eff.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/BURNING_TOUCH_FLAMING_BANAN.mp3"
+dest_files=[ "res://.import/BURNING_TOUCH_FLAMING_BANAN.mp3-2faa5ec81b2a39a3b46ad77dd4281eff.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

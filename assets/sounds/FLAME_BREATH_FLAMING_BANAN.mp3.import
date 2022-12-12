@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/FLAME_BREATH_FLAMING_BANAN.mp3-832a1712def17ca3f235a53e6d3a3925.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/FLAME_BREATH_FLAMING_BANAN.mp3"
+dest_files=[ "res://.import/FLAME_BREATH_FLAMING_BANAN.mp3-832a1712def17ca3f235a53e6d3a3925.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/CARAMALIZE_FLAMING_BANAN.mp3-3b90f966c5d9f085a4b0b825da4cf077.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/CARAMALIZE_FLAMING_BANAN.mp3"
+dest_files=[ "res://.import/CARAMALIZE_FLAMING_BANAN.mp3-3b90f966c5d9f085a4b0b825da4cf077.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

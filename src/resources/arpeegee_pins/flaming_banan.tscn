@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/sprites/banan/banan_onfire.PNG" type="Texture" id=2]
@@ -14,6 +14,10 @@
 [ext_resource path="res://src/resources/arpeegee_pins/actions/fire_attacks_flaming_banan.gd" type="Script" id=12]
 [ext_resource path="res://assets/sprites/effects/fx_burn.png" type="Texture" id=13]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/caramelize_flaming_banan.gd" type="Script" id=14]
+[ext_resource path="res://assets/sounds/BURNING_TOUCH_FLAMING_BANAN.mp3" type="AudioStream" id=15]
+[ext_resource path="res://assets/sounds/FLAME_BREATH_FLAMING_BANAN.mp3" type="AudioStream" id=16]
+[ext_resource path="res://assets/sounds/FLAMETHROWER_FLAMING_BANAN.mp3" type="AudioStream" id=17]
+[ext_resource path="res://assets/sounds/CARAMALIZE_FLAMING_BANAN.mp3" type="AudioStream" id=18]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 7 )
@@ -44,6 +48,22 @@ attack = 6
 magic_attack = 4
 magic_defence = 2
 evasion = 2
+
+[node name="Touch" type="AudioStreamPlayer" parent="Sounds" index="0"]
+stream = ExtResource( 15 )
+bus = "SFX"
+
+[node name="Thrower" type="AudioStreamPlayer" parent="Sounds" index="1"]
+stream = ExtResource( 17 )
+bus = "SFX"
+
+[node name="Breath" type="AudioStreamPlayer" parent="Sounds" index="2"]
+stream = ExtResource( 16 )
+bus = "SFX"
+
+[node name="Caramelize" type="AudioStreamPlayer" parent="Sounds" index="3"]
+stream = ExtResource( 18 )
+bus = "SFX"
 
 [node name="Sprites" type="Node2D" parent="." index="13"]
 material = SubResource( 1 )
@@ -80,6 +100,7 @@ script = ExtResource( 5 )
 attack_sprite_name = "idle"
 pin_action = ExtResource( 6 )
 narration_key = "NARRATOR_BURNING_TOUCH_USE"
+hit_sfx_name = "Touch"
 
 [node name="ImpactHint" type="Node2D" parent="Actions/BurningTouch" index="0"]
 position = Vector2( 48, -117 )

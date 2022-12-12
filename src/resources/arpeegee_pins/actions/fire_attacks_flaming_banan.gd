@@ -45,6 +45,13 @@ func run(actioner: ArpeegeePinNode, target: ArpeegeePinNode, object: Object, cal
 	_flame_particles.amount = 24
 	animation.tween_callback(_flame_particles, 'set', ['emitting', true])
 	
+	var sounds := NodE.get_child(actioner, SoundsComponent) as SoundsComponent
+	
+	if type == Type.Flamethrower:
+		animation.tween_callback(sounds, 'play', ['Thrower'])
+	elif type == Type.FlameBreath:
+		animation.tween_callback(sounds, 'play', ['Breath'])
+	
 	animation.tween_interval(2.0)
 	
 	var modified_stats := NodE.get_child(actioner, ModifiedPinStats) as ModifiedPinStats
@@ -58,6 +65,8 @@ func run(actioner: ArpeegeePinNode, target: ArpeegeePinNode, object: Object, cal
 		var damage := ActionUtils.damage_with_factor(modified_stats.magic_attack, 2.0)
 		hit_type = ActionUtils.add_magic_attack(animation, actioner, target, damage)
 		burn_attack = modified_stats.magic_attack
+	
+	animation.tween_callback(Sounds, 'play', ['DamageBurn'])
 	
 	if hit_type != ActionUtils.HitType.Miss and burn_attack > 0:
 		var burning_status_effect := EffectFunctions.create_burn_status_effect(burn_attack)
