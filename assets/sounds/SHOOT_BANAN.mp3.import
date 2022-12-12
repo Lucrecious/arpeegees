@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/SHOOT_BANAN.mp3-a2f9d4c910256a4cb858780ec92ecb50.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/SHOOT_BANAN.mp3"
+dest_files=[ "res://.import/SHOOT_BANAN.mp3-a2f9d4c910256a4cb858780ec92ecb50.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

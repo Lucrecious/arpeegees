@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/SURROUNDED_BY_SLICES_BANAN_CHOPPED.mp3-cc6ac2dbe143a3dcaee8618b7c83892a.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/SURROUNDED_BY_SLICES_BANAN_CHOPPED.mp3"
+dest_files=[ "res://.import/SURROUNDED_BY_SLICES_BANAN_CHOPPED.mp3-cc6ac2dbe143a3dcaee8618b7c83892a.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

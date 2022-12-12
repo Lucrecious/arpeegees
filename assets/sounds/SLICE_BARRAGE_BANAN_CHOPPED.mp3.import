@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/SLICE_BARRAGE_BANAN_CHOPPED.mp3-a71739c7ae4b88754c549bdd2a344e0a.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/SLICE_BARRAGE_BANAN_CHOPPED.mp3"
+dest_files=[ "res://.import/SLICE_BARRAGE_BANAN_CHOPPED.mp3-a71739c7ae4b88754c549bdd2a344e0a.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
