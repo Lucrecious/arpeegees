@@ -43,7 +43,7 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 	position = ActionUtils.add_stab(tween, actioner, target_position)
 
 	if hit_sfx.empty():
-		tween.tween_callback(Sounds, 'play', ['GenericHit1'])
+		tween.tween_callback(Sounds, 'play', ['Damage'])
 	else:
 		tween.tween_callback(sounds, 'play', [hit_sfx])
 

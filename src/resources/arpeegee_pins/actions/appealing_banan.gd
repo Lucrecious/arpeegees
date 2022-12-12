@@ -17,6 +17,9 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 	var sprite_switcher := NodE.get_child(actioner, SpriteSwitcher) as SpriteSwitcher
 	animation.tween_callback(sprite_switcher, 'change', ['appealing'])
 	
+	var sounds := NodE.get_child(actioner, SoundsComponent)
+	animation.tween_callback(sounds, 'play', ['Appealing'])
+	
 	var peel := sprite_switcher.sprite('appealing').get_child(0) as Node2D
 	for t in targets:
 		var target_position := ActionUtils.get_closest_adjecent_position(actioner, t) + actioner.global_position

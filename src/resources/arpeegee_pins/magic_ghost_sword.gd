@@ -18,7 +18,7 @@ func add_attack(animation: SceneTreeTween, pin: ArpeegeePinNode, targets: Array,
 		
 		ActionUtils.add_magic_attack(animation, pin, t, attack_amount)
 		
-		animation.tween_callback(Sounds, 'play', ['GenericHit1'])
+		animation.tween_callback(Sounds, 'play', ['Damage'])
 		
 		animation.tween_interval(0.5)
 		animation.tween_property(self, 'rotation_degrees', 0.0, 0.5)\

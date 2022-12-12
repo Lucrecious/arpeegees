@@ -130,7 +130,7 @@ class Poison extends Node:
 		ActionUtils.add_shader_param_interpolation(animation,
 				material, 'color_mix', 0.0, 0.8, 0.5)
 		
-		animation.tween_callback(Sounds, 'play', ['GenericHit1'])
+		animation.tween_callback(Sounds, 'play', ['Damage'])
 		animation.tween_callback(damage_receiver, 'real_damage', [damage])
 		
 		animation.tween_callback(self, 'emit_signal', ['start_turn_effect_finished'])

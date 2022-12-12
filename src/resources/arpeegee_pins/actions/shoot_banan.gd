@@ -12,6 +12,8 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	
 	var material := NodE.get_child(actioner, RootSprite).material as ShaderMaterial
 	
+	animation.tween_callback(Sounds, 'play', ['WindUpAttack'])
+	
 	TweenJuice.skew(animation, material, 0.0, -1.0, 1.0)\
 			.set_ease(Tween.EASE_OUT).set_ease(Tween.EASE_OUT)
 	
@@ -42,6 +44,8 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	var stats := NodE.get_child(actioner, ModifiedPinStats) as ModifiedPinStats
 	var attack_amount := ActionUtils.damage_with_factor(stats.attack, 2.5)
 	ActionUtils.add_attack_no_evade(animation, actioner, target, attack_amount)
+	
+	animation.tween_callback(Sounds, 'play', ['Damage'])
 	
 	animation.tween_interval(0.4)
 	

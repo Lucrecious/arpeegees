@@ -78,7 +78,7 @@ class BounceStartTurnEffect extends Node:
 			var damage := ActionUtils.damage_with_factor(stats.attack, 2.0)
 			ActionUtils.add_attack(animation, _actioner, _target, damage)
 			
-			animation.tween_callback(Sounds, 'play', ['GenericHit1'])
+			animation.tween_callback(Sounds, 'play', ['Damage'])
 			
 			animation.tween_interval(1.0)
 		else:

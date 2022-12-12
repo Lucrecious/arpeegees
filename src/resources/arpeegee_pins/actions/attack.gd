@@ -74,7 +74,7 @@ func run(actioner: Node2D, target: ArpeegeePinNode, object: Object, callback: St
 		else:
 			tween.tween_callback(sounds, 'play', [hit_sfx_name])
 	else:
-		tween.tween_callback(Sounds, 'play', ['GenericHit1'])
+		tween.tween_callback(Sounds, 'play', ['Damage'])
 
 	var sprite_switcher := NodE.get_child(actioner, SpriteSwitcher) as SpriteSwitcher
 	if not attack_sprite_name.empty():
