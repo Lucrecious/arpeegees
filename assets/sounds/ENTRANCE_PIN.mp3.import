@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/ENTRANCE_PIN.mp3-385305197fe7e89065a8251ee9b2a0da.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/ENTRANCE_PIN.mp3"
+dest_files=[ "res://.import/ENTRANCE_PIN.mp3-385305197fe7e89065a8251ee9b2a0da.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

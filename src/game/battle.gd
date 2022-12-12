@@ -507,7 +507,6 @@ func _drop_pins(positions: Array, pins: Array, item: PinItemPowerUp, item_positi
 		
 		var drop_tween := get_tree().create_tween()
 		drop_tween.tween_interval(drop_times[i])
-		drop_tween.tween_callback(_sounds, 'play', ['ShimmerArpeegees'])
 		drop_tween.tween_property(pin_node, 'global_position:y', position.y, 0.7)\
 			.set_ease(Tween.EASE_IN)\
 			.set_trans(Tween.TRANS_CUBIC)
@@ -526,6 +525,10 @@ func _drop_pins(positions: Array, pins: Array, item: PinItemPowerUp, item_positi
 			.set_trans(Tween.TRANS_BOUNCE)
 	
 	loader.queue_free()
+	var sound_tween := create_tween()
+	sound_tween.tween_interval(0.4)
+	sound_tween.tween_callback(_sounds, 'play', ['EntrancePin'])
+	
 	emit_signal('pins_dropped')
 
 
