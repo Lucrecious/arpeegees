@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/resources/arpeegee_pins/blobbo_sparkling.tres" type="Resource" id=2]
@@ -17,6 +17,9 @@
 [ext_resource path="res://assets/sprites/effects/goo_purple.png" type="Texture" id=15]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/sparkles_blobbo_sparkling.gd" type="Script" id=16]
 [ext_resource path="res://src/resources/arpeegee_pins/components/sparkles_kiss.gd" type="Script" id=17]
+[ext_resource path="res://assets/sounds/SPITTIN_GOO_BLOBBO.mp3" type="AudioStream" id=18]
+[ext_resource path="res://assets/sounds/A_SLAP_A_GOO_BLOBBO.mp3" type="AudioStream" id=19]
+[ext_resource path="res://assets/sounds/BRIGHT_SPARKLES_PALADIN.mp3" type="AudioStream" id=20]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 10 )
@@ -105,6 +108,7 @@ attack_sprite_name = "slap"
 pin_action = ExtResource( 13 )
 walk = false
 narration_key = "NARRATOR_SLAP_A_GOO_USE_PURPLE"
+hit_sfx_name = "Slap"
 
 [node name="ImpactHint" type="Position2D" parent="Actions/ASlapAGoo" index="0"]
 position = Vector2( 95, -63 )
@@ -122,3 +126,12 @@ texture = ExtResource( 15 )
 
 [node name="SPARKLES" type="Node2D" parent="Actions" index="2" groups=["sparkle_ability"]]
 script = ExtResource( 16 )
+
+[node name="Slap" type="AudioStreamPlayer" parent="Sounds" index="0"]
+stream = ExtResource( 19 )
+
+[node name="SpittinGoo" type="AudioStreamPlayer" parent="Sounds" index="1"]
+stream = ExtResource( 18 )
+
+[node name="Sparkles" type="AudioStreamPlayer" parent="Sounds" index="2"]
+stream = ExtResource( 20 )

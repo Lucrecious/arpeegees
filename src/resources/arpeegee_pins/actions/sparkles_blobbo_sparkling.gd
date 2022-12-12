@@ -23,9 +23,13 @@ func run(actioner: Node2D, object: Object, callback: String) -> void:
 	
 	var sprite_switcher := NodE.get_child(actioner, SpriteSwitcher) as SpriteSwitcher
 	animation.tween_callback(sprite_switcher, 'change', ['win'])
+	var sounds := NodE.get_child(actioner, SoundsComponent)
+	animation.tween_callback(sounds, 'play', ['Sparkles'])
 	
 	var list := NodE.get_child(actioner, StatusEffectsList) as StatusEffectsList
 	animation.tween_callback(list, 'add_instance', [_create_status_effect(self)])
+	
+	animation.tween_callback(Sounds, 'play', ['BuffAttackCry'])
 	
 	var sparkles := VFX.sparkle_explosions()
 	animation.tween_callback(NodE, 'add_children', [actioner, sparkles])
