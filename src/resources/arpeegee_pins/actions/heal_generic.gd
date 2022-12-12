@@ -188,4 +188,6 @@ func _heal_status_ailments(targets: Array) -> void:
 	for t in targets:
 		var status_effects := NodE.get_child(t, StatusEffectsList) as StatusEffectsList
 		for effect in status_effects.get_all():
+			if not effect.is_ailment:
+				continue
 			StatusEffect.queue_free_leave_particles_until_dead(effect)
