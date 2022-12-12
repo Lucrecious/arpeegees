@@ -12,6 +12,11 @@ enum Type {
 export(Type) var type := Type.HolySparkles
 export(String) var frame := ''
 
+func _ready() -> void:
+	if not get_tree().get_nodes_in_group('sparkle_ability_ruined').empty():
+		if type == Type.HolySparkles:
+			block()
+
 var _boosted := false
 func boost_from_combing() -> void:
 	_boosted = true

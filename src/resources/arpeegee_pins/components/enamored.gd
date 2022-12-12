@@ -37,6 +37,8 @@ func ruin_enamore() -> void:
 	_is_enamored = false
 	queue_free()
 	
+	get_parent().add_to_group('sparkle_ability_ruined')
+	
 	var sprite_switcher := NodE.get_sibling(self, SpriteSwitcher) as SpriteSwitcher
 	sprite_switcher.swap_map('idle', 'sad')
 	

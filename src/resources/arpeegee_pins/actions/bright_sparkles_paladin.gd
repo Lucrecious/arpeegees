@@ -2,6 +2,10 @@ extends Node2D
 
 signal text_triggered(narration_key)
 
+func _ready() -> void:
+	if not get_tree().get_nodes_in_group('sparkle_ability_ruined').empty():
+		block()
+
 var _boosted := false
 func boost_from_combing() -> void:
 	_boosted = true
