@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Group 9.png-8b7097f0e19ba8ab227805ec410d4e12.stex"
+path="res://.import/chest_top.png-175fa094a6fb1c5f75b58c16dc03d043.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/website/Group 9.png"
-dest_files=[ "res://.import/Group 9.png-8b7097f0e19ba8ab227805ec410d4e12.stex" ]
+source_file="res://assets/ui/website/chest_top.png"
+dest_files=[ "res://.import/chest_top.png-175fa094a6fb1c5f75b58c16dc03d043.stex" ]
 
 [params]
 

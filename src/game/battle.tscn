@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=2]
+[gd_scene load_steps=58 format=2]
 
 [ext_resource path="res://src/game/battle.gd" type="Script" id=1]
 [ext_resource path="res://src/game/battle/turn_manager.gd" type="Script" id=2]
@@ -36,6 +36,7 @@
 [ext_resource path="res://assets/battle/ground_night.png" type="Texture" id=34]
 [ext_resource path="res://assets/battle/ground.png" type="Texture" id=35]
 [ext_resource path="res://assets/battle/sky_night.png" type="Texture" id=36]
+[ext_resource path="res://src/ui/win_overlay.tscn" type="PackedScene" id=37]
 
 [sub_resource type="Shader" id=10]
 code = "shader_type canvas_item;
@@ -361,8 +362,8 @@ _turn_manager_path = NodePath("../../CanvasLayer/HUD/Control/BattleOverlay/TurnM
 
 [node name="Sprite" type="Sprite" parent="BattleLayer"]
 visible = false
-position = Vector2( 200, 600 )
-scale = Vector2( 0.13, 0.13 )
+position = Vector2( 982, 461 )
+scale = Vector2( 0.333, 0.333 )
 texture = ExtResource( 5 )
 
 [node name="ArrowRainControl" type="Control" parent="."]
@@ -446,6 +447,9 @@ texture = ExtResource( 14 )
 autoplay = "default"
 anims/RESET = SubResource( 5 )
 anims/default = SubResource( 6 )
+
+[node name="WinOverlay" parent="." instance=ExtResource( 37 )]
+visible = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

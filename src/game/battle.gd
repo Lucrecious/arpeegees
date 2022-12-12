@@ -430,6 +430,7 @@ func _on_battle_ended(end_condition: int) -> void:
 	if end_condition == TurnManager.EndCondition.NPCsDead:
 		_narrator.speak_tr('NARRATOR_BATTLE_FINISHED_HEROES_WIN_GENERIC', true)
 		_change_to_win_sprites(_turn_manager.get_players())
+		_show_reward()
 	elif end_condition == TurnManager.EndCondition.PlayersDead:
 		_narrator.speak_tr('NARRATOR_BATTLE_FINISHED_MONSTERS_WIN_GENERIC', true)
 		_change_to_win_sprites(_turn_manager.get_npcs())
@@ -437,6 +438,21 @@ func _on_battle_ended(end_condition: int) -> void:
 		_narrator.speak_tr('NARRATOR_BATTLE_FINISHED_TIED_GENERIC', true)
 	else:
 		assert(false)
+
+func _show_reward() -> void:
+	var win_overlay := get_node('WinOverlay')
+	win_overlay.visible = true
+	win_overlay.modulate.a = 0.0
+	
+	var animation := create_tween()
+	_add_speaking_pause(animation, _narrator)
+	animation.tween_interval(2.0)
+	
+	animation.tween_property(win_overlay, 'modulate:a', 1.0, 1.0)\
+			.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+			
+	animation.tween_callback(win_overlay, 'run')
+	
 
 func _change_to_win_sprites(pins: Array) -> void:
 	for p in pins:

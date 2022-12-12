@@ -67,6 +67,14 @@
                 z-index: 3;
             }
 
+            #arpeegee-sprite {
+                position: absolute;
+                margin-top: -28%;
+                margin-left: 68%;
+                z-index: 5;
+                max-width: 20%;
+            }
+
         </style>
     </head>
     <body>
@@ -96,6 +104,10 @@
                         }
 
                         loadingbarImg.src = new_image_src;
+
+                        if (new_index >= (progressUpdates.length - 1)) {
+                            document.getElementById('arpeegee-sprite').src = 'bard_win.png'
+                        }
                     }
 
                     engine.startGame({
@@ -119,6 +131,8 @@
                 <div>
                     <img src="loadingbartext.png" id="loadingbartext" class="center">
                     <img src="loadingbarbar0.png" id="loadingbar" class="center">
+                    <img src="bard_idle.png" id="arpeegee-sprite" class="center">
+                    <link rel="preload" href="bard_win.png" as="image">
                     <link rel="preload" href="loadingbarbar1.png" as="image">
                     <link rel="preload" href="loadingbarbar2.png" as="image">
                     <link rel="preload" href="loadingbarbar3.png" as="image">
