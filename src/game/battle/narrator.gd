@@ -267,7 +267,7 @@ func _process(_delta: float) -> void:
 	if not _is_typing:
 		return
 	
-	if Engine.get_idle_frames() % 5 != 0:
+	if Engine.get_idle_frames() % 15 != 0:
 		return
 	
-	Sounds.play('SpeakingBlip1')
+	Sounds.play_new('SpeakingBlip1')
