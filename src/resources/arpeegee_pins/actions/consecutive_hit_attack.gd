@@ -41,6 +41,8 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	var impact_position := NodE.get_child(target, REferenceRect).global_rect().get_center() as Vector2
 	var attack_times := MIN_ATTACKS + randi() % (MAX_ATTACKS - MIN_ATTACKS)
 	
+	var sounds := NodE.get_child(actioner, SoundsComponent)
+	
 	for i in attack_times:
 		ActionUtils.add_wind_up(animation, actioner, target_position, -1)
 		ActionUtils.add_stab(animation, actioner, target_position)
@@ -52,7 +54,7 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 		if type == Type.SloppySlapDeflatedMushboy:
 			animation.tween_callback(Sounds, 'play', ['LightPunch'])
 		elif type == Type.BiteKoboldio:
-			pass
+			animation.tween_callback(sounds, 'play', ['Bite'])
 		
 		ActionUtils.add_shake(animation, actioner, target_position, Vector2.RIGHT, 10, 0.25)
 		

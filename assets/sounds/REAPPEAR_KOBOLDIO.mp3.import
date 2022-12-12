@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/REAPPEAR_KOBOLDIO.mp3-2837393e0a966a5b8ad862a58da3c605.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/REAPPEAR_KOBOLDIO.mp3"
+dest_files=[ "res://.import/REAPPEAR_KOBOLDIO.mp3-2837393e0a966a5b8ad862a58da3c605.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

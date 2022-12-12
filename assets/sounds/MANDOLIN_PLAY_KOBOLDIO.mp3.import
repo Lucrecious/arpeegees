@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/MANDOLIN_PLAY_KOBOLDIO.mp3-4428a1713eefda23013dc5a987fe2d2d.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/MANDOLIN_PLAY_KOBOLDIO.mp3"
+dest_files=[ "res://.import/MANDOLIN_PLAY_KOBOLDIO.mp3-4428a1713eefda23013dc5a987fe2d2d.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

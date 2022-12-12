@@ -22,6 +22,9 @@ func run(actioner: Node2D, object: Object, callback: String) -> void:
 	var root_sprite := Components.root_sprite(actioner)
 	animation.tween_callback(self, '_remove_disappeared_effect', [list])
 	
+	var sounds := NodE.get_child(actioner, SoundsComponent)
+	animation.tween_callback(sounds, 'play', ['Reappear'])
+	
 	if chance < 0.25:
 		
 		animation.tween_property(root_sprite, 'modulate:a', 1.0, 1.0)\

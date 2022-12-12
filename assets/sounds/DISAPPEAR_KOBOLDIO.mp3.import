@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/DISAPPEAR_KOBOLDIO.mp3-1bba990092d231ac001babac7d81c253.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/DISAPPEAR_KOBOLDIO.mp3"
+dest_files=[ "res://.import/DISAPPEAR_KOBOLDIO.mp3-1bba990092d231ac001babac7d81c253.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

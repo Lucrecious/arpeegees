@@ -22,6 +22,9 @@ func run(actioner: Node2D, object: Object, callback: String) -> void:
 	var sprite_switcher := NodE.get_child(actioner, SpriteSwitcher) as SpriteSwitcher
 	animation.tween_callback(sprite_switcher, 'change', ['nervous'])
 	
+	var sounds := NodE.get_child(actioner, SoundsComponent)
+	animation.tween_callback(sounds, 'play', ['Disappear'])
+	
 	var root_sprite := Components.root_sprite(actioner)
 	animation.tween_property(root_sprite, 'modulate:a', 0.0, 1.0)\
 			.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
