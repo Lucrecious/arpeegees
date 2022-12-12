@@ -4,6 +4,7 @@ onready var _top := $Chest/Bottom/Top as Control
 onready var _glow := $Chest/Bottom/Glow as Control
 
 func _ready() -> void:
+	VisualServer.canvas_item_set_z_index(get_canvas_item(), 7)
 	_glow.visible = false
 	_glow.modulate.a = 0.0
 	_top.visible = true
