@@ -1114,6 +1114,7 @@ scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 37 )
 
 [node name="Hit" type="Sprite" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/Blobbo"]
+visible = false
 position = Vector2( 152.445, 162.497 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 38 )
