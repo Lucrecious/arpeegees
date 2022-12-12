@@ -60,7 +60,10 @@ func run(actioner: Node2D, target: ArpeegeePinNode, object: Object, callback: St
 	tween.tween_interval(.3)
 
 	if not windup_sfx_name.empty():
-		tween.tween_callback(sounds, 'play', [windup_sfx_name])
+		if use_global_sounds:
+			tween.tween_callback(Sounds, 'play', [windup_sfx_name])
+		else:
+			tween.tween_callback(sounds, 'play', [windup_sfx_name])
 	else:
 		tween.tween_callback(Sounds, 'play', ['WindUpAttack'])
 	
@@ -293,7 +296,10 @@ func _run_blobbo_steals_sword(actioner: ArpeegeePinNode, target: ArpeegeePinNode
 	
 	var sounds := NodE.get_child(actioner, SoundsComponent) as SoundsComponent
 	if not windup_sfx_name.empty():
-		animation.tween_callback(sounds, 'play', [windup_sfx_name])
+		if use_global_sounds:
+			animation.tween_callback(Sounds, 'play', [windup_sfx_name])
+		else:
+			animation.tween_callback(sounds, 'play', [windup_sfx_name])
 	else:
 		animation.tween_callback(Sounds, 'play', ['WindUpAttack'])
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/actions.gd" type="Script" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://assets/shaders/pin_sprite_shader.gdshader" type="Shader" id=13]
 [ext_resource path="res://assets/shaders/wobble_noise.tres" type="Texture" id=14]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/trying_to_spore_hatless_mushboy.gd" type="Script" id=15]
+[ext_resource path="res://assets/sounds/TRYNG_TO_SPORE_MUSHBOY.mp3" type="AudioStream" id=16]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 13 )
@@ -93,6 +94,9 @@ script = ExtResource( 4 )
 attack_sprite_name = "headbutt"
 pin_action = ExtResource( 10 )
 narration_key = "NARRATOR_DESPERATE_HEADBUTT_USE"
+use_global_sounds = true
+hit_sfx_name = "DamageLight"
+windup_sfx_name = "WindUpAttackLight"
 
 [node name="ImpactHint" type="Position2D" parent="Actions/DesperateHeadbutt" index="0"]
 position = Vector2( 63, -91 )
@@ -102,9 +106,16 @@ script = ExtResource( 4 )
 attack_sprite_name = "kick"
 pin_action = ExtResource( 11 )
 narration_key = "NARRATOR_DESPERATE_KICK_USE"
+use_global_sounds = true
+hit_sfx_name = "DamageLight"
+windup_sfx_name = "WindUpAttackLight"
 
 [node name="ImpactHint" type="Position2D" parent="Actions/DesperateKick" index="0"]
 position = Vector2( 65, -69 )
 
 [node name="TryingToSpore" type="Node2D" parent="Actions" index="2"]
 script = ExtResource( 15 )
+
+[node name="SporeTry" type="AudioStreamPlayer" parent="Sounds" index="0"]
+stream = ExtResource( 16 )
+bus = "SFX"

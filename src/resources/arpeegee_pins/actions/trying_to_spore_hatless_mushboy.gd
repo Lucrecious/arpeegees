@@ -19,8 +19,12 @@ func run(actioner: Node2D, object: Object, callback: String) -> void:
 	var sprite_switcher := NodE.get_child(actioner, SpriteSwitcher) as SpriteSwitcher
 	animation.tween_callback(sprite_switcher, 'change', ['tryingtospore'])
 	
+	var sounds := NodE.get_child(actioner, SoundsComponent)
+	animation.tween_callback(sounds, 'play', ['SporeTry'])
+	
 	var status_effects_list := NodE.get_child(actioner, StatusEffectsList) as StatusEffectsList
 	animation.tween_callback(status_effects_list, 'add_instance', [_create_getting_angry_effect()])
+	animation.tween_callback(Sounds, 'play', ['BuffAttackCry'])
 	
 	_uses += 1
 	if _uses >= 1 and _uses <= 3:

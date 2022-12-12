@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/TRYNG_TO_SPORE_MUSHBOY.mp3-13ed971ff287e869491ca76241d9b5cd.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/TRYNG_TO_SPORE_MUSHBOY.mp3"
+dest_files=[ "res://.import/TRYNG_TO_SPORE_MUSHBOY.mp3-13ed971ff287e869491ca76241d9b5cd.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

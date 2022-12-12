@@ -210,3 +210,4 @@ scale_amount = 0.2
 
 [node name="Spore" type="AudioStreamPlayer" parent="Sounds" index="0"]
 stream = ExtResource( 29 )
+bus = "SFX"
