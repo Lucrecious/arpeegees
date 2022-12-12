@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/sprites/mushboy/mushboy_idle.png" type="Texture" id=2]
@@ -28,6 +28,7 @@
 [ext_resource path="res://src/resources/arpeegee_pins/mushboy_deflated.tscn" type="PackedScene" id=26]
 [ext_resource path="res://src/resources/arpeegee_pins/components/cap_popper.gd" type="Script" id=27]
 [ext_resource path="res://assets/sprites/mushboy/mushboy_hat.png" type="Texture" id=28]
+[ext_resource path="res://assets/sounds/SPORE_MUSHBOY.mp3" type="AudioStream" id=29]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 10 )
@@ -96,7 +97,6 @@ centered = false
 [node name="MushboyHat" type="Sprite" parent="Sprites/HatlessHurt" index="0"]
 show_behind_parent = true
 position = Vector2( 225, 321 )
-scale = Vector2( 1, 1 )
 texture = ExtResource( 28 )
 
 [node name="HatlessIdle" type="Sprite" parent="Sprites" index="3"]
@@ -207,3 +207,6 @@ emission_sphere_radius = 25.0
 spread = 180.0
 initial_velocity = 300.0
 scale_amount = 0.2
+
+[node name="Spore" type="AudioStreamPlayer" parent="Sounds" index="0"]
+stream = ExtResource( 29 )

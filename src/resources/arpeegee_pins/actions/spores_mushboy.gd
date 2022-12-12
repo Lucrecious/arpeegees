@@ -48,6 +48,9 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	else:
 		_spore_shooter.angle = 0.0
 	
+	var sounds := NodE.get_child(actioner, SoundsComponent)
+	animation.tween_callback(sounds, 'play', ['Spore'])
+	
 	animation.tween_callback(_spore_shooter, 'set', ['emitting', true])
 	animation.tween_interval(0.75)
 	animation.tween_callback(_spore_shooter, 'set', ['emitting', false])

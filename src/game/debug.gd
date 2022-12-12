@@ -1,6 +1,6 @@
 extends Node
 
-var play_as_npcs := false
+var play_as_npcs := true
 var allow_pick_pins := true
 
 func get_picked_pins() -> Dictionary:

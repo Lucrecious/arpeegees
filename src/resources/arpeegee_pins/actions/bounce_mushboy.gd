@@ -15,6 +15,7 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	
 	TweenJuice.squish(animation, material, 0.5, 1.0, 0.1)
 	
+	animation.tween_callback(Sounds, 'play', ['Dash1'])
 	animation.tween_property(actioner, 'global_position', Vector2.UP * 1000.0, 0.15)\
 			.as_relative()
 	
@@ -76,6 +77,8 @@ class BounceStartTurnEffect extends Node:
 			var stats := NodE.get_child(_actioner, ModifiedPinStats) as ModifiedPinStats
 			var damage := ActionUtils.damage_with_factor(stats.attack, 2.0)
 			ActionUtils.add_attack(animation, _actioner, _target, damage)
+			
+			animation.tween_callback(Sounds, 'play', ['GenericHit1'])
 			
 			animation.tween_interval(1.0)
 		else:
