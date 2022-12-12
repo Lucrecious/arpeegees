@@ -113,6 +113,8 @@ position = Vector2( -113, -139 )
 script = ExtResource( 13 )
 pin_action = ExtResource( 14 )
 narration_key = "NARRATOR_USELESS_STUFF_WHACK_USE"
+use_global_sounds = true
+hit_sfx_name = "DamageLight"
 
 [node name="ImpactHint" type="Position2D" parent="Actions/UselessStaffWhack" index="0"]
 
@@ -124,6 +126,8 @@ script = ExtResource( 13 )
 attack_sprite_name = "attackdesperate"
 pin_action = ExtResource( 17 )
 narration_key = "NARRATOR_DESPERATE_STAFF_WHACK_USE"
+use_global_sounds = true
+hit_sfx_name = "DamageLight"
 attack_factor = 0.0
 
 [node name="ImpactHint" type="Node2D" parent="Actions/DesperateStaffWhack" index="0"]

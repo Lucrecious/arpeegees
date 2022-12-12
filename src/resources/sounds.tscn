@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://src/resources/sounds.gd" type="Script" id=1]
 [ext_resource path="res://assets/sounds/step_grass3.mp3" type="AudioStream" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://assets/sounds/BUFF_DEFENSE.mp3" type="AudioStream" id=18]
 [ext_resource path="res://assets/sounds/PUNCH_HEAVY.mp3" type="AudioStream" id=19]
 [ext_resource path="res://assets/sounds/DAMAGE_BURN.mp3" type="AudioStream" id=20]
+[ext_resource path="res://assets/sounds/DAMAGE_LIGHT.mp3" type="AudioStream" id=21]
 
 [node name="Sounds" type="Node"]
 script = ExtResource( 1 )
@@ -86,6 +87,10 @@ bus = "SFX"
 
 [node name="DamageBurn" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 20 )
+bus = "SFX"
+
+[node name="DamageLight" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 21 )
 bus = "SFX"
 
 [node name="BuffAttackCharge" type="AudioStreamPlayer" parent="."]
