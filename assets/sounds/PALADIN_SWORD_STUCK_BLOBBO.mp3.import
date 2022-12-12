@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/PALADIN_SWORD_STUCK_BLOBBO.mp3-c6b7b2d6d198e37937653748b4755c7b.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/PALADIN_SWORD_STUCK_BLOBBO.mp3"
+dest_files=[ "res://.import/PALADIN_SWORD_STUCK_BLOBBO.mp3-c6b7b2d6d198e37937653748b4755c7b.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

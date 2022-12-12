@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/A_SLAP_A_GOO_BLOBBO.mp3-7dd96dc22d93e17c1ca1d17dd05900dd.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/A_SLAP_A_GOO_BLOBBO.mp3"
+dest_files=[ "res://.import/A_SLAP_A_GOO_BLOBBO.mp3-7dd96dc22d93e17c1ca1d17dd05900dd.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

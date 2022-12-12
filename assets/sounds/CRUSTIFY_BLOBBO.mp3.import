@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/CRUSTIFY_BLOBBO.mp3-47eb11bff1c91a48c8d53f6054a2526e.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/CRUSTIFY_BLOBBO.mp3"
+dest_files=[ "res://.import/CRUSTIFY_BLOBBO.mp3-47eb11bff1c91a48c8d53f6054a2526e.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

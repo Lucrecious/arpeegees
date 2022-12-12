@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/GOO_TRAP_BLOBBO.mp3-db6d58622d48cdb2d4d67cf944d6e80b.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/GOO_TRAP_BLOBBO.mp3"
+dest_files=[ "res://.import/GOO_TRAP_BLOBBO.mp3-db6d58622d48cdb2d4d67cf944d6e80b.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

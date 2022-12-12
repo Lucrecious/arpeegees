@@ -43,10 +43,14 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 	
 	animation.tween_interval(0.5)
 	
+	animation.tween_callback(Sounds, 'play', ['WindUpAttack'])
+	
 	TweenJuice.skew(animation, material, 0.0, -0.5, 1.0)\
 			.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
 	
 	animation.tween_interval(0.5)
+	
+	animation.tween_callback(Sounds, 'play', ['Dash1'])
 	
 	TweenJuice.skew(animation, material, -0.5, 0.5, 0.1)\
 			.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_EXPO)
@@ -63,6 +67,12 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 	
 	animation.tween_property(_goo_shot, 'global_position', target_position, 0.25)\
 			.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUAD)
+	
+	var sounds := NodE.get_child(actioner, SoundsComponent)
+	if type == Type.GooShot:
+		animation.tween_callback(sounds, 'play', ['SpittinGoo'])
+	elif type == Type.GooTrap:
+		animation.tween_callback(sounds, 'play', ['GooTrap'])
 	
 	var explosions := VFX.goo_explosions()
 	animation.tween_callback(NodE, 'add_children', [actioner.get_parent(), explosions])

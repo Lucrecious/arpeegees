@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/SPITTIN_GOO_BLOBBO.mp3-aea2861855b289d05e65c830206cfeda.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/SPITTIN_GOO_BLOBBO.mp3"
+dest_files=[ "res://.import/SPITTIN_GOO_BLOBBO.mp3-aea2861855b289d05e65c830206cfeda.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
