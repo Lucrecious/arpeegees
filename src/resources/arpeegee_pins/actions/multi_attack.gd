@@ -76,7 +76,8 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 	
 	var actioner_file := actioner.filename.get_file()
 	if actioner_file == 'paladin.tscn' or actioner_file == 'paladin_no_sword.tscn':
-		assert(pin_action().resource_path.get_file() == 'tremendous_slash_paladin.tres')
+		assert(pin_action().resource_path.get_file() == 'tremendous_slash_paladin.tres'\
+				or pin_action().resource_path.get_file() == 'tremendous_punch_paladin.tres')
 		for t in targets:
 			var wont_attack_paladin := NodE.get_child(t, WontAttackPaladin, false) as WontAttackPaladin
 			if wont_attack_paladin:

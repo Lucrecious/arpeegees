@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://src/resources/arpeegee_pins/pin.tscn" type="PackedScene" id=1]
 [ext_resource path="res://lut/components/root_sprite.gd" type="Script" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://src/resources/actions/tremendous_punch_paladin.tres" type="Resource" id=14]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/multi_attack.gd" type="Script" id=15]
 [ext_resource path="res://src/resources/arpeegee_pins/paladin_no_sword.tres" type="Resource" id=16]
+[ext_resource path="res://assets/sounds/chikara_panchi_hit_monk.mp3" type="AudioStream" id=17]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/heal_generic.gd" type="Script" id=18]
 [ext_resource path="res://src/resources/arpeegee_pins/actions/slippable.gd" type="Script" id=19]
 [ext_resource path="res://assets/sprites/paladin/paladin_idle.png" type="Texture" id=20]
@@ -117,6 +118,8 @@ script = ExtResource( 11 )
 script = ExtResource( 12 )
 pin_action = ExtResource( 13 )
 narration_key = "NARRATOR_HEAVENLY_PUNCH_USE"
+use_global_sounds = true
+hit_sfx_name = "HeavyPunch"
 
 [node name="ImpactHint" type="Position2D" parent="Actions/HeavenlyPunch" index="0"]
 position = Vector2( -79, -75 )
@@ -128,6 +131,7 @@ script = ExtResource( 19 )
 script = ExtResource( 15 )
 pin_action = ExtResource( 14 )
 narration_key_single = "NARRATOR_TREMENDOUS_PUNCH_USE"
+hit_sfx = "TremendousPunch"
 
 [node name="ImpactHint" type="Position2D" parent="Actions/TremendousPunch" index="0"]
 position = Vector2( -79, -75 )
@@ -147,6 +151,10 @@ script = ExtResource( 21 )
 
 [node name="BrightSparkles" type="AudioStreamPlayer" parent="Sounds" index="0"]
 stream = ExtResource( 24 )
+bus = "SFX"
+
+[node name="TremendousPunch" type="AudioStreamPlayer" parent="Sounds" index="1"]
+stream = ExtResource( 17 )
 bus = "SFX"
 
 [node name="Transformer" type="Node" parent="." index="15"]

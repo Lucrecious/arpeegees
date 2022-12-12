@@ -10,6 +10,7 @@ export(bool) var walk := true
 export(bool) var physical := true
 export(String) var narration_key := ''
 
+export(bool) var use_global_sounds := false
 export(String) var hit_sfx_name := ''
 export(String) var windup_sfx_name := ''
 
@@ -68,7 +69,10 @@ func run(actioner: Node2D, target: ArpeegeePinNode, object: Object, callback: St
 	position = ActionUtils.add_stab(tween, actioner, target_position)
 
 	if not hit_sfx_name.empty():
-		tween.tween_callback(sounds, 'play', [hit_sfx_name])
+		if use_global_sounds:
+			tween.tween_callback(Sounds, 'play', [hit_sfx_name])
+		else:
+			tween.tween_callback(sounds, 'play', [hit_sfx_name])
 	else:
 		tween.tween_callback(Sounds, 'play', ['GenericHit1'])
 

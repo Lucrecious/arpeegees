@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://src/resources/sounds.gd" type="Script" id=1]
 [ext_resource path="res://assets/sounds/step_grass3.mp3" type="AudioStream" id=2]
@@ -8,7 +8,7 @@
 [ext_resource path="res://assets/sounds/dash1.mp3" type="AudioStream" id=6]
 [ext_resource path="res://assets/sounds/generic_hit.mp3" type="AudioStream" id=7]
 [ext_resource path="res://assets/sounds/WINDUP_MAGIC.mp3" type="AudioStream" id=8]
-[ext_resource path="res://assets/sounds/HEAL_3_WHITEMAGE.mp3" type="AudioStream" id=9]
+[ext_resource path="res://assets/sounds/HEAL.mp3" type="AudioStream" id=9]
 [ext_resource path="res://assets/sounds/WINDUP_ATTACK.mp3" type="AudioStream" id=10]
 [ext_resource path="res://assets/sounds/SELECTING_UI.mp3" type="AudioStream" id=11]
 [ext_resource path="res://assets/sounds/CONFIRM_UI.mp3" type="AudioStream" id=12]
@@ -18,6 +18,7 @@
 [ext_resource path="res://assets/sounds/SLASH.mp3" type="AudioStream" id=16]
 [ext_resource path="res://assets/sounds/BUFF_ATTACK_CRY.mp3" type="AudioStream" id=17]
 [ext_resource path="res://assets/sounds/BUFF_DEFENSE.mp3" type="AudioStream" id=18]
+[ext_resource path="res://assets/sounds/PUNCH_HEAVY.mp3" type="AudioStream" id=19]
 
 [node name="Sounds" type="Node"]
 script = ExtResource( 1 )
@@ -62,6 +63,10 @@ bus = "SFX"
 stream = ExtResource( 14 )
 bus = "SFX"
 
+[node name="HeavyPunch" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 19 )
+bus = "SFX"
+
 [node name="Slash" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 16 )
 bus = "SFX"
@@ -74,7 +79,7 @@ bus = "SFX"
 stream = ExtResource( 8 )
 bus = "SFX"
 
-[node name="GenericHeal" type="AudioStreamPlayer" parent="."]
+[node name="Heal" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
 bus = "SFX"
 

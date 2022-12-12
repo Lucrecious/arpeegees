@@ -126,6 +126,8 @@ script = ExtResource( 10 )
 script = ExtResource( 11 )
 pin_action = ExtResource( 12 )
 narration_key = "NARRATOR_HEAVENLY_SLASH_USE"
+use_global_sounds = true
+hit_sfx_name = "Slash"
 
 [node name="ImpactHint" type="Position2D" parent="Actions/HeavenlySlash" index="0"]
 position = Vector2( -103, -99 )
