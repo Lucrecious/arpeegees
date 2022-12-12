@@ -11,5 +11,5 @@ dest_files=[ "res://.import/BATTLE_THEME.mp3-0100d8917af24031bbb2b954014cc3ab.mp
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0

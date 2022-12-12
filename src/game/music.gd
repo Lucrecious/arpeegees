@@ -14,6 +14,16 @@ func play_theme() -> void:
 	
 	_battle1.play()
 
+func play_victory() -> void:
+	_play_ending($Victory)
+
+func play_defeat() -> void:
+	_play_ending($Defeat)
+
+func _play_ending(sound: AudioStreamPlayer) -> void:
+	pause_fade_out(true)
+	sound.play()
+
 func stop_theme() -> void:
 	var stop_music := true
 	pause_fade_out(stop_music)
