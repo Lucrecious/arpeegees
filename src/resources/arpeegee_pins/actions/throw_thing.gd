@@ -87,6 +87,7 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	elif type == Type.ThrowSpear:
 		var attack_amount := ActionUtils.damage_with_factor(stats.attack, 0.75)
 		hit_type = ActionUtils.add_attack(animation, actioner, target, attack_amount, 5)
+		animation.tween_callback(Sounds, 'play', ['Slash'])
 	else:
 		assert(false)
 	

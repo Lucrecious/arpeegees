@@ -42,6 +42,12 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 	var sprite_switcher := NodE.get_child(actioner, SpriteSwitcher) as SpriteSwitcher
 	animation.tween_callback(sprite_switcher, 'change', ['throw'])
 	
+	var sounds := NodE.get_child(actioner, SoundsComponent)
+	if type == Type.Splish:
+		animation.tween_callback(sounds, 'play', ['Splish'])
+	elif type == Type.Puddle:
+		animation.tween_callback(sounds, 'play', ['SplishWindUp'])
+	
 	animation.tween_callback(_particles, 'set', ['emitting', true])
 	
 	if type == Type.Puddle:
