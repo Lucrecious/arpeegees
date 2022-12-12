@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/DAMAGE_HEAVY.mp3-6ade9d7bcb8a01b0ee72adf3c0b31d2d.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/DAMAGE_HEAVY.mp3"
+dest_files=[ "res://.import/DAMAGE_HEAVY.mp3-6ade9d7bcb8a01b0ee72adf3c0b31d2d.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

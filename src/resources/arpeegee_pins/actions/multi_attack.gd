@@ -9,6 +9,7 @@ export(String) var impact_hint_name := 'ImpactHint'
 export(float) var attack_factor := 0.5
 export(String) var narration_key_single := ''
 export(String) var narration_key_multi := ''
+export(bool) var use_global_sfx := false
 export(String) var hit_sfx := ''
 
 onready var _impact_hint := get_node_or_null(impact_hint_name) as Position2D
@@ -45,7 +46,10 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 	if hit_sfx.empty():
 		tween.tween_callback(Sounds, 'play', ['Damage'])
 	else:
-		tween.tween_callback(sounds, 'play', [hit_sfx])
+		if use_global_sfx:
+			tween.tween_callback(Sounds, 'play', ['DamageHeavy'])
+		else:
+			tween.tween_callback(sounds, 'play', [hit_sfx])
 
 	var sprite_switcher := NodE.get_child(actioner, SpriteSwitcher) as SpriteSwitcher
 	if not attack_frame.empty():
