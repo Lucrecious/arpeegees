@@ -239,6 +239,7 @@ func run(actioner: Node2D, target: ArpeegeePinNode, object: Object, callback: St
 		if attacked_physically and randf() < 0.25:
 			var status_effects_list := NodE.get_child(target, StatusEffectsList) as StatusEffectsList
 			tween.tween_callback(status_effects_list, 'add_instance', [_create_wing_attack_effect()])
+			tween.tween_callback(Sounds, 'play', ['Debuff'])
 	
 	tween.tween_callback(object, callback)
 
