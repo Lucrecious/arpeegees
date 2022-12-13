@@ -71,19 +71,19 @@ func _on_battle_screen_requested(pin_amount: int) -> void:
 	
 	_title_screen.get_parent().remove_child(_title_screen)
 
-var _intro_faded := false
-func _input(event: InputEvent) -> void:
-	if _intro_faded:
-		return
-	
-	if event is InputEventMouseButton:
-		var is_mouse_button := bool(event.button_index == BUTTON_LEFT\
-				or event.button_index == BUTTON_RIGHT\
-				or event.button_index == BUTTON_MIDDLE)
-		
-		if event.pressed and is_mouse_button:
-			_intro_faded = true
-			var fade_away := _intro_panel.create_tween()
-			fade_away.tween_property(_intro_panel, 'modulate:a', 0.0, 1.0)\
-					.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
-			fade_away.tween_callback(_intro_panel, 'queue_free')
+#var _intro_faded := false
+#func _input(event: InputEvent) -> void:
+#	if _intro_faded:
+#		return
+#
+#	if event is InputEventMouseButton:
+#		var is_mouse_button := bool(event.button_index == BUTTON_LEFT\
+#				or event.button_index == BUTTON_RIGHT\
+#				or event.button_index == BUTTON_MIDDLE)
+#
+#		if event.pressed and is_mouse_button:
+#			_intro_faded = true
+#			var fade_away := _intro_panel.create_tween()
+#			fade_away.tween_property(_intro_panel, 'modulate:a', 0.0, 1.0)\
+#					.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
+#			fade_away.tween_callback(_intro_panel, 'queue_free')
