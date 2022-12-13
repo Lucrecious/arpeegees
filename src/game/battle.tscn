@@ -567,8 +567,10 @@ script = ExtResource( 21 )
 
 [node name="EnragedHarpy" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 23 )
+bus = "SFX"
 
 [node name="EntrancePin" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 18 )
+bus = "SFX"
 
 [connection signal="ready" from="CanvasLayer" to="CanvasLayer" method="set" binds= [ "visible", true ]]

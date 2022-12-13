@@ -356,3 +356,4 @@ script = ExtResource( 20 )
 
 [node name="BagPop" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 18 )
+bus = "SFX"
