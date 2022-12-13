@@ -41,6 +41,11 @@ func run(actioner: Node2D, object: Object, callback: String) -> void:
 	
 	animation.tween_callback(sprite_switcher, 'swap_map', ['idle', frame])
 	
+	if type == Type.FallOver:
+		animation.tween_callback(Sounds, 'play', ['DamageSlip'])
+	elif type == Type.GetBrighter:
+		animation.tween_callback(Sounds, 'play', ['DamageBurn'])
+	
 	if type == Type.Candle:
 		ActionUtils.add_text_trigger(animation, self, 'NARRATOR_CANDLE_USE')
 	elif type == Type.GetBrighter:

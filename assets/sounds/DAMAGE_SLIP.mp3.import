@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/DAMAGE_SLIP.mp3-1b9284470a47c5f48a933cce58374623.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/DAMAGE_SLIP.mp3"
+dest_files=[ "res://.import/DAMAGE_SLIP.mp3-1b9284470a47c5f48a933cce58374623.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
