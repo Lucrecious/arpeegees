@@ -9,10 +9,13 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 	var animation := create_tween()
 	animation.tween_interval(0.35)
 	
+	animation.tween_callback(Music, 'pause_fade_out')
+	
 	var sprite_switcher := NodE.get_child(actioner, SpriteSwitcher) as SpriteSwitcher
 	animation.tween_callback(sprite_switcher, 'change', ['play'])
 	
-	#animation.tween_callback(sounds, 'play', ['ChordStrum'])
+	var sounds := NodE.get_child(actioner, SoundsComponent)
+	animation.tween_callback(sounds, 'play', ['Play'])
 	
 	var root_sprite := Components.root_sprite(actioner)
 	var skew_stepper := JuiceSteppers.SkewBackAndForth.new(animation, root_sprite.material)
@@ -35,6 +38,8 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 	animation.tween_callback(sprite_switcher, 'change', ['idle'])
 	
 	ActionUtils.add_text_trigger(animation, self, 'NARRATOR_MANDOLIN_PLAY_USE')
+	
+	animation.tween_callback(Music, 'unpause_fade_in')
 	
 	animation.tween_interval(0.35)
 	
