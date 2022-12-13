@@ -39,6 +39,8 @@ func run_action_with_targets(actioner: Node2D, targets: Array) -> SceneTreeTween
 	var health := NodE.get_child(actioner, Health) as Health
 	ActionUtils.add_real_damage(animation, actioner, ceil(health.current * DAMAGE_PERCENT))
 	
+	animation.tween_callback(Sounds, 'play', ['DamageSlip'])
+	
 	animation.tween_interval(0.5)
 	
 	ActionUtils.add_text_trigger(animation, get_parent(), 'NARRATOR_APPEALING_SLIP')

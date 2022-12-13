@@ -132,9 +132,6 @@ script = ExtResource( 10 )
 [node name="Position2D" type="Position2D" parent="Actions/ChikaraPanchi" index="0"]
 position = Vector2( -47, -91 )
 
-[node name="Slippable" type="Node" parent="Actions/ChikaraPanchi" index="1"]
-script = ExtResource( 24 )
-
 [node name="FocusKi" type="Node2D" parent="Actions" index="2"]
 script = ExtResource( 8 )
 
