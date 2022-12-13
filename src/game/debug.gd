@@ -12,7 +12,9 @@ func get_picked_pins() -> Dictionary:
 	return debug_pick.get_picks() as Dictionary
 
 func _ready() -> void:
-	if allow_pick_pins:
-		var pick_menus := preload('res://src/game/debug_pin_pick.tscn').instance()
-		add_child(pick_menus)
+	var pick_menus := preload('res://src/game/debug_pin_pick.tscn').instance()
+	assert(pick_menus is CanvasLayer)
+	add_child(pick_menus)
+	if not allow_pick_pins:
+		pick_menus.get_child(0).queue_free()
 

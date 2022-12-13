@@ -65,19 +65,21 @@ text = "All Pins"
 flat = false
 switch_on_hover = true
 
-[node name="MarginContainer" type="MarginContainer" parent="DebugPick"]
+[node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-custom_constants/margin_right = 0
+theme = SubResource( 3 )
+custom_constants/margin_right = 20
 custom_constants/margin_top = 20
 custom_constants/margin_left = 20
-custom_constants/margin_bottom = 0
+custom_constants/margin_bottom = 20
 
-[node name="Version" type="Label" parent="DebugPick/MarginContainer"]
+[node name="Version" type="Label" parent="MarginContainer"]
 margin_left = 20.0
 margin_top = 20.0
-margin_right = 1280.0
-margin_bottom = 720.0
+margin_right = 1260.0
+margin_bottom = 700.0
 size_flags_vertical = 5
-text = "Version: 0.9.20"
+text = "Version: 0.9.22"
+align = 2
