@@ -301,6 +301,11 @@ func _do_queued_transforms() -> void:
 		
 		_transfer_status_effects(pin, new_pin)
 		
+		var old_top_hatter := NodE.get_child(pin, TopHatter, false) as TopHatter
+		var new_top_hatter := NodE.get_child(new_pin, TopHatter, false) as TopHatter
+		if old_top_hatter and new_top_hatter:
+			new_top_hatter.enable(old_top_hatter.hat_number)
+		
 		var stats := NodE.get_child(new_pin, ModifiedPinStats) as ModifiedPinStats
 		new_pin_health.current = min(old_pin_health.current, stats.max_health)
 		

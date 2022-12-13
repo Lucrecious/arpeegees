@@ -200,7 +200,7 @@ bus = "SFX"
 stream = ExtResource( 27 )
 bus = "SFX"
 
-[node name="TopHatter" type="Node2D" parent="." index="16"]
+[node name="TopHatter" type="Node2D" parent="." index="16" groups=["top_hatter"]]
 position = Vector2( -7, -154 )
 script = ExtResource( 33 )
 

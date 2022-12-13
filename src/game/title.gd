@@ -6,7 +6,6 @@ signal bag_open_finished()
 
 onready var _bag := $'%Bag' as PinBag
 onready var _shockwave := $'%Shockwave' as Control
-onready var _sounds := NodE.get_child(self, SoundsComponent) as SoundsComponent
 var _bag_opened_finished := false
 
 func _ready() -> void:

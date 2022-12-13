@@ -5,6 +5,6 @@
 [resource]
 script = ExtResource( 1 )
 type = 0
-rarity = 3
+rarity = 1
 scene_path = "res://src/resources/arpeegee_pins/bard.tscn"
 pickable = true
