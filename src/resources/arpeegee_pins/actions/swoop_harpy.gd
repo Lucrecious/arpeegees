@@ -85,7 +85,6 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	if attacked and randf() < 0.25:
 		var list := NodE.get_child(actioner, StatusEffectsList) as StatusEffectsList
 		tween.tween_callback(list, 'add_instance', [_create_status_effect()])
-		tween.tween_callback(Sounds, 'play', ['BuffAttackCry'])
 	
 	tween.tween_callback(object, callback)
 

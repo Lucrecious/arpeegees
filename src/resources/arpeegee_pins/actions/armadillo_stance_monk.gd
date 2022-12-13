@@ -35,7 +35,6 @@ func run(actioner: Node2D, object: Object, callback: String) -> void:
 	var status_effect := _create_armadillo_stance_status_effect()
 	
 	animation.tween_callback(status_effects_list, 'add_instance', [status_effect])
-	animation.tween_callback(Sounds, 'play', ['BuffDefence'])
 	
 	ActionUtils.add_text_trigger(animation, self, 'NARRATOR_ARMADILLO_STANCE_USE')
 	

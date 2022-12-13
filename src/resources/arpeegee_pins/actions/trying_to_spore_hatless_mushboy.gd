@@ -24,7 +24,6 @@ func run(actioner: Node2D, object: Object, callback: String) -> void:
 	
 	var status_effects_list := NodE.get_child(actioner, StatusEffectsList) as StatusEffectsList
 	animation.tween_callback(status_effects_list, 'add_instance', [_create_getting_angry_effect()])
-	animation.tween_callback(Sounds, 'play', ['BuffAttackCry'])
 	
 	_uses += 1
 	if _uses >= 1 and _uses <= 3:

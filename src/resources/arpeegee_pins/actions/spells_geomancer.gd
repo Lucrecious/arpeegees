@@ -48,8 +48,6 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 		var status_effects := NodE.get_child(actioner, StatusEffectsList) as StatusEffectsList
 		animation.tween_callback(status_effects, 'add_instance', [_create_raise_earth_status()])
 		
-		animation.tween_callback(Sounds, 'play', ['BuffAttackCharge'])
-		
 		ActionUtils.add_text_trigger(animation, self, 'NARRATOR_RAISE_EARTH_USE')
 	
 	elif type == Type.RockWall:

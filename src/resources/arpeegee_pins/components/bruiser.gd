@@ -19,7 +19,6 @@ func bruise() -> void:
 			sprite_switcher.swap_map(n, '%s_fully_bruised' % n)
 	
 	effects_list.add_instance(_create_bruise_effect())
-	Sounds.play('Debuff')
 	_bruise_level += 1
 
 func _create_bruise_effect() -> StatusEffect:

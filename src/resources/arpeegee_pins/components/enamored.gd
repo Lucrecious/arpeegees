@@ -16,6 +16,7 @@ func enamore() -> void:
 	
 	var effects_list := NodE.get_sibling(self, StatusEffectsList) as StatusEffectsList
 	effects_list.add_instance(_create_enamored_effect())
+	
 
 func _create_enamored_effect() -> StatusEffect:
 	var status_effect := StatusEffect.new()
