@@ -9,6 +9,9 @@ func pop(animation: SceneTreeTween) -> void:
 	
 	animation.tween_callback(particles, 'set', ['emitting', true])
 	
+	var sounds := NodE.get_sibling(self, SoundsComponent)
+	animation.tween_callback(sounds, 'play', ['Spore'])
+	
 	animation.tween_interval(1.5)
 	
 	animation.tween_callback(particles, 'set', ['emitting', false])

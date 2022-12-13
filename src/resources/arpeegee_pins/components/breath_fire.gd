@@ -9,6 +9,9 @@ func breath_fire(animation: SceneTreeTween) -> void:
 	var particles := sprite_switcher.sprite('bite').get_child(0) as CPUParticles2D
 	animation.tween_callback(particles, 'set', ['emitting', true])
 	
+	var sounds := NodE.get_sibling(self, SoundsComponent)
+	animation.tween_callback(sounds, 'play', ['Fire'])
+	
 	animation.tween_interval(2.0)
 	
 	animation.tween_callback(particles, 'set', ['emitting', false])

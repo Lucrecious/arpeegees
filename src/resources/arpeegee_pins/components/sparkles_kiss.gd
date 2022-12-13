@@ -22,6 +22,8 @@ func add_sparkles_kiss(animation: SceneTreeTween, narrator_caller: Object, user:
 	
 	animation.tween_callback(NodE, 'add_children', [blobbo, hearts])
 	
+	animation.tween_callback(Sounds, 'play', ['Heal'])
+	
 	var health := NodE.get_child(user, Health) as Health
 	animation.tween_callback(health, 'heal', [2]) # healing 2 instead of 10% 
 	

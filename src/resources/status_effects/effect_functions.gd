@@ -174,6 +174,8 @@ class BreakRocksRoutineEffect extends Node:
 		
 		animation.tween_callback(switcher, 'change', ['punch'])
 		
+		animation.tween_callback(Sounds, 'play', ['LightPunch'])
+		
 		animation.tween_interval(0.5)
 		
 		animation.tween_callback(switcher, 'change', ['idle'])
