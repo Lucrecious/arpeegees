@@ -47,9 +47,11 @@ evasion = 4
 
 [node name="SwordSpin" type="AudioStreamPlayer" parent="Sounds" index="0"]
 stream = ExtResource( 19 )
+bus = "SFX"
 
 [node name="GooShot" type="AudioStreamPlayer" parent="Sounds" index="1"]
 stream = ExtResource( 20 )
+bus = "SFX"
 
 [node name="Sprites" type="Node2D" parent="." index="13"]
 material = SubResource( 1 )

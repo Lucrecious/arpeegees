@@ -129,9 +129,12 @@ script = ExtResource( 16 )
 
 [node name="Slap" type="AudioStreamPlayer" parent="Sounds" index="0"]
 stream = ExtResource( 19 )
+bus = "SFX"
 
 [node name="SpittinGoo" type="AudioStreamPlayer" parent="Sounds" index="1"]
 stream = ExtResource( 18 )
+bus = "SFX"
 
 [node name="Sparkles" type="AudioStreamPlayer" parent="Sounds" index="2"]
 stream = ExtResource( 20 )
+bus = "SFX"
