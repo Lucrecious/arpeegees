@@ -341,6 +341,34 @@ gravity = Vector2( 0, 0 )
 scale_amount = 0.05
 scale_amount_curve = SubResource( 7 )
 
+[node name="CenterRockWall" type="CenterContainer" parent="SpanLimiter/Background"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 246.0
+
+[node name="Control" type="Control" parent="SpanLimiter/Background/CenterRockWall"]
+margin_left = 640.0
+margin_top = 237.0
+margin_right = 640.0
+margin_bottom = 237.0
+
+[node name="Clipping" type="Control" parent="SpanLimiter/Background/CenterRockWall/Control"]
+margin_left = -70.0
+margin_top = -70.0
+margin_right = 68.0
+margin_bottom = 70.0
+rect_clip_content = true
+
+[node name="Wall" type="Sprite" parent="SpanLimiter/Background/CenterRockWall/Control/Clipping"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 0, 88 )
+scale = Vector2( 0.333333, 0.333333 )
+texture = ExtResource( 20 )
+
+[node name="WallAnimationPlayer" type="AnimationPlayer" parent="SpanLimiter/Background/CenterRockWall" groups=["rock_wall_animation_player"]]
+anims/RESET = SubResource( 8 )
+anims/wall_appear = SubResource( 9 )
+
 [node name="BattleLayer" type="MarginContainer" parent="."]
 unique_name_in_owner = true
 anchor_top = 1.0
@@ -389,34 +417,6 @@ spread = 0.0
 initial_velocity = 800.0
 angle = 68.1
 scale_amount = 0.33
-
-[node name="CenterRockWall" type="CenterContainer" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 246.0
-
-[node name="Control" type="Control" parent="CenterRockWall"]
-margin_left = 640.0
-margin_top = 237.0
-margin_right = 640.0
-margin_bottom = 237.0
-
-[node name="Clipping" type="Control" parent="CenterRockWall/Control"]
-margin_left = -70.0
-margin_top = -70.0
-margin_right = 68.0
-margin_bottom = 70.0
-rect_clip_content = true
-
-[node name="Wall" type="Sprite" parent="CenterRockWall/Control/Clipping"]
-modulate = Color( 1, 1, 1, 0 )
-position = Vector2( 0, 88 )
-scale = Vector2( 0.333333, 0.333333 )
-texture = ExtResource( 20 )
-
-[node name="WallAnimationPlayer" type="AnimationPlayer" parent="CenterRockWall" groups=["rock_wall_animation_player"]]
-anims/RESET = SubResource( 8 )
-anims/wall_appear = SubResource( 9 )
 
 [node name="CharacterPointer" type="Node2D" parent="."]
 unique_name_in_owner = true
