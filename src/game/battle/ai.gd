@@ -43,6 +43,7 @@ func _on_npc_turn_started() -> void:
 		if wont_attack_paladin:
 			players = TurnManager.remove_by_file(players, 'paladin.tscn')
 			players = TurnManager.remove_by_file(players, 'paladin_no_sword.tscn')
+			players = TurnManager.remove_by_file(players, 'holy_paladin.tscn')
 			if players.empty():
 				_narrator_ui.speak_tr('NARRATOR_KOBOLDIO_FRIENDLY_PALADIN', true)
 				_turn_manager.finish_turn()

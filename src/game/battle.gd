@@ -395,7 +395,8 @@ func _add_koboldio_paladin_friendly_effects(animation: SceneTreeTween) -> void:
 		return
 	
 	var paladin := _turn_manager.get_pin_by_filename('paladin.tscn')
-	if not paladin:
+	var holy_paladin := _turn_manager.get_pin_by_filename('holy_paladin.tscn')
+	if not paladin and not holy_paladin:
 		return
 	
 	animation.tween_callback(_narrator, 'speak_tr', ['NARRATOR_KOBOLDIO_FRIENDLY_PALADIN', true])

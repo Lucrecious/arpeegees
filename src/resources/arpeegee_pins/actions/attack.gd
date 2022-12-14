@@ -31,9 +31,8 @@ func times_used() -> int:
 	return _times_used
 
 func run(actioner: Node2D, target: ArpeegeePinNode, object: Object, callback: String) -> void:
-	if target.filename.get_file() == 'blobbo.tscn' and pin_action().resource_path.get_file() == 'heavenly_slash_paladin.tres':
-		print_debug('should be 0.1')
-		if randf() < 1.0:
+	if actioner.filename.get_file() == 'paladin.tscn' and target.filename.get_file() == 'blobbo.tscn' and pin_action().resource_path.get_file() == 'heavenly_slash_paladin.tres':
+		if randf() < 0.1:
 			_run_blobbo_steals_sword(actioner, target, object, callback)
 			return
 	
@@ -212,7 +211,7 @@ func run(actioner: Node2D, target: ArpeegeePinNode, object: Object, callback: St
 	if banan_chopped:
 		ActionUtils.add_text_trigger(tween, self, 'NARRATOR_PALADIN_SLICES_BANAN_INTO_CHOPPED_BANAN')
 	
-	if actioner_file == 'paladin.tscn' or actioner_file == 'paladin_no_sword.tscn':
+	if actioner_file == 'paladin.tscn' or actioner_file == 'paladin_no_sword.tscn' or actioner_file == 'holy_paladin.tscn':
 		var wont_attack_paladin := NodE.get_child(target, WontAttackPaladin, false) as WontAttackPaladin
 		if wont_attack_paladin:
 			wont_attack_paladin.add_post_hit(tween, self)

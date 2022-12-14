@@ -79,7 +79,7 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 			ActionUtils.add_text_trigger(tween, self, narration_key_single)
 	
 	var actioner_file := actioner.filename.get_file()
-	if actioner_file == 'paladin.tscn' or actioner_file == 'paladin_no_sword.tscn':
+	if actioner_file == 'paladin.tscn' or actioner_file == 'paladin_no_sword.tscn' or actioner_file == 'holy_paladin.tscn':
 		assert(pin_action().resource_path.get_file() == 'tremendous_slash_paladin.tres'\
 				or pin_action().resource_path.get_file() == 'tremendous_punch_paladin.tres')
 		for t in targets:
@@ -96,6 +96,13 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 					tween.tween_callback(banan_sprite_switcher, 'swap_map', ['idle', 'choppedidle'])
 					
 					ActionUtils.add_text_trigger(tween, self, 'NARRATOR_PALADIN_SLICES_BANAN_INTO_CHOPPED_BANAN')
+			
+		var enamored := get_tree().get_nodes_in_group('harpy_enamored')
+		for e in enamored:
+			if not e.is_enamored():
+				continue
+			tween.tween_callback(e, 'ruin_enamore')
+			ActionUtils.add_text_trigger(tween, self, 'NARRATOR_HARPY_LOSES_TRUST_IN_SPARKLES')
 	
 	if not attack_frame.empty():
 		tween.tween_callback(sprite_switcher, 'change', ['idle'])
