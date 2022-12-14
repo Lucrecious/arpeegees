@@ -300,16 +300,16 @@ night = ExtResource( 36 )
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -206.0
+margin_top = -243.0
 margin_bottom = 81.0
 
 [node name="Puddle" type="ColorRect" parent="SpanLimiter/Background/CenterPuddle"]
 material = SubResource( 11 )
 margin_left = 340.0
-margin_top = 58.0
+margin_top = 62.0
 margin_right = 940.0
-margin_bottom = 228.0
-rect_min_size = Vector2( 600, 170 )
+margin_bottom = 262.0
+rect_min_size = Vector2( 600, 200 )
 color = Color( 0.427451, 0.490196, 1, 1 )
 
 [node name="PuddlePlayer" type="AnimationPlayer" parent="SpanLimiter/Background/CenterPuddle" groups=["puddle_animation_player"]]
