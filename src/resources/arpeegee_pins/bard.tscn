@@ -44,8 +44,8 @@ shader_param/fill_color = Color( 1, 1, 1, 1 )
 shader_param/color_mix = 0.0
 shader_param/top_skew = 0.0
 shader_param/squash = 1.0
-shader_param/offset_amount = 100.0
-shader_param/update_sec = 0.3
+shader_param/offset_amount = 65.0
+shader_param/update_sec = 0.4
 shader_param/uv_offset_texture = ExtResource( 21 )
 
 [node name="Bard" instance=ExtResource( 1 )]
