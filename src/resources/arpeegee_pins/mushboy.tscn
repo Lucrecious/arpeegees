@@ -52,6 +52,9 @@ magic_attack = 4
 defence = 4
 magic_defence = 4
 
+[node name="HealthBar" parent="." index="11"]
+position = Vector2( -107, -206 )
+
 [node name="CapRemover" type="Node" parent="." index="12"]
 script = ExtResource( 22 )
 

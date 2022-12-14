@@ -41,7 +41,7 @@ magic_defence = 3
 evasion = 3
 
 [node name="HealthBar" parent="." index="11"]
-position = Vector2( -88, -193 )
+position = Vector2( -120, -190 )
 
 [node name="Sprites" type="Node2D" parent="." index="12"]
 material = SubResource( 1 )

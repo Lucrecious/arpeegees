@@ -41,6 +41,9 @@ defence = 3
 magic_defence = 3
 evasion = 2
 
+[node name="HealthBar" parent="." index="11"]
+position = Vector2( -105, -192 )
+
 [node name="Transformer" type="Node" parent="." index="13"]
 script = ExtResource( 15 )
 transform_scene = ExtResource( 14 )
