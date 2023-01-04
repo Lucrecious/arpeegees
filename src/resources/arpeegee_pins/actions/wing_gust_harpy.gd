@@ -48,8 +48,7 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 	animation.tween_interval(1.0)
 	animation.tween_callback(object, callback)
 	
-	if hit:
-		ActionUtils.add_text_trigger(animation, self, 'NARRATOR_WING_GUST_USE')
+	ActionUtils.add_text_trigger(animation, self, 'NARRATOR_WING_GUST_USE')
 	
 	animation.tween_interval(gust.lifetime)
 	animation.tween_callback(gust, 'queue_free')
