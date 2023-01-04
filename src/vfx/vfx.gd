@@ -13,6 +13,16 @@ func goo_explosions() -> Array:
 	
 	return [explosion]
 
+func death_explosion() -> Array:
+	var explosion := ExplosionTemplateScene.instance() as ExplosionParticles
+	explosion.texture = load('res://assets/sprites/effects/death_smoke.png')
+	explosion.spread = 15.0
+	explosion.amount = 8
+	explosion.damping = 0.1
+	explosion.initial_velocity = 700.0
+	explosion.initial_velocity_random = 0.5
+	return [explosion]
+
 func heart_explosion() -> Array:
 	var explosion := ExplosionTemplateScene.instance() as ExplosionParticles
 	explosion.texture = load('res://assets/sprites/effects/heart1.png')
@@ -93,14 +103,14 @@ func note_explosion(front: bool) -> CPUParticles2D:
 func power_up_initial_explosion() -> Array:
 	var front := ExplosionTemplateScene.instance() as ExplosionParticles
 	front.texture = load('res://assets/sprites/effects/hero_smoke%d.png' % [RaNdom.randi_range(1, 7)])
-	front.scale_amount = 0.4
+	front.scale_amount = 0.5
 	front.amount = 5
 	front.spread = 35
 	front.z_index = Aura.Z_INDEX_FRONT
 	
 	var back := ExplosionTemplateScene.instance() as ExplosionParticles
 	back.texture = load('res://assets/sprites/effects/hero_smoke%d.png' % [RaNdom.randi_range(1, 7)])
-	back.scale_amount = 0.4
+	back.scale_amount = 0.5
 	front.amount = 5
 	back.spread = 35.0
 	

@@ -82,8 +82,11 @@ func hurt() -> void:
 		if _sprite_switcher.has_sprite('dead'):
 			_current_hurt_tween.tween_callback(_sprite_switcher, 'change', ['dead'])
 		else:
-			_current_hurt_tween.tween_property(get_parent(), 'modulate:a', 0.0, 1.0)\
-					.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_EXPO)
+			var death_smoke := VFX.death_explosion()
+			_current_hurt_tween.tween_callback(NodE, 'add_children', [get_parent().get_parent(), death_smoke])
+			
+			_current_hurt_tween.tween_property(get_parent(), 'modulate:a', 0.0, 0.5)\
+					.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
 			_current_hurt_tween.tween_callback(get_parent(), 'set', ['visible', false])
 		return
 	
