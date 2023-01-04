@@ -39,7 +39,7 @@ func _create_charge_status_effect(target: ArpeegeePinNode) -> StatusEffect:
 	
 	return status_effect
 
-class BananShootEffect extends StartTurnEffectRunner:
+class BananShootEffect extends Node:
 	signal start_turn_effect_finished()
 	signal text_triggered(translation_key)
 	

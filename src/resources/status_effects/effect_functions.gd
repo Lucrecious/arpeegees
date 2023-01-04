@@ -185,6 +185,8 @@ class BreakRocksRoutineEffect extends Node:
 		
 		ActionUtils.add_text_trigger(animation, self, 'NARRATOR_MONK_BREAKING_GEOMANCER_ROCKS')
 		
+		animation.tween_interval(2.0)
+		
 		animation.tween_callback(self, 'emit_signal', ['start_turn_effect_finished'])
 
 
