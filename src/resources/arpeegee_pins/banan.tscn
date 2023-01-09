@@ -305,7 +305,8 @@ script = ExtResource( 3 )
 script = ExtResource( 10 )
 attack_sprite_name = "headbutt"
 pin_action = ExtResource( 12 )
-narration_key = "NARRATOR_HEADBUTT_USE"
+narration_variations = 7
+narration_key = "NARRATOR_HEADBUTT_USE_"
 use_global_sounds = true
 hit_sfx_name = "Damage"
 
