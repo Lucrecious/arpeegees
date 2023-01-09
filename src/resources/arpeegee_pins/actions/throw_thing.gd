@@ -109,8 +109,7 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 		if throw_rock_hand.is_used() and not is_used():
 			ActionUtils.add_text_trigger(animation, self, 'NARRATOR_THROW_A_ROCK_WITH_MAGIC_USE_ALT')
 		else:
-			ActionUtils.add_text_trigger(animation, self, 'NARRATOR_THROW_A_ROCK_WITH_MAGIC_USE')
-	
+			ActionUtils.add_text_trigger_ordered(animation, self, 'NARRATOR_THROW_A_ROCK_WITH_MAGIC_USE_', 5, 1)
 		
 	if hit_type != ActionUtils.HitType.Miss:
 		var bruiser := NodE.get_child(target, Bruiser, false) as Bruiser
