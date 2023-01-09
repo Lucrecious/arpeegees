@@ -57,7 +57,7 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 			var sword := get_parent().get_node('MagicGhostSword/GhostSword')
 			sword.add_attack(animation, actioner, targets, 1)
 	
-	ActionUtils.add_text_trigger(animation, self, 'NARRATOR_RAIN_FROM_ABOVE_USE')
+	ActionUtils.add_text_trigger_ordered(animation, self, 'NARRATOR_RAIN_FROM_ABOVE_USE_', 4, 1)
 	
 	animation.tween_callback(Music, 'unpause_fade_in')
 	animation.tween_interval(0.5)
