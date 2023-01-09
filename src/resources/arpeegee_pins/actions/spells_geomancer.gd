@@ -11,8 +11,10 @@ export(Type) var type := Type.RaiseEarth
 
 var _is_blocked := false
 
+onready var _raise_drop_rocks := NodE.get_sibling(get_parent(), RaiseDropRocks) as RaiseDropRocks
+
 func is_blocked() -> bool:
-	return _is_blocked
+	return _is_blocked or (type == Type.RaiseEarth and _raise_drop_rocks.has_rocks())
 
 func pin_action() -> PinAction:
 	if type == Type.RaiseEarth:
@@ -22,10 +24,6 @@ func pin_action() -> PinAction:
 	else:
 		assert(false)
 		return null
-
-var _uses := 0
-
-var sprites_rocks := ['idle', 'throw', 'hurt', 'win']
 
 func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> void:
 	var animation := create_tween()
@@ -38,34 +36,37 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 	var sounds := NodE.get_child(actioner, SoundsComponent)
 	animation.tween_callback(sounds, 'play', ['RaiseEarth'])
 	
-	_is_blocked = true
 	if type == Type.RaiseEarth:
 		animation.tween_interval(1.0)
 		
-		for rocks in sprites_rocks:
-			animation.tween_callback(sprite_switcher, 'swap_map', [rocks, '%sRocks' % rocks])
+		animation.tween_callback(_raise_drop_rocks, 'hold_rocks')
 		
 		var status_effects := NodE.get_child(actioner, StatusEffectsList) as StatusEffectsList
 		animation.tween_callback(status_effects, 'add_instance', [_create_raise_earth_status()])
 		
-		ActionUtils.add_text_trigger(animation, self, 'NARRATOR_RAISE_EARTH_USE')
+		if not _raise_drop_rocks.rocks_lit():
+			ActionUtils.add_text_trigger(animation, self, 'NARRATOR_RAISE_EARTH_USE')
+		else:
+			ActionUtils.add_text_trigger(animation, self, 'NARRATOR_RAISE_EARTH_USE_ON_FIRE')
+		
+		if status_effects.count_tags(StatusEffectTag.RaiseEarth) > 0:
+			ActionUtils.add_text_trigger(animation, self, 'NARRATOR_RAISE_EARTH_USE_USELESS')
 	
 	elif type == Type.RockWall:
-		if _uses == 0:
-			var rock_wall_animation_player_group := get_tree().get_nodes_in_group('rock_wall_animation_player')
-			if not rock_wall_animation_player_group.empty():
-				var rock_wall_animation_player := rock_wall_animation_player_group[0] as AnimationPlayer
-				animation.tween_callback(rock_wall_animation_player, 'play', ['wall_appear'])
-				animation.tween_interval(rock_wall_animation_player.get_animation('wall_appear').length)
-				
-				animation.tween_callback(self, '_add_rock_wall_defences', [targets])
-				
-				if targets.size() == 1:
-					ActionUtils.add_text_trigger(animation, self, 'NARRATOR_RAISE_WALL_NO_ALLY')
-				elif targets.size() > 1:
-					ActionUtils.add_text_trigger(animation, self, 'NARRATOR_RAISE_WALL_WITH_ALLY')
-			else:
-				assert(false)
+		_is_blocked = true
+		
+		var rock_wall_animation_player_group := get_tree().get_nodes_in_group('rock_wall_animation_player')
+		if not rock_wall_animation_player_group.empty():
+			var rock_wall_animation_player := rock_wall_animation_player_group[0] as AnimationPlayer
+			animation.tween_callback(rock_wall_animation_player, 'play', ['wall_appear'])
+			animation.tween_interval(rock_wall_animation_player.get_animation('wall_appear').length)
+			
+			animation.tween_callback(self, '_add_rock_wall_defences', [targets])
+			
+			if targets.size() == 1:
+				ActionUtils.add_text_trigger(animation, self, 'NARRATOR_RAISE_WALL_NO_ALLY')
+			elif targets.size() > 1:
+				ActionUtils.add_text_trigger(animation, self, 'NARRATOR_RAISE_WALL_WITH_ALLY')
 		else:
 			assert(false)
 	else:
@@ -79,24 +80,8 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 			animation.tween_callback(m, 'add_mesmerize')
 			ActionUtils.add_text_trigger(animation, self, 'NARRATOR_MUSHBOY_MESMERIZED_BY_ROCKS')
 	
-	_uses += 1
-	
 	animation.tween_interval(0.4)
 	animation.tween_callback(sprite_switcher, 'change', ['idle'])
-	
-	if type == Type.RaiseEarth:
-		var breath_fires := get_tree().get_nodes_in_group('drago_breath_fire')
-		for b in breath_fires:
-			b.breath_fire(animation)
-			ActionUtils.add_text_trigger(animation, self, 'NARRATOR_DRAGO_BREATHS_FIRE_ON_ROCKS')
-			
-			animation.tween_callback(sprite_switcher, 'swap_map', ['idle', 'idlefire'])
-			animation.tween_callback(sprite_switcher, 'change', ['scaredfire'])
-			for sibling in get_parent().get_children():
-				if not sibling.has_method('light_rock_on_fire'):
-					continue
-				
-				animation.tween_callback(sibling, 'light_rock_on_fire')
 	
 	animation.tween_callback(object, callback)
 

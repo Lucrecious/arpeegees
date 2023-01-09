@@ -203,6 +203,8 @@ func _do_start_battle_effects() -> void:
 	
 	_add_monk_geomancer_effect(tween)
 	
+	_add_geomancer_drago_effect(tween, _narrator)
+	
 	_add_fishguy_banan_combine(tween)
 	
 	tween.tween_callback(self, '_start_battle', [nodes])
@@ -226,6 +228,23 @@ func _add_balance_battle(animation: SceneTreeTween) -> void:
 		animation.tween_callback(_sounds, 'play', ['EnragedHarpy'])
 		animation.tween_callback(_narrator, 'speak_tr', [disadvantage_dialog, true])
 		_add_speaking_pause(animation, _narrator)
+
+func _add_geomancer_drago_effect(animation: SceneTreeTween, narrator: NarratorUI) -> void:
+	var drago := _turn_manager.get_pin_by_filename('drago.tscn')
+	if not drago:
+		return
+	
+	var geomancer := _turn_manager.get_pin_by_filename('geomancer.tscn')
+	if not geomancer:
+		return
+		
+	var raise_drop_rocks := NodE.get_child(geomancer, RaiseDropRocks) as RaiseDropRocks
+	var breath_fires := get_tree().get_nodes_in_group('drago_breath_fire')
+	for b in breath_fires:
+		b.breath_fire(animation)
+		animation.tween_callback(raise_drop_rocks, 'light_rocks')
+		animation.tween_callback(narrator, 'speak_tr', ['NARRATOR_DRAGO_BREATHS_FIRE_ON_ROCKS', true])
+		_add_speaking_pause(animation, narrator)
 
 func _add_shifty_fishguy_reveal(animation: SceneTreeTween, narrator: NarratorUI) -> void:
 	var shifty := _turn_manager.get_pin_by_filename('shifty_fishguy.tscn')

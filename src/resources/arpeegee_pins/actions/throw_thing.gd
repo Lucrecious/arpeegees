@@ -19,6 +19,10 @@ func light_rock_on_fire() -> void:
 	_rocks_on_fire = true
 	get_child(0).get_child(0).visible = true
 
+func unlight_rocks_on_fire() -> void:
+	_rocks_on_fire = false
+	get_child(0).get_child(0).visible = false
+
 var _used := false
 
 func is_used() -> bool:
@@ -61,6 +65,9 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	
 	var sprite_switcher := NodE.get_child(actioner, SpriteSwitcher) as SpriteSwitcher
 	animation.tween_callback(sprite_switcher, 'change', [throw_frame])
+	
+	var raise_drop_rocks := NodE.get_child(actioner, RaiseDropRocks) as RaiseDropRocks
+	animation.tween_callback(raise_drop_rocks, 'drop_rocks')
 	
 	animation.tween_callback(_thing, 'set', ['visible', true])
 	
