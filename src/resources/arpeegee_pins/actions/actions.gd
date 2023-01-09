@@ -84,7 +84,10 @@ func run_action_with_targets(action_name: String, targets: Array, multiple: bool
 		var fear_animation := create_tween()
 		fear_animation.tween_interval(0.35)
 		
-		ActionUtils.add_text_trigger(fear_animation, node, 'NARRATOR_CANT_ATTACK_DUE_TO_FEAR')
+		if _parent.filename.get_file() == 'blobbo.tscn':
+			ActionUtils.add_text_trigger_ordered(fear_animation, node, 'NARRATOR_BLOBBO_CANT_ATTACK_DUE_TO_FEAR_', 5, 1_000_000)
+		else:
+			ActionUtils.add_text_trigger(fear_animation, node, 'NARRATOR_CANT_ATTACK_DUE_TO_FEAR')
 		
 		fear_animation.tween_callback(self, '_on_action_node_finished')
 	

@@ -61,10 +61,11 @@ static func add_fear_narration_and_effect(arpeegee: ArpeegeePinNode, narrator: N
 	
 	animation.tween_callback(sprite_switcher, 'swap_map', ['idle', fear_sprite_name])
 	
+
 	var narration_key := 'NARRATOR_SHAKES_WITH_FEAR_%d' % [randi() % 3 + 1]
 	var narration_text := arpeegee.tr('NARRATOR_SHAKES_WITH_FEAR_1')
 	narration_text = narration_text % [arpeegee.nice_name]
-	
+		
 	animation.tween_callback(narrator, 'speak', [narration_text, true])
 	
 
