@@ -117,7 +117,8 @@ script = ExtResource( 13 )
 attack_sprite_name = "punch"
 pin_action = ExtResource( 12 )
 walk = false
-narration_key = "NARRATOR_PANCHI_USE_1"
+narration_variations = 6
+narration_key = "NARRATOR_PANCHI_USE_"
 hit_sfx_name = "PanchiHit"
 
 [node name="ImpactHint" type="Position2D" parent="Actions/Panchi" index="0"]
