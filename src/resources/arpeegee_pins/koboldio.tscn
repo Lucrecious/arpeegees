@@ -159,7 +159,8 @@ script = ExtResource( 3 )
 script = ExtResource( 12 )
 attack_sprite_name = "swipe"
 pin_action = ExtResource( 13 )
-narration_key = "NARRATOR_SWIPE_USE"
+narration_variations = 5
+narration_key = "NARRATOR_SWIPE_USE_"
 use_global_sounds = true
 hit_sfx_name = "Slash"
 
