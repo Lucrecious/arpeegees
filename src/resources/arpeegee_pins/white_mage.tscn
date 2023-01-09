@@ -112,7 +112,8 @@ script = ExtResource( 3 )
 position = Vector2( -113, -139 )
 script = ExtResource( 13 )
 pin_action = ExtResource( 14 )
-narration_key = "NARRATOR_USELESS_STUFF_WHACK_USE"
+narration_variations = 3
+narration_key = "NARRATOR_USELESS_STUFF_WHACK_USE_"
 use_global_sounds = true
 hit_sfx_name = "DamageLight"
 

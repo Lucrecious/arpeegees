@@ -8,6 +8,8 @@ export(String) var attack_sprite_name := 'attack'
 export(Resource) var pin_action: Resource = null
 export(bool) var walk := true
 export(bool) var physical := true
+
+export(int) var narration_variations := 0
 export(String) var narration_key := ''
 
 export(bool) var use_global_sounds := false
@@ -199,7 +201,10 @@ func run(actioner: Node2D, target: ArpeegeePinNode, object: Object, callback: St
 		ActionUtils.add_text_trigger(tween, self, 'NARRATOR_MUSHBOY_CAP_EXPLODES_ALL_POISONED')
 	else:
 		if not narration_key.empty():
-			ActionUtils.add_text_trigger(tween, self, narration_key)
+			if narration_variations > 0:
+				ActionUtils.add_text_trigger_ordered(tween, self, narration_key, narration_variations, 1)
+			else:
+				ActionUtils.add_text_trigger(tween, self, narration_key)
 	
 	if hunter_gooed_up:
 		ActionUtils.add_text_trigger(tween, self, 'NARRATOR_HUNTER_GOOED_UP_FROM_BLOBBO')
