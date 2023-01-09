@@ -172,7 +172,8 @@ script = ExtResource( 3 )
 [node name="ThrowRock" type="Node2D" parent="Actions" index="0" groups=["geomancer_rock_throw"]]
 script = ExtResource( 12 )
 throw_frame = "throw"
-narration_key = "NARRATOR_THROW_A_ROCK_WITH_HANDS_USE"
+narration_variations = 7
+narration_key = "NARRATOR_THROW_A_ROCK_WITH_HANDS_USE_"
 
 [node name="Rock" type="Sprite" parent="Actions/ThrowRock" index="0"]
 visible = false

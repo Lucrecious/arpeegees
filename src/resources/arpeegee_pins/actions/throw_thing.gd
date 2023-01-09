@@ -10,6 +10,7 @@ enum Type {
 
 export(Type) var type := Type.HandThrowRock
 export(String) var throw_frame := ''
+export(int) var narration_variations := 0
 export(String) var narration_key := ''
 
 onready var _thing := get_child(0) as Node2D
@@ -23,10 +24,13 @@ func unlight_rocks_on_fire() -> void:
 	_rocks_on_fire = false
 	get_child(0).get_child(0).visible = false
 
-var _used := false
+var _uses := 0
+
+func is_blocked() -> bool:
+	return type == Type.HandThrowRock and _uses >= 7
 
 func is_used() -> bool:
-	return _used
+	return _uses > 0
 
 func _ready() -> void:
 	assert(_thing)
@@ -99,7 +103,10 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 		assert(false)
 	
 	if not narration_key.empty():
-		ActionUtils.add_text_trigger(animation, self, narration_key)
+		if narration_variations > 0:
+			ActionUtils.add_text_trigger_ordered(animation, self, narration_key, narration_variations, 1)
+		else:
+			ActionUtils.add_text_trigger(animation, self, narration_key)
 		if hit_type == ActionUtils.HitType.CriticalHit and type == Type.ThrowSpear:
 			ActionUtils.add_text_trigger(animation, self, 'NARRATOR_THROW_SPEAR_USE_WITH_CRIT')
 	elif type == Type.MagicThrowRock:
@@ -138,6 +145,6 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 					var burn_status_effect := EffectFunctions.create_burn_status_effect(burn_attack_base)
 					animation.tween_callback(target_effects_list, 'add_instance', [burn_status_effect])
 	
-	_used = true
+	_uses += 1
 	
 	animation.tween_callback(object, callback)
