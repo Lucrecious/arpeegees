@@ -77,7 +77,7 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 		
 		tween.tween_interval(.5)
 	
-	ActionUtils.add_text_trigger(tween, self, 'NARRATOR_SWOOP_USE')
+	ActionUtils.add_text_trigger_ordered(tween, self, 'NARRATOR_SWOOP_USE_', 4, 1)
 	
 	tween.tween_callback(sprite_switcher, 'change', ['idle'])
 	tween.tween_property(actioner, 'global_position', actioner.global_position, .3)
