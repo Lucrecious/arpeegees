@@ -178,7 +178,8 @@ script = ExtResource( 16 )
 script = ExtResource( 18 )
 attack_sprite_name = "wingattack"
 pin_action = ExtResource( 19 )
-narration_key = "NARRATOR_WING_ATTACK_USE"
+narration_variations = 4
+narration_key = "NARRATOR_WING_ATTACK_USE_"
 hit_sfx_name = "Chop"
 attack_factor = 0.5
 

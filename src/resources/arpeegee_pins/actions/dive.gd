@@ -39,7 +39,7 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	
 	tween.tween_callback(sounds, 'play', ['DiveBombHit'])
 	
-	ActionUtils.add_text_trigger(tween, self, 'NARRATOR_DIVE_BOMB_USE')
+	ActionUtils.add_text_trigger_ordered(tween, self, 'NARRATOR_DIVE_BOMB_USE_', 4, 1)
 	
 	var modified_stats := NodE.get_child(actioner, ModifiedPinStats) as ModifiedPinStats
 	if modified_stats:
