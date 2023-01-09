@@ -47,7 +47,7 @@ func run(actioner: Node2D, object: Object, callback: String) -> void:
 		animation.tween_callback(Sounds, 'play', ['DamageBurn'])
 	
 	if type == Type.Candle:
-		ActionUtils.add_text_trigger_ordered(animation, self, 'NARRATOR_CANDLE_USE_', 12, 1)
+		ActionUtils.add_text_trigger_ordered(animation, self, 'NARRATOR_CANDLE_USE_', 1, 1)
 	elif type == Type.GetBrighter:
 		ActionUtils.add_text_trigger(animation, self, 'NARRATOR_GET_BRIGHTER_USE')
 	elif type == Type.FallOver:

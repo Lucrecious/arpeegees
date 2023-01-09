@@ -45,6 +45,7 @@ func restart_battle() -> void:
 	
 
 func _on_battle_screen_requested(pin_amount: int) -> void:
+	ActionUtils.reset_key_to_speak_info()
 	
 	var pins := ArpeegeePins.pick_random(3)
 	if Debug.allow_pick_pins:

@@ -176,7 +176,7 @@ static func add_text_trigger(tween: SceneTreeTween, object: Object, translation:
 
 const _key_to_speak_info := {}
 static func reset_key_to_speak_info() -> void:
-	print_debug('should clear out key to speak info here')
+	_key_to_speak_info.clear()
 
 static func add_text_trigger_ordered(tween: SceneTreeTween, object: Object, translation_prefix: String, variations: int, repeats: int) -> void:
 	if not object.has_signal('text_triggered'):

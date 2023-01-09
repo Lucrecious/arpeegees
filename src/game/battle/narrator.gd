@@ -84,9 +84,6 @@ func speak_tr_random(translation_key_prefix: String, chain: bool, variations: in
 	var translation_key := '%s%d' % [translation_key_prefix, random_index]
 	speak_tr(translation_key, chain)
 
-func speak_tr_ordered(translation_key_prefix: String, chain: bool, variations: int, repeats := 1) -> void:
-	pass
-
 func speak(text: String, chain: bool) -> void:
 	if _current_tween:
 		if chain:
