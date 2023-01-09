@@ -76,7 +76,7 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	
 	if not cap_remover:
 		if type == Type.Regular:
-			ActionUtils.add_text_trigger(animation, self, 'NARRATOR_ARROW_ZIP_USE')
+			ActionUtils.add_text_trigger_ordered(animation, self, 'NARRATOR_ARROW_ZIP_USE_', 6, 1)
 		elif type == Type.OnFire:
 			ActionUtils.add_text_trigger(animation, self, 'NARRATOR_ARROWS_EN_FUEGO_USE')
 			if hit_type != ActionUtils.HitType.Miss:
