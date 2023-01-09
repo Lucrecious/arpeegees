@@ -21,7 +21,7 @@ func run(actioner: ArpeegeePinNode, target: ArpeegeePinNode, object: Object, cal
 	var status_effects_list := NodE.get_child(actioner, StatusEffectsList)
 	animation.tween_callback(status_effects_list, 'add_instance', [_create_charge_status_effect(target)])
 	
-	ActionUtils.add_text_trigger(animation, self, 'NARRATOR_BANAN_BAZOOKA_USE')
+	ActionUtils.add_text_trigger_ordered(animation, self, 'NARRATOR_BANAN_BAZOOKA_USE_', 3, 1)
 	
 	animation.tween_interval(1.0)
 	
@@ -82,7 +82,7 @@ class BananShootEffect extends Node:
 			animation.tween_interval(0.5)
 			animation.tween_callback(sprite_switcher, 'change', ['idle'])
 			
-			ActionUtils.add_text_trigger(animation, self, 'NARRATOR_BANAN_BAZOOKA_SHOOT')
+			ActionUtils.add_text_trigger_ordered(animation, self, 'NARRATOR_BANAN_BAZOOKA_SHOOT_', 4, 1)
 			
 		else:
 			ActionUtils.add_text_trigger(animation, self, 'NARRATOR_BANAN_BAZOOKA_FAILED')

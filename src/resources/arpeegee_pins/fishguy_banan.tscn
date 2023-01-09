@@ -124,7 +124,8 @@ script = ExtResource( 14 )
 attack_sprite_name = "poke"
 pin_action = ExtResource( 15 )
 walk = false
-narration_key = "NARRATOR_POKE_WITH_BANAN_USE"
+narration_variations = 6
+narration_key = "NARRATOR_POKE_WITH_BANAN_USE_"
 attack_factor = 0.8
 
 [node name="ImpactHint" type="Position2D" parent="Actions/PokeWithBanan" index="0"]
