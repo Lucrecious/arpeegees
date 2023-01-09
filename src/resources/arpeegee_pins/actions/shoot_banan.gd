@@ -59,6 +59,6 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	
 	animation.tween_callback(sprite_switcher, 'change', ['idle'])
 	
-	ActionUtils.add_text_trigger(animation, self, 'NARRATOR_SHOOT_BANAN_USE')
+	ActionUtils.add_text_trigger_ordered(animation, self, 'NARRATOR_SHOOT_BANAN_USE_', 5, 1)
 	
 	animation.tween_callback(object, callback)
