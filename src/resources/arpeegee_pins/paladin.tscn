@@ -126,7 +126,8 @@ script = ExtResource( 10 )
 [node name="HeavenlySlash" type="Node2D" parent="Actions" index="0"]
 script = ExtResource( 11 )
 pin_action = ExtResource( 12 )
-narration_key = "NARRATOR_HEAVENLY_SLASH_USE"
+narration_variations = 7
+narration_key = "NARRATOR_HEAVENLY_SLASH_USE_"
 use_global_sounds = true
 hit_sfx_name = "Slash"
 
@@ -141,7 +142,8 @@ script = ExtResource( 15 )
 pin_action = ExtResource( 16 )
 attack_frame = "slash"
 narration_key_single = "NARRATOR_TREMENDOUS_SLASH_USE_ONE_ENEMY"
-narration_key_multi = "NARRATOR_TREMENDOUS_SLASH_USE_MULTIPLE_ENEMIES"
+narration_multi_variations = 5
+narration_key_multi = "NARRATOR_TREMENDOUS_SLASH_USE_MULTIPLE_ENEMIES_"
 hit_sfx = "TremendousSlash"
 
 [node name="ImpactHint" type="Position2D" parent="Actions/TremendousSlash" index="0"]
