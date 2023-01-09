@@ -205,7 +205,8 @@ script = ExtResource( 15 )
 attack_sprite_name = "pounce"
 pin_action = ExtResource( 16 )
 walk = false
-narration_key = "NARRATOR_POUNCE_OWO_USE"
+narration_variations = 5
+narration_key = "NARRATOR_POUNCE_OWO_USE_"
 hit_sfx_name = "Pounce"
 
 [node name="ImpactHint" type="Position2D" parent="Actions/PounceOWO" index="0"]
