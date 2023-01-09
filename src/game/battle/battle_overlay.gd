@@ -128,7 +128,10 @@ func _do_turn_section_start(type: int) -> void:
 	
 	if keys.size() == 1:
 		var chain := false
-		_narrator.speak_tr(keys[0], chain)
+		if keys[0] == 'NARRATOR_GOO_TRAP_CANNOT_MOVE':
+			_narrator.speak_tr_random('NARRATOR_GOO_TRAP_CANNOT_MOVE_', chain, 6)
+		else:
+			_narrator.speak_tr(keys[0], chain)
 	else:
 		print_debug(keys)
 		assert(false, 'multiple keys is not implemented yet')
