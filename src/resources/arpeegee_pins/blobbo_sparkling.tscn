@@ -107,7 +107,8 @@ script = ExtResource( 12 )
 attack_sprite_name = "slap"
 pin_action = ExtResource( 13 )
 walk = false
-narration_key = "NARRATOR_SLAP_A_GOO_USE_PURPLE"
+narration_variations = 5
+narration_key = "NARRATOR_SLAP_A_GOO_USE_PURPLE_"
 hit_sfx_name = "Slap"
 
 [node name="ImpactHint" type="Position2D" parent="Actions/ASlapAGoo" index="0"]
