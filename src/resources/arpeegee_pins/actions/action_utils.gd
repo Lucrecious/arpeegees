@@ -174,6 +174,33 @@ static func add_text_trigger(tween: SceneTreeTween, object: Object, translation:
 	
 	tween.tween_callback(object, 'emit_signal', ['text_triggered', translation])
 
+const _key_to_speak_info := {}
+static func reset_key_to_speak_info() -> void:
+	print_debug('should clear out key to speak info here')
+
+static func add_text_trigger_ordered(tween: SceneTreeTween, object: Object, translation_prefix: String, variations: int, repeats: int) -> void:
+	if not object.has_signal('text_triggered'):
+		assert(false)
+		return
+	
+	var speak_info := _key_to_speak_info.get(translation_prefix, {}) as Dictionary
+	if speak_info.empty():
+		speak_info.current = -1
+		speak_info.variations = variations
+		speak_info.repeats = repeats
+		_key_to_speak_info[translation_prefix] = speak_info
+	
+	speak_info.current += 1
+	if speak_info.current >= speak_info.variations:
+		speak_info.current = 0
+		speak_info.repeats -= 1
+	
+	if speak_info.repeats <= 0:
+		return
+	
+	var translation_key := '%s%d' % [translation_prefix, speak_info.current + 1]
+	tween.tween_callback(object, 'emit_signal', ['text_triggered', translation_key])
+
 static func add_shader_param_interpolation(tween: SceneTreeTween,
 		material: ShaderMaterial, param: String,
 		begin: float, end: float, duration: float) -> MethodTweener:

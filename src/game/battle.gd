@@ -164,7 +164,7 @@ func _do_intro_narration() -> void:
 	speaking_tween.tween_property(_narrator, 'rect_position', _original_narrator_position, 1.5)\
 			.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 	speaking_tween.tween_interval(0.5)
-	speaking_tween.tween_callback(_narrator, 'speak_tr', ['NARRATOR_BATTLE_INTRODUCTION_GENERIC', false])
+	speaking_tween.tween_callback(_narrator, 'speak_tr_random', ['NARRATOR_BATTLE_INTRODUCTION_GENERIC_', false, 11])
 	TweenExtension.pause_until_signal_if_condition(speaking_tween.parallel(), _narrator, 'speaking_ended',
 			_narrator, 'is_speaking')
 	speaking_tween.tween_callback(self, '_do_start_battle_effects')
