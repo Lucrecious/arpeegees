@@ -78,7 +78,7 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 		if type == Type.Regular:
 			ActionUtils.add_text_trigger_ordered(animation, self, 'NARRATOR_ARROW_ZIP_USE_', 6, 1)
 		elif type == Type.OnFire:
-			ActionUtils.add_text_trigger(animation, self, 'NARRATOR_ARROWS_EN_FUEGO_USE')
+			ActionUtils.add_text_trigger_limited(animation, self, 'NARRATOR_ARROWS_EN_FUEGO_USE')
 			if hit_type != ActionUtils.HitType.Miss:
 				ActionUtils.add_text_trigger(animation, self, 'NARRATOR_ARROWS_EN_FUEGO_HIT_ENEMY')
 	

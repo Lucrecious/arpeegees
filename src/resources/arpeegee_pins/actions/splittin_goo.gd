@@ -110,9 +110,9 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 			.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 	
 	if type == Type.GooShot:
-		ActionUtils.add_text_trigger(animation, self, 'NARRATOR_SPITTIN_GOO_USE')
+		ActionUtils.add_text_trigger_limited(animation, self, 'NARRATOR_SPITTIN_GOO_USE')
 	elif type == Type.GooTrap:
-		ActionUtils.add_text_trigger(animation, self, 'NARRATOR_GOO_TRAP_USE')
+		ActionUtils.add_text_trigger_limited(animation, self, 'NARRATOR_GOO_TRAP_USE')
 		if trap_succeeds:
 			if already_trapped:
 				ActionUtils.add_text_trigger(animation, self, 'NARRATOR_GOO_TRAP_ALREADY_GOOED')

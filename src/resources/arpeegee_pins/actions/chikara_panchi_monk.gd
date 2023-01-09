@@ -19,7 +19,7 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	animation.tween_callback(sprite_switcher, 'swap_map', ['idle', 'powerup'])
 	animation.tween_callback(sounds, 'play', ['ChikaraPanchiCharge'])
 	
-	ActionUtils.add_text_trigger(animation, self, 'NARRATOR_CHIKARA_PANCHI_USE_START')
+	ActionUtils.add_text_trigger_limited(animation, self, 'NARRATOR_CHIKARA_PANCHI_USE_START')
 	
 	animation.tween_interval(0.5)
 	

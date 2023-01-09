@@ -32,7 +32,7 @@ func run(actioner: Node2D, object: Object, callback: String) -> void:
 	var sparkles := VFX.sparkle_explosions()
 	animation.tween_callback(NodE, 'add_children', [actioner, sparkles])
 	
-	ActionUtils.add_text_trigger(animation, self, 'NARRATOR_SPARKLES_USE')
+	ActionUtils.add_text_trigger_limited(animation, self, 'NARRATOR_SPARKLES_USE')
 	
 	animation.tween_interval(1.5)
 	animation.tween_callback(sprite_switcher, 'change', ['idle'])

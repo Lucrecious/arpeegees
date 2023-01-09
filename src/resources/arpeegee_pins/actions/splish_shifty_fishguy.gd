@@ -71,9 +71,9 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 	
 	if type == Type.Splish:
 		if _uses < 1:
-			ActionUtils.add_text_trigger(animation, self, 'NARRATOR_SPLISH_USE_1')
+			ActionUtils.add_text_trigger_limited(animation, self, 'NARRATOR_SPLISH_USE_1')
 		else:
-			ActionUtils.add_text_trigger(animation, self, 'NARRATOR_SPLISH_USE_2')
+			ActionUtils.add_text_trigger_limited(animation, self, 'NARRATOR_SPLISH_USE_2')
 	elif type == Type.Puddle:
 		ActionUtils.add_text_trigger(animation, self, 'NARRATOR_PUDDLE_USE')
 	

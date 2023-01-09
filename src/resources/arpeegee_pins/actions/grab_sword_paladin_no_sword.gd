@@ -76,7 +76,7 @@ func run(actioner: ArpeegeePinNode, object: Object, callback: String) -> void:
 	
 	ActionUtils.add_walk(animation, actioner, target_position, actioner.global_position, 15, 5)
 	
-	ActionUtils.add_text_trigger(animation, self, 'NARRATOR_SWORD_IN_THE_GOO_USE')
+	ActionUtils.add_text_trigger_limited(animation, self, 'NARRATOR_SWORD_IN_THE_GOO_USE')
 	if succeed:
 		ActionUtils.add_text_trigger(animation, self, 'NARRATOR_SWORD_IN_THE_GOO_USE_SUCCEED')
 	else:

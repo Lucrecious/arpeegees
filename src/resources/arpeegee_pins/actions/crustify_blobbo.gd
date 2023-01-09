@@ -37,7 +37,7 @@ func run(actioner: Node2D, object: Object, callback: String) -> void:
 	var status_effect := _create_defence_modifier()
 	animation.tween_callback(status_effects, 'add_instance', [status_effect])
 	
-	ActionUtils.add_text_trigger(animation, self, 'NARRATOR_CRUSTIFY_USE')
+	ActionUtils.add_text_trigger_limited(animation, self, 'NARRATOR_CRUSTIFY_USE')
 	
 	animation.tween_callback(object, callback)
 

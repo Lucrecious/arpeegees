@@ -59,7 +59,7 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	
 	animation.tween_callback(thing, 'queue_free')
 	
-	ActionUtils.add_text_trigger(animation, self, 'NARRATOR_SCREAM_USE')
+	ActionUtils.add_text_trigger_limited(animation, self, 'NARRATOR_SCREAM_USE')
 	
 	animation.tween_interval(1.0)
 	animation.tween_callback(sprite_switcher, 'change', ['idle'])

@@ -28,7 +28,7 @@ func run(actioner: Node2D, object: Object, callback: String) -> void:
 	
 	tween.tween_interval(0.75)
 	
-	ActionUtils.add_text_trigger(tween, self, 'NARRATOR_FOCUS_KI_USE_1')
+	ActionUtils.add_text_trigger_limited(tween, self, 'NARRATOR_FOCUS_KI_USE_1')
 	
 	tween.tween_interval(0.75)
 	

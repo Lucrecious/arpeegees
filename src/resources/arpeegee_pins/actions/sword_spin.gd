@@ -66,7 +66,7 @@ func run(actioner: Node2D, target: ArpeegeePinNode, object: Object, callback: St
 		
 		ActionUtils.add_walk(animation, actioner, after_winddown, actioner.global_position, 15, 5)
 	
-	ActionUtils.add_text_trigger(animation, self, 'NARRATOR_SWORD_SPIN_USE')
+	ActionUtils.add_text_trigger_limited(animation, self, 'NARRATOR_SWORD_SPIN_USE')
 	if took_sword_back:
 		ActionUtils.add_text_trigger(animation, self, 'NARRATOR_SWORD_SPIN_USE_SWORD_BACK')
 	

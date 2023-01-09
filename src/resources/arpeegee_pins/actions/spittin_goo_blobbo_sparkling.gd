@@ -70,7 +70,7 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	if type == Type.Sparkling:
 		ActionUtils.add_text_trigger_ordered(animation, self, 'NARRATOR_SPITTIN_GOO_PURPLE_', 7, 1)
 	elif type == Type.Sword:
-		ActionUtils.add_text_trigger(animation, self, 'NARRATOR_SPLITTIN_GOO_USE_SWORD_IN_BLOBBO')
+		ActionUtils.add_text_trigger_limited(animation, self, 'NARRATOR_SPLITTIN_GOO_USE_SWORD_IN_BLOBBO')
 	
 	animation.tween_interval(0.5)
 	animation.tween_callback(object, callback)

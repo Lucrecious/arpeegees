@@ -35,7 +35,7 @@ func run(actioner: Node2D, object: Object, callback: String) -> void:
 	
 	animation.tween_callback(EffectFunctions, 'bright_sparkles', [actioner, _boosted])
 	
-	ActionUtils.add_text_trigger(animation, self, 'NARRATOR_BRIGHT_SPARKLES_USE')
+	ActionUtils.add_text_trigger_limited(animation, self, 'NARRATOR_BRIGHT_SPARKLES_USE')
 	
 	animation.tween_interval(0.75)
 	

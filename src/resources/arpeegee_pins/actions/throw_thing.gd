@@ -106,7 +106,8 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 		if narration_variations > 0:
 			ActionUtils.add_text_trigger_ordered(animation, self, narration_key, narration_variations, 1)
 		else:
-			ActionUtils.add_text_trigger(animation, self, narration_key)
+			ActionUtils.add_text_trigger_limited(animation, self, narration_key)
+		
 		if hit_type == ActionUtils.HitType.CriticalHit and type == Type.ThrowSpear:
 			ActionUtils.add_text_trigger(animation, self, 'NARRATOR_THROW_SPEAR_USE_WITH_CRIT')
 	elif type == Type.MagicThrowRock:

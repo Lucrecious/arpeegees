@@ -24,7 +24,7 @@ func run(actioner: ArpeegeePinNode, targets: Array, object: Object, callback: St
 	
 	animation.tween_interval(2.0)
 	
-	ActionUtils.add_text_trigger(animation, self, 'NARRATOR_CARAMELIZE_USE')
+	ActionUtils.add_text_trigger_limited(animation, self, 'NARRATOR_CARAMELIZE_USE')
 	
 	animation.tween_callback(_flame_particles, 'set', ['emitting', false])
 	animation.tween_callback(sprite_switcher, 'change', ['idle'])

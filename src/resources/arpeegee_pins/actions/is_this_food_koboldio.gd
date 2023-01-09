@@ -15,7 +15,7 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 	var sounds := NodE.get_child(actioner, SoundsComponent)
 	animation.tween_callback(sounds, 'play', ['Break'])
 	
-	ActionUtils.add_text_trigger(animation, self, 'NARRATOR_IS_THIS_FOOD_USE')
+	ActionUtils.add_text_trigger_limited(animation, self, 'NARRATOR_IS_THIS_FOOD_USE')
 	
 	for t in targets:
 		if t.filename.get_file() != 'bard_no_mandolin.tscn':

@@ -9,7 +9,7 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 	var animation := create_tween()
 	
 	animation.tween_interval(0.5)
-	ActionUtils.add_text_trigger(animation, self, 'NARRATOR_SPLASH_USE')
+	ActionUtils.add_text_trigger_limited(animation, self, 'NARRATOR_SPLASH_USE')
 	
 	var sounds := NodE.get_child(actioner, SoundsComponent)
 	animation.tween_callback(sounds, 'play', ['Splash'])

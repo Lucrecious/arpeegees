@@ -74,9 +74,9 @@ func run(actioner: ArpeegeePinNode, target: ArpeegeePinNode, object: Object, cal
 		animation.tween_callback(status_effects_list, 'add_instance', [burning_status_effect])
 	
 	if type == Type.FlameBreath:
-		ActionUtils.add_text_trigger(animation, self, 'NARRATOR_FLAME_BREATH_USE')
+		ActionUtils.add_text_trigger_limited(animation, self, 'NARRATOR_FLAME_BREATH_USE')
 	elif type == Type.Flamethrower:
-		ActionUtils.add_text_trigger(animation, self, 'NARRATOR_FLAMETHROWER_USE')
+		ActionUtils.add_text_trigger_limited(animation, self, 'NARRATOR_FLAMETHROWER_USE')
 	
 	animation.tween_callback(_flame_particles, 'set', ['emitting', false])
 	

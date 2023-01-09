@@ -174,6 +174,29 @@ static func add_text_trigger(tween: SceneTreeTween, object: Object, translation:
 	
 	tween.tween_callback(object, 'emit_signal', ['text_triggered', translation])
 
+const TEXT_TRIGGER_LIMITED_COUNT := 2
+const _text_trigger_counts := {}
+static func reset_text_trigger_counts() -> void:
+	_text_trigger_counts.clear()
+
+static func add_text_trigger_limited(tween: SceneTreeTween, object: Object, translation: String) -> void:
+	if not object.has_signal('text_triggered'):
+		assert(false)
+		return
+	
+	var count := 0
+	if not translation in _text_trigger_counts:
+		_text_trigger_counts[translation] = 0
+	else:
+		count = _text_trigger_counts[translation]
+	
+	if count >= TEXT_TRIGGER_LIMITED_COUNT:
+		return
+	
+	_text_trigger_counts[translation] += 1
+	
+	tween.tween_callback(object, 'emit_signal', ['text_triggered', translation])
+
 const _key_to_speak_info := {}
 static func reset_key_to_speak_info() -> void:
 	_key_to_speak_info.clear()

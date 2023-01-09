@@ -26,6 +26,6 @@ func run(actioner: Node2D, object: Object, callback: String) -> void:
 	animation.tween_interval(0.75)
 	animation.tween_callback(sprite_switcher, 'change', ['idle'])
 	
-	ActionUtils.add_text_trigger(animation, self, 'NARRATOR_ANGELIC_HEAL_USE')
+	ActionUtils.add_text_trigger_limited(animation, self, 'NARRATOR_ANGELIC_HEAL_USE')
 	
 	animation.tween_callback(object, callback)

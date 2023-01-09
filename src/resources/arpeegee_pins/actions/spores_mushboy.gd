@@ -60,7 +60,7 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	
 	assert(not narration_key.empty())
 	
-	ActionUtils.add_text_trigger(animation, self, narration_key)
+	ActionUtils.add_text_trigger_limited(animation, self, narration_key)
 	
 	animation.tween_callback(sprite_switcher, 'change', ['sporessetup'])
 	animation.tween_interval(1.0)

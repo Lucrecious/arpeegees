@@ -65,7 +65,7 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	
 	skew_stepper.finish()
 	
-	ActionUtils.add_text_trigger(animation, self, narration_key)
+	ActionUtils.add_text_trigger_limited(animation, self, narration_key)
 	
 	animation.tween_callback(Music, 'unpause_fade_in')
 	

@@ -18,7 +18,7 @@ func run(actioner: ArpeegeePinNode, object: Object, callback: String) -> void:
 	var status_effects_list := NodE.get_child(actioner, StatusEffectsList) as StatusEffectsList
 	animation.tween_callback(status_effects_list, 'add_instance', [_create_confusion_effect()])
 	
-	ActionUtils.add_text_trigger(animation, self, 'NARRATOR_CONFUSION_USE')
+	ActionUtils.add_text_trigger_limited(animation, self, 'NARRATOR_CONFUSION_USE')
 	
 	animation.tween_callback(sprite_switcher, 'change', ['idle'])
 	

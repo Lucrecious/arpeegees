@@ -73,13 +73,13 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 	
 	if targets.size() == 1:
 		if not narration_key_single.empty():
-			ActionUtils.add_text_trigger(tween, self, narration_key_single)
+			ActionUtils.add_text_trigger_limited(tween, self, narration_key_single)
 	elif targets.size() > 1:
 		if not narration_key_multi.empty():
 			if narration_multi_variations > 0:
 				ActionUtils.add_text_trigger_ordered(tween, self, narration_key_multi, narration_multi_variations, 1)
 			else:
-				ActionUtils.add_text_trigger(tween, self, narration_key_multi)
+				ActionUtils.add_text_trigger_limited(tween, self, narration_key_multi)
 		elif not narration_key_single.empty():
 			ActionUtils.add_text_trigger(tween, self, narration_key_single)
 	

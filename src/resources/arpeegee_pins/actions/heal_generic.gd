@@ -127,7 +127,7 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 			narrator_use_no_ally = 'NARRATOR_FOREST_LOVE_USE_ALONE'
 		
 		if targets.size() == 1:
-			ActionUtils.add_text_trigger(animation, self, narrator_use_no_ally)
+			ActionUtils.add_text_trigger_limited(animation, self, narrator_use_no_ally)
 		elif targets.size() > 1:
 			var any_dead := false
 			for t in targets:
@@ -138,12 +138,12 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 				break
 			
 			if not any_dead:
-				ActionUtils.add_text_trigger(animation, self, narrator_use_with_ally)
+				ActionUtils.add_text_trigger_limited(animation, self, narrator_use_with_ally)
 			else:
-				ActionUtils.add_text_trigger(animation, self, narrator_use_dead_ally)
+				ActionUtils.add_text_trigger_limited(animation, self, narrator_use_dead_ally)
 	
 	elif type == Type.MedicinalSparkles:
-		ActionUtils.add_text_trigger(animation, self, 'NARRATOR_MEDICINAL_SPARKLES_USE')
+		ActionUtils.add_text_trigger_limited(animation, self, 'NARRATOR_MEDICINAL_SPARKLES_USE')
 	else:
 		assert(false)
 	

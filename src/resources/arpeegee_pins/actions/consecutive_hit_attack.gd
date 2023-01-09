@@ -66,7 +66,7 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	animation.tween_interval(0.5)
 	
 	if not narration_key.empty():
-		ActionUtils.add_text_trigger(animation, self, narration_key)
+		ActionUtils.add_text_trigger_limited(animation, self, narration_key)
 	
 	ActionUtils.add_walk(animation, actioner, target_position, actioner.global_position, 15.0, 5)
 	

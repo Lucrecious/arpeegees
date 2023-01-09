@@ -204,7 +204,7 @@ func run(actioner: Node2D, target: ArpeegeePinNode, object: Object, callback: St
 			if narration_variations > 0:
 				ActionUtils.add_text_trigger_ordered(tween, self, narration_key, narration_variations, 1)
 			else:
-				ActionUtils.add_text_trigger(tween, self, narration_key)
+				ActionUtils.add_text_trigger_limited(tween, self, narration_key)
 	
 	if hunter_gooed_up:
 		ActionUtils.add_text_trigger(tween, self, 'NARRATOR_HUNTER_GOOED_UP_FROM_BLOBBO')

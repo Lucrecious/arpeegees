@@ -37,7 +37,7 @@ func run(actioner: Node2D, object: Object, callback: String) -> void:
 	
 	skew_stepper.finish()
 	
-	ActionUtils.add_text_trigger(animation, self, 'NARRATOR_BEATBOXIN_USE')
+	ActionUtils.add_text_trigger_limited(animation, self, 'NARRATOR_BEATBOXIN_USE')
 	
 	animation.tween_interval(1.0)
 	

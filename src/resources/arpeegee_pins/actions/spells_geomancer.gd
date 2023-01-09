@@ -45,12 +45,12 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 		animation.tween_callback(status_effects, 'add_instance', [_create_raise_earth_status()])
 		
 		if not _raise_drop_rocks.rocks_lit():
-			ActionUtils.add_text_trigger(animation, self, 'NARRATOR_RAISE_EARTH_USE')
+			ActionUtils.add_text_trigger_limited(animation, self, 'NARRATOR_RAISE_EARTH_USE')
 		else:
-			ActionUtils.add_text_trigger(animation, self, 'NARRATOR_RAISE_EARTH_USE_ON_FIRE')
+			ActionUtils.add_text_trigger_limited(animation, self, 'NARRATOR_RAISE_EARTH_USE_ON_FIRE')
 		
 		if status_effects.count_tags(StatusEffectTag.RaiseEarth) > 0:
-			ActionUtils.add_text_trigger(animation, self, 'NARRATOR_RAISE_EARTH_USE_USELESS')
+			ActionUtils.add_text_trigger_limited(animation, self, 'NARRATOR_RAISE_EARTH_USE_USELESS')
 	
 	elif type == Type.RockWall:
 		_is_blocked = true

@@ -99,7 +99,7 @@ func run_start_turn_effect() -> void:
 	if blobbo_absorbed:
 		ActionUtils.add_text_trigger(tween, self, 'NARRATOR_BLOBBO_ABSORBS_CHAKIRA_PANCHI')
 	else:
-		ActionUtils.add_text_trigger(tween, self, 'NARRATOR_CHIKARA_PANCHI_USE_ATTACK')
+		ActionUtils.add_text_trigger_limited(tween, self, 'NARRATOR_CHIKARA_PANCHI_USE_ATTACK')
 	
 	# switching it back after punch
 	tween.tween_callback(sprite_switcher, 'swap_map', ['powerup', 'idle'])

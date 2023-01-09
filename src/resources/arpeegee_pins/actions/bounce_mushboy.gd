@@ -25,7 +25,7 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	animation.tween_callback(list, 'add_instance',
 			[_bounce_effect(actioner.global_position, actioner, target)])
 	
-	ActionUtils.add_text_trigger(animation, self, 'NARRATOR_BOUNCE_USE_FIRST_TURN')
+	ActionUtils.add_text_trigger_limited(animation, self, 'NARRATOR_BOUNCE_USE_FIRST_TURN')
 	
 	animation.tween_callback(object, callback)
 
@@ -79,6 +79,8 @@ class BounceStartTurnEffect extends Node:
 			ActionUtils.add_attack(animation, _actioner, _target, damage)
 			
 			animation.tween_callback(Sounds, 'play', ['Damage'])
+			
+			ActionUtils.add_text_trigger_limited(animation, self, 'NARRATOR_BOUNCE_USE_SECOND_TURN')	
 			
 			animation.tween_interval(1.0)
 		else:

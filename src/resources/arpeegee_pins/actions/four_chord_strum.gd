@@ -41,7 +41,7 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 	
 	skew_stepper.finish()
 	
-	ActionUtils.add_text_trigger(animation, self, 'NARRATOR_FOUR_CHORD_STRUM_USE_1')
+	ActionUtils.add_text_trigger_limited(animation, self, 'NARRATOR_FOUR_CHORD_STRUM_USE_1')
 	
 	for t in targets:
 		EffectFunctions.add_dance_frame_and_narration(t, self, animation)
