@@ -18,7 +18,7 @@ func _init().():
 	add_to_group('size_adapter')
 
 const SIZE_INCREASE_LIMIT := 3000
-const START_INCREASE_SIZE := 1920
+const START_INCREASE_SIZE := 1500
 const MAX_SCALE := 1.7
 func adapt(size: float) -> void:
 	if size > START_INCREASE_SIZE:
@@ -31,6 +31,8 @@ func _ready() -> void:
 	_light_down.visible = false
 	if not resource:
 		print_debug('warning: resource missing')
+	
+	adapt(get_viewport().get_size_override().x)
 
 func emit_stars() -> void:
 	_hp_bar.visible = false
