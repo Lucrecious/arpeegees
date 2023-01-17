@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=2]
+[gd_scene load_steps=61 format=2]
 
 [ext_resource path="res://src/game/title.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/main.gd" type="Script" id=2]
@@ -42,6 +42,7 @@
 [ext_resource path="res://assets/sprites/paladin/paladin_hurt.png" type="Texture" id=40]
 [ext_resource path="res://assets/sprites/monk/monk_idle.png" type="Texture" id=41]
 [ext_resource path="res://assets/sprites/paladin/paladin_idle.png" type="Texture" id=42]
+[ext_resource path="res://src/ui/title_screen_size_adapter.gd" type="Script" id=43]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -201,6 +202,12 @@ anchor_bottom = 1.0
 
 [node name="Title" parent="SpanLimiter/Content/Game" instance=ExtResource( 1 )]
 unique_name_in_owner = true
+anchor_bottom = 0.0
+margin_bottom = 720.0
+
+[node name="TileSizeAdapter" type="Node" parent="SpanLimiter/Content/Game/Title"]
+script = ExtResource( 43 )
+main_path = NodePath("../../../../..")
 
 [node name="TopGrassSmaller" type="TextureRect" parent="SpanLimiter/Content/Game"]
 anchor_top = 1.0
@@ -225,8 +232,8 @@ size_limit_x = 1280
 size_y = 787
 height_offset = 566
 move_down = true
-_paths_copies = [ NodePath("../WebsiteContent"), NodePath("../Game/BattleScreenPositionReference"), NodePath("../FillIn"), NodePath("../Game/Title") ]
-copy_height_offsets = [ 0, -810, -5, -810 ]
+_paths_copies = [ NodePath("../WebsiteContent"), NodePath("../Game/BattleScreenPositionReference"), NodePath("../FillIn") ]
+copy_height_offsets = [ 0, -810, -5 ]
 
 [node name="SizeAdapter" type="Node" parent="SpanLimiter/Content"]
 script = ExtResource( 22 )

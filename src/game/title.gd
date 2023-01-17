@@ -60,4 +60,3 @@ func _do_camera_shake_if_possible() -> void:
 
 func _on_pin_bag_opened() -> void:
 	emit_signal('battle_screen_requested', 3)
-

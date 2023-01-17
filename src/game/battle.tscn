@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=2]
+[gd_scene load_steps=58 format=2]
 
 [ext_resource path="res://src/game/battle.gd" type="Script" id=1]
 [ext_resource path="res://src/game/battle/turn_manager.gd" type="Script" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://src/resources/arpeegee_pins/monk.tres" type="Resource" id=19]
 [ext_resource path="res://assets/sprites/effects/rockwall.png" type="Texture" id=20]
 [ext_resource path="res://src/resources/sounds.gd" type="Script" id=21]
+[ext_resource path="res://src/game/texture_rect_relative_fixed_points_controls.gd" type="Script" id=22]
 [ext_resource path="res://assets/sounds/enraged_harpy.mp3" type="AudioStream" id=23]
 [ext_resource path="res://src/game/save_log.gd" type="Script" id=24]
 [ext_resource path="res://src/game/battle/y_sort_during_actions.gd" type="Script" id=25]
@@ -36,6 +37,61 @@
 [ext_resource path="res://assets/battle/ground.png" type="Texture" id=35]
 [ext_resource path="res://assets/battle/sky_night.png" type="Texture" id=36]
 [ext_resource path="res://src/ui/win_overlay.tscn" type="PackedScene" id=37]
+
+[sub_resource type="Animation" id=8]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Control/Clipping/Wall:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 88 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Control/Clipping/Wall:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "wall_appear"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Control/Clipping/Wall:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Control/Clipping/Wall:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 71, 177 ), Vector2( 71, 73 ) ]
+}
 
 [sub_resource type="Shader" id=10]
 code = "shader_type canvas_item;
@@ -93,61 +149,6 @@ tracks/0/keys = {
 
 [sub_resource type="Curve" id=7]
 _data = [ Vector2( 0.0112782, 0.0225226 ), 0.0, 0.0, 0, 0, Vector2( 0.661654, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="Animation" id=8]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("Control/Clipping/Wall:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 0, 88 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Control/Clipping/Wall:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ) ]
-}
-
-[sub_resource type="Animation" id=9]
-resource_name = "wall_appear"
-length = 1.5
-tracks/0/type = "value"
-tracks/0/path = NodePath("Control/Clipping/Wall:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Control/Clipping/Wall:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 1.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 71, 177 ), Vector2( 71, 73 ) ]
-}
 
 [sub_resource type="Animation" id=3]
 length = 0.001
@@ -275,20 +276,63 @@ expand = true
 stretch_mode = 5
 
 [node name="Ground" type="TextureRect" parent="SpanLimiter/Background/SkySmaller"]
-anchor_top = 0.5
+anchor_top = 0.689
 anchor_right = 1.0
-anchor_bottom = 0.5
-margin_top = 136.0
-margin_bottom = 1355.0
+anchor_bottom = 0.689
+margin_top = -0.0800171
+margin_right = -1.0
+margin_bottom = 2130.92
 texture = ExtResource( 35 )
 expand = true
 stretch_mode = 5
+script = ExtResource( 22 )
+children_to_track = [ NodePath("TitleBagHint"), NodePath("CenterRockWall") ]
 
 [node name="TextureDayNightCycle" type="Node" parent="SpanLimiter/Background/SkySmaller/Ground"]
 script = ExtResource( 32 )
 day = ExtResource( 35 )
 evening = ExtResource( 33 )
 night = ExtResource( 34 )
+
+[node name="TitleBagHint" type="ReferenceRect" parent="SpanLimiter/Background/SkySmaller/Ground"]
+unique_name_in_owner = true
+margin_left = 628.0
+margin_top = 94.0
+margin_right = 628.0
+margin_bottom = 94.0
+border_width = 10.0
+
+[node name="CenterRockWall" type="Control" parent="SpanLimiter/Background/SkySmaller/Ground"]
+anchor_top = 0.018
+anchor_right = 1.0
+anchor_bottom = 0.018
+margin_left = 638.0
+margin_top = 23.642
+margin_right = -624.0
+margin_bottom = 23.642
+
+[node name="Control" type="Control" parent="SpanLimiter/Background/SkySmaller/Ground/CenterRockWall"]
+margin_left = -2.0
+margin_top = -56.0
+margin_right = -2.0
+margin_bottom = -56.0
+
+[node name="Clipping" type="Control" parent="SpanLimiter/Background/SkySmaller/Ground/CenterRockWall/Control"]
+margin_left = -70.0
+margin_top = -70.0
+margin_right = 68.0
+margin_bottom = 70.0
+rect_clip_content = true
+
+[node name="Wall" type="Sprite" parent="SpanLimiter/Background/SkySmaller/Ground/CenterRockWall/Control/Clipping"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 0, 88 )
+scale = Vector2( 0.333333, 0.333333 )
+texture = ExtResource( 20 )
+
+[node name="WallAnimationPlayer" type="AnimationPlayer" parent="SpanLimiter/Background/SkySmaller/Ground/CenterRockWall" groups=["rock_wall_animation_player"]]
+anims/RESET = SubResource( 8 )
+anims/wall_appear = SubResource( 9 )
 
 [node name="TextureDayNightCycle" type="Node" parent="SpanLimiter/Background/SkySmaller"]
 script = ExtResource( 32 )
@@ -340,34 +384,6 @@ emission_rect_extents = Vector2( 300, 50 )
 gravity = Vector2( 0, 0 )
 scale_amount = 0.05
 scale_amount_curve = SubResource( 7 )
-
-[node name="CenterRockWall" type="CenterContainer" parent="SpanLimiter/Background"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 246.0
-
-[node name="Control" type="Control" parent="SpanLimiter/Background/CenterRockWall"]
-margin_left = 640.0
-margin_top = 237.0
-margin_right = 640.0
-margin_bottom = 237.0
-
-[node name="Clipping" type="Control" parent="SpanLimiter/Background/CenterRockWall/Control"]
-margin_left = -70.0
-margin_top = -70.0
-margin_right = 68.0
-margin_bottom = 70.0
-rect_clip_content = true
-
-[node name="Wall" type="Sprite" parent="SpanLimiter/Background/CenterRockWall/Control/Clipping"]
-modulate = Color( 1, 1, 1, 0 )
-position = Vector2( 0, 88 )
-scale = Vector2( 0.333333, 0.333333 )
-texture = ExtResource( 20 )
-
-[node name="WallAnimationPlayer" type="AnimationPlayer" parent="SpanLimiter/Background/CenterRockWall" groups=["rock_wall_animation_player"]]
-anims/RESET = SubResource( 8 )
-anims/wall_appear = SubResource( 9 )
 
 [node name="BattleLayer" type="MarginContainer" parent="."]
 unique_name_in_owner = true
@@ -451,6 +467,7 @@ anims/default = SubResource( 6 )
 visible = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="HUD" type="MarginContainer" parent="CanvasLayer"]
 anchor_right = 1.0

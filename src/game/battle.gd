@@ -31,6 +31,8 @@ onready var _restart_button_holder_original_position := _restart_button_holder.r
 
 onready var _puddle_player := $'%PuddlePlayer' as AnimationPlayer
 
+onready var title_bag_hint := $'%TitleBagHint' as Control
+
 func _ready() -> void:
 	_puddle_player.play('RESET')
 	
