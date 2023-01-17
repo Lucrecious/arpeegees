@@ -14,6 +14,19 @@ onready var _light_particles := _start_animation.get_node('LightParticles').get_
 onready var _root_sprite := Components.root_sprite(self)
 onready var _hp_bar := get_node('HealthBar') as Node2D
 
+func _init().():
+	add_to_group('size_adapter')
+
+const SIZE_INCREASE_LIMIT := 3000
+const START_INCREASE_SIZE := 1920
+const MAX_SCALE := 1.7
+func adapt(size: float) -> void:
+	if size > START_INCREASE_SIZE:
+		var ratio := inverse_lerp(START_INCREASE_SIZE, SIZE_INCREASE_LIMIT, size)
+		scale = Vector2.ONE * min(lerp(1.0, MAX_SCALE, ratio), MAX_SCALE)
+	else:
+		scale = Vector2.ONE
+
 func _ready() -> void:
 	_light_down.visible = false
 	if not resource:
