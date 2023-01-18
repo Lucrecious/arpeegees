@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://src/game/title.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/main.gd" type="Script" id=2]
@@ -18,31 +18,19 @@
 [ext_resource path="res://assets/ui/website/Artboard.svg" type="Texture" id=16]
 [ext_resource path="res://assets/ui/website_font_regular.ttf" type="DynamicFontData" id=17]
 [ext_resource path="res://assets/battle/topleaves_night.png" type="Texture" id=18]
-[ext_resource path="res://assets/ui/website/Group 10.png" type="Texture" id=19]
-[ext_resource path="res://assets/ui/website/packet-image.png" type="Texture" id=20]
-[ext_resource path="res://assets/ui/website/Group 26.svg" type="Texture" id=21]
 [ext_resource path="res://src/ui/size_adapter.gd" type="Script" id=22]
 [ext_resource path="res://assets/ui/website/Path.png" type="Texture" id=23]
 [ext_resource path="res://src/website/swipe_open.gd" type="Script" id=24]
 [ext_resource path="res://src/website/size_adjuster.gd" type="Script" id=25]
-[ext_resource path="res://assets/battle/Path-1.png" type="Texture" id=26]
 [ext_resource path="res://assets/battle/topleaves_evening.png" type="Texture" id=27]
 [ext_resource path="res://src/ui/texture_day_night_cycle.gd" type="Script" id=28]
 [ext_resource path="res://assets/battle/grass_night.png" type="Texture" id=29]
 [ext_resource path="res://assets/battle/grass_evening.png" type="Texture" id=30]
-[ext_resource path="res://assets/battle/Path-1_night.png" type="Texture" id=31]
-[ext_resource path="res://assets/battle/Path-1_evening.png" type="Texture" id=32]
 [ext_resource path="res://src/ui/color_day_night_cycle.gd" type="Script" id=33]
-[ext_resource path="res://assets/sprites/koboldio/koboldio_idle.png" type="Texture" id=34]
-[ext_resource path="res://assets/sprites/koboldio/koboldio_hit.png" type="Texture" id=35]
-[ext_resource path="res://src/website/click_toggle_sprites.gd" type="Script" id=36]
-[ext_resource path="res://assets/sprites/blobbo/blobbo_idle.png" type="Texture" id=37]
-[ext_resource path="res://assets/sprites/blobbo/blobbo_hit.png" type="Texture" id=38]
-[ext_resource path="res://assets/sprites/monk/monk_hit.png" type="Texture" id=39]
-[ext_resource path="res://assets/sprites/paladin/paladin_hurt.png" type="Texture" id=40]
-[ext_resource path="res://assets/sprites/monk/monk_idle.png" type="Texture" id=41]
-[ext_resource path="res://assets/sprites/paladin/paladin_idle.png" type="Texture" id=42]
 [ext_resource path="res://src/ui/title_screen_size_adapter.gd" type="Script" id=43]
+[ext_resource path="res://assets/ui/website/pin-examples.png" type="Texture" id=44]
+[ext_resource path="res://assets/ui/website/stickers_title.png" type="Texture" id=45]
+[ext_resource path="res://assets/ui/website/sticker-examples.png" type="Texture" id=46]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -113,10 +101,6 @@ font_data = ExtResource( 7 )
 size = 24
 font_data = ExtResource( 7 )
 
-[sub_resource type="DynamicFont" id=12]
-size = 42
-font_data = ExtResource( 7 )
-
 [sub_resource type="StyleBoxFlat" id=9]
 draw_center = false
 border_width_left = 5
@@ -126,24 +110,20 @@ border_width_bottom = 5
 border_color = Color( 0.0941176, 0, 0.176471, 1 )
 
 [sub_resource type="DynamicFont" id=10]
-size = 42
+size = 24
 font_data = ExtResource( 7 )
 
 [sub_resource type="DynamicFont" id=11]
-size = 32
-font_data = ExtResource( 17 )
-
-[sub_resource type="DynamicFont" id=14]
-size = 32
-font_data = ExtResource( 7 )
-
-[sub_resource type="DynamicFont" id=15]
 size = 24
 font_data = ExtResource( 17 )
 
-[sub_resource type="DynamicFont" id=16]
+[sub_resource type="DynamicFont" id=18]
 size = 24
 font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=19]
+size = 24
+font_data = ExtResource( 17 )
 
 [node name="Main" type="Control"]
 anchor_right = 1.0
@@ -154,7 +134,7 @@ script = ExtResource( 2 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -1205.0
-margin_bottom = 6055.0
+margin_bottom = 7693.0
 color = Color( 0.0862745, 0.545098, 0.403922, 1 )
 
 [node name="ColorDayNightCycle" type="Node" parent="Background"]
@@ -171,7 +151,7 @@ anchor_bottom = 1.0
 margin_left = -640.0
 margin_top = -1183.0
 margin_right = 640.0
-margin_bottom = 2800.0
+margin_bottom = 4020.0
 
 [node name="SpanLimiter" type="MarginContainer" parent="."]
 anchor_right = 1.0
@@ -889,114 +869,27 @@ margin_right = 1101.0
 margin_bottom = 1548.0
 rect_min_size = Vector2( 922, 1548 )
 
-[node name="StumpImage" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer"]
-margin_left = -171.0
-margin_top = 794.0
-margin_right = 1109.0
-margin_bottom = 1514.0
-rect_min_size = Vector2( 1280, 720 )
-
-[node name="StumpClip" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/StumpImage"]
-anchor_left = 0.166
-anchor_top = 0.932
-anchor_right = 0.832
-anchor_bottom = 0.932
-margin_left = 0.519989
-margin_top = -570.04
-margin_right = 0.0400391
-margin_bottom = 4.95996
-rect_clip_content = true
-
-[node name="Stump" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/StumpImage/StumpClip"]
-anchor_left = 0.063
-anchor_top = 1.0
-anchor_right = 0.919
-anchor_bottom = 1.0
-margin_left = -0.355995
-margin_top = -728.0
-margin_right = 0.33197
-margin_bottom = 2.0
-texture = ExtResource( 19 )
-expand = true
-stretch_mode = 5
-
-[node name="Path" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/StumpImage"]
-anchor_left = 0.208
-anchor_top = 0.944
-anchor_right = 0.778
-anchor_bottom = 0.944
-margin_left = -0.23999
-margin_top = -364.68
-margin_right = 7.15991
-margin_bottom = 20.3199
-texture = ExtResource( 26 )
-expand = true
-stretch_mode = 5
-
-[node name="TextureDayNightCycle" type="Node" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/StumpImage/Path"]
-script = ExtResource( 28 )
-day = ExtResource( 26 )
-evening = ExtResource( 32 )
-night = ExtResource( 31 )
-
-[node name="PacketImage" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/StumpImage"]
-anchor_left = 0.208
-anchor_top = 0.944
-anchor_right = 0.778
-anchor_bottom = 0.944
-margin_left = 213.76
-margin_top = -426.68
-margin_right = -284.84
-margin_bottom = -112.68
-texture = ExtResource( 20 )
-expand = true
-stretch_mode = 5
-
-[node name="SaleTag" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/StumpImage"]
-anchor_left = 0.208
-anchor_top = 0.944
-anchor_right = 0.778
-anchor_bottom = 0.944
-margin_left = 380.76
-margin_top = -240.68
-margin_right = -199.84
-margin_bottom = -140.68
-texture = ExtResource( 21 )
-expand = true
-stretch_mode = 5
-
-[node name="Title" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/StumpImage/SaleTag"]
-anchor_right = 1.0
-margin_left = 25.0
-margin_top = 19.0
-margin_right = -19.0
-margin_bottom = 95.0
-custom_colors/font_color = Color( 0.231373, 0.141176, 0.227451, 1 )
-custom_fonts/font = SubResource( 12 )
-text = "$25"
-
 [node name="PackInformation" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer"]
-margin_left = -171.0
+margin_left = -178.0
 margin_top = 68.0
-margin_right = 1109.0
+margin_right = 1102.0
 margin_bottom = 1011.0
 
 [node name="PanelContainer" type="PanelContainer" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation"]
-anchor_left = 0.218
-anchor_top = 0.066
-anchor_right = 0.776
-anchor_bottom = 0.884
-margin_left = -0.0400085
-margin_top = -0.237999
-margin_right = -0.280029
-margin_bottom = 0.387939
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 129.0
+margin_top = 62.0
+margin_right = -137.0
+margin_bottom = 646.0
+rect_min_size = Vector2( 650, 0 )
 custom_styles/panel = SubResource( 9 )
 
 [node name="MarginContainer" type="MarginContainer" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer"]
 margin_left = 5.0
 margin_top = 5.0
-margin_right = 709.0
-margin_bottom = 767.0
+margin_right = 1009.0
+margin_bottom = 1522.0
 custom_constants/margin_right = 0
 custom_constants/margin_top = 70
 custom_constants/margin_left = 0
@@ -1004,15 +897,15 @@ custom_constants/margin_bottom = 0
 
 [node name="Back" type="ColorRect" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer/MarginContainer"]
 margin_top = 70.0
-margin_right = 704.0
-margin_bottom = 762.0
+margin_right = 1004.0
+margin_bottom = 1517.0
 color = Color( 0.972549, 0.905882, 0.823529, 1 )
 
 [node name="Pattern" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer"]
 margin_left = 5.0
 margin_top = 5.0
-margin_right = 709.0
-margin_bottom = 767.0
+margin_right = 1009.0
+margin_bottom = 1522.0
 texture = ExtResource( 16 )
 expand = true
 stretch_mode = 5
@@ -1020,157 +913,196 @@ stretch_mode = 5
 [node name="Container" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer"]
 margin_left = 5.0
 margin_top = 5.0
-margin_right = 709.0
-margin_bottom = 767.0
+margin_right = 1009.0
+margin_bottom = 1522.0
 
-[node name="Title" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer/Container"]
-anchor_right = 1.0
-margin_left = 1.0
-margin_top = 102.0
-margin_right = 1.0
-margin_bottom = 207.0
+[node name="PinsInfo" type="VBoxContainer" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer/Container"]
+margin_left = 377.0
+margin_top = 395.0
+margin_right = 964.0
+margin_bottom = 818.0
+
+[node name="Title" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer/Container/PinsInfo"]
+margin_right = 587.0
+margin_bottom = 61.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 10 )
-text = "Each bag contains 3 (three) randomly selected pins."
-align = 1
+text = "Each bag contains 3 (three) randomly
+selected pins."
 autowrap = true
 
-[node name="Top" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer/Container"]
-anchor_right = 1.0
-margin_left = 50.0
-margin_top = 242.0
-margin_right = -50.0
-margin_bottom = 362.0
+[node name="Space" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer/Container/PinsInfo"]
+margin_top = 65.0
+margin_right = 587.0
+margin_bottom = 90.0
+rect_min_size = Vector2( 0, 25 )
+
+[node name="Top" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer/Container/PinsInfo"]
+margin_top = 94.0
+margin_right = 587.0
+margin_bottom = 159.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 11 )
-text = "The entire set of Wave 1 pins consist of:
-"
-align = 1
+text = "The entire set of Wave 1 pins consist
+of:"
 autowrap = true
 
-[node name="Middle" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer/Container"]
-anchor_right = 1.0
-margin_left = 127.0
-margin_top = 350.0
-margin_right = 27.0
-margin_bottom = 511.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = SubResource( 8 )
+[node name="Middle" type="RichTextLabel" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer/Container/PinsInfo"]
+margin_top = 163.0
+margin_right = 587.0
+margin_bottom = 291.0
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+custom_fonts/bold_font = SubResource( 18 )
+custom_fonts/normal_font = SubResource( 19 )
+bbcode_enabled = true
+bbcode_text = "[b]7[/b] Hero Pins (facing left)
+[b]7[/b] Monster Pins (facing right)
+[b]4[/b] Menu Pins
+[b]2[/b] ULTRA RARE Mystery Pins"
 text = "7 Hero Pins (facing left)
 7 Monster Pins (facing right)
 4 Menu Pins
 2 ULTRA RARE Mystery Pins"
-autowrap = true
+fit_content_height = true
+scroll_active = false
 
-[node name="Bottom" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer/Container"]
-anchor_right = 1.0
-margin_left = 50.0
-margin_top = 538.0
-margin_right = -50.0
-margin_bottom = 658.0
+[node name="Space2" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer/Container/PinsInfo"]
+margin_top = 295.0
+margin_right = 587.0
+margin_bottom = 320.0
+rect_min_size = Vector2( 0, 25 )
+
+[node name="Bottom" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer/Container/PinsInfo"]
+margin_top = 324.0
+margin_right = 587.0
+margin_bottom = 423.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 11 )
 text = "Each pack of 3 pins contains AT LEAST 1 (one) UNCOMMON OR HIGHER rarity pin! Try for your favorite one!"
-align = 1
 autowrap = true
 
-[node name="TopScroll" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation"]
-margin_left = 193.0
-margin_top = 4.0
-margin_right = 1247.0
-margin_bottom = 107.0
-texture = ExtResource( 15 )
+[node name="StickerInfo" type="VBoxContainer" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer/Container"]
+margin_left = 46.0
+margin_top = 1025.0
+margin_right = 633.0
+margin_bottom = 1448.0
 
-[node name="BottomScroll" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation"]
-margin_left = 193.0
-margin_top = 802.0
-margin_right = 1247.0
-margin_bottom = 905.0
-texture = ExtResource( 15 )
+[node name="Title" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer/Container/StickerInfo"]
+margin_right = 587.0
+margin_bottom = 61.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 10 )
+text = "Each bag contains 3 (three) randomly
+selected stickers."
+autowrap = true
 
-[node name="Koboldio" type="TextureButton" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation"]
-show_behind_parent = true
-margin_left = 957.0
-margin_top = 179.0
-margin_right = 1134.0
+[node name="Space" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer/Container/StickerInfo"]
+margin_top = 65.0
+margin_right = 587.0
+margin_bottom = 90.0
+rect_min_size = Vector2( 0, 25 )
+
+[node name="Top" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer/Container/StickerInfo"]
+margin_top = 94.0
+margin_right = 587.0
+margin_bottom = 159.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 11 )
+text = "The entire set of Wave 1 stickers
+consist of:"
+autowrap = true
+
+[node name="Middle" type="RichTextLabel" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer/Container/StickerInfo"]
+margin_top = 163.0
+margin_right = 587.0
+margin_bottom = 291.0
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+custom_fonts/bold_font = SubResource( 18 )
+custom_fonts/normal_font = SubResource( 19 )
+bbcode_enabled = true
+bbcode_text = "[b]7[/b] Common Stickers
+[b]6[/b] Uncommon Stickers
+[b]5[/b] Rare Holofoil Stickers!
+[b]2[/b] ULTRA RARE Holofoil Stickers!!"
+text = "7 Common Stickers
+6 Uncommon Stickers
+5 Rare Holofoil Stickers!
+2 ULTRA RARE Holofoil Stickers!!"
+fit_content_height = true
+scroll_active = false
+
+[node name="Space2" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer/Container/StickerInfo"]
+margin_top = 295.0
+margin_right = 587.0
+margin_bottom = 320.0
+rect_min_size = Vector2( 0, 25 )
+
+[node name="Bottom" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer/Container/StickerInfo"]
+margin_top = 324.0
+margin_right = 587.0
 margin_bottom = 423.0
-rect_rotation = 14.9633
-action_mode = 0
-script = ExtResource( 36 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 11 )
+text = "Each pack of 3 pins contains AT LEAST 1 (one) UNCOMMON OR HIGHER rarity sticker! Try for your favorite one! "
+autowrap = true
 
-[node name="Idle" type="Sprite" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/Koboldio"]
-position = Vector2( 85.9265, 108.493 )
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 34 )
+[node name="TopScroll" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer/Container"]
+anchor_right = 1.0
+margin_left = -91.0
+margin_top = -63.0
+margin_right = 83.0
+margin_bottom = 98.0
+texture = ExtResource( 15 )
+expand = true
+stretch_mode = 5
 
-[node name="Hit" type="Sprite" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/Koboldio"]
-visible = false
-position = Vector2( 114.544, 105.191 )
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 35 )
+[node name="BottomScroll" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer/Container"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -91.0
+margin_top = -26.9999
+margin_right = 83.0
+margin_bottom = 141.0
+texture = ExtResource( 15 )
+expand = true
+stretch_mode = 5
 
-[node name="Blobbo" type="TextureButton" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation"]
-show_behind_parent = true
-margin_left = 923.0
-margin_top = 404.0
-margin_right = 1118.0
-margin_bottom = 652.0
-rect_rotation = 11.1937
-action_mode = 0
-script = ExtResource( 36 )
+[node name="Logo" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer/Container"]
+margin_left = 344.0
+margin_top = 136.0
+margin_right = 858.0
+margin_bottom = 393.0
+texture = ExtResource( 8 )
+expand = true
+stretch_mode = 5
 
-[node name="Idle" type="Sprite" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/Blobbo"]
-position = Vector2( 84.8715, 119.803 )
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 37 )
+[node name="PinExamples" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer/Container"]
+margin_left = 34.0
+margin_top = 305.0
+margin_right = 548.0
+margin_bottom = 643.0
+texture = ExtResource( 44 )
+expand = true
+stretch_mode = 5
 
-[node name="Hit" type="Sprite" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/Blobbo"]
-visible = false
-position = Vector2( 152.445, 162.497 )
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 38 )
+[node name="StickersLogo" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer/Container"]
+margin_left = 40.0
+margin_top = 814.0
+margin_right = 475.0
+margin_bottom = 1048.0
+texture = ExtResource( 45 )
+expand = true
+stretch_mode = 5
 
-[node name="Paladin" type="TextureButton" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation"]
-show_behind_parent = true
-margin_left = 186.0
-margin_top = 185.0
-margin_right = 300.0
-margin_bottom = 419.0
-rect_rotation = -7.47355
-action_mode = 0
-script = ExtResource( 36 )
-
-[node name="Idle" type="Sprite" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/Paladin"]
-position = Vector2( 43.7691, 104.582 )
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 42 )
-
-[node name="Hit" type="Sprite" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/Paladin"]
-visible = false
-position = Vector2( 45.622, 105.833 )
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 40 )
-
-[node name="Monk" type="TextureButton" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation"]
-show_behind_parent = true
-margin_left = 173.0
-margin_top = 396.0
-margin_right = 300.0
-margin_bottom = 657.0
-rect_rotation = -7.47355
-action_mode = 0
-script = ExtResource( 36 )
-
-[node name="Idle" type="Sprite" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/Monk"]
-position = Vector2( 77.7233, 130.215 )
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 41 )
-
-[node name="Hit" type="Sprite" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/Monk"]
-visible = false
-position = Vector2( 73.8873, 128.704 )
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 39 )
+[node name="StickerExamples" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer/Container"]
+margin_left = 541.0
+margin_top = 937.0
+margin_right = 976.0
+margin_bottom = 1374.0
+texture = ExtResource( 46 )
+expand = true
+stretch_mode = 5
 
 [node name="StumpAdSizeAdapter" type="Node" parent="SpanLimiter/Content/WebsiteContent"]
 script = ExtResource( 22 )
@@ -1178,127 +1110,45 @@ _smaller_path = NodePath("../StumpAdSmaller")
 _bigger_path = NodePath("../StumpAd")
 size_limit = 1080
 
-[node name="StumpAdSmaller" type="CenterContainer" parent="SpanLimiter/Content/WebsiteContent" groups=["size_small"]]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 868.0
-margin_bottom = 1247.0
+[node name="StumpAdSmaller" type="CenterContainer" parent="SpanLimiter/Content/WebsiteContent" groups=["size_normal"]]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -640.0
+margin_top = 634.0
+margin_right = 640.0
+margin_bottom = 2182.0
 
 [node name="StumpAdContainer" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller"]
-margin_left = 294.0
-margin_top = 126.0
-margin_right = 985.0
-margin_bottom = 973.0
-rect_min_size = Vector2( 691, 847 )
-
-[node name="StumpImage" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer"]
-margin_left = -171.0
-margin_top = 823.0
-margin_right = 1109.0
-margin_bottom = 1543.0
-rect_min_size = Vector2( 1280, 720 )
-
-[node name="StumpClip" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/StumpImage"]
-anchor_left = 0.166
-anchor_top = 0.14
-anchor_right = 0.832
-anchor_bottom = 0.932
-margin_left = -1.48001
-margin_top = -100.8
-margin_right = -226.96
-margin_bottom = -221.04
-rect_clip_content = true
-
-[node name="Stump" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/StumpImage/StumpClip"]
-anchor_left = 0.063
-anchor_top = -0.266
-anchor_right = 0.919
-anchor_bottom = 1.0
-margin_left = -0.355995
-margin_top = -0.0500793
-margin_right = 0.33197
-margin_bottom = 2.0
-texture = ExtResource( 19 )
-expand = true
-stretch_mode = 5
-
-[node name="Path" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/StumpImage"]
-anchor_left = 0.208
-anchor_top = 0.944
-anchor_right = 0.778
-anchor_bottom = 0.944
-margin_left = -16.24
-margin_top = -528.68
-margin_right = -153.84
-margin_bottom = -259.68
-texture = ExtResource( 26 )
-expand = true
-stretch_mode = 5
-
-[node name="TextureDayNightCycle" type="Node" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/StumpImage/Path"]
-script = ExtResource( 28 )
-day = ExtResource( 26 )
-evening = ExtResource( 32 )
-night = ExtResource( 31 )
-
-[node name="PacketImage" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/StumpImage"]
-anchor_left = 0.208
-anchor_top = 0.944
-anchor_right = 0.778
-anchor_bottom = 0.944
-margin_left = 124.76
-margin_top = -640.68
-margin_right = -373.84
-margin_bottom = -326.68
-texture = ExtResource( 20 )
-expand = true
-stretch_mode = 5
-
-[node name="SaleTag" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/StumpImage"]
-anchor_left = 0.208
-anchor_top = 0.944
-anchor_right = 0.778
-anchor_bottom = 0.944
-margin_left = 291.76
-margin_top = -454.68
-margin_right = -288.84
-margin_bottom = -354.68
-texture = ExtResource( 21 )
-expand = true
-stretch_mode = 5
-
-[node name="Title" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/StumpImage/SaleTag"]
-anchor_right = 1.0
-margin_left = 25.0
-margin_top = 19.0
-margin_right = -19.0
-margin_bottom = 95.0
-custom_colors/font_color = Color( 0.231373, 0.141176, 0.227451, 1 )
-custom_fonts/font = SubResource( 12 )
-text = "$25"
+margin_left = 215.0
+margin_right = 1065.0
+margin_bottom = 1548.0
+rect_min_size = Vector2( 850, 1548 )
 
 [node name="PackInformation" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer"]
-margin_left = -171.0
+margin_left = -214.0
 margin_top = 68.0
-margin_right = 1109.0
+margin_right = 1066.0
 margin_bottom = 1011.0
 
 [node name="PanelContainer" type="PanelContainer" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation"]
-anchor_left = 0.218
-anchor_top = 0.066
-anchor_right = 0.776
-anchor_bottom = 0.884
-margin_left = -0.039978
-margin_top = -0.237999
-margin_right = -231.28
-margin_bottom = -103.612
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -325.0
+margin_top = -409.5
+margin_right = 325.0
+margin_bottom = 2093.5
+rect_min_size = Vector2( 650, 0 )
 custom_styles/panel = SubResource( 9 )
 
 [node name="MarginContainer" type="MarginContainer" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/PanelContainer"]
 margin_left = 5.0
 margin_top = 5.0
-margin_right = 478.0
-margin_bottom = 663.0
+margin_right = 645.0
+margin_bottom = 2498.0
 custom_constants/margin_right = 0
 custom_constants/margin_top = 70
 custom_constants/margin_left = 0
@@ -1306,15 +1156,15 @@ custom_constants/margin_bottom = 0
 
 [node name="Back" type="ColorRect" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/PanelContainer/MarginContainer"]
 margin_top = 70.0
-margin_right = 473.0
-margin_bottom = 658.0
+margin_right = 640.0
+margin_bottom = 2493.0
 color = Color( 0.972549, 0.905882, 0.823529, 1 )
 
 [node name="Pattern" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/PanelContainer"]
 margin_left = 5.0
 margin_top = 5.0
-margin_right = 478.0
-margin_bottom = 663.0
+margin_right = 645.0
+margin_bottom = 2498.0
 texture = ExtResource( 16 )
 expand = true
 stretch_mode = 5
@@ -1322,166 +1172,204 @@ stretch_mode = 5
 [node name="Container" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/PanelContainer"]
 margin_left = 5.0
 margin_top = 5.0
-margin_right = 478.0
-margin_bottom = 663.0
+margin_right = 645.0
+margin_bottom = 2498.0
 
-[node name="Title" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/PanelContainer/Container"]
-anchor_top = -0.0354331
-anchor_right = 1.0
-anchor_bottom = -0.0354331
-margin_left = 1.0
-margin_top = 102.0
-margin_right = 1.0
-margin_bottom = 207.0
+[node name="VBoxContainer" type="VBoxContainer" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/PanelContainer/Container"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -251.0
+margin_top = 168.0
+margin_right = 251.0
+margin_bottom = 2409.0
+
+[node name="Logo" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/PanelContainer/Container/VBoxContainer"]
+margin_right = 502.0
+margin_bottom = 225.0
+rect_min_size = Vector2( 0, 225 )
+size_flags_vertical = 3
+texture = ExtResource( 8 )
+expand = true
+stretch_mode = 6
+
+[node name="PinsInfo" type="VBoxContainer" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/PanelContainer/Container/VBoxContainer"]
+margin_top = 229.0
+margin_right = 502.0
+margin_bottom = 652.0
+
+[node name="Title" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/PanelContainer/Container/VBoxContainer/PinsInfo"]
+margin_right = 502.0
+margin_bottom = 61.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = SubResource( 14 )
-text = "Each bag contains 3 (three) randomly selected pins."
-align = 1
+custom_fonts/font = SubResource( 10 )
+text = "Each bag contains 3 (three) randomly
+selected pins."
 autowrap = true
-__meta__ = {
-"_edit_use_anchors_": true
-}
 
-[node name="Top" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/PanelContainer/Container"]
-anchor_right = 1.0
-margin_left = 50.0
-margin_top = 175.0
-margin_right = -50.0
-margin_bottom = 295.0
+[node name="Space" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/PanelContainer/Container/VBoxContainer/PinsInfo"]
+margin_top = 65.0
+margin_right = 502.0
+margin_bottom = 90.0
+rect_min_size = Vector2( 0, 25 )
+
+[node name="Top" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/PanelContainer/Container/VBoxContainer/PinsInfo"]
+margin_top = 94.0
+margin_right = 502.0
+margin_bottom = 159.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = SubResource( 15 )
-text = "The entire set of Wave 1 pins consist of:
-"
-align = 1
+custom_fonts/font = SubResource( 11 )
+text = "The entire set of Wave 1 pins consist
+of:"
 autowrap = true
 
-[node name="Middle" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/PanelContainer/Container"]
-anchor_right = 1.0
-margin_left = 87.0
-margin_top = 291.0
-margin_right = -13.0
-margin_bottom = 452.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = SubResource( 16 )
+[node name="Middle" type="RichTextLabel" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/PanelContainer/Container/VBoxContainer/PinsInfo"]
+margin_top = 163.0
+margin_right = 502.0
+margin_bottom = 291.0
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+custom_fonts/bold_font = SubResource( 18 )
+custom_fonts/normal_font = SubResource( 19 )
+bbcode_enabled = true
+bbcode_text = "[b]7[/b] Hero Pins (facing left)
+[b]7[/b] Monster Pins (facing right)
+[b]4[/b] Menu Pins
+[b]2[/b] ULTRA RARE Mystery Pins"
 text = "7 Hero Pins (facing left)
 7 Monster Pins (facing right)
 4 Menu Pins
 2 ULTRA RARE Mystery Pins"
-autowrap = true
+fit_content_height = true
+scroll_active = false
 
-[node name="Bottom" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/PanelContainer/Container"]
-anchor_right = 1.0
-margin_left = 50.0
-margin_top = 474.0
-margin_right = -50.0
-margin_bottom = 607.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = SubResource( 15 )
-text = "Each pack of 3 pins contains AT LEAST 1 (one) UNCOMMON OR HIGHER rarity pin! Try for your favorite one!"
-align = 1
-autowrap = true
+[node name="Space2" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/PanelContainer/Container/VBoxContainer/PinsInfo"]
+margin_top = 295.0
+margin_right = 502.0
+margin_bottom = 320.0
+rect_min_size = Vector2( 0, 25 )
 
-[node name="TopScroll" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation"]
-margin_left = 193.0
-margin_top = 4.0
-margin_right = 835.0
-margin_bottom = 107.0
-texture = ExtResource( 15 )
-expand = true
-stretch_mode = 6
-
-[node name="BottomScroll" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation"]
-margin_left = 193.0
-margin_top = 681.0
-margin_right = 841.0
-margin_bottom = 784.0
-texture = ExtResource( 15 )
-expand = true
-stretch_mode = 6
-
-[node name="Koboldio" type="TextureButton" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation"]
-show_behind_parent = true
-margin_left = 737.144
-margin_top = 179.0
-margin_right = 914.144
+[node name="Bottom" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/PanelContainer/Container/VBoxContainer/PinsInfo"]
+margin_top = 324.0
+margin_right = 502.0
 margin_bottom = 423.0
-rect_rotation = 14.9633
-action_mode = 0
-script = ExtResource( 36 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 11 )
+text = "Each pack of 3 pins contains AT LEAST 1 (one) UNCOMMON OR HIGHER rarity pin! Try for your favorite one!"
+autowrap = true
 
-[node name="Idle" type="Sprite" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/Koboldio"]
-position = Vector2( 85.9265, 108.493 )
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 34 )
+[node name="PinExamples" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/PanelContainer/Container/VBoxContainer"]
+margin_top = 656.0
+margin_right = 502.0
+margin_bottom = 1156.0
+rect_min_size = Vector2( 0, 500 )
+size_flags_vertical = 3
+texture = ExtResource( 44 )
+expand = true
+stretch_mode = 6
 
-[node name="Hit" type="Sprite" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/Koboldio"]
-visible = false
-position = Vector2( 114.544, 105.191 )
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 35 )
+[node name="StickersLogo" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/PanelContainer/Container/VBoxContainer"]
+margin_top = 1160.0
+margin_right = 502.0
+margin_bottom = 1310.0
+rect_min_size = Vector2( 0, 150 )
+size_flags_vertical = 3
+texture = ExtResource( 45 )
+expand = true
+stretch_mode = 6
 
-[node name="Blobbo" type="TextureButton" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation"]
-show_behind_parent = true
-margin_left = 703.143
-margin_top = 404.0
-margin_right = 898.143
-margin_bottom = 652.0
-rect_rotation = 11.1937
-action_mode = 0
-script = ExtResource( 36 )
+[node name="StickerInfo" type="VBoxContainer" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/PanelContainer/Container/VBoxContainer"]
+margin_top = 1314.0
+margin_right = 502.0
+margin_bottom = 1737.0
 
-[node name="Idle" type="Sprite" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/Blobbo"]
-position = Vector2( 84.8715, 119.803 )
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 37 )
+[node name="Title" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/PanelContainer/Container/VBoxContainer/StickerInfo"]
+margin_right = 502.0
+margin_bottom = 61.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 10 )
+text = "Each bag contains 3 (three) randomly
+selected stickers."
+autowrap = true
 
-[node name="Hit" type="Sprite" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/Blobbo"]
-visible = false
-position = Vector2( 152.445, 162.497 )
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 38 )
+[node name="Space" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/PanelContainer/Container/VBoxContainer/StickerInfo"]
+margin_top = 65.0
+margin_right = 502.0
+margin_bottom = 90.0
+rect_min_size = Vector2( 0, 25 )
 
-[node name="Paladin" type="TextureButton" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation"]
-show_behind_parent = true
-margin_left = 186.0
-margin_top = 185.0
-margin_right = 300.0
-margin_bottom = 419.0
-rect_rotation = -7.47355
-action_mode = 0
-script = ExtResource( 36 )
+[node name="Top" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/PanelContainer/Container/VBoxContainer/StickerInfo"]
+margin_top = 94.0
+margin_right = 502.0
+margin_bottom = 159.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 11 )
+text = "The entire set of Wave 1 stickers
+consist of:"
+autowrap = true
 
-[node name="Idle" type="Sprite" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/Paladin"]
-position = Vector2( 43.7691, 104.582 )
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 42 )
+[node name="Middle" type="RichTextLabel" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/PanelContainer/Container/VBoxContainer/StickerInfo"]
+margin_top = 163.0
+margin_right = 502.0
+margin_bottom = 291.0
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+custom_fonts/bold_font = SubResource( 18 )
+custom_fonts/normal_font = SubResource( 19 )
+bbcode_enabled = true
+bbcode_text = "[b]7[/b] Common Stickers
+[b]6[/b] Uncommon Stickers
+[b]5[/b] Rare Holofoil Stickers!
+[b]2[/b] ULTRA RARE Holofoil Stickers!!"
+text = "7 Common Stickers
+6 Uncommon Stickers
+5 Rare Holofoil Stickers!
+2 ULTRA RARE Holofoil Stickers!!"
+fit_content_height = true
+scroll_active = false
 
-[node name="Hit" type="Sprite" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/Paladin"]
-visible = false
-position = Vector2( 45.622, 105.833 )
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 40 )
+[node name="Space2" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/PanelContainer/Container/VBoxContainer/StickerInfo"]
+margin_top = 295.0
+margin_right = 502.0
+margin_bottom = 320.0
+rect_min_size = Vector2( 0, 25 )
 
-[node name="Monk" type="TextureButton" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation"]
-show_behind_parent = true
-margin_left = 173.0
-margin_top = 396.0
-margin_right = 300.0
-margin_bottom = 657.0
-rect_rotation = -7.47355
-action_mode = 0
-script = ExtResource( 36 )
+[node name="Bottom" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/PanelContainer/Container/VBoxContainer/StickerInfo"]
+margin_top = 324.0
+margin_right = 502.0
+margin_bottom = 423.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 11 )
+text = "Each pack of 3 pins contains AT LEAST 1 (one) UNCOMMON OR HIGHER rarity sticker! Try for your favorite one! "
+autowrap = true
 
-[node name="Idle" type="Sprite" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/Monk"]
-position = Vector2( 77.7233, 130.215 )
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 41 )
+[node name="StickerExamples" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/PanelContainer/Container/VBoxContainer"]
+margin_top = 1741.0
+margin_right = 502.0
+margin_bottom = 2241.0
+rect_min_size = Vector2( 0, 500 )
+texture = ExtResource( 46 )
+expand = true
+stretch_mode = 6
 
-[node name="Hit" type="Sprite" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/Monk"]
-visible = false
-position = Vector2( 73.8873, 128.704 )
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 39 )
+[node name="TopScroll" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/PanelContainer/Container"]
+anchor_right = 1.0
+margin_left = -91.0
+margin_top = -63.0
+margin_right = 83.0
+margin_bottom = 98.0
+texture = ExtResource( 15 )
+expand = true
+stretch_mode = 5
+
+[node name="BottomScroll" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/PanelContainer/Container"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -91.0
+margin_top = -26.9999
+margin_right = 83.0
+margin_bottom = 141.0
+texture = ExtResource( 15 )
+expand = true
+stretch_mode = 5
 
 [node name="Camera" type="Node2D" parent="."]
 script = ExtResource( 5 )
