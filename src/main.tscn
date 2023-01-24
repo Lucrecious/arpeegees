@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=48 format=2]
 
 [ext_resource path="res://src/game/title.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/main.gd" type="Script" id=2]
@@ -18,6 +18,7 @@
 [ext_resource path="res://assets/ui/website/Artboard.svg" type="Texture" id=16]
 [ext_resource path="res://assets/ui/website_font_regular.ttf" type="DynamicFontData" id=17]
 [ext_resource path="res://assets/battle/topleaves_night.png" type="Texture" id=18]
+[ext_resource path="res://assets/ui/website/new-shop-bottom.jpg" type="Texture" id=19]
 [ext_resource path="res://src/ui/size_adapter.gd" type="Script" id=22]
 [ext_resource path="res://assets/ui/website/Path.png" type="Texture" id=23]
 [ext_resource path="res://src/website/swipe_open.gd" type="Script" id=24]
@@ -856,26 +857,81 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="StumpAd" type="CenterContainer" parent="SpanLimiter/Content/WebsiteContent" groups=["size_normal"]]
+[node name="StumpAd" type="Control" parent="SpanLimiter/Content/WebsiteContent" groups=["size_normal"]]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 830.0
 margin_bottom = 1658.0
 
-[node name="StumpAdContainer" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAd"]
+[node name="PurpleBack" type="ColorRect" parent="SpanLimiter/Content/WebsiteContent/StumpAd"]
+anchor_right = 1.0
+margin_top = 1425.0
+margin_bottom = 6793.0
+color = Color( 0.0901961, 0, 0.172549, 1 )
+
+[node name="SizeAdapter" type="Node" parent="SpanLimiter/Content/WebsiteContent/StumpAd/PurpleBack"]
+script = ExtResource( 22 )
+_smaller_path = NodePath("../GrassNinePatch")
+_bigger_path = NodePath("../Grass")
+size_limit = 1280
+
+[node name="GrassNinePatch" type="NinePatchRect" parent="SpanLimiter/Content/WebsiteContent/StumpAd/PurpleBack"]
+anchor_right = 1.0
+margin_top = 232.0
+margin_bottom = 478.0
+rect_scale = Vector2( 1, -1 )
+texture = ExtResource( 4 )
+patch_margin_left = 353
+patch_margin_right = 349
+
+[node name="TextureDayNightCycle" type="Node" parent="SpanLimiter/Content/WebsiteContent/StumpAd/PurpleBack/GrassNinePatch"]
+script = ExtResource( 28 )
+day = ExtResource( 4 )
+evening = ExtResource( 30 )
+night = ExtResource( 29 )
+
+[node name="Grass" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAd/PurpleBack"]
+anchor_right = 1.0
+margin_top = -14.0
+margin_bottom = 5317.0
+mouse_filter = 2
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 5
+flip_v = true
+
+[node name="TextureDayNightCycle" type="Node" parent="SpanLimiter/Content/WebsiteContent/StumpAd/PurpleBack/Grass"]
+script = ExtResource( 28 )
+day = ExtResource( 4 )
+evening = ExtResource( 30 )
+night = ExtResource( 29 )
+
+[node name="Background" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAd"]
+anchor_right = 1.0
+margin_top = 1772.0
+margin_bottom = 7716.0
+texture = ExtResource( 19 )
+expand = true
+stretch_mode = 5
+
+[node name="CenterContainer" type="CenterContainer" parent="SpanLimiter/Content/WebsiteContent/StumpAd"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="StumpAdContainer" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAd/CenterContainer"]
 margin_left = 179.0
 margin_right = 1101.0
 margin_bottom = 1548.0
 rect_min_size = Vector2( 922, 1548 )
 
-[node name="PackInformation" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer"]
+[node name="PackInformation" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAd/CenterContainer/StumpAdContainer"]
 margin_left = -178.0
 margin_top = 68.0
 margin_right = 1102.0
 margin_bottom = 1011.0
 
-[node name="PanelContainer" type="PanelContainer" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation"]
+[node name="PanelContainer" type="PanelContainer" parent="SpanLimiter/Content/WebsiteContent/StumpAd/CenterContainer/StumpAdContainer/PackInformation"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 129.0
@@ -885,7 +941,7 @@ margin_bottom = 646.0
 rect_min_size = Vector2( 650, 0 )
 custom_styles/panel = SubResource( 9 )
 
-[node name="MarginContainer" type="MarginContainer" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="SpanLimiter/Content/WebsiteContent/StumpAd/CenterContainer/StumpAdContainer/PackInformation/PanelContainer"]
 margin_left = 5.0
 margin_top = 5.0
 margin_right = 1009.0
@@ -895,13 +951,13 @@ custom_constants/margin_top = 70
 custom_constants/margin_left = 0
 custom_constants/margin_bottom = 0
 
-[node name="Back" type="ColorRect" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer/MarginContainer"]
+[node name="Back" type="ColorRect" parent="SpanLimiter/Content/WebsiteContent/StumpAd/CenterContainer/StumpAdContainer/PackInformation/PanelContainer/MarginContainer"]
 margin_top = 70.0
 margin_right = 1004.0
 margin_bottom = 1517.0
 color = Color( 0.972549, 0.905882, 0.823529, 1 )
 
-[node name="Pattern" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer"]
+[node name="Pattern" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAd/CenterContainer/StumpAdContainer/PackInformation/PanelContainer"]
 margin_left = 5.0
 margin_top = 5.0
 margin_right = 1009.0
@@ -910,19 +966,19 @@ texture = ExtResource( 16 )
 expand = true
 stretch_mode = 5
 
-[node name="Container" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer"]
+[node name="Container" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAd/CenterContainer/StumpAdContainer/PackInformation/PanelContainer"]
 margin_left = 5.0
 margin_top = 5.0
 margin_right = 1009.0
 margin_bottom = 1522.0
 
-[node name="PinsInfo" type="VBoxContainer" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer/Container"]
+[node name="PinsInfo" type="VBoxContainer" parent="SpanLimiter/Content/WebsiteContent/StumpAd/CenterContainer/StumpAdContainer/PackInformation/PanelContainer/Container"]
 margin_left = 377.0
 margin_top = 395.0
 margin_right = 964.0
 margin_bottom = 818.0
 
-[node name="Title" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer/Container/PinsInfo"]
+[node name="Title" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAd/CenterContainer/StumpAdContainer/PackInformation/PanelContainer/Container/PinsInfo"]
 margin_right = 587.0
 margin_bottom = 61.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
@@ -931,13 +987,13 @@ text = "Each bag contains 3 (three) randomly
 selected pins."
 autowrap = true
 
-[node name="Space" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer/Container/PinsInfo"]
+[node name="Space" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAd/CenterContainer/StumpAdContainer/PackInformation/PanelContainer/Container/PinsInfo"]
 margin_top = 65.0
 margin_right = 587.0
 margin_bottom = 90.0
 rect_min_size = Vector2( 0, 25 )
 
-[node name="Top" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer/Container/PinsInfo"]
+[node name="Top" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAd/CenterContainer/StumpAdContainer/PackInformation/PanelContainer/Container/PinsInfo"]
 margin_top = 94.0
 margin_right = 587.0
 margin_bottom = 159.0
@@ -947,7 +1003,7 @@ text = "The entire set of Wave 1 pins consist
 of:"
 autowrap = true
 
-[node name="Middle" type="RichTextLabel" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer/Container/PinsInfo"]
+[node name="Middle" type="RichTextLabel" parent="SpanLimiter/Content/WebsiteContent/StumpAd/CenterContainer/StumpAdContainer/PackInformation/PanelContainer/Container/PinsInfo"]
 margin_top = 163.0
 margin_right = 587.0
 margin_bottom = 291.0
@@ -966,13 +1022,13 @@ text = "7 Hero Pins (facing left)
 fit_content_height = true
 scroll_active = false
 
-[node name="Space2" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer/Container/PinsInfo"]
+[node name="Space2" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAd/CenterContainer/StumpAdContainer/PackInformation/PanelContainer/Container/PinsInfo"]
 margin_top = 295.0
 margin_right = 587.0
 margin_bottom = 320.0
 rect_min_size = Vector2( 0, 25 )
 
-[node name="Bottom" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer/Container/PinsInfo"]
+[node name="Bottom" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAd/CenterContainer/StumpAdContainer/PackInformation/PanelContainer/Container/PinsInfo"]
 margin_top = 324.0
 margin_right = 587.0
 margin_bottom = 423.0
@@ -981,13 +1037,13 @@ custom_fonts/font = SubResource( 11 )
 text = "Each pack of 3 pins contains AT LEAST 1 (one) UNCOMMON OR HIGHER rarity pin! Try for your favorite one!"
 autowrap = true
 
-[node name="StickerInfo" type="VBoxContainer" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer/Container"]
+[node name="StickerInfo" type="VBoxContainer" parent="SpanLimiter/Content/WebsiteContent/StumpAd/CenterContainer/StumpAdContainer/PackInformation/PanelContainer/Container"]
 margin_left = 46.0
 margin_top = 1025.0
 margin_right = 633.0
 margin_bottom = 1448.0
 
-[node name="Title" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer/Container/StickerInfo"]
+[node name="Title" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAd/CenterContainer/StumpAdContainer/PackInformation/PanelContainer/Container/StickerInfo"]
 margin_right = 587.0
 margin_bottom = 61.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
@@ -996,13 +1052,13 @@ text = "Each bag contains 3 (three) randomly
 selected stickers."
 autowrap = true
 
-[node name="Space" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer/Container/StickerInfo"]
+[node name="Space" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAd/CenterContainer/StumpAdContainer/PackInformation/PanelContainer/Container/StickerInfo"]
 margin_top = 65.0
 margin_right = 587.0
 margin_bottom = 90.0
 rect_min_size = Vector2( 0, 25 )
 
-[node name="Top" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer/Container/StickerInfo"]
+[node name="Top" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAd/CenterContainer/StumpAdContainer/PackInformation/PanelContainer/Container/StickerInfo"]
 margin_top = 94.0
 margin_right = 587.0
 margin_bottom = 159.0
@@ -1012,7 +1068,7 @@ text = "The entire set of Wave 1 stickers
 consist of:"
 autowrap = true
 
-[node name="Middle" type="RichTextLabel" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer/Container/StickerInfo"]
+[node name="Middle" type="RichTextLabel" parent="SpanLimiter/Content/WebsiteContent/StumpAd/CenterContainer/StumpAdContainer/PackInformation/PanelContainer/Container/StickerInfo"]
 margin_top = 163.0
 margin_right = 587.0
 margin_bottom = 291.0
@@ -1031,13 +1087,13 @@ text = "7 Common Stickers
 fit_content_height = true
 scroll_active = false
 
-[node name="Space2" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer/Container/StickerInfo"]
+[node name="Space2" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAd/CenterContainer/StumpAdContainer/PackInformation/PanelContainer/Container/StickerInfo"]
 margin_top = 295.0
 margin_right = 587.0
 margin_bottom = 320.0
 rect_min_size = Vector2( 0, 25 )
 
-[node name="Bottom" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer/Container/StickerInfo"]
+[node name="Bottom" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAd/CenterContainer/StumpAdContainer/PackInformation/PanelContainer/Container/StickerInfo"]
 margin_top = 324.0
 margin_right = 587.0
 margin_bottom = 423.0
@@ -1046,7 +1102,7 @@ custom_fonts/font = SubResource( 11 )
 text = "Each pack of 3 pins contains AT LEAST 1 (one) UNCOMMON OR HIGHER rarity sticker! Try for your favorite one! "
 autowrap = true
 
-[node name="TopScroll" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer/Container"]
+[node name="TopScroll" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAd/CenterContainer/StumpAdContainer/PackInformation/PanelContainer/Container"]
 anchor_right = 1.0
 margin_left = -91.0
 margin_top = -63.0
@@ -1056,7 +1112,7 @@ texture = ExtResource( 15 )
 expand = true
 stretch_mode = 5
 
-[node name="BottomScroll" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer/Container"]
+[node name="BottomScroll" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAd/CenterContainer/StumpAdContainer/PackInformation/PanelContainer/Container"]
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -1068,7 +1124,7 @@ texture = ExtResource( 15 )
 expand = true
 stretch_mode = 5
 
-[node name="Logo" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer/Container"]
+[node name="Logo" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAd/CenterContainer/StumpAdContainer/PackInformation/PanelContainer/Container"]
 margin_left = 344.0
 margin_top = 136.0
 margin_right = 858.0
@@ -1077,7 +1133,7 @@ texture = ExtResource( 8 )
 expand = true
 stretch_mode = 5
 
-[node name="PinExamples" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer/Container"]
+[node name="PinExamples" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAd/CenterContainer/StumpAdContainer/PackInformation/PanelContainer/Container"]
 margin_left = 34.0
 margin_top = 305.0
 margin_right = 548.0
@@ -1086,7 +1142,7 @@ texture = ExtResource( 44 )
 expand = true
 stretch_mode = 5
 
-[node name="StickersLogo" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer/Container"]
+[node name="StickersLogo" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAd/CenterContainer/StumpAdContainer/PackInformation/PanelContainer/Container"]
 margin_left = 40.0
 margin_top = 814.0
 margin_right = 475.0
@@ -1095,7 +1151,7 @@ texture = ExtResource( 45 )
 expand = true
 stretch_mode = 5
 
-[node name="StickerExamples" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAd/StumpAdContainer/PackInformation/PanelContainer/Container"]
+[node name="StickerExamples" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAd/CenterContainer/StumpAdContainer/PackInformation/PanelContainer/Container"]
 margin_left = 541.0
 margin_top = 937.0
 margin_right = 976.0
@@ -1110,7 +1166,7 @@ _smaller_path = NodePath("../StumpAdSmaller")
 _bigger_path = NodePath("../StumpAd")
 size_limit = 1080
 
-[node name="StumpAdSmaller" type="CenterContainer" parent="SpanLimiter/Content/WebsiteContent" groups=["size_normal"]]
+[node name="StumpAdSmaller" type="Control" parent="SpanLimiter/Content/WebsiteContent" groups=["size_normal"]]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -1120,19 +1176,74 @@ margin_top = 634.0
 margin_right = 640.0
 margin_bottom = 2182.0
 
-[node name="StumpAdContainer" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller"]
+[node name="PurpleBack" type="ColorRect" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller"]
+anchor_right = 1.0
+margin_top = 2210.0
+margin_bottom = 7578.0
+color = Color( 0.0901961, 0, 0.172549, 1 )
+
+[node name="SizeAdapter" type="Node" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/PurpleBack"]
+script = ExtResource( 22 )
+_smaller_path = NodePath("../GrassNinePatch")
+_bigger_path = NodePath("../Grass")
+size_limit = 1280
+
+[node name="GrassNinePatch" type="NinePatchRect" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/PurpleBack"]
+anchor_right = 1.0
+margin_top = 232.0
+margin_bottom = 478.0
+rect_scale = Vector2( 1, -1 )
+texture = ExtResource( 4 )
+patch_margin_left = 353
+patch_margin_right = 349
+
+[node name="TextureDayNightCycle" type="Node" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/PurpleBack/GrassNinePatch"]
+script = ExtResource( 28 )
+day = ExtResource( 4 )
+evening = ExtResource( 30 )
+night = ExtResource( 29 )
+
+[node name="Grass" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/PurpleBack"]
+anchor_right = 1.0
+margin_top = -14.0
+margin_bottom = 5317.0
+mouse_filter = 2
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 5
+flip_v = true
+
+[node name="TextureDayNightCycle" type="Node" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/PurpleBack/Grass"]
+script = ExtResource( 28 )
+day = ExtResource( 4 )
+evening = ExtResource( 30 )
+night = ExtResource( 29 )
+
+[node name="Background" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller"]
+anchor_right = 1.0
+margin_top = 2727.0
+margin_bottom = 7545.0
+texture = ExtResource( 19 )
+expand = true
+stretch_mode = 5
+
+[node name="CenterContainer" type="CenterContainer" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller"]
 margin_left = 215.0
 margin_right = 1065.0
 margin_bottom = 1548.0
+
+[node name="StumpAdContainer" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/CenterContainer"]
+margin_right = 850.0
+margin_bottom = 1548.0
 rect_min_size = Vector2( 850, 1548 )
 
-[node name="PackInformation" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer"]
+[node name="PackInformation" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/CenterContainer/StumpAdContainer"]
 margin_left = -214.0
 margin_top = 68.0
 margin_right = 1066.0
 margin_bottom = 1011.0
 
-[node name="PanelContainer" type="PanelContainer" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation"]
+[node name="PanelContainer" type="PanelContainer" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/CenterContainer/StumpAdContainer/PackInformation"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -1144,7 +1255,7 @@ margin_bottom = 2093.5
 rect_min_size = Vector2( 650, 0 )
 custom_styles/panel = SubResource( 9 )
 
-[node name="MarginContainer" type="MarginContainer" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/CenterContainer/StumpAdContainer/PackInformation/PanelContainer"]
 margin_left = 5.0
 margin_top = 5.0
 margin_right = 645.0
@@ -1154,13 +1265,13 @@ custom_constants/margin_top = 70
 custom_constants/margin_left = 0
 custom_constants/margin_bottom = 0
 
-[node name="Back" type="ColorRect" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/PanelContainer/MarginContainer"]
+[node name="Back" type="ColorRect" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/CenterContainer/StumpAdContainer/PackInformation/PanelContainer/MarginContainer"]
 margin_top = 70.0
 margin_right = 640.0
 margin_bottom = 2493.0
 color = Color( 0.972549, 0.905882, 0.823529, 1 )
 
-[node name="Pattern" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/PanelContainer"]
+[node name="Pattern" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/CenterContainer/StumpAdContainer/PackInformation/PanelContainer"]
 margin_left = 5.0
 margin_top = 5.0
 margin_right = 645.0
@@ -1169,13 +1280,13 @@ texture = ExtResource( 16 )
 expand = true
 stretch_mode = 5
 
-[node name="Container" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/PanelContainer"]
+[node name="Container" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/CenterContainer/StumpAdContainer/PackInformation/PanelContainer"]
 margin_left = 5.0
 margin_top = 5.0
 margin_right = 645.0
 margin_bottom = 2498.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/PanelContainer/Container"]
+[node name="VBoxContainer" type="VBoxContainer" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/CenterContainer/StumpAdContainer/PackInformation/PanelContainer/Container"]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -251.0
@@ -1183,7 +1294,7 @@ margin_top = 168.0
 margin_right = 251.0
 margin_bottom = 2409.0
 
-[node name="Logo" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/PanelContainer/Container/VBoxContainer"]
+[node name="Logo" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/CenterContainer/StumpAdContainer/PackInformation/PanelContainer/Container/VBoxContainer"]
 margin_right = 502.0
 margin_bottom = 225.0
 rect_min_size = Vector2( 0, 225 )
@@ -1192,12 +1303,12 @@ texture = ExtResource( 8 )
 expand = true
 stretch_mode = 6
 
-[node name="PinsInfo" type="VBoxContainer" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/PanelContainer/Container/VBoxContainer"]
+[node name="PinsInfo" type="VBoxContainer" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/CenterContainer/StumpAdContainer/PackInformation/PanelContainer/Container/VBoxContainer"]
 margin_top = 229.0
 margin_right = 502.0
 margin_bottom = 652.0
 
-[node name="Title" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/PanelContainer/Container/VBoxContainer/PinsInfo"]
+[node name="Title" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/CenterContainer/StumpAdContainer/PackInformation/PanelContainer/Container/VBoxContainer/PinsInfo"]
 margin_right = 502.0
 margin_bottom = 61.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
@@ -1206,13 +1317,13 @@ text = "Each bag contains 3 (three) randomly
 selected pins."
 autowrap = true
 
-[node name="Space" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/PanelContainer/Container/VBoxContainer/PinsInfo"]
+[node name="Space" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/CenterContainer/StumpAdContainer/PackInformation/PanelContainer/Container/VBoxContainer/PinsInfo"]
 margin_top = 65.0
 margin_right = 502.0
 margin_bottom = 90.0
 rect_min_size = Vector2( 0, 25 )
 
-[node name="Top" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/PanelContainer/Container/VBoxContainer/PinsInfo"]
+[node name="Top" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/CenterContainer/StumpAdContainer/PackInformation/PanelContainer/Container/VBoxContainer/PinsInfo"]
 margin_top = 94.0
 margin_right = 502.0
 margin_bottom = 159.0
@@ -1222,7 +1333,7 @@ text = "The entire set of Wave 1 pins consist
 of:"
 autowrap = true
 
-[node name="Middle" type="RichTextLabel" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/PanelContainer/Container/VBoxContainer/PinsInfo"]
+[node name="Middle" type="RichTextLabel" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/CenterContainer/StumpAdContainer/PackInformation/PanelContainer/Container/VBoxContainer/PinsInfo"]
 margin_top = 163.0
 margin_right = 502.0
 margin_bottom = 291.0
@@ -1241,13 +1352,13 @@ text = "7 Hero Pins (facing left)
 fit_content_height = true
 scroll_active = false
 
-[node name="Space2" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/PanelContainer/Container/VBoxContainer/PinsInfo"]
+[node name="Space2" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/CenterContainer/StumpAdContainer/PackInformation/PanelContainer/Container/VBoxContainer/PinsInfo"]
 margin_top = 295.0
 margin_right = 502.0
 margin_bottom = 320.0
 rect_min_size = Vector2( 0, 25 )
 
-[node name="Bottom" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/PanelContainer/Container/VBoxContainer/PinsInfo"]
+[node name="Bottom" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/CenterContainer/StumpAdContainer/PackInformation/PanelContainer/Container/VBoxContainer/PinsInfo"]
 margin_top = 324.0
 margin_right = 502.0
 margin_bottom = 423.0
@@ -1256,7 +1367,7 @@ custom_fonts/font = SubResource( 11 )
 text = "Each pack of 3 pins contains AT LEAST 1 (one) UNCOMMON OR HIGHER rarity pin! Try for your favorite one!"
 autowrap = true
 
-[node name="PinExamples" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/PanelContainer/Container/VBoxContainer"]
+[node name="PinExamples" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/CenterContainer/StumpAdContainer/PackInformation/PanelContainer/Container/VBoxContainer"]
 margin_top = 656.0
 margin_right = 502.0
 margin_bottom = 1156.0
@@ -1266,7 +1377,7 @@ texture = ExtResource( 44 )
 expand = true
 stretch_mode = 6
 
-[node name="StickersLogo" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/PanelContainer/Container/VBoxContainer"]
+[node name="StickersLogo" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/CenterContainer/StumpAdContainer/PackInformation/PanelContainer/Container/VBoxContainer"]
 margin_top = 1160.0
 margin_right = 502.0
 margin_bottom = 1310.0
@@ -1276,12 +1387,12 @@ texture = ExtResource( 45 )
 expand = true
 stretch_mode = 6
 
-[node name="StickerInfo" type="VBoxContainer" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/PanelContainer/Container/VBoxContainer"]
+[node name="StickerInfo" type="VBoxContainer" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/CenterContainer/StumpAdContainer/PackInformation/PanelContainer/Container/VBoxContainer"]
 margin_top = 1314.0
 margin_right = 502.0
 margin_bottom = 1737.0
 
-[node name="Title" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/PanelContainer/Container/VBoxContainer/StickerInfo"]
+[node name="Title" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/CenterContainer/StumpAdContainer/PackInformation/PanelContainer/Container/VBoxContainer/StickerInfo"]
 margin_right = 502.0
 margin_bottom = 61.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
@@ -1290,13 +1401,13 @@ text = "Each bag contains 3 (three) randomly
 selected stickers."
 autowrap = true
 
-[node name="Space" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/PanelContainer/Container/VBoxContainer/StickerInfo"]
+[node name="Space" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/CenterContainer/StumpAdContainer/PackInformation/PanelContainer/Container/VBoxContainer/StickerInfo"]
 margin_top = 65.0
 margin_right = 502.0
 margin_bottom = 90.0
 rect_min_size = Vector2( 0, 25 )
 
-[node name="Top" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/PanelContainer/Container/VBoxContainer/StickerInfo"]
+[node name="Top" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/CenterContainer/StumpAdContainer/PackInformation/PanelContainer/Container/VBoxContainer/StickerInfo"]
 margin_top = 94.0
 margin_right = 502.0
 margin_bottom = 159.0
@@ -1306,7 +1417,7 @@ text = "The entire set of Wave 1 stickers
 consist of:"
 autowrap = true
 
-[node name="Middle" type="RichTextLabel" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/PanelContainer/Container/VBoxContainer/StickerInfo"]
+[node name="Middle" type="RichTextLabel" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/CenterContainer/StumpAdContainer/PackInformation/PanelContainer/Container/VBoxContainer/StickerInfo"]
 margin_top = 163.0
 margin_right = 502.0
 margin_bottom = 291.0
@@ -1325,13 +1436,13 @@ text = "7 Common Stickers
 fit_content_height = true
 scroll_active = false
 
-[node name="Space2" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/PanelContainer/Container/VBoxContainer/StickerInfo"]
+[node name="Space2" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/CenterContainer/StumpAdContainer/PackInformation/PanelContainer/Container/VBoxContainer/StickerInfo"]
 margin_top = 295.0
 margin_right = 502.0
 margin_bottom = 320.0
 rect_min_size = Vector2( 0, 25 )
 
-[node name="Bottom" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/PanelContainer/Container/VBoxContainer/StickerInfo"]
+[node name="Bottom" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/CenterContainer/StumpAdContainer/PackInformation/PanelContainer/Container/VBoxContainer/StickerInfo"]
 margin_top = 324.0
 margin_right = 502.0
 margin_bottom = 423.0
@@ -1340,7 +1451,7 @@ custom_fonts/font = SubResource( 11 )
 text = "Each pack of 3 pins contains AT LEAST 1 (one) UNCOMMON OR HIGHER rarity sticker! Try for your favorite one! "
 autowrap = true
 
-[node name="StickerExamples" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/PanelContainer/Container/VBoxContainer"]
+[node name="StickerExamples" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/CenterContainer/StumpAdContainer/PackInformation/PanelContainer/Container/VBoxContainer"]
 margin_top = 1741.0
 margin_right = 502.0
 margin_bottom = 2241.0
@@ -1349,7 +1460,7 @@ texture = ExtResource( 46 )
 expand = true
 stretch_mode = 6
 
-[node name="TopScroll" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/PanelContainer/Container"]
+[node name="TopScroll" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/CenterContainer/StumpAdContainer/PackInformation/PanelContainer/Container"]
 anchor_right = 1.0
 margin_left = -91.0
 margin_top = -63.0
@@ -1359,7 +1470,7 @@ texture = ExtResource( 15 )
 expand = true
 stretch_mode = 5
 
-[node name="BottomScroll" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/StumpAdContainer/PackInformation/PanelContainer/Container"]
+[node name="BottomScroll" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/CenterContainer/StumpAdContainer/PackInformation/PanelContainer/Container"]
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
