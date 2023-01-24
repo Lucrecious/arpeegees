@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=61 format=2]
 
 [ext_resource path="res://src/game/title.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/main.gd" type="Script" id=2]
@@ -19,15 +19,21 @@
 [ext_resource path="res://assets/ui/website_font_regular.ttf" type="DynamicFontData" id=17]
 [ext_resource path="res://assets/battle/topleaves_night.png" type="Texture" id=18]
 [ext_resource path="res://assets/ui/website/new-shop-bottom.jpg" type="Texture" id=19]
+[ext_resource path="res://assets/ui/website/shop-title@2x.png" type="Texture" id=20]
+[ext_resource path="res://assets/ui/website/Group 19.png" type="Texture" id=21]
 [ext_resource path="res://src/ui/size_adapter.gd" type="Script" id=22]
 [ext_resource path="res://assets/ui/website/Path.png" type="Texture" id=23]
 [ext_resource path="res://src/website/swipe_open.gd" type="Script" id=24]
 [ext_resource path="res://src/website/size_adjuster.gd" type="Script" id=25]
+[ext_resource path="res://src/website/sale_item.tscn" type="PackedScene" id=26]
 [ext_resource path="res://assets/battle/topleaves_evening.png" type="Texture" id=27]
 [ext_resource path="res://src/ui/texture_day_night_cycle.gd" type="Script" id=28]
 [ext_resource path="res://assets/battle/grass_night.png" type="Texture" id=29]
 [ext_resource path="res://assets/battle/grass_evening.png" type="Texture" id=30]
+[ext_resource path="res://assets/ui/website/Arpeegees_Wave_1_Front.png" type="Texture" id=31]
+[ext_resource path="res://assets/ui/website/Arpeegees_Wave_2_Front.png" type="Texture" id=32]
 [ext_resource path="res://src/ui/color_day_night_cycle.gd" type="Script" id=33]
+[ext_resource path="res://assets/ui/website/finger_hand.svg" type="Texture" id=34]
 [ext_resource path="res://src/ui/title_screen_size_adapter.gd" type="Script" id=43]
 [ext_resource path="res://assets/ui/website/pin-examples.png" type="Texture" id=44]
 [ext_resource path="res://assets/ui/website/stickers_title.png" type="Texture" id=45]
@@ -126,6 +132,53 @@ font_data = ExtResource( 7 )
 size = 24
 font_data = ExtResource( 17 )
 
+[sub_resource type="StyleBoxFlat" id=20]
+draw_center = false
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color( 0.768627, 0.513726, 0.388235, 1 )
+
+[sub_resource type="DynamicFont" id=21]
+size = 24
+font_data = ExtResource( 7 )
+
+[sub_resource type="StyleBoxFlat" id=22]
+bg_color = Color( 0, 0.101961, 0.431373, 1 )
+border_width_left = 15
+border_width_top = 15
+border_width_right = 15
+border_width_bottom = 15
+border_color = Color( 0.866667, 0.866667, 0.866667, 1 )
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="DynamicFont" id=23]
+size = 48
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=24]
+size = 32
+font_data = ExtResource( 7 )
+
+[sub_resource type="StyleBoxFlat" id=25]
+content_margin_left = 20.0
+content_margin_right = 20.0
+content_margin_top = 10.0
+content_margin_bottom = 10.0
+bg_color = Color( 0, 0.164706, 0.67451, 1 )
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="DynamicFont" id=26]
+size = 24
+font_data = ExtResource( 7 )
+
 [node name="Main" type="Control"]
 anchor_right = 1.0
 margin_bottom = 720.0
@@ -152,7 +205,7 @@ anchor_bottom = 1.0
 margin_left = -640.0
 margin_top = -1183.0
 margin_right = 640.0
-margin_bottom = 4020.0
+margin_bottom = 5498.0
 
 [node name="SpanLimiter" type="MarginContainer" parent="."]
 anchor_right = 1.0
@@ -858,7 +911,6 @@ __meta__ = {
 }
 
 [node name="StumpAd" type="Control" parent="SpanLimiter/Content/WebsiteContent" groups=["size_normal"]]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 830.0
@@ -1160,6 +1212,270 @@ texture = ExtResource( 46 )
 expand = true
 stretch_mode = 5
 
+[node name="Shop" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAd"]
+anchor_right = 1.0
+margin_top = 1707.0
+margin_bottom = 3360.0
+
+[node name="PanelContainer" type="PanelContainer" parent="SpanLimiter/Content/WebsiteContent/StumpAd/Shop"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -436.0
+margin_top = -299.5
+margin_right = 437.0
+margin_bottom = 194.5
+custom_styles/panel = SubResource( 20 )
+
+[node name="Panel" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAd/Shop/PanelContainer"]
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 867.0
+margin_bottom = 488.0
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 2
+
+[node name="TL" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAd/Shop/PanelContainer/Panel"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 43.0
+margin_bottom = 46.0
+texture = ExtResource( 21 )
+
+[node name="TR" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAd/Shop/PanelContainer/Panel"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -43.0
+margin_top = 20.0
+margin_right = -20.0
+margin_bottom = 46.0
+texture = ExtResource( 21 )
+
+[node name="BL" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAd/Shop/PanelContainer/Panel"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = -46.0
+margin_right = 43.0
+margin_bottom = -20.0
+texture = ExtResource( 21 )
+
+[node name="BR" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAd/Shop/PanelContainer/Panel"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -43.0
+margin_top = -46.0
+margin_right = -20.0
+margin_bottom = -20.0
+texture = ExtResource( 21 )
+
+[node name="Wave3" parent="SpanLimiter/Content/WebsiteContent/StumpAd/Shop/PanelContainer/Panel" instance=ExtResource( 26 )]
+
+[node name="Wave2" parent="SpanLimiter/Content/WebsiteContent/StumpAd/Shop/PanelContainer/Panel" instance=ExtResource( 26 )]
+margin_left = 310.0
+margin_right = 551.0
+
+[node name="Bag" parent="SpanLimiter/Content/WebsiteContent/StumpAd/Shop/PanelContainer/Panel/Wave2" index="0"]
+texture_normal = ExtResource( 32 )
+
+[node name="Wave" parent="SpanLimiter/Content/WebsiteContent/StumpAd/Shop/PanelContainer/Panel/Wave2/Bag/VBox" index="3"]
+text = "Wave 2"
+
+[node name="Wave4" parent="SpanLimiter/Content/WebsiteContent/StumpAd/Shop/PanelContainer/Panel" instance=ExtResource( 26 )]
+margin_left = 556.0
+margin_right = 797.0
+
+[node name="Bag" parent="SpanLimiter/Content/WebsiteContent/StumpAd/Shop/PanelContainer/Panel/Wave4" index="0"]
+texture_normal = ExtResource( 31 )
+
+[node name="Wave" parent="SpanLimiter/Content/WebsiteContent/StumpAd/Shop/PanelContainer/Panel/Wave4/Bag/VBox" index="3"]
+text = "Wave 1"
+
+[node name="Label" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAd/Shop"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -599.0
+margin_bottom = -570.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 21 )
+text = "Orders will be processed within 14 days"
+align = 1
+
+[node name="Title" type="CenterContainer" parent="SpanLimiter/Content/WebsiteContent/StumpAd/Shop"]
+anchor_right = 1.0
+margin_bottom = 196.0
+
+[node name="Shop" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAd/Shop/Title"]
+margin_left = 317.0
+margin_right = 963.0
+margin_bottom = 196.0
+texture = ExtResource( 20 )
+
+[node name="Checklists" type="PanelContainer" parent="SpanLimiter/Content/WebsiteContent/StumpAd/Shop"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -490.0
+margin_top = 337.5
+margin_right = 490.0
+margin_bottom = 949.5
+rect_min_size = Vector2( 780, 0 )
+custom_styles/panel = SubResource( 22 )
+
+[node name="Info" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAd/Shop/Checklists"]
+margin_left = 15.0
+margin_top = 15.0
+margin_right = 965.0
+margin_bottom = 597.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SpanLimiter/Content/WebsiteContent/StumpAd/Shop/Checklists/Info"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 0
+
+[node name="Space" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAd/Shop/Checklists/Info/VBoxContainer"]
+margin_right = 950.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 0, 25 )
+
+[node name="Title" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAd/Shop/Checklists/Info/VBoxContainer"]
+margin_top = 25.0
+margin_right = 950.0
+margin_bottom = 82.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 23 )
+text = "Collect them all!! Trade them!"
+align = 1
+autowrap = true
+
+[node name="Space2" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAd/Shop/Checklists/Info/VBoxContainer"]
+margin_top = 82.0
+margin_right = 950.0
+margin_bottom = 102.0
+rect_min_size = Vector2( 0, 20 )
+
+[node name="Blurb" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAd/Shop/Checklists/Info/VBoxContainer"]
+margin_top = 102.0
+margin_right = 950.0
+margin_bottom = 181.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 24 )
+text = "We hope you LOVE Arpeegees!
+We are SO EXCITED to be sharing these with the world! "
+align = 1
+autowrap = true
+
+[node name="Space3" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAd/Shop/Checklists/Info/VBoxContainer"]
+margin_top = 181.0
+margin_right = 950.0
+margin_bottom = 201.0
+rect_min_size = Vector2( 0, 20 )
+
+[node name="Print1" type="PanelContainer" parent="SpanLimiter/Content/WebsiteContent/StumpAd/Shop/Checklists/Info/VBoxContainer"]
+margin_left = 218.0
+margin_top = 201.0
+margin_right = 731.0
+margin_bottom = 293.0
+size_flags_horizontal = 4
+custom_styles/panel = SubResource( 25 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SpanLimiter/Content/WebsiteContent/StumpAd/Shop/Checklists/Info/VBoxContainer/Print1"]
+margin_left = 20.0
+margin_top = 10.0
+margin_right = 493.0
+margin_bottom = 82.0
+alignment = 1
+
+[node name="Finger" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAd/Shop/Checklists/Info/VBoxContainer/Print1/HBoxContainer"]
+margin_right = 84.0
+margin_bottom = 72.0
+texture = ExtResource( 34 )
+
+[node name="Label" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAd/Shop/Checklists/Info/VBoxContainer/Print1/HBoxContainer"]
+margin_left = 88.0
+margin_top = 21.0
+margin_right = 473.0
+margin_bottom = 50.0
+custom_fonts/font = SubResource( 26 )
+text = "print your wave 1 checklist"
+uppercase = true
+
+[node name="Space4" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAd/Shop/Checklists/Info/VBoxContainer"]
+margin_top = 293.0
+margin_right = 950.0
+margin_bottom = 303.0
+rect_min_size = Vector2( 0, 10 )
+
+[node name="Print2" type="PanelContainer" parent="SpanLimiter/Content/WebsiteContent/StumpAd/Shop/Checklists/Info/VBoxContainer"]
+margin_left = 216.0
+margin_top = 303.0
+margin_right = 733.0
+margin_bottom = 395.0
+size_flags_horizontal = 4
+custom_styles/panel = SubResource( 25 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SpanLimiter/Content/WebsiteContent/StumpAd/Shop/Checklists/Info/VBoxContainer/Print2"]
+margin_left = 20.0
+margin_top = 10.0
+margin_right = 497.0
+margin_bottom = 82.0
+alignment = 1
+
+[node name="Finger" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAd/Shop/Checklists/Info/VBoxContainer/Print2/HBoxContainer"]
+margin_right = 84.0
+margin_bottom = 72.0
+texture = ExtResource( 34 )
+
+[node name="Label" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAd/Shop/Checklists/Info/VBoxContainer/Print2/HBoxContainer"]
+margin_left = 88.0
+margin_top = 21.0
+margin_right = 477.0
+margin_bottom = 50.0
+custom_fonts/font = SubResource( 26 )
+text = "print your wave 2 checklist"
+uppercase = true
+
+[node name="Space5" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAd/Shop/Checklists/Info/VBoxContainer"]
+margin_top = 395.0
+margin_right = 950.0
+margin_bottom = 405.0
+rect_min_size = Vector2( 0, 10 )
+
+[node name="Print3" type="PanelContainer" parent="SpanLimiter/Content/WebsiteContent/StumpAd/Shop/Checklists/Info/VBoxContainer"]
+margin_left = 216.0
+margin_top = 405.0
+margin_right = 733.0
+margin_bottom = 497.0
+size_flags_horizontal = 4
+custom_styles/panel = SubResource( 25 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SpanLimiter/Content/WebsiteContent/StumpAd/Shop/Checklists/Info/VBoxContainer/Print3"]
+margin_left = 20.0
+margin_top = 10.0
+margin_right = 497.0
+margin_bottom = 82.0
+alignment = 1
+
+[node name="Finger" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAd/Shop/Checklists/Info/VBoxContainer/Print3/HBoxContainer"]
+margin_right = 84.0
+margin_bottom = 72.0
+texture = ExtResource( 34 )
+
+[node name="Label" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAd/Shop/Checklists/Info/VBoxContainer/Print3/HBoxContainer"]
+margin_left = 88.0
+margin_top = 21.0
+margin_right = 477.0
+margin_bottom = 50.0
+custom_fonts/font = SubResource( 26 )
+text = "print your wave 3 checklist"
+uppercase = true
+
 [node name="StumpAdSizeAdapter" type="Node" parent="SpanLimiter/Content/WebsiteContent"]
 script = ExtResource( 22 )
 _smaller_path = NodePath("../StumpAdSmaller")
@@ -1167,6 +1483,7 @@ _bigger_path = NodePath("../StumpAd")
 size_limit = 1080
 
 [node name="StumpAdSmaller" type="Control" parent="SpanLimiter/Content/WebsiteContent" groups=["size_normal"]]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -1221,8 +1538,8 @@ night = ExtResource( 29 )
 
 [node name="Background" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller"]
 anchor_right = 1.0
-margin_top = 2727.0
-margin_bottom = 7545.0
+margin_top = 2800.0
+margin_bottom = 7618.0
 texture = ExtResource( 19 )
 expand = true
 stretch_mode = 5
@@ -1482,6 +1799,268 @@ texture = ExtResource( 15 )
 expand = true
 stretch_mode = 5
 
+[node name="Shop" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller"]
+anchor_right = 1.0
+margin_top = 2645.0
+margin_bottom = 4298.0
+
+[node name="PanelContainer" type="PanelContainer" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/Shop"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -436.0
+margin_top = -299.5
+margin_right = 437.0
+margin_bottom = 194.5
+custom_styles/panel = SubResource( 20 )
+
+[node name="Panel" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/Shop/PanelContainer"]
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 867.0
+margin_bottom = 488.0
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 2
+
+[node name="TL" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/Shop/PanelContainer/Panel"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 43.0
+margin_bottom = 46.0
+texture = ExtResource( 21 )
+
+[node name="TR" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/Shop/PanelContainer/Panel"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -43.0
+margin_top = 20.0
+margin_right = -20.0
+margin_bottom = 46.0
+texture = ExtResource( 21 )
+
+[node name="BL" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/Shop/PanelContainer/Panel"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = -46.0
+margin_right = 43.0
+margin_bottom = -20.0
+texture = ExtResource( 21 )
+
+[node name="BR" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/Shop/PanelContainer/Panel"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -43.0
+margin_top = -46.0
+margin_right = -20.0
+margin_bottom = -20.0
+texture = ExtResource( 21 )
+
+[node name="Wave3" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/Shop/PanelContainer/Panel" instance=ExtResource( 26 )]
+
+[node name="Wave2" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/Shop/PanelContainer/Panel" instance=ExtResource( 26 )]
+margin_left = 310.0
+margin_right = 551.0
+
+[node name="Bag" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/Shop/PanelContainer/Panel/Wave2" index="0"]
+texture_normal = ExtResource( 32 )
+
+[node name="Wave" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/Shop/PanelContainer/Panel/Wave2/Bag/VBox" index="3"]
+text = "Wave 2"
+
+[node name="Wave4" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/Shop/PanelContainer/Panel" instance=ExtResource( 26 )]
+margin_left = 556.0
+margin_right = 797.0
+
+[node name="Bag" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/Shop/PanelContainer/Panel/Wave4" index="0"]
+texture_normal = ExtResource( 31 )
+
+[node name="Wave" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/Shop/PanelContainer/Panel/Wave4/Bag/VBox" index="3"]
+text = "Wave 1"
+
+[node name="Label" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/Shop"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -599.0
+margin_bottom = -570.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 21 )
+text = "Orders will be processed within 14 days"
+align = 1
+
+[node name="Title" type="CenterContainer" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/Shop"]
+anchor_right = 1.0
+margin_bottom = 196.0
+
+[node name="Shop" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/Shop/Title"]
+margin_left = 317.0
+margin_right = 963.0
+margin_bottom = 196.0
+texture = ExtResource( 20 )
+
+[node name="Checklists" type="PanelContainer" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/Shop"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 250.0
+margin_top = 337.5
+margin_right = -250.0
+margin_bottom = 949.5
+custom_styles/panel = SubResource( 22 )
+
+[node name="Info" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/Shop/Checklists"]
+margin_left = 15.0
+margin_top = 15.0
+margin_right = 765.0
+margin_bottom = 597.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/Shop/Checklists/Info"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 0
+
+[node name="Space" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/Shop/Checklists/Info/VBoxContainer"]
+margin_right = 750.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 0, 25 )
+
+[node name="Title" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/Shop/Checklists/Info/VBoxContainer"]
+margin_top = 25.0
+margin_right = 750.0
+margin_bottom = 82.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 23 )
+text = "Collect them all!! Trade them!"
+align = 1
+autowrap = true
+
+[node name="Space2" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/Shop/Checklists/Info/VBoxContainer"]
+margin_top = 82.0
+margin_right = 750.0
+margin_bottom = 102.0
+rect_min_size = Vector2( 0, 20 )
+
+[node name="Blurb" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/Shop/Checklists/Info/VBoxContainer"]
+margin_top = 102.0
+margin_right = 750.0
+margin_bottom = 222.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 24 )
+text = "We hope you LOVE Arpeegees!
+We are SO EXCITED to be sharing these with the world! "
+align = 1
+autowrap = true
+
+[node name="Space3" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/Shop/Checklists/Info/VBoxContainer"]
+margin_top = 222.0
+margin_right = 750.0
+margin_bottom = 242.0
+rect_min_size = Vector2( 0, 20 )
+
+[node name="Print1" type="PanelContainer" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/Shop/Checklists/Info/VBoxContainer"]
+margin_left = 118.0
+margin_top = 242.0
+margin_right = 631.0
+margin_bottom = 334.0
+size_flags_horizontal = 4
+custom_styles/panel = SubResource( 25 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/Shop/Checklists/Info/VBoxContainer/Print1"]
+margin_left = 20.0
+margin_top = 10.0
+margin_right = 493.0
+margin_bottom = 82.0
+alignment = 1
+
+[node name="Finger" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/Shop/Checklists/Info/VBoxContainer/Print1/HBoxContainer"]
+margin_right = 84.0
+margin_bottom = 72.0
+texture = ExtResource( 34 )
+
+[node name="Label" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/Shop/Checklists/Info/VBoxContainer/Print1/HBoxContainer"]
+margin_left = 88.0
+margin_top = 21.0
+margin_right = 473.0
+margin_bottom = 50.0
+custom_fonts/font = SubResource( 26 )
+text = "print your wave 1 checklist"
+uppercase = true
+
+[node name="Space4" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/Shop/Checklists/Info/VBoxContainer"]
+margin_top = 334.0
+margin_right = 750.0
+margin_bottom = 344.0
+rect_min_size = Vector2( 0, 10 )
+
+[node name="Print2" type="PanelContainer" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/Shop/Checklists/Info/VBoxContainer"]
+margin_left = 116.0
+margin_top = 344.0
+margin_right = 633.0
+margin_bottom = 436.0
+size_flags_horizontal = 4
+custom_styles/panel = SubResource( 25 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/Shop/Checklists/Info/VBoxContainer/Print2"]
+margin_left = 20.0
+margin_top = 10.0
+margin_right = 497.0
+margin_bottom = 82.0
+alignment = 1
+
+[node name="Finger" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/Shop/Checklists/Info/VBoxContainer/Print2/HBoxContainer"]
+margin_right = 84.0
+margin_bottom = 72.0
+texture = ExtResource( 34 )
+
+[node name="Label" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/Shop/Checklists/Info/VBoxContainer/Print2/HBoxContainer"]
+margin_left = 88.0
+margin_top = 21.0
+margin_right = 477.0
+margin_bottom = 50.0
+custom_fonts/font = SubResource( 26 )
+text = "print your wave 2 checklist"
+uppercase = true
+
+[node name="Space5" type="Control" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/Shop/Checklists/Info/VBoxContainer"]
+margin_top = 436.0
+margin_right = 750.0
+margin_bottom = 446.0
+rect_min_size = Vector2( 0, 10 )
+
+[node name="Print3" type="PanelContainer" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/Shop/Checklists/Info/VBoxContainer"]
+margin_left = 116.0
+margin_top = 446.0
+margin_right = 633.0
+margin_bottom = 538.0
+size_flags_horizontal = 4
+custom_styles/panel = SubResource( 25 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/Shop/Checklists/Info/VBoxContainer/Print3"]
+margin_left = 20.0
+margin_top = 10.0
+margin_right = 497.0
+margin_bottom = 82.0
+alignment = 1
+
+[node name="Finger" type="TextureRect" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/Shop/Checklists/Info/VBoxContainer/Print3/HBoxContainer"]
+margin_right = 84.0
+margin_bottom = 72.0
+texture = ExtResource( 34 )
+
+[node name="Label" type="Label" parent="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/Shop/Checklists/Info/VBoxContainer/Print3/HBoxContainer"]
+margin_left = 88.0
+margin_top = 21.0
+margin_right = 477.0
+margin_bottom = 50.0
+custom_fonts/font = SubResource( 26 )
+text = "print your wave 3 checklist"
+uppercase = true
+
 [node name="Camera" type="Node2D" parent="."]
 script = ExtResource( 5 )
 _control_path = NodePath("../Boundaries")
@@ -1543,3 +2122,8 @@ stretch_mode = 5
 flip_v = true
 
 [connection signal="tree_entered" from="CanvasLayer" to="CanvasLayer" method="set" binds= [ "visible", true ]]
+
+[editable path="SpanLimiter/Content/WebsiteContent/StumpAd/Shop/PanelContainer/Panel/Wave2"]
+[editable path="SpanLimiter/Content/WebsiteContent/StumpAd/Shop/PanelContainer/Panel/Wave4"]
+[editable path="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/Shop/PanelContainer/Panel/Wave2"]
+[editable path="SpanLimiter/Content/WebsiteContent/StumpAdSmaller/Shop/PanelContainer/Panel/Wave4"]

@@ -1,0 +1,172 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://assets/ui/website_font_bold.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://assets/ui/website/Arpeegees_Wave_3_Front.png" type="Texture" id=2]
+[ext_resource path="res://assets/ui/website/coin.svg" type="Texture" id=3]
+
+[sub_resource type="StyleBoxFlat" id=21]
+draw_center = false
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="DynamicFont" id=22]
+size = 48
+outline_size = 6
+outline_color = Color( 0.32549, 0.0862745, 0.117647, 1 )
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=23]
+size = 48
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=24]
+size = 42
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=25]
+size = 48
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=26]
+bg_color = Color( 0.180392, 0.27451, 0.960784, 1 )
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color( 0, 0, 0, 1 )
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id=27]
+bg_color = Color( 0.0431373, 0.113725, 0.615686, 1 )
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color( 0, 0, 0, 1 )
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id=28]
+bg_color = Color( 0.454902, 0.521569, 1, 1 )
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color( 0, 0, 0, 1 )
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[node name="Wave3" type="PanelContainer"]
+margin_left = 63.0
+margin_top = -210.0
+margin_right = 304.0
+margin_bottom = 96.0
+custom_styles/panel = SubResource( 21 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Bag" type="TextureButton" parent="."]
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 235.0
+margin_bottom = 300.0
+toggle_mode = true
+texture_normal = ExtResource( 2 )
+expand = true
+stretch_mode = 6
+
+[node name="VBox" type="VBoxContainer" parent="Bag"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 18.0
+margin_bottom = 75.0
+custom_constants/separation = 0
+
+[node name="Price" type="HBoxContainer" parent="Bag/VBox"]
+margin_right = 229.0
+margin_bottom = 57.0
+custom_constants/separation = 10
+alignment = 1
+
+[node name="Coin" type="TextureRect" parent="Bag/VBox/Price"]
+margin_left = 27.0
+margin_right = 97.0
+margin_bottom = 57.0
+rect_min_size = Vector2( 70, 0 )
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 6
+
+[node name="Price" type="Label" parent="Bag/VBox/Price"]
+margin_left = 107.0
+margin_right = 202.0
+margin_bottom = 57.0
+custom_colors/font_color = Color( 0.988235, 0.894118, 0.447059, 1 )
+custom_fonts/font = SubResource( 22 )
+text = "$25"
+
+[node name="Space" type="Control" parent="Bag/VBox"]
+margin_top = 57.0
+margin_right = 229.0
+margin_bottom = 77.0
+rect_min_size = Vector2( 0, 20 )
+
+[node name="Item" type="Label" parent="Bag/VBox"]
+margin_top = 77.0
+margin_right = 229.0
+margin_bottom = 134.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 0.419608 )
+custom_constants/shadow_offset_x = 5
+custom_constants/shadow_offset_y = 4
+custom_fonts/font = SubResource( 23 )
+text = "Pins"
+align = 1
+
+[node name="Wave" type="Label" parent="Bag/VBox"]
+margin_top = 134.0
+margin_right = 229.0
+margin_bottom = 185.0
+custom_colors/font_color = Color( 0.823529, 0.988235, 0.996078, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 0.419608 )
+custom_constants/shadow_offset_x = 5
+custom_constants/shadow_offset_y = 4
+custom_fonts/font = SubResource( 24 )
+text = "Wave 3"
+align = 1
+
+[node name="Space2" type="Control" parent="Bag/VBox"]
+margin_top = 185.0
+margin_right = 229.0
+margin_bottom = 225.0
+rect_min_size = Vector2( 0, 40 )
+
+[node name="Button" type="Button" parent="Bag/VBox"]
+margin_top = 225.0
+margin_right = 229.0
+margin_bottom = 294.0
+custom_colors/font_color_disabled = Color( 1, 1, 1, 0.705882 )
+custom_colors/font_color_focus = Color( 1, 1, 1, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
+custom_colors/font_color_pressed = Color( 0.823529, 0.823529, 0.823529, 1 )
+custom_fonts/font = SubResource( 25 )
+custom_styles/hover = SubResource( 26 )
+custom_styles/pressed = SubResource( 27 )
+custom_styles/focus = SubResource( 26 )
+custom_styles/disabled = SubResource( 28 )
+custom_styles/normal = SubResource( 26 )
+text = "Buy"
