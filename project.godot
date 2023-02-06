@@ -867,7 +867,7 @@ _global_script_class_icons={
 [application]
 
 config/name="arpeegees"
-run/main_scene="res://src/main.tscn"
+run/main_scene="res://src/game_frame.tscn"
 config/icon="res://icon.png"
 
 [autoload]

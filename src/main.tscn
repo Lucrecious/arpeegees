@@ -236,7 +236,6 @@ anchor_bottom = 1.0
 
 [node name="Title" parent="SpanLimiter/Content/Game" instance=ExtResource( 1 )]
 unique_name_in_owner = true
-anchor_bottom = 0.0
 margin_bottom = 720.0
 
 [node name="TileSizeAdapter" type="Node" parent="SpanLimiter/Content/Game/Title"]

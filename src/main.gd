@@ -8,7 +8,6 @@ const BattleScreen := preload('res://src/game/battle.tscn')
 onready var _title_screen := $'%Title' as TitleScreen
 onready var _battle_screen_position_reference := $'%BattleScreenPositionReference' as Control
 onready var _battle_screen: BattleScreen
-onready var _intro_panel := $'%IntroPanel' as Control
 
 func _enter_tree():
 	randomize()
@@ -31,6 +30,10 @@ func restart_battle() -> void:
 	parent.add_child(_battle_screen)
 	_battle_screen.rect_size = _battle_screen_position_reference.rect_size
 	_battle_screen.rect_position = Vector2.ZERO
+	#_battle_screen.anchor_left = _battle_screen_position_reference.anchor_left
+	#_battle_screen.anchor_right = _battle_screen_position_reference.anchor_right
+	#_battle_screen.anchor_bottom = _battle_screen_position_reference.anchor_bottom
+	#_battle_screen.anchor_top = _battle_screen_position_reference.anchor_top
 	
 	if not _title_screen.is_inside_tree():
 		_battle_screen_position_reference.get_parent()\
@@ -71,20 +74,3 @@ func _on_battle_screen_requested(pin_amount: int) -> void:
 	yield(get_tree().create_timer(1.0), 'timeout')
 	
 	_title_screen.get_parent().remove_child(_title_screen)
-
-#var _intro_faded := false
-#func _input(event: InputEvent) -> void:
-#	if _intro_faded:
-#		return
-#
-#	if event is InputEventMouseButton:
-#		var is_mouse_button := bool(event.button_index == BUTTON_LEFT\
-#				or event.button_index == BUTTON_RIGHT\
-#				or event.button_index == BUTTON_MIDDLE)
-#
-#		if event.pressed and is_mouse_button:
-#			_intro_faded = true
-#			var fade_away := _intro_panel.create_tween()
-#			fade_away.tween_property(_intro_panel, 'modulate:a', 0.0, 1.0)\
-#					.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
-#			fade_away.tween_callback(_intro_panel, 'queue_free')

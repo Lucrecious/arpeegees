@@ -25,8 +25,11 @@
                 bottom: 0;
                 z-index: 2;
                 background-color: #0d5e45;
-                width:100%;
-                height: 100%;
+            }
+            #scroll-overlay::after {
+                content: '';
+                display: block;
+                height: 6681px;
             }
 
             #cover-overlay {
@@ -41,7 +44,7 @@
                 align-items: center;
 
                 z-index: 3;
-                background-color: #0d5e45;
+                background-color: transparent;
             }
 
             #game {
@@ -119,6 +122,8 @@
                         overlay.style.backgroundColor = "transparent";
                         coverOverlay.style.visibility = "hidden";
                         console.log("Arpeegees Game Loaded")
+
+                        overlay.scrollTop = 463
                     });
                 </script>
             </div>
