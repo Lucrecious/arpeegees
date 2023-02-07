@@ -117,19 +117,21 @@
                         document.getElementById("canvas").dispatchEvent(exitedScreenEvent);
                     }
 
-                    engine.startGame({
-                        'onProgress': function (current, total) {
-                            let finishedPercent = current / total;
-                            updateProgress(finishedPercent);
-                        }
-                    }).then(() => {
-                        const overlay = document.getElementById("scroll-overlay")
-                        const coverOverlay = document.getElementById("cover-overlay")
+                    function beginLoading() {
+                        engine.startGame({
+                            'onProgress': function (current, total) {
+                                let finishedPercent = current / total;
+                                updateProgress(finishedPercent);
+                            }
+                        }).then(() => {
+                            const overlay = document.getElementById("scroll-overlay")
+                            const coverOverlay = document.getElementById("cover-overlay")
 
-                        overlay.style.backgroundColor = "transparent";
-                        coverOverlay.style.visibility = "hidden";
-                        console.log("Arpeegees Game Loaded")
-                    });
+                            overlay.style.backgroundColor = "transparent";
+                            coverOverlay.style.visibility = "hidden";
+                            console.log("Arpeegees Game Loaded")
+                        });
+                    }
                 </script>
             </div>
             <div id="scroll-overlay">
