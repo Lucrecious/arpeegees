@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/game/title.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/ui/texture_day_night_cycle.gd" type="Script" id=2]
 [ext_resource path="res://assets/battle/topleaves_evening.png" type="Texture" id=3]
 [ext_resource path="res://src/main.gd" type="Script" id=4]
+[ext_resource path="res://src/website/game_frame_web_interop.gd" type="Script" id=5]
 [ext_resource path="res://assets/battle/topleaves.png" type="Texture" id=6]
 [ext_resource path="res://assets/battle/topleaves_night.png" type="Texture" id=7]
 [ext_resource path="res://assets/battle/grass_evening.png" type="Texture" id=8]
@@ -62,3 +63,6 @@ script = ExtResource( 2 )
 day = ExtResource( 10 )
 evening = ExtResource( 8 )
 night = ExtResource( 9 )
+
+[node name="Web" type="Node" parent="."]
+script = ExtResource( 5 )

@@ -219,6 +219,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://lut/extension/geometry_extension.gd"
 }, {
+"base": "Node",
+"class": "GameFrameWebInterop",
+"language": "GDScript",
+"path": "res://src/website/game_frame_web_interop.gd"
+}, {
 "base": "Node2D",
 "class": "GenericHitAllEnemiesAttack",
 "language": "GDScript",
@@ -762,6 +767,7 @@ _global_script_class_icons={
 "FloatingText": "",
 "FuncREf": "",
 "GEometry": "",
+"GameFrameWebInterop": "",
 "GenericHitAllEnemiesAttack": "",
 "GenericTargetAttack": "",
 "GooShotTrapAction": "",

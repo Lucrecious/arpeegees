@@ -107,6 +107,16 @@
                         }
                     }
 
+                    function enterScreen() {
+                        const enteredScreenEvent = new CustomEvent("enteredscreen", { });
+                        document.getElementById("canvas").dispatchEvent(enteredScreenEvent);
+                    }
+
+                    function exitScreen() {
+                        const exitedScreenEvent = new CustomEvent("exitedscreen", { });
+                        document.getElementById("canvas").dispatchEvent(exitedScreenEvent);
+                    }
+
                     engine.startGame({
                         'onProgress': function (current, total) {
                             let finishedPercent = current / total;
