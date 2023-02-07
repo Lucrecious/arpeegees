@@ -107,6 +107,24 @@
                         }
                     }
 
+                    function getGrassColor() {
+                        const dayColor = "rgb(22, 139, 103)";
+                        const eveningColor = "rgb(39, 122, 58)";
+                        const nightColor = "rgb(9, 58, 43)";
+
+                        let date = new Date();
+                        let color = "";
+                        if (date.getHours() >= 6 && date.getHours() < 17)  {
+                            color = dayColor;
+                        } else if (date.getHours() >= 17 && date.getHours() < 22) {
+                            color = eveningColor;
+                        } else {
+                            color = nightColor;
+                        }
+
+                        return color;
+                    }
+
                     function enterScreen() {
                         const enteredScreenEvent = new CustomEvent("enteredscreen", { });
                         document.getElementById("canvas").dispatchEvent(enteredScreenEvent);
@@ -116,6 +134,10 @@
                         const exitedScreenEvent = new CustomEvent("exitedscreen", { });
                         document.getElementById("canvas").dispatchEvent(exitedScreenEvent);
                     }
+
+                    window.onload = (event) => {
+                        document.getElementById("cover-overlay").style.backgroundColor = getGrassColor();
+                    };
 
                     function beginLoading() {
                         engine.startGame({
