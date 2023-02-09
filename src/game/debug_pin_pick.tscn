@@ -76,10 +76,11 @@ custom_constants/margin_left = 20
 custom_constants/margin_bottom = 20
 
 [node name="Version" type="Label" parent="MarginContainer"]
+modulate = Color( 0, 0, 0, 0.117647 )
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 1260.0
 margin_bottom = 700.0
 size_flags_vertical = 5
-text = "Version: 0.9.28"
+text = "0.9.29"
 align = 2

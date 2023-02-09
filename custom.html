@@ -125,6 +125,24 @@
                         return color;
                     }
 
+                    function getTopGrassColor() {
+                        const dayColor = "rgb(13, 94, 69)";
+                        const eveningColor = "rgb(50, 78, 29)";
+                        const nightColor = "rgb(5, 39, 29)";
+
+                        let date = new Date();
+                        let color = "";
+                        if (date.getHours() >= 6 && date.getHours() < 17)  {
+                            color = dayColor;
+                        } else if (date.getHours() >= 17 && date.getHours() < 22) {
+                            color = eveningColor;
+                        } else {
+                            color = nightColor;
+                        }
+
+                        return color;
+                    }
+
                     function enterScreen() {
                         const enteredScreenEvent = new CustomEvent("enteredscreen", { });
                         document.getElementById("canvas").dispatchEvent(enteredScreenEvent);
@@ -136,7 +154,7 @@
                     }
 
                     window.onload = (event) => {
-                        document.getElementById("cover-overlay").style.backgroundColor = getGrassColor();
+                        document.getElementById("cover-overlay").style.background = 'linear-gradient(to bottom, ' + getTopGrassColor() + ', ' + getGrassColor() + ')';
                     };
 
                     function beginLoading() {
@@ -151,7 +169,11 @@
 
                             overlay.style.backgroundColor = "transparent";
                             coverOverlay.style.visibility = "hidden";
-                            console.log("Arpeegees Game Loaded")
+
+                            const canvas = document.getElementById("canvas");
+
+                            const gameLoadedEvent = new CustomEvent('gameloaded', {});
+                            canvas.dispatchEvent(gameLoadedEvent);
                         });
                     }
                 </script>
