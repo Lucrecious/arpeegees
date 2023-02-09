@@ -80,9 +80,11 @@ func hurt() -> void:
 	
 	if _health.current <= 0:
 		if _sprite_switcher.has_sprite('dead'):
+			_current_hurt_tween.tween_callback(Sounds, 'play', ['FallDeath'])
 			_current_hurt_tween.tween_callback(_sprite_switcher, 'change', ['dead'])
 		else:
 			var death_smoke := VFX.death_explosion()
+			_current_hurt_tween.tween_callback(Sounds, 'play', ['PoofDeath'])
 			_current_hurt_tween.tween_callback(NodE, 'add_children', [get_parent().get_parent(), death_smoke])
 			
 			_current_hurt_tween.tween_property(get_parent(), 'modulate:a', 0.0, 0.5)\

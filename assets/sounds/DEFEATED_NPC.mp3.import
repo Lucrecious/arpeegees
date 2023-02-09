@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/DEFEATED_NPC.mp3-0176a36dd1d53dc83c36feb2d462b5b7.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/DEFEATED_NPC.mp3"
+dest_files=[ "res://.import/DEFEATED_NPC.mp3-0176a36dd1d53dc83c36feb2d462b5b7.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

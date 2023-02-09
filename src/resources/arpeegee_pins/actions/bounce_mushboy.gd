@@ -15,7 +15,8 @@ func run(actioner: Node2D, target: Node2D, object: Object, callback: String) -> 
 	
 	TweenJuice.squish(animation, material, 0.5, 1.0, 0.1)
 	
-	animation.tween_callback(Sounds, 'play', ['Dash1'])
+	var sounds := NodE.get_child(actioner, SoundsComponent) as SoundsComponent
+	animation.tween_callback(sounds, 'play', ['Rise'])
 	animation.tween_property(actioner, 'global_position', Vector2.UP * 1000.0, 0.15)\
 			.as_relative()
 	
@@ -72,6 +73,8 @@ class BounceStartTurnEffect extends Node:
 			var target_box := NodE.get_child(_target, REferenceRect) as REferenceRect
 			var target_position := target_box.global_rect().get_center()
 			
+			var sounds := NodE.get_child(_actioner, SoundsComponent) as SoundsComponent
+			animation.tween_callback(sounds, 'play', ['Fall'])
 			animation.tween_property(_actioner, 'global_position', target_position, 0.2)
 			
 			var stats := NodE.get_child(_actioner, ModifiedPinStats) as ModifiedPinStats

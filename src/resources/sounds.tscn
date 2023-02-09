@@ -1,8 +1,8 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://src/resources/sounds.gd" type="Script" id=1]
 [ext_resource path="res://assets/sounds/step_grass3.mp3" type="AudioStream" id=2]
-[ext_resource path="res://assets/sounds/narrator_blip.mp3" type="AudioStream" id=3]
+[ext_resource path="res://assets/sounds/VOICE_COMMENTATOR.mp3" type="AudioStream" id=3]
 [ext_resource path="res://assets/sounds/step_grass1.mp3" type="AudioStream" id=4]
 [ext_resource path="res://assets/sounds/step_grass2.mp3" type="AudioStream" id=5]
 [ext_resource path="res://assets/sounds/dash1.mp3" type="AudioStream" id=6]
@@ -25,12 +25,15 @@
 [ext_resource path="res://assets/sounds/DAMAGE_HEAVY.mp3" type="AudioStream" id=23]
 [ext_resource path="res://assets/sounds/WINDUP_ATTACK_LIGHT.mp3" type="AudioStream" id=24]
 [ext_resource path="res://assets/sounds/DAMAGE_SLIP.mp3" type="AudioStream" id=25]
+[ext_resource path="res://assets/sounds/DEFEATED_NPC.mp3" type="AudioStream" id=26]
+[ext_resource path="res://assets/sounds/DEFEATED_PLAYER.mp3" type="AudioStream" id=27]
 
 [node name="Sounds" type="Node"]
 script = ExtResource( 1 )
 
 [node name="SpeakingBlip1" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
+volume_db = 5.0
 bus = "SFX"
 
 [node name="ConfirmUI" type="AudioStreamPlayer" parent="."]
@@ -123,4 +126,12 @@ bus = "SFX"
 
 [node name="BuffAttackCry" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 17 )
+bus = "SFX"
+
+[node name="FallDeath" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 27 )
+bus = "SFX"
+
+[node name="PoofDeath" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 26 )
 bus = "SFX"

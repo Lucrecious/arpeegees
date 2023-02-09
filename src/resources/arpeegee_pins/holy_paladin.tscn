@@ -120,7 +120,8 @@ script = ExtResource( 3 )
 [node name="HeavenlySlash" type="Node2D" parent="Action" index="0"]
 script = ExtResource( 15 )
 pin_action = ExtResource( 17 )
-narration_key = "NARRATOR_HEAVENLY_SLASH_USE"
+narration_variations = 7
+narration_key = "NARRATOR_HEAVENLY_SLASH_USE_"
 use_global_sounds = true
 hit_sfx_name = "Slash"
 

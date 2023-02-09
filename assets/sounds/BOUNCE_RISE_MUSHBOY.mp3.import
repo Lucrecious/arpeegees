@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/BOUNCE_RISE_MUSHBOY.mp3-8243421e9ad9f4ca7d966d599f628f6b.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/BOUNCE_RISE_MUSHBOY.mp3"
+dest_files=[ "res://.import/BOUNCE_RISE_MUSHBOY.mp3-8243421e9ad9f4ca7d966d599f628f6b.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

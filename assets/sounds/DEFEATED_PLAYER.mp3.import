@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/DEFEATED_PLAYER.mp3-84a64f73387ce18506a4986591c61053.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/DEFEATED_PLAYER.mp3"
+dest_files=[ "res://.import/DEFEATED_PLAYER.mp3-84a64f73387ce18506a4986591c61053.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
