@@ -1,6 +1,6 @@
 extends Node
 
-const MIN_STRETCH := 1.5
+const MIN_STRETCH := 1.0
 const MIN_WINDOW_SIZE_X := 1240
 
 var _current_stretch := 1.0
@@ -8,7 +8,7 @@ var _current_stretch := 1.0
 func _ready() -> void:
 	get_viewport().connect('size_changed', self, '_on_viewport_size_changed')
 	
-	_set_stretch(1.5)
+	_set_stretch(MIN_STRETCH)
 
 func _set_stretch(factor: float) -> void:
 	if is_equal_approx(factor, _current_stretch):

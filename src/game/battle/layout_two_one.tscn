@@ -14,9 +14,9 @@ anchor_top = 0.811
 anchor_right = 0.283
 anchor_bottom = 0.811
 margin_left = -0.240021
-margin_top = 0.0799561
+margin_top = -41.92
 margin_right = 39.7601
-margin_bottom = 40.08
+margin_bottom = -1.91998
 mouse_filter = 2
 
 [node name="Left_2" type="ReferenceRect" parent="."]
@@ -25,9 +25,9 @@ anchor_top = 0.89
 anchor_right = 0.432875
 anchor_bottom = 0.89
 margin_left = -0.0800171
-margin_top = 0.199951
+margin_top = -41.8
 margin_right = 39.9201
-margin_bottom = 40.2
+margin_bottom = -1.79999
 mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": true
@@ -38,10 +38,10 @@ anchor_left = 0.677
 anchor_top = 0.781
 anchor_right = 0.677
 anchor_bottom = 0.781
-margin_left = -0.560059
-margin_top = -0.320007
-margin_right = 39.44
-margin_bottom = 39.68
+margin_left = -0.56012
+margin_top = -42.32
+margin_right = 39.4399
+margin_bottom = -2.32001
 mouse_filter = 2
 
 [node name="Item_1" type="ReferenceRect" parent="."]
@@ -50,7 +50,7 @@ anchor_top = 0.486
 anchor_right = 0.485
 anchor_bottom = 0.486
 margin_left = 0.199951
-margin_top = 0.0799866
+margin_top = -41.92
 margin_right = 40.2
-margin_bottom = 40.08
+margin_bottom = -1.92001
 mouse_filter = 2

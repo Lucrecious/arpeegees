@@ -334,7 +334,7 @@ texture = ExtResource( 2 )
 [node name="Position2D" type="Position2D" parent="Bag/BagSprite/Sprite"]
 
 [node name="Finger" type="Sprite" parent="Bag"]
-position = Vector2( -508, -364 )
+position = Vector2( -220, -10 )
 scale = Vector2( 0.478846, 0.478846 )
 texture = ExtResource( 25 )
 

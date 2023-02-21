@@ -13,10 +13,10 @@ anchor_left = 0.654
 anchor_top = 0.803
 anchor_right = 0.654
 anchor_bottom = 0.803
-margin_left = -0.120056
-margin_top = -0.159973
-margin_right = 39.88
-margin_bottom = 39.8401
+margin_left = -0.119995
+margin_top = -31.16
+margin_right = 39.8801
+margin_bottom = 8.84009
 mouse_filter = 2
 
 [node name="Right_2" type="ReferenceRect" parent="."]
@@ -24,10 +24,10 @@ anchor_left = 0.532
 anchor_top = 0.889
 anchor_right = 0.532
 anchor_bottom = 0.889
-margin_left = 0.039917
-margin_top = -0.0800171
-margin_right = 40.0399
-margin_bottom = 39.92
+margin_left = 0.039978
+margin_top = -31.08
+margin_right = 40.04
+margin_bottom = 8.91998
 mouse_filter = 2
 
 [node name="Left_1" type="ReferenceRect" parent="."]
@@ -36,9 +36,9 @@ anchor_top = 0.779
 anchor_right = 0.324
 anchor_bottom = 0.779
 margin_left = 0.279999
-margin_top = 0.119995
+margin_top = -30.88
 margin_right = 40.28
-margin_bottom = 40.12
+margin_bottom = 9.12
 mouse_filter = 2
 
 [node name="Item_1" type="ReferenceRect" parent="."]
@@ -47,7 +47,7 @@ anchor_top = 0.485
 anchor_right = 0.485
 anchor_bottom = 0.485
 margin_left = 0.199951
-margin_top = -0.200012
+margin_top = -31.2
 margin_right = 40.2
-margin_bottom = 39.8
+margin_bottom = 8.79999
 mouse_filter = 2

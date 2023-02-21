@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/game/bag.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/game/title_bag_scaler.gd" type="Script" id=2]
 [ext_resource path="res://src/game/title.gd" type="Script" id=3]
 
 [sub_resource type="Shader" id=2]
@@ -49,11 +50,16 @@ anchor_bottom = 1.0
 script = ExtResource( 3 )
 
 [node name="Center" type="CenterContainer" parent="."]
-anchor_top = 0.992
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = -570.24
-margin_bottom = -6.0
+anchor_left = 0.5
+anchor_top = 0.789
+anchor_right = 0.5
+anchor_bottom = 0.789
+margin_left = -640.0
+margin_top = -528.08
+margin_right = 640.0
+margin_bottom = 41.92
+rect_pivot_offset = Vector2( 640, 531 )
+script = ExtResource( 2 )
 
 [node name="Control" type="Control" parent="Center"]
 margin_left = 445.0

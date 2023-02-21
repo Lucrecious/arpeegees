@@ -56,7 +56,13 @@ day = ExtResource( 6 )
 evening = ExtResource( 3 )
 night = ExtResource( 7 )
 
-[node name="GrassNinePatch" type="NinePatchRect" parent="."]
+[node name="Web" type="Node" parent="."]
+script = ExtResource( 5 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 128
+
+[node name="GrassNinePatch" type="NinePatchRect" parent="CanvasLayer"]
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -65,11 +71,8 @@ texture = ExtResource( 10 )
 patch_margin_left = 353
 patch_margin_right = 349
 
-[node name="TextureDayNightCycle" type="Node" parent="GrassNinePatch"]
+[node name="TextureDayNightCycle" type="Node" parent="CanvasLayer/GrassNinePatch"]
 script = ExtResource( 2 )
 day = ExtResource( 10 )
 evening = ExtResource( 8 )
 night = ExtResource( 9 )
-
-[node name="Web" type="Node" parent="."]
-script = ExtResource( 5 )

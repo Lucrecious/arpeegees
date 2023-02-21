@@ -21,6 +21,8 @@ func _fly() -> void:
 	animation.tween_property(_fly_sprite, 'frame', 1, SEC_PER_FRAME * 2)
 	animation.tween_callback(_fly_sprite, 'set', ['position', _fly_sprite.position + Vector2.UP * 75.0])
 	animation.tween_callback(_fly_sprite, 'play')
-	animation.tween_property(_fly_sprite, 'position:y', -500.0, 0.35).as_relative()
+	
+	var distance := -get_viewport_rect().size.y
+	animation.tween_property(_fly_sprite, 'position:y', distance, distance / 1428.57).as_relative()
 	animation.tween_interval(2.0)
 	animation.tween_callback(self, 'queue_free')

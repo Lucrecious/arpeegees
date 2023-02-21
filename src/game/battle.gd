@@ -519,7 +519,7 @@ func _drop_pins(positions: Array, pins: Array, item: PinItemPowerUp, item_positi
 		control.add_child(pin_node)
 		var position := control.get_global_rect().get_center()
 		
-		pin_node.global_position = position + Vector2.UP * 900.0
+		pin_node.global_position = position + Vector2.UP * (get_viewport_rect().size.y + 100.0)
 		
 		_add_pin_shadow(control)
 		
@@ -540,7 +540,7 @@ func _drop_pins(positions: Array, pins: Array, item: PinItemPowerUp, item_positi
 		_battle_layer.add_child(item)
 		var position := item_position.get_global_rect().get_center()
 		
-		item.global_position = position + Vector2.UP * 1000.0
+		item.global_position = position + Vector2.UP * (get_viewport_rect().size.y + 100.0)
 		
 		var drop_tween := get_tree().create_tween()
 		drop_tween.tween_interval(drop_times[positions.size()])
