@@ -714,6 +714,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://lut/components_3d/velocity3.gd"
 }, {
+"base": "Sprite",
+"class": "WallpaperCircle",
+"language": "GDScript",
+"path": "res://src/ui/click_wallpaper.gd"
+}, {
+"base": "Resource",
+"class": "WallpaperReward",
+"language": "GDScript",
+"path": "res://assets/wallpaper_previews/wallpaper.gd"
+}, {
 "base": "Label",
 "class": "WobbleLabel",
 "language": "GDScript",
@@ -866,6 +876,8 @@ _global_script_class_icons={
 "VFXNotesPair": "",
 "Velocity": "",
 "Velocity3": "",
+"WallpaperCircle": "",
+"WallpaperReward": "",
 "WobbleLabel": "",
 "WontAttackPaladin": ""
 }
@@ -917,6 +929,10 @@ mp3={
 "loop": false,
 "loop_offset": 0
 }
+
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
 
 [locale]
 

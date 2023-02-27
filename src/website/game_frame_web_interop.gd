@@ -1,6 +1,9 @@
 class_name GameFrameWebInterop
 extends Node
 
+const WebDict := {
+	is_on_mobile = false
+}
 
 var _on_entered_screen_js_callback := JavaScript.create_callback(self, '_on_entered_screen')
 var _on_exited_screen_js_callback := JavaScript.create_callback(self, '_on_exited_screen')
@@ -13,6 +16,8 @@ func _ready() -> void:
 	var canvas = document.getElementById('canvas')
 	canvas.addEventListener('enteredscreen', _on_entered_screen_js_callback)
 	canvas.addEventListener('exitedscreen', _on_exited_screen_js_callback)
+	
+	WebDict.is_on_mobile = document.isOnMobile()
 
 func _on_entered_screen(args) -> void:
 	_mute_play_audio(false)
