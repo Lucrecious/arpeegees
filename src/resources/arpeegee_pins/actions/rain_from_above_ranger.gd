@@ -36,6 +36,11 @@ func run(actioner: Node2D, targets: Array, object: Object, callback: String) -> 
 	var rain_arrow_group := get_tree().get_nodes_in_group('rain_arrows')
 	if not rain_arrow_group.empty():
 		var rain_arrows := rain_arrow_group[0] as CPUParticles2D
+		
+		var viewport_rect := rain_arrows.get_viewport_rect()
+		var particles_position := viewport_rect.position.y + viewport_rect.size.y - 1500.0
+		rain_arrows.global_position.y = particles_position
+		
 		animation.tween_callback(rain_arrows, 'set', ['emitting', true])
 		animation.tween_interval(3.0)
 		

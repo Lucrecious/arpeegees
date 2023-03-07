@@ -59,6 +59,37 @@
                 z-index: 4;
             }
 
+            @font-face {
+                font-family: 'DKWoolwich';
+                src: url('DKWoolwich.otf') format('opentype');
+                font-weight: normal;
+                font-style: normal;
+            }
+
+            #cannot-play-container {
+                display: none;
+                justify-content: space-between;
+                align-items: center;
+                margin-left: -22%;
+            }
+
+            #arpeegee-sprite-sad {
+                width: 20%;
+                margin-bottom: 10%;
+                margin-left: -35%;
+                margin-right: 10%;
+            }
+
+            #cannot-play-text {
+                z-index: 4;
+                font-family: "DKWoolwich", sans-serif;
+                font-size: 3em;
+                color: white;
+                text-shadow: -4px -4px 0 #000, 4px -4px 0 #000, -4px 4px 0 #000, 4px 4px 0 #000;
+                width: 60%;
+                margin: 0 auto;
+            }
+
             #loadingbar {
                 margin-top: -3.5%;
                 z-index: 3;
@@ -175,6 +206,19 @@
                     window.onload = (event) => {
                         document.getElementById("cover-overlay").style.background = 'linear-gradient(to bottom, ' + getTopGrassColor() + ', ' + getGrassColor() + ')';
                     };
+                    function cant_play_on_safari() {
+                        const loadingBarText = document.getElementById("loadingbartext");
+                        loadingBarText.style.display = "none"; // hide the loading text
+
+                        const loadingBar = document.getElementById("loadingbar");
+                        loadingBar.style.display = "none"; // hide the loading bar
+
+                        document.getElementById('arpeegee-sprite').style.display = "none";
+
+                        const cannotPlay = document.getElementById("cannot-play-container"); // create new text element for cannot play message
+                        cannotPlay.style.display = "flex";
+                    }
+                    
 
                     function beginLoading() {
                         engine.startGame({
@@ -187,7 +231,12 @@
                             const coverOverlay = document.getElementById("cover-overlay")
 
                             overlay.style.backgroundColor = "transparent";
-                            overlay.style.visibility = "hidden";
+                            const isMobileSafari = /iP(ad|od|hone)/i.test(navigator.userAgent) && /WebKit/i.test(navigator.userAgent);
+                            if (isMobileSafari) {
+                                overlay.style.visibility = "hidden";
+                            } else {
+                            }
+
                             coverOverlay.style.visibility = "hidden";
 
                             const canvas = document.getElementById("canvas");
@@ -200,8 +249,14 @@
             </div>
             <div id="scroll-overlay">
             </div>
-            <dev id="cover-overlay">
+            <div id="cover-overlay">
                 <div>
+                    <div id="cannot-play-container">
+                        <div id="cannot-play-text" class="center">
+                            Sorry! This game cannot be played on iPhone, iPad or iPod yet.
+                        </div>
+                        <img src="bard_dead.png" id="arpeegee-sprite-sad">
+                    </div>
                     <img src="loadingbartext.png" id="loadingbartext" class="center">
                     <img src="loadingbarbar0.png" id="loadingbar" class="center">
                     <img src="bard_idle.png" id="arpeegee-sprite" class="center">

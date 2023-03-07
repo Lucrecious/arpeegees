@@ -13,6 +13,8 @@ const WAIT_BEFORE_FIRST_SENTENCE_SEC := 0.3
 const WAIT_BETWEEN_SENTENCES_SEC := 2.0
 const DISSOLVE_OUT_SEC := 0.5
 
+export var adapt_size := false
+
 var _is_speaking := false
 var _queued_text := []
 var _is_typing := false
@@ -28,6 +30,24 @@ func _ready() -> void:
 	
 	_textbox_dissolve_level(0.0)
 	
+	if adapt_size:
+		add_to_group('size_adapter')
+
+func adapt(size_x: float) -> void:
+	var recty := get_viewport_rect().size.y
+	var miny := 720
+	var maxy := 1700
+	
+	var min_scale := 1.0
+	var max_scale := 1.7
+	
+	var weight := inverse_lerp(miny, maxy, recty)
+	
+	var new_scale := Vector2.ONE * clamp(lerp(min_scale, max_scale, weight), 1.0, 1.5)
+	
+	rect_scale = new_scale
+	
+
 func is_speaking() -> bool:
 	return _is_speaking
 

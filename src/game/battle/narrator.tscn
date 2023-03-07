@@ -99,6 +99,7 @@ default_sprite = "neutral"
 
 [node name="Sprites" type="Node2D" parent="HBoxContainer/NarratorRect/Control/CenterContainer/Jester"]
 material = SubResource( 7 )
+scale = Vector2( 1.25, 1.25 )
 script = ExtResource( 10 )
 
 [node name="Neutral" type="Sprite" parent="HBoxContainer/NarratorRect/Control/CenterContainer/Jester/Sprites"]
@@ -159,10 +160,10 @@ texture = ExtResource( 8 )
 [node name="Textbox" type="TextureRect" parent="HBoxContainer"]
 unique_name_in_owner = true
 material = SubResource( 3 )
-margin_left = 297.0
+margin_left = 377.0
 margin_top = 28.0
-margin_right = 732.0
-margin_bottom = 294.0
+margin_right = 958.0
+margin_bottom = 327.0
 mouse_filter = 2
 size_flags_horizontal = 3
 texture = SubResource( 6 )
@@ -172,13 +173,13 @@ stretch_mode = 5
 [node name="Label" type="Label" parent="HBoxContainer/Textbox"]
 unique_name_in_owner = true
 anchor_left = 0.094
-anchor_top = 0.18
-anchor_right = 0.901
+anchor_top = 0.181
+anchor_right = 0.869
 anchor_bottom = 0.714
-margin_left = 0.109997
-margin_top = 0.119999
-margin_right = 0.0650024
-margin_bottom = 0.0759888
+margin_left = 0.386002
+margin_top = -0.119003
+margin_right = 0.110992
+margin_bottom = 0.514008
 size_flags_vertical = 7
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_constants/line_spacing = 0

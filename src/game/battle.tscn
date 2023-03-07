@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=2]
+[gd_scene load_steps=59 format=2]
 
 [ext_resource path="res://src/game/battle.gd" type="Script" id=1]
 [ext_resource path="res://src/game/battle/turn_manager.gd" type="Script" id=2]
@@ -150,6 +150,10 @@ tracks/0/keys = {
 [sub_resource type="Curve" id=7]
 _data = [ Vector2( 0.0112782, 0.0225226 ), 0.0, 0.0, 0, 0, Vector2( 0.661654, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
+[sub_resource type="Gradient" id=21]
+offsets = PoolRealArray( 0.0214286, 0.0964286, 1 )
+colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1 )
+
 [sub_resource type="Animation" id=3]
 length = 0.001
 tracks/0/type = "value"
@@ -240,7 +244,6 @@ font_data = ExtResource( 31 )
 [node name="Battle" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -13658.0
 theme = ExtResource( 7 )
 script = ExtResource( 1 )
 auto_start = true
@@ -423,18 +426,20 @@ margin_right = 314.72
 margin_bottom = -109.0
 
 [node name="Rain" type="CPUParticles2D" parent="ArrowRainControl/Anchor" groups=["rain_arrows"]]
+position = Vector2( -170, -298 )
 emitting = false
 amount = 20
-lifetime = 2.0
+lifetime = 4.0
 speed_scale = 5.0
 texture = ExtResource( 13 )
 emission_shape = 2
-emission_rect_extents = Vector2( 350, 1 )
+emission_rect_extents = Vector2( 500, 1 )
 direction = Vector2( -0.5, 1 )
 spread = 0.0
 initial_velocity = 800.0
 angle = 68.1
 scale_amount = 0.33
+color_ramp = SubResource( 21 )
 
 [node name="CharacterPointer" type="Node2D" parent="."]
 unique_name_in_owner = true
@@ -494,7 +499,7 @@ script = ExtResource( 8 )
 unique_name_in_owner = true
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -483.0
+margin_left = -672.0
 margin_top = 143.0
 margin_right = -45.0
 margin_bottom = 470.0
